@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { SignUpForm } from "./SignUpForm";
 import { NotificationContext } from "../../contextData/NotificationContext.js";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink.jsx";
-import { DividerOr } from "../sharedComponents/dividerOr.jsx";
+import { DividerOr } from "../sharedComponents/DividerOr.jsx";
 
 function SignUp() {
   const [loading, setLoading] = useState(false);

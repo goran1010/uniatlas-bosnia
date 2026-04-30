@@ -24,7 +24,7 @@ function Home() {
             </h2>
             <ul>
               <li>
-                <strong>Postal codes</strong> — browse all or search by code and
+                <strong>Postal codes</strong> - browse all or search by code and
                 city name
               </li>
             </ul>

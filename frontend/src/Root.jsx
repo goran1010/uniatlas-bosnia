@@ -11,10 +11,9 @@ import { useNotification } from "./customHooks/useNotification";
 import { useTitle } from "./customHooks/useTitle";
 import { LongWaitInfo } from "./utils/longWaitInfo";
 import { useServerWakeUp } from "./customHooks/useServerWakeUp";
+import { useCloseMenu } from "./customHooks/useCloseMenu";
 
 function Root() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isThemeMenuOpen, setThemeMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [longWait, setLongWait] = useState(false);
   const { notifications, addNotification, removeNotification } =
@@ -22,6 +21,8 @@ function Root() {
   const [serverIsDown, setServerIsDown] = useState(false);
 
   useTitle();
+
+  const closeMenu = useCloseMenu();
 
   useServerWakeUp({
     setLongWait,
@@ -48,20 +49,9 @@ function Root() {
     >
       <UserDataContext value={{ userData, setUserData }}>
         <>
-          <Navbar
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            isThemeMenuOpen={isThemeMenuOpen}
-            setThemeMenuOpen={setThemeMenuOpen}
-          />
+          <Navbar closeMenu={closeMenu} />
           <Notifications />
-          <main
-            className="app-main flex-1 flex flex-col items-center justify-center px-1 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative"
-            onClick={() => {
-              isMenuOpen && setIsMenuOpen(false);
-              isThemeMenuOpen && setThemeMenuOpen(false);
-            }}
-          >
+          <main className="app-main flex-1 flex flex-col items-center justify-center px-1 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative">
             {loading ? <Spinner /> : <Outlet />}
           </main>
 

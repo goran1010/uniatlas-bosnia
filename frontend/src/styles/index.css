@@ -155,8 +155,19 @@
       color 150ms ease;
   }
 
+  .menu-item:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px var(--focus-ring);
+    background: var(--hover-surface);
+  }
+
   .divider-muted {
     border-color: color-mix(in oklab, var(--border-color), transparent 35%);
+  }
+
+  a:hover,
+  a:focus {
+    text-decoration: underline;
   }
 
   .label-muted {
@@ -386,3 +397,7 @@
         text-decoration-thickness: 2px;
     }
 } */
+
+*:focus {
+  outline: 2px solid black;
+}

@@ -5,7 +5,7 @@ import { LogInForm } from "./LogInForm.jsx";
 import { UserDataContext } from "../../contextData/UserDataContext.js";
 import { NotificationContext } from "../../contextData/NotificationContext.js";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink.jsx";
-import { DividerOr } from "../sharedComponents/dividerOr.jsx";
+import { DividerOr } from "../sharedComponents/DividerOr.jsx";
 
 function LogIn() {
   const [loading, setLoading] = useState(false);
