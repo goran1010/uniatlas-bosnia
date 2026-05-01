@@ -30,7 +30,8 @@ For more info on how to connect your app to the REST API, visit <https://bosnia-
 
 - **Versioned REST API**: Public endpoints under `/api/v1`
 - **Postal Code Search**: Browse all postal codes or search by code and city name
-- **Session Authentication**: Passport-based auth with signup, login, logout, and email confirmation
+- **Session Authentication**: Passport-based auth with email/password signup, login, logout, and email confirmation
+- **GitHub Login**: Optional OAuth2 authentication with GitHub
 - **Role-based Access**: Contributor and admin roles with protected dashboards for data management
 - **CSRF Protection**: Synchronised CSRF tokens required for all mutating requests to authenticated routes
 - **First-party cookies**: Frontend proxies authenticated requests through Netlify (`/backend/*`) so session cookies are always same-site
@@ -57,6 +58,13 @@ node --version
 npm --version
 psql --version
 ```
+
+You will also need:
+
+- A Resend API key for email confirmations (<https://resend.com/>)
+- GitHub OAuth credentials if you want GitHub login support (optional):
+  - Visit <https://github.com/settings/developers> to create an OAuth app
+  - Create a Client ID and Client Secret for your environment
 
 ### Installing
 
@@ -96,8 +104,9 @@ Backend env layout:
 - `PORT`: backend port, usually `3000`
 - `COOKIE_SECRET`: session/cookie signing secret
 - `NODE_ENV`: app mode, usually `development`
-
-The backend validates these variables on startup, so placeholder values must be replaced before running the app.
+- `GITHUB_CLIENT_ID`: GitHub OAuth app client ID (optional, for GitHub login)
+- `GITHUB_CLIENT_SECRET`: GitHub OAuth app client secret (optional, for GitHub login)
+- `GITHUB_CALLBACK_URL`: GitHub OAuth callback URL - locally `http://localhost:3000/auth/github/callback`, in production `https://yoursite.netlify.app/backend/auth/github/callback`
 
 Frontend: copy `frontend/.env.example` to `frontend/.env` and update `VITE_BACKEND_URL` if needed.
 
@@ -186,7 +195,7 @@ Run these from the repository root.
 
 All JSON API responses follow a consistent structure:
 
-- Success responses use `data` and can include an optional `message`.
+- Success responses use `data` and include an optional `message`.
 - Error responses use a nested `error.message`.
 
 Success example:
@@ -196,7 +205,8 @@ Success example:
   "data": {
     "postalCodes": [
       {
-        "code": "71000",
+        "id": "unique-identifier",
+        "code": 71000,
         "city": "Sarajevo",
         "post": "BH_POSTA"
       }
@@ -211,17 +221,41 @@ Error example:
 ```json
 {
   "error": {
-    "message": "Validation failed: Postal codes must have 5 numbers Fix the highlighted fields and try again."
+    "message": "Validation failed: Postal codes must have 5 numbers. Fix the highlighted fields and try again."
   }
 }
 ```
 
-### Public routes (no authentication required)
+### Public endpoints (no authentication required)
 
-- `GET /api`: API status response
-- `GET /api/v1`: versioned API status response
-- `GET /api/v1/postal-codes`: list all postal codes
-- `GET /api/v1/postal-codes/search?searchTerm=...`: search postal codes by numeric code or city name
+All public endpoints are available under `https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api`
+
+#### Status endpoints
+
+- `GET /api` - Check API status
+- `GET /api/v1` - Check API v1 status
+
+#### Postal Code endpoints
+
+- `GET /api/v1/postal-codes` - Get all postal codes (ordered by code ascending)
+- `GET /api/v1/postal-codes/search?searchTerm=...` - Search postal codes by 5-digit code or city name (minimum 2 characters for city names)
+
+**Search parameter:**
+
+- `searchTerm` (required, string): A 5-digit postal code (e.g., `71000`) or a city name (e.g., `Sarajevo`)
+
+**Postal code object structure:**
+
+```json
+{
+  "id": "unique-identifier-string",
+  "code": 71000,
+  "city": "Sarajevo",
+  "post": "BH_POSTA" | "POSTE_SRP" | "HP_MOSTAR" | null
+}
+```
+
+The `post` field indicates the postal operator and can be `BH_POSTA`, `POSTE_SRP`, `HP_MOSTAR`, or `null`.
 
 ## Running the tests
 

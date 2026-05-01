@@ -6,15 +6,23 @@ Contributions of any kind are welcome - bug fixes, new features, data, documenta
 
 1. Fork the repository and create your branch from `main`
 2. Run `npm run install:all` to install dependencies
-3. Copy `.env.example` files and configure your local environment
-4. Make your changes, write tests where appropriate, and ensure the full suite passes (`npm run test:all`)
-5. Open a pull request referencing any related issues
+3. Set up your local environment:
+   - Copy `backend/.env.example` to `backend/.env` and fill in your database, email service, and (optionally) GitHub OAuth credentials
+   - Copy `frontend/.env.example` to `frontend/.env` and update `VITE_BACKEND_URL` if needed
+4. Set up the databases:
+   - Run `npm run db:deploy_generate` to initialize the development database
+   - Run `npm run db:test:deploy_generate` if you plan to run backend tests
+5. Make your changes, write tests where appropriate, and ensure the full test suite passes (`npm run test:all`)
+6. Open a pull request referencing any related issues
 
 ## Guidelines
 
-- Never commit secrets or API keys
-- All data must come from verifiable, and/or official sources
-- Keep commits focused; use conventional prefixes: `feat:`, `fix:`, `docs:`, `data:`, `test:`, `refactor:`, etc.
+- Never commit secrets, API keys, or `.env` files
+- All data must come from verifiable and/or official sources
+- Keep commits focused; use conventional prefixes: `feat:`, `fix:`, `docs:`, `data:`, `test:`, `refactor:`, `chore:`, etc.
+- Write tests for new features or bug fixes
+- Run `npm run test:all` locally before pushing to ensure all tests pass
+- Follow existing code style and patterns in the codebase
 
 ## Reporting Issues
 
