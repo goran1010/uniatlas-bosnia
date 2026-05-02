@@ -1,18 +1,11 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 
-async function handleEditContributor(
-  e,
-  setSearchResult,
-  addNotification,
-  setLoading,
-) {
+async function handleDelete(e, setSearchResult, addNotification, setLoading) {
   try {
     e.preventDefault();
     setLoading(true);
-    const code = e.target.children[0].children[1].textContent;
-    const city = e.target[0].value;
-    const post = e.target[1].value;
+    const code = e.currentTarget.dataset.postalcode;
 
     const csrfToken = await getCsrfToken();
 
@@ -28,23 +21,21 @@ async function handleEditContributor(
       `${currentUrl}/users/contributor/postal-codes`,
       {
         mode: "cors",
-        method: "put",
+        method: "DELETE",
         credentials: "include",
         headers: {
           "x-csrf-token": csrfToken,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ city, code, post }),
+        body: JSON.stringify({ code }),
       },
     );
     const result = await response.json();
 
     if (response.ok) {
-      setSearchResult((prevState) => {
-        return prevState.map((item) =>
-          item.code === result.data.code ? result.data : item,
-        );
-      });
+      setSearchResult((previousState) =>
+        previousState.filter((item) => Number(item.code) !== Number(code)),
+      );
       addNotification({
         type: "success",
         message: result.message,
@@ -56,17 +47,17 @@ async function handleEditContributor(
       message:
         result?.error?.message ||
         result?.error ||
-        "Failed to update postal code.",
+        "Failed to delete postal code.",
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while updating the postal code.",
+      message: "An error occurred while deleting the postal code.",
     });
-    console.error("Error updating postal code:", err);
+    console.error("Error deleting postal code:", err);
   } finally {
     setLoading(false);
   }
 }
 
-export { handleEditContributor };
+export { handleDelete };

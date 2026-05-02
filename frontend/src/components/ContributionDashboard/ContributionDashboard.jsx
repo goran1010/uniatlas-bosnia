@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
-import { ContributorForm } from "./ContributorForm";
+import { ContributionForm } from "./ContributionForm";
 
-function ContributorDashboard() {
+function ContributionDashboard() {
   const { userData } = useContext(UserDataContext);
 
   if (!userData) {
@@ -16,7 +16,7 @@ function ContributorDashboard() {
   }
 
   if (userData) {
-    return <ContributorForm />;
+    return <ContributionForm />;
   }
   return (
     <section className="panel-card relative min-h-full w-full flex items-center justify-center p-3">
@@ -27,4 +27,4 @@ function ContributorDashboard() {
   );
 }
 
-export { ContributorDashboard };
+export { ContributionDashboard };

@@ -40,7 +40,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
         {userData && (
           <Link
             className="menu-item block p-2 w-full text-center text-nowrap"
-            to="/contributor-dashboard"
+            to="/contribution-dashboard"
             onClick={() => setIsMenuOpen(false)}
           >
             Contribute

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ContributorPostalCodes } from "./ContributorPostalCodes";
+import { ContributionPostalCodes } from "./ContributionPostalCodes";
 import { AddNewData } from "./AddNewData";
 
 function PostalCodeData() {
@@ -14,7 +14,7 @@ function PostalCodeData() {
         setLoading={setLoading}
       />
 
-      <ContributorPostalCodes
+      <ContributionPostalCodes
         searchResult={searchResult}
         setSearchResult={setSearchResult}
         loading={loading}

@@ -1,8 +1,8 @@
 import { SearchPostalCode } from "../PostalCodes/SearchPostalCode";
 import { GetAllPostalCodes } from "../PostalCodes/GetAllPostalCodes";
-import { PostalCodesResultContributor } from "./PostalCodesResultContributor";
+import { PostalCodesResultContribution } from "./PostalCodesResultContribution";
 
-function ContributorPostalCodes({
+function ContributionPostalCodes({
   searchResult,
   setSearchResult,
   loading,
@@ -23,7 +23,7 @@ function ContributorPostalCodes({
           setLoading={setLoading}
         />
       </section>
-      <PostalCodesResultContributor
+      <PostalCodesResultContribution
         searchResult={searchResult}
         setSearchResult={setSearchResult}
       />
@@ -33,4 +33,4 @@ function ContributorPostalCodes({
   );
 }
 
-export { ContributorPostalCodes };
+export { ContributionPostalCodes };

@@ -2,7 +2,6 @@ import { NotificationContext } from "../../contextData/NotificationContext";
 import { useContext, useEffect } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
 import { useNavigate } from "react-router-dom";
-import { handleBecomeContributor } from "./utils/handleBecomeContributor";
 import { handleLogout } from "./utils/handleLogout";
 import { Button } from "../sharedComponents/Button";
 import { useState } from "react";
@@ -47,11 +46,9 @@ function Profile() {
             <dd className="flex items-center justify-center">
               <span
                 className={`items-center px-4 py-2 rounded-full text-sm font-bold ${
-                  userData?.role === "CONTRIBUTOR"
-                    ? "role-pill-contributor"
-                    : userData?.role === "ADMIN"
-                      ? "role-pill-admin"
-                      : "role-pill-user"
+                  userData?.role === "ADMIN"
+                    ? "role-pill-admin"
+                    : "role-pill-user"
                 }`}
               >
                 {userData?.role}
@@ -60,23 +57,6 @@ function Profile() {
           </div>
         </dl>
         <div className="flex flex-col gap-2 w-full max-w-sm">
-          {userData?.role === "USER" && !userData?.requestedContributor && (
-            <Button
-              onClick={() =>
-                handleBecomeContributor(
-                  addNotification,
-                  setUserData,
-                  setLoading,
-                )
-              }
-              className="w-full px-6 py-3 font-semibold"
-              type="submit"
-              loading={loading}
-            >
-              Request Contributor role
-            </Button>
-          )}
-
           <Button
             onClick={() =>
               handleLogout(addNotification, navigate, setUserData, setLoading)

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "../../contextData/NotificationContext";
 import { PostalCodeRow } from "./PostalCodeRow";
 
-function PostalCodesResultContributor({ searchResult, setSearchResult }) {
+function PostalCodesResultContribution({ searchResult, setSearchResult }) {
   const [inputValuesByCode, setInputValuesByCode] = useState(new Map());
   const { addNotification } = useContext(NotificationContext);
 
@@ -59,4 +59,4 @@ function PostalCodesResultContributor({ searchResult, setSearchResult }) {
   );
 }
 
-export { PostalCodesResultContributor };
+export { PostalCodesResultContribution };

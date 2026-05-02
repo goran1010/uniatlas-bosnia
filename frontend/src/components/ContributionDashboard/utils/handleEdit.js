@@ -1,16 +1,13 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 
-async function handleDeleteContributor(
-  e,
-  setSearchResult,
-  addNotification,
-  setLoading,
-) {
+async function handleEdit(e, setSearchResult, addNotification, setLoading) {
   try {
     e.preventDefault();
     setLoading(true);
-    const code = e.currentTarget.dataset.postalcode;
+    const code = e.target.children[0].children[1].textContent;
+    const city = e.target[0].value;
+    const post = e.target[1].value;
 
     const csrfToken = await getCsrfToken();
 
@@ -26,21 +23,23 @@ async function handleDeleteContributor(
       `${currentUrl}/users/contributor/postal-codes`,
       {
         mode: "cors",
-        method: "DELETE",
+        method: "put",
         credentials: "include",
         headers: {
           "x-csrf-token": csrfToken,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ city, code, post }),
       },
     );
     const result = await response.json();
 
     if (response.ok) {
-      setSearchResult((previousState) =>
-        previousState.filter((item) => Number(item.code) !== Number(code)),
-      );
+      setSearchResult((prevState) => {
+        return prevState.map((item) =>
+          item.code === result.data.code ? result.data : item,
+        );
+      });
       addNotification({
         type: "success",
         message: result.message,
@@ -52,17 +51,17 @@ async function handleDeleteContributor(
       message:
         result?.error?.message ||
         result?.error ||
-        "Failed to delete postal code.",
+        "Failed to update postal code.",
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while deleting the postal code.",
+      message: "An error occurred while updating the postal code.",
     });
-    console.error("Error deleting postal code:", err);
+    console.error("Error updating postal code:", err);
   } finally {
     setLoading(false);
   }
 }
 
-export { handleDeleteContributor };
+export { handleEdit };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PostalCodeData } from "./PostalCodeData";
 import { Select } from "../sharedComponents/Select";
 
-function ContributorForm() {
+function ContributionForm() {
   const [datasetSelect, setDatasetSelect] = useState("");
 
   function handleDataset(e) {
@@ -35,4 +35,4 @@ function ContributorForm() {
   );
 }
 
-export { ContributorForm };
+export { ContributionForm };

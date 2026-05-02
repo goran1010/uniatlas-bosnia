@@ -33,7 +33,7 @@ function StandardMenu({ userData }) {
           <li>
             <Link
               className="menu-item block py-3 px-2"
-              to="/contributor-dashboard"
+              to="/contribution-dashboard"
             >
               Contribute
             </Link>

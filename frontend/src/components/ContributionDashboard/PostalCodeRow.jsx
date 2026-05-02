@@ -2,23 +2,23 @@ import { memo } from "react";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { useState } from "react";
-import { handleEditContributor } from "./utils/handleEditContributor";
-import { handleDeleteContributor } from "./utils/handleDeleteContributor";
+import { handleEdit } from "./utils/handleEdit";
+import { handleDelete } from "./utils/handleDelete";
 
 const PostalCodeRow = memo(
   ({ result, handleInputChange, setSearchResult, addNotification }) => {
     const [loading, setLoading] = useState(false);
 
-    const handleEdit = (e) => {
-      handleEditContributor(e, setSearchResult, addNotification, setLoading);
+    const handleEditForm = (e) => {
+      handleEdit(e, setSearchResult, addNotification, setLoading);
     };
 
-    const handleDelete = (e) => {
-      handleDeleteContributor(e, setSearchResult, addNotification, setLoading);
+    const handleDeleteForm = (e) => {
+      handleDelete(e, setSearchResult, addNotification, setLoading);
     };
     return (
       <form
-        onSubmit={handleEdit}
+        onSubmit={handleEditForm}
         className="grid gap-2 w-full p-2 border border-gray-200 dark:border-gray-500 rounded-md sm:border-0 sm:rounded-none sm:p-1 sm:gap-1 sm:grid-cols-5"
       >
         <div className="flex justify-between sm:justify-center items-center">
@@ -58,7 +58,7 @@ const PostalCodeRow = memo(
           <Button
             type="button"
             data-postalcode={result.code}
-            onClick={handleDelete}
+            onClick={handleDeleteForm}
             className="w-full bg-red-600 py-2 text-white hover:bg-red-700"
             loading={loading}
           >
