@@ -28,11 +28,12 @@ enum role {
 }
 
 model User {
-  id                   String  @id @default(uuid())
-  email                String  @unique
-  password             String?
-  githubId             String? @unique
-  role                 role    @default(USER)
+  id             String           @id @default(uuid())
+  email          String           @unique
+  password       String?
+  githubId       String?          @unique
+  role           role             @default(USER)
+  pendingChanges PendingChanges[]
 
   @@map("users")
 }
@@ -45,6 +46,26 @@ model PendingUser {
   expiresAt DateTime
 
   @@map("pending_users")
+}
+
+enum typeOfChange {
+  UPDATE
+  DELETE
+
+  CREATE
+}
+
+model PendingChanges {
+  id           String       @id @default(uuid())
+  typeOfChange typeOfChange
+  tableName    String
+  rowId        String
+  newData      String?
+  userId       String
+  user         User         @relation(fields: [userId], references: [id])
+  createdAt    DateTime     @default(now())
+
+  @@map("pending_changes")
 }
 
 enum postOperator {
