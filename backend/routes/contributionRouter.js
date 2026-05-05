@@ -9,6 +9,11 @@ contributionRouter.get(
   contributionController.getPendingChanges,
 );
 
+contributionRouter.delete(
+  "/pending-changes/postal-codes",
+  contributionController.deletePendingChange,
+);
+
 contributionRouter.post(
   "/postal-codes",
   contributionValidation.createPostalCode,

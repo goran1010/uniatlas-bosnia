@@ -27,7 +27,11 @@ function PostalCodeData() {
         setLoading={setLoading}
         setPendingChanges={setPendingChanges}
       />
-      <PendingChanges pendingChanges={pendingChanges} loading={loading} />
+      <PendingChanges
+        pendingChanges={pendingChanges}
+        loading={loading}
+        setPendingChanges={setPendingChanges}
+      />
     </>
   );
 }

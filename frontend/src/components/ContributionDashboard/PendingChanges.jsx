@@ -46,7 +46,7 @@ function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
             return (
               <PendingChangesRow
                 key={result.id}
-                result={result}
+                change={result}
                 addNotification={addNotification}
                 setPendingChanges={setPendingChanges}
               />

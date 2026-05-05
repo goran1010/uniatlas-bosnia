@@ -2,19 +2,15 @@ const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 
 async function handleRemove(
-  e,
-  result,
+  change,
   userData,
   addNotification,
-  setLoading,
   setPendingChanges,
+  setLoading,
 ) {
   try {
-    e.preventDefault();
     setLoading(true);
-    const code = e.currentTarget.dataset.postalcode;
-    const city = e.currentTarget.dataset.city;
-    const post = e.currentTarget.dataset.post;
+    const id = change.id;
 
     const csrfToken = await getCsrfToken();
 
@@ -27,7 +23,7 @@ async function handleRemove(
     }
 
     const response = await fetch(
-      `${currentUrl}/users/contribution/postal-codes`,
+      `${currentUrl}/users/contribution/pending-changes/postal-codes`,
       {
         mode: "cors",
         method: "DELETE",
@@ -36,24 +32,13 @@ async function handleRemove(
           "x-csrf-token": csrfToken,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code, city, post }),
+        body: JSON.stringify({ id }),
       },
     );
     const result = await response.json();
-    const { data } = result;
 
     if (response.ok) {
-      setPendingChanges((prev) => [
-        ...prev,
-        {
-          id: data.id,
-          typeOfChange: data.typeOfChange,
-          code: data.code,
-          city: data.city,
-          post: data.post,
-          user: { email: userData.email },
-        },
-      ]);
+      setPendingChanges((prev) => prev.filter((change) => change.id !== id));
       addNotification({
         type: "success",
         message: result.message,

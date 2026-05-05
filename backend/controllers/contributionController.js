@@ -16,6 +16,31 @@ class ContributionController {
     });
   }
 
+  async deletePendingChange(req, res) {
+    const { id } = req.user;
+    const { id: pendingChangeId } = req.body;
+
+    const pendingChange = await pendingChangesPostalCodeModel.findMany({
+      userId: id,
+      id: pendingChangeId,
+    });
+
+    if (!pendingChange || pendingChange.length === 0) {
+      return sendError(res, {
+        status: 404,
+        message: "Pending change not found.",
+      });
+    }
+
+    await pendingChangesPostalCodeModel.delete({
+      id: pendingChange[0].id,
+    });
+
+    return sendSuccess(res, {
+      message: "Pending change deleted successfully.",
+    });
+  }
+
   async createPostalCode(req, res) {
     try {
       const userId = req.user.id;
