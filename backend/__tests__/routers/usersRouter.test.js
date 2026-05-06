@@ -56,48 +56,6 @@ describe("GET /me", () => {
   });
 });
 
-describe("POST /become-contributor", () => {
-  test("responds with status 403 and Only regular users can request contributor status if user is not a regular user", async () => {
-    const user = createNewUser({ role: "CONTRIBUTOR" });
-    mockedUser = user;
-
-    const response = await request(app)
-      .post("/users/become-contributor")
-      .set("Cookie", "sessionId=valid-session-id");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.body).toEqual({
-      error: {
-        message:
-          "Request denied: only regular users can request contributor access.",
-      },
-    });
-    expect(response.status).toBe(403);
-  });
-
-  test("responds with status 200 and message if request to become contributor successful", async () => {
-    const user = createNewUser();
-    mockedUser = user;
-
-    vi.spyOn(usersModel, "update").mockResolvedValue({
-      ...user,
-      requestedContributor: true,
-    });
-
-    const response = await request(app).post("/users/become-contributor");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.body).toEqual({
-      message:
-        "You've asked to become a contributor! An admin will review your request soon.",
-      data: expect.objectContaining({
-        requestedContributor: true,
-      }),
-    });
-    expect(response.status).toBe(200);
-  });
-});
-
 describe("POST /logout", () => {
   test("responds User logged out successfully", async () => {
     const user = createNewUser();

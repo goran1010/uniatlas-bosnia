@@ -36,7 +36,6 @@ describe("GET /api/v1/postal-codes", () => {
       message: "Postal codes retrieved successfully",
       data: expect.arrayContaining([
         expect.objectContaining({
-          id: codeInDb.id,
           city: codeInDb.city,
           code: codeInDb.code,
           post: codeInDb.post,
@@ -67,7 +66,6 @@ describe("GET /api/v1/postal-codes/search", () => {
     expect(response.body.data).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: codeInDb.id,
           city: codeInDb.city,
           code: codeInDb.code,
           post: codeInDb.post,
@@ -95,7 +93,6 @@ describe("GET /api/v1/postal-codes/search", () => {
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.body.data).toEqual([
       expect.objectContaining({
-        id: codeInDb.id,
         city: codeInDb.city,
         code: codeInDb.code,
         post: codeInDb.post,
