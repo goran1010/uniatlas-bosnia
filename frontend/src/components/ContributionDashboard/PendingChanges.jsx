@@ -13,7 +13,7 @@ function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
 
   if (pendingChanges.length === 0 || !pendingChanges) {
     return (
-      <section section className="flex justify-center items-center p-4">
+      <section className="flex justify-center items-center p-4">
         <p className="text-gray-500 dark:text-gray-300">
           No pending changes to display.
         </p>

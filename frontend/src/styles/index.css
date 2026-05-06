@@ -249,6 +249,21 @@
     color: #dcfce7;
   }
 
+  .btn-update {
+    background: #2563eb;
+    color: #eff6ff;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.22);
+  }
+
+  .btn-update:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+
+  .btn-update:disabled {
+    background: #93c5fd;
+    color: #dbeafe;
+  }
+
   .btn-warning {
     background: #ca8a04;
     color: #fefce8;

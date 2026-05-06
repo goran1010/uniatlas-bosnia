@@ -62,10 +62,10 @@ const PostalCodeRow = memo(
         <div>
           <Button
             type="submit"
-            className="btn-success w-full py-2"
+            className="btn-update w-full py-2"
             loading={loading}
           >
-            Save
+            Update
           </Button>
         </div>
         <div>
