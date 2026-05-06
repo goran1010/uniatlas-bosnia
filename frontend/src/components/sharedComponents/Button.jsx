@@ -5,15 +5,26 @@ function Button({
   className = "",
   type = "button",
   loading = false,
+  variant = "primary",
   ...props
 }) {
+  const variantClasses = {
+    primary: "btn-primary",
+    secondary: "btn-surface",
+    success: "btn-success",
+    danger: "btn-danger",
+    update: "btn-update",
+    warning: "btn-warning",
+  };
+
+  const variantClass = variantClasses[variant] || variantClasses.primary;
   const baseClassName =
-    "btn-primary w-full relative inline-flex items-center justify-center rounded-md p-2 text-sm cursor-pointer disabled:cursor-not-allowed";
+    "w-full relative inline-flex items-center justify-center rounded-md p-2 text-sm cursor-pointer disabled:cursor-not-allowed transition-all duration-150";
 
   return (
     <button
       type={type}
-      className={`${className} ${baseClassName}`}
+      className={`${variantClass} ${baseClassName} ${className}`}
       disabled={loading || props.disabled}
       {...props}
     >

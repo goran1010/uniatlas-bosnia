@@ -25,7 +25,7 @@ function Profile() {
 
   return (
     <div className="panel-card w-full max-w-md mx-auto overflow-hidden">
-      <div className="bg-linear-to-r from-blue-600 to-indigo-700 p-4">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-900 dark:to-indigo-900 p-4">
         <h1 className="text-2xl font-bold text-white text-center">
           My Profile
         </h1>
@@ -61,7 +61,8 @@ function Profile() {
             onClick={() =>
               handleLogout(addNotification, navigate, setUserData, setLoading)
             }
-            className="btn-danger px-6 py-3 font-semibold"
+            variant="danger"
+            className="px-6 py-3 font-semibold"
             type="submit"
             loading={loading}
           >

@@ -47,7 +47,7 @@ function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
 
   return (
     <form onSubmit={handleGetAll} className="w-full">
-      <Button type="submit" loading={loading} className="btn-warning">
+      <Button type="submit" loading={loading} variant="warning">
         Get All
       </Button>
     </form>

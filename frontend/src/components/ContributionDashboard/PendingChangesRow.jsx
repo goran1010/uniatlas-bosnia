@@ -78,7 +78,8 @@ const PendingChangesRow = memo(
             data-postalcode={change.code}
             data-city={change.city}
             data-post={change.post}
-            className="btn-danger w-full py-2"
+            variant="danger"
+            className="w-full py-2"
             loading={loading}
             onClick={() =>
               handleRemove(

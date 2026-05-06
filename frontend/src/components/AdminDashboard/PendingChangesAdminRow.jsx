@@ -79,7 +79,8 @@ const PendingChangesAdminRow = memo(
 
         <div className="flex justify-center sm:flex-row gap-2 p-1">
           <Button
-            className="btn-success px-3 py-2 text-sm sm:max-w-25"
+            variant="success"
+            className="px-3 py-2 text-sm sm:max-w-25"
             onClick={() => {
               handleConfirm(
                 change,
@@ -94,7 +95,8 @@ const PendingChangesAdminRow = memo(
             Approve
           </Button>
           <Button
-            className="btn-danger px-3 py-2 text-sm sm:max-w-25"
+            variant="danger"
+            className="px-3 py-2 text-sm sm:max-w-25"
             onClick={() => {
               handleDecline(
                 change,

@@ -234,6 +234,14 @@
     transform: none;
   }
 
+  .btn-primary[aria-disabled="true"] {
+    background: var(--accent-disabled);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
   .btn-success {
     background: #15803d;
     color: #f0fdf4;
