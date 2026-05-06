@@ -12,7 +12,7 @@ beforeEach(() => {
   vi.spyOn(globalThis, "fetch").mockResolvedValue({
     ok: true,
     json: async () => ({
-      data: [{ id: 1, code: "mocked code" }],
+      data: [],
       message: "mocked message",
     }),
   });
@@ -24,10 +24,13 @@ afterEach(() => {
 
 function Wrapper({ initialUser = null }) {
   const [userData, setUserData] = useState(initialUser);
-  const { notifications, addNotification, removeNotification } = useNotification();
+  const { notifications, addNotification, removeNotification } =
+    useNotification();
 
   return (
-    <NotificationContext value={{ notifications, addNotification, removeNotification }}>
+    <NotificationContext
+      value={{ notifications, addNotification, removeNotification }}
+    >
       <UserDataContext value={{ userData, setUserData }}>
         <MemoryRouter initialEntries={["/admin-dashboard"]}>
           <Notifications />
@@ -64,6 +67,7 @@ describe("AdminDashboard component", () => {
     const headingElement = await screen.findByRole("heading", {
       name: /Admin Dashboard/i,
     });
+
     expect(headingElement).toBeInTheDocument();
   });
 });
