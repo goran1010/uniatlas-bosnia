@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { ContributorDashboard } from "../../../src/components/ContributorDashboard/ContributorDashboard";
+import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
 import { NotificationContext } from "../../../src/contextData/NotificationContext";
 import { UserDataContext } from "../../../src/contextData/UserDataContext";
 import { useNotification } from "../../../src/customHooks/useNotification";
@@ -13,17 +13,20 @@ const user = userEvent.setup();
 
 function Wrapper({ initialUser = null }) {
   const [userData, setUserData] = useState(initialUser);
-  const { notifications, addNotification, removeNotification } = useNotification();
+  const { notifications, addNotification, removeNotification } =
+    useNotification();
 
   return (
-    <NotificationContext value={{ notifications, addNotification, removeNotification }}>
+    <NotificationContext
+      value={{ notifications, addNotification, removeNotification }}
+    >
       <UserDataContext value={{ userData, setUserData }}>
-        <MemoryRouter initialEntries={["/contributor-dashboard"]}>
+        <MemoryRouter initialEntries={["/contribution-dashboard"]}>
           <Notifications />
           <Routes>
             <Route
-              path="/contributor-dashboard"
-              element={<ContributorDashboard />}
+              path="/contribution-dashboard"
+              element={<ContributionDashboard />}
             />
           </Routes>
         </MemoryRouter>
@@ -51,7 +54,24 @@ const setupFetchMock = () => {
       );
     }
 
-    if (requestUrl.includes("/users/contributor")) {
+    if (requestUrl.includes("/pending-changes/postal-codes")) {
+      return Promise.resolve(
+        createFetchResponse({
+          data: [
+            {
+              id: 2,
+              city: "Test City",
+              code: "12345",
+              post: "",
+              typeOfChange: "DELETE",
+            },
+          ],
+          message: "Pending changes retrieved successfully",
+        }),
+      );
+    }
+
+    if (requestUrl.includes("/users/contribution/postal-codes")) {
       return Promise.resolve(
         createFetchResponse({
           data: {
@@ -59,14 +79,15 @@ const setupFetchMock = () => {
             city: "Test City",
             code: "12345",
             post: "",
+            typeOfChange: "CREATE",
           },
 
-          message: "Data added successfully",
+          message: "New postal code suggested",
         }),
       );
     }
 
-    if (requestUrl.includes("/postal-codes/search")) {
+    if (requestUrl.includes("/users/postal-codes/search")) {
       return Promise.resolve(
         createFetchResponse({
           data: [
@@ -82,26 +103,7 @@ const setupFetchMock = () => {
       );
     }
 
-    if (requestUrl.includes("/postal-codes")) {
-      return Promise.resolve(
-        createFetchResponse({
-          data: [
-            {
-              id: 1,
-              city: "Test City",
-              code: "12345",
-              post: "",
-            },
-            { id: 2, city: "Test City 2", code: "12346", post: "" },
-          ],
-          message: "Data added successfully",
-        }),
-      );
-    }
-
-    return Promise.resolve(
-      createFetchResponse({ data: [], message: "Data added successfully" }),
-    );
+    return Promise.reject(new Error(`Unhandled request: ${requestUrl}`));
   });
 };
 
@@ -116,7 +118,7 @@ afterEach(() => {
 describe("AddNewData component", () => {
   beforeEach(async () => {
     setupFetchMock();
-    render(<Wrapper initialUser={{ role: "CONTRIBUTOR" }} />);
+    render(<Wrapper initialUser={{ email: "some@email.com" }} />);
 
     const selectElement = screen.getByLabelText(/Choose dataset/i);
     await user.selectOptions(selectElement, "Postal Codes");
@@ -205,6 +207,9 @@ describe("AddNewData component", () => {
   test("successfully submits data and shows success notification", async () => {
     setupFetchMock();
 
+    const pendingCount = await screen.findByLabelText(/pending changes count/i);
+    expect(pendingCount).toHaveTextContent("1");
+
     const toggleButton = screen.getByRole("button", { name: /add new data/i });
     await user.click(toggleButton);
 
@@ -219,21 +224,18 @@ describe("AddNewData component", () => {
     await user.click(addButton);
 
     const successNotification = await screen.findByText(
-      /Data added successfully/i,
+      /New postal code suggested/i,
     );
     expect(successNotification).toBeInTheDocument();
 
-    const dataCodeRow = await screen.findByText("12345");
-
-    const dataInputCity = await screen.findByRole("textbox", {
-      name: /city for postal code 12345/i,
-      value: "Test City",
+    const deleteButtons = await screen.findAllByRole("button", {
+      name: /Discard/i,
     });
 
-    const deleteButton = await screen.findByRole("button", { name: /delete/i });
-
-    expect(deleteButton).toBeInTheDocument();
-    expect(dataCodeRow).toBeInTheDocument();
-    expect(dataInputCity).toBeInTheDocument();
+    expect(deleteButtons).toHaveLength(2);
+    const updatedPendingCount = await screen.findByLabelText(
+      /pending changes count/i,
+    );
+    expect(updatedPendingCount).toHaveTextContent("2");
   });
 });
