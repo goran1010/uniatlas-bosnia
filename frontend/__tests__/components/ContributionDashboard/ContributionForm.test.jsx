@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { ContributorDashboard } from "../../../src/components/ContributorDashboard/ContributorDashboard";
+import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
 import { NotificationContext } from "../../../src/contextData/NotificationContext";
 import { UserDataContext } from "../../../src/contextData/UserDataContext";
 import { useNotification } from "../../../src/customHooks/useNotification";
@@ -13,17 +13,20 @@ const user = userEvent.setup();
 
 function Wrapper({ initialUser = null }) {
   const [userData, setUserData] = useState(initialUser);
-  const { notifications, addNotification, removeNotification } = useNotification();
+  const { notifications, addNotification, removeNotification } =
+    useNotification();
 
   return (
-    <NotificationContext value={{ notifications, addNotification, removeNotification }}>
+    <NotificationContext
+      value={{ notifications, addNotification, removeNotification }}
+    >
       <UserDataContext value={{ userData, setUserData }}>
-        <MemoryRouter initialEntries={["/contributor-dashboard"]}>
+        <MemoryRouter initialEntries={["/contribution-dashboard"]}>
           <Notifications />
           <Routes>
             <Route
-              path="/contributor-dashboard"
-              element={<ContributorDashboard />}
+              path="/contribution-dashboard"
+              element={<ContributionDashboard />}
             />
           </Routes>
         </MemoryRouter>
@@ -32,12 +35,12 @@ function Wrapper({ initialUser = null }) {
   );
 }
 
-describe("ContributorForm component rendering", () => {
+describe("ContributionForm component rendering", () => {
   beforeEach(() => {
-    render(<Wrapper initialUser={{ role: "CONTRIBUTOR" }} />);
+    render(<Wrapper initialUser={{ email: "some@email.com" }} />);
   });
 
-  test("renders ContributorForm component's select element if user is contributor", async () => {
+  test("renders ContributionForm component's select element if user is logged in", async () => {
     const selectElement = screen.getByLabelText(/Choose dataset/i);
     expect(selectElement).toBeInTheDocument();
   });
