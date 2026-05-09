@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach } from "vitest";
+import { describe, test, expect, beforeEach, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
@@ -8,6 +8,20 @@ import { useNotification } from "../../../src/customHooks/useNotification";
 import { Notifications } from "../../../src/components/Notifications";
 import { useState } from "react";
 import userEvent from "@testing-library/user-event";
+
+beforeEach(() => {
+  vi.spyOn(globalThis, "fetch").mockResolvedValue({
+    ok: true,
+    json: async () => ({
+      data: [{ id: 1, code: "mocked code" }],
+      message: "mocked message",
+    }),
+  });
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 const user = userEvent.setup();
 
