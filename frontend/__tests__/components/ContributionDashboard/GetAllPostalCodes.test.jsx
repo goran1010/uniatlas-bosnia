@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { ContributorDashboard } from "../../../src/components/ContributorDashboard/ContributorDashboard";
+import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
 import { NotificationContext } from "../../../src/contextData/NotificationContext";
 import { UserDataContext } from "../../../src/contextData/UserDataContext";
 import { useNotification } from "../../../src/customHooks/useNotification";
@@ -13,17 +13,20 @@ const user = userEvent.setup();
 
 function Wrapper({ initialUser = null }) {
   const [userData, setUserData] = useState(initialUser);
-  const { notifications, addNotification, removeNotification } = useNotification();
+  const { notifications, addNotification, removeNotification } =
+    useNotification();
 
   return (
-    <NotificationContext value={{ notifications, addNotification, removeNotification }}>
+    <NotificationContext
+      value={{ notifications, addNotification, removeNotification }}
+    >
       <UserDataContext value={{ userData, setUserData }}>
-        <MemoryRouter initialEntries={["/contributor-dashboard"]}>
+        <MemoryRouter initialEntries={["/contribution-dashboard"]}>
           <Notifications />
           <Routes>
             <Route
-              path="/contributor-dashboard"
-              element={<ContributorDashboard />}
+              path="/contribution-dashboard"
+              element={<ContributionDashboard />}
             />
           </Routes>
         </MemoryRouter>
@@ -51,17 +54,22 @@ const setupFetchMock = () => {
       );
     }
 
-    if (requestUrl.includes("/users/contributor")) {
+    if (
+      requestUrl.includes("/users/contribution/pending-changes/postal-codes")
+    ) {
       return Promise.resolve(
         createFetchResponse({
-          data: {
-            id: 1,
-            city: "Test City",
-            code: "12345",
-            post: "",
-          },
+          data: [
+            {
+              id: 2,
+              city: "Pending City",
+              code: "54321",
+              post: "",
+              typeOfChange: "DELETE",
+            },
+          ],
 
-          message: "Data added successfully",
+          message: "Pending changes retrieved successfully",
         }),
       );
     }
@@ -138,13 +146,12 @@ describe("GetAllPostalCodes component", () => {
     );
     expect(successNotification).toBeInTheDocument();
 
-    const dataCodeRow = await screen.findByText("12345");
+    const dataCodeRows = await screen.findAllByText("12345");
     const dataInputCity = await screen.findByRole("textbox", {
       name: /city for postal code 12345/i,
-      value: "Test City",
     });
-    expect(dataCodeRow).toBeInTheDocument();
-    expect(dataInputCity).toBeInTheDocument();
+    expect(dataCodeRows.length).toBeGreaterThan(0);
+    expect(dataInputCity).toHaveValue("Test City");
   });
 
   test("shows error notification when Get All fails", async () => {

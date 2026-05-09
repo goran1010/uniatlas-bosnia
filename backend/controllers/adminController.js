@@ -1,8 +1,6 @@
-import { matchedData } from "express-validator";
 import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
 import { postalCodesModel } from "../models/postalCodesModel.js";
 import { sendSuccess } from "../utils/response.js";
-import { sanitizeUser, sanitizeUsers } from "../utils/sanitizeUser.js";
 
 class AdminController {
   async getPendingChanges(req, res) {

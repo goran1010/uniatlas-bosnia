@@ -27,6 +27,9 @@ class PendingChangesPostalCodeModel {
   }
 
   async delete(query) {
+    if (!query) {
+      return await prisma.pendingChangesPostalCode.deleteMany();
+    }
     return await prisma.pendingChangesPostalCode.deleteMany({
       where: query,
     });

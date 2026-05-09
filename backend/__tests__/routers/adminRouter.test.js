@@ -1,7 +1,8 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { app } from "../../app.js";
-import { usersModel } from "../../models/usersModel.js";
+import { pendingChangesPostalCodeModel } from "../../models/pendingChangesPostalCodeModel.js";
+import { postalCodesModel } from "../../models/postalCodesModel.js";
 
 let mockedUser = null;
 
@@ -24,9 +25,9 @@ beforeEach(() => {
   mockedUser = null;
 });
 
-describe("Admin Router - GET /users/admin/contributors", () => {
+describe("Admin Router - GET /users/admin//pending-changes", () => {
   test("Responds with You need to be logged in and an admin to access this route if not logged in", async () => {
-    const response = await request(app).get("/users/admin/contributors");
+    const response = await request(app).get("/users/admin/pending-changes");
 
     expect(response.header["content-type"]).toMatch(/json/);
     expect(response.status).toBe(401);
@@ -44,7 +45,7 @@ describe("Admin Router - GET /users/admin/contributors", () => {
       role: "USER",
     };
 
-    const response = await request(app).get("/users/admin/contributors");
+    const response = await request(app).get("/users/admin//pending-changes");
 
     expect(response.header["content-type"]).toMatch(/json/);
 
@@ -56,34 +57,14 @@ describe("Admin Router - GET /users/admin/contributors", () => {
     expect(response.status).toBe(403);
   });
 
-  test("Responds with status 403 and You need to be admin to access this route if role CONTRIBUTOR", async () => {
-    mockedUser = {
-      id: 1,
-      username: "contributor1",
-      email: "contributor1@example.com",
-      role: "CONTRIBUTOR",
-    };
-
-    const response = await request(app).get("/users/admin/contributors");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 200 and all contributors if role ADMIN", async () => {
-    vi.spyOn(usersModel, "findMany").mockResolvedValueOnce([
+  test("Responds with status 200 and all pending changes if role ADMIN", async () => {
+    vi.spyOn(pendingChangesPostalCodeModel, "findMany").mockResolvedValueOnce([
       {
         id: 1,
-        username: "contributor1",
-        email: "s@non-existent-mail.comms",
-        isEmailConfirmed: false,
-        requestedContributor: false,
-        role: "CONTRIBUTOR",
+        city: "Pending City",
+        code: 54321,
+        post: "",
+        typeOfChange: "DELETE",
       },
     ]);
 
@@ -94,30 +75,29 @@ describe("Admin Router - GET /users/admin/contributors", () => {
       role: "ADMIN",
     };
 
-    const response = await request(app).get("/users/admin/contributors");
+    const response = await request(app).get("/users/admin/pending-changes");
 
     expect(response.header["content-type"]).toMatch(/json/);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      message: "All contributors fetched successfully.",
+      message: "Pending changes retrieved successfully.",
       data: [
         {
           id: 1,
-          username: "contributor1",
-          email: "s@non-existent-mail.comms",
-          isEmailConfirmed: false,
-          requestedContributor: false,
-          role: "CONTRIBUTOR",
+          city: "Pending City",
+          code: 54321,
+          post: "",
+          typeOfChange: "DELETE",
         },
       ],
     });
   });
 });
 
-describe("Admin Router - GET /users/admin/requested-contributors", () => {
+describe("Admin Router - DELETE /decline-pending-change", () => {
   test("Responds with You need to be logged in and an admin to access this route if not logged in", async () => {
-    const response = await request(app).get(
-      "/users/admin/requested-contributors",
+    const response = await request(app).delete(
+      "/users/admin/decline-pending-change",
     );
 
     expect(response.header["content-type"]).toMatch(/json/);
@@ -136,8 +116,8 @@ describe("Admin Router - GET /users/admin/requested-contributors", () => {
       role: "USER",
     };
 
-    const response = await request(app).get(
-      "/users/admin/requested-contributors",
+    const response = await request(app).delete(
+      "/users/admin/decline-pending-change",
     );
 
     expect(response.header["content-type"]).toMatch(/json/);
@@ -149,38 +129,10 @@ describe("Admin Router - GET /users/admin/requested-contributors", () => {
     });
   });
 
-  test("Responds with status 403 and You need to be admin to access this route if role CONTRIBUTOR", async () => {
-    mockedUser = {
-      id: 1,
-      username: "contributor1",
-      email: "contributor1@example.com",
-      role: "CONTRIBUTOR",
-    };
-
-    const response = await request(app).get(
-      "/users/admin/requested-contributors",
+  test("Responds with status 200 and all pending changes if role ADMIN", async () => {
+    vi.spyOn(pendingChangesPostalCodeModel, "delete").mockResolvedValueOnce(
+      "Successfully deleted pending change",
     );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 200 and all requested contributors if role ADMIN", async () => {
-    vi.spyOn(usersModel, "findMany").mockResolvedValueOnce([
-      {
-        id: 1,
-        username: "user1",
-        email: "user1@non-existent-mail.com",
-        isEmailConfirmed: false,
-        requestedContributor: true,
-        role: "CONTRIBUTOR",
-      },
-    ]);
 
     mockedUser = {
       id: 1,
@@ -189,134 +141,23 @@ describe("Admin Router - GET /users/admin/requested-contributors", () => {
       role: "ADMIN",
     };
 
-    const response = await request(app).get(
-      "/users/admin/requested-contributors",
-    );
+    const response = await request(app)
+      .delete("/users/admin/decline-pending-change")
+      .send({ id: 1 });
 
     expect(response.header["content-type"]).toMatch(/json/);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      message: "Users requested contributor role fetched successfully.",
-      data: [
-        {
-          id: 1,
-          username: "user1",
-          email: "user1@non-existent-mail.com",
-          isEmailConfirmed: false,
-          requestedContributor: true,
-          role: "CONTRIBUTOR",
-        },
-      ],
+      message: "Pending change declined successfully.",
+      data: null,
     });
   });
 });
 
-describe("Admin Router - POST /users/admin/add-contributor", () => {
-  test("Responds with You need to be logged in and an admin to access this route if not logged in", async () => {
-    const response = await request(app).post("/users/admin/add-contributor");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(401);
-    expect(response.body).toEqual({
-      error: "You are not logged in.",
-      details: [{ msg: null }],
-    });
-  });
-
-  test("Responds with You need to be admin to access this route if role USER", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "USER",
-    };
-
-    const response = await request(app).post("/users/admin/add-contributor");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 403 and You need to be admin to access this route if role CONTRIBUTOR", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "CONTRIBUTOR",
-    };
-
-    const response = await request(app).post("/users/admin/add-contributor");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 400 if userId is empty", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "ADMIN",
-    };
-
-    const response = await request(app).post("/users/admin/add-contributor");
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(400);
-    expect(response.body.error.message).toContain("User ID is required");
-  });
-
-  test("Responds with status 201 and message if user promoted to contributor successfully", async () => {
-    vi.spyOn(usersModel, "update").mockResolvedValueOnce({
-      id: 2,
-      username: "user2",
-      email: "user2@example.com",
-      isEmailConfirmed: false,
-      requestedContributor: false,
-      role: "CONTRIBUTOR",
-    });
-
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "ADMIN",
-    };
-
-    const response = await request(app)
-      .post("/users/admin/add-contributor")
-      .send({ userId: 2 });
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-      data: {
-        id: 2,
-        username: "user2",
-        email: "user2@example.com",
-        isEmailConfirmed: false,
-        requestedContributor: false,
-        role: "CONTRIBUTOR",
-      },
-      message: "User promoted to contributor successfully.",
-    });
-  });
-});
-
-describe("Admin Router - POST /users/admin/decline-contributor", () => {
+describe("Admin Router - POST /users/admin/approve-pending-change", () => {
   test("Responds with You need to be logged in and an admin to access this route if not logged in", async () => {
     const response = await request(app).post(
-      "/users/admin/decline-contributor",
+      "/users/admin/approve-pending-change",
     );
 
     expect(response.header["content-type"]).toMatch(/json/);
@@ -336,7 +177,7 @@ describe("Admin Router - POST /users/admin/decline-contributor", () => {
     };
 
     const response = await request(app).post(
-      "/users/admin/decline-contributor",
+      "/users/admin/approve-pending-change",
     );
 
     expect(response.header["content-type"]).toMatch(/json/);
@@ -348,28 +189,7 @@ describe("Admin Router - POST /users/admin/decline-contributor", () => {
     });
   });
 
-  test("Responds with status 403 and You need to be admin to access this route if role CONTRIBUTOR", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "CONTRIBUTOR",
-    };
-
-    const response = await request(app).post(
-      "/users/admin/decline-contributor",
-    );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 400 if userId is empty", async () => {
+  test("Responds with status 404 and Pending change not found if no valid id is provided", async () => {
     mockedUser = {
       id: 1,
       username: "user1",
@@ -377,23 +197,39 @@ describe("Admin Router - POST /users/admin/decline-contributor", () => {
       role: "ADMIN",
     };
 
-    const response = await request(app).post(
-      "/users/admin/decline-contributor",
+    vi.spyOn(pendingChangesPostalCodeModel, "findMany").mockResolvedValueOnce(
+      [],
     );
 
+    const response = await request(app)
+      .post("/users/admin/approve-pending-change")
+      .send({ id: 999, typeOfChange: "CREATE" });
+
     expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(400);
-    expect(response.body.error.message).toContain("User ID is required");
+    expect(response.status).toBe(404);
+    expect(response.body.error).toContain("Pending change not found");
   });
 
-  test("Responds with status 201 and message if user's contributor request declined successfully", async () => {
-    vi.spyOn(usersModel, "update").mockResolvedValueOnce({
-      id: 2,
-      username: "user2",
-      email: "user2@example.com",
-      isEmailConfirmed: false,
-      requestedContributor: false,
-      role: "USER",
+  test("Responds with status 200 and message if pending change approved successfully", async () => {
+    vi.spyOn(pendingChangesPostalCodeModel, "findMany").mockResolvedValueOnce([
+      {
+        id: 1,
+        city: "Test City",
+        code: 12345,
+        post: "",
+        typeOfChange: "CREATE",
+      },
+    ]);
+
+    vi.spyOn(postalCodesModel, "createNew").mockResolvedValueOnce({
+      id: 10,
+      city: "Test City",
+      code: 12345,
+      post: "",
+    });
+
+    vi.spyOn(pendingChangesPostalCodeModel, "delete").mockResolvedValueOnce({
+      count: 1,
     });
 
     mockedUser = {
@@ -404,130 +240,23 @@ describe("Admin Router - POST /users/admin/decline-contributor", () => {
     };
 
     const response = await request(app)
-      .post("/users/admin/decline-contributor")
-      .send({ userId: 2 });
+      .post("/users/admin/approve-pending-change")
+      .send({ id: 1, typeOfChange: "CREATE" });
 
     expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      data: {
-        id: 2,
-        username: "user2",
-        email: "user2@example.com",
-        isEmailConfirmed: false,
-        requestedContributor: false,
-        role: "USER",
-      },
-      message: "User's contributor request declined successfully.",
+      data: null,
+      message: "Pending change approved successfully.",
     });
-  });
-});
 
-describe("Admin Router - DELETE /users/admin/remove-contributor", () => {
-  test("Responds with You need to be logged in and an admin to access this route if not logged in", async () => {
-    const response = await request(app).delete(
-      "/users/admin/remove-contributor",
+    expect(postalCodesModel.createNew).toHaveBeenCalledWith(
+      "Test City",
+      12345,
+      "",
     );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(401);
-    expect(response.body).toEqual({
-      error: "You are not logged in.",
-      details: [{ msg: null }],
-    });
-  });
-
-  test("Responds with You need to be admin to access this route if role USER", async () => {
-    mockedUser = {
+    expect(pendingChangesPostalCodeModel.delete).toHaveBeenCalledWith({
       id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "USER",
-    };
-
-    const response = await request(app).delete(
-      "/users/admin/remove-contributor",
-    );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 403 and You need to be admin to access this route if role CONTRIBUTOR", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "CONTRIBUTOR",
-    };
-
-    const response = await request(app).delete(
-      "/users/admin/remove-contributor",
-    );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(403);
-    expect(response.body).toEqual({
-      error: {
-        message: "Access denied: admin role is required.",
-      },
-    });
-  });
-
-  test("Responds with status 400 if userId is empty", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "ADMIN",
-    };
-    const response = await request(app).delete(
-      "/users/admin/remove-contributor",
-    );
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(400);
-    expect(response.body.error.message).toContain("User ID is required");
-  });
-
-  test("Responds with status 201 and message if user removed from contributors successfully", async () => {
-    mockedUser = {
-      id: 1,
-      username: "user1",
-      email: "user1@example.com",
-      role: "ADMIN",
-    };
-
-    vi.spyOn(usersModel, "update").mockResolvedValueOnce({
-      id: 2,
-      username: "user2",
-      email: "user2@example.com",
-      isEmailConfirmed: false,
-      requestedContributor: false,
-      role: "USER",
-    });
-
-    const response = await request(app)
-      .delete("/users/admin/remove-contributor")
-      .send({ userId: 2 });
-
-    expect(response.header["content-type"]).toMatch(/json/);
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-      data: {
-        id: 2,
-        username: "user2",
-        email: "user2@example.com",
-        isEmailConfirmed: false,
-        requestedContributor: false,
-        role: "USER",
-      },
-      message: "User removed from contributors successfully.",
     });
   });
 });

@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { ContributorDashboard } from "../../../src/components/ContributorDashboard/ContributorDashboard";
+import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
 import { NotificationContext } from "../../../src/contextData/NotificationContext";
 import { UserDataContext } from "../../../src/contextData/UserDataContext";
 import { useNotification } from "../../../src/customHooks/useNotification";
@@ -22,12 +22,12 @@ function Wrapper({ initialUser = null }) {
       value={{ notifications, addNotification, removeNotification }}
     >
       <UserDataContext value={{ userData, setUserData }}>
-        <MemoryRouter initialEntries={["/contributor-dashboard"]}>
+        <MemoryRouter initialEntries={["/contribution-dashboard"]}>
           <Notifications />
           <Routes>
             <Route
-              path="/contributor-dashboard"
-              element={<ContributorDashboard />}
+              path="/contribution-dashboard"
+              element={<ContributionDashboard />}
             />
           </Routes>
         </MemoryRouter>
@@ -56,17 +56,22 @@ const setupFetchMock = () => {
       );
     }
 
-    if (requestUrl.includes("/users/contributor")) {
+    if (
+      requestUrl.includes("/users/contribution/pending-changes/postal-codes")
+    ) {
       return Promise.resolve(
         createFetchResponse({
-          data: {
-            id: 1,
-            city: "Test City",
-            code: 12345,
-            post: "",
-          },
+          data: [
+            {
+              id: 3,
+              city: "Pending City",
+              code: 54321,
+              post: "",
+              typeOfChange: "DELETE",
+            },
+          ],
 
-          message: "Postal codes retrieved successfully",
+          message: "Pending changes retrieved successfully",
         }),
       );
     }
@@ -121,7 +126,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe("PostalCodesResultContributor component", () => {
+describe("PostalCodesResultContribution component", () => {
   beforeEach(async () => {
     setupFetchMock();
     render(<Wrapper initialUser={{ role: "CONTRIBUTOR" }} />);
@@ -139,13 +144,12 @@ describe("PostalCodesResultContributor component", () => {
     );
     expect(successNotification).toBeInTheDocument();
 
-    const dataCodeRow = await screen.findByText("12345");
+    const dataCodeRows = await screen.findAllByText("12345");
     const dataInputCity = await screen.findByRole("textbox", {
       name: /city for postal code 12345/i,
-      value: "Test City",
     });
-    expect(dataCodeRow).toBeInTheDocument();
-    expect(dataInputCity).toBeInTheDocument();
+    expect(dataCodeRows.length).toBeGreaterThan(0);
+    expect(dataInputCity).toHaveValue("Test City");
   });
 
   test("shows no results message when searchResult is empty", async () => {
@@ -174,7 +178,9 @@ describe("PostalCodesResultContributor component", () => {
 
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-    const editButtons = await screen.findAllByRole("button", { name: /save/i });
+    const editButtons = await screen.findAllByRole("button", {
+      name: /update/i,
+    });
     const editButton = editButtons[0];
     await user.click(editButton);
 
@@ -202,6 +208,7 @@ describe("PostalCodesResultContributor component", () => {
           createFetchResponse({
             data: {
               id: 1,
+              typeOfChange: "UPDATE",
               city: "Updated City",
               code: 12345,
               post: "",
@@ -215,7 +222,9 @@ describe("PostalCodesResultContributor component", () => {
     await user.clear(cityInput);
     await user.type(cityInput, "Updated City");
 
-    const editButtons = await screen.findAllByRole("button", { name: /save/i });
+    const editButtons = await screen.findAllByRole("button", {
+      name: /update/i,
+    });
     const editButton = editButtons[0];
     await user.click(editButton);
 
@@ -270,7 +279,13 @@ describe("PostalCodesResultContributor component", () => {
       .mockImplementationOnce(() =>
         Promise.resolve(
           createFetchResponse({
-            data: { code: 12345 },
+            data: {
+              id: 2,
+              typeOfChange: "DELETE",
+              city: "Test City",
+              code: 12345,
+              post: "",
+            },
             message: "Postal code deleted successfully",
           }),
         ),
@@ -288,8 +303,8 @@ describe("PostalCodesResultContributor component", () => {
     );
     expect(successNotification).toBeInTheDocument();
 
-    const dataCodeRow = screen.queryByText("12345");
-    expect(dataCodeRow).not.toBeInTheDocument();
+    const dataCodeRows = await screen.findAllByText("12345");
+    expect(dataCodeRows.length).toBeGreaterThan(0);
   });
 
   test("shows error when csrfToken retrieval fails during edit", async () => {
@@ -303,7 +318,9 @@ describe("PostalCodesResultContributor component", () => {
     await user.clear(cityInput);
     await user.type(cityInput, "Updated City");
 
-    const editButtons = await screen.findAllByRole("button", { name: /save/i });
+    const editButtons = await screen.findAllByRole("button", {
+      name: /update/i,
+    });
     const editButton = editButtons[0];
     await user.click(editButton);
 
