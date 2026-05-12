@@ -171,9 +171,10 @@ describe("PendingChanges Component", () => {
 
     render(<Wrapper initialUser={{ role: "ADMIN" }} />);
 
-    const countBadge = await screen.findByLabelText(/pending changes count/i);
-    expect(countBadge).toHaveTextContent("0");
-    expect(screen.getByText(/No pending changes/i)).toBeInTheDocument();
+    const pendingMessage = await screen.findByText(
+      /There are no pending changes at the moment./i,
+    );
+    expect(pendingMessage).toBeInTheDocument();
 
     consoleErrorSpy.mockRestore();
   });

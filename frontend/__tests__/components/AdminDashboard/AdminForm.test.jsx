@@ -144,14 +144,17 @@ describe("AdminForm component pending changes interaction", () => {
 
     await user.click(confirmButton);
 
-    expect(pendingCount).toHaveTextContent("0");
+    expect(pendingCount).not.toBeInTheDocument();
 
-    expect(screen.getByText(/No pending changes/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/There are no pending changes at the moment./i),
+    ).toBeInTheDocument();
   });
 
   test("removes pending request from the list when declined", async () => {
     setupFetchMock({ pendingRequests: mockChanges });
     render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    const pendingCount = await screen.findByLabelText(/pending changes count/i);
 
     const user = userEvent.setup();
 
@@ -164,9 +167,10 @@ describe("AdminForm component pending changes interaction", () => {
 
     await user.click(rejectButton);
 
-    const pendingCount = await screen.findByLabelText(/pending changes count/i);
-    expect(pendingCount).toHaveTextContent("0");
+    expect(pendingCount).not.toBeInTheDocument();
 
-    expect(screen.getByText(/No pending changes/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/There are no pending changes at the moment./i),
+    ).toBeInTheDocument();
   });
 });
