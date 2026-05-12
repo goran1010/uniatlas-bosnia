@@ -1,20 +1,9 @@
-import { usersModel } from "../models/usersModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
-import { sanitizeUser } from "../utils/sanitizeUser.js";
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const NUMBER_OF_DAYS = 30;
 
 class UsersController {
-  async me(req, res) {
-    const loggedInUser = sanitizeUser(req.user);
-
-    return sendSuccess(res, {
-      message: "User info retrieved",
-      data: loggedInUser,
-    });
-  }
-
   logout(req, res) {
     req.logout((err) => {
       if (err) {

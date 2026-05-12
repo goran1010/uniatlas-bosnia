@@ -98,7 +98,7 @@ class AuthController {
 
       if (!user) {
         return sendError(res, {
-          status: 404,
+          status: 500,
           message: "Email confirmation failed: account couldn't be created.",
         });
       }

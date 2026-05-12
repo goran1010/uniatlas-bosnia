@@ -1,5 +1,4 @@
 import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
-import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 
@@ -47,7 +46,7 @@ class ContributionController {
     });
 
     return sendSuccess(res, {
-      status: 201,
+      status: 200,
       message:
         "Postal code edit suggested. Admin will review the suggestion and decide whether to accept it or not.",
       data: result,
@@ -68,6 +67,7 @@ class ContributionController {
     });
 
     return sendSuccess(res, {
+      status: 201,
       message:
         "Postal code deletion suggested. Admin will review the suggestion and decide whether to accept it or not.",
       data: result,
