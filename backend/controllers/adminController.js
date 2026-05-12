@@ -1,6 +1,7 @@
 import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
 import { postalCodesModel } from "../models/postalCodesModel.js";
 import { sendSuccess } from "../utils/response.js";
+import { matchedData } from "express-validator";
 
 class AdminController {
   async getPendingChanges(req, res) {
@@ -13,7 +14,7 @@ class AdminController {
   }
 
   async declinePendingChange(req, res) {
-    const { id } = req.body;
+    const { id } = matchedData(req);
 
     await pendingChangesPostalCodeModel.delete({ id });
 
@@ -23,7 +24,7 @@ class AdminController {
   }
 
   async confirmPendingChange(req, res) {
-    const { id, typeOfChange } = req.body;
+    const { id, typeOfChange } = matchedData(req);
 
     const pendingChange = await pendingChangesPostalCodeModel.findMany({ id });
 

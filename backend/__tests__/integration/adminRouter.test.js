@@ -47,7 +47,7 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
     const userInDb = await usersModel.create(userRequested);
 
-    await pendingChangesPostalCodeModel.create({
+    const pendingChange = await pendingChangesPostalCodeModel.create({
       city: "Test City",
       code: 1234,
       userId: userInDb.id,
@@ -60,7 +60,7 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
     const response = await agent
       .delete("/users/admin/decline-pending-change")
       .send({
-        id: "1234",
+        id: pendingChange.id,
       });
     const expectedResponse = {
       status: 200,

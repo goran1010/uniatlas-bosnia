@@ -152,7 +152,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
 
     const response = await request(app)
       .delete("/users/admin/decline-pending-change")
-      .send({ id: 1 });
+      .send({ id: "a1b2c3d4-e5f6-4789-abcd-000000000001" });
     const expectedResponse = {
       status: 200,
       body: {
@@ -218,7 +218,10 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
     const response = await request(app)
       .post("/users/admin/approve-pending-change")
-      .send({ id: 999, typeOfChange: "CREATE" });
+      .send({
+        id: "a1b2c3d4-e5f6-4789-abcd-000000000999",
+        typeOfChange: "CREATE",
+      });
     const expectedResponse = {
       status: 404,
       body: expect.objectContaining({
@@ -232,7 +235,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
   test("Responds with status 200 and message if pending change approved successfully", async () => {
     vi.spyOn(pendingChangesPostalCodeModel, "findMany").mockResolvedValueOnce([
       {
-        id: 1,
+        id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
         city: "Test City",
         code: 12345,
         post: "",
@@ -260,7 +263,10 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
     const response = await request(app)
       .post("/users/admin/approve-pending-change")
-      .send({ id: 1, typeOfChange: "CREATE" });
+      .send({
+        id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
+        typeOfChange: "CREATE",
+      });
     const expectedResponse = {
       status: 200,
       body: {
@@ -277,7 +283,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       "",
     );
     expect(pendingChangesPostalCodeModel.delete).toHaveBeenCalledWith({
-      id: 1,
+      id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
     });
   });
 });

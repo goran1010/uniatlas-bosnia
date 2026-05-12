@@ -1,4 +1,5 @@
 import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
+import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 
@@ -88,7 +89,7 @@ class ContributionController {
 
   async deletePendingChange(req, res) {
     const { id } = req.user;
-    const { id: pendingChangeId } = req.body;
+    const { id: pendingChangeId } = matchedData(req);
 
     const pendingChange = await pendingChangesPostalCodeModel.findMany({
       userId: id,

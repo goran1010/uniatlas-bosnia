@@ -75,6 +75,18 @@ class ContributionValidation {
 
     validationError,
   ];
+
+  deletePendingChange = [
+    body("id")
+      .trim()
+      .notEmpty()
+      .withMessage("Pending change ID is required")
+      .bail()
+      .isUUID()
+      .withMessage("Pending change ID must be a valid UUID"),
+
+    validationError,
+  ];
 }
 
 const contributionValidation = new ContributionValidation();

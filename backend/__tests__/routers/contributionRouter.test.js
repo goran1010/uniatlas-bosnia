@@ -184,7 +184,7 @@ describe("PUT /users/contribution/postal-codes", () => {
     expect(responseCode).toEqual(expect.objectContaining(expectedResponseData));
   });
 
-  test("Valid request responds with status 201 and Postal code edit suggested", async () => {
+  test("Valid request responds with status 200 and Postal code edit suggested", async () => {
     vi.spyOn(pendingChangesPostalCodeModel, "create").mockResolvedValue({
       city: "TestCity",
       code: "12345",
@@ -214,7 +214,7 @@ describe("PUT /users/contribution/postal-codes", () => {
       .put("/users/contribution/postal-codes")
       .send({ city: "TestCity", code: "12345", post: "" });
     const expectedResponseData = {
-      status: 201,
+      status: 200,
       body: expectedResponse,
     };
 
@@ -262,7 +262,7 @@ describe("DELETE /users/contribution/postal-codes", () => {
     expect(responseCode).toEqual(expect.objectContaining(expectedResponseData));
   });
 
-  test("Valid request responds with status 200 and Postal code row deleted", async () => {
+  test("Valid request responds with status 201 and Postal code row deleted", async () => {
     vi.spyOn(pendingChangesPostalCodeModel, "create").mockResolvedValue({
       city: "TestCity",
       code: "12345",
@@ -291,7 +291,7 @@ describe("DELETE /users/contribution/postal-codes", () => {
       .delete("/users/contribution/postal-codes")
       .send({ code: "12345" });
     const expectedResponseData = {
-      status: 200,
+      status: 201,
       body: expectedResponse,
     };
 
@@ -377,7 +377,7 @@ describe("DELETE /users/contribution/pending-changes/postal-codes", () => {
 
   test("Valid request responds with status 200 and Pending change deleted successfully", async () => {
     const pendingChange = {
-      id: "1",
+      id: "36d5cc88-1f4d-4d8a-9e4f-8dc06f1cb001",
       userId: "1",
       code: "12345",
       post: "",

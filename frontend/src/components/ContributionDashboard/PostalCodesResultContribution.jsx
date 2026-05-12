@@ -34,6 +34,16 @@ function PostalCodesResultContribution({ searchResult, setPendingChanges }) {
   }
   return (
     <section className="flex flex-col justify-center items-center w-full">
+      <h2 className="text-md text-center font-semibold flex items-center gap-1 p-1 flex-1">
+        <span
+          aria-label="pending changes count"
+          className="badge-warning px-2 py-1 rounded-full text-sm font-bold"
+        >
+          {searchResult.length}
+        </span>
+        <span className="flex-1">Pending Changes</span>
+      </h2>
+
       <ul className="w-full max-w-4xl max-h-128 flex flex-col overflow-auto border border-gray-400 dark:border-gray-600 rounded-md p-2 bg-white dark:bg-gray-700">
         <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-gray-400 dark:border-gray-600 rounded-md font-bold text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-600 sm:grid-cols-5">
           <div>Code</div>

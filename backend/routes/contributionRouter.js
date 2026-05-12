@@ -29,6 +29,7 @@ contributionRouter.get(
 
 contributionRouter.delete(
   "/pending-changes/postal-codes",
+  contributionValidation.deletePendingChange,
   contributionController.deletePendingChange,
 );
 

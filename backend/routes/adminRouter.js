@@ -8,11 +8,13 @@ adminRouter.get("/pending-changes", adminController.getPendingChanges);
 
 adminRouter.delete(
   "/decline-pending-change",
+  adminValidation.declinePendingChange,
   adminController.declinePendingChange,
 );
 
 adminRouter.post(
   "/approve-pending-change",
+  adminValidation.approvePendingChange,
   adminController.confirmPendingChange,
 );
 
