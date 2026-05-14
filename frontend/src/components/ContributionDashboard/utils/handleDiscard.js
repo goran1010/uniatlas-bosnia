@@ -1,7 +1,7 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 
-async function handleRemove(
+async function handleDiscard(
   change,
   userData,
   addNotification,
@@ -63,4 +63,4 @@ async function handleRemove(
   }
 }
 
-export { handleRemove };
+export { handleDiscard };

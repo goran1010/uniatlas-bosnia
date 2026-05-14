@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react({
         babel: {
-          plugins: ["babel-plugin-react-compiler"],
+          plugins: mode !== "test" ? ["babel-plugin-react-compiler"] : [],
         },
       }),
       tailwindcss(),

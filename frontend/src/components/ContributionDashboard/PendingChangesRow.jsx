@@ -3,7 +3,7 @@ import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { useState } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
-import { handleRemove } from "./utils/handleRemove";
+import { handleDiscard } from "./utils/handleDiscard";
 
 const PendingChangesRow = memo(
   ({ change, addNotification, setPendingChanges, index = 0 }) => {
@@ -82,7 +82,7 @@ const PendingChangesRow = memo(
             className="w-full py-2"
             loading={loading}
             onClick={() =>
-              handleRemove(
+              handleDiscard(
                 change,
                 userData,
                 addNotification,
