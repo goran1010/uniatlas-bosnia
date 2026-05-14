@@ -1,7 +1,7 @@
 import { EndpointCard } from "./EndPointCard";
 import { endpoints, authenticatedGroups } from "./utils/endpoints";
 
-const BASE_URL = "https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 function MethodTag({ method }) {
   const methodClasses = {
