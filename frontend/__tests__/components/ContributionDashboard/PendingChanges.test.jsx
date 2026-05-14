@@ -1,6 +1,5 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ContributionDashboard } from "../../../src/components/ContributionDashboard/ContributionDashboard";
 import { NotificationContext } from "../../../src/contextData/NotificationContext";
 import { UserDataContext } from "../../../src/contextData/UserDataContext";
@@ -21,15 +20,7 @@ function Wrapper({ initialUser = null }) {
       value={{ notifications, addNotification, removeNotification }}
     >
       <UserDataContext value={{ userData, setUserData }}>
-        <MemoryRouter initialEntries={["/contribution-dashboard"]}>
-          <Notifications />
-          <Routes>
-            <Route
-              path="/contribution-dashboard"
-              element={<ContributionDashboard />}
-            />
-          </Routes>
-        </MemoryRouter>
+        <ContributionDashboard />
       </UserDataContext>
     </NotificationContext>
   );
@@ -83,22 +74,6 @@ const setupFetchMock = () => {
           },
 
           message: "New postal code suggested",
-        }),
-      );
-    }
-
-    if (requestUrl.includes("/users/postal-codes/search")) {
-      return Promise.resolve(
-        createFetchResponse({
-          data: [
-            {
-              id: 1,
-              city: "Test City",
-              code: "12345",
-              post: "",
-            },
-          ],
-          message: "Postal codes retrieved successfully",
         }),
       );
     }
