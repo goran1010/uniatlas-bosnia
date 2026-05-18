@@ -1,7 +1,7 @@
 import { Status } from "./Status";
 import { useContext } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
-import { useTheme } from "../../utils/useTheme";
+import { useTheme } from "../../customHooks/useTheme";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { StandardMenu } from "./StandardMenu";

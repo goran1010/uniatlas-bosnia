@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "home": "Početna",
+    "apiDocs": "API Dokumentacija",
+    "postalCodes": "Poštanski brojevi",
+    "universities": "Univerziteti",
+    "contribute": "Doprinesi",
+    "admin": "Admin",
+    "profile": "Profil",
+    "login": "Prijava",
+    "theme": "Tema",
+    "choose": "Izaberi",
+    "close": "Zatvori",
+    "menu": "Meni",
+    "toggleThemeAria": "Prikaži meni za temu",
+    "toggleMenuAria": "Prikaži navigacioni meni"
+  },
+  "notifications": {
+    "dismiss": "Zatvori obavijest"
+  },
+  "theme": {
+    "system": "Sistemska",
+    "light": "Svijetla",
+    "dark": "Tamna",
+    "switched": {
+      "system": "Prebačeno na sistemsku temu",
+      "light": "Prebačeno na svijetlu temu",
+      "dark": "Prebačeno na tamnu temu"
+    }
+  },
+  "language": {
+    "english": "Engleski",
+    "serbian": "Srpski",
+    "switchAria": "Promijeni jezik"
+  },
+  "auth": {
+    "or": "ILI",
+    "continueWithGithub": "Nastavi preko GitHub-a",
+    "login": {
+      "heading": "Prijava",
+      "githubFailed": "GitHub prijava nije uspjela. Pokušajte ponovo.",
+      "alreadyLoggedIn": "Već ste prijavljeni. Preusmereni ste na početnu stranicu.",
+      "noAccount": "Nemate nalog ? Idite na stranicu Registracija."
+    },
+    "signup": {
+      "heading": "Kreirajte svoj nalog",
+      "blockedWhileLoggedIn": "Ne možete se registrovati dok ste prijavljeni. Preusmereni ste na početnu stranicu.",
+      "haveAccount": "Već imate nalog ? Vratite se na stranicu Prijava."
+    }
+  },
+  "form": {
+    "email": "Email",
+    "password": "Lozinka",
+    "confirmPassword": "Potvrdi lozinku",
+    "create": "Kreiraj",
+    "search": "Pretraži",
+    "getAll": "Prikaži sve",
+    "update": "Ažuriraj",
+    "delete": "Obriši",
+    "discard": "Odbaci",
+    "approve": "Odobri",
+    "reject": "Odbij",
+    "addData": "Dodaj podatke",
+    "closeForm": "Zatvori formu"
+  },
+  "profile": {
+    "title": "Moj profil",
+    "emailAddress": "Email adresa",
+    "currentRole": "Trenutna uloga",
+    "needLogin": "Morate biti prijavljeni. Preusmereni ste na stranicu za prijavu.",
+    "logout": "Odjavi se"
+  },
+  "home": {
+    "title": "Bosnia Lens",
+    "description1": "Besplatan open-source projekat koji pruža strukturirane javne podatke o Bosni i Hercegovini kroz REST API i web interfejs.",
+    "description2": "Trenutno je fokus na poštanskim brojevima, a univerziteti su sljedeći planirani skup podataka - sa ciljem da bosanski javni podaci budu otvoreni, pretraživi i prilagođeni programerima.",
+    "availableData": "Dostupni podaci",
+    "availableDataPostalCodes": "Poštanski brojevi - pregled svih ili pretraga po broju i nazivu grada",
+    "plannedData": "Planirani podaci",
+    "plannedDataUniversities": "Univerziteti i njihovi programi",
+    "contributing": "Doprinos",
+    "contributingReadme": "Pročitajte CONTRIBUTING.md za detalje o pravilima ponašanja i postupku slanja pull request-ova.",
+    "contributingWelcome": "Dobrodošli su doprinosi kroz podatke, unapređenja koda, dokumentaciju i prijave grešaka.",
+    "getStarted": "Počni",
+    "card": {
+      "postalCodes": {
+        "title": "Poštanski brojevi",
+        "description": "Pregledajte sve poštanske brojeve ili pretražujte po broju i nazivu grada."
+      },
+      "restApi": {
+        "title": "REST API",
+        "description": "Uključite Bosnia Lens podatke u svoju aplikaciju preko javnog REST API-ja. Pogledajte dokumentaciju i dostupne endpoint-e."
+      }
+    }
+  },
+  "postal": {
+    "search": {
+      "label": "Pretraga po poštanskom broju ili opštini",
+      "success": "Poštanski brojevi su uspješno preuzeti.",
+      "failed": "Pretraga nije uspjela.",
+      "error": "Došlo je do greške prilikom pretrage poštanskih brojeva."
+    },
+    "getAll": {
+      "failed": "Učitavanje poštanskih brojeva nije uspjelo.",
+      "error": "Došlo je do greške prilikom preuzimanja poštanskih brojeva i opština."
+    },
+    "results": {
+      "none": "Nema rezultata za prikaz.",
+      "code": "Broj",
+      "city": "Grad",
+      "post": "Pošta",
+      "resultOne": "rezultat",
+      "resultOther": "rezultata"
+    }
+  },
+  "api": {
+    "title": "REST API",
+    "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
+    "authIntro": "Autentifikovani endpoint-i su odvojeni od javnog osnovnog URL-a i koriste sesijske kolačiće plus CSRF tokene za izmjene podataka.",
+    "postalObject": "Objekat poštanskog broja",
+    "endpoints": "Endpoint-i",
+    "authFlowTitle": "Autentifikovani tok za doprinos podacima",
+    "authFlowBody": "Ovi endpoint-i zahtijevaju autentifikovanu sesiju (credentials: include) i koriste CSRF zaštitu za zahtjeve koji mijenjaju podatke.",
+    "method": {
+      "get": "GET",
+      "post": "POST",
+      "put": "PUT",
+      "delete": "DELETE"
+    }
+  },
+  "endpoint": {
+    "queryParameters": "Parametri upita",
+    "name": "Naziv",
+    "required": "Obavezno",
+    "description": "Opis",
+    "yes": "Da",
+    "no": "Ne",
+    "successResponse": "Uspješan odgovor",
+    "errorResponses": "Odgovori sa greškom"
+  },
+  "contribution": {
+    "needUser": "Morate biti registrovani korisnik da biste predložili izmjene sadržaja.",
+    "chooseDataset": "Izaberite skup podataka:",
+    "noDataset": "Nema skupa",
+    "selectDatasetError": "Morate izabrati skup podataka.",
+    "viewEditAllData": "Prikaži i uređuj sve podatke:",
+    "addNewData": "Dodaj nove podatke",
+    "cityName": "Naziv grada:",
+    "postalCode": "Poštanski broj:",
+    "postalCarrier": "Poštanski operater:",
+    "pendingChanges": "Izmjene na čekanju",
+    "noPendingChanges": "Nema izmjena na čekanju za prikaz.",
+    "change": "Izmjena",
+    "user": "Korisnik",
+    "dataset": {
+      "postalCodes": "Poštanski brojevi",
+      "universities": "Univerziteti",
+      "universitiesPlaceholder": "Univerziteti - uskoro"
+    }
+  },
+  "admin": {
+    "needAdmin": "Morate biti admin da biste vidjeli admin kontrolnu tablu.",
+    "needLoginAndAdmin": "Morate biti prijavljeni i imati admin ulogu da biste vidjeli admin kontrolnu tablu.",
+    "dashboardTitle": "Admin kontrolna tabla",
+    "pendingChanges": "Izmjene na čekanju",
+    "noPendingChanges": "Trenutno nema izmjena na čekanju."
+  },
+  "error": {
+    "notFound": "Ovdje nema ničega, izvinite.",
+    "goHome": "Idi na početnu stranicu"
+  },
+  "longWait": {
+    "unreachable": "Server nije dostupan ni nakon više pokušaja. Pokušajte ponovo kasnije.",
+    "wakingUp": "Odgovor servera traje duže nego očekivano (server se možda pokreće). Sačekajte..."
+  },
+  "footer": {
+    "name": "Goran Jović",
+    "email": "goran1010jovic@gmail.com"
+  }
+}

@@ -1,20 +1,16 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 function Home() {
+  const { t } = useContext(LanguageContext);
   return (
     <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col items-center gap-10 py-8 dark:text-gray-100">
       <header className="flex flex-col items-center gap-6 w-full">
         <h1 className="text-3xl font-bold">Bosnia Lens</h1>
         <section className="w-full text-left">
-          <p>
-            A free, open-source project providing structured public data about
-            Bosnia and Herzegovina through a REST API and web interface.
-          </p>
-          <p className="mt-2">
-            Currently focused on postal codes, with universities as the next
-            planned dataset - making Bosnian public data open, searchable, and
-            developer-friendly.
-          </p>
+          <p>{t("home.description1")}</p>
+          <p className="mt-2">{t("home.description2")}</p>
         </section>
 
         <div className="grid gap-6 md:grid-cols-2 w-full">
