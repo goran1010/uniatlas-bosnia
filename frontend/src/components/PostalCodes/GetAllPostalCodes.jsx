@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { NotificationContext } from "../../contextData/NotificationContext";
 import { Spinner } from "../../utils/Spinner";
 import { Button } from "../sharedComponents/Button";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 const currentURL = import.meta.env.VITE_BACKEND_URL;
 
 function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
   const { addNotification } = useContext(NotificationContext);
+  const { t } = useContext(LanguageContext);
 
   async function handleGetAll(e) {
     try {
@@ -24,7 +26,7 @@ function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
           message:
             result?.error?.message ||
             result?.error ||
-            "Failed to load postal codes.",
+            t("postal.getAll.failed"),
         });
         return;
       }
@@ -36,8 +38,7 @@ function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
     } catch (err) {
       addNotification({
         type: "error",
-        message:
-          "An error occurred while fetching postal codes and municipalities.",
+        message: t("postal.getAll.error"),
       });
       console.error("Error fetching postal codes and municipalities:", err);
     } finally {
@@ -48,7 +49,7 @@ function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
   return (
     <form onSubmit={handleGetAll} className="w-full">
       <Button type="submit" loading={loading} variant="warning">
-        Get All
+        {t("form.getAll")}
       </Button>
     </form>
   );

@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "home": "Home",
+    "apiDocs": "API Docs",
+    "postalCodes": "Postal Codes",
+    "universities": "Universities",
+    "contribute": "Contribute",
+    "admin": "Admin",
+    "profile": "Profile",
+    "login": "Log In",
+    "language": "Language",
+    "theme": "Theme",
+    "choose": "Choose",
+    "close": "Close",
+    "menu": "Menu",
+    "toggleThemeAria": "Toggle theme menu",
+    "toggleMenuAria": "Toggle navigation menu"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "dismiss": "Dismiss notification"
+  },
+  "theme": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "switched": {
+      "system": "Switched to system theme",
+      "light": "Switched to light theme",
+      "dark": "Switched to dark theme"
+    }
+  },
+  "language": {
+    "browser": "Browser Language",
+    "english": "English",
+    "serbian": "Serbian",
+    "switchAria": "Toggle language",
+    "switched": {
+      "browser": "Switched to browser language",
+      "english": "Switched to English",
+      "serbian": "Switched to Serbian"
+    }
+  },
+  "auth": {
+    "or": "OR",
+    "pageSuffix": "page.",
+    "continueWithGithub": "Continue with GitHub",
+    "login": {
+      "linkText": "Log In",
+      "noAccountPrefix": "Don't have an account ? Go to the",
+      "heading": "Log in",
+      "githubFailed": "GitHub login failed. Please try again.",
+      "alreadyLoggedIn": "You are already logged in. Redirected to the home page.",
+      "noAccount": "Don't have an account ? Go to the Sign Up page."
+    },
+    "signup": {
+      "linkText": "Sign Up",
+      "haveAccountPrefix": "Already have an account ? Go back to the",
+      "heading": "Create your account",
+      "blockedWhileLoggedIn": "You can't sign up while logged in. Redirected to the home page.",
+      "haveAccount": "Already have an account ? Go back to the Log In page."
+    }
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "create": "Create",
+    "search": "Search",
+    "getAll": "Get All",
+    "update": "Update",
+    "delete": "Delete",
+    "discard": "Discard",
+    "approve": "Approve",
+    "reject": "Reject",
+    "addData": "Add data",
+    "closeForm": "Close form"
+  },
+  "profile": {
+    "title": "My Profile",
+    "emailAddress": "Email Address",
+    "currentRole": "Current Role",
+    "needLogin": "You need to be logged in. Redirected to the login page.",
+    "logout": "Log out"
+  },
+  "home": {
+    "title": "Bosnia Lens",
+    "description1": "A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and web interface.",
+    "description2": "Currently focused on postal codes, with universities as the next planned dataset - making Bosnian public data open, searchable, and developer-friendly.",
+    "availableData": "Available data",
+    "availableDataPostalCodes": "Postal codes - browse all or search by code and city name",
+    "plannedData": "Planned data",
+    "plannedDataUniversities": "Universities and their programs",
+    "contributing": "Contributing",
+    "contributingReadmePrefix": "Please read",
+    "contributingReadmeSuffix": "for details on our code of conduct and the process for submitting pull requests.",
+    "contributingReadme": "Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.",
+    "contributingWelcome": "We welcome contributions of data, code improvements, documentation, and bug reports.",
+    "getStarted": "Get started",
+    "card": {
+      "postalCodes": {
+        "title": "Postal Codes",
+        "description": "Browse all postal codes or search by code and city name."
+      },
+      "restApi": {
+        "title": "REST API",
+        "description": "Integrate Bosnia Lens data into your own app via our public REST API. View documentation and available endpoints."
+      }
+    }
+  },
+  "postal": {
+    "search": {
+      "label": "Search by Postal Code or Municipality",
+      "success": "Postal codes retrieved successfully.",
+      "failed": "Search failed.",
+      "error": "An error occurred while searching for postal codes."
+    },
+    "getAll": {
+      "failed": "Failed to load postal codes.",
+      "error": "An error occurred while fetching postal codes and municipalities."
+    },
+    "results": {
+      "none": "No results to display.",
+      "code": "Code",
+      "city": "City",
+      "post": "Post",
+      "resultOne": "result",
+      "resultOther": "results"
+    }
+  },
+  "api": {
+    "title": "REST API",
+    "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
+    "authIntro": "Authenticated endpoints are separate from the public base URL and use session cookies plus CSRF tokens for write operations.",
+    "postalObject": "Postal code object",
+    "endpoints": "Endpoints",
+    "authFlowTitle": "Authenticated Data Contribution Flow",
+    "authFlowBody": "These endpoints require an authenticated session (credentials: include) and use CSRF protection for mutating requests.",
+    "postalObjectExample": "{\n  \"id\":   string   - unique identifier\n  \"code\": number   - 5-digit postal code\n  \"city\": string   - city name\n  \"post\": \"BH_POSTA\" | \"POSTE_SRP\" | \"HP_MOSTAR\" | null\n}",
+    "groups": {
+      "csrf": "CSRF",
+      "auth": "Auth",
+      "users": "Users (Authenticated)",
+      "contributions": "Contributions (Authenticated Users)",
+      "admin": "Admin (Authenticated Admin Users)"
+    },
+    "endpointsData": {
+      "apiStatus": "Check API status.",
+      "apiV1Status": "Check API v1 status.",
+      "getAllPostalCodes": "Retrieve all postal codes, ordered by code ascending.",
+      "searchPostalCodes": "Search postal codes by numeric code (exact 5-digit match) or by city name (case-insensitive, minimum 2 characters).",
+      "searchTermParam": "A 5-digit postal code (e.g. 71000) or a city name (e.g. Sarajevo, minimum 2 characters).",
+      "csrfIssue": "Issue a CSRF token used in the x-csrf-token header for mutating requests.",
+      "authSignup": "Register a pending account and send a confirmation email.",
+      "authConfirm": "Confirm signup token and create the user account.",
+      "authLogin": "Log in with email/password.",
+      "authGithubStart": "Start GitHub OAuth login flow.",
+      "authGithubCallback": "Complete GitHub OAuth login flow.",
+      "usersMe": "Get current user profile.",
+      "usersLogout": "End session.",
+      "contributionCreate": "Suggest a new postal code (stored as pending change).",
+      "contributionUpdate": "Suggest an edit to a postal code (stored as pending change).",
+      "contributionDelete": "Suggest deletion of a postal code (stored as pending change).",
+      "contributionPendingList": "List your own pending suggestions.",
+      "contributionPendingDelete": "Remove one of your own pending suggestions.",
+      "adminPendingList": "List all pending suggestions.",
+      "adminApprove": "Approve a pending suggestion and apply it to the live dataset.",
+      "adminDecline": "Reject a pending suggestion."
+    },
+    "method": {
+      "get": "GET",
+      "post": "POST",
+      "put": "PUT",
+      "delete": "DELETE"
+    }
+  },
+  "endpoint": {
+    "queryParameters": "Query parameters",
+    "name": "Name",
+    "required": "Required",
+    "description": "Description",
+    "yes": "Yes",
+    "no": "No",
+    "successResponse": "Success response",
+    "errorResponses": "Error responses"
+  },
+  "contribution": {
+    "needUser": "You need to be a registered user to propose changes to the content.",
+    "chooseDataset": "Choose dataset:",
+    "noDataset": "No dataset",
+    "selectDatasetError": "You need to select a dataset.",
+    "viewEditAllData": "View and edit all data:",
+    "addNewData": "Add new data",
+    "cityName": "City name:",
+    "postalCode": "Postal Code:",
+    "postalCarrier": "Postal Carrier:",
+    "pendingChanges": "Pending Changes",
+    "noPendingChanges": "No pending changes to display.",
+    "change": "Change",
+    "pendingChangesCountAria": "pending changes count",
+    "searchResultsCountAria": "search result count",
+    "searchResults": "Search Results",
+    "user": "User",
+    "dataset": {
+      "postalCodes": "Postal Codes",
+      "universities": "Universities",
+      "universitiesPlaceholder": "Universities placeholder"
+    }
+  },
+  "admin": {
+    "needAdmin": "You need to be an admin to see the admin dashboard.",
+    "needLoginAndAdmin": "You need to be logged in and an admin to see the admin dashboard.",
+    "dashboardTitle": "Admin Dashboard",
+    "pendingChangesCountAria": "pending changes count",
+    "pendingChanges": "Pending Changes",
+    "noPendingChanges": "There are no pending changes at the moment."
+  },
+  "error": {
+    "notFound": "There is nothing here, sorry.",
+    "goHome": "Go to Home Page"
+  },
+  "longWait": {
+    "unreachable": "Server can't be reached after multiple attempts. Please try again later.",
+    "wakingUp": "Getting response from the server is taking longer than expected (server might be waking up). Please wait..."
+  },
+  "footer": {
+    "name": "Goran Jović",
+    "email": "goran1010jovic@gmail.com"
+  },
+  "validation": {
+    "email": {
+      "invalid": "Please enter a valid email address",
+      "minLength": "Email must have at least 3 characters",
+      "missingAt": "Please include an '@' in the email address. '{{email}}' is missing an '@'.",
+      "missingDomain": "Please enter a part following '@'. {{email}} is incomplete."
+    },
+    "password": {
+      "minLength": "Password must have at least 6 characters",
+      "mustMatch": "Password and confirm password fields must match"
+    },
+    "postalCode": {
+      "fiveDigits": "Postal code must be a 5-digit number"
+    },
+    "search": {
+      "minLength": "Search must have at least 2 characters"
+    },
+    "city": {
+      "required": "City name cannot be empty"
+    }
+  },
+  "messages": {
+    "csrfTokenFailed": "Failed to retrieve CSRF token.",
+    "pendingChanges": {
+      "loadFailed": "Failed to load pending changes.",
+      "fetchError": "Error fetching pending changes."
+    },
+    "postal": {
+      "addFailed": "Failed to add postal code.",
+      "addError": "An error occurred while adding the postal code.",
+      "updateFailed": "Failed to update postal code.",
+      "updateError": "An error occurred while updating the postal code.",
+      "deleteFailed": "Failed to delete postal code.",
+      "deleteError": "An error occurred while deleting the postal code."
+    },
+    "auth": {
+      "loginFailed": "Login failed.",
+      "loginError": "An error occurred while logging in.",
+      "registrationFailed": "Registration failed.",
+      "registrationError": "An error occurred during registration.",
+      "logoutFailed": "Logout failed.",
+      "logoutError": "An error occurred while logging out."
+    },
+    "admin": {
+      "approveFailed": "Failed to approve pending change.",
+      "approveError": "Error approving pending change for {{email}}.",
+      "declineFailed": "Failed to decline request.",
+      "declineError": "Error declining {{email}}'s request."
+    }
+  }
+}

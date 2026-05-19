@@ -2,22 +2,21 @@ function checkFormValidityClick(
   passwordInput,
   confirmPasswordInput,
   emailInput,
+  t,
 ) {
   const emailValue = emailInput.current.value.trim();
 
   if (emailValue.length < 3) {
-    emailInput.current.setCustomValidity(
-      "Email must have at least 3 characters",
-    );
+    emailInput.current.setCustomValidity(t("validation.email.minLength"));
     emailInput.current.reportValidity();
   } else if (!emailValue.includes("@")) {
     emailInput.current.setCustomValidity(
-      `Please include an '@' in the email address. '${emailValue}' is missing an '@'.`,
+      t("validation.email.missingAt", { email: emailValue }),
     );
     emailInput.current.reportValidity();
   } else if (emailValue.split("@")[1]?.length === 0) {
     emailInput.current.setCustomValidity(
-      `Please enter a part following '@'. ${emailValue} is incomplete.`,
+      t("validation.email.missingDomain", { email: emailValue }),
     );
     emailInput.current.reportValidity();
   } else {
@@ -25,9 +24,7 @@ function checkFormValidityClick(
   }
 
   if (passwordInput.current.value.trim().length < 6) {
-    passwordInput.current.setCustomValidity(
-      "Password must have at least 6 characters",
-    );
+    passwordInput.current.setCustomValidity(t("validation.password.minLength"));
     passwordInput.current.reportValidity();
   } else passwordInput.current.setCustomValidity("");
 
@@ -36,7 +33,7 @@ function checkFormValidityClick(
     confirmPasswordInput.current.value.trim()
   ) {
     confirmPasswordInput.current.setCustomValidity(
-      "Password and confirm password fields must match",
+      t("validation.password.mustMatch"),
     );
     confirmPasswordInput.current.reportValidity();
   } else confirmPasswordInput.current.setCustomValidity("");

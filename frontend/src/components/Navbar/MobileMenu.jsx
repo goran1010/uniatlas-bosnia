@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { Status } from "./Status";
+import { useContext } from "react";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 function MobileMenu({ setIsMenuOpen, userData }) {
+  const { t } = useContext(LanguageContext);
+
   return (
     <div
       id="mobile-menu"
@@ -12,21 +17,21 @@ function MobileMenu({ setIsMenuOpen, userData }) {
           to="/"
           onClick={() => setIsMenuOpen(false)}
         >
-          Home
+          {t("nav.home")}
         </Link>
         <Link
           className="menu-item block p-2 w-full text-center text-nowrap"
           to="/api-docs"
           onClick={() => setIsMenuOpen(false)}
         >
-          API Docs
+          {t("nav.apiDocs")}
         </Link>
         <Link
           className="menu-item block p-2 w-full text-center text-nowrap"
           to="/postal-codes"
           onClick={() => setIsMenuOpen(false)}
         >
-          Postal Codes
+          {t("nav.postalCodes")}
         </Link>
 
         <Link
@@ -34,7 +39,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
           to="/universities"
           onClick={() => setIsMenuOpen(false)}
         >
-          Universities
+          {t("nav.universities")}
         </Link>
 
         {userData && (
@@ -43,7 +48,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
             to="/contribution-dashboard"
             onClick={() => setIsMenuOpen(false)}
           >
-            Contribute
+            {t("nav.contribute")}
           </Link>
         )}
         {userData?.role === "ADMIN" && (
@@ -52,9 +57,12 @@ function MobileMenu({ setIsMenuOpen, userData }) {
             to="/admin-dashboard"
             onClick={() => setIsMenuOpen(false)}
           >
-            Admin
+            {t("nav.admin")}
           </Link>
         )}
+        <div className="flex justify-center items-center">
+          <Status setIsMenuOpen={setIsMenuOpen} />
+        </div>
       </ul>
     </div>
   );

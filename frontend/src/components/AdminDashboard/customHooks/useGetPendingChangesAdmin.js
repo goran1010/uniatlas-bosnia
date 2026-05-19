@@ -2,7 +2,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "../../../contextData/NotificationContext";
 
-function useGetPendingChangesAdmin(setLoading) {
+function useGetPendingChangesAdmin(setLoading, t) {
   const { addNotification } = useContext(NotificationContext);
   const [pendingChanges, setPendingChanges] = useState([]);
 
@@ -37,13 +37,13 @@ function useGetPendingChangesAdmin(setLoading) {
           message:
             result?.error?.message ||
             result?.error ||
-            "Failed to load pending changes.",
+            t("messages.pendingChanges.loadFailed"),
         });
       } catch (error) {
         console.error("Error fetching pending changes:", error);
         addNotification({
           type: "error",
-          message: "Error fetching pending changes.",
+          message: t("messages.pendingChanges.fetchError"),
         });
       } finally {
         setLoading(false);

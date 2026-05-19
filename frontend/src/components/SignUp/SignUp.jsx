@@ -6,11 +6,13 @@ import { SignUpForm } from "./SignUpForm";
 import { NotificationContext } from "../../contextData/NotificationContext.js";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink.jsx";
 import { DividerOr } from "../sharedComponents/DividerOr.jsx";
+import { LanguageContext } from "../../contextData/LanguageContext.js";
 
 function SignUp() {
   const [loading, setLoading] = useState(false);
 
   const { addNotification } = useContext(NotificationContext);
+  const { t } = useContext(LanguageContext);
 
   const navigate = useNavigate();
   const { userData } = useContext(UserDataContext);
@@ -19,20 +21,19 @@ function SignUp() {
     if (userData) {
       addNotification({
         type: "warning",
-        message:
-          "You can't sign up while logged in. Redirected to the home page.",
+        message: t("auth.signup.blockedWhileLoggedIn"),
       });
       navigate("/home");
       return;
     }
-  }, [userData, navigate, addNotification]);
+  }, [userData, navigate, addNotification, t]);
 
   return (
     <div className="panel-card relative min-h-full w-full max-w-xl mx-auto flex items-center justify-center p-4 sm:p-5">
       <div className="w-full max-w-md p-1 sm:p-2 flex flex-col gap-4">
         <div>
           <h1 className="text-3xl text-center font-bold">
-            Create your account
+            {t("auth.signup.heading")}
           </h1>
         </div>
         <SignUpForm setLoading={setLoading} loading={loading} />
@@ -45,11 +46,11 @@ function SignUp() {
 
         <div className="relative">
           <p className="text-center">
-            Already have an account ? Go back to the{" "}
+            {t("auth.signup.haveAccountPrefix")}{" "}
             <Link className="hover:underline font-bold" to={"/login"}>
-              Log In
+              {t("auth.login.linkText")}
             </Link>{" "}
-            page.
+            {t("auth.pageSuffix")}
           </p>
         </div>
       </div>

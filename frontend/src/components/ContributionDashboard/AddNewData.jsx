@@ -6,6 +6,7 @@ import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { Label } from "../sharedComponents/Label";
 import { UserDataContext } from "../../contextData/UserDataContext";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 function AddNewData({
   setSearchResult,
@@ -14,6 +15,7 @@ function AddNewData({
   setPendingChanges,
 }) {
   const { userData } = useContext(UserDataContext);
+  const { t } = useContext(LanguageContext);
   const [input, setInput] = useState({ city: "", code: "", post: "" });
   const { addNotification } = useContext(NotificationContext);
 
@@ -23,7 +25,7 @@ function AddNewData({
   function handleInput(e) {
     const newInput = { ...input };
     newInput[e.target.name] = e.target.value;
-    validateAddData(e);
+    validateAddData(e, t);
     setInput(newInput);
   }
 
@@ -36,12 +38,12 @@ function AddNewData({
         onClick={() => setIsOpen(!isOpen)}
         variant="secondary"
       >
-        {isOpen ? "Close form" : "Add new data"}
+        {isOpen ? t("form.closeForm") : t("contribution.addNewData")}
       </Button>
       {isOpen && (
         <div className="flex flex-col gap-2 border border-gray-300 dark:border-gray-600 rounded-md p-3 w-full max-w-md mx-auto">
           <div>
-            <Label htmlFor="city">City name:</Label>
+            <Label htmlFor="city">{t("contribution.cityName")}</Label>
             <Input
               ref={cityInput}
               type="text"
@@ -52,7 +54,7 @@ function AddNewData({
             />
           </div>
           <div>
-            <Label htmlFor="code">Postal Code:</Label>
+            <Label htmlFor="code">{t("contribution.postalCode")}</Label>
             <Input
               ref={codeInput}
               type="text"
@@ -63,7 +65,7 @@ function AddNewData({
             />
           </div>
           <div>
-            <Label htmlFor="post">Postal Carrier:</Label>
+            <Label htmlFor="post">{t("contribution.postalCarrier")}</Label>
             <Input
               type="text"
               id="post"
@@ -85,6 +87,7 @@ function AddNewData({
                   codeInput,
                   setPendingChanges,
                   userData,
+                  t,
                 )
               }
               type="button"
@@ -92,7 +95,7 @@ function AddNewData({
               variant="success"
               className=""
             >
-              Add data
+              {t("form.addData")}
             </Button>
           </div>
         </div>

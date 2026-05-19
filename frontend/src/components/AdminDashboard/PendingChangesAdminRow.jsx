@@ -5,10 +5,13 @@ import { useState } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
 import { handleConfirm } from "./utils/handleConfirm";
 import { handleDecline } from "./utils/handleDecline";
+import { useContext } from "react";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 const PendingChangesAdminRow = memo(
   ({ change, addNotification, setPendingChanges, index = 0 }) => {
     const [loading, setLoading] = useState(false);
+    const { t } = useContext(LanguageContext);
 
     const getChangeTypeStyles = (type) => {
       switch (type?.toLowerCase()) {
@@ -48,7 +51,9 @@ const PendingChangesAdminRow = memo(
       >
         <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
           <div className="flex justify-between sm:justify-center items-center ">
-            <span className="sm:hidden font-semibold">Change</span>
+            <span className="sm:hidden font-semibold">
+              {t("contribution.change")}
+            </span>
             <span
               className={`px-2 py-1 rounded-md text-xs font-semibold capitalize ${getChangeTypeBadgeStyles(
                 change.typeOfChange,
@@ -58,21 +63,29 @@ const PendingChangesAdminRow = memo(
             </span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
-            <span className="sm:hidden font-semibold">Code</span>
+            <span className="sm:hidden font-semibold">
+              {t("postal.results.code")}
+            </span>
             <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
               {change.code}
             </span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
-            <span className="sm:hidden font-semibold">City</span>
+            <span className="sm:hidden font-semibold">
+              {t("postal.results.city")}
+            </span>
             <span>{change.city}</span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
-            <span className="sm:hidden font-semibold">Post</span>
+            <span className="sm:hidden font-semibold">
+              {t("postal.results.post")}
+            </span>
             <span>{change.post}</span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
-            <span className="sm:hidden font-semibold">User</span>
+            <span className="sm:hidden font-semibold">
+              {t("contribution.user")}
+            </span>
             <span className="break-all">{change.user.email}</span>
           </div>
         </div>
@@ -87,12 +100,13 @@ const PendingChangesAdminRow = memo(
                 setPendingChanges,
                 addNotification,
                 setLoading,
+                t,
               );
             }}
             type="button"
             loading={loading}
           >
-            Approve
+            {t("form.approve")}
           </Button>
           <Button
             variant="danger"
@@ -103,12 +117,13 @@ const PendingChangesAdminRow = memo(
                 setPendingChanges,
                 addNotification,
                 setLoading,
+                t,
               );
             }}
             type="button"
             loading={loading}
           >
-            Reject
+            {t("form.reject")}
           </Button>
         </div>
       </form>

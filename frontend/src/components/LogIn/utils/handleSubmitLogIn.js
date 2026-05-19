@@ -8,6 +8,7 @@ async function handleSubmitLogIn(
   addNotification,
   setLoading,
   navigate,
+  t,
 ) {
   try {
     setLoading(true);
@@ -18,7 +19,7 @@ async function handleSubmitLogIn(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -41,7 +42,10 @@ async function handleSubmitLogIn(
     if (!response.ok) {
       addNotification({
         type: "error",
-        message: result?.error?.message || result?.error || "Login failed.",
+        message:
+          result?.error?.message ||
+          result?.error ||
+          t("messages.auth.loginFailed"),
       });
       return;
     }
@@ -56,7 +60,7 @@ async function handleSubmitLogIn(
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while logging in.",
+      message: t("messages.auth.loginError"),
     });
     console.error(err);
   } finally {

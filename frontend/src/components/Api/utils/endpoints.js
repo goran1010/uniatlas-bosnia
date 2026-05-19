@@ -2,7 +2,7 @@ const endpoints = [
   {
     method: "GET",
     path: "/api",
-    description: "Check API status.",
+    descriptionKey: "api.endpointsData.apiStatus",
     params: null,
     successExample: `{
   "data": { "status": "ok" },
@@ -13,7 +13,7 @@ const endpoints = [
   {
     method: "GET",
     path: "/api/v1",
-    description: "Check API v1 status.",
+    descriptionKey: "api.endpointsData.apiV1Status",
     params: null,
     successExample: `{
   "data": { "status": "ok" },
@@ -24,7 +24,7 @@ const endpoints = [
   {
     method: "GET",
     path: "/api/v1/postal-codes",
-    description: "Retrieve all postal codes, ordered by code ascending.",
+    descriptionKey: "api.endpointsData.getAllPostalCodes",
     params: null,
     successExample: `{
   "message": "Postal codes retrieved successfully",
@@ -38,14 +38,12 @@ const endpoints = [
   {
     method: "GET",
     path: "/api/v1/postal-codes/search",
-    description:
-      "Search postal codes by numeric code (exact 5-digit match) or by city name (case-insensitive, minimum 2 characters).",
+    descriptionKey: "api.endpointsData.searchPostalCodes",
     params: [
       {
         name: "searchTerm",
         required: true,
-        description:
-          "A 5-digit postal code (e.g. 71000) or a city name (e.g. Sarajevo, minimum 2 characters).",
+        descriptionKey: "api.endpointsData.searchTermParam",
       },
     ],
     successExample: `{
@@ -54,122 +52,117 @@ const endpoints = [
     { "id": "...", "code": 71000, "city": "Sarajevo", "post": "BH_POSTA" }
   ]
 }`,
-    errorExample: `// 404 — no match found
+    errorExample: `// 404 - no match found
 { "error": { "message": "Postal code not found: verify the search term and try again." } }
 
-// 400 — invalid searchTerm
+// 400 - invalid searchTerm
 { "error": { "message": "Validation failed: Postal codes must have 5 numbers. Fix the highlighted fields and try again." } }`,
   },
 ];
 
 const authenticatedGroups = [
   {
-    title: "CSRF",
+    titleKey: "api.groups.csrf",
     endpoints: [
       {
         method: "GET",
         path: "/csrf-token",
-        description:
-          "Issue a CSRF token used in the x-csrf-token header for mutating requests.",
+        descriptionKey: "api.endpointsData.csrfIssue",
       },
     ],
   },
   {
-    title: "Auth",
+    titleKey: "api.groups.auth",
     endpoints: [
       {
         method: "POST",
         path: "/auth/signup",
-        description:
-          "Register a pending account and send a confirmation email.",
+        descriptionKey: "api.endpointsData.authSignup",
       },
       {
         method: "GET",
         path: "/auth/confirm/:token",
-        description: "Confirm signup token and create the user account.",
+        descriptionKey: "api.endpointsData.authConfirm",
       },
       {
         method: "POST",
         path: "/auth/login",
-        description: "Log in with email/password.",
+        descriptionKey: "api.endpointsData.authLogin",
       },
       {
         method: "GET",
         path: "/auth/github",
-        description: "Start GitHub OAuth login flow.",
+        descriptionKey: "api.endpointsData.authGithubStart",
       },
       {
         method: "GET",
         path: "/auth/github/callback",
-        description: "Complete GitHub OAuth login flow.",
+        descriptionKey: "api.endpointsData.authGithubCallback",
       },
     ],
   },
   {
-    title: "Users (Authenticated)",
+    titleKey: "api.groups.users",
     endpoints: [
       {
         method: "GET",
         path: "/users/me",
-        description: "Get current user profile.",
+        descriptionKey: "api.endpointsData.usersMe",
       },
       {
         method: "POST",
         path: "/users/logout",
-        description: "End session.",
+        descriptionKey: "api.endpointsData.usersLogout",
       },
     ],
   },
   {
-    title: "Contributions (Authenticated Users)",
+    titleKey: "api.groups.contributions",
     endpoints: [
       {
         method: "POST",
         path: "/users/contribution/postal-codes",
-        description: "Suggest a new postal code (stored as pending change).",
+        descriptionKey: "api.endpointsData.contributionCreate",
       },
       {
         method: "PUT",
         path: "/users/contribution/postal-codes",
-        description:
-          "Suggest an edit to a postal code (stored as pending change).",
+        descriptionKey: "api.endpointsData.contributionUpdate",
       },
       {
         method: "DELETE",
         path: "/users/contribution/postal-codes",
-        description:
-          "Suggest deletion of a postal code (stored as pending change).",
+        descriptionKey: "api.endpointsData.contributionDelete",
       },
       {
         method: "GET",
         path: "/users/contribution/pending-changes/postal-codes",
-        description: "List your own pending suggestions.",
+        descriptionKey: "api.endpointsData.contributionPendingList",
       },
       {
         method: "DELETE",
         path: "/users/contribution/pending-changes/postal-codes",
-        description: "Remove one of your own pending suggestions.",
+        descriptionKey: "api.endpointsData.contributionPendingDelete",
       },
     ],
   },
   {
-    title: "Admin (Authenticated Admin Users)",
+    titleKey: "api.groups.admin",
     endpoints: [
       {
         method: "GET",
         path: "/users/admin/pending-changes",
-        description: "List all pending suggestions.",
+        descriptionKey: "api.endpointsData.adminPendingList",
       },
       {
         method: "POST",
         path: "/users/admin/approve-pending-change",
-        description:
-          "Approve a pending suggestion and apply it to the live dataset.",
+        descriptionKey: "api.endpointsData.adminApprove",
       },
       {
         method: "DELETE",
         path: "/users/admin/decline-pending-change",
-        description: "Reject a pending suggestion.",
+        descriptionKey: "api.endpointsData.adminDecline",
       },
     ],
   },

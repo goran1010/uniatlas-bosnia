@@ -8,11 +8,13 @@ import { handleSubmitLogIn } from "./utils/handleSubmitLogIn";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { Label } from "../sharedComponents/Label";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 function LogInForm({ loading, setLoading }) {
   const navigate = useNavigate();
   const { setUserData } = useContext(UserDataContext);
   const { addNotification } = useContext(NotificationContext);
+  const { t } = useContext(LanguageContext);
 
   const [inputFields, setInputFields] = useState({
     email: "",
@@ -23,7 +25,7 @@ function LogInForm({ loading, setLoading }) {
   const passwordInput = useRef();
 
   function handleInputFields(e) {
-    checkLoginFormValidity(e.target.name, emailInput, passwordInput);
+    checkLoginFormValidity(e.target.name, emailInput, passwordInput, t);
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   }
 
@@ -37,12 +39,13 @@ function LogInForm({ loading, setLoading }) {
           addNotification,
           setLoading,
           navigate,
+          t,
         )
       }
       className="flex flex-col gap-3"
     >
       <div>
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t("form.email")}</Label>
         <Input
           value={inputFields.email}
           ref={emailInput}
@@ -54,7 +57,7 @@ function LogInForm({ loading, setLoading }) {
         />
       </div>
       <div>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{t("form.password")}</Label>
         <Input
           ref={passwordInput}
           value={inputFields.password}
@@ -67,12 +70,14 @@ function LogInForm({ loading, setLoading }) {
       </div>
       <div>
         <Button
-          onClick={() => checkLoginFormClickValidity(emailInput, passwordInput)}
+          onClick={() =>
+            checkLoginFormClickValidity(emailInput, passwordInput, t)
+          }
           type="submit"
           loading={loading}
           className="text-white"
         >
-          Log in
+          {t("auth.login.heading")}
         </Button>
       </div>
     </form>

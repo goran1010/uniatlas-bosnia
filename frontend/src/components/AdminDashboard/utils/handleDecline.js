@@ -6,6 +6,7 @@ async function handleDecline(
   setPendingChanges,
   addNotification,
   setLoading,
+  t,
 ) {
   try {
     setLoading(true);
@@ -14,7 +15,7 @@ async function handleDecline(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -47,12 +48,14 @@ async function handleDecline(
     addNotification({
       type: "error",
       message:
-        result?.error?.message || change?.error || "Failed to decline request.",
+        result?.error?.message ||
+        change?.error ||
+        t("messages.admin.declineFailed"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: `Error declining ${change.user.email}'s request.`,
+      message: t("messages.admin.declineError", { email: change.user.email }),
     });
     console.error(`Error declining ${change.user.email}'s request:`, error);
   } finally {

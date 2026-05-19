@@ -7,6 +7,7 @@ async function handleDelete(
   setLoading,
   setPendingChanges,
   userData,
+  t,
 ) {
   try {
     e.preventDefault();
@@ -20,7 +21,7 @@ async function handleDelete(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -64,12 +65,12 @@ async function handleDelete(
       message:
         result?.error?.message ||
         result?.error ||
-        "Failed to delete postal code.",
+        t("messages.postal.deleteFailed"),
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while deleting the postal code.",
+      message: t("messages.postal.deleteError"),
     });
     console.error("Error deleting postal code:", err);
   } finally {

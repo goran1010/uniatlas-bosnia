@@ -6,10 +6,12 @@ import { UserDataContext } from "../../contextData/UserDataContext.js";
 import { NotificationContext } from "../../contextData/NotificationContext.js";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink.jsx";
 import { DividerOr } from "../sharedComponents/DividerOr.jsx";
+import { LanguageContext } from "../../contextData/LanguageContext.js";
 
 function LogIn() {
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
+  const { t } = useContext(LanguageContext);
 
   const { addNotification } = useContext(NotificationContext);
 
@@ -17,10 +19,10 @@ function LogIn() {
     if (searchParams.get("error") === "github") {
       addNotification({
         type: "error",
-        message: "GitHub login failed. Please try again.",
+        message: t("auth.login.githubFailed"),
       });
     }
-  }, [searchParams, addNotification]);
+  }, [searchParams, addNotification, t]);
 
   const navigate = useNavigate();
   const { userData } = useContext(UserDataContext);
@@ -31,18 +33,20 @@ function LogIn() {
       if (wasLoggedInOnPageLoad.current) {
         addNotification({
           type: "warning",
-          message: "You are already logged in. Redirected to the home page.",
+          message: t("auth.login.alreadyLoggedIn"),
         });
       }
       navigate("/home");
       return;
     }
-  }, [userData, navigate, addNotification]);
+  }, [userData, navigate, addNotification, t]);
 
   return (
     <div className="panel-card relative min-h-full w-full max-w-xl mx-auto flex items-center justify-center p-4 sm:p-5">
       <div className="w-full max-w-md p-1 sm:p-2 flex flex-col gap-4">
-        <h1 className="text-3xl text-center font-bold">Log in</h1>
+        <h1 className="text-3xl text-center font-bold">
+          {t("auth.login.heading")}
+        </h1>
         <LogInForm setLoading={setLoading} loading={loading} />
 
         <DividerOr />
@@ -53,11 +57,11 @@ function LogIn() {
 
         <div className="relative">
           <p className="text-center">
-            Don't have an account ? Go to the{" "}
+            {t("auth.login.noAccountPrefix")}{" "}
             <Link className="hover:underline font-bold" to={"/signup"}>
-              Sign Up
+              {t("auth.signup.linkText")}
             </Link>{" "}
-            page.
+            {t("auth.pageSuffix")}
           </p>
         </div>
       </div>

@@ -6,6 +6,7 @@ async function handleConfirm(
   setPendingChanges,
   addNotification,
   setLoading,
+  t,
 ) {
   try {
     setLoading(true);
@@ -14,7 +15,7 @@ async function handleConfirm(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -52,12 +53,12 @@ async function handleConfirm(
       message:
         result?.error?.message ||
         result?.error ||
-        "Failed to approve pending change.",
+        t("messages.admin.approveFailed"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: `Error approving pending change for ${change.user.email}.`,
+      message: t("messages.admin.approveError", { email: change.user.email }),
     });
     console.error(
       `Error approving pending change for ${change.user.email}:`,

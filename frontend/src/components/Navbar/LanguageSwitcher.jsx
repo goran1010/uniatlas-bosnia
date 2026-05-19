@@ -1,60 +1,63 @@
 import { useContext } from "react";
 import { NotificationContext } from "../../contextData/NotificationContext";
+import { setInitialLanguage } from "../../utils/setInitialLanguage";
 import { LanguageContext } from "../../contextData/LanguageContext";
 
-function ThemeSwitcher({ setMode, setThemeMenuOpen }) {
+function LanguageSwitcher({ setLanguageMenuOpen, setLanguage }) {
   const { addNotification } = useContext(NotificationContext);
   const { t } = useContext(LanguageContext);
 
   return (
-    <div className="menu-shell z-50 absolute top-full left-0 w-full text-center rounded-b user-select-none cursor-pointer backdrop-blur-sm ">
+    <div className="menu-shell z-50 absolute top-full left-0 w-full text-center rounded-b user-select-none cursor-pointer backdrop-blur-sm">
       <ul className="flex flex-col">
         <li>
           <button
             type="button"
             className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
             onClick={() => {
-              setMode("system");
+              setLanguage(setInitialLanguage());
               addNotification({
                 type: "info",
-                message: t("theme.switched.system"),
+                message: t("language.switched.browser"),
               });
-              setThemeMenuOpen(false);
+              setLanguageMenuOpen(false);
             }}
           >
-            {t("theme.system")}
+            {t("language.browser")}
           </button>
         </li>
+
         <li>
           <button
             type="button"
             className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
             onClick={() => {
-              setMode("light");
+              setLanguage("en");
               addNotification({
                 type: "info",
-                message: t("theme.switched.light"),
+                message: t("language.switched.english"),
               });
-              setThemeMenuOpen(false);
+              setLanguageMenuOpen(false);
             }}
           >
-            {t("theme.light")}
+            {t("language.english")}
           </button>
         </li>
+
         <li>
           <button
             type="button"
             className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
             onClick={() => {
-              setMode("dark");
+              setLanguage("sr");
               addNotification({
                 type: "info",
-                message: t("theme.switched.dark"),
+                message: t("language.switched.serbian"),
               });
-              setThemeMenuOpen(false);
+              setLanguageMenuOpen(false);
             }}
           >
-            {t("theme.dark")}
+            {t("language.serbian")}
           </button>
         </li>
       </ul>
@@ -62,4 +65,4 @@ function ThemeSwitcher({ setMode, setThemeMenuOpen }) {
   );
 }
 
-export { ThemeSwitcher };
+export { LanguageSwitcher };

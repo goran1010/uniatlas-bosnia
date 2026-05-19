@@ -5,6 +5,7 @@ import { useState } from "react";
 import { handleEdit } from "./utils/handleEdit";
 import { handleDelete } from "./utils/handleDelete";
 import { UserDataContext } from "../../contextData/UserDataContext";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 const PostalCodeRow = memo(
   ({
@@ -16,13 +17,28 @@ const PostalCodeRow = memo(
   }) => {
     const [loading, setLoading] = useState(false);
     const { userData } = useContext(UserDataContext);
+    const { t } = useContext(LanguageContext);
 
     const handleEditForm = (e) => {
-      handleEdit(e, addNotification, setLoading, setPendingChanges, userData);
+      handleEdit(
+        e,
+        addNotification,
+        setLoading,
+        setPendingChanges,
+        userData,
+        t,
+      );
     };
 
     const handleDeleteForm = (e) => {
-      handleDelete(e, addNotification, setLoading, setPendingChanges, userData);
+      handleDelete(
+        e,
+        addNotification,
+        setLoading,
+        setPendingChanges,
+        userData,
+        t,
+      );
     };
     return (
       <form
@@ -34,7 +50,9 @@ const PostalCodeRow = memo(
         }`}
       >
         <div className="flex justify-between sm:justify-center items-center">
-          <span className="sm:hidden font-semibold">Code</span>
+          <span className="sm:hidden font-semibold">
+            {t("postal.results.code")}
+          </span>
           <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
             {result.code}
           </span>
@@ -47,7 +65,7 @@ const PostalCodeRow = memo(
             handleInputChange(result.code, e.target.name, e.target.value)
           }
           data-code={result.code}
-          aria-label={`City for postal code ${result.code}`}
+          aria-label={`${t("postal.results.city")} ${result.code}`}
         />
         <Input
           data-code={result.code}
@@ -57,7 +75,7 @@ const PostalCodeRow = memo(
           onChange={(e) =>
             handleInputChange(result.code, e.target.name, e.target.value)
           }
-          aria-label={`Post office for postal code ${result.code}`}
+          aria-label={`${t("postal.results.post")} ${result.code}`}
         />
         <div>
           <Button
@@ -66,7 +84,7 @@ const PostalCodeRow = memo(
             className="w-full py-2"
             loading={loading}
           >
-            Update
+            {t("form.update")}
           </Button>
         </div>
         <div>
@@ -79,7 +97,7 @@ const PostalCodeRow = memo(
             className="btn-danger w-full py-2"
             loading={loading}
           >
-            Delete
+            {t("form.delete")}
           </Button>
         </div>
       </form>

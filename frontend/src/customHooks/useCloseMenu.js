@@ -5,21 +5,24 @@ function useCloseMenu() {
   const navRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setLanguageMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!isMenuOpen && !isThemeMenuOpen) return;
+    if (!isMenuOpen && !isThemeMenuOpen && !isLanguageMenuOpen) return;
 
     const handleClickAway = (event) => {
       if (navRef.current?.contains(event.target)) return;
 
       setIsMenuOpen(false);
       setThemeMenuOpen(false);
+      setLanguageMenuOpen(false);
     };
 
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         setIsMenuOpen(false);
         setThemeMenuOpen(false);
+        setLanguageMenuOpen(false);
       }
     };
 
@@ -30,7 +33,7 @@ function useCloseMenu() {
       document.removeEventListener("click", handleClickAway);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isMenuOpen, isThemeMenuOpen]);
+  }, [isMenuOpen, isThemeMenuOpen, isLanguageMenuOpen]);
 
   return {
     navRef,
@@ -38,6 +41,8 @@ function useCloseMenu() {
     setIsMenuOpen,
     isThemeMenuOpen,
     setThemeMenuOpen,
+    isLanguageMenuOpen,
+    setLanguageMenuOpen,
   };
 }
 

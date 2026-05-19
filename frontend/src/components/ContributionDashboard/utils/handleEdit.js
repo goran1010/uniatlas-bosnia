@@ -7,6 +7,7 @@ async function handleEdit(
   setLoading,
   setPendingChanges,
   userData,
+  t,
 ) {
   try {
     e.preventDefault();
@@ -20,7 +21,7 @@ async function handleEdit(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -64,12 +65,12 @@ async function handleEdit(
       message:
         result?.error?.message ||
         result?.error ||
-        "Failed to update postal code.",
+        t("messages.postal.updateFailed"),
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while updating the postal code.",
+      message: t("messages.postal.updateError"),
     });
     console.error("Error updating postal code:", err);
   } finally {

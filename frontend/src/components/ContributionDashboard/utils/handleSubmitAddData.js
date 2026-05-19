@@ -12,13 +12,14 @@ async function handleSubmitAddData(
   codeInput,
   setPendingChanges,
   userData,
+  t,
 ) {
   try {
     e.preventDefault();
     setLoading(true);
     const { city, code, post } = input;
 
-    if (!validateSubmitAddData(cityInput, codeInput)) {
+    if (!validateSubmitAddData(cityInput, codeInput, t)) {
       return;
     }
 
@@ -27,7 +28,7 @@ async function handleSubmitAddData(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -71,13 +72,15 @@ async function handleSubmitAddData(
     addNotification({
       type: "error",
       message:
-        result?.error?.message || result?.error || "Failed to add postal code.",
+        result?.error?.message ||
+        result?.error ||
+        t("messages.postal.addFailed"),
     });
   } catch (err) {
     console.error("Error adding postal code:", err);
     addNotification({
       type: "error",
-      message: "Error occurred while adding the postal code.",
+      message: t("messages.postal.addError"),
     });
   } finally {
     setLoading(false);

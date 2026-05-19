@@ -4,11 +4,13 @@ import { Input } from "../sharedComponents/Input";
 import { useState } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
 import { handleDiscard } from "./utils/handleDiscard";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 const PendingChangesRow = memo(
   ({ change, addNotification, setPendingChanges, index = 0 }) => {
     const [loading, setLoading] = useState(false);
     const { userData } = useContext(UserDataContext);
+    const { t } = useContext(LanguageContext);
 
     const getChangeTypeStyles = (type) => {
       switch (type?.toLowerCase()) {
@@ -47,7 +49,9 @@ const PendingChangesRow = memo(
         }`}
       >
         <div className="flex justify-between sm:justify-center items-center">
-          <span className="sm:hidden font-semibold">Change</span>
+          <span className="sm:hidden font-semibold">
+            {t("contribution.change")}
+          </span>
           <span
             className={`px-2 py-1 rounded-md text-xs font-semibold capitalize ${getChangeTypeBadgeStyles(
               change.typeOfChange,
@@ -57,18 +61,24 @@ const PendingChangesRow = memo(
           </span>
         </div>
         <div className="flex justify-between sm:justify-center items-center">
-          <span className="sm:hidden font-semibold">Code</span>
+          <span className="sm:hidden font-semibold">
+            {t("postal.results.code")}
+          </span>
           <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
             {change.code}
           </span>
         </div>
 
         <div className="flex justify-between sm:justify-center items-center">
-          <span className="sm:hidden font-semibold">City</span>
+          <span className="sm:hidden font-semibold">
+            {t("postal.results.city")}
+          </span>
           <span>{change.city}</span>
         </div>
         <div className="flex justify-between sm:justify-center items-center">
-          <span className="sm:hidden font-semibold">Post</span>
+          <span className="sm:hidden font-semibold">
+            {t("postal.results.post")}
+          </span>
           <span>{change.post}</span>
         </div>
 
@@ -88,10 +98,11 @@ const PendingChangesRow = memo(
                 addNotification,
                 setPendingChanges,
                 setLoading,
+                t,
               )
             }
           >
-            Discard
+            {t("form.discard")}
           </Button>
         </div>
       </form>

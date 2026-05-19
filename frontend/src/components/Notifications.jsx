@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import { NotificationContext } from "../contextData/NotificationContext";
+import { LanguageContext } from "../contextData/LanguageContext";
 
 function getNotificationStyles(type) {
   switch (type) {
@@ -24,6 +25,7 @@ function getNotificationRole(type) {
 
 function Notifications() {
   const { notifications, removeNotification } = useContext(NotificationContext);
+  const { t } = useContext(LanguageContext);
   const timerMapRef = useRef(new Map());
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function Notifications() {
   return (
     <aside
       className="fixed top-15 right-4 z-50 w-[min(92vw,24rem)] select-none opacity-90 hover:opacity-100 transition-opacity"
-      aria-label="Notifications"
+      aria-label={t("notifications.title")}
       aria-live="polite"
       aria-relevant="additions text"
     >
@@ -78,7 +80,7 @@ function Notifications() {
             <button
               type="button"
               onClick={() => removeNotification(notification.id)}
-              aria-label="Dismiss notification"
+              aria-label={t("notifications.dismiss")}
               className="absolute top-2 right-2 text-sm opacity-80 hover:opacity-100 cursor-pointer"
             >
               ✕

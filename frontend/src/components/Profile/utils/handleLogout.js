@@ -6,6 +6,7 @@ async function handleLogout(
   navigate,
   setUserData,
   setLoading,
+  t,
 ) {
   try {
     setLoading(true);
@@ -13,7 +14,7 @@ async function handleLogout(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -42,12 +43,15 @@ async function handleLogout(
 
     addNotification({
       type: "error",
-      message: result?.error?.message || result?.error || "Logout failed.",
+      message:
+        result?.error?.message ||
+        result?.error ||
+        t("messages.auth.logoutFailed"),
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred while logging out.",
+      message: t("messages.auth.logoutError"),
     });
     console.error("Error logging out:", err);
   } finally {

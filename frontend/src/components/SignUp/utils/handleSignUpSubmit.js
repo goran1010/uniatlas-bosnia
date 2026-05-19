@@ -7,6 +7,7 @@ async function handleSignUpSubmit(
   inputFields,
   addNotification,
   navigate,
+  t,
 ) {
   try {
     setLoading(true);
@@ -17,7 +18,7 @@ async function handleSignUpSubmit(
     if (!csrfToken) {
       addNotification({
         type: "error",
-        message: "Failed to retrieve CSRF token.",
+        message: t("messages.csrfTokenFailed"),
       });
       return;
     }
@@ -42,7 +43,9 @@ async function handleSignUpSubmit(
       addNotification({
         type: "error",
         message:
-          result?.error?.message || result?.error || "Registration failed.",
+          result?.error?.message ||
+          result?.error ||
+          t("messages.auth.registrationFailed"),
       });
       return;
     }
@@ -54,7 +57,7 @@ async function handleSignUpSubmit(
   } catch (err) {
     addNotification({
       type: "error",
-      message: "An error occurred during registration.",
+      message: t("messages.auth.registrationError"),
     });
     console.error("Error during registration:", err);
   } finally {

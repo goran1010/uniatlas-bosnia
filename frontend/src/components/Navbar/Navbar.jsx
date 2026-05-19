@@ -1,11 +1,12 @@
-import { Status } from "./Status";
 import { useContext } from "react";
 import { UserDataContext } from "../../contextData/UserDataContext";
-import { useTheme } from "../../utils/useTheme";
+import { useTheme } from "../../customHooks/useTheme";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { StandardMenu } from "./StandardMenu";
 import { ButtonNavbar } from "./ButtonNavbar";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { LanguageContext } from "../../contextData/LanguageContext";
 
 function Navbar({ closeMenu }) {
   const {
@@ -14,28 +15,38 @@ function Navbar({ closeMenu }) {
     setIsMenuOpen,
     isThemeMenuOpen,
     setThemeMenuOpen,
+    isLanguageMenuOpen,
+    setLanguageMenuOpen,
   } = closeMenu;
   const { setMode } = useTheme();
   const { userData } = useContext(UserDataContext);
+  const { setLanguage, t } = useContext(LanguageContext);
 
   return (
     <nav
       ref={navRef}
+      onClick={() => {
+        setThemeMenuOpen(false);
+        setLanguageMenuOpen(false);
+        setIsMenuOpen(false);
+      }}
       className="nav-shell z-40 px-3 py-1 w-full font-bold grid grid-cols-3 lg:flex lg:justify-between items-center gap-2 lg:gap-3 transition transform
      sticky top-0 left-0 shadow-md"
     >
       <div className="relative">
         <ButtonNavbar
           id="theme-switcher"
-          aria-label="Toggle theme menu"
+          aria-label={t("nav.toggleThemeAria")}
           aria-controls="theme-menu"
           aria-expanded={isThemeMenuOpen}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setThemeMenuOpen((prev) => !prev);
+            setLanguageMenuOpen(false);
             setIsMenuOpen(false);
           }}
         >
-          {isThemeMenuOpen ? "Choose" : "Theme"}
+          {isThemeMenuOpen ? t("nav.choose") : t("nav.theme")}
         </ButtonNavbar>
         {isThemeMenuOpen && (
           <ThemeSwitcher
@@ -48,15 +59,17 @@ function Navbar({ closeMenu }) {
         <ButtonNavbar
           id="mobile-menu-toggle"
           type="button"
-          aria-label="Toggle navigation menu"
+          aria-label={t("nav.toggleMenuAria")}
           aria-controls="mobile-menu"
           aria-expanded={isMenuOpen}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsMenuOpen((prev) => !prev);
+            setLanguageMenuOpen(false);
             setThemeMenuOpen(false);
           }}
         >
-          {isMenuOpen ? "Close" : "Menu"}
+          {isMenuOpen ? t("nav.close") : t("nav.menu")}
         </ButtonNavbar>
       </div>
 
@@ -64,10 +77,29 @@ function Navbar({ closeMenu }) {
         <MobileMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
       )}
 
-      <StandardMenu userData={userData} />
+      <StandardMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
 
-      <div className="flex justify-center items-center">
-        <Status />
+      <div className="relative">
+        <ButtonNavbar
+          id="language-switcher"
+          aria-label={t("language.switchAria")}
+          aria-controls="language-menu"
+          aria-expanded={isLanguageMenuOpen}
+          onClick={(e) => {
+            e.stopPropagation();
+            setLanguageMenuOpen((prev) => !prev);
+            setIsMenuOpen(false);
+            setThemeMenuOpen(false);
+          }}
+        >
+          {isLanguageMenuOpen ? t("nav.choose") : t("nav.language")}
+        </ButtonNavbar>
+        {isLanguageMenuOpen && (
+          <LanguageSwitcher
+            setLanguageMenuOpen={setLanguageMenuOpen}
+            setLanguage={setLanguage}
+          />
+        )}
       </div>
     </nav>
   );
