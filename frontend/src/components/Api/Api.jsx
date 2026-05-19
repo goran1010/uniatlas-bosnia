@@ -32,7 +32,7 @@ function Api() {
   return (
     <>
       <Helmet>
-        <title>{`${t("api.title")} | ${t("appName")}`}</title>
+        <title>{`${t("title.api")} | ${t("title.app")}`}</title>
       </Helmet>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-8 py-8 dark:text-gray-100">
         <header>

@@ -1,5 +1,20 @@
 {
-  "appName": "Bosnia Lens",
+  "title": {
+    "app": "Bosnia Lens",
+    "home": "Početna",
+    "api": "API Dokumentacija",
+    "postal": "Poštanski brojevi",
+    "universities": "Univerziteti",
+    "contribute": "Doprinesi",
+    "admin": "Admin",
+    "profile": "Moj profil",
+    "login": "Prijava",
+    "signup": "Registracija",
+    "notFound": "Stranica nije pronađena",
+    "serverDown": "Server nije dostupan",
+    "wakingUp": "Budi se..."
+  },
+
   "nav": {
     "home": "Početna",
     "apiDocs": "API Dokumentacija",

@@ -1,5 +1,20 @@
 {
-  "appName": "Bosnia Lens",
+  "title": {
+    "app": "Bosnia Lens",
+    "home": "Home",
+    "api": "API Docs",
+    "postal": "Postal Codes",
+    "universities": "Universities",
+    "contribute": "Contribute",
+    "admin": "Admin Dashboard",
+    "profile": "My Profile",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "notFound": "Page Not Found",
+    "serverDown": "Server Down",
+    "wakingUp": "Waking Up..."
+  },
+
   "nav": {
     "home": "Home",
     "apiDocs": "API Docs",
@@ -78,14 +93,12 @@
     "closeForm": "Close form"
   },
   "profile": {
-    "title": "My Profile",
     "emailAddress": "Email Address",
     "currentRole": "Current Role",
     "needLogin": "You need to be logged in. Redirected to the login page.",
     "logout": "Log out"
   },
   "home": {
-    "title": "Home",
     "heading": "Welcome to Bosnia Lens",
     "description1": "A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and web interface.",
     "description2": "Currently focused on postal codes, with universities as the next planned dataset - making Bosnian public data open, searchable, and developer-friendly.",
@@ -111,7 +124,6 @@
     }
   },
   "postal": {
-    "title": "Postal Codes",
     "search": {
       "label": "Search by Postal Code or Municipality",
       "success": "Postal codes retrieved successfully.",
@@ -132,7 +144,6 @@
     }
   },
   "api": {
-    "title": "REST API",
     "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
     "authIntro": "Authenticated endpoints are separate from the public base URL and use session cookies plus CSRF tokens for write operations.",
     "postalObject": "Postal code object",
@@ -219,7 +230,6 @@
     "noPendingChanges": "There are no pending changes at the moment."
   },
   "error": {
-    "notFound": "There is nothing here, sorry.",
     "goHome": "Go to Home Page",
     "pageTitle": "Page Not Found"
   },

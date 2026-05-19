@@ -13,7 +13,7 @@ function PostalCodes() {
   return (
     <>
       <Helmet>
-        <title>{`${t("postal.title")} | ${t("appName")}`}</title>
+        <title>{`${t("title.postal")} | ${t("title.app")}`}</title>
       </Helmet>
       <div className="flex flex-col gap-8 flex-1 items-center w-full">
         <section className="relative flex flex-col justify-center items-center gap-4 py-4">
