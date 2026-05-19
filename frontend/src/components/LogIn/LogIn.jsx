@@ -46,6 +46,14 @@ function LogIn() {
     <>
       <Helmet>
         <title>{`${t("title.login")} | ${t("title.app")}`}</title>
+        <meta name="description" content={t("meta.login")} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://bosnia-lens.netlify.app/login" />
+        <meta property="og:url" content="https://bosnia-lens.netlify.app/login" />
+        <meta property="og:title" content={`${t("title.login")} | ${t("title.app")}`} />
+        <meta property="og:description" content={t("meta.login")} />
+        <meta name="twitter:title" content={`${t("title.login")} | ${t("title.app")}`} />
+        <meta name="twitter:description" content={t("meta.login")} />
       </Helmet>
       <div className="panel-card relative min-h-full w-full max-w-xl mx-auto flex items-center justify-center p-4 sm:p-5">
         <div className="w-full max-w-md p-1 sm:p-2 flex flex-col gap-4">

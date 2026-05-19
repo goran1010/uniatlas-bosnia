@@ -30,6 +30,7 @@ function Profile() {
     <>
       <Helmet>
         <title>{`${t("title.profile")} | ${t("title.app")}`}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="panel-card w-full max-w-md mx-auto overflow-hidden">
         <div className="bg-linear-to-r from-blue-600 to-indigo-700 dark:from-blue-900 dark:to-indigo-900 p-4">

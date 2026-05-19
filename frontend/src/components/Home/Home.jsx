@@ -9,6 +9,14 @@ function Home() {
     <>
       <Helmet>
         <title>{`${t("title.home")} | ${t("title.app")}`}</title>
+        <meta name="description" content={t("meta.home")} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://bosnia-lens.netlify.app/" />
+        <meta property="og:url" content="https://bosnia-lens.netlify.app/" />
+        <meta property="og:title" content={`${t("title.home")} | ${t("title.app")}`} />
+        <meta property="og:description" content={t("meta.home")} />
+        <meta name="twitter:title" content={`${t("title.home")} | ${t("title.app")}`} />
+        <meta name="twitter:description" content={t("meta.home")} />
       </Helmet>
 
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col items-center gap-10 py-8 dark:text-gray-100">

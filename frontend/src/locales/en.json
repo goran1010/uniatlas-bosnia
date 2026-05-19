@@ -15,6 +15,15 @@
     "wakingUp": "Waking Up..."
   },
 
+  "meta": {
+    "home": "Free, open-source public data about Bosnia and Herzegovina. Browse postal codes and universities via REST API or interactive interface.",
+    "postal": "Search and browse all postal codes of Bosnia and Herzegovina. Look up any city or area by postal code or name.",
+    "universities": "Explore universities and academic programs in Bosnia and Herzegovina.",
+    "api": "REST API documentation for Bosnia Lens. Access postal codes and universities data programmatically.",
+    "login": "Log in to your Bosnia Lens account to contribute data and track your submissions.",
+    "signup": "Create a free Bosnia Lens account to start contributing postal code and university data."
+  },
+
   "nav": {
     "home": "Home",
     "apiDocs": "API Docs",

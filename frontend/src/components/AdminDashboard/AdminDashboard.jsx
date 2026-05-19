@@ -13,6 +13,7 @@ function AdminDashboard() {
       <>
         <Helmet>
           <title>{`${t("title.admin")} | ${t("title.app")}`}</title>
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <AdminForm />
       </>
@@ -22,6 +23,7 @@ function AdminDashboard() {
     <>
       <Helmet>
         <title>{`${t("title.admin")} | ${t("title.app")}`}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="relative min-h-full w-full flex items-center justify-center p-3">
         <div className="panel-card w-full max-w-6xl p-4 md:p-6 flex flex-col gap-4">

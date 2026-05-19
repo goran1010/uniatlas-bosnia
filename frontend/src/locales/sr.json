@@ -15,6 +15,15 @@
     "wakingUp": "Budi se..."
   },
 
+  "meta": {
+    "home": "Besplatni, open-source javni podaci o Bosni i Hercegovini. Pretražite poštanske brojeve i univerzitete putem REST API-ja ili interaktivnog sučelja.",
+    "postal": "Pretražite sve poštanske brojeve Bosne i Hercegovine. Pronađite grad ili oblast po poštanskom broju ili nazivu.",
+    "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
+    "api": "REST API dokumentacija za Bosnia Lens. Pristupite podacima o poštanskim brojevima i univerzitetima programski.",
+    "login": "Prijavite se na vaš Bosnia Lens nalog kako biste doprinijeli podacima i pratili vaše prijave.",
+    "signup": "Napravite besplatan Bosnia Lens nalog i počnite doprinositi podacima o poštanskim brojevima i univerzitetima."
+  },
+
   "nav": {
     "home": "Početna",
     "apiDocs": "API Dokumentacija",

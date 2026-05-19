@@ -33,6 +33,14 @@ function Api() {
     <>
       <Helmet>
         <title>{`${t("title.api")} | ${t("title.app")}`}</title>
+        <meta name="description" content={t("meta.api")} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://bosnia-lens.netlify.app/api-docs" />
+        <meta property="og:url" content="https://bosnia-lens.netlify.app/api-docs" />
+        <meta property="og:title" content={`${t("title.api")} | ${t("title.app")}`} />
+        <meta property="og:description" content={t("meta.api")} />
+        <meta name="twitter:title" content={`${t("title.api")} | ${t("title.app")}`} />
+        <meta name="twitter:description" content={t("meta.api")} />
       </Helmet>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-8 py-8 dark:text-gray-100">
         <header>
