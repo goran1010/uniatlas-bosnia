@@ -42,7 +42,7 @@ function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
             <div>{t("postal.results.code")}</div>
             <div>{t("postal.results.city")}</div>
             <div>{t("postal.results.post")}</div>
-            <div>{t("form.delete")}</div>
+            <div>{t("form.discard")}</div>
           </li>
           {pendingChanges.map((result, index) => {
             return (
