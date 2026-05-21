@@ -5,14 +5,14 @@ import { LanguageContext } from "../contextData/LanguageContext";
 function getNotificationStyles(type) {
   switch (type) {
     case "success":
-      return "notification-success";
+      return "bg-green-300 text-green-700 border border-green-400";
     case "error":
-      return "notification-error";
+      return "bg-red-300 text-red-800 border border-red-400";
     case "warning":
-      return "notification-warning";
+      return "bg-yellow-200 text-amber-800 border border-amber-300";
     case "info":
     default:
-      return "notification-info";
+      return "bg-sky-300 text-sky-950 border border-sky-400";
   }
 }
 
@@ -61,7 +61,7 @@ function Notifications() {
 
   return (
     <aside
-      className="fixed top-15 right-4 z-50 w-[min(92vw,24rem)] select-none opacity-90 hover:opacity-100 transition-opacity"
+      className="fixed top-18 right-4 z-20 w-[min(92vw,24rem)] select-none opacity-90 hover:opacity-100 transition-opacity"
       aria-label={t("notifications.title")}
       aria-live="polite"
       aria-relevant="additions text"

@@ -11,7 +11,7 @@ function Status({ setIsMenuOpen }) {
     return (
       <div className="flex items-center justify-center">
         <Link
-          className="menu-item block py-3 px-4 cursor-pointer rounded-lg lg:px-2"
+          className="block py-3 px-4 cursor-pointer rounded-lg lg:px-2 transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
           to="/profile"
           onClick={() => setIsMenuOpen(false)}
         >
@@ -24,7 +24,7 @@ function Status({ setIsMenuOpen }) {
   return (
     <div className="flex items-center justify-center">
       <Link
-        className="menu-item block py-3 px-2 cursor-pointer rounded-lg lg:px-2"
+        className="block py-3 px-2 cursor-pointer rounded-lg lg:px-2 transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
         to="/login"
         onClick={() => setIsMenuOpen(false)}
       >

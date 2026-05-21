@@ -9,25 +9,25 @@ function MobileMenu({ setIsMenuOpen, userData }) {
   return (
     <div
       id="mobile-menu"
-      className="menu-shell z-50 pb-2 absolute top-full w-full left-0"
+      className="z-50 absolute top-full w-full left-0 bg-(--surface-2) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow)"
     >
       <ul className="flex flex-col items-center">
         <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
+          className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
           to="/"
           onClick={() => setIsMenuOpen(false)}
         >
           {t("nav.home")}
         </Link>
         <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
+          className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
           to="/api-docs"
           onClick={() => setIsMenuOpen(false)}
         >
           {t("nav.apiDocs")}
         </Link>
         <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
+          className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
           to="/postal-codes"
           onClick={() => setIsMenuOpen(false)}
         >
@@ -35,7 +35,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
         </Link>
 
         <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
+          className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
           to="/universities"
           onClick={() => setIsMenuOpen(false)}
         >
@@ -44,7 +44,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
 
         {userData && (
           <Link
-            className="menu-item block p-2 w-full text-center text-nowrap"
+            className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             to="/contribution-dashboard"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -53,7 +53,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
         )}
         {userData?.role === "ADMIN" && (
           <Link
-            className="menu-item block p-2 w-full text-center text-nowrap"
+            className="block p-2 w-full text-center text-nowrap rounded-[0.6rem] transition-[background-color,color] duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             to="/admin-dashboard"
             onClick={() => setIsMenuOpen(false)}
           >

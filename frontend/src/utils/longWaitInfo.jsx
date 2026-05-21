@@ -12,8 +12,8 @@ function LongWaitInfo({ serverIsDown }) {
           <title>{`${t("title.serverDown")} | ${t("title.app")}`}</title>
           <meta name="robots" content="noindex, nofollow" />
         </Helmet>
-        <main className="overlay-screen fixed w-full h-full flex items-center justify-center p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-10">
-          <div className="status-banner status-banner--error p-2 rounded">
+        <main className="fixed w-full h-full flex items-center justify-center p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-10 bg-[color-mix(in_oklab,var(--app-bg),black_5%)]">
+          <div className="p-2 rounded border border-red-500 bg-red-700 text-red-50 shadow-(--card-shadow-strong)">
             <p className="font-bold text-center">{t("longWait.unreachable")}</p>
           </div>
         </main>
@@ -27,8 +27,8 @@ function LongWaitInfo({ serverIsDown }) {
         <title>{`${t("title.wakingUp")} | ${t("title.app")}`}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <main className="overlay-screen fixed w-full h-full flex items-center justify-center p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-10">
-        <div className="status-banner status-banner--info p-2 rounded">
+      <main className="fixed w-full h-full flex items-center justify-center p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-10 bg-[color-mix(in_oklab,var(--app-bg),black_5%)]">
+        <div className="p-2 rounded border border-slate-500 bg-slate-700 text-slate-50 shadow-(--card-shadow-strong)">
           <p className="font-bold text-center">{t("longWait.wakingUp")}</p>
         </div>
       </main>

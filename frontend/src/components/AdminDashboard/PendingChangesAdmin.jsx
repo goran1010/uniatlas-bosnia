@@ -31,11 +31,11 @@ function PendingChangesAdmin() {
   }
 
   return (
-    <section className="panel-card py-3 px-1 sm:px-4 w-full">
+    <section className="py-3 px-1 sm:px-4 w-full bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-[0.9rem] shadow-(--card-shadow) backdrop-blur-[7px]">
       <h2 className="text-md text-center font-semibold flex items-center gap-1 p-1 flex-1">
         <span
           aria-label={t("admin.pendingChangesCountAria")}
-          className="badge-warning px-2 py-1 rounded-full text-sm font-bold"
+          className="px-2 py-1 rounded-full text-sm font-bold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         >
           {pendingChanges.length}
         </span>

@@ -94,7 +94,8 @@ const PostalCodeRow = memo(
             data-city={result.city}
             data-post={result.post}
             onClick={handleDeleteForm}
-            className="btn-danger w-full py-2"
+            variant="danger"
+            className="w-full py-2"
             loading={loading}
           >
             {t("form.delete")}

@@ -5,7 +5,7 @@ function Footer() {
   const { t } = useContext(LanguageContext);
 
   return (
-    <footer className="nav-shell w-full flex justify-between items-center font-bold px-3 py-2">
+    <footer className="w-full flex justify-between items-center font-bold px-3 py-2 text-(--text-primary) border-b border-(--border-color) backdrop-blur-[9px]">
       <address className="not-italic w-full flex justify-between items-center">
         <span className="block text-sm font-medium">{t("footer.name")}</span>
         <a
