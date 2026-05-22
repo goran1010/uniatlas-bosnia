@@ -47,8 +47,8 @@
   },
   "theme": {
     "system": "Sistemska tema",
-    "light": "Svijetla",
-    "dark": "Tamna",
+    "light": "Svijetla tema",
+    "dark": "Tamna tema",
     "switched": {
       "system": "Prebačeno na sistemsku temu",
       "light": "Prebačeno na svijetlu temu",

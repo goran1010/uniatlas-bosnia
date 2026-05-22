@@ -47,8 +47,8 @@
   },
   "theme": {
     "system": "System theme",
-    "light": "Light",
-    "dark": "Dark",
+    "light": "Light theme",
+    "dark": "Dark theme",
     "switched": {
       "system": "Switched to system theme",
       "light": "Switched to light theme",
