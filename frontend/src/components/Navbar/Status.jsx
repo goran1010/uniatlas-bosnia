@@ -12,28 +12,24 @@ function Status({ setIsMenuOpen }) {
 
   if (userData) {
     return (
-      <div className="flex items-center justify-center">
-        <Link
-          className={`${statusLinkClass}`}
-          to="/profile"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.profile")}
-        </Link>
-      </div>
+      <Link
+        className={statusLinkClass}
+        to="/profile"
+        onClick={() => setIsMenuOpen(false)}
+      >
+        {t("nav.profile")}
+      </Link>
     );
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <Link
-        className={`${statusLinkClass}`}
-        to="/login"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        {t("nav.login")}
-      </Link>
-    </div>
+    <Link
+      className={statusLinkClass}
+      to="/login"
+      onClick={() => setIsMenuOpen(false)}
+    >
+      {t("nav.login")}
+    </Link>
   );
 }
 

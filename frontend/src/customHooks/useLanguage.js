@@ -7,11 +7,11 @@ const translations = { en, sr };
 
 function useLanguage() {
   const [language, setLanguageState] = useState(
-    () => localStorage.getItem("language") ?? "browser",
+    () => localStorage.getItem("language") ?? "system",
   );
 
   const resolvedLanguage =
-    language === "browser" ? setInitialLanguage() : language;
+    language === "system" ? setInitialLanguage() : language;
 
   useEffect(() => {
     localStorage.setItem("language", language);

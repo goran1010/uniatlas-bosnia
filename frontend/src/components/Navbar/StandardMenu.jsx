@@ -48,9 +48,9 @@ function StandardMenu({ setIsMenuOpen, userData }) {
             </Link>
           </li>
         )}
-        <div className="flex justify-center items-center">
+        <li className="flex justify-center items-center">
           <Status setIsMenuOpen={setIsMenuOpen} />
-        </div>
+        </li>
       </ul>
     </div>
   );

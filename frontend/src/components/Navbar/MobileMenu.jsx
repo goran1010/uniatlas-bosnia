@@ -14,57 +14,69 @@ function MobileMenu({ setIsMenuOpen, userData }) {
   return (
     <div id="mobile-menu" className={menuShellClass}>
       <ul className="flex flex-col items-center">
-        <Link
-          className={menuItemClass}
-          to="/"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.home")}
-        </Link>
-        <Link
-          className={menuItemClass}
-          to="/api-docs"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.apiDocs")}
-        </Link>
-        <Link
-          className={menuItemClass}
-          to="/postal-codes"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.postalCodes")}
-        </Link>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.home")}
+          </Link>
+        </li>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/api-docs"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.apiDocs")}
+          </Link>
+        </li>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/postal-codes"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.postalCodes")}
+          </Link>
+        </li>
 
-        <Link
-          className={menuItemClass}
-          to="/universities"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.universities")}
-        </Link>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/universities"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.universities")}
+          </Link>
+        </li>
 
         {userData && (
-          <Link
-            className={menuItemClass}
-            to="/contribution-dashboard"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {t("nav.contribute")}
-          </Link>
+          <li className="w-full">
+            <Link
+              className={menuItemClass}
+              to="/contribution-dashboard"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("nav.contribute")}
+            </Link>
+          </li>
         )}
         {userData?.role === "ADMIN" && (
-          <Link
-            className={menuItemClass}
-            to="/admin-dashboard"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {t("nav.admin")}
-          </Link>
+          <li className="w-full">
+            <Link
+              className={menuItemClass}
+              to="/admin-dashboard"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("nav.admin")}
+            </Link>
+          </li>
         )}
-        <div className="flex justify-center items-center">
+        <li className="flex justify-center items-center">
           <Status setIsMenuOpen={setIsMenuOpen} />
-        </div>
+        </li>
       </ul>
     </div>
   );
