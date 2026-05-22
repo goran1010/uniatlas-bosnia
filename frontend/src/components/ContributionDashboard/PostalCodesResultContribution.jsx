@@ -4,6 +4,9 @@ import { PostalCodeRow } from "./PostalCodeRow";
 import { Spinner } from "../../utils/Spinner";
 import { LanguageContext } from "../../contextData/LanguageContext";
 
+const panelClass =
+  "w-full max-w-4xl p-3 bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-2xl shadow-(--card-shadow) backdrop-blur-sm";
+
 function PostalCodesResultContribution({
   searchResult,
   setPendingChanges,
@@ -36,17 +39,19 @@ function PostalCodesResultContribution({
 
   if (searchResult.length === 0) {
     return (
-      <section className="panel-card w-full max-w-4xl p-3 flex justify-center items-center">
-        <p className="label-muted text-center">{t("postal.results.none")}</p>
+      <section className={`${panelClass} flex justify-center items-center`}>
+        <p className="text-center text-(--text-secondary)">
+          {t("postal.results.none")}
+        </p>
       </section>
     );
   }
   return (
-    <section className="panel-card w-full max-w-4xl p-3 flex flex-col gap-3">
+    <section className={`${panelClass} flex flex-col gap-3`}>
       <h2 className="text-md text-center font-semibold flex items-center justify-center gap-2 p-1">
         <span
           aria-label={t("contribution.searchResultsCountAria")}
-          className="badge-warning px-2 py-1 rounded-full text-sm font-bold"
+          className="px-2 py-1 rounded-full text-sm font-bold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         >
           {searchResult.length}
         </span>

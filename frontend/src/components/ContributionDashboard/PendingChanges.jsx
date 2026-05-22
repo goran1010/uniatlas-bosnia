@@ -5,6 +5,9 @@ import { PendingChangesRow } from "./PendingChangesRow";
 import { useContext } from "react";
 import { LanguageContext } from "../../contextData/LanguageContext";
 
+const panelClass =
+  "w-full max-w-4xl p-3 bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-2xl shadow-(--card-shadow) backdrop-blur-sm";
+
 function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
   const { addNotification } = useContext(NotificationContext);
   const { t } = useContext(LanguageContext);
@@ -15,8 +18,8 @@ function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
 
   if (!pendingChanges || pendingChanges.length === 0) {
     return (
-      <section className="panel-card w-full max-w-4xl p-3 flex justify-center items-center">
-        <p className="label-muted text-center">
+      <section className={`${panelClass} flex justify-center items-center`}>
+        <p className="text-center text-(--text-secondary)">
           {t("contribution.noPendingChanges")}
         </p>
       </section>
@@ -24,11 +27,11 @@ function PendingChanges({ pendingChanges, loading, setPendingChanges }) {
   }
 
   return (
-    <section className="panel-card w-full max-w-4xl p-3 flex flex-col gap-3">
+    <section className={`${panelClass} flex flex-col gap-3`}>
       <h2 className="text-md text-center font-semibold flex items-center gap-1 p-1 flex-1">
         <span
           aria-label={t("contribution.pendingChangesCountAria")}
-          className="badge-warning px-2 py-1 rounded-full text-sm font-bold"
+          className="px-2 py-1 rounded-full text-sm font-bold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         >
           {pendingChanges.length}
         </span>

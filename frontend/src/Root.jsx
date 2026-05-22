@@ -53,7 +53,7 @@ function Root() {
               <>
                 <Navbar closeMenu={closeMenu} />
                 <Notifications />
-                <main className="app-main flex-1 flex flex-col items-center justify-center px-2 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative">
+                <main className="flex-1 flex flex-col items-center justify-center px-2 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative bg-(--app-bg) text-(--text-primary)">
                   {loading ? <Spinner /> : <Outlet />}
                 </main>
                 <Footer />

@@ -3,66 +3,80 @@ import { Status } from "./Status";
 import { useContext } from "react";
 import { LanguageContext } from "../../contextData/LanguageContext";
 
+const menuShellClass =
+  "z-50 absolute top-full w-full left-0 bg-(--surface-2) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow)";
+const menuItemClass =
+  "block p-2 w-full text-center text-nowrap rounded-lg transition-colors duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)";
+
 function MobileMenu({ setIsMenuOpen, userData }) {
   const { t } = useContext(LanguageContext);
 
   return (
-    <div
-      id="mobile-menu"
-      className="menu-shell z-50 pb-2 absolute top-full w-full left-0"
-    >
+    <div id="mobile-menu" className={menuShellClass}>
       <ul className="flex flex-col items-center">
-        <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
-          to="/"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.home")}
-        </Link>
-        <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
-          to="/api-docs"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.apiDocs")}
-        </Link>
-        <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
-          to="/postal-codes"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.postalCodes")}
-        </Link>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.home")}
+          </Link>
+        </li>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/api-docs"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.apiDocs")}
+          </Link>
+        </li>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/postal-codes"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.postalCodes")}
+          </Link>
+        </li>
 
-        <Link
-          className="menu-item block p-2 w-full text-center text-nowrap"
-          to="/universities"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {t("nav.universities")}
-        </Link>
+        <li className="w-full">
+          <Link
+            className={menuItemClass}
+            to="/universities"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("nav.universities")}
+          </Link>
+        </li>
 
         {userData && (
-          <Link
-            className="menu-item block p-2 w-full text-center text-nowrap"
-            to="/contribution-dashboard"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {t("nav.contribute")}
-          </Link>
+          <li className="w-full">
+            <Link
+              className={menuItemClass}
+              to="/contribution-dashboard"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("nav.contribute")}
+            </Link>
+          </li>
         )}
         {userData?.role === "ADMIN" && (
-          <Link
-            className="menu-item block p-2 w-full text-center text-nowrap"
-            to="/admin-dashboard"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {t("nav.admin")}
-          </Link>
+          <li className="w-full">
+            <Link
+              className={menuItemClass}
+              to="/admin-dashboard"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("nav.admin")}
+            </Link>
+          </li>
         )}
-        <div className="flex justify-center items-center">
+        <li className="flex justify-center items-center">
           <Status setIsMenuOpen={setIsMenuOpen} />
-        </div>
+        </li>
       </ul>
     </div>
   );

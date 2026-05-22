@@ -27,41 +27,43 @@ function PostalCodesResult({ searchResult }) {
           <span>{t("postal.results.city")}</span>
           <span>{t("postal.results.post")}</span>
         </li>
-        {searchResult.map((result, index) => (
-          <li
-            key={result.code}
-            className={`flex flex-col gap-1 px-4 py-3 md:grid md:grid-cols-3 md:items-center md:gap-0 md:py-2.5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/60 ${
-              index % 2 === 0
-                ? "bg-white dark:bg-gray-800"
-                : "bg-gray-100 dark:bg-gray-800/60"
-            }`}
-          >
-            <div className="flex justify-between md:block">
-              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
-                {t("postal.results.code")}
-              </span>
-              <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
-                {result.code}
-              </span>
-            </div>
-            <div className="flex justify-between md:block">
-              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
-                {t("postal.results.city")}
-              </span>
-              <span className="text-gray-700 dark:text-gray-200">
-                {result.city}
-              </span>
-            </div>
-            <div className="flex justify-between md:block">
-              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
-                {t("postal.results.post")}
-              </span>
-              <span className="text-gray-600 dark:text-gray-300">
-                {result.post}
-              </span>
-            </div>
-          </li>
-        ))}
+        {searchResult.map((result, index) => {
+          const rowBgEveryOther =
+            index % 2 === 0
+              ? "bg-white-100 dark:bg-gray-800"
+              : "bg-gray-100 dark:bg-gray-600";
+          return (
+            <li
+              key={result.code}
+              className={`${rowBgEveryOther} flex flex-col gap-1 px-4 py-3 md:grid md:grid-cols-3 md:items-center md:gap-0 md:py-2.5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/60`}
+            >
+              <div className="flex justify-between md:block">
+                <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
+                  {t("postal.results.code")}
+                </span>
+                <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
+                  {result.code}
+                </span>
+              </div>
+              <div className="flex justify-between md:block">
+                <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
+                  {t("postal.results.city")}
+                </span>
+                <span className="text-gray-700 dark:text-gray-200">
+                  {result.city}
+                </span>
+              </div>
+              <div className="flex justify-between md:block">
+                <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase md:hidden">
+                  {t("postal.results.post")}
+                </span>
+                <span className="text-gray-600 dark:text-gray-300">
+                  {result.post}
+                </span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

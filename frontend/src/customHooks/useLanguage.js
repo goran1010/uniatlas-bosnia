@@ -7,8 +7,11 @@ const translations = { en, sr };
 
 function useLanguage() {
   const [language, setLanguageState] = useState(
-    () => localStorage.getItem("language") ?? setInitialLanguage(),
+    () => localStorage.getItem("language") ?? "system",
   );
+
+  const resolvedLanguage =
+    language === "system" ? setInitialLanguage() : language;
 
   useEffect(() => {
     localStorage.setItem("language", language);
@@ -21,7 +24,7 @@ function useLanguage() {
   const t = useCallback(
     (key, params = {}) => {
       const keys = key.split(".");
-      let value = translations[language];
+      let value = translations[resolvedLanguage];
 
       for (const k of keys) {
         if (value == null) return key;
@@ -35,7 +38,7 @@ function useLanguage() {
         return replacement == null ? "" : String(replacement);
       });
     },
-    [language],
+    [resolvedLanguage],
   );
 
   return { language, setLanguage, t };

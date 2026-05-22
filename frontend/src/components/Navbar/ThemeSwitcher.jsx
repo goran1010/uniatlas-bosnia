@@ -1,64 +1,34 @@
 import { useContext } from "react";
 import { NotificationContext } from "../../contextData/NotificationContext";
 import { LanguageContext } from "../../contextData/LanguageContext";
+import { Select } from "../sharedComponents/Select";
 
-function ThemeSwitcher({ setMode, setThemeMenuOpen }) {
+function ThemeSwitcher({ theme, setMode }) {
   const { addNotification } = useContext(NotificationContext);
   const { t } = useContext(LanguageContext);
 
+  function handleThemeChange(e) {
+    const nextTheme = e.target.value;
+
+    setMode(nextTheme);
+    addNotification({
+      type: "info",
+      message: t(`theme.switched.${nextTheme}`),
+    });
+  }
+
   return (
-    <div className="menu-shell z-50 absolute top-full left-0 w-full text-center rounded-b user-select-none cursor-pointer backdrop-blur-sm ">
-      <ul className="flex flex-col">
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setMode("system");
-              addNotification({
-                type: "info",
-                message: t("theme.switched.system"),
-              });
-              setThemeMenuOpen(false);
-            }}
-          >
-            {t("theme.system")}
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setMode("light");
-              addNotification({
-                type: "info",
-                message: t("theme.switched.light"),
-              });
-              setThemeMenuOpen(false);
-            }}
-          >
-            {t("theme.light")}
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setMode("dark");
-              addNotification({
-                type: "info",
-                message: t("theme.switched.dark"),
-              });
-              setThemeMenuOpen(false);
-            }}
-          >
-            {t("theme.dark")}
-          </button>
-        </li>
-      </ul>
-    </div>
+    <Select
+      id="theme-switcher"
+      aria-label={t("nav.toggleThemeAria")}
+      value={theme}
+      onChange={handleThemeChange}
+      className="whitespace-normal text-center break-all h-full px-3 py-2 sm:min-w-38 w-full sm:w-auto relative inline-flex items-center justify-center rounded-md p-1 text-sm font-semibold bg-(--surface-1) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow-soft) hover:shadow-(--card-shadow)"
+    >
+      <option value="system">{t("theme.system")}</option>
+      <option value="light">{t("theme.light")}</option>
+      <option value="dark">{t("theme.dark")}</option>
+    </Select>
   );
 }
 

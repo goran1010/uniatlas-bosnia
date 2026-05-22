@@ -15,6 +15,11 @@ const PostalCodeRow = memo(
     setPendingChanges,
     index = 0,
   }) => {
+    const rowBgEveryOther =
+      index % 2 === 0
+        ? "bg-white dark:bg-gray-800"
+        : "bg-gray-100 dark:bg-gray-600";
+
     const [loading, setLoading] = useState(false);
     const { userData } = useContext(UserDataContext);
     const { t } = useContext(LanguageContext);
@@ -43,11 +48,7 @@ const PostalCodeRow = memo(
     return (
       <form
         onSubmit={handleEditForm}
-        className={`grid gap-2 w-full p-2 border border-gray-200 dark:border-gray-500 rounded-md sm:border-0 sm:rounded-none sm:p-1 sm:gap-1 sm:grid-cols-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/60 ${
-          index % 2 === 0
-            ? "bg-white dark:bg-gray-800"
-            : "bg-gray-100 dark:bg-gray-800/60"
-        }`}
+        className={`${rowBgEveryOther} grid gap-2 w-full p-2 border border-gray-200 dark:border-gray-500 rounded-md sm:border-0 sm:rounded-none sm:p-1 sm:gap-1 sm:grid-cols-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/60`}
       >
         <div className="flex justify-between sm:justify-center items-center">
           <span className="sm:hidden font-semibold">
@@ -94,7 +95,8 @@ const PostalCodeRow = memo(
             data-city={result.city}
             data-post={result.post}
             onClick={handleDeleteForm}
-            className="btn-danger w-full py-2"
+            variant="danger"
+            className="w-full py-2"
             loading={loading}
           >
             {t("form.delete")}

@@ -1,67 +1,41 @@
 import { useContext } from "react";
 import { NotificationContext } from "../../contextData/NotificationContext";
-import { setInitialLanguage } from "../../utils/setInitialLanguage";
 import { LanguageContext } from "../../contextData/LanguageContext";
+import { Select } from "../sharedComponents/Select";
 
-function LanguageSwitcher({ setLanguageMenuOpen, setLanguage }) {
+function LanguageSwitcher({ language, setLanguage }) {
   const { addNotification } = useContext(NotificationContext);
   const { t } = useContext(LanguageContext);
 
+  function handleLanguageChange(e) {
+    const nextLanguage = e.target.value;
+    if (!nextLanguage) return;
+    setLanguage(nextLanguage);
+
+    addNotification({
+      type: "info",
+      message: t(
+        nextLanguage === "system"
+          ? "language.switched.system"
+          : nextLanguage === "en"
+            ? "language.switched.english"
+            : "language.switched.serbian",
+      ),
+    });
+  }
+
   return (
-    <div className="menu-shell z-50 absolute top-full left-0 w-full text-center rounded-b user-select-none cursor-pointer backdrop-blur-sm">
-      <ul className="flex flex-col">
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setLanguage(setInitialLanguage());
-              addNotification({
-                type: "info",
-                message: t("language.switched.browser"),
-              });
-              setLanguageMenuOpen(false);
-            }}
-          >
-            {t("language.browser")}
-          </button>
-        </li>
-
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setLanguage("en");
-              addNotification({
-                type: "info",
-                message: t("language.switched.english"),
-              });
-              setLanguageMenuOpen(false);
-            }}
-          >
-            {t("language.english")}
-          </button>
-        </li>
-
-        <li>
-          <button
-            type="button"
-            className="menu-item block w-full py-1 px-1 wrap-break-word text-sm"
-            onClick={() => {
-              setLanguage("sr");
-              addNotification({
-                type: "info",
-                message: t("language.switched.serbian"),
-              });
-              setLanguageMenuOpen(false);
-            }}
-          >
-            {t("language.serbian")}
-          </button>
-        </li>
-      </ul>
-    </div>
+    <Select
+      id="language-switcher"
+      aria-label={t("language.switchAria")}
+      value={language}
+      onChange={handleLanguageChange}
+      className="whitespace-normal text-center break-all h-full px-3 py-2 sm:min-w-38 w-full sm:w-auto relative inline-flex items-center justify-center rounded-md p-1 text-sm font-semibold bg-(--surface-1) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow-soft) hover:shadow-(--card-shadow)"
+    >
+      <option value="system">{t("language.system")}</option>
+      <option value="en">{t("language.english")}</option>
+      <option value="sr">{t("language.serbian")}</option>
+    </Select>
   );
 }
 

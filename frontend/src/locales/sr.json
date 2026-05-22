@@ -46,7 +46,7 @@
     "dismiss": "Zatvori obavijest"
   },
   "theme": {
-    "system": "Sistemska",
+    "system": "Sistemska tema",
     "light": "Svijetla",
     "dark": "Tamna",
     "switched": {
@@ -56,12 +56,12 @@
     }
   },
   "language": {
-    "browser": "Jezik pregledača",
+    "system": "Jezik sistema",
     "english": "Engleski",
     "serbian": "Srpski",
     "switchAria": "Promijeni jezik",
     "switched": {
-      "browser": "Prebačeno na jezik pregledača",
+      "system": "Prebačeno na jezik sistema",
       "english": "Prebačeno na engleski",
       "serbian": "Prebačeno na srpski"
     }

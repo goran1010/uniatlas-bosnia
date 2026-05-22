@@ -49,13 +49,22 @@ function LogIn() {
         <meta name="description" content={t("meta.login")} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://bosnia-lens.netlify.app/login" />
-        <meta property="og:url" content="https://bosnia-lens.netlify.app/login" />
-        <meta property="og:title" content={`${t("title.login")} | ${t("title.app")}`} />
+        <meta
+          property="og:url"
+          content="https://bosnia-lens.netlify.app/login"
+        />
+        <meta
+          property="og:title"
+          content={`${t("title.login")} | ${t("title.app")}`}
+        />
         <meta property="og:description" content={t("meta.login")} />
-        <meta name="twitter:title" content={`${t("title.login")} | ${t("title.app")}`} />
+        <meta
+          name="twitter:title"
+          content={`${t("title.login")} | ${t("title.app")}`}
+        />
         <meta name="twitter:description" content={t("meta.login")} />
       </Helmet>
-      <div className="panel-card relative min-h-full w-full max-w-xl mx-auto flex items-center justify-center p-4 sm:p-5">
+      <div className="relative min-h-full w-full max-w-xl mx-auto flex items-center justify-center p-4 sm:p-5 bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-2xl shadow-(--card-shadow) backdrop-blur-sm">
         <div className="w-full max-w-md p-1 sm:p-2 flex flex-col gap-4">
           <h1 className="text-3xl text-center font-bold">
             {t("auth.login.heading")}

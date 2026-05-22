@@ -14,13 +14,13 @@ function GitHubLoginLink({ loading, setLoading }) {
     if (loading) return e.preventDefault();
     setLoading(true);
   }
-  const baseClassName = `btn-primary w-full relative inline-flex items-center justify-center rounded-md p-2 text-sm ${loading ? "cursor-not-allowed" : "cursor-pointer"}`;
+  const baseClassName = `w-full relative inline-flex items-center justify-center rounded-md p-2 text-sm font-semibold tracking-[0.01em] transition-all duration-150 bg-(--accent) text-slate-50 ${loading ? "cursor-not-allowed bg-(--accent-disabled) text-(--disabled-text)" : "cursor-pointer hover:bg-(--accent-hover) hover:shadow-[0_10px_20px_rgba(37,99,235,0.25)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring)"}`;
   return (
     <a
       href={`${BACKEND_URL}/auth/github`}
       onClick={handleLoading}
       aria-disabled={loading}
-      className={`${baseClassName} text-white`}
+      className={baseClassName}
     >
       <div
         className={`h-full w-full flex justify-center items-center absolute`}
