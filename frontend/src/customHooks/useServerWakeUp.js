@@ -1,38 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import {
+  SERVER_STATUS,
+  SERVER_STATUS_NOTIFICATION_ID,
+} from "../utils/serverStatus";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;
-const SERVER_STATUS_NOTIFICATION_ID = "server-status";
 
 function useServerWakeUp({ addNotification, removeNotification, t }) {
-  const isServerLiveRef = useRef(false);
+  const [serverStatus, setServerStatus] = useState(SERVER_STATUS.LIVE);
 
   useEffect(() => {
-    const translate =
-      typeof t === "function"
-        ? t
-        : (key) => {
-            if (key === "longWait.wakingUp") {
-              return "Server is waking up.";
-            }
-            if (key === "longWait.unreachable") {
-              return "Server is currently unavailable.";
-            }
-            return key;
-          };
-
     // Limit the number of wake-up attempts to prevent infinite loops
     let isCancelled = false;
     let currentNumberOfAttempts = 0;
     let retryTimeoutId;
 
-    addNotification({
-      id: SERVER_STATUS_NOTIFICATION_ID,
-      type: "warning",
-      message: translate("longWait.wakingUp"),
-      duration: null,
-      persistent: true,
-    });
+    setServerStatus(SERVER_STATUS.WAKING);
 
     async function checkServer() {
       if (isCancelled) {
@@ -40,10 +24,11 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
       }
 
       if (currentNumberOfAttempts >= ALLOWED_ATTEMPTS) {
+        setServerStatus(SERVER_STATUS.DOWN);
         addNotification({
           id: SERVER_STATUS_NOTIFICATION_ID,
           type: "error",
-          message: translate("longWait.unreachable"),
+          message: t("longWait.unreachable"),
           duration: null,
           persistent: true,
         });
@@ -61,13 +46,21 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
         });
 
         if (!response.ok) {
+          addNotification({
+            id: SERVER_STATUS_NOTIFICATION_ID,
+            type: "warning",
+            message: t("longWait.wakingUp"),
+            duration: null,
+            persistent: true,
+          });
           retryTimeoutId = setTimeout(() => {
             currentNumberOfAttempts++;
             checkServer();
           }, DELAY_BETWEEN_ATTEMPTS);
           return;
         }
-        isServerLiveRef.current = true;
+
+        setServerStatus(SERVER_STATUS.LIVE);
         removeNotification(SERVER_STATUS_NOTIFICATION_ID);
       } catch (err) {
         if (isCancelled || err?.name === "AbortError") {
@@ -91,7 +84,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
     };
   }, [addNotification, removeNotification, t]);
 
-  return isServerLiveRef.current;
+  return serverStatus;
 }
 
 export { useServerWakeUp };

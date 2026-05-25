@@ -1,5 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 async function handleConfirm(
   change,
@@ -7,10 +8,15 @@ async function handleConfirm(
   addNotification,
   setLoading,
   t,
+  serverStatus,
 ) {
   try {
     setLoading(true);
-    const csrfToken = await getCsrfToken();
+    const csrfToken = await getCsrfToken({
+      serverStatus,
+      addNotification,
+      t,
+    });
 
     if (!csrfToken) {
       addNotification({
@@ -20,7 +26,7 @@ async function handleConfirm(
       return;
     }
 
-    const response = await fetch(
+    const response = await guardedFetch(
       `${BACKEND_URL}/users/admin/approve-pending-change`,
       {
         method: "POST",
@@ -35,7 +41,12 @@ async function handleConfirm(
         }),
         credentials: "include",
       },
+      { serverStatus, addNotification, t },
     );
+
+    if (!response) {
+      return;
+    }
     const result = await response.json();
 
     if (response.ok) {

@@ -11,6 +11,7 @@ const PendingChangesAdminRow = memo(
   ({ change, addNotification, setPendingChanges, index = 0 }) => {
     const [loading, setLoading] = useState(false);
     const { t } = useContext(RootContext);
+    const { serverStatus } = useContext(RootContext);
 
     const getChangeTypeStyles = (type) => {
       switch (type?.toLowerCase()) {
@@ -100,6 +101,7 @@ const PendingChangesAdminRow = memo(
                 addNotification,
                 setLoading,
                 t,
+                serverStatus,
               );
             }}
             type="button"
@@ -117,6 +119,7 @@ const PendingChangesAdminRow = memo(
                 addNotification,
                 setLoading,
                 t,
+                serverStatus,
               );
             }}
             type="button"

@@ -13,6 +13,7 @@ function LogInForm({ loading, setLoading }) {
   const { setUserData } = useContext(RootContext);
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
+  const { serverStatus } = useContext(RootContext);
 
   const [inputFields, setInputFields] = useState({
     email: "",
@@ -38,6 +39,7 @@ function LogInForm({ loading, setLoading }) {
           setLoading,
           navigate,
           t,
+          serverStatus,
         )
       }
       className="flex flex-col gap-3"

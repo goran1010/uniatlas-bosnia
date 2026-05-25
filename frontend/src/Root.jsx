@@ -9,6 +9,7 @@ import { useCloseMenu } from "./customHooks/useCloseMenu";
 import { useLanguage } from "./customHooks/useLanguage";
 import { HelmetProvider } from "react-helmet-async";
 import { RootContext } from "./contextData/RootContext";
+import { SERVER_STATUS } from "./utils/serverStatus";
 
 function Root() {
   const closeMenu = useCloseMenu();
@@ -16,12 +17,17 @@ function Root() {
   const { notifications, addNotification, removeNotification } =
     useNotification();
   const { language, setLanguage, t } = useLanguage();
-  let isServerLive = useServerWakeUp({
+  const serverStatus = useServerWakeUp({
     addNotification,
     removeNotification,
     t,
   });
-  const { userData, setUserData } = useStatusCheck(addNotification);
+
+  const { userData, setUserData } = useStatusCheck(
+    addNotification,
+    t,
+    serverStatus,
+  );
 
   return (
     <RootContext
@@ -34,7 +40,7 @@ function Root() {
         removeNotification,
         userData,
         setUserData,
-        isServerLive,
+        serverStatus,
       }}
     >
       <HelmetProvider>

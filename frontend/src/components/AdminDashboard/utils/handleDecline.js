@@ -1,5 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 async function handleDecline(
   change,
@@ -7,10 +8,15 @@ async function handleDecline(
   addNotification,
   setLoading,
   t,
+  serverStatus,
 ) {
   try {
     setLoading(true);
-    const csrfToken = await getCsrfToken();
+    const csrfToken = await getCsrfToken({
+      serverStatus,
+      addNotification,
+      t,
+    });
 
     if (!csrfToken) {
       addNotification({
@@ -20,7 +26,7 @@ async function handleDecline(
       return;
     }
 
-    const response = await fetch(
+    const response = await guardedFetch(
       `${BACKEND_URL}/users/admin/decline-pending-change`,
       {
         method: "DELETE",
@@ -32,7 +38,12 @@ async function handleDecline(
         body: JSON.stringify({ id: change.id }),
         credentials: "include",
       },
+      { serverStatus, addNotification, t },
     );
+
+    if (!response) {
+      return;
+    }
     const result = await response.json();
 
     if (response.ok) {

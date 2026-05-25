@@ -14,6 +14,7 @@ function AddNewData({
 }) {
   const { userData } = useContext(RootContext);
   const { t } = useContext(RootContext);
+  const { serverStatus } = useContext(RootContext);
   const [input, setInput] = useState({ city: "", code: "", post: "" });
   const { addNotification } = useContext(RootContext);
 
@@ -86,6 +87,7 @@ function AddNewData({
                   setPendingChanges,
                   userData,
                   t,
+                  serverStatus,
                 )
               }
               type="button"

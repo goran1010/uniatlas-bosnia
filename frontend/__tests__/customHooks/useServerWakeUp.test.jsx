@@ -19,11 +19,13 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+const identityTranslate = (key) => key;
+
 function ServerWakeUpProbe({ setLongWait, setServerIsDown }) {
   useServerWakeUp({
     addNotification: setLongWait,
     removeNotification: setServerIsDown,
-    t: (key) => key,
+    t: identityTranslate,
   });
 
   return <div data-testid="server-wake-up-probe">Probe</div>;

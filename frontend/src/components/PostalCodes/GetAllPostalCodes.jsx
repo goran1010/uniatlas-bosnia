@@ -2,21 +2,36 @@ import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { Button } from "../sharedComponents/Button";
+import { guardedFetch } from "../../utils/guardedFetch";
 
 const currentURL = import.meta.env.VITE_BACKEND_URL;
 
 function GetAllPostalCodes({ setSearchResult, loading, setLoading }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
+  const { serverStatus } = useContext(RootContext);
 
   async function handleGetAll(e) {
     try {
       setLoading(true);
       e.preventDefault();
 
-      const response = await fetch(`${currentURL}/api/v1/postal-codes`, {
-        mode: "cors",
-      });
+      const response = await guardedFetch(
+        `${currentURL}/api/v1/postal-codes`,
+        {
+          mode: "cors",
+        },
+        {
+          serverStatus,
+          addNotification,
+          t,
+        },
+      );
+
+      if (!response) {
+        return;
+      }
+
       const result = await response.json();
 
       if (!response.ok) {

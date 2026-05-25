@@ -1,9 +1,10 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 function useGetPendingChanges(setLoading, t) {
-  const { addNotification } = useContext(RootContext);
+  const { addNotification, serverStatus } = useContext(RootContext);
   const [pendingChanges, setPendingChanges] = useState([]);
 
   useEffect(() => {
@@ -11,7 +12,7 @@ function useGetPendingChanges(setLoading, t) {
       try {
         setLoading(true);
 
-        const response = await fetch(
+        const response = await guardedFetch(
           `${BACKEND_URL}/users/contribution/pending-changes/postal-codes`,
           {
             method: "GET",
@@ -21,7 +22,17 @@ function useGetPendingChanges(setLoading, t) {
             },
             credentials: "include",
           },
+          {
+            serverStatus,
+            addNotification,
+            t,
+          },
         );
+
+        if (!response) {
+          return;
+        }
+
         const result = await response.json();
 
         if (response.ok) {
@@ -50,7 +61,7 @@ function useGetPendingChanges(setLoading, t) {
       }
     };
     fetchPendingChanges();
-  }, [addNotification, setLoading]);
+  }, [addNotification, setLoading, serverStatus, t]);
 
   return { pendingChanges, setPendingChanges };
 }

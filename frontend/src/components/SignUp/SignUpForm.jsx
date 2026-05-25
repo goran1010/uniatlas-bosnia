@@ -13,6 +13,7 @@ function SignUpForm({ loading, setLoading }) {
   const navigate = useNavigate();
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
+  const { serverStatus } = useContext(RootContext);
 
   const passwordInput = useRef();
   const confirmPasswordInput = useRef();
@@ -47,6 +48,7 @@ function SignUpForm({ loading, setLoading }) {
           addNotification,
           navigate,
           t,
+          serverStatus,
         )
       }
     >

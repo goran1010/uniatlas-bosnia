@@ -1,6 +1,7 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { validateSubmitAddData } from "./validateSubmitAddData";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 async function handleSubmitAddData(
   e,
@@ -13,6 +14,7 @@ async function handleSubmitAddData(
   setPendingChanges,
   userData,
   t,
+  serverStatus,
 ) {
   try {
     e.preventDefault();
@@ -23,7 +25,11 @@ async function handleSubmitAddData(
       return;
     }
 
-    const csrfToken = await getCsrfToken();
+    const csrfToken = await getCsrfToken({
+      serverStatus,
+      addNotification,
+      t,
+    });
 
     if (!csrfToken) {
       addNotification({
@@ -33,7 +39,7 @@ async function handleSubmitAddData(
       return;
     }
 
-    const response = await fetch(
+    const response = await guardedFetch(
       `${currentUrl}/users/contribution/postal-codes`,
       {
         mode: "cors",
@@ -45,7 +51,12 @@ async function handleSubmitAddData(
         },
         body: JSON.stringify({ city, code, post }),
       },
+      { serverStatus, addNotification, t },
     );
+
+    if (!response) {
+      return;
+    }
     const result = await response.json();
     if (response.ok) {
       addNotification({

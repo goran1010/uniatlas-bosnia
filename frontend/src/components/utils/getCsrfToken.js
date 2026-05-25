@@ -1,16 +1,30 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { guardedFetch } from "../../utils/guardedFetch";
 
 let cachedToken = null;
 
-async function getCsrfToken() {
+async function getCsrfToken({ serverStatus, addNotification, t } = {}) {
   try {
     if (cachedToken) {
       return cachedToken;
     }
-    const csrfResponse = await fetch(`${BACKEND_URL}/csrf-token`, {
-      mode: "cors",
-      credentials: "include",
-    });
+
+    const csrfResponse = await guardedFetch(
+      `${BACKEND_URL}/csrf-token`,
+      {
+        mode: "cors",
+        credentials: "include",
+      },
+      {
+        serverStatus,
+        addNotification,
+        t,
+      },
+    );
+
+    if (!csrfResponse) {
+      return null;
+    }
 
     if (!csrfResponse.ok) {
       return null;

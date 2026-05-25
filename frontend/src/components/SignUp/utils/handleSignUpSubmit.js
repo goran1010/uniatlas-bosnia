@@ -1,5 +1,6 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 async function handleSignUpSubmit(
   event,
@@ -8,12 +9,17 @@ async function handleSignUpSubmit(
   addNotification,
   navigate,
   t,
+  serverStatus,
 ) {
   try {
     setLoading(true);
     event.preventDefault();
 
-    const csrfToken = await getCsrfToken();
+    const csrfToken = await getCsrfToken({
+      serverStatus,
+      addNotification,
+      t,
+    });
 
     if (!csrfToken) {
       addNotification({
@@ -23,20 +29,28 @@ async function handleSignUpSubmit(
       return;
     }
 
-    const response = await fetch(`${currentUrl}/auth/signup`, {
-      mode: "cors",
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "x-csrf-token": csrfToken,
-        "Content-Type": "application/json",
+    const response = await guardedFetch(
+      `${currentUrl}/auth/signup`,
+      {
+        mode: "cors",
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "x-csrf-token": csrfToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: inputFields.email,
+          password: inputFields.password,
+          "confirm-password": inputFields["confirm-password"],
+        }),
       },
-      body: JSON.stringify({
-        email: inputFields.email,
-        password: inputFields.password,
-        "confirm-password": inputFields["confirm-password"],
-      }),
-    });
+      { serverStatus, addNotification, t },
+    );
+
+    if (!response) {
+      return;
+    }
 
     const result = await response.json();
     if (!response.ok) {

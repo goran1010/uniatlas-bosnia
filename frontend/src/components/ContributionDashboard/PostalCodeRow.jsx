@@ -22,6 +22,7 @@ const PostalCodeRow = memo(
     const [loading, setLoading] = useState(false);
     const { userData } = useContext(RootContext);
     const { t } = useContext(RootContext);
+    const { serverStatus } = useContext(RootContext);
 
     const handleEditForm = (e) => {
       handleEdit(
@@ -31,6 +32,7 @@ const PostalCodeRow = memo(
         setPendingChanges,
         userData,
         t,
+        serverStatus,
       );
     };
 
@@ -42,6 +44,7 @@ const PostalCodeRow = memo(
         setPendingChanges,
         userData,
         t,
+        serverStatus,
       );
     };
     return (

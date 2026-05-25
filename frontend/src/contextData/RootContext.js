@@ -1,20 +1,17 @@
 import { createContext } from "react";
+import { SERVER_STATUS } from "../utils/serverStatus";
 
-const UserData = null;
-const Language = {
+const RootContext = createContext({
   language: "en",
   setLanguage: () => {},
   t: (key) => key,
-};
-
-const Notification = null;
-const ServerStatus = null;
-
-const RootContext = createContext({
-  UserData,
-  Language,
-  Notification,
-  ServerStatus,
+  notifications: [],
+  addNotification: () => {},
+  removeNotification: () => {},
+  userData: null,
+  setUserData: () => {},
+  isServerLive: true,
+  serverStatus: SERVER_STATUS.LIVE,
 });
 
 export { RootContext };

@@ -10,6 +10,7 @@ const PendingChangesRow = memo(
     const [loading, setLoading] = useState(false);
     const { userData } = useContext(RootContext);
     const { t } = useContext(RootContext);
+    const { serverStatus } = useContext(RootContext);
 
     const getChangeTypeStyles = (type) => {
       switch (type?.toLowerCase()) {
@@ -98,6 +99,7 @@ const PendingChangesRow = memo(
                 setPendingChanges,
                 setLoading,
                 t,
+                serverStatus,
               )
             }
           >

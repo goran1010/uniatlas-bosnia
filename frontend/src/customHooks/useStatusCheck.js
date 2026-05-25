@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { guardedFetch } from "../utils/guardedFetch";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-function useStatusCheck(addNotification) {
+function useStatusCheck(addNotification, t, serverStatus) {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -12,12 +13,24 @@ function useStatusCheck(addNotification) {
     async function checkLogin() {
       let response;
       try {
-        response = await fetch(`${BACKEND_URL}/users/me`, {
-          mode: "cors",
-          method: "GET",
-          credentials: "include",
-          signal: abortController.signal,
-        });
+        response = await guardedFetch(
+          `${BACKEND_URL}/users/me`,
+          {
+            mode: "cors",
+            method: "GET",
+            credentials: "include",
+            signal: abortController.signal,
+          },
+          {
+            serverStatus,
+            addNotification,
+            t,
+          },
+        );
+
+        if (!response) {
+          return;
+        }
 
         const result = await response.json();
 
@@ -66,7 +79,7 @@ function useStatusCheck(addNotification) {
       abortController.abort();
       clearTimeout(checkLoginTimeoutId);
     };
-  }, [addNotification]);
+  }, [addNotification, t, serverStatus]);
 
   return { userData, setUserData };
 }

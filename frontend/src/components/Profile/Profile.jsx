@@ -10,6 +10,7 @@ function Profile() {
   const { addNotification } = useContext(RootContext);
   const { userData, setUserData } = useContext(RootContext);
   const { t } = useContext(RootContext);
+  const { serverStatus } = useContext(RootContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -70,6 +71,7 @@ function Profile() {
                   setUserData,
                   setLoading,
                   t,
+                  serverStatus,
                 )
               }
               variant="danger"
