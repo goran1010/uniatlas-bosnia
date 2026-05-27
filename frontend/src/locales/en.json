@@ -3,7 +3,6 @@
     "app": "Bosnia Lens",
     "home": "Home",
     "api": "API Docs",
-    "postal": "Postal Codes",
     "universities": "Universities",
     "contribute": "Contribute",
     "admin": "Admin Dashboard",
@@ -16,18 +15,16 @@
   },
 
   "meta": {
-    "home": "Free, open-source public data about Bosnia and Herzegovina. Browse postal codes and universities via REST API or interactive interface.",
-    "postal": "Search and browse all postal codes of Bosnia and Herzegovina. Look up any city or area by postal code or name.",
+    "home": "Free, open-source public data about Bosnia and Herzegovina. Browse universities and academic programs via REST API or interactive interface.",
     "universities": "Explore universities and academic programs in Bosnia and Herzegovina.",
-    "api": "REST API documentation for Bosnia Lens. Access postal codes and universities data programmatically.",
+    "api": "REST API documentation for Bosnia Lens. Access universities and academic programs data programmatically.",
     "login": "Log in to your Bosnia Lens account to contribute data and track your submissions.",
-    "signup": "Create a free Bosnia Lens account to start contributing postal code and university data."
+    "signup": "Create a free Bosnia Lens account to start contributing university data."
   },
 
   "nav": {
     "home": "Home",
     "apiDocs": "API Docs",
-    "postalCodes": "Postal Codes",
     "universities": "Universities",
     "contribute": "Contribute",
     "admin": "Admin",
@@ -112,11 +109,9 @@
     "title": "Home Page",
     "heading": "Welcome to Bosnia Lens",
     "description1": "A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and web interface.",
-    "description2": "Currently focused on postal codes, with universities as the next planned dataset - making Bosnian public data open, searchable, and developer-friendly.",
+    "description2": "Currently focused on universities and academic programs - making Bosnian public data open, searchable, and developer-friendly.",
     "availableData": "Available data",
-    "availableDataPostalCodes": "Postal codes - browse all or search by code and city name",
-    "plannedData": "Planned data",
-    "plannedDataUniversities": "Universities and their programs",
+    "availableDataUniversities": "Universities - browse institutions, faculties, study programs, and subjects",
     "contributing": "Contributing",
     "contributingReadmePrefix": "Please read",
     "contributingReadmeSuffix": "for details on our code of conduct and the process for submitting pull requests.",
@@ -124,9 +119,9 @@
     "contributingWelcome": "We welcome contributions of data, code improvements, documentation, and bug reports.",
     "getStarted": "Get started",
     "card": {
-      "postalCodes": {
-        "title": "Postal Codes",
-        "description": "Browse all postal codes or search by code and city name."
+      "universities": {
+        "title": "Universities",
+        "description": "Browse universities, faculties, study programs, and subjects across Bosnia and Herzegovina."
       },
       "restApi": {
         "title": "REST API",
@@ -134,37 +129,15 @@
       }
     }
   },
-  "postal": {
-    "title": "Postal Codes",
-    "search": {
-      "label": "Search by Postal Code or Municipality",
-      "success": "Postal codes retrieved successfully.",
-      "failed": "Search failed.",
-      "error": "An error occurred while searching for postal codes."
-    },
-    "getAll": {
-      "failed": "Failed to load postal codes.",
-      "error": "An error occurred while fetching postal codes and municipalities."
-    },
-    "results": {
-      "none": "No results to display.",
-      "code": "Code",
-      "city": "City",
-      "post": "Post",
-      "resultOne": "result",
-      "resultOther": "results"
-    }
-  },
-
   "api": {
     "title": "REST API",
     "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
     "authIntro": "Authenticated endpoints are separate from the public base URL and use session cookies plus CSRF tokens for write operations.",
-    "postalObject": "Postal code object",
+    "dataObject": "University object",
+    "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"isPublic\":    boolean\n  \"foundedYear\": number | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoints",
     "authFlowTitle": "Authenticated Data Contribution Flow",
     "authFlowBody": "These endpoints require an authenticated session (credentials: include) and use CSRF protection for mutating requests.",
-    "postalObjectExample": "{\n  \"id\":   string   - unique identifier\n  \"code\": number   - 5-digit postal code\n  \"city\": string   - city name\n  \"post\": \"BH_POSTA\" | \"POSTE_SRP\" | \"HP_MOSTAR\" | null\n}",
     "groups": {
       "csrf": "CSRF",
       "auth": "Auth",
@@ -175,9 +148,11 @@
     "endpointsData": {
       "apiStatus": "Check API status.",
       "apiV1Status": "Check API v1 status.",
-      "getAllPostalCodes": "Retrieve all postal codes, ordered by code ascending.",
-      "searchPostalCodes": "Search postal codes by numeric code (exact 5-digit match) or by city name (case-insensitive, minimum 2 characters).",
-      "searchTermParam": "A 5-digit postal code (e.g. 71000) or a city name (e.g. Sarajevo, minimum 2 characters).",
+      "getAllUniversities": "Retrieve all universities, ordered by name.",
+      "searchUniversities": "Search universities by name, city, or acronym (case-insensitive, minimum 2 characters).",
+      "getUniversityById": "Retrieve a university by ID with full nested detail (faculties, study programs, subjects).",
+      "searchStudyPrograms": "Search study programs by name across all universities (case-insensitive, minimum 2 characters).",
+      "searchTermParam": "A search term (minimum 2 characters).",
       "csrfIssue": "Issue a CSRF token used in the x-csrf-token header for mutating requests.",
       "authSignup": "Register a pending account and send a confirmation email.",
       "authConfirm": "Confirm signup token and create the user account.",
@@ -186,9 +161,9 @@
       "authGithubCallback": "Complete GitHub OAuth login flow.",
       "usersMe": "Get current user profile.",
       "usersLogout": "End session.",
-      "contributionCreate": "Suggest a new postal code (stored as pending change).",
-      "contributionUpdate": "Suggest an edit to a postal code (stored as pending change).",
-      "contributionDelete": "Suggest deletion of a postal code (stored as pending change).",
+      "contributionCreate": "Suggest a new university entity (stored as pending change).",
+      "contributionUpdate": "Suggest an edit to a university entity (stored as pending change).",
+      "contributionDelete": "Suggest deletion of a university entity (stored as pending change).",
       "contributionPendingList": "List your own pending suggestions.",
       "contributionPendingDelete": "Remove one of your own pending suggestions.",
       "adminPendingList": "List all pending suggestions.",
@@ -219,18 +194,15 @@
     "selectDatasetError": "You need to select a dataset.",
     "viewEditAllData": "View and edit all data:",
     "addNewData": "Add new data",
-    "cityName": "City name:",
-    "postalCode": "Postal Code:",
-    "postalCarrier": "Postal Carrier:",
     "pendingChanges": "Pending Changes",
     "noPendingChanges": "No pending changes to display.",
     "change": "Change",
+    "entityType": "Entity Type",
     "pendingChangesCountAria": "pending changes count",
     "searchResultsCountAria": "search result count",
     "searchResults": "Search Results",
     "user": "User",
     "dataset": {
-      "postalCodes": "Postal Codes",
       "universities": "Universities",
       "universitiesPlaceholder": "Universities placeholder"
     }
@@ -267,14 +239,8 @@
       "minLength": "Password must have at least 6 characters",
       "mustMatch": "Password and confirm password fields must match"
     },
-    "postalCode": {
-      "fiveDigits": "Postal code must be a 5-digit number"
-    },
     "search": {
       "minLength": "Search must have at least 2 characters"
-    },
-    "city": {
-      "required": "City name cannot be empty"
     }
   },
   "messages": {
@@ -282,14 +248,6 @@
     "pendingChanges": {
       "loadFailed": "Failed to load pending changes.",
       "fetchError": "Error fetching pending changes."
-    },
-    "postal": {
-      "addFailed": "Failed to add postal code.",
-      "addError": "An error occurred while adding the postal code.",
-      "updateFailed": "Failed to update postal code.",
-      "updateError": "An error occurred while updating the postal code.",
-      "deleteFailed": "Failed to delete postal code.",
-      "deleteError": "An error occurred while deleting the postal code."
     },
     "auth": {
       "loginFailed": "Login failed.",

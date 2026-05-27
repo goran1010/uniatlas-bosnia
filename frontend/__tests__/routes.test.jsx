@@ -31,7 +31,7 @@ function renderRoute(route, { withUserDataContext = false } = {}) {
           setUserData: () => {},
         }}
       >
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </RootContextProvider>,
     );
     return;
@@ -64,13 +64,6 @@ describe("Loading components when visiting an address", () => {
     expect(linkElements[0]).toBeInTheDocument();
   });
 
-  test("visit postal codes page", async () => {
-    renderRoute("/postal-codes", { withUserDataContext: true });
-
-    const linkElement = await screen.findByText(/Postal Code or Municipality/i);
-    expect(linkElement).toBeInTheDocument();
-  });
-
   test("visit home page", async () => {
     renderRoute("/");
 
@@ -81,7 +74,7 @@ describe("Loading components when visiting an address", () => {
     expect(linkElement).toBeInTheDocument();
   });
 
-  test.each(["/", "/postal-codes", "/universities"])(
+  test.each(["/", "/universities"])(
     "render Footer on every page",
     async (route) => {
       renderRoute(route);
@@ -93,7 +86,7 @@ describe("Loading components when visiting an address", () => {
     },
   );
 
-  test.each(["/", "/postal-codes", "/universities"])(
+  test.each(["/", "/universities"])(
     "render Navbar on every page",
     async (route) => {
       renderRoute(route);
@@ -103,13 +96,9 @@ describe("Loading components when visiting an address", () => {
       const universitiesLink = within(nav).getByRole("link", {
         name: /Universities/i,
       });
-      const postalCodesLink = within(nav).getByRole("link", {
-        name: /Postal Codes/i,
-      });
 
       expect(homeLink).toBeInTheDocument();
       expect(universitiesLink).toBeInTheDocument();
-      expect(postalCodesLink).toBeInTheDocument();
     },
   );
 });

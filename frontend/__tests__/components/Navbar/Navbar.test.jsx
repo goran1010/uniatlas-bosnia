@@ -49,7 +49,6 @@ async function openMobileMenu() {
 function expectSharedNavbarLinks() {
   expect(screen.getByText(/Home/i)).toBeInTheDocument();
   expect(screen.getByText(/Universities/i)).toBeInTheDocument();
-  expect(screen.getByText(/Postal Codes/i)).toBeInTheDocument();
 }
 
 describe("Render Navbar on root route", () => {
@@ -219,11 +218,9 @@ describe("render Menu based on viewport size", () => {
     const universitiesLink = screen.getByRole("link", {
       name: /Universities/i,
     });
-    const postalCodesLink = screen.getByRole("link", { name: /Postal Codes/i });
 
     expect(homeLink).toBeInTheDocument();
     expect(universitiesLink).toBeInTheDocument();
-    expect(postalCodesLink).toBeInTheDocument();
 
     const menuButton = screen.getByRole("button", {
       name: /Toggle navigation menu/i,

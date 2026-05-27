@@ -33,7 +33,7 @@ async function handleDelete(
     }
 
     const response = await guardedFetch(
-      `${currentUrl}/users/contribution/postal-codes`,
+      `${currentUrl}/users/contribution/universities`,
       {
         mode: "cors",
         method: "DELETE",

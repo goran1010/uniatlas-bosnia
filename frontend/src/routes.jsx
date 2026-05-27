@@ -1,6 +1,5 @@
 import { Root } from "./Root";
 import { ErrorPage } from "./components/ErrorPage";
-import { PostalCodes } from "./components/PostalCodes/PostalCodes";
 import { Home } from "./components/Home/Home";
 import { Universities } from "./components/Universities";
 import { LogIn } from "./components/LogIn/LogIn";
@@ -27,10 +26,6 @@ const routes = [
       {
         element: <Api />,
         path: "api-docs",
-      },
-      {
-        element: <PostalCodes />,
-        path: "postal-codes",
       },
       {
         element: <Universities />,

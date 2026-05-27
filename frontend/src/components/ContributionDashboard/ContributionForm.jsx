@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { PostalCodeData } from "./PostalCodeData";
 import { Select } from "../sharedComponents/Select";
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
@@ -27,15 +26,11 @@ function ContributionForm() {
           <option default value="">
             {t("contribution.noDataset")}
           </option>
-          <option value="postal-codes">
-            {t("contribution.dataset.postalCodes")}
-          </option>
           <option value="universities">
             {t("contribution.dataset.universities")}
           </option>
         </Select>
       </form>
-      {datasetSelect === "postal-codes" && <PostalCodeData />}
       {datasetSelect === "universities" &&
         t("contribution.dataset.universitiesPlaceholder")}
       {datasetSelect === "" && (

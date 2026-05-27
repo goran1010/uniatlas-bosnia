@@ -23,12 +23,6 @@ function StandardMenu({ setIsMenuOpen, userData }) {
           </Link>
         </li>
         <li>
-          <Link className={`${menuLinkClass} text-nowrap`} to="/postal-codes">
-            {t("nav.postalCodes")}
-          </Link>
-        </li>
-
-        <li>
           <Link className={menuLinkClass} to="/universities">
             {t("nav.universities")}
           </Link>

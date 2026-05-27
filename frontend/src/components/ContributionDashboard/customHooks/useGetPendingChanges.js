@@ -13,7 +13,7 @@ function useGetPendingChanges(setLoading, t) {
         setLoading(true);
 
         const response = await guardedFetch(
-          `${BACKEND_URL}/users/contribution/pending-changes/postal-codes`,
+          `${BACKEND_URL}/users/contribution/pending-changes/universities`,
           {
             method: "GET",
             mode: "cors",

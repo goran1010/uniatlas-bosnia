@@ -49,7 +49,7 @@ const PendingChangesAdminRow = memo(
             : "bg-gray-100 dark:bg-gray-800/60"
         }`}
       >
-        <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
+        <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,2fr)]">
           <div className="flex justify-between sm:justify-center items-center ">
             <span className="sm:hidden font-semibold">
               {t("contribution.change")}
@@ -64,23 +64,17 @@ const PendingChangesAdminRow = memo(
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
             <span className="sm:hidden font-semibold">
-              {t("postal.results.code")}
+              {t("contribution.entityType")}
             </span>
-            <span className="font-mono font-medium text-gray-800 dark:text-gray-100">
-              {change.code}
+            <span className="font-mono font-medium text-gray-800 dark:text-gray-100 text-xs">
+              {change.entityType}
             </span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
             <span className="sm:hidden font-semibold">
-              {t("postal.results.city")}
+              {t("endpoint.name")}
             </span>
-            <span>{change.city}</span>
-          </div>
-          <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
-            <span className="sm:hidden font-semibold">
-              {t("postal.results.post")}
-            </span>
-            <span>{change.post}</span>
+            <span>{change.data?.name ?? "—"}</span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
             <span className="sm:hidden font-semibold">

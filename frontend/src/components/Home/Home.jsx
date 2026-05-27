@@ -13,9 +13,15 @@ function Home() {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://bosnia-lens.netlify.app/" />
         <meta property="og:url" content="https://bosnia-lens.netlify.app/" />
-        <meta property="og:title" content={`${t("title.home")} | ${t("title.app")}`} />
+        <meta
+          property="og:title"
+          content={`${t("title.home")} | ${t("title.app")}`}
+        />
         <meta property="og:description" content={t("meta.home")} />
-        <meta name="twitter:title" content={`${t("title.home")} | ${t("title.app")}`} />
+        <meta
+          name="twitter:title"
+          content={`${t("title.home")} | ${t("title.app")}`}
+        />
         <meta name="twitter:description" content={t("meta.home")} />
       </Helmet>
 
@@ -33,13 +39,7 @@ function Home() {
                 {t("home.availableData")}
               </h2>
               <ul>
-                <li>{t("home.availableDataPostalCodes")}</li>
-              </ul>
-              <h2 className="text-xl font-bold text-center mt-4 mb-2">
-                {t("home.plannedData")}
-              </h2>
-              <ul>
-                <li>{t("home.plannedDataUniversities")}</li>
+                <li>{t("home.availableDataUniversities")}</li>
               </ul>
             </section>
 
@@ -63,13 +63,13 @@ function Home() {
           <h2 className="text-xl font-bold">{t("home.getStarted")}</h2>
           <div className="grid gap-4 md:grid-cols-2 w-full">
             <Link
-              to="/postal-codes"
+              to="/universities"
               className="border rounded-lg p-5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
             >
               <h3 className="text-lg font-bold mb-1">
-                {t("home.card.postalCodes.title")}
+                {t("home.card.universities.title")}
               </h3>
-              <p>{t("home.card.postalCodes.description")}</p>
+              <p>{t("home.card.universities.description")}</p>
             </Link>
             <Link
               to="/api-docs"

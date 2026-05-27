@@ -69,17 +69,4 @@ describe("ContributionForm component rendering", () => {
     const universitiesElement = screen.getByText(/Universities placeholder/i);
     expect(universitiesElement).toBeInTheDocument();
   });
-
-  test("renders PostalCodeData component when Postal Codes is selected", async () => {
-    const selectElement = screen.getByLabelText(/Choose dataset/i);
-    await user.selectOptions(selectElement, "Postal Codes");
-
-    const postalCodeDataElement = await screen.findByText(/Add new data/i);
-    expect(postalCodeDataElement).toBeInTheDocument();
-
-    const viewDataElement = screen.getByRole("heading", {
-      name: /View and edit all data/i,
-    });
-    expect(viewDataElement).toBeInTheDocument();
-  });
 });
