@@ -35,16 +35,6 @@ function MobileMenu({ setIsMenuOpen, userData }) {
         <li className="w-full">
           <Link
             className={menuItemClass}
-            to="/postal-codes"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {t("nav.postalCodes")}
-          </Link>
-        </li>
-
-        <li className="w-full">
-          <Link
-            className={menuItemClass}
             to="/universities"
             onClick={() => setIsMenuOpen(false)}
           >
@@ -56,10 +46,10 @@ function MobileMenu({ setIsMenuOpen, userData }) {
           <li className="w-full">
             <Link
               className={menuItemClass}
-              to="/contribution-dashboard"
+              to="/improve-data"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t("nav.contribute")}
+              {t("nav.improveData")}
             </Link>
           </li>
         )}

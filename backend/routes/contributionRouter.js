@@ -5,30 +5,30 @@ import { contributionController } from "../controllers/contributionController.js
 import { contributionValidation } from "../validation/contributionValidation.js";
 
 contributionRouter.post(
-  "/postal-codes",
-  contributionValidation.createPostalCode,
-  contributionController.createPostalCode,
+  "/universities",
+  contributionValidation.createEntity,
+  contributionController.createEntity,
 );
 
 contributionRouter.put(
-  "/postal-codes",
-  contributionValidation.editPostalCode,
-  contributionController.editPostalCode,
+  "/universities",
+  contributionValidation.editEntity,
+  contributionController.editEntity,
 );
 
 contributionRouter.delete(
-  "/postal-codes",
-  contributionValidation.deletePostalCode,
-  contributionController.deletePostalCode,
+  "/universities",
+  contributionValidation.deleteEntity,
+  contributionController.deleteEntity,
 );
 
 contributionRouter.get(
-  "/pending-changes/postal-codes",
+  "/pending-changes/universities",
   contributionController.getPendingChanges,
 );
 
 contributionRouter.delete(
-  "/pending-changes/postal-codes",
+  "/pending-changes/universities",
   contributionValidation.deletePendingChange,
   contributionController.deletePendingChange,
 );

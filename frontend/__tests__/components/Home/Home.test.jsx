@@ -82,7 +82,7 @@ describe("Home component", () => {
     });
     expect(linkElement).toBeInTheDocument();
     const linkElement2 = await screen.findByRole("link", {
-      name: /Postal Codes/i,
+      name: /Universities/i,
     });
     expect(linkElement2).toBeInTheDocument();
   });

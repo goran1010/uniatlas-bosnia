@@ -1,5 +1,4 @@
-import { normalizeName } from "../utils/normalizeName.js";
-import { postalCodesModel } from "../models/postalCodesModel.js";
+import { universitiesModel } from "../models/universitiesModel.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 
@@ -13,42 +12,70 @@ class V1Controller {
     });
   }
 
-  async getPostalCodes(req, res) {
-    const postalCodes = await postalCodesModel.getAllPostalCodes();
+  async getUniversities(req, res) {
+    const universities = await universitiesModel.getAll();
     return sendSuccess(res, {
-      message: "Postal codes retrieved successfully",
-      data: postalCodes,
+      message: "Universities retrieved successfully.",
+      data: universities,
     });
   }
 
-  async getPostalCodeByCode(req, res) {
-    let { searchTerm } = matchedData(req);
-
-    const numericSearchTerm = Number(searchTerm);
-    if (!Number.isNaN(numericSearchTerm) && numericSearchTerm > 0) {
-      searchTerm = numericSearchTerm;
-    } else {
-      searchTerm = normalizeName(searchTerm);
-    }
-
-    let result = [];
-    if (typeof searchTerm === "number") {
-      const found = await postalCodesModel.getPostalCodeByCode(searchTerm);
-      if (found) result.push(found);
-    } else {
-      result = await postalCodesModel.getPostalCodesByCity(searchTerm);
-    }
+  async searchUniversities(req, res) {
+    const { searchTerm } = matchedData(req);
+    const result = await universitiesModel.searchUniversities(searchTerm);
 
     if (result.length > 0) {
       return sendSuccess(res, {
-        message: "Postal codes retrieved successfully",
+        message: "Universities retrieved successfully.",
         data: result,
       });
     }
 
     return sendError(res, {
       status: 404,
-      message: "Postal code not found: verify the search term and try again.",
+      message: "No universities found matching your search.",
+    });
+  }
+
+  async getUniversityById(req, res) {
+    const id = Number(req.params.id);
+
+    if (!Number.isInteger(id) || id < 1) {
+      return sendError(res, {
+        status: 400,
+        message: "Invalid university ID.",
+      });
+    }
+
+    const university = await universitiesModel.getById(id);
+
+    if (!university) {
+      return sendError(res, {
+        status: 404,
+        message: "University not found.",
+      });
+    }
+
+    return sendSuccess(res, {
+      message: "University retrieved successfully.",
+      data: university,
+    });
+  }
+
+  async searchStudyPrograms(req, res) {
+    const { searchTerm } = matchedData(req);
+    const result = await universitiesModel.searchStudyPrograms(searchTerm);
+
+    if (result.length > 0) {
+      return sendSuccess(res, {
+        message: "Study programs retrieved successfully.",
+        data: result,
+      });
+    }
+
+    return sendError(res, {
+      status: 404,
+      message: "No study programs found matching your search.",
     });
   }
 }

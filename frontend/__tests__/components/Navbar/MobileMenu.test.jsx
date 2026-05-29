@@ -12,9 +12,9 @@ beforeEach(() => {
 function Wrapper({ userData, setIsMenuOpen }) {
   return (
     <RootContextProvider rootValue={{ userData, setUserData: vi.fn() }}>
-        <MemoryRouter>
-          <MobileMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <MobileMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
+      </MemoryRouter>
     </RootContextProvider>
   );
 }
@@ -25,9 +25,6 @@ describe("MobileMenu", () => {
 
     expect(screen.getByRole("link", { name: /Home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /API Docs/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /Postal Codes/i }),
-    ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /Universities/i }),
     ).toBeInTheDocument();

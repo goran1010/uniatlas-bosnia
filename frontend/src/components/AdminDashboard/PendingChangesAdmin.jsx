@@ -46,11 +46,10 @@ function PendingChangesAdmin() {
 
       <section className="flex flex-col justify-center items-center p-1 w-full">
         <ul className="w-full max-w-4xl flex flex-col border border-gray-400 dark:border-gray-600 rounded-md p-2 bg-white dark:bg-gray-700 gap-1">
-          <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-gray-400 dark:border-gray-600 rounded-md font-bold text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-600 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
+          <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-gray-400 dark:border-gray-600 rounded-md font-bold text-gray-800 dark:text-white bg-gray-50 dark:bg-gray-600 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,2fr)]">
             <div>{t("contribution.change")}</div>
-            <div>{t("postal.results.code")}</div>
-            <div>{t("postal.results.city")}</div>
-            <div>{t("postal.results.post")}</div>
+            <div>{t("contribution.entityType")}</div>
+            <div>{t("endpoint.name")}</div>
             <div>{t("contribution.user")}</div>
           </li>
           {pendingChanges.map((result, index) => {

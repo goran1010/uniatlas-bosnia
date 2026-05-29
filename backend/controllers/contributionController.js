@@ -1,83 +1,95 @@
-import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
+import { pendingChangesUniversityModel } from "../models/pendingChangesUniversityModel.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 
 class ContributionController {
-  async createPostalCode(req, res) {
+  async createEntity(req, res) {
     try {
       const userId = req.user.id;
-      const typeOfChange = "CREATE";
-      const { city, code, post } = matchedData(req);
+      const { entityType, parentId } = matchedData(req);
+      const data = req.body.data;
 
-      const result = await pendingChangesPostalCodeModel.create({
+      const result = await pendingChangesUniversityModel.create({
         userId,
-        city,
-        code: Number(code),
-        post,
-        typeOfChange,
+        entityType,
+        typeOfChange: "CREATE",
+        parentId: parentId ? Number(parentId) : null,
+        data,
       });
 
       return sendSuccess(res, {
         status: 201,
-        message:
-          "New postal code suggested. Admin will review the suggestion and decide whether to accept it or not.",
+        message: "Suggestion submitted. An admin will review it.",
         data: result,
       });
     } catch (err) {
       logger.error(err);
       return sendError(res, {
         status: 500,
-        message: "An error occurred while suggesting a new postal code.",
+        message: "An error occurred while submitting the suggestion.",
       });
     }
   }
 
-  async editPostalCode(req, res) {
-    const userId = req.user.id;
-    const typeOfChange = "UPDATE";
-    const { city, code, post } = matchedData(req);
+  async editEntity(req, res) {
+    try {
+      const userId = req.user.id;
+      const { entityType, targetId } = matchedData(req);
+      const data = req.body.data;
 
-    const result = await pendingChangesPostalCodeModel.create({
-      userId,
-      code: Number(code),
-      post,
-      typeOfChange,
-      city,
-    });
+      const result = await pendingChangesUniversityModel.create({
+        userId,
+        entityType,
+        typeOfChange: "UPDATE",
+        targetId: Number(targetId),
+        data,
+      });
 
-    return sendSuccess(res, {
-      status: 200,
-      message:
-        "Postal code edit suggested. Admin will review the suggestion and decide whether to accept it or not.",
-      data: result,
-    });
+      return sendSuccess(res, {
+        status: 201,
+        message: "Edit suggestion submitted. An admin will review it.",
+        data: result,
+      });
+    } catch (err) {
+      logger.error(err);
+      return sendError(res, {
+        status: 500,
+        message: "An error occurred while submitting the edit suggestion.",
+      });
+    }
   }
 
-  async deletePostalCode(req, res) {
-    const userId = req.user.id;
-    const typeOfChange = "DELETE";
-    const { code, city, post } = matchedData(req);
+  async deleteEntity(req, res) {
+    try {
+      const userId = req.user.id;
+      const { entityType, targetId } = matchedData(req);
 
-    const result = await pendingChangesPostalCodeModel.create({
-      userId,
-      code: Number(code),
-      typeOfChange,
-      city,
-      post,
-    });
+      const result = await pendingChangesUniversityModel.create({
+        userId,
+        entityType,
+        typeOfChange: "DELETE",
+        targetId: Number(targetId),
+        data: {},
+      });
 
-    return sendSuccess(res, {
-      status: 201,
-      message:
-        "Postal code deletion suggested. Admin will review the suggestion and decide whether to accept it or not.",
-      data: result,
-    });
+      return sendSuccess(res, {
+        status: 201,
+        message: "Deletion suggestion submitted. An admin will review it.",
+        data: result,
+      });
+    } catch (err) {
+      logger.error(err);
+      return sendError(res, {
+        status: 500,
+        message: "An error occurred while submitting the deletion suggestion.",
+      });
+    }
   }
 
   async getPendingChanges(req, res) {
     const { id } = req.user;
-    const pendingChanges = await pendingChangesPostalCodeModel.findMany({
+    const pendingChanges = await pendingChangesUniversityModel.findMany({
       userId: id,
     });
 
@@ -91,7 +103,7 @@ class ContributionController {
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData(req);
 
-    const pendingChange = await pendingChangesPostalCodeModel.findMany({
+    const pendingChange = await pendingChangesUniversityModel.findMany({
       userId: id,
       id: pendingChangeId,
     });
@@ -103,7 +115,7 @@ class ContributionController {
       });
     }
 
-    await pendingChangesPostalCodeModel.delete({
+    await pendingChangesUniversityModel.delete({
       id: pendingChange[0].id,
     });
 

@@ -3,9 +3,8 @@
     "app": "Bosnia Lens",
     "home": "Početna",
     "api": "API Dokumentacija",
-    "postal": "Poštanski brojevi",
     "universities": "Univerziteti",
-    "contribute": "Doprinesi",
+    "contribute": "Poboljšaj podatke",
     "admin": "Admin",
     "profile": "Moj profil",
     "login": "Prijava",
@@ -14,22 +13,18 @@
     "serverDown": "Server nije dostupan",
     "wakingUp": "Budi se..."
   },
-
   "meta": {
-    "home": "Besplatni, open-source javni podaci o Bosni i Hercegovini. Pretražite poštanske brojeve i univerzitete putem REST API-ja ili interaktivnog sučelja.",
-    "postal": "Pretražite sve poštanske brojeve Bosne i Hercegovine. Pronađite grad ili oblast po poštanskom broju ili nazivu.",
+    "home": "Besplatni, open-source javni podaci o Bosni i Hercegovini. Istražite univerzitete i akademske programe putem REST API-ja ili interaktivnog sučelja.",
     "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
-    "api": "REST API dokumentacija za Bosnia Lens. Pristupite podacima o poštanskim brojevima i univerzitetima programski.",
+    "api": "REST API dokumentacija za Bosnia Lens. Pristupite podacima o univerzitetima i akademskim programima programski.",
     "login": "Prijavite se na vaš Bosnia Lens nalog kako biste doprinijeli podacima i pratili vaše prijave.",
-    "signup": "Napravite besplatan Bosnia Lens nalog i počnite doprinositi podacima o poštanskim brojevima i univerzitetima."
+    "signup": "Napravite besplatan Bosnia Lens nalog i počnite doprinositi podacima o univerzitetima."
   },
-
   "nav": {
     "home": "Početna",
     "apiDocs": "API Dokumentacija",
-    "postalCodes": "Poštanski brojevi",
     "universities": "Univerziteti",
-    "contribute": "Doprinesi",
+    "improveData": "Poboljšaj podatke",
     "admin": "Admin",
     "profile": "Profil",
     "login": "Prijava",
@@ -111,59 +106,36 @@
   "home": {
     "title": "Početna stranica",
     "heading": "Dobrodošli u Bosnia Lens",
-    "description1": "Besplatan open-source projekat koji pruža strukturirane javne podatke o Bosni i Hercegovini kroz REST API i web interfejs.",
-    "description2": "Trenutno je fokus na poštanskim brojevima, a univerziteti su sljedeći planirani skup podataka - sa ciljem da bosanski javni podaci budu otvoreni, pretraživi i prilagođeni programerima.",
-    "availableData": "Dostupni podaci",
-    "availableDataPostalCodes": "Poštanski brojevi - pregled svih ili pretraga po broju i nazivu grada",
-    "plannedData": "Planirani podaci",
-    "plannedDataUniversities": "Univerziteti i njihovi programi",
-    "contributing": "Doprinos",
-    "contributingReadmePrefix": "Pročitajte",
-    "contributingReadmeSuffix": "za detalje o pravilima ponašanja i postupku slanja pull request-ova.",
-    "contributingReadme": "Pročitajte CONTRIBUTING.md za detalje o pravilima ponašanja i postupku slanja pull request-ova.",
-    "contributingWelcome": "Dobrodošli su doprinosi kroz podatke, unapređenja koda, dokumentaciju i prijave grešaka.",
-    "getStarted": "Počni",
+    "intro": "Besplatan open-source projekat koji gradi strukturiranu, pretraživu bazu javnih podataka o Bosni i Hercegovini. Fokus je na univerzitetima - institucijama, fakultetima, studijskim programima i predmetima.",
+    "exploreHeading": "Istražite podatke",
+    "exploreDescription": "Pregledajte univerzitete širom Bosne i Hercegovine. Pogledajte fakultete, studijske programe i predmete. Pretražujte po nazivu, gradu ili akronimu.",
     "card": {
-      "postalCodes": {
-        "title": "Poštanski brojevi",
-        "description": "Pregledajte sve poštanske brojeve ili pretražujte po broju i nazivu grada."
-      },
-      "restApi": {
-        "title": "REST API",
-        "description": "Uključite Bosnia Lens podatke u svoju aplikaciju preko javnog REST API-ja. Pogledajte dokumentaciju i dostupne endpoint-e."
+      "universities": {
+        "title": "Univerziteti",
+        "description": "Pregledajte univerzitete, fakultete, studijske programe i predmete širom Bosne i Hercegovine."
       }
-    }
-  },
-  "postal": {
-    "title": "Poštanski brojevi",
-    "search": {
-      "label": "Pretraga po poštanskom broju ili opštini",
-      "success": "Poštanski brojevi su uspješno preuzeti.",
-      "failed": "Pretraga nije uspjela.",
-      "error": "Došlo je do greške prilikom pretrage poštanskih brojeva."
     },
-    "getAll": {
-      "failed": "Učitavanje poštanskih brojeva nije uspjelo.",
-      "error": "Došlo je do greške prilikom preuzimanja poštanskih brojeva i opština."
-    },
-    "results": {
-      "none": "Nema rezultata za prikaz.",
-      "code": "Broj",
-      "city": "Grad",
-      "post": "Pošta",
-      "resultOne": "rezultat",
-      "resultOther": "rezultata"
-    }
+    "improveHeading": "Unaprijedite podatke",
+    "improveDescription": "Znate nešto što nedostaje ili nije ispravno? Registrovani korisnici mogu predlagati izmjene - dodavanja, ispravke ili brisanja - koje admini pregledaju i primjenjuju.",
+    "improveStep1": "Napravite besplatan nalog i potvrdite email",
+    "improveStep2": "Idite na stranicu Poboljšaj podatke i pošaljite prijedlog",
+    "improveStep3": "Admini pregledaju prijedloge i primjenjuju odobrene izmjene na aktivni skup podataka",
+    "improveContribute": "Poboljšaj podatke",
+    "improveSignUp": "Kreirajte nalog",
+    "forDevsHeading": "Za programere",
+    "forDevsDescription": "Bosnia Lens nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu ili gradu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
+    "forDevsNote": "Autentifikacija nije potrebna za javne endpoint-e.",
+    "forDevsCta": "Pogledajte API dokumentaciju"
   },
   "api": {
     "title": "REST API",
     "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
     "authIntro": "Autentifikovani endpoint-i su odvojeni od javnog osnovnog URL-a i koriste sesijske kolačiće plus CSRF tokene za izmjene podataka.",
-    "postalObject": "Objekat poštanskog broja",
+    "dataObject": "Objekat univerziteta",
+    "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": number | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoint-i",
     "authFlowTitle": "Autentifikovani tok za doprinos podacima",
     "authFlowBody": "Ovi endpoint-i zahtijevaju autentifikovanu sesiju (credentials: include) i koriste CSRF zaštitu za zahtjeve koji mijenjaju podatke.",
-    "postalObjectExample": "{\n  \"id\":   string   - jedinstveni identifikator\n  \"code\": number   - poštanski broj od 5 cifara\n  \"city\": string   - naziv grada\n  \"post\": \"BH_POSTA\" | \"POSTE_SRP\" | \"HP_MOSTAR\" | null\n}",
     "groups": {
       "csrf": "CSRF",
       "auth": "Autentifikacija",
@@ -174,9 +146,11 @@
     "endpointsData": {
       "apiStatus": "Provjera statusa API-ja.",
       "apiV1Status": "Provjera statusa API v1.",
-      "getAllPostalCodes": "Preuzimanje svih poštanskih brojeva, sortiranih rastuće po broju.",
-      "searchPostalCodes": "Pretraga poštanskih brojeva po numeričkom kodu (tačno poklapanje od 5 cifara) ili po nazivu grada (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
-      "searchTermParam": "Poštanski broj od 5 cifara (npr. 71000) ili naziv grada (npr. Sarajevo, najmanje 2 karaktera).",
+      "getAllUniversities": "Preuzimanje svih univerziteta, sortiranih po nazivu.",
+      "searchUniversities": "Pretraga univerziteta po nazivu, gradu ili akronimu (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
+      "getUniversityById": "Preuzimanje univerziteta po ID-u s potpunim ugniježđenim detaljima (fakulteti, studijski programi, predmeti).",
+      "searchStudyPrograms": "Pretraga studijskih programa po nazivu širom svih univerziteta (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
+      "searchTermParam": "Pojam za pretragu (najmanje 2 karaktera).",
       "csrfIssue": "Izdavanje CSRF tokena koji se koristi u x-csrf-token headeru za zahtjeve koji mijenjaju podatke.",
       "authSignup": "Registracija naloga na čekanju i slanje emaila za potvrdu.",
       "authConfirm": "Potvrda signup tokena i kreiranje korisničkog naloga.",
@@ -185,9 +159,9 @@
       "authGithubCallback": "Završetak GitHub OAuth toka prijave.",
       "usersMe": "Dobavljanje profila trenutnog korisnika.",
       "usersLogout": "Zatvaranje sesije.",
-      "contributionCreate": "Predlaganje novog poštanskog broja (čuva se kao izmjena na čekanju).",
-      "contributionUpdate": "Predlaganje izmjene poštanskog broja (čuva se kao izmjena na čekanju).",
-      "contributionDelete": "Predlaganje brisanja poštanskog broja (čuva se kao izmjena na čekanju).",
+      "contributionCreate": "Predlaganje novog entiteta univerziteta (čuva se kao izmjena na čekanju).",
+      "contributionUpdate": "Predlaganje izmjene entiteta univerziteta (čuva se kao izmjena na čekanju).",
+      "contributionDelete": "Predlaganje brisanja entiteta univerziteta (čuva se kao izmjena na čekanju).",
       "contributionPendingList": "Prikaz vlastitih prijedloga na čekanju.",
       "contributionPendingDelete": "Uklanjanje jednog vlastitog prijedloga na čekanju.",
       "adminPendingList": "Prikaz svih prijedloga na čekanju.",
@@ -218,21 +192,60 @@
     "selectDatasetError": "Morate izabrati skup podataka.",
     "viewEditAllData": "Prikaži i uređuj sve podatke:",
     "addNewData": "Dodaj nove podatke",
-    "cityName": "Naziv grada:",
-    "postalCode": "Poštanski broj:",
-    "postalCarrier": "Poštanski operater:",
     "pendingChanges": "Izmjene na čekanju",
     "noPendingChanges": "Nema izmjena na čekanju za prikaz.",
     "change": "Izmjena",
+    "entityType": "Tip entiteta",
     "pendingChangesCountAria": "broj izmjena na čekanju",
     "searchResultsCountAria": "broj rezultata pretrage",
     "searchResults": "Rezultati pretrage",
     "user": "Korisnik",
     "dataset": {
-      "postalCodes": "Poštanski brojevi",
       "universities": "Univerziteti",
       "universitiesPlaceholder": "Univerziteti - uskoro"
-    }
+    },
+    "entityTypes": {
+      "UNIVERSITY": "Univerzitet",
+      "FACULTY": "Fakultet",
+      "STUDY_PROGRAM": "Studijski program",
+      "SUBJECT": "Predmet"
+    },
+    "parentId": "ID roditelja",
+    "parentIdHelp": {
+      "FACULTY": "ID univerziteta",
+      "STUDY_PROGRAM": "ID fakulteta",
+      "SUBJECT": "ID studijskog programa"
+    },
+    "dataFields": {
+      "name": "Naziv",
+      "city": "Grad",
+      "entity": "Entitet",
+      "cycle": "Studijski ciklus",
+      "durationYears": "Trajanje (godine)",
+      "ects": "ECTS krediti",
+      "language": "Jezik",
+      "semester": "Semestar",
+      "subjectType": "Tip predmeta",
+      "website": "Web stranica",
+      "sourceUrl": "URL izvora",
+      "ownership": "Vlasništvo"
+    },
+    "cycles": {
+      "FIRST": "PRVI — Bachelor",
+      "SECOND": "DRUGI — Master",
+      "THIRD": "TREĆI — PhD"
+    },
+    "subjectTypes": {
+      "MANDATORY": "Obavezni",
+      "ELECTIVE": "Izborni"
+    },
+    "entities": {
+      "FBIH": "FBIH — Federacija BiH",
+      "RS": "RS — Republika Srpska",
+      "BD": "BD — Brčko Distrikt"
+    },
+    "submitSuggestion": "Pošalji prijedlog",
+    "deleteChange": "Obriši"
   },
   "admin": {
     "needAdmin": "Morate biti admin da biste vidjeli admin kontrolnu tablu.",
@@ -266,14 +279,8 @@
       "minLength": "Lozinka mora imati najmanje 6 karaktera",
       "mustMatch": "Lozinka i potvrda lozinke moraju biti iste"
     },
-    "postalCode": {
-      "fiveDigits": "Poštanski broj mora imati 5 cifara"
-    },
     "search": {
       "minLength": "Pretraga mora imati najmanje 2 karaktera"
-    },
-    "city": {
-      "required": "Naziv grada ne može biti prazan"
     }
   },
   "messages": {
@@ -281,14 +288,6 @@
     "pendingChanges": {
       "loadFailed": "Neuspjelo učitavanje izmjena na čekanju.",
       "fetchError": "Greška pri preuzimanju izmjena na čekanju."
-    },
-    "postal": {
-      "addFailed": "Neuspjelo dodavanje poštanskog broja.",
-      "addError": "Došlo je do greške pri dodavanju poštanskog broja.",
-      "updateFailed": "Neuspjelo ažuriranje poštanskog broja.",
-      "updateError": "Došlo je do greške pri ažuriranju poštanskog broja.",
-      "deleteFailed": "Neuspjelo brisanje poštanskog broja.",
-      "deleteError": "Došlo je do greške pri brisanju poštanskog broja."
     },
     "auth": {
       "loginFailed": "Prijava nije uspjela.",
@@ -303,6 +302,52 @@
       "approveError": "Greška pri odobravanju izmjene na čekanju za {{email}}.",
       "declineFailed": "Neuspjelo odbijanje zahtjeva.",
       "declineError": "Greška pri odbijanju zahtjeva korisnika {{email}}."
+    },
+    "universities": {
+      "addFailed": "Slanje prijedloga nije uspjelo.",
+      "addError": "Greška pri slanju prijedloga.",
+      "deleteFailed": "Brisanje prijedloga nije uspjelo.",
+      "deleteError": "Greška pri brisanju prijedloga."
+    }
+  },
+  "universitiesPage": {
+    "browseAll": "Pregledaj sve",
+    "search": "Pretraži",
+    "findPrograms": "Pronađi studijske programe",
+    "searchPlaceholder": "Pretraži po nazivu, gradu ili akronimu…",
+    "studyProgramsPlaceholder": "Pretraži po nazivu studijskog programa…",
+    "noResults": "Nisu pronađeni univerziteti.",
+    "noStudyProgramResults": "Nisu pronađeni studijski programi.",
+    "city": "Grad",
+    "entity": "Entitet",
+    "entities": {
+      "FBIH": "Federacija BiH",
+      "RS": "Republika Srpska",
+      "BD": "Brčko Distrikt"
+    },
+    "faculties": "Fakulteti",
+    "studyPrograms": "Studijski programi",
+    "subjects": "Predmeti",
+    "cycle": "Ciklus",
+    "cycles": {
+      "FIRST": "Prvi (Bachelor)",
+      "SECOND": "Drugi (Master)",
+      "THIRD": "Treći (PhD)"
+    },
+    "ects": "ECTS",
+    "semester": "Semestar",
+    "subjectType": "Tip",
+    "subjectTypes": {
+      "MANDATORY": "Obavezni",
+      "ELECTIVE": "Izborni"
+    },
+    "website": "Web stranica",
+    "foundedYear": "Osnovan",
+    "viewDetails": "Prikaži detalje",
+    "hideDetails": "Sakrij detalje",
+    "ownership": {
+      "JAVNA": "Javna",
+      "PRIVATNA": "Privatna"
     }
   }
 }

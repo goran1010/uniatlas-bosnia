@@ -1,11 +1,11 @@
-import { pendingChangesPostalCodeModel } from "../models/pendingChangesPostalCodeModel.js";
+import { pendingChangesUniversityModel } from "../models/pendingChangesUniversityModel.js";
 import { transactionModel } from "../models/transactionModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { matchedData } from "express-validator";
 
 class AdminController {
   async getPendingChanges(req, res) {
-    const pendingChanges = await pendingChangesPostalCodeModel.findMany();
+    const pendingChanges = await pendingChangesUniversityModel.findMany();
 
     return sendSuccess(res, {
       data: pendingChanges,
@@ -16,7 +16,7 @@ class AdminController {
   async declinePendingChange(req, res) {
     const { id } = matchedData(req);
 
-    await pendingChangesPostalCodeModel.delete({ id });
+    await pendingChangesUniversityModel.delete({ id });
 
     return sendSuccess(res, {
       message: "Pending change declined successfully.",
@@ -24,9 +24,11 @@ class AdminController {
   }
 
   async confirmPendingChange(req, res) {
-    const { id, typeOfChange } = matchedData(req);
-    const wasApplied = await transactionModel.approvePendingChange({
+    const { id, entityType, typeOfChange } = matchedData(req);
+
+    const wasApplied = await transactionModel.approveUniversityPendingChange({
       id,
+      entityType,
       typeOfChange,
     });
 

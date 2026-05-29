@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "db:migrate_dev": "cd backend && npx prisma migrate dev --name",
+    "db:reset": "cd backend && npx prisma migrate reset",
     "db:deploy_generate": "cd backend && npx prisma migrate deploy && npx prisma generate",
     "db:generate": "cd backend && npx prisma generate",
     "db:seed": "cd backend && npx prisma db seed",

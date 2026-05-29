@@ -36,15 +36,26 @@ function Api() {
         <meta name="description" content={t("meta.api")} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://bosnia-lens.netlify.app/api-docs" />
-        <meta property="og:url" content="https://bosnia-lens.netlify.app/api-docs" />
-        <meta property="og:title" content={`${t("title.api")} | ${t("title.app")}`} />
+        <meta
+          property="og:url"
+          content="https://bosnia-lens.netlify.app/api-docs"
+        />
+        <meta
+          property="og:title"
+          content={`${t("title.api")} | ${t("title.app")}`}
+        />
         <meta property="og:description" content={t("meta.api")} />
-        <meta name="twitter:title" content={`${t("title.api")} | ${t("title.app")}`} />
+        <meta
+          name="twitter:title"
+          content={`${t("title.api")} | ${t("title.app")}`}
+        />
         <meta name="twitter:description" content={t("meta.api")} />
       </Helmet>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-8 py-8 dark:text-gray-100">
         <header>
-          <h1 className="text-3xl font-bold mb-3">{t("api.title")}</h1>
+          <h1 className="text-3xl font-bold mb-3 text-center">
+            {t("api.title")}
+          </h1>
           <p>{t("api.publicIntro")}</p>
           <pre className="mt-3 bg-gray-100 dark:bg-gray-800 rounded p-3 text-sm font-mono overflow-x-auto">
             {BASE_URL}
@@ -54,19 +65,25 @@ function Api() {
           </p>
         </header>
         <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">{t("api.postalObject")}</h2>
+          <h2 className="text-xl font-bold text-center">
+            {t("api.dataObject")}
+          </h2>
           <pre className="bg-gray-100 dark:bg-gray-800 rounded p-3 text-xs overflow-x-auto">
-            {t("api.postalObjectExample")}
+            {t("api.dataObjectExample")}
           </pre>
         </section>
         <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">{t("api.endpoints")}</h2>
+          <h2 className="text-xl font-bold text-center">
+            {t("api.endpoints")}
+          </h2>
           {endpoints.map((ep) => (
             <EndpointCard key={ep.path} endpoint={ep} />
           ))}
         </section>
         <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">{t("api.authFlowTitle")}</h2>
+          <h2 className="text-xl font-bold text-center">
+            {t("api.authFlowTitle")}
+          </h2>
           <p>{t("api.authFlowBody")}</p>
           <div className="grid gap-4">
             {authenticatedGroups.map((group) => (
@@ -74,7 +91,7 @@ function Api() {
                 key={group.titleKey}
                 className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/70 p-4"
               >
-                <h3 className="text-lg font-semibold mb-3">
+                <h3 className="text-lg font-semibold mb-3 text-center">
                   {t(group.titleKey)}
                 </h3>
                 <ul className="space-y-2">

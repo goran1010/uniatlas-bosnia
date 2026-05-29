@@ -1,25 +1,18 @@
-const currentUrl = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-async function handleDiscard(
-  change,
-  userData,
-  addNotification,
+async function handleDiscardUniversityChange({
+  changeId,
   setPendingChanges,
+  addNotification,
   setLoading,
   t,
   serverStatus,
-) {
+}) {
   try {
     setLoading(true);
-    const id = change.id;
-
-    const csrfToken = await getCsrfToken({
-      serverStatus,
-      addNotification,
-      t,
-    });
+    const csrfToken = await getCsrfToken({ serverStatus, addNotification, t });
 
     if (!csrfToken) {
       addNotification({
@@ -30,31 +23,27 @@ async function handleDiscard(
     }
 
     const response = await guardedFetch(
-      `${currentUrl}/users/contribution/pending-changes/postal-codes`,
+      `${BACKEND_URL}/users/contribution/pending-changes/universities`,
       {
-        mode: "cors",
         method: "DELETE",
-        credentials: "include",
+        mode: "cors",
         headers: {
-          "x-csrf-token": csrfToken,
           "Content-Type": "application/json",
+          "x-csrf-token": csrfToken,
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ id: changeId }),
+        credentials: "include",
       },
       { serverStatus, addNotification, t },
     );
 
-    if (!response) {
-      return;
-    }
+    if (!response) return;
+
     const result = await response.json();
 
     if (response.ok) {
-      setPendingChanges((prev) => prev.filter((change) => change.id !== id));
-      addNotification({
-        type: "success",
-        message: result.message,
-      });
+      setPendingChanges((prev) => prev.filter((c) => c.id !== changeId));
+      addNotification({ type: "success", message: result.message });
       return;
     }
     addNotification({
@@ -62,17 +51,17 @@ async function handleDiscard(
       message:
         result?.error?.message ||
         result?.error ||
-        t("messages.postal.deleteFailed"),
+        t("messages.universities.deleteFailed"),
     });
   } catch (err) {
     addNotification({
       type: "error",
-      message: t("messages.postal.deleteError"),
+      message: t("messages.universities.deleteError"),
     });
-    console.error("Error deleting postal code:", err);
+    console.error("Error discarding pending change:", err);
   } finally {
     setLoading(false);
   }
 }
 
-export { handleDiscard };
+export { handleDiscardUniversityChange };

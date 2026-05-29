@@ -23,13 +23,13 @@ const endpoints = [
   },
   {
     method: "GET",
-    path: "/api/v1/postal-codes",
-    descriptionKey: "api.endpointsData.getAllPostalCodes",
+    path: "/api/v1/universities",
+    descriptionKey: "api.endpointsData.getAllUniversities",
     params: null,
     successExample: `{
-  "message": "Postal codes retrieved successfully",
+  "message": "Universities retrieved successfully",
   "data": [
-    { "id": "...", "code": 71000, "city": "Sarajevo", "post": "BH_POSTA" },
+    { "id": 1, "name": "University of Sarajevo", "acronym": "UNSA", "city": "Sarajevo", "entity": "FBIH", "ownership": "JAVNA" },
     ...
   ]
 }`,
@@ -37,8 +37,8 @@ const endpoints = [
   },
   {
     method: "GET",
-    path: "/api/v1/postal-codes/search",
-    descriptionKey: "api.endpointsData.searchPostalCodes",
+    path: "/api/v1/universities/search",
+    descriptionKey: "api.endpointsData.searchUniversities",
     params: [
       {
         name: "searchTerm",
@@ -47,16 +47,59 @@ const endpoints = [
       },
     ],
     successExample: `{
-  "message": "Postal codes retrieved successfully",
+  "message": "Universities retrieved successfully",
   "data": [
-    { "id": "...", "code": 71000, "city": "Sarajevo", "post": "BH_POSTA" }
+    { "id": 1, "name": "University of Sarajevo", "acronym": "UNSA", "city": "Sarajevo" }
   ]
 }`,
     errorExample: `// 404 - no match found
-{ "error": { "message": "Postal code not found: verify the search term and try again." } }
+{ "error": { "message": "No universities found for the given search term." } }
 
 // 400 - invalid searchTerm
-{ "error": { "message": "Validation failed: Postal codes must have 5 numbers. Fix the highlighted fields and try again." } }`,
+{ "error": { "message": "Validation failed: Search term must have at least 2 characters." } }`,
+  },
+  {
+    method: "GET",
+    path: "/api/v1/universities/:id",
+    descriptionKey: "api.endpointsData.getUniversityById",
+    params: null,
+    successExample: `{
+  "message": "University retrieved successfully",
+  "data": {
+    "id": 1, "name": "University of Sarajevo", "acronym": "UNSA",
+    "city": "Sarajevo", "entity": "FBIH", "ownership": "JAVNA",
+    "faculties": [
+      { "id": 1, "name": "Faculty of Science", "studyPrograms": [ ... ] }
+    ]
+  }
+}`,
+    errorExample: `// 404
+{ "error": { "message": "University not found." } }`,
+  },
+  {
+    method: "GET",
+    path: "/api/v1/study-programs/search",
+    descriptionKey: "api.endpointsData.searchStudyPrograms",
+    params: [
+      {
+        name: "searchTerm",
+        required: true,
+        descriptionKey: "api.endpointsData.searchTermParam",
+      },
+    ],
+    successExample: `{
+  "message": "Study programs retrieved successfully",
+  "data": [
+    {
+      "id": 1, "name": "Software Engineering", "cycle": "FIRST",
+      "faculty": { "id": 1, "name": "Faculty of Electrical Engineering",
+        "university": { "id": 1, "name": "University of Sarajevo" }
+      }
+    }
+  ]
+}`,
+    errorExample: `// 404 - no match found
+{ "error": { "message": "No study programs found for the given search term." } }`,
   },
 ];
 
@@ -121,27 +164,27 @@ const authenticatedGroups = [
     endpoints: [
       {
         method: "POST",
-        path: "/users/contribution/postal-codes",
+        path: "/users/contribution/universities",
         descriptionKey: "api.endpointsData.contributionCreate",
       },
       {
         method: "PUT",
-        path: "/users/contribution/postal-codes",
+        path: "/users/contribution/universities",
         descriptionKey: "api.endpointsData.contributionUpdate",
       },
       {
         method: "DELETE",
-        path: "/users/contribution/postal-codes",
+        path: "/users/contribution/universities",
         descriptionKey: "api.endpointsData.contributionDelete",
       },
       {
         method: "GET",
-        path: "/users/contribution/pending-changes/postal-codes",
+        path: "/users/contribution/pending-changes/universities",
         descriptionKey: "api.endpointsData.contributionPendingList",
       },
       {
         method: "DELETE",
-        path: "/users/contribution/pending-changes/postal-codes",
+        path: "/users/contribution/pending-changes/universities",
         descriptionKey: "api.endpointsData.contributionPendingDelete",
       },
     ],

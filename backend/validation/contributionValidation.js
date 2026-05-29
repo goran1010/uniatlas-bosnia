@@ -1,81 +1,160 @@
 import { body } from "express-validator";
-import { postalCodesModel } from "../models/postalCodesModel.js";
 import { validationError } from "./validationError.js";
 
-const validPosts = ["BH_POSTA", "POSTE_SRP", "HP_MOSTAR"];
+const ENTITY_TYPES = ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"];
+const STUDY_CYCLES = ["FIRST", "SECOND", "THIRD"];
+const SUBJECT_TYPES = ["MANDATORY", "ELECTIVE"];
+const ENTITIES = ["FBIH", "RS", "BD"];
+const OWNERSHIP = ["JAVNA", "PRIVATNA"];
 
 class ContributionValidation {
-  createPostalCode = [
-    body("code")
+  createEntity = [
+    body("entityType")
       .trim()
       .notEmpty()
-      .withMessage("Code is required")
-      .custom((value) => {
-        if (Number.isInteger(Number(value))) {
-          if (value.length !== 5) {
-            throw new Error("Postal codes must have 5 numbers");
-          }
-        } else {
-          throw new Error("Must be a number");
-        }
-        return true;
-      }),
+      .withMessage("Entity type is required")
+      .bail()
+      .isIn(ENTITY_TYPES)
+      .withMessage("Invalid entity type"),
 
-    body("city").trim().notEmpty().withMessage("City is required"),
+    body("parentId")
+      .if((_, { req }) => req.body.entityType !== "UNIVERSITY")
+      .notEmpty()
+      .withMessage("Parent ID is required")
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage("Parent ID must be a positive integer"),
 
-    body("post").custom((value) => {
-      if (!validPosts.includes(value) && value !== "") {
-        throw new Error("Invalid post");
-      }
-      return true;
-    }),
+    body("data.name").trim().notEmpty().withMessage("Name is required"),
+
+    body("data.city")
+      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .trim()
+      .notEmpty()
+      .withMessage("City is required"),
+
+    body("data.entity")
+      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .notEmpty()
+      .withMessage("Entity (FBIH/RS/BD) is required")
+      .bail()
+      .isIn(ENTITIES)
+      .withMessage("Invalid entity — must be FBIH, RS, or BD"),
+
+    body("data.ownership")
+      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .notEmpty()
+      .withMessage("ownership is required")
+      .bail()
+      .isIn(OWNERSHIP)
+      .withMessage("ownership must be JAVNA or PRIVATNA"),
+
+    body("data.cycle")
+      .if((_, { req }) => req.body.entityType === "STUDY_PROGRAM")
+      .notEmpty()
+      .withMessage("Study cycle is required")
+      .bail()
+      .isIn(STUDY_CYCLES)
+      .withMessage("Invalid study cycle — must be FIRST, SECOND, or THIRD"),
+
+    body("data.durationYears")
+      .optional({ values: "null" })
+      .isInt({ min: 1, max: 10 })
+      .withMessage("Duration must be between 1 and 10 years"),
+
+    body("data.ects")
+      .optional({ values: "null" })
+      .isInt({ min: 1 })
+      .withMessage("ECTS must be a positive integer"),
+
+    body("data.semester")
+      .optional({ values: "null" })
+      .isInt({ min: 1, max: 12 })
+      .withMessage("Semester must be between 1 and 12"),
+
+    body("data.type")
+      .optional({ values: "null" })
+      .isIn(SUBJECT_TYPES)
+      .withMessage("Invalid subject type — must be MANDATORY or ELECTIVE"),
+
     validationError,
   ];
 
-  editPostalCode = [
-    body("code")
+  editEntity = [
+    body("entityType")
       .trim()
       .notEmpty()
-      .withMessage("Code is required")
-      .custom(async (value) => {
-        const codeExists = await postalCodesModel.getPostalCodeByCode(
-          Number(value),
-        );
-        if (!codeExists) {
-          throw new Error("Code doesn't exist");
-        }
-        return true;
-      }),
+      .withMessage("Entity type is required")
+      .bail()
+      .isIn(ENTITY_TYPES)
+      .withMessage("Invalid entity type"),
 
-    body("city").trim().notEmpty().withMessage("City is required"),
+    body("targetId")
+      .notEmpty()
+      .withMessage("Target ID is required")
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage("Target ID must be a positive integer"),
 
-    body("post").custom((value) => {
-      if (!validPosts.includes(value) && value !== "") {
-        throw new Error("Invalid post");
-      }
-      return true;
-    }),
+    body("data.name")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("Name cannot be empty if provided"),
+
+    body("data.cycle")
+      .optional()
+      .isIn(STUDY_CYCLES)
+      .withMessage("Invalid study cycle"),
+
+    body("data.entity")
+      .optional()
+      .isIn(ENTITIES)
+      .withMessage("Invalid entity — must be FBIH, RS, or BD"),
+
+    body("data.ownership")
+      .optional()
+      .isIn(OWNERSHIP)
+      .withMessage("ownership must be JAVNA or PRIVATNA"),
+
+    body("data.durationYears")
+      .optional({ values: "null" })
+      .isInt({ min: 1, max: 10 })
+      .withMessage("Duration must be between 1 and 10 years"),
+
+    body("data.ects")
+      .optional({ values: "null" })
+      .isInt({ min: 1 })
+      .withMessage("ECTS must be a positive integer"),
+
+    body("data.semester")
+      .optional({ values: "null" })
+      .isInt({ min: 1, max: 12 })
+      .withMessage("Semester must be between 1 and 12"),
+
+    body("data.type")
+      .optional({ values: "null" })
+      .isIn(SUBJECT_TYPES)
+      .withMessage("Invalid subject type — must be MANDATORY or ELECTIVE"),
+
     validationError,
   ];
 
-  deletePostalCode = [
-    body("code")
+  deleteEntity = [
+    body("entityType")
       .trim()
       .notEmpty()
-      .withMessage("Can't delete data. Code is required")
-      .custom(async (value) => {
-        const codeExists = await postalCodesModel.getPostalCodeByCode(
-          Number(value),
-        );
-        if (!codeExists) {
-          throw new Error("Code doesn't exist");
-        }
-        return true;
-      }),
+      .withMessage("Entity type is required")
+      .bail()
+      .isIn(ENTITY_TYPES)
+      .withMessage("Invalid entity type"),
 
-    body("city").trim(),
-
-    body("post").trim(),
+    body("targetId")
+      .notEmpty()
+      .withMessage("Target ID is required")
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage("Target ID must be a positive integer"),
 
     validationError,
   ];

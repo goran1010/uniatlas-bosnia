@@ -29,16 +29,17 @@ describe("Api component", () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test("renders the postal code object section heading", () => {
+  test("renders the data object section heading", () => {
     renderApi();
     expect(
-      screen.getByRole("heading", { name: /Postal code object/i, level: 2 }),
+      screen.getByRole("heading", { name: /University object/i, level: 2 }),
     ).toBeInTheDocument();
   });
 
-  test("renders postal code schema snippet", () => {
+  test("renders university schema snippet", () => {
     renderApi();
-    expect(screen.getByText(/POSTE_SRP/)).toBeInTheDocument();
+    const matches = screen.getAllByText(/FBIH/);
+    expect(matches.length).toBeGreaterThan(0);
   });
 
   test("renders the Endpoints section heading", () => {

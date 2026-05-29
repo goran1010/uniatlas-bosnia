@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
-import fs from "fs";
+import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/client.js";
 import "dotenv/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = import.meta.dirname;
 
 const connectionString =
   process.env.NODE_ENV === "test"
@@ -21,39 +19,39 @@ if (!connectionString) {
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
-const filePath = path.resolve(__dirname, "JSON_files/postal_codes.json");
+const filePath = path.resolve(__dirname, "JSON_files/universities.json");
 const JSONdata = fs.readFileSync(filePath, "utf-8");
-let postalCodes = JSON.parse(JSONdata);
+const universities = JSON.parse(JSONdata);
 
-const postMapping = {
-  "BH Pošta": "BH_POSTA",
-  "Pošte Srpske": "POSTE_SRP",
-  "HP Mostar": "HP_MOSTAR",
-};
-
-postalCodes = postalCodes.map((postalCode) => ({
-  ...postalCode,
-  post: postMapping[postalCode.post] ?? null,
-}));
+const toDateTime = (val) => (val ? new Date(val).toISOString() : null);
 
 async function main() {
-  console.log("Seeding postal codes...");
+  console.log("Seeding universities...");
 
-  const result = await prisma.postalCode.createMany({
-    data: postalCodes.map((postalCode) => ({
-      code: Number(postalCode.postalCode),
-      city: postalCode.city,
-      post: postalCode.post,
+  const result = await prisma.university.createMany({
+    data: universities.map((u) => ({
+      name: u.name,
+      acronym: u.acronym,
+      city: u.city,
+      entity: u.entity,
+      ownership: u.ownership === "Javna" ? "JAVNA" : "PRIVATNA",
+      foundedYear: u.foundedYear,
+      website: u.website,
+      accreditationFrom: toDateTime(u.accreditationFrom),
+      accreditationTo: toDateTime(u.accreditationTo),
+      authority: u.authority,
+      sourceUrl: u.sourceUrl,
+      lastChecked: toDateTime(u.lastChecked),
     })),
     skipDuplicates: true,
   });
 
-  console.log(`Inserted ${result.count} new postal codes.`);
+  console.log(`Inserted ${result.count} new universities.`);
 }
 
 main()
   .catch((error) => {
-    console.error("Error seeding postal codes:", error);
+    console.error("Error seeding universities:", error);
     process.exit(1);
   })
   .finally(async () => {

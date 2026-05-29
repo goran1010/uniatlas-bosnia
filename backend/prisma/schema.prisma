@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated"
@@ -33,7 +30,7 @@ model User {
   password       String?
   githubId       String?                    @unique
   role           role                       @default(USER)
-  pendingChanges PendingChangesPostalCode[]
+  pendingChanges PendingChangesUniversity[]
 
   @@map("users")
 }
@@ -54,29 +51,107 @@ enum typeOfChange {
   CREATE
 }
 
-model PendingChangesPostalCode {
-  id           String        @id @default(uuid())
-  code         Int
+enum entity {
+  FBIH
+  RS
+  BD
+}
+
+enum ownership {
+  JAVNA
+  PRIVATNA
+}
+
+enum studyCycle {
+  FIRST
+  SECOND
+  THIRD
+}
+
+enum subjectType {
+  MANDATORY
+  ELECTIVE
+}
+
+enum universityEntityType {
+  UNIVERSITY
+  FACULTY
+  STUDY_PROGRAM
+  SUBJECT
+}
+
+model University {
+  id                Int       @id @default(autoincrement())
+  name              String    @unique
+  acronym           String?
+  city              String
+  entity            entity
+  ownership         ownership
+  foundedYear       String?
+  website           String?
+  accreditationFrom DateTime?
+  accreditationTo   DateTime?
+  authority         String?
+  sourceUrl         String?
+  lastChecked       DateTime?
+  faculties         Faculty[]
+
+  @@map("universities")
+}
+
+model Faculty {
+  id            Int            @id @default(autoincrement())
+  name          String
+  universityId  Int
+  university    University     @relation(fields: [universityId], references: [id])
+  city          String?
+  website       String?
+  studyPrograms StudyProgram[]
+
+  @@unique([name, universityId])
+  @@map("faculties")
+}
+
+model StudyProgram {
+  id            Int        @id @default(autoincrement())
+  name          String
+  facultyId     Int
+  faculty       Faculty    @relation(fields: [facultyId], references: [id])
+  cycle         studyCycle
+  durationYears Int?
+  ects          Int?
+  language      String?
+  sourceUrl     String?
+  subjects      Subject[]
+
+  @@unique([name, facultyId, cycle])
+  @@map("study_programs")
+}
+
+model Subject {
+  id             Int          @id @default(autoincrement())
+  name           String
+  studyProgramId Int
+  studyProgram   StudyProgram @relation(fields: [studyProgramId], references: [id])
+  semester       Int?
+  ects           Int?
+  type           subjectType?
+  sourceUrl      String?
+
+  @@unique([name, studyProgramId])
+  @@map("subjects")
+}
+
+model PendingChangesUniversity {
+  id           String               @id @default(uuid())
+  entityType   universityEntityType
   typeOfChange typeOfChange
-  city         String
-  post         postOperator?
+  targetId     Int?
+  parentId     Int?
+  data         Json
   userId       String
-  user         User          @relation(fields: [userId], references: [id])
-  createdAt    DateTime      @default(now())
+  user         User                 @relation(fields: [userId], references: [id])
+  createdAt    DateTime             @default(now())
 
-  @@map("pending_changes_postal_code")
-}
-
-enum postOperator {
-  BH_POSTA
-  POSTE_SRP
-  HP_MOSTAR
-}
-
-model PostalCode {
-  code Int           @id
-  city String
-  post postOperator?
-
-  @@map("postal_codes")
+  @@map("pending_changes_university")
 }

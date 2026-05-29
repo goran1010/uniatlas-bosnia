@@ -1,11 +1,47 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { Universities } from "../../src/components/Universities";
+import { MemoryRouter } from "react-router-dom";
+import { Universities } from "../../src/components/Universities/Universities";
+import { RootContextProvider } from "../rootContextProvider";
 
-describe("ErrorPage Component", () => {
-  test("Universities component", () => {
-    render(<Universities />);
-    const linkElement = screen.getByText(/Universities/i);
-    expect(linkElement).toBeInTheDocument();
+beforeEach(() => {
+  vi.spyOn(globalThis, "fetch").mockResolvedValue({
+    ok: true,
+    json: async () => ({ data: [], message: "ok" }),
+  });
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
+function Wrapper() {
+  return (
+    <RootContextProvider>
+      <MemoryRouter>
+        <Universities />
+      </MemoryRouter>
+    </RootContextProvider>
+  );
+}
+
+describe("Universities page", () => {
+  test("renders Universities heading", async () => {
+    render(<Wrapper />);
+    const heading = await screen.findByRole("heading", {
+      name: /Universities/i,
+    });
+    expect(heading).toBeInTheDocument();
+  });
+
+  test("renders tab buttons: Browse All, Search, Find Study Programs", () => {
+    render(<Wrapper />);
+    expect(
+      screen.getByRole("button", { name: /Browse All/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Search/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Find Study Programs/i }),
+    ).toBeInTheDocument();
   });
 });

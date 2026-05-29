@@ -8,13 +8,10 @@ import { RootContextProvider } from "../../rootContextProvider";
 function Wrapper({ initialUser = null }) {
   return (
     <RootContextProvider initialUserData={initialUser}>
-      <MemoryRouter initialEntries={["/contribution-dashboard"]}>
+      <MemoryRouter initialEntries={["/improve-data"]}>
         <Notifications />
         <Routes>
-          <Route
-            path="/contribution-dashboard"
-            element={<ContributionDashboard />}
-          />
+          <Route path="/improve-data" element={<ContributionDashboard />} />
         </Routes>
       </MemoryRouter>
     </RootContextProvider>

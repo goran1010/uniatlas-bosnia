@@ -1,6 +1,6 @@
 # Bosnia Lens
 
-A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and a React web interface. The current implemented dataset is postal codes, with universities as a planned addition and focus of the project.
+A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and a React web interface. The focus is universities and academic programs - browse institutions, faculties, study programs, and subjects.
 
 LIVE Web app - <https://bosnia-lens.netlify.app/>
 
@@ -30,17 +30,17 @@ For more info on how to connect your app to the REST API, visit <https://bosnia-
 ## Features
 
 - **Versioned REST API**: Public endpoints under `/api/v1`
-- **Postal Code Search**: Browse all postal codes or search by code and city name
+- **University Search**: Browse all universities or search by name, city, or acronym; retrieve full detail with faculties, study programs, and subjects
+- **Study Program Search**: Search study programs by name across all universities
 - **Session Authentication**: Passport-based auth with email/password signup, login, logout, and email confirmation
 - **GitHub Login**: Optional OAuth2 authentication with GitHub
-- **Suggestion-based Data Workflow**: Any authenticated user can suggest postal code changes - admins review and approve or reject them
+- **Suggestion-based Data Workflow**: Any authenticated user can suggest university data changes - admins review and approve or reject them
 - **CSRF Protection**: Synchronised CSRF tokens required for all mutating requests to authenticated routes
 - **First-party cookies**: Frontend proxies authenticated requests through Netlify (`/backend/*`) so session cookies are always same-site
 
 ## Data Coverage
 
-- Postal codes (implemented)
-- Universities (frontend route placeholder, planned dataset - target focus of the project)
+- Universities (implemented) — 4-level hierarchy: University → Faculty → Study Program → Subject
 
 ## Getting Started
 
@@ -203,13 +203,15 @@ Success example:
 
 ```json
 {
-  "message": "Postal codes retrieved successfully",
+  "message": "Universities retrieved successfully",
   "data": [
     {
-      "id": "unique-identifier",
-      "code": 71000,
+      "id": 1,
+      "name": "University of Sarajevo",
+      "acronym": "UNSA",
       "city": "Sarajevo",
-      "post": "BH_POSTA"
+      "entity": "FBIH",
+      "ownership": "JAVNA"
     }
   ]
 }
@@ -220,7 +222,7 @@ Error example:
 ```json
 {
   "error": {
-    "message": "Validation failed: Postal codes must have 5 numbers. Fix the highlighted fields and try again."
+    "message": "Validation failed: Search term must have at least 2 characters."
   }
 }
 ```
@@ -234,27 +236,35 @@ All public endpoints are available under `https://round-leann-goran-jovic-1010-c
 - `GET /api` - Check API status
 - `GET /api/v1` - Check API v1 status
 
-#### Postal Code endpoints
+#### University endpoints
 
-- `GET /api/v1/postal-codes` - Get all postal codes (ordered by code ascending)
-- `GET /api/v1/postal-codes/search?searchTerm=...` - Search postal codes by 5-digit code or city name (minimum 2 characters for city names)
+- `GET /api/v1/universities` - Get all universities (ordered by name)
+- `GET /api/v1/universities/search?searchTerm=...` - Search universities by name, city, or acronym (minimum 2 characters)
+- `GET /api/v1/universities/:id` - Get a university by ID with full nested detail (faculties, study programs, subjects)
+
+#### Study Program endpoints
+
+- `GET /api/v1/study-programs/search?searchTerm=...` - Search study programs by name across all universities (minimum 2 characters)
 
 **Search parameter:**
 
-- `searchTerm` (required, string): A 5-digit postal code (e.g., `71000`) or a city name (e.g., `Sarajevo`)
+- `searchTerm` (required, string): A search string of at least 2 characters
 
-**Postal code object structure:**
+**University object structure:**
 
 ```json
 {
-  "id": "unique-identifier-string",
-  "code": 71000,
+  "id": 1,
+  "name": "University of Sarajevo",
+  "acronym": "UNSA",
   "city": "Sarajevo",
-  "post": "BH_POSTA" | "POSTE_SRP" | "HP_MOSTAR" | null
+  "entity": "FBIH" | "RS" | "BD",
+  "ownership": "JAVNA" | "PRIVATNA",
+  "foundedYear": 1949,
+  "website": "https://www.unsa.ba",
+  "faculties": [ ... ]
 }
 ```
-
-The `post` field indicates the postal operator and can be `BH_POSTA`, `POSTE_SRP`, `HP_MOSTAR`, or `null`.
 
 ## Authenticated Data Contribution Flow
 
@@ -279,11 +289,11 @@ These endpoints require an authenticated session (`credentials: include`) and ar
 
 ### Contribution endpoints (authenticated users)
 
-- `POST /users/contribution/postal-codes` - Suggest a new postal code (stored as pending change)
-- `PUT /users/contribution/postal-codes` - Suggest an edit to a postal code (stored as pending change)
-- `DELETE /users/contribution/postal-codes` - Suggest deletion of a postal code (stored as pending change)
-- `GET /users/contribution/pending-changes/postal-codes` - List your own pending suggestions
-- `DELETE /users/contribution/pending-changes/postal-codes` - Remove one of your own pending suggestions
+- `POST /users/contribution/universities` - Suggest a new university entity (stored as pending change)
+- `PUT /users/contribution/universities` - Suggest an edit to a university entity (stored as pending change)
+- `DELETE /users/contribution/universities` - Suggest deletion of a university entity (stored as pending change)
+- `GET /users/contribution/pending-changes/universities` - List your own pending suggestions
+- `DELETE /users/contribution/pending-changes/universities` - Remove one of your own pending suggestions
 
 ### Admin endpoints (authenticated admin users)
 
@@ -353,7 +363,7 @@ The public REST API (`/api/v1/...`) is served directly from the backend with ope
 
 ## Current Status
 
-The currently complete public dataset and API surface are centered on postal codes. Universities remain planned. Data changes are handled through a pending-suggestion workflow where authenticated users submit proposals and admins moderate them.
+The project is focused on universities and academic programs. The public API and contribution workflow cover the full 4-level university hierarchy: University → Faculty → Study Program → Subject. Data changes are handled through a pending-suggestion workflow where authenticated users submit proposals and admins moderate them.
 
 ## Contributing
 
@@ -371,4 +381,4 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 ## Acknowledgments
 
-- Initial PostalCode data sourced from [Spisak poštanskih brojeva u Bosni i Hercegovini](https://bs.wikipedia.org/wiki/Spisak_po%C5%A1tanskih_brojeva_u_Bosni_i_Hercegovini)
+- General university data sourced from [Agencija za razvoj visokog obrazovanja i osiguranje kvaliteta Bosne i Hercegovine (HEA)](https://www.hea.gov.ba/Content/Read/lista-akreditiranih-vsu).
