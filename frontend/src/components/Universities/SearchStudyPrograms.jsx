@@ -74,7 +74,7 @@ function SearchStudyPrograms() {
   }
 
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex gap-4 w-full items-center justify-center">
       <form onSubmit={handleSearch} className="flex gap-2 w-full max-w-lg">
         <Input
           ref={inputRef}

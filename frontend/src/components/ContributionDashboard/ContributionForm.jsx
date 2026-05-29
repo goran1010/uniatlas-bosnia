@@ -17,8 +17,8 @@ function ContributionForm() {
   );
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700">
+    <div className="flex flex-col gap-4 items-center w-full">
+      <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700 items-center justify-center">
         {TABS.map((tab) => (
           <button
             key={tab}

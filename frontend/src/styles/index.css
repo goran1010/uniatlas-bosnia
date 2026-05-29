@@ -45,9 +45,6 @@
 
 /* Base styles using @layer base to override default styles */
 @layer base {
-  *:focus {
-    outline: 2px solid black;
-  }
   main a {
     color: var(--accent);
     text-decoration-color: transparent;
