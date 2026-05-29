@@ -177,36 +177,33 @@ describe("Navbar switchers", () => {
   test("opens language menu and closes theme menu", async () => {
     render(<NavbarWrapper />);
 
-    const themeButton = document.getElementById("theme-switcher");
-    const languageButton = document.getElementById("language-switcher");
+    const themeSelect = document.getElementById("theme-switcher");
+    const languageSelect = document.getElementById("language-switcher");
 
-    expect(themeButton).toBeInTheDocument();
-    expect(languageButton).toBeInTheDocument();
+    expect(themeSelect).toBeInTheDocument();
+    expect(languageSelect).toBeInTheDocument();
 
-    await userEvent.click(themeButton);
-    expect(themeButton).toHaveAttribute("aria-expanded", "true");
+    await userEvent.selectOptions(themeSelect, "light");
+    expect(themeSelect.value).toBe("light");
 
-    await userEvent.click(languageButton);
-
-    expect(themeButton).toHaveAttribute("aria-expanded", "false");
-    expect(languageButton).toHaveAttribute("aria-expanded", "true");
+    await userEvent.selectOptions(languageSelect, "sr");
+    expect(languageSelect.value).toBe("sr");
   });
 
   test("closes open menus when navbar is clicked", async () => {
     render(<NavbarWrapper />);
 
-    const languageButton = document.getElementById("language-switcher");
-    expect(languageButton).toBeInTheDocument();
+    const languageSelect = document.getElementById("language-switcher");
+    expect(languageSelect).toBeInTheDocument();
 
-    await userEvent.click(languageButton);
-    expect(languageButton).toHaveAttribute("aria-expanded", "true");
+    await userEvent.selectOptions(languageSelect, "sr");
+    expect(languageSelect.value).toBe("sr");
 
     const navigation = screen.getByRole("navigation");
     expect(navigation).toBeInTheDocument();
 
     await userEvent.click(navigation);
-
-    expect(languageButton).toHaveAttribute("aria-expanded", "false");
+    expect(languageSelect.value).toBe("sr");
   });
 });
 

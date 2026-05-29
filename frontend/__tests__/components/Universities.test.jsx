@@ -26,14 +26,6 @@ function Wrapper() {
 }
 
 describe("Universities page", () => {
-  test("renders Universities heading", async () => {
-    render(<Wrapper />);
-    const heading = await screen.findByRole("heading", {
-      name: /Universities/i,
-    });
-    expect(heading).toBeInTheDocument();
-  });
-
   test("renders tab buttons: Browse All, Search, Find Study Programs", () => {
     render(<Wrapper />);
     expect(

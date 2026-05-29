@@ -31,7 +31,7 @@ describe("MobileMenu", () => {
     expect(screen.getByRole("link", { name: /^Log In$/i })).toBeInTheDocument();
 
     expect(
-      screen.queryByRole("link", { name: /Contribute/i }),
+      screen.queryByRole("link", { name: /Improve Data/i }),
     ).not.toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: /^Admin$/i }),
@@ -47,7 +47,7 @@ describe("MobileMenu", () => {
     );
 
     expect(
-      screen.getByRole("link", { name: /Contribute/i }),
+      screen.getByRole("link", { name: /Improve Data/i }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: /^Admin$/i }),
@@ -63,7 +63,7 @@ describe("MobileMenu", () => {
     );
 
     expect(
-      screen.getByRole("link", { name: /Contribute/i }),
+      screen.getByRole("link", { name: /Improve Data/i }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^Admin$/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Profile/i })).toBeInTheDocument();

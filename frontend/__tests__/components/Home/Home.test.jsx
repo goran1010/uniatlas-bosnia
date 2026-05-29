@@ -33,7 +33,7 @@ describe("Home component", () => {
       </MemoryRouter>,
     );
     const linkElement = await screen.findByRole("heading", {
-      name: /Available data/i,
+      name: /Explore the Data/i,
       level: 2,
     });
     expect(linkElement).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe("Home component", () => {
       </MemoryRouter>,
     );
     const linkElement = await screen.findByRole("heading", {
-      name: /Contributing/i,
+      name: /Improve the Data/i,
       level: 2,
     });
     expect(linkElement).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe("Home component", () => {
       </MemoryRouter>,
     );
     const linkElement = await screen.findByRole("heading", {
-      name: /Get started/i,
+      name: /For Developers/i,
       level: 2,
     });
     expect(linkElement).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe("Home component", () => {
       </MemoryRouter>,
     );
     const linkElement = await screen.findByRole("link", {
-      name: /REST API/i,
+      name: /View API Docs/i,
     });
     expect(linkElement).toBeInTheDocument();
     const linkElement2 = await screen.findByRole("link", {
