@@ -41,9 +41,10 @@
     "dismiss": "Zatvori obavijest"
   },
   "theme": {
-    "system": "Sistemska tema",
-    "light": "Svijetla tema",
-    "dark": "Tamna tema",
+    "select": "Tema",
+    "system": "Sistemska",
+    "light": "Svijetla",
+    "dark": "Tamna",
     "switched": {
       "system": "Prebačeno na sistemsku temu",
       "light": "Prebačeno na svijetlu temu",

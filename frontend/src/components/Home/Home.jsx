@@ -41,7 +41,7 @@ function Home() {
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <Link
               to="/universities"
-              className="border rounded-lg px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto"
+              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             >
               {t("home.card.universities.title")}
             </Link>
@@ -61,13 +61,13 @@ function Home() {
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <Link
               to="/improve-data"
-              className="border rounded-lg px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto"
+              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             >
               {t("home.improveContribute")}
             </Link>
             <Link
               to="/signup"
-              className="border rounded-lg px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto"
+              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             >
               {t("home.improveSignUp")}
             </Link>
@@ -84,7 +84,7 @@ function Home() {
           </p>
           <Link
             to="/api-docs"
-            className="border rounded-lg px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto self-center"
+            className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface) self-center"
           >
             {t("home.forDevsCta")}
           </Link>
