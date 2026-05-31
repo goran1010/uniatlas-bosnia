@@ -52,7 +52,8 @@
     }
   },
   "language": {
-    "system": "Jezik sistema",
+    "select": "Jezik",
+    "system": "Sistemski",
     "english": "Engleski",
     "serbian": "Srpski",
     "switchAria": "Promijeni jezik",

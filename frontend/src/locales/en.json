@@ -52,7 +52,8 @@
     }
   },
   "language": {
-    "system": "System Language",
+    "select": "Language",
+    "system": "System",
     "english": "English",
     "serbian": "Serbian",
     "switchAria": "Toggle language",
