@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { RootContext } from "../../contextData/RootContext";
 
 const statusLinkClass =
-  "block h-full flex px-3 py-2 items-center justify-center cursor-pointer rounded-lg  transition-colors duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)";
+  "block h-full flex px-1 py-2 items-center justify-center cursor-pointer rounded-lg  transition-colors duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)";
 
 function Status({ setIsMenuOpen }) {
   const { userData } = useContext(RootContext);
