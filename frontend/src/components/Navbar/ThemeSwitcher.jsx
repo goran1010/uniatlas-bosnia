@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
-function ThemeSwitcher({ theme, setMode }) {
+function ThemeSwitcher({ setMode }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
 
   function handleThemeChange(e) {
+    if (!e.target.value) return;
     const nextTheme = e.target.value;
 
     setMode(nextTheme);
@@ -19,11 +20,13 @@ function ThemeSwitcher({ theme, setMode }) {
   return (
     <Select
       id="theme-switcher"
+      value={""}
       aria-label={t("nav.toggleThemeAria")}
-      value={theme}
       onChange={handleThemeChange}
-      className="whitespace-normal text-center break-all h-full py-2 sm:min-w-38 w-full sm:w-auto relative inline-flex items-center justify-center rounded-md p-1 text-sm font-semibold bg-(--surface-1) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow-soft) hover:shadow-(--card-shadow)"
     >
+      <option className="font-bold" value="">
+        {t("theme.select")}
+      </option>
       <option value="system">{t("theme.system")}</option>
       <option value="light">{t("theme.light")}</option>
       <option value="dark">{t("theme.dark")}</option>

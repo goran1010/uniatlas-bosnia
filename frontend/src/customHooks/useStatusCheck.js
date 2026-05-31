@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function useStatusCheck(addNotification, t, serverStatus) {
   const [userData, setUserData] = useState(null);
+
+  const tRef = useRef(t);
 
   useEffect(() => {
     let isCancelled = false;
@@ -24,7 +26,7 @@ function useStatusCheck(addNotification, t, serverStatus) {
           {
             serverStatus,
             addNotification,
-            t,
+            t: tRef.current,
           },
         );
 
@@ -44,14 +46,14 @@ function useStatusCheck(addNotification, t, serverStatus) {
             message:
               result?.error?.message ||
               result?.error ||
-              "Failed to check login status.",
+              tRef.current("loginStatus.failed"),
           });
           return;
         }
 
         addNotification({
           type: "success",
-          message: result.message || "Login status verified.",
+          message: result.message || tRef.current("loginStatus.success"),
         });
         setUserData(result.data);
       } catch (err) {
@@ -60,7 +62,7 @@ function useStatusCheck(addNotification, t, serverStatus) {
         }
         addNotification({
           type: "error",
-          message: "An error occurred while checking login status.",
+          message: tRef.current("loginStatus.error"),
         });
         console.error("Error checking login status:", err);
       }
@@ -79,7 +81,7 @@ function useStatusCheck(addNotification, t, serverStatus) {
       abortController.abort();
       clearTimeout(checkLoginTimeoutId);
     };
-  }, [addNotification, t, serverStatus]);
+  }, [addNotification, serverStatus]);
 
   return { userData, setUserData };
 }

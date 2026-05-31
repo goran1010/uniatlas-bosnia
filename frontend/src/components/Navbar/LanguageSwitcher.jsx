@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
-function LanguageSwitcher({ language, setLanguage }) {
+function LanguageSwitcher({ setLanguage }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
 
@@ -27,10 +27,12 @@ function LanguageSwitcher({ language, setLanguage }) {
     <Select
       id="language-switcher"
       aria-label={t("language.switchAria")}
-      value={language}
+      value={""}
       onChange={handleLanguageChange}
-      className="whitespace-normal text-center break-all h-full py-2 sm:min-w-38 w-full sm:w-auto relative inline-flex items-center justify-center rounded-md p-1 text-sm font-semibold bg-(--surface-1) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow-soft) hover:shadow-(--card-shadow)"
     >
+      <option className="font-bold" value="">
+        {t("language.select")}
+      </option>
       <option value="system">{t("language.system")}</option>
       <option value="en">{t("language.english")}</option>
       <option value="sr">{t("language.serbian")}</option>

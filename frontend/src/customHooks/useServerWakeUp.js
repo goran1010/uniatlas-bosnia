@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   SERVER_STATUS,
   SERVER_STATUS_NOTIFICATION_ID,
@@ -9,6 +9,7 @@ const DELAY_BETWEEN_ATTEMPTS = 2000;
 
 function useServerWakeUp({ addNotification, removeNotification, t }) {
   const [serverStatus, setServerStatus] = useState(SERVER_STATUS.LIVE);
+  const tRef = useRef(t);
 
   useEffect(() => {
     // Limit the number of wake-up attempts to prevent infinite loops
@@ -28,7 +29,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
         addNotification({
           id: SERVER_STATUS_NOTIFICATION_ID,
           type: "error",
-          message: t("longWait.unreachable"),
+          message: tRef.current("longWait.unreachable"),
           duration: null,
           persistent: true,
         });
@@ -49,7 +50,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
           addNotification({
             id: SERVER_STATUS_NOTIFICATION_ID,
             type: "warning",
-            message: t("longWait.wakingUp"),
+            message: tRef.current("longWait.wakingUp"),
             duration: null,
             persistent: true,
           });
@@ -82,7 +83,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
       clearTimeout(retryTimeoutId);
       removeNotification(SERVER_STATUS_NOTIFICATION_ID);
     };
-  }, [addNotification, removeNotification, t]);
+  }, [addNotification, removeNotification]);
 
   return serverStatus;
 }

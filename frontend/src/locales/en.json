@@ -41,9 +41,10 @@
     "dismiss": "Dismiss notification"
   },
   "theme": {
-    "system": "System theme",
-    "light": "Light theme",
-    "dark": "Dark theme",
+    "select": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
     "switched": {
       "system": "Switched to system theme",
       "light": "Switched to light theme",
@@ -51,7 +52,8 @@
     }
   },
   "language": {
-    "system": "System Language",
+    "select": "Language",
+    "system": "System",
     "english": "English",
     "serbian": "Serbian",
     "switchAria": "Toggle language",

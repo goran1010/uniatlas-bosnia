@@ -3,16 +3,17 @@ import { Status } from "./Status";
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
-const menuShellClass =
-  "z-50 absolute top-full w-full left-0 bg-(--surface-2) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow)";
-const menuItemClass =
-  "block p-2 w-full text-center text-nowrap rounded-lg transition-colors duration-150 hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)";
+const menuItemClass = `block p-2 w-full text-center text-nowrap rounded-lg hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 
+  focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)`;
 
 function MobileMenu({ setIsMenuOpen, userData }) {
   const { t } = useContext(RootContext);
 
   return (
-    <div id="mobile-menu" className={menuShellClass}>
+    <div
+      id="mobile-menu"
+      className={`z-50 absolute top-full w-full left-0 text-(--text-primary) border border-(--border-color) shadow-(--card-shadow) bg-(--surface-2) backdrop-blur-sm`}
+    >
       <ul className="flex flex-col items-center">
         <li className="w-full">
           <Link
@@ -64,7 +65,7 @@ function MobileMenu({ setIsMenuOpen, userData }) {
             </Link>
           </li>
         )}
-        <li className="flex justify-center items-center">
+        <li className={`flex justify-center items-center`}>
           <Status setIsMenuOpen={setIsMenuOpen} />
         </li>
       </ul>
