@@ -32,7 +32,9 @@ describe("Universities page", async () => {
     expect(
       await screen.findByRole("button", { name: /Browse All/i }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Search/i })).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("button", { name: /Search/i })[0],
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /Find Study Programs/i }),
     ).toBeInTheDocument();

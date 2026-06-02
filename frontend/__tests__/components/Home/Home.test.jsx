@@ -18,7 +18,7 @@ describe("Home component", () => {
       </MemoryRouter>,
     );
     const linkElement = await screen.findByRole("heading", {
-      name: /Bosnia Lens/i,
+      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
       level: 1,
     });
     expect(linkElement).toBeInTheDocument();

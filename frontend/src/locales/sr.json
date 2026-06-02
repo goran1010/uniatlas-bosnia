@@ -2,8 +2,8 @@
   "title": {
     "app": "Bosnia Lens",
     "home": "Početna",
-    "api": "API Dokumentacija",
-    "universities": "Univerziteti",
+    "api": "API dokumentacija za univerzitete u Bosni i Hercegovini",
+    "universities": "Univerziteti u Bosni i Hercegovini",
     "contribute": "Poboljšaj podatke",
     "admin": "Admin",
     "profile": "Moj profil",
@@ -14,7 +14,7 @@
     "wakingUp": "Budi se..."
   },
   "meta": {
-    "home": "Besplatni, open-source javni podaci o Bosni i Hercegovini. Istražite univerzitete i akademske programe putem REST API-ja ili interaktivnog sučelja.",
+    "home": "Istražite univerzitete, fakultete, studijske programe i predmete u Bosni i Hercegovini kroz besplatan javni skup podataka, pretraživo web sučelje i REST API.",
     "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
     "api": "REST API dokumentacija za Bosnia Lens. Pristupite podacima o univerzitetima i akademskim programima programski.",
     "login": "Prijavite se na vaš Bosnia Lens nalog kako biste doprinijeli podacima i pratili vaše prijave.",
@@ -106,9 +106,10 @@
     "logout": "Odjavi se"
   },
   "home": {
-    "title": "Početna stranica",
-    "heading": "Dobrodošli u Bosnia Lens",
+    "title": "Univerziteti i studijski programi u Bosni i Hercegovini",
+    "heading": "Univerziteti i studijski programi u Bosni i Hercegovini",
     "intro": "Besplatan open-source projekat koji gradi strukturiranu, pretraživu bazu javnih podataka o Bosni i Hercegovini. Fokus je na univerzitetima - institucijama, fakultetima, studijskim programima i predmetima.",
+    "summary": "Koristite Bosnia Lens za pregled profila univerziteta, poređenje akademske ponude i pristup strukturiranim javnim podacima kroz jednostavno sučelje ili direktno kroz API.",
     "exploreHeading": "Istražite podatke",
     "exploreDescription": "Pregledajte univerzitete širom Bosne i Hercegovine. Pogledajte fakultete, studijske programe i predmete. Pretražujte po nazivu, gradu ili akronimu.",
     "card": {
@@ -124,6 +125,10 @@
     "improveStep3": "Admini pregledaju prijedloge i primjenjuju odobrene izmjene na aktivni skup podataka",
     "improveContribute": "Poboljšaj podatke",
     "improveSignUp": "Kreirajte nalog",
+    "whyHeading": "Zašto Bosnia Lens znači",
+    "whyDescription1": "Javne informacije o visokom obrazovanju su često rasute po web stranicama univerziteta i teško ih je dosljedno pretraživati. Bosnia Lens organizuje te informacije u jedan strukturiran skup podataka koji je lakše pregledati, provjeriti i ponovo koristiti.",
+    "whyDescription2": "Studenti, istraživači, novinari i programeri mogu koristiti platformu da pronađu institucije, pregledaju studijske programe i pošalju ispravke kada se javni podaci promijene.",
+    "whyLogin": "Prijavite se za doprinos",
     "forDevsHeading": "Za programere",
     "forDevsDescription": "Bosnia Lens nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu ili gradu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
     "forDevsNote": "Autentifikacija nije potrebna za javne endpoint-e.",
