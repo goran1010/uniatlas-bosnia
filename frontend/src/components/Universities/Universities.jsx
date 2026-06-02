@@ -5,11 +5,11 @@ import { GetAllUniversities } from "./GetAllUniversities";
 import { SearchUniversities } from "./SearchUniversities";
 import { SearchStudyPrograms } from "./SearchStudyPrograms";
 
-const TABS = ["browseAll", "search", "findPrograms"];
+const TABS = ["search", "findPrograms", "browseAll"];
 
 function Universities() {
   const { t } = useContext(RootContext);
-  const [activeTab, setActiveTab] = useState("browseAll");
+  const [activeTab, setActiveTab] = useState("search");
 
   return (
     <>
