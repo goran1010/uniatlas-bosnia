@@ -1,0 +1,15 @@
+# Bosnia Lens
+
+Bosnia Lens is a free, open-source directory of universities, faculties, study programs, and subjects in Bosnia and Herzegovina. The site provides a searchable web interface and a public REST API.
+
+## Public pages
+
+- [Home](https://bosnia-lens.netlify.app/)
+- [Universities](https://bosnia-lens.netlify.app/universities)
+- [API Docs](https://bosnia-lens.netlify.app/api-docs)
+
+## API access
+
+- [All universities endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities)
+- [Search universities endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities/search?term=sarajevo)
+- [Search study programs endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities/search-study-programs?term=engineering)
