@@ -7,12 +7,12 @@ function getNotificationStyles(type) {
     case "success":
       return "bg-green-100 text-green-900 border border-green-300";
     case "error":
-      return "bg-red-300 text-red-800 border border-red-400";
+      return "bg-red-100 text-red-900 border border-red-300";
     case "warning":
-      return "bg-yellow-200 text-amber-800 border border-amber-300";
+      return "bg-yellow-100 text-amber-900 border border-amber-300";
     case "info":
     default:
-      return "bg-sky-300 text-sky-950 border border-sky-400";
+      return "bg-sky-100 text-sky-900 border border-sky-300";
   }
 }
 
@@ -78,23 +78,25 @@ function Notifications() {
     >
       <ul className="flex flex-col gap-2">
         {notifications.map((notification) => (
-          <li
-            key={notification.id}
-            role={getNotificationRole(notification.type)}
-            className={`relative px-4 py-3 rounded-lg shadow-lg w-full flex flex-col justify-center items-center ${getNotificationStyles(
-              notification.type,
-            )}`}
-          >
-            <p>{notification.message}</p>
-
-            <button
-              type="button"
-              onClick={() => removeNotification(notification.id)}
-              aria-label={t("notifications.dismiss")}
-              className="absolute top-0 right-1 text-sm font-semibold text-current cursor-pointer"
+          <li key={notification.id} className="w-full">
+            <div
+              role={getNotificationRole(notification.type)}
+              aria-atomic="true"
+              className={`relative px-4 py-3 rounded-lg shadow-lg w-full flex flex-col justify-center items-center ${getNotificationStyles(
+                notification.type,
+              )}`}
             >
-              ✖
-            </button>
+              <p>{notification.message}</p>
+
+              <button
+                type="button"
+                onClick={() => removeNotification(notification.id)}
+                aria-label={t("notifications.dismiss")}
+                className="absolute top-0 right-1 text-sm font-semibold text-current cursor-pointer"
+              >
+                ✖
+              </button>
+            </div>
           </li>
         ))}
       </ul>
