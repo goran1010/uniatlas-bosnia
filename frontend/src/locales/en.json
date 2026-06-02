@@ -188,6 +188,7 @@
     "errorResponses": "Error responses"
   },
   "contribution": {
+    "title": "Improve the Data",
     "needUser": "You need to be a registered user to propose changes to the content.",
     "chooseDataset": "Choose dataset:",
     "noDataset": "No dataset",

@@ -188,6 +188,7 @@
     "errorResponses": "Odgovori sa greškom"
   },
   "contribution": {
+    "title": "Poboljšajte podatke",
     "needUser": "Morate biti registrovani korisnik da biste predložili izmjene sadržaja.",
     "chooseDataset": "Izaberite skup podataka:",
     "noDataset": "Nema skupa",
