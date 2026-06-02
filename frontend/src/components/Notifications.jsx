@@ -5,7 +5,7 @@ import { Spinner } from "../utils/Spinner";
 function getNotificationStyles(type) {
   switch (type) {
     case "success":
-      return "bg-green-300 text-green-700 border border-green-400";
+      return "bg-green-100 text-green-900 border border-green-300";
     case "error":
       return "bg-red-300 text-red-800 border border-red-400";
     case "warning":
@@ -91,7 +91,7 @@ function Notifications() {
               type="button"
               onClick={() => removeNotification(notification.id)}
               aria-label={t("notifications.dismiss")}
-              className="absolute top-0 right-1 text-sm opacity-80 hover:opacity-100 cursor-pointer"
+              className="absolute top-0 right-1 text-sm font-semibold text-current cursor-pointer"
             >
               ✖
             </button>
