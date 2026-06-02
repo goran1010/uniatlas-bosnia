@@ -313,6 +313,7 @@
     }
   },
   "universitiesPage": {
+    "title": "Find programs and universities",
     "browseAll": "Browse All",
     "search": "Search",
     "findPrograms": "Find Study Programs",
@@ -348,8 +349,8 @@
     "viewDetails": "View details",
     "hideDetails": "Hide details",
     "ownership": {
-      "JAVNA": "Javna",
-      "PRIVATNA": "Privatna"
+      "JAVNA": "Public",
+      "PRIVATNA": "Private"
     }
   }
 }

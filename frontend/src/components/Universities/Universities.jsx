@@ -37,7 +37,8 @@ function Universities() {
         <meta name="twitter:description" content={t("meta.universities")} />
       </Helmet>
 
-      <div className="w-full mx-auto px-2 sm:px-4 max-w-5xl flex flex-col gap-4">
+      <div className="w-full mx-auto px-2 sm:px-4 max-w-5xl flex flex-col gap-2">
+        <h1 className="self-center font-bold">{t("universitiesPage.title")}</h1>
         <div className="flex gap-1 justify-center border-b border-gray-200 dark:border-gray-700">
           {TABS.map((tab) => (
             <button
