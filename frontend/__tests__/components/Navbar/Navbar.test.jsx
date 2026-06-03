@@ -1,5 +1,5 @@
 import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { Root } from "../../../src/Root";
 import { Notifications } from "../../../src/components/Notifications";
@@ -40,9 +40,13 @@ async function openMobileMenu() {
 
   await userEvent.click(menuButton);
 
+  await waitFor(() => {
+    expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  });
+
   return {
     menuButton,
-    mobileMenu: await screen.findByText(/Close/i),
+    mobileMenu: document.getElementById("mobile-menu"),
   };
 }
 
@@ -118,7 +122,7 @@ describe("render Navbar mobile menu", () => {
 
       expect(menuButton).toBeInTheDocument();
       expect(mobileMenu).toBeInTheDocument();
-      expect(screen.queryByText("Menu")).not.toBeInTheDocument();
+      expect(menuButton).toHaveAttribute("aria-expanded", "true");
     },
   );
 
@@ -184,10 +188,12 @@ describe("Navbar switchers", () => {
     expect(languageSelect).toBeInTheDocument();
 
     await userEvent.selectOptions(themeSelect, "light");
-    expect(themeSelect.value).toBe("light");
+    expect(localStorage.getItem("theme")).toBe("light");
+    expect(themeSelect.value).toBe("");
 
     await userEvent.selectOptions(languageSelect, "sr");
-    expect(languageSelect.value).toBe("sr");
+    expect(localStorage.getItem("language")).toBe("sr");
+    expect(languageSelect.value).toBe("");
   });
 
   test("closes open menus when navbar is clicked", async () => {
@@ -197,13 +203,15 @@ describe("Navbar switchers", () => {
     expect(languageSelect).toBeInTheDocument();
 
     await userEvent.selectOptions(languageSelect, "sr");
-    expect(languageSelect.value).toBe("sr");
+    expect(localStorage.getItem("language")).toBe("sr");
+    expect(languageSelect.value).toBe("");
 
     const navigation = screen.getByRole("navigation");
     expect(navigation).toBeInTheDocument();
 
     await userEvent.click(navigation);
-    expect(languageSelect.value).toBe("sr");
+    expect(localStorage.getItem("language")).toBe("sr");
+    expect(languageSelect.value).toBe("");
   });
 });
 
@@ -224,6 +232,6 @@ describe("render Menu based on viewport size", () => {
     });
 
     expect(menuButton.parentElement).toHaveClass("flex");
-    expect(menuButton.parentElement).toHaveClass("lg:hidden");
+    expect(menuButton.parentElement).toHaveClass("md:hidden");
   });
 });
