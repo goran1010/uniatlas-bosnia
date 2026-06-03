@@ -27,4 +27,14 @@ describe("render ContributionDashboard component", () => {
     );
     expect(paragraphElement).toBeInTheDocument();
   });
+
+  test("renders contribution form when user exists", async () => {
+    render(<Wrapper initialUser={{ email: "some@email.com" }} />);
+
+    const headingElement = await screen.findByRole("heading", {
+      name: /Improve the Data/i,
+    });
+
+    expect(headingElement).toBeInTheDocument();
+  });
 });

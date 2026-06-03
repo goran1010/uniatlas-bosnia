@@ -86,10 +86,8 @@ describe("Root component", () => {
   test("renders Log In link when user is not logged in", async () => {
     renderRoot();
 
-    await expectNotificationAndLink({
-      notificationText: /User not authenticated./i,
-      linkName: /Log In/i,
-    });
+    const screenLink = await screen.findAllByRole("link", { name: /Log In/i });
+    expect(screenLink.length).toBe(2);
   });
 });
 

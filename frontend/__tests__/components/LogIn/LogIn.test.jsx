@@ -67,6 +67,57 @@ describe("Render LogIn Component", () => {
       expect(formElements[element]).toBeInTheDocument();
     }
   });
+
+  test("shows github login error notification from query params", async () => {
+    function WrapperWithGithubError() {
+      return (
+        <RootContextProvider>
+          <MemoryRouter initialEntries={["/login?error=github"]}>
+            <Notifications />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LogIn />} />
+            </Routes>
+          </MemoryRouter>
+        </RootContextProvider>
+      );
+    }
+
+    render(<WrapperWithGithubError />);
+
+    const githubFailed = await screen.findByText(/GitHub login failed/i);
+
+    expect(githubFailed).toBeInTheDocument();
+  });
+
+  test("redirects to home and warns when user is already logged in", async () => {
+    function WrapperWithUser() {
+      return (
+        <RootContextProvider
+          initialUserData={{ id: "1", email: "user@mail.com" }}
+        >
+          <MemoryRouter initialEntries={["/login"]}>
+            <Notifications />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<LogIn />} />
+            </Routes>
+          </MemoryRouter>
+        </RootContextProvider>
+      );
+    }
+
+    render(<WrapperWithUser />);
+
+    const alreadyLoggedIn = await screen.findByText(/already logged in/i);
+    const homePageText = await screen.findByText(
+      /A free, open-source project/i,
+    );
+
+    expect(alreadyLoggedIn).toBeInTheDocument();
+    expect(homePageText).toBeInTheDocument();
+  });
 });
 
 describe("User typing in input fields in LogIn Component", () => {
@@ -201,5 +252,23 @@ describe("LogIn Form Submit", () => {
     expect(networkErrorMessage).toBeInTheDocument();
 
     consoleErrorSpy.mockRestore();
+  });
+
+  test("shows fallback login failed message when backend error payload is missing", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
+      ok: false,
+      status: 400,
+      json: async () => ({}),
+    });
+
+    await submitLogInForm({
+      email: "existing@user.com",
+      password: "Password123!",
+    });
+
+    const fallbackError = await screen.findByText(/^Login failed\.$/i);
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fallbackError).toBeInTheDocument();
   });
 });
