@@ -94,6 +94,50 @@ describe("AddUniversityEntity", () => {
     expect(screen.getByLabelText(/Language/i)).toBeInTheDocument();
   });
 
+  test("renders subject specific fields for create changes", async () => {
+    render(
+      <Wrapper>
+        <AddUniversityEntity setPendingChanges={vi.fn()} />
+      </Wrapper>,
+    );
+
+    const user = userEvent.setup();
+
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Entity Type/i }),
+      "SUBJECT",
+    );
+
+    expect(screen.getByLabelText(/Parent ID/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Semester/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/ECTS credits/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Subject type/i)).toBeInTheDocument();
+  });
+
+  test("renders target id and data fields for update changes", async () => {
+    render(
+      <Wrapper>
+        <AddUniversityEntity setPendingChanges={vi.fn()} />
+      </Wrapper>,
+    );
+
+    const user = userEvent.setup();
+
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Entity Type/i }),
+      "UNIVERSITY",
+    );
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Change/i }),
+      "UPDATE",
+    );
+
+    expect(screen.getByLabelText(/^ID$/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Parent ID/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/City/i)).toBeInTheDocument();
+  });
+
   test("submits the selected entity data through the handler", async () => {
     const setPendingChanges = vi.fn();
 
@@ -136,6 +180,55 @@ describe("AddUniversityEntity", () => {
         setFormState: expect.any(Function),
         t: expect.any(Function),
         serverStatus: "live",
+      }),
+    );
+  });
+
+  test("submits subject data with numeric conversions on update", async () => {
+    const setPendingChanges = vi.fn();
+
+    render(
+      <Wrapper>
+        <AddUniversityEntity setPendingChanges={setPendingChanges} />
+      </Wrapper>,
+    );
+
+    const user = userEvent.setup();
+
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Entity Type/i }),
+      "SUBJECT",
+    );
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Change/i }),
+      "UPDATE",
+    );
+
+    await user.type(screen.getByLabelText(/^ID$/i), "123");
+    await user.type(screen.getByLabelText(/Name/i), "Algorithms");
+    await user.type(screen.getByLabelText(/Semester/i), "3");
+    await user.type(screen.getByLabelText(/ECTS credits/i), "6");
+    await user.selectOptions(
+      screen.getByLabelText(/Subject type/i),
+      "MANDATORY",
+    );
+
+    await user.click(
+      screen.getByRole("button", { name: /Submit Suggestion/i }),
+    );
+
+    expect(handleSubmitUniversityEntityMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        entityType: "SUBJECT",
+        targetId: "123",
+        typeOfChange: "UPDATE",
+        data: expect.objectContaining({
+          name: "Algorithms",
+          semester: 3,
+          ects: 6,
+          type: "MANDATORY",
+        }),
+        setPendingChanges,
       }),
     );
   });
