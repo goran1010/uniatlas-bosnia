@@ -5,11 +5,11 @@ import { GetAllUniversities } from "./GetAllUniversities";
 import { SearchUniversities } from "./SearchUniversities";
 import { SearchStudyPrograms } from "./SearchStudyPrograms";
 
-const TABS = ["browseAll", "search", "findPrograms"];
+const TABS = ["search", "findPrograms", "browseAll"];
 
 function Universities() {
   const { t } = useContext(RootContext);
-  const [activeTab, setActiveTab] = useState("browseAll");
+  const [activeTab, setActiveTab] = useState("search");
 
   return (
     <>
@@ -37,7 +37,10 @@ function Universities() {
         <meta name="twitter:description" content={t("meta.universities")} />
       </Helmet>
 
-      <div className="w-full mx-auto px-2 sm:px-4 max-w-5xl flex flex-col gap-4">
+      <div className="w-full mx-auto px-2 sm:px-4 max-w-5xl flex flex-col gap-2">
+        <h1 className="text-center text-(--text-secondary)">
+          {t("universitiesPage.title")}
+        </h1>
         <div className="flex gap-1 justify-center border-b border-gray-200 dark:border-gray-700">
           {TABS.map((tab) => (
             <button

@@ -5,23 +5,19 @@ import { Helmet } from "react-helmet-async";
 
 function Home() {
   const { t } = useContext(RootContext);
+  const pageTitle = `${t("home.title")} | ${t("title.app")}`;
+
   return (
     <>
       <Helmet>
-        <title>{`${t("title.home")} | ${t("title.app")}`}</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={t("meta.home")} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://bosnia-lens.netlify.app/" />
         <meta property="og:url" content="https://bosnia-lens.netlify.app/" />
-        <meta
-          property="og:title"
-          content={`${t("title.home")} | ${t("title.app")}`}
-        />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={t("meta.home")} />
-        <meta
-          name="twitter:title"
-          content={`${t("title.home")} | ${t("title.app")}`}
-        />
+        <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={t("meta.home")} />
       </Helmet>
 
@@ -31,6 +27,7 @@ function Home() {
             {t("home.heading")}
           </h1>
           <p className="text-lg">{t("home.intro")}</p>
+          <p>{t("home.summary")}</p>
         </header>
 
         <section className="flex flex-col gap-4">
@@ -70,6 +67,22 @@ function Home() {
               className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             >
               {t("home.improveSignUp")}
+            </Link>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="text-xl font-bold text-center">
+            {t("home.whyHeading")}
+          </h2>
+          <p>{t("home.whyDescription1")}</p>
+          <p>{t("home.whyDescription2")}</p>
+          <div className="flex flex-wrap gap-3 justify-center items-center">
+            <Link
+              to="/login"
+              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+            >
+              {t("home.whyLogin")}
             </Link>
           </div>
         </section>

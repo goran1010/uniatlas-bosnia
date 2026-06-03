@@ -18,7 +18,10 @@ function ContributionForm() {
   );
 
   return (
-    <div className="flex flex-col gap-4 items-center w-full">
+    <div className="flex flex-col gap-2 items-center w-full">
+      <h1 className="text-center text-(--text-secondary)">
+        {t("contribution.title")}
+      </h1>
       <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700 items-center justify-center">
         {TABS.map((tab) => (
           <button

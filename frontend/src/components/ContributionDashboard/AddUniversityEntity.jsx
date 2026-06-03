@@ -81,7 +81,7 @@ function AddUniversityEntity({ setPendingChanges }) {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 w-full max-w-lg"
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 items-center">
         <Label htmlFor="entityType">{t("contribution.entityType")}</Label>
         <Select
           id="entityType"
@@ -99,7 +99,7 @@ function AddUniversityEntity({ setPendingChanges }) {
         </Select>
       </div>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 items-center">
         <Label htmlFor="typeOfChange">{t("contribution.change")}</Label>
         <Select
           id="typeOfChange"
@@ -165,47 +165,49 @@ function AddUniversityEntity({ setPendingChanges }) {
                 value={data.city ?? ""}
                 onChange={(e) => setDataField("city", e.target.value)}
               />
-              <div className="flex flex-col gap-1">
-                <Label htmlFor="dataEntity">
-                  {t("contribution.dataFields.entity")}
-                </Label>
-                <Select
-                  id="dataEntity"
-                  value={data.entity ?? ""}
-                  onChange={(e) => setDataField("entity", e.target.value)}
-                  required={typeOfChange === "CREATE"}
-                >
-                  <option value="">—</option>
-                  {ENTITIES.map((en) => (
-                    <option key={en} value={en}>
-                      {t(`contribution.entities.${en}`)}
+              <div className="flex flex-col gap-1 self-center">
+                <div className="flex flex-col gap-1">
+                  <Label htmlFor="dataEntity" className="text-center">
+                    {t("contribution.dataFields.entity")}
+                  </Label>
+                  <Select
+                    id="dataEntity"
+                    value={data.entity ?? ""}
+                    onChange={(e) => setDataField("entity", e.target.value)}
+                    required={typeOfChange === "CREATE"}
+                  >
+                    <option value="">—</option>
+                    {ENTITIES.map((en) => (
+                      <option key={en} value={en}>
+                        {t(`contribution.entities.${en}`)}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Label htmlFor="dataOwnership" className="text-center">
+                    {t("contribution.dataFields.ownership")}
+                  </Label>
+                  <Select
+                    id="dataOwnership"
+                    value={data.ownership ?? ""}
+                    onChange={(e) =>
+                      setDataField(
+                        "ownership",
+                        e.target.value === "" ? undefined : e.target.value,
+                      )
+                    }
+                    required={typeOfChange === "CREATE"}
+                  >
+                    <option value="">—</option>
+                    <option value="JAVNA">
+                      {t("universitiesPage.ownership.JAVNA")}
                     </option>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex flex-col gap-1">
-                <Label htmlFor="dataOwnership">
-                  {t("contribution.dataFields.ownership")}
-                </Label>
-                <Select
-                  id="dataOwnership"
-                  value={data.ownership ?? ""}
-                  onChange={(e) =>
-                    setDataField(
-                      "ownership",
-                      e.target.value === "" ? undefined : e.target.value,
-                    )
-                  }
-                  required={typeOfChange === "CREATE"}
-                >
-                  <option value="">—</option>
-                  <option value="JAVNA">
-                    {t("universitiesPage.ownership.JAVNA")}
-                  </option>
-                  <option value="PRIVATNA">
-                    {t("universitiesPage.ownership.PRIVATNA")}
-                  </option>
-                </Select>
+                    <option value="PRIVATNA">
+                      {t("universitiesPage.ownership.PRIVATNA")}
+                    </option>
+                  </Select>
+                </div>
               </div>
               <DataField
                 label={t("contribution.dataFields.website")}

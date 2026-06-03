@@ -25,9 +25,9 @@ function ContributionDashboard() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <section className="relative h-full w-full flex items-center justify-center p-3 bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-2xl shadow-(--card-shadow) backdrop-blur-sm">
-        <p className="text-center text-(--text-secondary)">
+        <h1 className="text-center text-(--text-secondary)">
           {t("contribution.needUser")}
-        </p>
+        </h1>
       </section>
     </>
   );
