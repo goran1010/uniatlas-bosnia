@@ -8,7 +8,7 @@ REST API - <https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api>
 
 For more info on how to connect your app to the REST API, visit <https://bosnia-lens.netlify.app/api-docs>
 
-![Bosnia Lens](./frontend/public/og-image.png)
+![Bosnia Lens](./frontend/public/images/og-image-home.png)
 
 ## Table of Contents
 
