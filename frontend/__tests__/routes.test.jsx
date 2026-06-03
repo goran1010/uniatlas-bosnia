@@ -68,7 +68,7 @@ describe("Loading components when visiting an address", () => {
     renderRoute("/");
 
     const linkElement = await screen.findByRole("heading", {
-      name: /Bosnia Lens/i,
+      name: /Bosnia and Herzegovina/i,
       level: 1,
     });
     expect(linkElement).toBeInTheDocument();
