@@ -1,5 +1,5 @@
 import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { Root } from "../../../src/Root";
 import { Notifications } from "../../../src/components/Notifications";
@@ -44,9 +44,16 @@ async function openMobileMenu() {
     expect(menuButton).toHaveAttribute("aria-expanded", "true");
   });
 
+  const controlsId = menuButton.getAttribute("aria-controls");
+  const mobileMenu =
+    screen
+      .getAllByRole("link")
+      .find((link) => link.closest(`#${controlsId}`))
+      ?.closest("div") ?? null;
+
   return {
     menuButton,
-    mobileMenu: document.getElementById("mobile-menu"),
+    mobileMenu,
   };
 }
 
@@ -129,51 +136,43 @@ describe("render Navbar mobile menu", () => {
   test("shows user-only links for contributor in mobile menu", async () => {
     render(<NavbarWrapper role="CONTRIBUTOR" />);
 
-    await openMobileMenu();
+    const { mobileMenu } = await openMobileMenu();
 
-    const contributeLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/improve-data']",
-    );
-    const adminLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/admin-dashboard']",
-    );
-
-    expect(contributeLinks.length).toBe(1);
-    expect(adminLinks.length).toBe(0);
+    expect(
+      within(mobileMenu).getByRole("link", { name: /Improve Data/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(mobileMenu).queryByRole("link", { name: /^Admin$/i }),
+    ).not.toBeInTheDocument();
   });
 
   test("shows admin link for admin in mobile menu", async () => {
     render(<NavbarWrapper role="ADMIN" />);
 
-    await openMobileMenu();
+    const { mobileMenu } = await openMobileMenu();
 
-    const contributeLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/improve-data']",
-    );
-    const adminLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/admin-dashboard']",
-    );
-
-    expect(contributeLinks.length).toBe(1);
-    expect(adminLinks.length).toBe(1);
+    expect(
+      within(mobileMenu).getByRole("link", { name: /Improve Data/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(mobileMenu).getByRole("link", { name: /^Admin$/i }),
+    ).toBeInTheDocument();
   });
 
   test("hides user-only links when user is not logged in", async () => {
     render(<NavbarWrapper withUser={false} />);
 
-    await openMobileMenu();
+    const { mobileMenu } = await openMobileMenu();
 
-    const contributeLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/improve-data']",
-    );
-    const adminLinks = document.querySelectorAll(
-      "#mobile-menu a[href='/admin-dashboard']",
-    );
-    const loginLinks = document.querySelectorAll("a[href='/login']");
-
-    expect(contributeLinks.length).toBe(0);
-    expect(adminLinks.length).toBe(0);
-    expect(loginLinks.length).toBeGreaterThan(0);
+    expect(
+      within(mobileMenu).queryByRole("link", { name: /Improve Data/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(mobileMenu).queryByRole("link", { name: /^Admin$/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(mobileMenu).getByRole("link", { name: /^Log In$/i }),
+    ).toBeInTheDocument();
   });
 });
 
@@ -181,8 +180,12 @@ describe("Navbar switchers", () => {
   test("opens language menu and closes theme menu", async () => {
     render(<NavbarWrapper />);
 
-    const themeSelect = document.getElementById("theme-switcher");
-    const languageSelect = document.getElementById("language-switcher");
+    const themeSelect = screen.getByRole("combobox", {
+      name: /Toggle theme/i,
+    });
+    const languageSelect = screen.getByRole("combobox", {
+      name: /Toggle language/i,
+    });
 
     expect(themeSelect).toBeInTheDocument();
     expect(languageSelect).toBeInTheDocument();
@@ -199,7 +202,9 @@ describe("Navbar switchers", () => {
   test("closes open menus when navbar is clicked", async () => {
     render(<NavbarWrapper />);
 
-    const languageSelect = document.getElementById("language-switcher");
+    const languageSelect = screen.getByRole("combobox", {
+      name: /Toggle language/i,
+    });
     expect(languageSelect).toBeInTheDocument();
 
     await userEvent.selectOptions(languageSelect, "sr");
