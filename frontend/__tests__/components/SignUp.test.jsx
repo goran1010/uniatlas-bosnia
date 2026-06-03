@@ -70,6 +70,36 @@ describe("Render SignUp Component", () => {
       expect(formElements[element]).toBeInTheDocument();
     }
   });
+
+  test("redirects to home and warns when user is already logged in", async () => {
+    function WrapperWithUser() {
+      return (
+        <RootContextProvider
+          initialUserData={{ id: "1", email: "user@mail.com" }}
+        >
+          <MemoryRouter initialEntries={["/signup"]}>
+            <Notifications />
+            <Routes>
+              <Route path="/" element={<div>Home Page</div>} />
+              <Route path="/home" element={<div>Home Page</div>} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<LogIn />} />
+            </Routes>
+          </MemoryRouter>
+        </RootContextProvider>
+      );
+    }
+
+    render(<WrapperWithUser />);
+
+    const warningMessage = await screen.findByText(
+      /can't sign up while logged in/i,
+    );
+    const homePageText = await screen.findByText(/^Home Page$/i);
+
+    expect(warningMessage).toBeInTheDocument();
+    expect(homePageText).toBeInTheDocument();
+  });
 });
 
 describe("User typing in input fields in SignUp Component", () => {
@@ -267,5 +297,24 @@ describe("SignUp Form Submit", () => {
     expect(networkErrorMessage).toBeInTheDocument();
 
     consoleErrorSpy.mockRestore();
+  });
+
+  test("shows fallback registration failed message when backend error payload is missing", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
+      ok: false,
+      status: 400,
+      json: async () => ({}),
+    });
+
+    await submitSignUpForm({
+      email: "newemail@mail.com",
+      password: "Password123!",
+      confirmPassword: "Password123!",
+    });
+
+    const fallbackError = await screen.findByText(/^Registration failed\.$/i);
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fallbackError).toBeInTheDocument();
   });
 });
