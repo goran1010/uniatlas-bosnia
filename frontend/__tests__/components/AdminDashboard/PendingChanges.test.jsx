@@ -4,6 +4,7 @@ import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AdminDashboard } from "../../../src/components/AdminDashboard/AdminDashboard";
 import { Notifications } from "../../../src/components/Notifications";
 import { RootContextProvider } from "../../rootContextProvider";
+import { SERVER_STATUS } from "../../../src/utils/serverStatus";
 
 const mockChanges = [
   {
@@ -48,12 +49,16 @@ const setupFetchMock = ({
     }
     if (requestUrl.includes("/approve-pending-change")) {
       return Promise.resolve(
-        createFetchResponse({ message: "Pending change approved successfully." }),
+        createFetchResponse({
+          message: "Pending change approved successfully.",
+        }),
       );
     }
     if (requestUrl.includes("/decline-pending-change")) {
       return Promise.resolve(
-        createFetchResponse({ message: "Pending change declined successfully." }),
+        createFetchResponse({
+          message: "Pending change declined successfully.",
+        }),
       );
     }
     throw new Error(`Unexpected fetch request: ${requestUrl}`);
@@ -63,6 +68,19 @@ const setupFetchMock = ({
 function Wrapper({ initialUser = null }) {
   return (
     <RootContextProvider initialUserData={initialUser}>
+      <MemoryRouter initialEntries={["/admin-dashboard"]}>
+        <Notifications />
+        <Routes>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        </Routes>
+      </MemoryRouter>
+    </RootContextProvider>
+  );
+}
+
+function WrapperWithRootValue({ initialUser = null, rootValue = {} }) {
+  return (
+    <RootContextProvider initialUserData={initialUser} rootValue={rootValue}>
       <MemoryRouter initialEntries={["/admin-dashboard"]}>
         <Notifications />
         <Routes>
@@ -110,12 +128,16 @@ describe("PendingChanges Component", () => {
     setupFetchMock({ pendingRequests: mockChangesMore });
     render(<Wrapper initialUser={{ role: "ADMIN" }} />);
     await screen.findByText("johndoe@examplemail.com");
-    expect(screen.getByLabelText(/pending changes count/i)).toHaveTextContent("2");
+    expect(screen.getByLabelText(/pending changes count/i)).toHaveTextContent(
+      "2",
+    );
     expect(screen.getByText("janedoe@examplemail.com")).toBeInTheDocument();
   });
 
   test("shows no pending requests when fetch throws a network error", async () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
     fetchMock.mockImplementation((url) => {
       const requestUrl = String(url);
       if (requestUrl.includes("/csrf-token")) {
@@ -131,5 +153,50 @@ describe("PendingChanges Component", () => {
     );
     expect(pendingMessage).toBeInTheDocument();
     consoleErrorSpy.mockRestore();
+  });
+
+  test("shows an error notification when loading pending changes fails", async () => {
+    fetchMock.mockImplementation((url) => {
+      const requestUrl = String(url);
+
+      if (requestUrl.includes("/pending-changes")) {
+        return Promise.resolve(
+          createFetchResponse(
+            { error: "Backend rejected pending changes." },
+            false,
+          ),
+        );
+      }
+
+      return Promise.resolve(
+        createFetchResponse({ data: "someToken", message: "Success" }),
+      );
+    });
+
+    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+
+    const alert = await screen.findByRole("alert");
+
+    expect(alert).toHaveTextContent(/Backend rejected pending changes\./i);
+    expect(
+      screen.getByText(/There are no pending changes at the moment\./i),
+    ).toBeInTheDocument();
+  });
+
+  test("shows the no pending changes state when the server is waking up", async () => {
+    render(
+      <WrapperWithRootValue
+        initialUser={{ role: "ADMIN" }}
+        rootValue={{ serverStatus: SERVER_STATUS.WAKING }}
+      />,
+    );
+
+    const alert = await screen.findByRole("alert");
+
+    expect(alert).toHaveTextContent(/server might be waking up/i);
+    expect(
+      screen.getByText(/There are no pending changes at the moment\./i),
+    ).toBeInTheDocument();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
