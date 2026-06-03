@@ -1,4 +1,4 @@
-<!-- Thank you for taking the time to contribute to Bosnia Lens. In order to get this pull request (PR) merged in a reasonable amount of time, you must complete this entire template. -->
+<!-- Thank you for taking the time to contribute to UniAtlas Bosnia. In order to get this pull request (PR) merged in a reasonable amount of time, you must complete this entire template. -->
 
 ## Description
 <!-- Brief description of what this PR does. -->

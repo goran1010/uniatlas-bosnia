@@ -2,5 +2,5 @@ User-agent: *
 Disallow: /admin-dashboard
 Disallow: /contributor-dashboard
 
-Sitemap: https://bosnia-lens.netlify.app/sitemap.xml
+Sitemap: https://uniatlas-bosnia.netlify.app/sitemap.xml
 

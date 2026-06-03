@@ -6,7 +6,7 @@ const resend = new Resend(RESEND_API_KEY);
 async function sendConfirmationEmail(userEmail, confirmationLink) {
   try {
     const email = await resend.emails.send({
-      from: "Bosnia Lens <onboarding@resend.dev>",
+      from: "UniAtlas Bosnia <onboarding@resend.dev>",
       to: [userEmail],
       subject: "Confirm Your Email Address",
       html: `

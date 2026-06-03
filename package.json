@@ -1,5 +1,5 @@
 {
-  "name": "bosnia-lens",
+  "name": "uniatlas-bosnia",
   "private": true,
   "scripts": {
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
@@ -24,15 +24,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goran1010/bosnia-lens.git"
+    "url": "git+https://github.com/goran1010/uniatlas-bosnia.git"
   },
   "keywords": [],
   "author": "Goran Jović",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/goran1010/bosnia-lens/issues"
+    "url": "https://github.com/goran1010/uniatlas-bosnia/issues"
   },
-  "homepage": "https://github.com/goran1010/bosnia-lens#readme",
+  "homepage": "https://github.com/goran1010/uniatlas-bosnia#readme",
   "dependencies": {
     "concurrently": "^9.2.1"
   },

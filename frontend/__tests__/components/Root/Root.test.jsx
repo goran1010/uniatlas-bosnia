@@ -55,7 +55,7 @@ describe("Root component", () => {
   test("renders Home heading if server is live", async () => {
     renderRoot();
     const homeHeading = await screen.findByRole("heading", {
-      name: /Bosnia Lens/i,
+      name: /UniAtlas Bosnia/i,
     });
     expect(homeHeading).toBeInTheDocument();
   });

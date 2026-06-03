@@ -1,4 +1,4 @@
-# Contributing to Bosnia Lens
+# Contributing to UniAtlas Bosnia
 
 Contributions of any kind are welcome - bug fixes, new features, data, documentation, or tests.
 
@@ -26,7 +26,7 @@ Contributions of any kind are welcome - bug fixes, new features, data, documenta
 
 ## In-App Data Contributions
 
-If you want to contribute data through the Bosnia Lens app (instead of opening a code PR), use the current workflow below:
+If you want to contribute data through the UniAtlas Bosnia app (instead of opening a code PR), use the current workflow below:
 
 1. Create an account and confirm your email.
 2. Log in and open `/improve-data`.

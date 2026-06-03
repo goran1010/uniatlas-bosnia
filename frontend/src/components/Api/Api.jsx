@@ -35,10 +35,10 @@ function Api() {
         <title>{`${t("title.api")} | ${t("title.app")}`}</title>
         <meta name="description" content={t("meta.api")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://bosnia-lens.netlify.app/api-docs" />
+        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/api-docs" />
         <meta
           property="og:url"
-          content="https://bosnia-lens.netlify.app/api-docs"
+          content="https://uniatlas-bosnia.netlify.app/api-docs"
         />
         <meta
           property="og:title"

@@ -1,7 +1,7 @@
 {
-  "name": "bosnia-lens-backend",
+  "name": "uniatlas-bosnia-backend",
   "version": "1.0.0",
-  "description": "REST API backend for Bosnia Lens - providing open data about Bosnia and Herzegovina",
+  "description": "REST API backend for UniAtlas Bosnia - providing open data about Bosnia and Herzegovina",
   "main": "index.js",
   "engines": {
     "node": "24.x"
@@ -17,16 +17,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goran1010/bosnia-lens.git"
+    "url": "git+https://github.com/goran1010/uniatlas-bosnia.git"
   },
   "type": "module",
   "keywords": [],
   "author": "Goran Jovic",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/goran1010/bosnia-lens/issues"
+    "url": "https://github.com/goran1010/uniatlas-bosnia/issues"
   },
-  "homepage": "https://github.com/goran1010/bosnia-lens#readme",
+  "homepage": "https://github.com/goran1010/uniatlas-bosnia#readme",
   "dependencies": {
     "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^7.3.0",
