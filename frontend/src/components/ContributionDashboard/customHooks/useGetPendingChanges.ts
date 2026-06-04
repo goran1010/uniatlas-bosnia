@@ -1,7 +1,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
-import { guardedFetch } from "../../../utils/guardedFetch";
+import { guardedFetch } from "../../utils/guardedFetch";
 
 function useGetPendingChanges(setLoading, t, enabled = true) {
   const { addNotification, serverStatus } = useContext(RootContext);

@@ -1,4 +1,4 @@
-import { Spinner } from "../../utils/Spinner";
+import { Spinner } from "../utils/Spinner";
 
 function Button({
   children,

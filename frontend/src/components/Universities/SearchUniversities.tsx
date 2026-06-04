@@ -2,7 +2,7 @@ import { useState, useContext, useRef } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
-import { Spinner } from "../../utils/Spinner";
+import { Spinner } from "../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

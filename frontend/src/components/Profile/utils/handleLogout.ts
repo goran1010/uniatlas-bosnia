@@ -1,6 +1,6 @@
 const currentURL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
-import { guardedFetch } from "../../../utils/guardedFetch";
+import { guardedFetch } from "../../utils/guardedFetch";
 
 async function handleLogout(
   addNotification,
