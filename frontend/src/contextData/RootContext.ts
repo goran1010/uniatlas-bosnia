@@ -3,7 +3,7 @@ import { type ServerStatus } from "../utils/serverStatus";
 
 import { type Notification } from "../customHooks/useNotification";
 
-type RootContextType = {
+export interface RootContextType {
   language: string;
   setLanguage: (language: string) => void;
   t: (key: string) => string;
@@ -16,7 +16,7 @@ type RootContextType = {
   } | null;
   setUserData: (userData: { email: string; role: string } | null) => void;
   serverStatus: ServerStatus;
-};
+}
 
 const RootContext = createContext<RootContextType>({
   language: "en",

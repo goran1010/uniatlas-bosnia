@@ -1,9 +1,9 @@
 import { useGetPendingChangesAdmin } from "./customHooks/useGetPendingChangesAdmin";
 import { useContext, useState } from "react";
 import { RootContext } from "../../contextData/RootContext";
-import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { PendingChangesAdminRow } from "./PendingChangesAdminRow";
+import type { RootContextType } from "../../contextData/RootContext";
 
 const panelClass =
   "py-3 px-1 sm:px-4 w-full bg-(--surface-2) text-(--text-primary) border border-(--border-color) rounded-2xl shadow-(--card-shadow) backdrop-blur-sm";
@@ -11,8 +11,7 @@ const panelClass =
 function PendingChangesAdmin() {
   const [loading, setLoading] = useState(true);
 
-  const { addNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
+  const { addNotification, t } = useContext<RootContextType>(RootContext);
   const { pendingChanges, setPendingChanges } = useGetPendingChangesAdmin(
     setLoading,
     t,
@@ -52,11 +51,11 @@ function PendingChangesAdmin() {
             <div>{t("endpoint.name")}</div>
             <div>{t("contribution.user")}</div>
           </li>
-          {pendingChanges.map((result, index) => {
+          {pendingChanges.map((data, index) => {
             return (
               <PendingChangesAdminRow
-                key={result.id}
-                change={result}
+                key={data.id}
+                data={data}
                 addNotification={addNotification}
                 setPendingChanges={setPendingChanges}
                 index={index}

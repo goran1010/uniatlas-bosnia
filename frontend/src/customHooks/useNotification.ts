@@ -5,7 +5,7 @@ export type Notification = {
   id?: string;
   type: "success" | "error" | "info" | "warning";
   message: string;
-  duration?: number;
+  duration?: number | null;
   persistent?: boolean;
 };
 
