@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRef, useState } from "react";
 
 function useCloseMenu() {
-  const navRef = useRef(null);
+  const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeMenuOpen, setThemeMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ function useCloseMenu() {
   useEffect(() => {
     if (!isMenuOpen && !isThemeMenuOpen && !isLanguageMenuOpen) return;
 
-    const handleClickAway = (event) => {
+    const handleClickAway = (event: MouseEvent) => {
       if (navRef.current?.contains(event.target)) return;
 
       setIsMenuOpen(false);
@@ -18,8 +18,8 @@ function useCloseMenu() {
       setLanguageMenuOpen(false);
     };
 
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
         setIsMenuOpen(false);
         setThemeMenuOpen(false);
         setLanguageMenuOpen(false);
