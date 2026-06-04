@@ -1,7 +1,24 @@
 import { createContext } from "react";
-import { SERVER_STATUS } from "../utils/serverStatus";
+import { type ServerStatus } from "../utils/serverStatus";
 
-const RootContext = createContext({
+import { type Notification } from "../customHooks/useNotification";
+
+type RootContextType = {
+  language: string;
+  setLanguage: (language: string) => void;
+  t: (key: string) => string;
+  notifications: Array<Notification>;
+  addNotification: (notification: Notification) => void;
+  removeNotification: (id: string) => void;
+  userData: {
+    email: string;
+    role: string;
+  } | null;
+  setUserData: (userData: { email: string; role: string } | null) => void;
+  serverStatus: ServerStatus;
+};
+
+const RootContext = createContext<RootContextType>({
   language: "en",
   setLanguage: () => {},
   t: (key) => key,
@@ -10,8 +27,7 @@ const RootContext = createContext({
   removeNotification: () => {},
   userData: null,
   setUserData: () => {},
-  isServerLive: true,
-  serverStatus: SERVER_STATUS.LIVE,
+  serverStatus: "live",
 });
 
 export { RootContext };

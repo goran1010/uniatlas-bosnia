@@ -4,6 +4,8 @@ const SERVER_STATUS = {
   DOWN: "down",
 };
 
-const SERVER_STATUS_NOTIFICATION_ID = "server-status";
+export type ServerStatus = "waking" | "live" | "down";
+
+const SERVER_STATUS_NOTIFICATION_ID = "server-status" as const;
 
 export { SERVER_STATUS, SERVER_STATUS_NOTIFICATION_ID };

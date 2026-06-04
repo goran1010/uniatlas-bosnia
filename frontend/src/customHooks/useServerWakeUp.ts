@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  SERVER_STATUS,
-  SERVER_STATUS_NOTIFICATION_ID,
-} from "../utils/serverStatus";
+import { SERVER_STATUS_NOTIFICATION_ID } from "../utils/serverStatus";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;
 
+import { type ServerStatus } from "../utils/serverStatus";
+
 function useServerWakeUp({ addNotification, removeNotification, t }) {
-  const [serverStatus, setServerStatus] = useState(SERVER_STATUS.LIVE);
+  const [serverStatus, setServerStatus] = useState<ServerStatus>("live");
   const tRef = useRef(t);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
     let currentNumberOfAttempts = 0;
     let retryTimeoutId;
 
-    setServerStatus(SERVER_STATUS.WAKING);
+    setServerStatus("waking");
 
     async function checkServer() {
       if (isCancelled) {
@@ -25,7 +24,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
       }
 
       if (currentNumberOfAttempts >= ALLOWED_ATTEMPTS) {
-        setServerStatus(SERVER_STATUS.DOWN);
+        setServerStatus("down");
         addNotification({
           id: SERVER_STATUS_NOTIFICATION_ID,
           type: "error",
@@ -61,7 +60,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
           return;
         }
 
-        setServerStatus(SERVER_STATUS.LIVE);
+        setServerStatus("live");
         removeNotification(SERVER_STATUS_NOTIFICATION_ID);
       } catch (err) {
         if (isCancelled || err?.name === "AbortError") {

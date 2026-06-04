@@ -1,11 +1,25 @@
 import { useCallback, useState } from "react";
 const MAX_NOTIFICATIONS = 5;
 
+export type Notification = {
+  id: string;
+  type: "success" | "error" | "info" | "warning";
+  message: string;
+  duration: number | null;
+  persistent?: boolean;
+};
+
 function useNotification() {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const addNotification = useCallback(
-    ({ id, type = "info", message, duration = 3000, persistent = false }) => {
+    ({
+      id,
+      type = "info",
+      message,
+      duration = 3000,
+      persistent = false,
+    }: Notification) => {
       const notificationId = id || crypto.randomUUID();
       const newNotification = {
         id: notificationId,
@@ -50,7 +64,7 @@ function useNotification() {
     [],
   );
 
-  const removeNotification = useCallback((id) => {
+  const removeNotification = useCallback((id: string) => {
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   }, []);
 

@@ -9,7 +9,6 @@ import { useCloseMenu } from "./customHooks/useCloseMenu";
 import { useLanguage } from "./customHooks/useLanguage";
 import { HelmetProvider } from "react-helmet-async";
 import { RootContext } from "./contextData/RootContext";
-import { SERVER_STATUS } from "./utils/serverStatus";
 
 function App() {
   const closeMenu = useCloseMenu();

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
 import { RootContext } from "../contextData/RootContext";
-import { Spinner } from "../utils/Spinner";
 
 function getNotificationStyles(type) {
   switch (type) {
