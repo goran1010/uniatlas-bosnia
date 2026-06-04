@@ -1,7 +1,7 @@
 import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { routes } from "../src/routes";
+import { routes } from "../js_files/src/routes";
 import { RootContextProvider } from "./rootContextProvider";
 
 beforeEach(() => {

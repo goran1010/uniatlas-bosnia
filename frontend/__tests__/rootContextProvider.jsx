@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { RootContext } from "../src/contextData/RootContext";
-import { useLanguage } from "../src/customHooks/useLanguage";
-import { useNotification } from "../src/customHooks/useNotification";
-import { SERVER_STATUS } from "../src/utils/serverStatus";
+import { RootContext } from "../js_files/src/contextData/RootContext";
+import { useLanguage } from "../js_files/src/customHooks/useLanguage";
+import { useNotification } from "../js_files/src/customHooks/useNotification";
+import { SERVER_STATUS } from "../js_files/src/utils/serverStatus";
 
 function RootContextProvider({
   children,
