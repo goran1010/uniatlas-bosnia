@@ -1,14 +1,14 @@
-# Bosnia Lens
+# UniAtlas Bosnia
 
-A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and a React web interface. The focus is universities and academic programs - browse institutions, faculties, study programs, and subjects.
+An open-source platform for Bosnia and Herzegovina higher-education data, offering a REST API and React web app to explore universities, faculties, study programs, and subjects.
 
-LIVE Web app - <https://bosnia-lens.netlify.app/>
+LIVE Web app - <https://uniatlas-bosnia.netlify.app/>
 
 REST API - <https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api>
 
-For more info on how to connect your app to the REST API, visit <https://bosnia-lens.netlify.app/api-docs>
+For more info on how to connect your app to the REST API, visit <https://uniatlas-bosnia.netlify.app/api-docs>
 
-![Bosnia Lens](./frontend/public/og-image.png)
+![UniAtlas Bosnia](./frontend/public/images/og-image-home.png)
 
 ## Table of Contents
 
@@ -17,7 +17,6 @@ For more info on how to connect your app to the REST API, visit <https://bosnia-
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
 - [API Overview](#api-overview)
-- [Authenticated Data Contribution Flow](#authenticated-data-contribution-flow)
 - [Running the Tests](#running-the-tests)
 - [Deployment](#deployment)
 - [Built With](#built-with)
@@ -74,8 +73,8 @@ A step by step series of examples that tell you how to get a development environ
 Clone the repository:
 
 ```bash
-git clone https://github.com/goran1010/bosnia-lens.git
-cd bosnia-lens
+git clone https://github.com/goran1010/uniatlas-bosnia.git
+cd uniatlas-bosnia
 ```
 
 Install all dependencies for both backend and frontend:
@@ -266,41 +265,6 @@ All public endpoints are available under `https://round-leann-goran-jovic-1010-c
 }
 ```
 
-## Authenticated Data Contribution Flow
-
-These endpoints require an authenticated session (`credentials: include`) and are protected by CSRF for mutating requests.
-
-### CSRF token endpoint
-
-- `GET /csrf-token` - Issue a CSRF token used in `x-csrf-token` for mutating requests
-
-### Auth endpoints
-
-- `POST /auth/signup` - Register a pending account and send a confirmation email
-- `GET /auth/confirm/:token` - Confirm signup token and create the user account
-- `POST /auth/login` - Log in with email/password
-- `GET /auth/github` - Start GitHub OAuth login flow
-- `GET /auth/github/callback` - Complete GitHub OAuth login flow
-
-### User endpoints (authenticated)
-
-- `GET /users/me` - Get current user profile
-- `POST /users/logout` - End session
-
-### Contribution endpoints (authenticated users)
-
-- `POST /users/contribution/universities` - Suggest a new university entity (stored as pending change)
-- `PUT /users/contribution/universities` - Suggest an edit to a university entity (stored as pending change)
-- `DELETE /users/contribution/universities` - Suggest deletion of a university entity (stored as pending change)
-- `GET /users/contribution/pending-changes/universities` - List your own pending suggestions
-- `DELETE /users/contribution/pending-changes/universities` - Remove one of your own pending suggestions
-
-### Admin endpoints (authenticated admin users)
-
-- `GET /users/admin/pending-changes` - List all pending suggestions
-- `POST /users/admin/approve-pending-change` - Approve a pending suggestion and apply it to the live dataset
-- `DELETE /users/admin/decline-pending-change` - Reject a pending suggestion
-
 ## Running the tests
 
 Backend tests use Vitest and Supertest. Frontend tests use Vitest, React Testing Library, and JSDOM.
@@ -373,7 +337,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 - **Goran Jović** - _Initial work_ - [@goran1010](https://github.com/goran1010)
 
-See also the list of [contributors](https://github.com/goran1010/bosnia-lens/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/goran1010/uniatlas-bosnia/contributors) who participated in this project.
 
 ## License
 

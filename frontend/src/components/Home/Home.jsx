@@ -13,8 +13,8 @@ function Home() {
         <title>{pageTitle}</title>
         <meta name="description" content={t("meta.home")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://bosnia-lens.netlify.app/" />
-        <meta property="og:url" content="https://bosnia-lens.netlify.app/" />
+        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/" />
+        <meta property="og:url" content="https://uniatlas-bosnia.netlify.app/" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={t("meta.home")} />
         <meta name="twitter:title" content={pageTitle} />

@@ -1,6 +1,6 @@
 {
   "title": {
-    "app": "Bosnia Lens",
+    "app": "UniAtlas Bosnia",
     "home": "Home",
     "api": "Bosnia and Herzegovina Universities API Docs",
     "universities": "Universities in Bosnia and Herzegovina",
@@ -16,9 +16,9 @@
   "meta": {
     "home": "Explore universities, faculties, study programs, and subjects in Bosnia and Herzegovina with a free public dataset, searchable web interface, and REST API.",
     "universities": "Explore universities and academic programs in Bosnia and Herzegovina.",
-    "api": "REST API documentation for Bosnia Lens. Access universities and academic programs data programmatically.",
-    "login": "Log in to your Bosnia Lens account to contribute data and track your submissions.",
-    "signup": "Create a free Bosnia Lens account to start contributing university data."
+    "api": "REST API documentation for UniAtlas Bosnia. Access universities and academic programs data programmatically.",
+    "login": "Log in to your UniAtlas Bosnia account to contribute data and track your submissions.",
+    "signup": "Create a free UniAtlas Bosnia account to start contributing university data."
   },
   "nav": {
     "home": "Home",
@@ -109,7 +109,7 @@
     "title": "Universities and Academic Programs in Bosnia and Herzegovina",
     "heading": "Universities and Academic Programs in Bosnia and Herzegovina",
     "intro": "A free, open-source project building a structured, searchable database of public data about Bosnia and Herzegovina. Focused on universities - institutions, faculties, study programs, and subjects.",
-    "summary": "Use Bosnia Lens to browse university profiles, compare academic offerings, and access structured public data through a simple interface or directly through the API.",
+    "summary": "Use UniAtlas Bosnia to browse university profiles, compare academic offerings, and access structured public data through a simple interface or directly through the API.",
     "exploreHeading": "Explore the Data",
     "exploreDescription": "Browse universities across Bosnia and Herzegovina. View faculties, study programs, and subjects. Search by name, city, or acronym.",
     "card": {
@@ -125,12 +125,12 @@
     "improveStep3": "Admins review submissions and apply approved changes to the live dataset",
     "improveContribute": "Improve Data",
     "improveSignUp": "Create an Account",
-    "whyHeading": "Why Bosnia Lens Matters",
-    "whyDescription1": "Public information about higher education is often scattered across university websites and hard to search consistently. Bosnia Lens organizes that information into a single, structured dataset that is easier to browse, verify, and reuse.",
+    "whyHeading": "Why UniAtlas Bosnia Matters",
+    "whyDescription1": "Public information about higher education is often scattered across university websites and hard to search consistently. UniAtlas Bosnia organizes that information into a single, structured dataset that is easier to browse, verify, and reuse.",
     "whyDescription2": "Students, researchers, journalists, and developers can use the platform to discover institutions, inspect study programs, and contribute fixes when public data changes.",
     "whyLogin": "Log In to Contribute",
     "forDevsHeading": "For Developers",
-    "forDevsDescription": "Bosnia Lens exposes a free, unauthenticated REST API. Fetch all universities, search by name or city, retrieve full detail for a single university, or search study programs across all institutions.",
+    "forDevsDescription": "UniAtlas Bosnia exposes a free, unauthenticated REST API. Fetch all universities, search by name or city, retrieve full detail for a single university, or search study programs across all institutions.",
     "forDevsNote": "No authentication required for public endpoints.",
     "forDevsCta": "View API Docs"
   },

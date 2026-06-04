@@ -46,10 +46,10 @@ function LogIn() {
         <title>{`${t("title.login")} | ${t("title.app")}`}</title>
         <meta name="description" content={t("meta.login")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://bosnia-lens.netlify.app/login" />
+        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/login" />
         <meta
           property="og:url"
-          content="https://bosnia-lens.netlify.app/login"
+          content="https://uniatlas-bosnia.netlify.app/login"
         />
         <meta
           property="og:title"

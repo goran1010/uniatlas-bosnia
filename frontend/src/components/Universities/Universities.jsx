@@ -19,11 +19,11 @@ function Universities() {
         <meta name="robots" content="index, follow" />
         <link
           rel="canonical"
-          href="https://bosnia-lens.netlify.app/universities"
+          href="https://uniatlas-bosnia.netlify.app/universities"
         />
         <meta
           property="og:url"
-          content="https://bosnia-lens.netlify.app/universities"
+          content="https://uniatlas-bosnia.netlify.app/universities"
         />
         <meta
           property="og:title"

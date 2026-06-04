@@ -33,10 +33,10 @@ function SignUp() {
         <title>{`${t("title.signup")} | ${t("title.app")}`}</title>
         <meta name="description" content={t("meta.signup")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://bosnia-lens.netlify.app/signup" />
+        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/signup" />
         <meta
           property="og:url"
-          content="https://bosnia-lens.netlify.app/signup"
+          content="https://uniatlas-bosnia.netlify.app/signup"
         />
         <meta
           property="og:title"
