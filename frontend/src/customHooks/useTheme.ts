@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+export type SetMode = (mode: string) => void;
+
 function useTheme() {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "system",
@@ -21,7 +23,7 @@ function useTheme() {
     }
   }, [theme]);
 
-  const setMode = (mode) => {
+  const setMode: SetMode = (mode) => {
     if (mode === "system") localStorage.removeItem("theme");
     else localStorage.setItem("theme", mode);
 

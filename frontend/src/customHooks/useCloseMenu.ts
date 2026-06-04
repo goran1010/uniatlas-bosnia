@@ -1,7 +1,17 @@
 import { useEffect } from "react";
 import { useRef, useState } from "react";
 
-function useCloseMenu() {
+export interface UseCloseMenu {
+  navRef: React.RefObject<HTMLElement>;
+  isMenuOpen: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isThemeMenuOpen: boolean;
+  setThemeMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isLanguageMenuOpen: boolean;
+  setLanguageMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function useCloseMenu(): UseCloseMenu {
   const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeMenuOpen, setThemeMenuOpen] = useState(false);
@@ -10,9 +20,7 @@ function useCloseMenu() {
   useEffect(() => {
     if (!isMenuOpen && !isThemeMenuOpen && !isLanguageMenuOpen) return;
 
-    const handleClickAway = (event: MouseEvent) => {
-      if (navRef.current?.contains(event.target)) return;
-
+    const handleClickAway = () => {
       setIsMenuOpen(false);
       setThemeMenuOpen(false);
       setLanguageMenuOpen(false);

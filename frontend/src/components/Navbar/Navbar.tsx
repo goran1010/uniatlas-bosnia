@@ -6,10 +6,12 @@ import { MobileMenu } from "./MobileMenu";
 import { StandardMenu } from "./StandardMenu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-function Navbar({ closeMenu }) {
+import { type UseCloseMenu } from "../../customHooks/useCloseMenu";
+
+function Navbar({ closeMenu }: { closeMenu: UseCloseMenu }) {
   const { navRef, isMenuOpen, setIsMenuOpen } = closeMenu;
-  const { theme, setMode } = useTheme();
-  const { userData, language, setLanguage, t } = useContext(RootContext);
+  const { setMode } = useTheme();
+  const { userData, setLanguage, t } = useContext(RootContext);
 
   return (
     <nav
@@ -51,9 +53,9 @@ function Navbar({ closeMenu }) {
       )}
 
       <div className="flex items-center gap-1 sm:gap-2 flex-1 justify-center md:justify-between">
-        <ThemeSwitcher theme={theme} setMode={setMode} />
+        <ThemeSwitcher setMode={setMode} />
         <StandardMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
-        <LanguageSwitcher language={language} setLanguage={setLanguage} />
+        <LanguageSwitcher setLanguage={setLanguage} />
       </div>
     </nav>
   );

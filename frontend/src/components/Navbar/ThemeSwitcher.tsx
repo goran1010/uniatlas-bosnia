@@ -2,7 +2,9 @@ import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
-function ThemeSwitcher({ setMode }) {
+import type { SetMode } from "../../customHooks/useTheme";
+
+function ThemeSwitcher({ setMode }: { setMode: SetMode }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
 
