@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { PendingUniversityChangesRow } from "./PendingUniversityChangesRow";
-import { Spinner } from "../utils/Spinner";
+import { Spinner } from "../../utils/Spinner";
 
 function PendingUniversityChanges({
   pendingChanges,

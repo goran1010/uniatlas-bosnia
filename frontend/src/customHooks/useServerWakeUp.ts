@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   SERVER_STATUS,
   SERVER_STATUS_NOTIFICATION_ID,
-} from "../components/utils/serverStatus";
+} from "../utils/serverStatus";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;

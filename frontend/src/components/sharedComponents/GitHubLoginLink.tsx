@@ -1,4 +1,4 @@
-import { Spinner } from "../utils/Spinner";
+import { Spinner } from "../../utils/Spinner";
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 

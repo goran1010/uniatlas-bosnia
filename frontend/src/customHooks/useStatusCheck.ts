@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { guardedFetch } from "../components/utils/guardedFetch";
+import { guardedFetch } from "../utils/guardedFetch";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function useStatusCheck(addNotification, t, serverStatus) {

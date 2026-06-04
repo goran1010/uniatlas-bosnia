@@ -2,7 +2,7 @@ import { useGetPendingChangesAdmin } from "./customHooks/useGetPendingChangesAdm
 import { useContext, useState } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
-import { Spinner } from "../utils/Spinner";
+import { Spinner } from "../../utils/Spinner";
 import { PendingChangesAdminRow } from "./PendingChangesAdminRow";
 
 const panelClass =

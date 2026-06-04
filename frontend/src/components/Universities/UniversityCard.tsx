@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
-import { Spinner } from "../utils/Spinner";
+import { Spinner } from "../../utils/Spinner";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

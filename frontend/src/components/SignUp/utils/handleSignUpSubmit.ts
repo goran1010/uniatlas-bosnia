@@ -1,6 +1,6 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
-import { guardedFetch } from "../../utils/guardedFetch";
+import { guardedFetch } from "../../../utils/guardedFetch";
 
 async function handleSignUpSubmit(
   event,

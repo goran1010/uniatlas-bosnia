@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { SERVER_STATUS } from "../components/utils/serverStatus";
+import { SERVER_STATUS } from "../utils/serverStatus";
 
 const RootContext = createContext({
   language: "en",

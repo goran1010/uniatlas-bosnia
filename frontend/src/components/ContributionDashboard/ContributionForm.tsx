@@ -3,7 +3,7 @@ import { RootContext } from "../../contextData/RootContext";
 import { AddUniversityEntity } from "./AddUniversityEntity";
 import { PendingUniversityChanges } from "./PendingUniversityChanges";
 import { useGetPendingChanges } from "./customHooks/useGetPendingChanges";
-import { Spinner } from "../utils/Spinner";
+import { Spinner } from "../../utils/Spinner";
 
 const TABS = ["addNewData", "pendingChanges"];
 

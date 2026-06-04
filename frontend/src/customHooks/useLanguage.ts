@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import en from "../locales/en.json";
 import sr from "../locales/sr.json";
-import { setInitialLanguage } from "../components/utils/setInitialLanguage";
+import { setInitialLanguage } from "../utils/setInitialLanguage";
 
 const translations = { en, sr };
 
