@@ -1,6 +1,6 @@
 # UniAtlas Bosnia
 
-A free, open-source project providing structured public data about Bosnia and Herzegovina through a REST API and a React web interface. The focus is universities and academic programs - browse institutions, faculties, study programs, and subjects.
+An open-source platform for Bosnia and Herzegovina higher-education data, offering a REST API and React web app to explore universities, faculties, study programs, and subjects.
 
 LIVE Web app - <https://uniatlas-bosnia.netlify.app/>
 
