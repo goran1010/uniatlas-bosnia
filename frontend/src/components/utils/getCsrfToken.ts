@@ -3,7 +3,7 @@ import { guardedFetch } from "../../utils/guardedFetch";
 
 let cachedToken = null;
 
-async function getCsrfToken({ serverStatus, addNotification, t } = {}) {
+async function getCsrfToken({ serverStatus, addNotification, t }) {
   try {
     if (cachedToken) {
       return cachedToken;
