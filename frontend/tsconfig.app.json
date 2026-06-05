@@ -19,7 +19,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // Added by me
+    "strictNullChecks": true,
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

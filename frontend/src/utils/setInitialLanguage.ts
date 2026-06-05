@@ -1,4 +1,6 @@
-function setInitialLanguage() {
+export type SystemLanguage = "en" | "sr";
+
+function setSystemLanguage(): SystemLanguage {
   const browserLanguage = navigator.language.slice(0, 2);
 
   if (browserLanguage === "en" || browserLanguage === "sr") {
@@ -7,4 +9,4 @@ function setInitialLanguage() {
   return "en";
 }
 
-export { setInitialLanguage };
+export { setSystemLanguage };

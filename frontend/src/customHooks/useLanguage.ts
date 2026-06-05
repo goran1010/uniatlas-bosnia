@@ -1,42 +1,60 @@
 import { useCallback, useEffect, useState } from "react";
 import en from "../locales/en.json";
 import sr from "../locales/sr.json";
-import { setInitialLanguage } from "../utils/setInitialLanguage";
+import { setSystemLanguage } from "../utils/setInitialLanguage";
+import type { SystemLanguage } from "../utils/setInitialLanguage";
 
-const translations = { en, sr };
+export type Language = SystemLanguage | "system";
+
+type TranslationValue = string | TranslationMap;
+
+type TranslationMap = {
+  [key: string]: TranslationValue;
+};
+
+const translations: Record<SystemLanguage, TranslationMap> = { en, sr };
+
+function getSavedLanguage(): Language {
+  const savedLanguage = localStorage.getItem("language");
+
+  if (
+    savedLanguage === "en" ||
+    savedLanguage === "sr" ||
+    savedLanguage === "system"
+  ) {
+    return savedLanguage;
+  }
+
+  return "system";
+}
 
 function useLanguage() {
-  const [language, setLanguageState] = useState(
-    () => localStorage.getItem("language") ?? "system",
-  );
+  const [language, setLanguageState] = useState<Language>(getSavedLanguage);
 
   const resolvedLanguage =
-    language === "system" ? setInitialLanguage() : language;
+    language === "system" ? setSystemLanguage() : language;
 
   useEffect(() => {
     localStorage.setItem("language", language);
   }, [language]);
 
-  const setLanguage = useCallback((lang) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
   }, []);
 
   const t = useCallback(
-    (key, params = {}) => {
+    (key: string): string => {
       const keys = key.split(".");
-      let value = translations[resolvedLanguage];
+      let value: TranslationValue = translations[resolvedLanguage];
 
       for (const k of keys) {
-        if (value == null) return key;
+        if (typeof value !== "object" || value === null) return key;
         value = value[k];
       }
 
-      if (typeof value !== "string") return value ?? key;
+      if (typeof value !== "string") return key;
 
-      return value.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, token) => {
-        const replacement = params[token];
-        return replacement == null ? "" : String(replacement);
-      });
+      return value;
     },
     [resolvedLanguage],
   );

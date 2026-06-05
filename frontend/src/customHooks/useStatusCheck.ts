@@ -2,8 +2,22 @@ import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-function useStatusCheck(addNotification, t, serverStatus) {
-  const [userData, setUserData] = useState(null);
+import type { Notification } from "./useNotification";
+import type { ServerStatus } from "../utils/serverStatus";
+
+type AddNotificationFunction = (notification: Notification) => string;
+
+export type UserData = {
+  email: string;
+  role: string;
+} | null;
+
+function useStatusCheck(
+  addNotification: AddNotificationFunction,
+  t: (key: string) => string,
+  serverStatus: ServerStatus,
+) {
+  const [userData, setUserData] = useState<UserData>(null);
 
   const tRef = useRef(t);
 
@@ -57,7 +71,7 @@ function useStatusCheck(addNotification, t, serverStatus) {
         });
         setUserData(result.data);
       } catch (err) {
-        if (isCancelled || err?.name === "AbortError") {
+        if (isCancelled) {
           return;
         }
         addNotification({

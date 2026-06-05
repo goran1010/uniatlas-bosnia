@@ -2,19 +2,18 @@ import { createContext } from "react";
 import { type ServerStatus } from "../utils/serverStatus";
 
 import { type Notification } from "../customHooks/useNotification";
+import type { UserData } from "../customHooks/useStatusCheck";
+import { type Language } from "../customHooks/useLanguage";
 
 export interface RootContextType {
-  language: string;
-  setLanguage: (language: string) => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
   t: (key: string) => string;
-  notifications: Array<Notification>;
+  notifications: Notification[];
   addNotification: (notification: Notification) => void;
   removeNotification: (id: string) => void;
-  userData: {
-    email: string;
-    role: string;
-  } | null;
-  setUserData: (userData: { email: string; role: string } | null) => void;
+  userData: UserData;
+  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
   serverStatus: ServerStatus;
 }
 
