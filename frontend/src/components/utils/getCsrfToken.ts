@@ -1,9 +1,25 @@
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL: string | undefined = import.meta.env.VITE_BACKEND_URL;
+
 import { guardedFetch } from "../../utils/guardedFetch";
 
-let cachedToken = null;
+import type { ServerStatus } from "../../utils/serverStatus";
+import type { AddNotification } from "../../customHooks/useNotification";
+import type { TFunction } from "../../customHooks/useLanguage";
 
-async function getCsrfToken({ serverStatus, addNotification, t }) {
+let cachedToken: string | null = null;
+
+async function getCsrfToken({
+  serverStatus,
+  addNotification,
+  t,
+}: {
+  serverStatus: ServerStatus;
+  addNotification: AddNotification;
+  t: TFunction;
+}): Promise<string> {
+  if (!BACKEND_URL) {
+    throw new Error("VITE_BACKEND_URL is not defined");
+  }
   try {
     if (cachedToken) {
       return cachedToken;
@@ -22,12 +38,8 @@ async function getCsrfToken({ serverStatus, addNotification, t }) {
       },
     );
 
-    if (!csrfResponse) {
-      return null;
-    }
-
-    if (!csrfResponse.ok) {
-      return null;
+    if (!csrfResponse || !csrfResponse.ok) {
+      throw new Error("Failed to fetch CSRF token");
     }
 
     const { data: csrfToken } = await csrfResponse.json();

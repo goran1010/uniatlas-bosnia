@@ -6,6 +6,8 @@ import type { SystemLanguage } from "../utils/setInitialLanguage";
 
 export type Language = SystemLanguage | "system";
 
+export type TFunction = (key: string) => string;
+
 type TranslationValue = string | TranslationMap;
 
 type TranslationMap = {
@@ -42,7 +44,7 @@ function useLanguage() {
     setLanguageState(lang);
   }, []);
 
-  const t = useCallback(
+  const t: TFunction = useCallback(
     (key: string): string => {
       const keys = key.split(".");
       let value: TranslationValue = translations[resolvedLanguage];

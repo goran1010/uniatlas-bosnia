@@ -9,6 +9,9 @@ export type Notification = {
   persistent?: boolean;
 };
 
+export type AddNotification = (notification: Notification) => string;
+export type RemoveNotification = (id: string) => void;
+
 function useNotification() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
