@@ -6,25 +6,61 @@ import { Label } from "../sharedComponents/Label";
 import { Button } from "../sharedComponents/Button";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
-const ENTITY_TYPES = ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"];
-const TYPE_OF_CHANGES = ["CREATE", "UPDATE", "DELETE"];
-const CYCLES = ["FIRST", "SECOND", "THIRD"];
-const SUBJECT_TYPES = ["MANDATORY", "ELECTIVE"];
-const ENTITIES = ["FBIH", "RS", "BD"];
+type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
+type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
+type Cycle = "FIRST" | "SECOND" | "THIRD";
+type SubjectType = "MANDATORY" | "ELECTIVE";
+type Entity = "FBIH" | "RS" | "BD";
 
-const INIT_FORM = {
-  entityType: "",
+interface FormState {
+  entityType: EntityType;
+  typeOfChange: TypeOfChange;
+  parentId: string;
+  targetId: string;
+  data: {
+    name?: string;
+    city?: string;
+    entity?: Entity;
+    ownership?: "JAVNA" | "PRIVATNA";
+    website?: string;
+    cycle?: Cycle;
+    durationYears?: number | null;
+    ects?: number | null;
+    language?: string;
+    semester?: number | null;
+    type?: SubjectType | null;
+  };
+}
+
+const INIT_FORM: FormState = {
+  entityType: "UNIVERSITY",
   typeOfChange: "CREATE",
   parentId: "",
   targetId: "",
   data: {},
 };
 
-function DataField({ label, id, ...props }) {
+const ENTITY_TYPES: EntityType[] = [
+  "UNIVERSITY",
+  "FACULTY",
+  "STUDY_PROGRAM",
+  "SUBJECT",
+];
+
+const TYPE_OF_CHANGES: TypeOfChange[] = ["CREATE", "UPDATE", "DELETE"];
+
+const CYCLES: Cycle[] = ["FIRST", "SECOND", "THIRD"];
+
+const SUBJECT_TYPES: SubjectType[] = ["MANDATORY", "ELECTIVE"];
+
+const ENTITIES: Entity[] = ["FBIH", "RS", "BD"];
+
+function DataField(props) {
+  const { label, id } = props;
   return (
     <div className="flex flex-col gap-1">
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} name={id} {...props} />
+      <Input {...props} />
     </div>
   );
 }
