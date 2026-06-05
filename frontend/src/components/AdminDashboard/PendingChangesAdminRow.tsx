@@ -6,6 +6,8 @@ import { handleConfirm } from "./utils/handleConfirm";
 import { handleDecline } from "./utils/handleDecline";
 import { useContext } from "react";
 
+import type { Notification } from "../../customHooks/useNotification";
+
 type PendingChangesAdminRowProps = {
   data: any;
   addNotification: (notification: Notification) => void;
