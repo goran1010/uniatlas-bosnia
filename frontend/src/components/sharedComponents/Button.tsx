@@ -1,4 +1,16 @@
 import { Spinner } from "../../utils/Spinner";
+import type { ButtonHTMLAttributes } from "react";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "update"
+    | "warning";
+  loading?: boolean;
+}
 
 function Button({
   children,
@@ -7,7 +19,7 @@ function Button({
   loading = false,
   variant = "primary",
   ...props
-}) {
+}: ButtonProps) {
   const variantClasses = {
     primary:
       "bg-(--accent) text-slate-50 font-semibold tracking-[0.01em] enabled:hover:bg-(--accent-hover) enabled:hover:shadow-[0_10px_20px_rgba(37,99,235,0.25)] enabled:active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) disabled:bg-(--accent-disabled) disabled:text-(--disabled-text) disabled:shadow-none disabled:transform-none aria-disabled:bg-(--accent-disabled) aria-disabled:text-(--disabled-text) aria-disabled:shadow-none aria-disabled:transform-none",

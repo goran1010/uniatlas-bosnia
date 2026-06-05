@@ -15,9 +15,9 @@ function SignUpForm({ loading, setLoading }) {
   const { t } = useContext(RootContext);
   const { serverStatus } = useContext(RootContext);
 
-  const passwordInput = useRef();
-  const confirmPasswordInput = useRef();
-  const emailInput = useRef();
+  const passwordInput = useRef(null);
+  const confirmPasswordInput = useRef(null);
+  const emailInput = useRef(null);
 
   const [inputFields, setInputFields] = useState({
     email: "",
