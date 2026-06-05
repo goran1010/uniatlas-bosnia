@@ -20,8 +20,8 @@ function LogInForm({ loading, setLoading }) {
     password: "",
   });
 
-  const emailInput = useRef();
-  const passwordInput = useRef();
+  const emailInput = useRef(null);
+  const passwordInput = useRef(null);
 
   function handleInputFields(e) {
     checkLoginFormValidity(e.target.name, emailInput, passwordInput, t);
