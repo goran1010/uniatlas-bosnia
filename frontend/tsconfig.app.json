@@ -21,6 +21,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
 
+    // Temporary - to be removed later
     "strict": false
   },
   "include": ["src"]
