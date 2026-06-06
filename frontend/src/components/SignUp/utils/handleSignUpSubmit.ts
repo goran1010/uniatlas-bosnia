@@ -1,8 +1,26 @@
 const currentUrl = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import type { SubmitEvent } from "react";
+import type { AddNotification } from "../../../customHooks/useNotification";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { ServerStatus } from "../../../utils/serverStatus";
 
-async function handleSignUpSubmit(
+type HandleSignUpSubmit = (
+  event: SubmitEvent<HTMLFormElement>,
+  setLoading: (loading: boolean) => void,
+  inputFields: {
+    email: string;
+    password: string;
+    "confirm-password": string;
+  },
+  addNotification: AddNotification,
+  navigate: (path: string) => void,
+  t: TFunction,
+  serverStatus: ServerStatus,
+) => Promise<void>;
+
+const handleSignUpSubmit: HandleSignUpSubmit = async function (
   event,
   setLoading,
   inputFields,
@@ -77,6 +95,6 @@ async function handleSignUpSubmit(
   } finally {
     setLoading(false);
   }
-}
+};
 
 export { handleSignUpSubmit };

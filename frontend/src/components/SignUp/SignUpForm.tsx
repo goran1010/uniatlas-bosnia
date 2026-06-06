@@ -8,16 +8,24 @@ import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { Label } from "../sharedComponents/Label";
+import type { SubmitEvent } from "react";
 
-function SignUpForm({ loading, setLoading }) {
+interface SignUpFormProps {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
+
+function SignUpForm({ loading, setLoading }: SignUpFormProps) {
   const navigate = useNavigate();
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
   const { serverStatus } = useContext(RootContext);
 
-  const passwordInput = useRef(null);
-  const confirmPasswordInput = useRef(null);
-  const emailInput = useRef(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  console.log(passwordRef);
 
   const [inputFields, setInputFields] = useState({
     email: "",
@@ -25,12 +33,12 @@ function SignUpForm({ loading, setLoading }) {
     ["confirm-password"]: "",
   });
 
-  function handleInputFields(e) {
+  function handleInputFields(e: SubmitEvent<HTMLFormElement>) {
     checkFormValidity(
       e.target.name,
-      passwordInput,
-      confirmPasswordInput,
-      emailInput,
+      passwordRef?.current,
+      confirmPasswordRef?.current,
+      emailRef?.current,
       t,
     );
 
@@ -55,7 +63,7 @@ function SignUpForm({ loading, setLoading }) {
       <div>
         <Label htmlFor="email">{t("form.email")}</Label>
         <Input
-          ref={emailInput}
+          ref={emailRef}
           value={inputFields.email}
           onChange={handleInputFields}
           type="email"
@@ -67,7 +75,7 @@ function SignUpForm({ loading, setLoading }) {
       <div>
         <Label htmlFor="password">{t("form.password")}</Label>
         <Input
-          ref={passwordInput}
+          ref={passwordRef}
           value={inputFields.password}
           onChange={handleInputFields}
           type="password"
@@ -79,7 +87,7 @@ function SignUpForm({ loading, setLoading }) {
       <div>
         <Label htmlFor="confirm-password">{t("form.confirmPassword")}</Label>
         <Input
-          ref={confirmPasswordInput}
+          ref={confirmPasswordRef}
           value={inputFields["confirm-password"]}
           onChange={handleInputFields}
           type="password"
@@ -92,9 +100,9 @@ function SignUpForm({ loading, setLoading }) {
         <Button
           onClick={() =>
             checkFormValidityClick(
-              passwordInput,
-              confirmPasswordInput,
-              emailInput,
+              passwordRef?.current,
+              confirmPasswordRef?.current,
+              emailRef?.current,
               t,
             )
           }

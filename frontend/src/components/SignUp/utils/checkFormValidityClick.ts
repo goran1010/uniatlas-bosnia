@@ -1,42 +1,51 @@
-function checkFormValidityClick(
+type CheckFormValidityClick = (
+  passwordInput: HTMLInputElement | null,
+  confirmPasswordInput: HTMLInputElement | null,
+  emailInput: HTMLInputElement | null,
+  t: (key: string) => string,
+) => void;
+
+const checkFormValidityClick: CheckFormValidityClick = function (
   passwordInput,
   confirmPasswordInput,
   emailInput,
   t,
 ) {
-  const emailValue = emailInput.current.value.trim();
+  if (
+    passwordInput === null ||
+    confirmPasswordInput === null ||
+    emailInput === null
+  )
+    return;
+
+  const emailValue = emailInput.value.trim();
 
   if (emailValue.length < 3) {
-    emailInput.current.setCustomValidity(t("validation.email.minLength"));
-    emailInput.current.reportValidity();
+    emailInput.setCustomValidity(t("validation.email.minLength"));
+    emailInput.reportValidity();
   } else if (!emailValue.includes("@")) {
-    emailInput.current.setCustomValidity(
-      t("validation.email.missingAt", { email: emailValue }),
+    emailInput.setCustomValidity(
+      `${t("validation.email.missingAt")} ${emailValue}`,
     );
-    emailInput.current.reportValidity();
+    emailInput.reportValidity();
   } else if (emailValue.split("@")[1]?.length === 0) {
-    emailInput.current.setCustomValidity(
-      t("validation.email.missingDomain", { email: emailValue }),
+    emailInput.setCustomValidity(
+      `${t("validation.email.missingDomain")} ${emailValue}`,
     );
-    emailInput.current.reportValidity();
+    emailInput.reportValidity();
   } else {
-    emailInput.current.setCustomValidity("");
+    emailInput.setCustomValidity("");
   }
 
-  if (passwordInput.current.value.trim().length < 6) {
-    passwordInput.current.setCustomValidity(t("validation.password.minLength"));
-    passwordInput.current.reportValidity();
-  } else passwordInput.current.setCustomValidity("");
+  if (passwordInput.value.trim().length < 6) {
+    passwordInput.setCustomValidity(t("validation.password.minLength"));
+    passwordInput.reportValidity();
+  } else passwordInput.setCustomValidity("");
 
-  if (
-    passwordInput.current.value.trim() !==
-    confirmPasswordInput.current.value.trim()
-  ) {
-    confirmPasswordInput.current.setCustomValidity(
-      t("validation.password.mustMatch"),
-    );
-    confirmPasswordInput.current.reportValidity();
-  } else confirmPasswordInput.current.setCustomValidity("");
-}
+  if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
+    confirmPasswordInput.setCustomValidity(t("validation.password.mustMatch"));
+    confirmPasswordInput.reportValidity();
+  } else confirmPasswordInput.setCustomValidity("");
+};
 
 export { checkFormValidityClick };

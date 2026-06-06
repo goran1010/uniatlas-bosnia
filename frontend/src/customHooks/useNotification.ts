@@ -11,7 +11,7 @@ export type Notification = {
   persistent?: boolean;
 };
 
-export type AddNotification = (notification: Notification) => string;
+export type AddNotification = (notification: Notification) => void;
 export type RemoveNotification = (id: string) => void;
 
 function useNotification() {

@@ -1,50 +1,59 @@
-function checkFormValidity(
+type CheckFormValidity = (
+  currentInput: string,
+  passwordInput: HTMLInputElement | null,
+  confirmPasswordInput: HTMLInputElement | null,
+  emailInput: HTMLInputElement | null,
+  t: (key: string) => string,
+) => void;
+
+const checkFormValidity: CheckFormValidity = function (
   currentInput,
   passwordInput,
   confirmPasswordInput,
   emailInput,
   t,
 ) {
+  if (
+    passwordInput === null ||
+    confirmPasswordInput === null ||
+    emailInput === null
+  )
+    return;
   if (currentInput === "email") {
-    const emailValue = emailInput.current.value.trim();
+    const emailValue = emailInput.value.trim();
     if (emailValue.length < 3) {
-      emailInput.current.setCustomValidity(t("validation.email.minLength"));
-      emailInput.current.reportValidity();
+      emailInput.setCustomValidity(t("validation.email.minLength"));
+      emailInput.reportValidity();
     } else if (!emailValue.includes("@")) {
-      emailInput.current.setCustomValidity(
-        t("validation.email.missingAt", { email: emailValue }),
+      emailInput.setCustomValidity(
+        `${t("validation.email.missingAt")} ${emailValue}`,
       );
-      emailInput.current.reportValidity();
+      emailInput.reportValidity();
     } else if (emailValue.split("@")[1]?.length === 0) {
-      emailInput.current.setCustomValidity(
-        t("validation.email.missingDomain", { email: emailValue }),
+      emailInput.setCustomValidity(
+        `${t("validation.email.missingDomain")} ${emailValue}`,
       );
-      emailInput.current.reportValidity();
+      emailInput.reportValidity();
     } else {
-      emailInput.current.setCustomValidity("");
+      emailInput.setCustomValidity("");
     }
   }
 
   if (currentInput === "password") {
-    if (passwordInput.current.value.trim().length < 6) {
-      passwordInput.current.setCustomValidity(
-        t("validation.password.minLength"),
-      );
-      passwordInput.current.reportValidity();
-    } else passwordInput.current.setCustomValidity("");
+    if (passwordInput.value.trim().length < 6) {
+      passwordInput.setCustomValidity(t("validation.password.minLength"));
+      passwordInput.reportValidity();
+    } else passwordInput.setCustomValidity("");
   }
 
   if (currentInput === "confirm-password") {
-    if (
-      passwordInput.current.value.trim() !==
-      confirmPasswordInput.current.value.trim()
-    ) {
-      confirmPasswordInput.current.setCustomValidity(
+    if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
+      confirmPasswordInput.setCustomValidity(
         t("validation.password.mustMatch"),
       );
-      confirmPasswordInput.current.reportValidity();
-    } else confirmPasswordInput.current.setCustomValidity("");
+      confirmPasswordInput.reportValidity();
+    } else confirmPasswordInput.setCustomValidity("");
   }
-}
+};
 
 export { checkFormValidity };
