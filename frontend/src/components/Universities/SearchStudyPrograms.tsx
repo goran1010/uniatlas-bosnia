@@ -1,12 +1,21 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, type SubmitEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 
+import type { Faculty, StudyProgram } from "./GetAllUniversities";
+import type { TFunction } from "../../customHooks/useLanguage";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-function StudyProgramResult({ program, t }) {
+function StudyProgramResult({
+  program,
+  t,
+}: {
+  program: StudyWithFacultyResult;
+  t: TFunction;
+}) {
   return (
     <li className="border border-gray-200 dark:border-gray-600 rounded-lg p-3 bg-white dark:bg-gray-800">
       <p className="font-bold text-gray-900 dark:text-white">{program.name}</p>
@@ -33,13 +42,17 @@ function StudyProgramResult({ program, t }) {
   );
 }
 
+interface StudyWithFacultyResult extends StudyProgram {
+  faculty: Faculty;
+}
+
 function SearchStudyPrograms() {
   const { t, addNotification } = useContext(RootContext);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState<StudyWithFacultyResult[]>([]);
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  async function handleSearch(e) {
+  async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
     const term = inputRef.current?.value?.trim();
     if (!term || term.length < 2) {
@@ -52,7 +65,7 @@ function SearchStudyPrograms() {
     try {
       setLoading(true);
       const res = await fetch(
-        `${BACKEND_URL}/api/v1/study-programs/search?searchTerm=${encodeURIComponent(term)}`,
+        `${BACKEND_URL}/api/v1/study-programs/search?searchTerm=${term}`,
         { method: "GET", mode: "cors" },
       );
       const result = await res.json();
@@ -89,9 +102,9 @@ function SearchStudyPrograms() {
         </Button>
       </form>
 
-      {loading && <Spinner />}
-
-      {!loading && results !== null && (
+      {loading ? (
+        <Spinner />
+      ) : (
         <>
           {results.length === 0 ? (
             <p className="text-gray-500 dark:text-gray-400">

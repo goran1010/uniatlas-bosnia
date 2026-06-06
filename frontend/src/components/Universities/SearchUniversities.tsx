@@ -1,19 +1,21 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, type SubmitEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 
+import type { University } from "./GetAllUniversities";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function SearchUniversities() {
   const { t, addNotification } = useContext(RootContext);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState<University[]>([]);
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  async function handleSearch(e) {
+  async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
     const term = inputRef.current?.value?.trim();
     if (!term || term.length < 2) {
@@ -63,9 +65,9 @@ function SearchUniversities() {
         </Button>
       </form>
 
-      {loading && <Spinner />}
-
-      {!loading && results !== null && (
+      {loading ? (
+        <Spinner />
+      ) : (
         <>
           {results.length === 0 ? (
             <p className="text-gray-500 dark:text-gray-400">

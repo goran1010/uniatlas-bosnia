@@ -5,9 +5,62 @@ import { UniversityCard } from "./UniversityCard";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+type Entity = "RS" | "FBiH" | "BD";
+
+type Ownership = "JAVNA" | "PRIVATNA";
+
+export interface University {
+  id: number;
+  name: string;
+  acronym?: string;
+  city: string;
+  entity: Entity;
+  ownership: Ownership;
+  foundedYear?: string;
+  website?: string;
+  accreditationFrom?: string;
+  accreditationTo?: string;
+  authority?: string;
+  sourceUrl?: string;
+  lastChecked?: string;
+  faculties: Faculty[];
+}
+
+export interface Faculty {
+  id: number;
+  name: string;
+  universityId: number;
+  university: University;
+  city?: string;
+  website?: string;
+  studyPrograms: StudyProgram[];
+}
+
+export interface StudyProgram {
+  id: number;
+  name: string;
+  facultyId: number;
+  cycle: "BACHELOR" | "MASTER" | "DOCTORATE";
+  durationYears?: number;
+  ects?: number;
+  language?: string;
+  sourceUrl?: string;
+  subjects: Subject[];
+}
+
+export interface Subject {
+  id: number;
+  name: string;
+  studyProgramId: number;
+  semester?: number;
+  ects?: number;
+  type?: "MANDATORY" | "ELECTIVE";
+  sourceUrl?: string;
+}
+
 function GetAllUniversities() {
   const { t, addNotification } = useContext(RootContext);
-  const [universities, setUniversities] = useState([]);
+  const [universities, setUniversities] = useState<University[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -3,9 +3,18 @@ import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 
+import type { TFunction } from "../../customHooks/useLanguage";
+
+import type {
+  University,
+  Faculty,
+  StudyProgram,
+  Subject,
+} from "./GetAllUniversities";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-function SubjectRow({ subject, t }) {
+function SubjectRow({ subject, t }: { subject: Subject; t: TFunction }) {
   return (
     <li className="flex flex-wrap gap-2 text-sm py-1 border-b border-gray-100 dark:border-gray-700 last:border-0">
       <span className="font-medium flex-1">{subject.name}</span>
@@ -36,7 +45,13 @@ function SubjectRow({ subject, t }) {
   );
 }
 
-function StudyProgramRow({ program, t }) {
+function StudyProgramRow({
+  program,
+  t,
+}: {
+  program: StudyProgram;
+  t: TFunction;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <li className="text-sm">
@@ -69,7 +84,7 @@ function StudyProgramRow({ program, t }) {
   );
 }
 
-function FacultyRow({ faculty, t }) {
+function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
   const [open, setOpen] = useState(false);
   return (
     <li className="text-sm">
@@ -100,10 +115,10 @@ function FacultyRow({ faculty, t }) {
   );
 }
 
-function UniversityCard({ university }) {
+function UniversityCard({ university }: { university: University }) {
   const { t, addNotification } = useContext(RootContext);
   const [expanded, setExpanded] = useState(false);
-  const [detailData, setDetailData] = useState(null);
+  const [detailData, setDetailData] = useState<University>();
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   async function handleExpand() {
@@ -204,7 +219,7 @@ function UniversityCard({ university }) {
 
         {expanded && detailData && (
           <div className="mt-3 border-t border-gray-200 dark:border-gray-600 pt-3">
-            {detailData.faculties?.length > 0 ? (
+            {detailData?.faculties?.length > 0 ? (
               <>
                 <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
                   {detailData.faculties.length}{" "}
