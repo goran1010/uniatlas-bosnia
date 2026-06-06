@@ -2,7 +2,21 @@ const currentURL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-async function handleLogout(
+import type { AddNotification } from "../../../customHooks/useNotification";
+import type { UserData } from "../../../customHooks/useStatusCheck";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { ServerStatus } from "../../../utils/serverStatus";
+
+type HandleLogout = (
+  addNotification: AddNotification,
+  navigate: (path: string) => void,
+  setUserData: (data: UserData) => void,
+  setLoading: (loading: boolean) => void,
+  t: TFunction,
+  serverStatus: ServerStatus,
+) => Promise<void>;
+
+const handleLogout: HandleLogout = async function (
   addNotification,
   navigate,
   setUserData,
@@ -71,6 +85,6 @@ async function handleLogout(
   } finally {
     setLoading(false);
   }
-}
+};
 
 export { handleLogout };
