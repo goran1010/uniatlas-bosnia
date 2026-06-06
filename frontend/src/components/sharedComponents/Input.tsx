@@ -1,6 +1,8 @@
 import type { InputHTMLAttributes } from "react";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  ref: React.Ref<HTMLInputElement>;
+}
 
 function Input(props: InputProps) {
   const baseStyles =

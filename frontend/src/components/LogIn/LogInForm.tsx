@@ -8,7 +8,13 @@ import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { Label } from "../sharedComponents/Label";
 
-function LogInForm({ loading, setLoading }) {
+import type { ChangeEvent } from "react";
+interface LogInFormProps {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
+
+function LogInForm({ loading, setLoading }: LogInFormProps) {
   const navigate = useNavigate();
   const { setUserData } = useContext(RootContext);
   const { addNotification } = useContext(RootContext);
@@ -20,11 +26,16 @@ function LogInForm({ loading, setLoading }) {
     password: "",
   });
 
-  const emailInput = useRef(null);
-  const passwordInput = useRef(null);
+  const emailInput = useRef<HTMLInputElement>(null);
+  const passwordInput = useRef<HTMLInputElement>(null);
 
-  function handleInputFields(e) {
-    checkLoginFormValidity(e.target.name, emailInput, passwordInput, t);
+  function handleInputFields(e: ChangeEvent<HTMLInputElement>) {
+    checkLoginFormValidity(
+      e.target.name,
+      emailInput?.current,
+      passwordInput?.current,
+      t,
+    );
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   }
 
@@ -71,7 +82,11 @@ function LogInForm({ loading, setLoading }) {
       <div>
         <Button
           onClick={() =>
-            checkLoginFormClickValidity(emailInput, passwordInput, t)
+            checkLoginFormClickValidity(
+              emailInput?.current,
+              passwordInput?.current,
+              t,
+            )
           }
           type="submit"
           loading={loading}

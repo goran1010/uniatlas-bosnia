@@ -1,4 +1,15 @@
-function ButtonNavbar({ children, className = "", ...rest }) {
+import type { ButtonHTMLAttributes } from "react";
+
+interface ButtonNavbarProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function ButtonNavbar({
+  children,
+  className = "",
+  ...rest
+}: ButtonNavbarProps) {
   return (
     <button
       className={`min-w-20 w-full relative inline-flex items-center justify-center rounded-md p-2 text-sm transition transform hover:cursor-pointer

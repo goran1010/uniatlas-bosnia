@@ -8,7 +8,7 @@ import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
 import { Label } from "../sharedComponents/Label";
-import type { SubmitEvent } from "react";
+import type { ChangeEvent } from "react";
 
 interface SignUpFormProps {
   loading: boolean;
@@ -33,7 +33,7 @@ function SignUpForm({ loading, setLoading }: SignUpFormProps) {
     ["confirm-password"]: "",
   });
 
-  function handleInputFields(e: SubmitEvent<HTMLFormElement>) {
+  function handleInputFields(e: ChangeEvent<HTMLInputElement>) {
     checkFormValidity(
       e.target.name,
       passwordRef?.current,

@@ -1,14 +1,26 @@
-function checkLoginFormClickValidity(emailInput, passwordInput, t) {
-  const emailValue = emailInput.current.value.trim();
-  if (!emailValue.includes("@") || emailValue.length < 3) {
-    emailInput.current.setCustomValidity(t("validation.email.invalid"));
-    emailInput.current.reportValidity();
-  } else emailInput.current.setCustomValidity("");
+type CheckLoginFormClickValidity = (
+  passwordInput: HTMLInputElement | null,
+  emailInput: HTMLInputElement | null,
+  t: (key: string) => string,
+) => void;
 
-  if (passwordInput.current.value.trim().length < 6) {
-    passwordInput.current.setCustomValidity(t("validation.password.minLength"));
-    passwordInput.current.reportValidity();
-  } else passwordInput.current.setCustomValidity("");
-}
+const checkLoginFormClickValidity: CheckLoginFormClickValidity = function (
+  emailInput,
+  passwordInput,
+  t,
+) {
+  if (passwordInput === null || emailInput === null) return;
+
+  const emailValue = emailInput.value.trim();
+  if (!emailValue.includes("@") || emailValue.length < 3) {
+    emailInput.setCustomValidity(t("validation.email.invalid"));
+    emailInput.reportValidity();
+  } else emailInput.setCustomValidity("");
+
+  if (passwordInput.value.trim().length < 6) {
+    passwordInput.setCustomValidity(t("validation.password.minLength"));
+    passwordInput.reportValidity();
+  } else passwordInput.setCustomValidity("");
+};
 
 export { checkLoginFormClickValidity };
