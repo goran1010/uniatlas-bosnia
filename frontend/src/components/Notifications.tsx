@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef } from "react";
 import { RootContext } from "../contextData/RootContext";
+import type { TypeNotification } from "../customHooks/useNotification";
 
-function getNotificationStyles(type) {
+function getNotificationStyles(type: TypeNotification) {
   switch (type) {
     case "success":
       return "bg-green-100 text-green-900 border border-green-300";
@@ -15,7 +16,7 @@ function getNotificationStyles(type) {
   }
 }
 
-function getNotificationRole(type) {
+function getNotificationRole(type: TypeNotification) {
   if (type === "error" || type === "warning") {
     return "alert";
   }
@@ -44,11 +45,15 @@ function Notifications() {
 
       if (shouldAutoDismiss && !newTimerRef.has(notification.id)) {
         const timer = setTimeout(() => {
-          removeNotification(notification.id);
-          newTimerRef.delete(notification.id);
-        }, notification.duration);
+          if (notification.id) {
+            removeNotification(notification.id);
+            newTimerRef.delete(notification.id);
+          }
+        }, notification.duration ?? 0);
 
-        newTimerRef.set(notification.id, timer);
+        if (notification.id) {
+          newTimerRef.set(notification.id, timer);
+        }
       }
     });
 
@@ -89,7 +94,9 @@ function Notifications() {
 
               <button
                 type="button"
-                onClick={() => removeNotification(notification.id)}
+                onClick={() =>
+                  notification.id && removeNotification(notification.id)
+                }
                 aria-label={t("notifications.dismiss")}
                 className="absolute top-0 right-1 text-sm font-semibold text-current cursor-pointer"
               >

@@ -5,8 +5,20 @@ const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;
 
 import { type ServerStatus } from "../utils/serverStatus";
+import type { AddNotification, RemoveNotification } from "./useNotification";
+import type { TFunction } from "./useLanguage";
 
-function useServerWakeUp({ addNotification, removeNotification, t }) {
+interface UseServerWakeUp {
+  addNotification: AddNotification;
+  removeNotification: RemoveNotification;
+  t: TFunction;
+}
+
+function useServerWakeUp({
+  addNotification,
+  removeNotification,
+  t,
+}: UseServerWakeUp) {
   const [serverStatus, setServerStatus] = useState<ServerStatus>("live");
   const tRef = useRef(t);
 
@@ -14,7 +26,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
     // Limit the number of wake-up attempts to prevent infinite loops
     let isCancelled = false;
     let currentNumberOfAttempts = 0;
-    let retryTimeoutId;
+    let retryTimeoutId: number;
 
     setServerStatus("waking");
 
@@ -63,7 +75,7 @@ function useServerWakeUp({ addNotification, removeNotification, t }) {
         setServerStatus("live");
         removeNotification(SERVER_STATUS_NOTIFICATION_ID);
       } catch (err) {
-        if (isCancelled || err?.name === "AbortError") {
+        if (isCancelled) {
           return;
         }
 

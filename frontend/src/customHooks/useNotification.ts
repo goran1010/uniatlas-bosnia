@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 const MAX_NOTIFICATIONS = 5;
 
+export type TypeNotification = "success" | "error" | "info" | "warning";
+
 export type Notification = {
   id?: string;
-  type: "success" | "error" | "info" | "warning";
+  type: TypeNotification;
   message: string;
   duration?: number | null;
   persistent?: boolean;

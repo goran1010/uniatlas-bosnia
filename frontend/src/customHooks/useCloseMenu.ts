@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRef, useState } from "react";
 
 export interface UseCloseMenu {
-  navRef: React.RefObject<HTMLElement>;
+  navRef: React.RefObject<HTMLElement | null>;
   isMenuOpen: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isThemeMenuOpen: boolean;
