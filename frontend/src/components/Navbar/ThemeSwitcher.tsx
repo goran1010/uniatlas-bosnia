@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, type ChangeEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
@@ -8,7 +8,7 @@ function ThemeSwitcher({ setMode }: { setMode: SetMode }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
 
-  function handleThemeChange(e) {
+  function handleThemeChange(e: ChangeEvent<HTMLSelectElement>) {
     if (!e.target.value) return;
     const nextTheme = e.target.value;
 

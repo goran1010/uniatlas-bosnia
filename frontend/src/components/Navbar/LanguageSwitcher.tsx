@@ -2,13 +2,20 @@ import { useContext, type ChangeEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
-function LanguageSwitcher({ setLanguage }) {
+import type { SetLanguage } from "../../customHooks/useLanguage";
+
+function LanguageSwitcher({ setLanguage }: { setLanguage: SetLanguage }) {
   const { addNotification } = useContext(RootContext);
   const { t } = useContext(RootContext);
 
   function handleLanguageChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLanguage = event.target.value;
-    if (!nextLanguage) return;
+    if (
+      nextLanguage !== "sr" &&
+      nextLanguage !== "en" &&
+      nextLanguage !== "system"
+    )
+      return;
     setLanguage(nextLanguage);
 
     addNotification({

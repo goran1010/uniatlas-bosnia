@@ -1,4 +1,11 @@
-function Select({ children, className = "", ...props }) {
+import type { SelectHTMLAttributes } from "react";
+
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  className?: string;
+  children: React.ReactNode;
+}
+
+function Select({ children, className = "", ...props }: SelectProps) {
   return (
     <select
       className={`flex-1 cursor-pointer appearance-none whitespace-normal text-center break-all h-full sm:min-w-33 w-full sm:w-auto relative flex items-center 

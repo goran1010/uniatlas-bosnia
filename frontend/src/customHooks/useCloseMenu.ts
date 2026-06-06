@@ -1,14 +1,19 @@
 import { useEffect } from "react";
 import { useRef, useState } from "react";
+import type { Dispatch, SetStateAction, RefObject } from "react";
+
+export type SetIsMenuOpen = Dispatch<SetStateAction<boolean>>;
+export type SetThemeMenuOpen = Dispatch<SetStateAction<boolean>>;
+export type SetLanguageMenuOpen = Dispatch<SetStateAction<boolean>>;
 
 export interface UseCloseMenu {
-  navRef: React.RefObject<HTMLElement | null>;
+  navRef: RefObject<HTMLElement | null>;
   isMenuOpen: boolean;
-  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsMenuOpen: SetIsMenuOpen;
   isThemeMenuOpen: boolean;
-  setThemeMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setThemeMenuOpen: SetThemeMenuOpen;
   isLanguageMenuOpen: boolean;
-  setLanguageMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setLanguageMenuOpen: SetLanguageMenuOpen;
 }
 
 function useCloseMenu(): UseCloseMenu {

@@ -3,11 +3,11 @@ import { type ServerStatus } from "../utils/serverStatus";
 
 import { type Notification } from "../customHooks/useNotification";
 import type { UserData } from "../customHooks/useStatusCheck";
-import { type Language } from "../customHooks/useLanguage";
+import type { Language, SetLanguage } from "../customHooks/useLanguage";
 
 export interface RootContextType {
   language: Language;
-  setLanguage: (language: Language) => void;
+  setLanguage: SetLanguage;
   t: (key: string) => string;
   notifications: Notification[];
   addNotification: (notification: Notification) => void;

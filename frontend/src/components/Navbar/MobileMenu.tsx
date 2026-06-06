@@ -3,10 +3,18 @@ import { Status } from "./Status";
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
+import type { UserData } from "../../customHooks/useStatusCheck";
+import type { SetIsMenuOpen } from "../../customHooks/useCloseMenu";
+
 const menuItemClass = `block p-2 w-full text-center text-nowrap rounded-lg hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 
   focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)`;
 
-function MobileMenu({ setIsMenuOpen, userData }) {
+interface MobileMenuProps {
+  setIsMenuOpen: SetIsMenuOpen;
+  userData: UserData | null;
+}
+
+function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
   const { t } = useContext(RootContext);
 
   return (
