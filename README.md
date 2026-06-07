@@ -13,14 +13,12 @@ For more info on how to connect your app to the REST API, visit <https://uniatla
 ## Table of Contents
 
 - [Features](#features)
-- [Data Coverage](#data-coverage)
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
 - [API Overview](#api-overview)
 - [Running the Tests](#running-the-tests)
 - [Deployment](#deployment)
 - [Built With](#built-with)
-- [Current Status](#current-status)
 - [Contributing](#contributing)
 - [Authors](#authors)
 - [License](#license)
@@ -36,10 +34,6 @@ For more info on how to connect your app to the REST API, visit <https://uniatla
 - **Suggestion-based Data Workflow**: Any authenticated user can suggest university data changes - admins review and approve or reject them
 - **CSRF Protection**: Synchronised CSRF tokens required for all mutating requests to authenticated routes
 - **First-party cookies**: Frontend proxies authenticated requests through Netlify (`/backend/*`) so session cookies are always same-site
-
-## Data Coverage
-
-- Universities (implemented) — 4-level hierarchy: University → Faculty → Study Program → Subject
 
 ## Getting Started
 
@@ -324,10 +318,6 @@ The public REST API (`/api/v1/...`) is served directly from the backend with ope
 - [React Router](https://reactrouter.com/)
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/react)
-
-## Current Status
-
-The project is focused on universities and academic programs. The public API and contribution workflow cover the full 4-level university hierarchy: University → Faculty → Study Program → Subject. Data changes are handled through a pending-suggestion workflow where authenticated users submit proposals and admins moderate them.
 
 ## Contributing
 
