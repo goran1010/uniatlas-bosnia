@@ -10,9 +10,9 @@ export type TFunction = (key: string) => string;
 
 type TranslationValue = string | TranslationMap;
 
-type TranslationMap = {
+interface TranslationMap {
   [key: string]: TranslationValue;
-};
+}
 
 const translations: Record<SystemLanguage, TranslationMap> = { en, sr };
 
