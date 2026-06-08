@@ -2,14 +2,31 @@ import { useState, useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { handleDiscardUniversityChange } from "./utils/handleDiscardUniversityChange";
+import type { PendingChange } from "./customHooks/useGetPendingChanges";
 
-const TYPE_BADGE = {
+interface BadgeStyles {
+  CREATE: string;
+  UPDATE: string;
+  DELETE: string;
+}
+
+const BADGE: BadgeStyles = {
   CREATE: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200",
   UPDATE: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200",
   DELETE: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200",
 };
 
-function PendingUniversityChangesRow({ change, index, setPendingChanges }) {
+interface PendingUniversityChangesRowProps {
+  change: PendingChange;
+  index: number;
+  setPendingChanges: (changes: PendingChange[]) => void;
+}
+
+function PendingUniversityChangesRow({
+  change,
+  index,
+  setPendingChanges,
+}: PendingUniversityChangesRowProps) {
   const { t, addNotification, serverStatus } = useContext(RootContext);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +42,7 @@ function PendingUniversityChangesRow({ change, index, setPendingChanges }) {
             {t("contribution.change")}
           </span>
           <span
-            className={`px-2 py-0.5 rounded text-xs font-semibold ${TYPE_BADGE[change.typeOfChange] ?? ""}`}
+            className={`px-2 py-0.5 rounded text-xs font-semibold ${BADGE[change.typeOfChange] ?? ""}`}
           >
             {change.typeOfChange}
           </span>

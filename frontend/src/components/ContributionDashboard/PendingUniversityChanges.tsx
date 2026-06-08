@@ -3,11 +3,19 @@ import { RootContext } from "../../contextData/RootContext";
 import { PendingUniversityChangesRow } from "./PendingUniversityChangesRow";
 import { Spinner } from "../../utils/Spinner";
 
+import type { PendingChange } from "./customHooks/useGetPendingChanges";
+
+interface PendingUniversityChangesProps {
+  pendingChanges: PendingChange[];
+  setPendingChanges: (changes: PendingChange[]) => void;
+  loading: boolean;
+}
+
 function PendingUniversityChanges({
   pendingChanges,
   setPendingChanges,
   loading,
-}) {
+}: PendingUniversityChangesProps) {
   const { t } = useContext(RootContext);
 
   if (loading) return <Spinner />;

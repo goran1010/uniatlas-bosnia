@@ -6,11 +6,27 @@ import { Label } from "../sharedComponents/Label";
 import { Button } from "../sharedComponents/Button";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
+import type { PendingChange } from "./customHooks/useGetPendingChanges";
+import type { SubmitEvent } from "react";
+
 type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
 type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
 type Cycle = "FIRST" | "SECOND" | "THIRD";
 type SubjectType = "MANDATORY" | "ELECTIVE";
 type Entity = "FBIH" | "RS" | "BD";
+
+interface DataFieldProps {
+  label: string;
+  id: string;
+  type: string;
+  min?: number;
+  max?: number;
+  required?: boolean;
+  value: string | number;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+}
 
 interface FormState {
   entityType: EntityType;
@@ -24,11 +40,11 @@ interface FormState {
     ownership?: "JAVNA" | "PRIVATNA";
     website?: string;
     cycle?: Cycle;
-    durationYears?: number | null;
-    ects?: number | null;
+    durationYears?: number;
+    ects?: number;
     language?: string;
-    semester?: number | null;
-    type?: SubjectType | null;
+    semester?: number;
+    type?: SubjectType;
   };
 }
 
@@ -55,7 +71,7 @@ const SUBJECT_TYPES: SubjectType[] = ["MANDATORY", "ELECTIVE"];
 
 const ENTITIES: Entity[] = ["FBIH", "RS", "BD"];
 
-function DataField(props) {
+function DataField(props: DataFieldProps) {
   const { label, id } = props;
   return (
     <div className="flex flex-col gap-1">
@@ -65,18 +81,25 @@ function DataField(props) {
   );
 }
 
-function AddUniversityEntity({ setPendingChanges }) {
+function AddUniversityEntity({
+  setPendingChanges,
+}: {
+  setPendingChanges: (value: PendingChange[]) => void;
+}) {
   const { t, addNotification, serverStatus } = useContext(RootContext);
   const [formState, setFormState] = useState(INIT_FORM);
   const [loading, setLoading] = useState(false);
 
   const { entityType, typeOfChange, parentId, targetId, data } = formState;
 
-  function setField(field, value) {
+  function setField(field: keyof FormState, value: string) {
     setFormState((prev) => ({ ...prev, [field]: value }));
   }
 
-  function setDataField(field, value) {
+  function setDataField(
+    field: keyof FormState["data"],
+    value: string | number,
+  ) {
     setFormState((prev) => ({
       ...prev,
       data: { ...prev.data, [field]: value },
@@ -88,7 +111,7 @@ function AddUniversityEntity({ setPendingChanges }) {
   const needsTarget = typeOfChange !== "CREATE" && entityType;
   const needsDataFields = typeOfChange !== "DELETE";
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!entityType || !typeOfChange) {
       addNotification({
@@ -227,12 +250,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                   <Select
                     id="dataOwnership"
                     value={data.ownership ?? ""}
-                    onChange={(e) =>
-                      setDataField(
-                        "ownership",
-                        e.target.value === "" ? undefined : e.target.value,
-                      )
-                    }
+                    onChange={(e) => setDataField("ownership", e.target.value)}
                     required={typeOfChange === "CREATE"}
                   >
                     <option value="">—</option>
@@ -283,10 +301,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                 max={10}
                 value={data.durationYears ?? ""}
                 onChange={(e) =>
-                  setDataField(
-                    "durationYears",
-                    e.target.value ? Number(e.target.value) : null,
-                  )
+                  setDataField("durationYears", Number(e.target.value))
                 }
               />
               <DataField
@@ -295,12 +310,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                 type="number"
                 min={1}
                 value={data.ects ?? ""}
-                onChange={(e) =>
-                  setDataField(
-                    "ects",
-                    e.target.value ? Number(e.target.value) : null,
-                  )
-                }
+                onChange={(e) => setDataField("ects", Number(e.target.value))}
               />
               <DataField
                 label={t("contribution.dataFields.language")}
@@ -322,10 +332,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                 max={12}
                 value={data.semester ?? ""}
                 onChange={(e) =>
-                  setDataField(
-                    "semester",
-                    e.target.value ? Number(e.target.value) : null,
-                  )
+                  setDataField("semester", Number(e.target.value))
                 }
               />
               <DataField
@@ -334,12 +341,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                 type="number"
                 min={1}
                 value={data.ects ?? ""}
-                onChange={(e) =>
-                  setDataField(
-                    "ects",
-                    e.target.value ? Number(e.target.value) : null,
-                  )
-                }
+                onChange={(e) => setDataField("ects", Number(e.target.value))}
               />
               <div className="flex flex-col gap-1">
                 <Label htmlFor="dataSubjectType">
@@ -348,7 +350,7 @@ function AddUniversityEntity({ setPendingChanges }) {
                 <Select
                   id="dataSubjectType"
                   value={data.type ?? ""}
-                  onChange={(e) => setDataField("type", e.target.value || null)}
+                  onChange={(e) => setDataField("type", e.target.value)}
                 >
                   <option value="">—</option>
                   {SUBJECT_TYPES.map((st) => (

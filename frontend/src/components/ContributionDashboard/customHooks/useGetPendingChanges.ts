@@ -3,9 +3,29 @@ import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-function useGetPendingChanges(setLoading, t, enabled = true) {
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { UserData } from "../../../customHooks/useStatusCheck";
+import type { Entity } from "../../Universities/GetAllUniversities";
+
+export interface PendingChange {
+  id: string;
+  entityType: Entity;
+  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
+  targetId: number | null;
+  parentId: number | null;
+  data: any;
+  userId: string;
+  user: UserData;
+  createdAt: Date;
+}
+
+function useGetPendingChanges(
+  setLoading: (loading: boolean) => void,
+  t: TFunction,
+  enabled = true,
+) {
   const { addNotification, serverStatus } = useContext(RootContext);
-  const [pendingChanges, setPendingChanges] = useState([]);
+  const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
 
   useEffect(() => {
     if (!enabled) return;

@@ -5,9 +5,9 @@ import { UniversityCard } from "./UniversityCard";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-type Entity = "RS" | "FBiH" | "BD";
+export type Entity = "RS" | "FBiH" | "BD";
 
-type Ownership = "JAVNA" | "PRIVATNA";
+export type Ownership = "JAVNA" | "PRIVATNA";
 
 export interface University {
   id: number;
