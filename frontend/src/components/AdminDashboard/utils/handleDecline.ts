@@ -2,7 +2,22 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-async function handleDecline(
+import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { Notification } from "../../../customHooks/useNotification";
+import type { ServerStatus } from "../../../utils/serverStatus";
+import type { Dispatch, SetStateAction } from "react";
+
+type HandleDecline = (
+  change: PendingChange,
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>,
+  addNotification: (notification: Notification) => void,
+  setLoading: (loading: boolean) => void,
+  t: TFunction,
+  serverStatus: ServerStatus,
+) => Promise<void>;
+
+const handleDecline: HandleDecline = async function (
   change,
   setPendingChanges,
   addNotification,
@@ -58,20 +73,20 @@ async function handleDecline(
     }
     addNotification({
       type: "error",
-      message:
-        result?.error?.message ||
-        change?.error ||
-        t("messages.admin.declineFailed"),
+      message: result?.error?.message || t("messages.admin.declineFailed"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: t("messages.admin.declineError", { email: change.user.email }),
+      message: `${t("messages.admin.declineError")} ${change.user?.email ?? ""}`,
     });
-    console.error(`Error declining ${change.user.email}'s request:`, error);
+    console.error(
+      `Error declining ${change.user?.email ?? ""}'s request:`,
+      error,
+    );
   } finally {
     setLoading(false);
   }
-}
+};
 
 export { handleDecline };

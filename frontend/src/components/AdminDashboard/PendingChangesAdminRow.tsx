@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, type Dispatch, type SetStateAction } from "react";
 import { Button } from "../sharedComponents/Button";
 import { useState } from "react";
 import { RootContext } from "../../contextData/RootContext";
@@ -7,11 +7,13 @@ import { handleDecline } from "./utils/handleDecline";
 import { useContext } from "react";
 
 import type { Notification } from "../../customHooks/useNotification";
+import type { PendingChange } from "../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { TypeOfChange } from "../ContributionDashboard/AddUniversityEntity";
 
 type PendingChangesAdminRowProps = {
-  data: any;
+  data: PendingChange;
   addNotification: (notification: Notification) => void;
-  setPendingChanges: (changes: Array<any>) => void;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
   index: number;
 };
 
@@ -23,10 +25,9 @@ const PendingChangesAdminRow = memo(
     index,
   }: PendingChangesAdminRowProps) => {
     const [loading, setLoading] = useState(false);
-    const { t } = useContext(RootContext);
-    const { serverStatus } = useContext(RootContext);
+    const { t, serverStatus } = useContext(RootContext);
 
-    const getChangeTypeStyles = (type) => {
+    const getChangeTypeStyles = (type: TypeOfChange) => {
       switch (type?.toLowerCase()) {
         case "create":
           return "border-l-4 border-l-green-500 dark:border-l-green-400";
@@ -39,7 +40,7 @@ const PendingChangesAdminRow = memo(
       }
     };
 
-    const getChangeTypeBadgeStyles = (type) => {
+    const getChangeTypeBadgeStyles = (type: TypeOfChange) => {
       switch (type?.toLowerCase()) {
         case "create":
           return "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300";
@@ -93,7 +94,7 @@ const PendingChangesAdminRow = memo(
             <span className="sm:hidden font-semibold">
               {t("contribution.user")}
             </span>
-            <span className="break-all">{data.user.email}</span>
+            <span className="break-all">{data.user?.email ?? "-"}</span>
           </div>
         </div>
 

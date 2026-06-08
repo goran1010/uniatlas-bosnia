@@ -2,7 +2,22 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-async function handleConfirm(
+import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { Notification } from "../../../customHooks/useNotification";
+import type { ServerStatus } from "../../../utils/serverStatus";
+import type { Dispatch, SetStateAction } from "react";
+
+type HandleConfirm = (
+  change: PendingChange,
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>,
+  addNotification: (notification: Notification) => void,
+  setLoading: (loading: boolean) => void,
+  t: TFunction,
+  serverStatus: ServerStatus,
+) => Promise<void>;
+
+const handleConfirm: HandleConfirm = async function (
   change,
   setPendingChanges,
   addNotification,
@@ -70,15 +85,15 @@ async function handleConfirm(
   } catch (error) {
     addNotification({
       type: "error",
-      message: t("messages.admin.approveError", { email: change.user.email }),
+      message: `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`,
     });
     console.error(
-      `Error approving pending change for ${change.user.email}:`,
+      `Error approving pending change for ${change.user?.email ?? ""}:`,
       error,
     );
   } finally {
     setLoading(false);
   }
-}
+};
 
 export { handleConfirm };

@@ -3,9 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-function useGetPendingChangesAdmin(setLoading, t) {
+import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { TFunction } from "../../../customHooks/useLanguage";
+
+function useGetPendingChangesAdmin(
+  setLoading: (loading: boolean) => void,
+  t: TFunction,
+) {
   const { addNotification, serverStatus } = useContext(RootContext);
-  const [pendingChanges, setPendingChanges] = useState([]);
+  const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
 
   useEffect(() => {
     const fetchPendingChanges = async () => {

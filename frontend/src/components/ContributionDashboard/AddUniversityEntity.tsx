@@ -10,7 +10,7 @@ import type { PendingChange } from "./customHooks/useGetPendingChanges";
 import type { Dispatch, SetStateAction, SubmitEvent } from "react";
 
 type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
+export type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
 type Cycle = "FIRST" | "SECOND" | "THIRD";
 type SubjectType = "MANDATORY" | "ELECTIVE";
 type Entity = "FBIH" | "RS" | "BD";
