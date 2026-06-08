@@ -1,16 +1,22 @@
 import { EndpointCard } from "./EndPointCard";
-import { endpoints, authenticatedGroups } from "./utils/endpoints";
+import { apiEndpoints, authenticatedGroupsEndpoints } from "./utils/endpoints";
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-function MethodTag({ method }) {
+function MethodTag({
+  method,
+}: {
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+}) {
   const methodClasses = {
     GET: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
     POST: "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
     PUT: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
+    PATCH:
+      "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300",
     DELETE: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
   };
 
@@ -35,7 +41,10 @@ function Api() {
         <title>{`${t("title.api")} | ${t("title.app")}`}</title>
         <meta name="description" content={t("meta.api")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/api-docs" />
+        <link
+          rel="canonical"
+          href="https://uniatlas-bosnia.netlify.app/api-docs"
+        />
         <meta
           property="og:url"
           content="https://uniatlas-bosnia.netlify.app/api-docs"
@@ -76,7 +85,7 @@ function Api() {
           <h2 className="text-xl font-bold text-center">
             {t("api.endpoints")}
           </h2>
-          {endpoints.map((ep) => (
+          {apiEndpoints.map((ep) => (
             <EndpointCard key={ep.path} endpoint={ep} />
           ))}
         </section>
@@ -86,7 +95,7 @@ function Api() {
           </h2>
           <p>{t("api.authFlowBody")}</p>
           <div className="grid gap-4">
-            {authenticatedGroups.map((group) => (
+            {authenticatedGroupsEndpoints.map((group) => (
               <div
                 key={group.titleKey}
                 className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/70 p-4"

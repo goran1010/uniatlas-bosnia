@@ -1,4 +1,17 @@
-const endpoints = [
+export interface Endpoint {
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  path: string;
+  descriptionKey: string;
+  params?: Array<{
+    name?: string;
+    required?: boolean;
+    descriptionKey?: string;
+  }> | null;
+  successExample?: string | null;
+  errorExample?: string | null;
+}
+
+const apiEndpoints: Endpoint[] = [
   {
     method: "GET",
     path: "/api",
@@ -103,7 +116,10 @@ const endpoints = [
   },
 ];
 
-const authenticatedGroups = [
+const authenticatedGroupsEndpoints: {
+  titleKey: string;
+  endpoints: Endpoint[];
+}[] = [
   {
     titleKey: "api.groups.csrf",
     endpoints: [
@@ -211,4 +227,4 @@ const authenticatedGroups = [
   },
 ];
 
-export { endpoints, authenticatedGroups };
+export { apiEndpoints, authenticatedGroupsEndpoints };

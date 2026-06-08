@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
+import type { Endpoint } from "./utils/endpoints";
 
 const methodColor = {
   GET: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
@@ -10,7 +11,7 @@ const methodColor = {
   DELETE: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
 };
 
-function EndpointCard({ endpoint }) {
+function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
   const { t } = useContext(RootContext);
 
   return (
@@ -50,7 +51,7 @@ function EndpointCard({ endpoint }) {
                   <td className="pt-1 pr-4">
                     {p.required ? t("endpoint.yes") : t("endpoint.no")}
                   </td>
-                  <td className="pt-1">{t(p.descriptionKey)}</td>
+                  <td className="pt-1">{t(p.descriptionKey ?? "")}</td>
                 </tr>
               ))}
             </tbody>
