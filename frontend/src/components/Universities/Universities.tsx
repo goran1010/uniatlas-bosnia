@@ -46,7 +46,7 @@ function Universities() {
             <button
               key={tab}
               type="button"
-              onClick={() => setActiveTab(tab)}
+              onClick={() => { setActiveTab(tab); }}
               className={`px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
                 activeTab === tab
                   ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"

@@ -6,11 +6,11 @@ import type { ServerStatus } from "./serverStatus";
 
 export type Url = string;
 export type FetchOptions = Parameters<typeof fetch>[1];
-export type Guard = {
+export interface Guard {
   serverStatus: ServerStatus;
   addNotification: AddNotification;
   t: TFunction;
-};
+}
 
 type GuardedFetch = (
   url: Url,

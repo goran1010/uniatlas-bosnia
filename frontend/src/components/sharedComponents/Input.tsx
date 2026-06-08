@@ -10,7 +10,7 @@ function Input(props: InputProps) {
     "sm:text-sm invalid:border-red-500 focus:invalid:ring-red-500 focus:invalid:border-red-500 " +
     "dark:invalid:border-red-500 dark:focus:invalid:ring-red-500 dark:focus:invalid:border-red-500";
 
-  return <input className={`${baseStyles}`} {...props} />;
+  return <input className={baseStyles} {...props} />;
 }
 
 export { Input };

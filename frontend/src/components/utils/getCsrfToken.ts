@@ -38,7 +38,7 @@ async function getCsrfToken({
       },
     );
 
-    if (!csrfResponse || !csrfResponse.ok) {
+    if (!csrfResponse?.ok) {
       throw new Error("Failed to fetch CSRF token");
     }
 

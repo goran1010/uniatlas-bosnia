@@ -99,12 +99,12 @@ function SignUpForm({ loading, setLoading }: SignUpFormProps) {
       <div>
         <Button
           onClick={() =>
-            checkFormValidityClick(
+            { checkFormValidityClick(
               passwordRef?.current,
               confirmPasswordRef?.current,
               emailRef?.current,
               t,
-            )
+            ); }
           }
           type="submit"
           loading={loading}

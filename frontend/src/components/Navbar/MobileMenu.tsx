@@ -27,7 +27,7 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
           <Link
             className={menuItemClass}
             to="/"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => { setIsMenuOpen(false); }}
           >
             {t("nav.home")}
           </Link>
@@ -36,7 +36,7 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
           <Link
             className={menuItemClass}
             to="/api-docs"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => { setIsMenuOpen(false); }}
           >
             {t("nav.apiDocs")}
           </Link>
@@ -45,7 +45,7 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
           <Link
             className={menuItemClass}
             to="/universities"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => { setIsMenuOpen(false); }}
           >
             {t("nav.universities")}
           </Link>
@@ -56,7 +56,7 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
             <Link
               className={menuItemClass}
               to="/improve-data"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => { setIsMenuOpen(false); }}
             >
               {t("nav.improveData")}
             </Link>
@@ -67,7 +67,7 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
             <Link
               className={menuItemClass}
               to="/admin-dashboard"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => { setIsMenuOpen(false); }}
             >
               {t("nav.admin")}
             </Link>

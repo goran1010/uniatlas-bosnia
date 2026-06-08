@@ -82,11 +82,11 @@ function LogInForm({ loading, setLoading }: LogInFormProps) {
       <div>
         <Button
           onClick={() =>
-            checkLoginFormClickValidity(
+            { checkLoginFormClickValidity(
               emailInput?.current,
               passwordInput?.current,
               t,
-            )
+            ); }
           }
           type="submit"
           loading={loading}

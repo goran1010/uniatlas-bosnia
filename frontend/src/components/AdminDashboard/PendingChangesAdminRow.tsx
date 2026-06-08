@@ -10,12 +10,12 @@ import type { Notification } from "../../customHooks/useNotification";
 import type { PendingChange } from "../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TypeOfChange } from "../ContributionDashboard/AddUniversityEntity";
 
-type PendingChangesAdminRowProps = {
+interface PendingChangesAdminRowProps {
   data: PendingChange;
   addNotification: (notification: Notification) => void;
   setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
   index: number;
-};
+}
 
 const PendingChangesAdminRow = memo(
   ({

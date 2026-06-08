@@ -51,7 +51,7 @@ function Button({
       >
         {loading && <Spinner />}
       </div>
-      <span className={`${loading ? "invisible" : "visible"}`}>{children}</span>
+      <span className={loading ? "invisible" : "visible"}>{children}</span>
     </button>
   );
 }

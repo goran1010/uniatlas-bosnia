@@ -29,7 +29,7 @@ function Notifications() {
   const timerMapRef = useRef(new Map());
 
   useEffect(() => {
-    let newTimerRef = timerMapRef.current;
+    const newTimerRef = timerMapRef.current;
 
     // Set timers for new notifications only
     notifications?.forEach((notification) => {

@@ -18,7 +18,7 @@ function Status({
       <Link
         className={statusLinkClass}
         to="/profile"
-        onClick={() => setIsMenuOpen(false)}
+        onClick={() => { setIsMenuOpen(false); }}
       >
         {t("nav.profile")}
       </Link>
@@ -29,7 +29,7 @@ function Status({
     <Link
       className={statusLinkClass}
       to="/login"
-      onClick={() => setIsMenuOpen(false)}
+      onClick={() => { setIsMenuOpen(false); }}
     >
       {t("nav.login")}
     </Link>

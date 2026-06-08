@@ -19,7 +19,7 @@ function useTheme() {
         document.documentElement.classList.toggle("dark", media.matches);
 
       media.addEventListener("change", listener);
-      return () => media.removeEventListener("change", listener);
+      return () => { media.removeEventListener("change", listener); };
     }
   }, [theme]);
 

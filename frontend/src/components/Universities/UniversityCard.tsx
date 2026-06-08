@@ -57,7 +57,7 @@ function StudyProgramRow({
     <li className="text-sm">
       <button
         type="button"
-        onClick={() => setOpen((p) => !p)}
+        onClick={() => { setOpen((p) => !p); }}
         className="w-full text-left flex justify-between items-center gap-2 py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
         <span className="font-medium">{program.name}</span>
@@ -90,7 +90,7 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
     <li className="text-sm">
       <button
         type="button"
-        onClick={() => setOpen((p) => !p)}
+        onClick={() => { setOpen((p) => !p); }}
         className="w-full text-left flex justify-between items-center gap-2 py-1.5 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-semibold"
       >
         <span>{faculty.name}</span>

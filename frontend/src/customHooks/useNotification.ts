@@ -3,13 +3,13 @@ const MAX_NOTIFICATIONS = 5;
 
 export type TypeNotification = "success" | "error" | "info" | "warning";
 
-export type Notification = {
+export interface Notification {
   id?: string;
   type: TypeNotification;
   message: string;
   duration?: number | null;
   persistent?: boolean;
-};
+}
 
 export type AddNotification = (notification: Notification) => void;
 export type RemoveNotification = (id: string) => void;
@@ -20,7 +20,7 @@ function useNotification() {
   const addNotification = useCallback(
     ({
       id,
-      type = "info",
+      type,
       message,
       duration = 3000,
       persistent = false,
