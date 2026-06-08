@@ -2,6 +2,21 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
+import type { ServerStatus } from "../../../utils/serverStatus";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { AddNotification } from "../../../customHooks/useNotification";
+import type { PendingChange } from "../customHooks/useGetPendingChanges";
+import type { Dispatch, SetStateAction } from "react";
+
+interface HandleDiscardUniversityChangeParams {
+  changeId: string;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
+  addNotification: AddNotification;
+  setLoading: (loading: boolean) => void;
+  t: TFunction;
+  serverStatus: ServerStatus;
+}
+
 async function handleDiscardUniversityChange({
   changeId,
   setPendingChanges,
@@ -9,7 +24,7 @@ async function handleDiscardUniversityChange({
   setLoading,
   t,
   serverStatus,
-}) {
+}: HandleDiscardUniversityChangeParams) {
   try {
     setLoading(true);
     const csrfToken = await getCsrfToken({ serverStatus, addNotification, t });

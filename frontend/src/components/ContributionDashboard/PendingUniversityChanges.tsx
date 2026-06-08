@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, type Dispatch, type SetStateAction } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { PendingUniversityChangesRow } from "./PendingUniversityChangesRow";
 import { Spinner } from "../../utils/Spinner";
@@ -7,7 +7,7 @@ import type { PendingChange } from "./customHooks/useGetPendingChanges";
 
 interface PendingUniversityChangesProps {
   pendingChanges: PendingChange[];
-  setPendingChanges: (changes: PendingChange[]) => void;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
   loading: boolean;
 }
 

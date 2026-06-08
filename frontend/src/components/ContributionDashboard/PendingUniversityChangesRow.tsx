@@ -1,4 +1,9 @@
-import { useState, useContext } from "react";
+import {
+  useState,
+  useContext,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { handleDiscardUniversityChange } from "./utils/handleDiscardUniversityChange";
@@ -19,7 +24,7 @@ const BADGE: BadgeStyles = {
 interface PendingUniversityChangesRowProps {
   change: PendingChange;
   index: number;
-  setPendingChanges: (changes: PendingChange[]) => void;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
 }
 
 function PendingUniversityChangesRow({

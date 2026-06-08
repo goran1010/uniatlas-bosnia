@@ -2,6 +2,31 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
+import type { ServerStatus } from "../../../utils/serverStatus";
+import type { TFunction } from "../../../customHooks/useLanguage";
+import type { AddNotification } from "../../../customHooks/useNotification";
+import type { PendingChange } from "../customHooks/useGetPendingChanges";
+import type { Dispatch, SetStateAction } from "react";
+
+interface HandleSubmitUniversityEntityParams {
+  entityType: string;
+  parentId?: string;
+  targetId?: string;
+  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
+  data: Record<string, unknown>;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
+  addNotification: AddNotification;
+  setLoading: (loading: boolean) => void;
+  setFormState: (formState: {
+    entityType: string;
+    parentId?: string;
+    targetId?: string;
+    data: Record<string, unknown>;
+  }) => void;
+  t: TFunction;
+  serverStatus: ServerStatus;
+}
+
 async function handleSubmitUniversityEntity({
   entityType,
   parentId,
@@ -14,7 +39,7 @@ async function handleSubmitUniversityEntity({
   setFormState,
   t,
   serverStatus,
-}) {
+}: HandleSubmitUniversityEntityParams) {
   try {
     setLoading(true);
     const csrfToken = await getCsrfToken({ serverStatus, addNotification, t });

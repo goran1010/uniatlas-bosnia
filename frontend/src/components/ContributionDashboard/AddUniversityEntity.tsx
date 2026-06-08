@@ -7,7 +7,7 @@ import { Button } from "../sharedComponents/Button";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
 import type { PendingChange } from "./customHooks/useGetPendingChanges";
-import type { SubmitEvent } from "react";
+import type { Dispatch, SetStateAction, SubmitEvent } from "react";
 
 type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
 type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
@@ -84,7 +84,7 @@ function DataField(props: DataFieldProps) {
 function AddUniversityEntity({
   setPendingChanges,
 }: {
-  setPendingChanges: (value: PendingChange[]) => void;
+  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
 }) {
   const { t, addNotification, serverStatus } = useContext(RootContext);
   const [formState, setFormState] = useState(INIT_FORM);
