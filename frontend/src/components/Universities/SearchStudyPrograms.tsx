@@ -8,6 +8,21 @@ import { BACKEND_URL } from "../../utils/envConfig";
 import type { Faculty, StudyProgram } from "./GetAllUniversities";
 import type { TFunction } from "../../customHooks/useLanguage";
 
+interface StatusSuccessResponse {
+  message: string;
+  data: StudyWithFacultyResult[];
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function StudyProgramResult({
   program,
   t,
@@ -63,18 +78,20 @@ function SearchStudyPrograms() {
     try {
       setLoading(true);
       const res = await fetch(
-        `${BACKEND_URL}/api/v1/study-programs/search?searchTerm=${term}`,
+        `${BACKEND_URL}/api/v1/study-programs/search?searchTerm=${encodeURIComponent(term)}`,
         { method: "GET", mode: "cors" },
       );
-      const result = await res.json();
+
       if (res.ok) {
+        const result = await parseJson<StatusSuccessResponse>(res);
         setResults(result.data);
       } else if (res.status === 404) {
         setResults([]);
       } else {
+        const result = await parseJson<StatusErrorResponse>(res);
         addNotification({
           type: "error",
-          message: result?.error?.message ?? "Search failed.",
+          message: result.error.message,
         });
       }
     } catch {
@@ -86,7 +103,10 @@ function SearchStudyPrograms() {
 
   return (
     <div className="flex gap-4 w-full items-center justify-center">
-      <form onSubmit={handleSearch} className="flex gap-2 w-full max-w-lg">
+      <form
+        onSubmit={(e) => void handleSearch(e)}
+        className="flex gap-2 w-full max-w-lg"
+      >
         <Input
           ref={inputRef}
           type="search"

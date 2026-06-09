@@ -24,9 +24,10 @@ function useServerWakeUp({
 
   useEffect(() => {
     // Limit the number of wake-up attempts to prevent infinite loops
-    let isCancelled = false;
     let currentNumberOfAttempts = 0;
+
     let retryTimeoutId: number;
+    let isCancelled = false;
 
     async function checkServer() {
       setServerStatus("waking");
@@ -66,7 +67,7 @@ function useServerWakeUp({
           });
           retryTimeoutId = setTimeout(() => {
             currentNumberOfAttempts++;
-            checkServer();
+            void checkServer();
           }, DELAY_BETWEEN_ATTEMPTS);
           return;
         }
@@ -77,12 +78,12 @@ function useServerWakeUp({
         console.error(err);
         retryTimeoutId = setTimeout(() => {
           currentNumberOfAttempts++;
-          checkServer();
+          void checkServer();
         }, DELAY_BETWEEN_ATTEMPTS);
       }
     }
 
-    checkServer();
+    void checkServer();
 
     return () => {
       isCancelled = true;

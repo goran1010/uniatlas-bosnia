@@ -12,6 +12,23 @@ export type UserData = {
   role: string;
 } | null;
 
+export type Message = string | null;
+
+interface StatusSuccessResponse {
+  message: Message;
+  data: UserData;
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function useStatusCheck(
   addNotification: AddNotificationFunction,
   t: (key: string) => string,
@@ -19,7 +36,13 @@ function useStatusCheck(
 ) {
   const [userData, setUserData] = useState<UserData>(null);
   const tRef = useRef(t);
-  const checkLoginTimeoutId = useRef<number>(undefined);
+  const checkLoginTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
+  useEffect(() => {
+    tRef.current = t;
+  }, [t]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -27,7 +50,7 @@ function useStatusCheck(
 
     async function checkLogin() {
       try {
-        const response: Response = await guardedFetch(
+        const response = await guardedFetch(
           `${BACKEND_URL}/users/me`,
           {
             mode: "cors",
@@ -42,52 +65,60 @@ function useStatusCheck(
           },
         );
 
-        const result = await response.json();
+        if (!response.ok) {
+          const result = await parseJson<StatusErrorResponse>(response);
 
-        if (isCancelled) {
+          if (isCancelled) {
+            return;
+          }
+
+          addNotification({
+            type: "error",
+            message: result.error.message,
+          });
+
           return;
         }
 
-        if (!response.ok) {
-          addNotification({
-            type: "error",
-            message:
-              result?.error?.message ||
-              result?.error ||
-              tRef.current("loginStatus.failed"),
-          });
+        const result = await parseJson<StatusSuccessResponse>(response);
+
+        if (isCancelled) {
           return;
         }
 
         addNotification({
           type: "success",
-          message: result.message || tRef.current("loginStatus.success"),
+          message: result.message ?? tRef.current("loginStatus.success"),
         });
+
         setUserData(result.data);
       } catch (err) {
         if (isCancelled) {
           return;
         }
+
         addNotification({
           type: "error",
           message: tRef.current("loginStatus.error"),
         });
+
         console.error("Error checking login status:", err);
       }
     }
 
-    // Need to add a slight delay before checking the server status to avoid race conditions ?!
-    // To-Do : Implement a more robust solution for this
-    checkLoginTimeoutId.current = setTimeout(async () => {
+    checkLoginTimeoutId.current = setTimeout(() => {
       if (!isCancelled) {
-        await checkLogin();
+        void checkLogin();
       }
     }, 100);
 
     return () => {
       isCancelled = true;
       abortController.abort();
-      clearTimeout(checkLoginTimeoutId.current);
+
+      if (checkLoginTimeoutId.current !== null) {
+        clearTimeout(checkLoginTimeoutId.current);
+      }
     };
   }, [addNotification, serverStatus]);
 

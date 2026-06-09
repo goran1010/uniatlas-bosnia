@@ -77,7 +77,7 @@ function useGetPendingChanges(
         setLoading(false);
       }
     };
-    fetchPendingChanges();
+    void fetchPendingChanges();
   }, [addNotification, enabled, setLoading, serverStatus, t]);
 
   return { pendingChanges, setPendingChanges };

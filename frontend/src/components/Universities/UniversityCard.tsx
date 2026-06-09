@@ -118,6 +118,21 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
   );
 }
 
+interface StatusSuccessResponse {
+  message: string;
+  data: University;
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function UniversityCard({ university }: { university: University }) {
   const { t, addNotification } = use(RootContext);
   const [expanded, setExpanded] = useState(false);
@@ -142,14 +157,16 @@ function UniversityCard({ university }: { university: University }) {
           mode: "cors",
         },
       );
-      const result = await res.json();
+
       if (res.ok) {
+        const result = await parseJson<StatusSuccessResponse>(res);
         setDetailData(result.data);
         setExpanded(true);
       } else {
+        const result = await parseJson<StatusErrorResponse>(res);
         addNotification({
           type: "error",
-          message: result?.error?.message ?? "Failed to load details.",
+          message: result.error.message,
         });
       }
     } catch {
@@ -211,7 +228,9 @@ function UniversityCard({ university }: { university: University }) {
           <Button
             variant="secondary"
             className="px-3 py-1.5 text-xs shrink-0 max-w-36"
-            onClick={handleExpand}
+            onClick={() => {
+              void handleExpand();
+            }}
             loading={loadingDetail}
           >
             {expanded

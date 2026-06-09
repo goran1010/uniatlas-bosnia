@@ -39,7 +39,7 @@ function LogInForm({ loading, setLoading }: LogInFormProps) {
   return (
     <form
       onSubmit={(e) =>
-        handleSubmitLogIn(
+        void handleSubmitLogIn(
           e,
           inputFields,
           setUserData,

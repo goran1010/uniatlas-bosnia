@@ -18,7 +18,7 @@ function SignUp() {
         type: "warning",
         message: t("auth.signup.blockedWhileLoggedIn"),
       });
-      navigate("/home");
+      void navigate("/home");
     }
   }, [userData, navigate, addNotification, t]);
 

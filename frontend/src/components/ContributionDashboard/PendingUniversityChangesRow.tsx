@@ -70,7 +70,7 @@ function PendingUniversityChangesRow({
             className="px-2 py-1 text-xs max-w-24"
             loading={loading}
             onClick={() =>
-              handleDiscardUniversityChange({
+              void handleDiscardUniversityChange({
                 changeId: change.id,
                 setPendingChanges,
                 addNotification,

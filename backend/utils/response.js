@@ -1,11 +1,5 @@
-function sendSuccess(res, { status = 200, data = null, message } = {}) {
-  const payload = { data };
-
-  if (message) {
-    payload.message = message;
-  }
-
-  return res.status(status).json(payload);
+function sendSuccess(res, { status = 200, data = null, message = null } = {}) {
+  return res.status(status).json({ data, message });
 }
 
 function sendError(res, { status = 400, message = "Request failed." } = {}) {

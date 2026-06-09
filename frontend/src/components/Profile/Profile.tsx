@@ -17,7 +17,7 @@ function Profile() {
         type: "warning",
         message: t("profile.needLogin"),
       });
-      navigate("/login");
+      void navigate("/login");
       return;
     }
   }, [userData, navigate, addNotification, t]);
@@ -62,7 +62,7 @@ function Profile() {
           <div className="flex flex-col gap-2 w-full max-w-sm">
             <Button
               onClick={() =>
-                handleLogout(
+                void handleLogout(
                   addNotification,
                   navigate,
                   setUserData,

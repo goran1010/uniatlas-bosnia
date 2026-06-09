@@ -32,7 +32,7 @@ function LogIn() {
           message: t("auth.login.alreadyLoggedIn"),
         });
       }
-      navigate("/home");
+      void navigate("/home");
       return;
     }
   }, [userData, navigate, addNotification, t]);

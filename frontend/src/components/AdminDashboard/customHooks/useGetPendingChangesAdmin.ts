@@ -62,7 +62,7 @@ function useGetPendingChangesAdmin(
         setLoading(false);
       }
     };
-    fetchPendingChanges();
+    void fetchPendingChanges();
   }, [addNotification, setLoading, serverStatus, t]);
 
   return { pendingChanges, setPendingChanges };

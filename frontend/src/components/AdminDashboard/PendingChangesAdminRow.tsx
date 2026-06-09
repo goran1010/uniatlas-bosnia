@@ -96,7 +96,7 @@ const PendingChangesAdminRow = memo(
             variant="success"
             className="px-3 py-2 text-sm sm:max-w-25"
             onClick={() => {
-              handleConfirm(
+              void handleConfirm(
                 data,
                 setPendingChanges,
                 addNotification,
@@ -114,7 +114,7 @@ const PendingChangesAdminRow = memo(
             variant="danger"
             className="px-3 py-2 text-sm sm:max-w-25"
             onClick={() => {
-              handleDecline(
+              void handleDecline(
                 data,
                 setPendingChanges,
                 addNotification,

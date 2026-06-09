@@ -1,5 +1,4 @@
-const BACKEND_URL: string | undefined = import.meta.env.VITE_BACKEND_URL;
-
+import { BACKEND_URL } from "../../utils/envConfig";
 import { guardedFetch } from "../../utils/guardedFetch";
 
 import type { ServerStatus } from "../../utils/serverStatus";
@@ -7,6 +6,15 @@ import type { AddNotification } from "../../customHooks/useNotification";
 import type { TFunction } from "../../customHooks/useLanguage";
 
 let cachedToken: string | null = null;
+
+interface StatusSuccessResponse {
+  message: string;
+  data: string;
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
 
 async function getCsrfToken({
   serverStatus,
@@ -37,11 +45,16 @@ async function getCsrfToken({
         t,
       },
     );
-
-    const { data: csrfToken } = await csrfResponse.json();
+    const { data: csrfToken } =
+      await parseJson<StatusSuccessResponse>(csrfResponse);
     cachedToken = csrfToken;
+
     return csrfToken;
   } catch (error) {
+    addNotification({
+      type: "error",
+      message: "Error fetching CSRF token",
+    });
     console.error("Error fetching CSRF token:", error);
     throw new Error("Failed to fetch CSRF token", { cause: error });
   }

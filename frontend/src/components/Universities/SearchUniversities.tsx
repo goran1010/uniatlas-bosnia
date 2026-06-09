@@ -8,6 +8,21 @@ import { BACKEND_URL } from "../../utils/envConfig";
 
 import type { University } from "./GetAllUniversities";
 
+interface StatusSuccessResponse {
+  message: string;
+  data: University[];
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function SearchUniversities() {
   const { t, addNotification } = use(RootContext);
   const [results, setResults] = useState<University[]>([]);
@@ -30,15 +45,17 @@ function SearchUniversities() {
         `${BACKEND_URL}/api/v1/universities/search?searchTerm=${encodeURIComponent(term)}`,
         { method: "GET", mode: "cors" },
       );
-      const result = await res.json();
+
       if (res.ok) {
+        const result = await parseJson<StatusSuccessResponse>(res);
         setResults(result.data);
       } else if (res.status === 404) {
         setResults([]);
       } else {
+        const result = await parseJson<StatusErrorResponse>(res);
         addNotification({
           type: "error",
-          message: result?.error?.message ?? "Search failed.",
+          message: result.error.message,
         });
       }
     } catch {
@@ -50,7 +67,10 @@ function SearchUniversities() {
 
   return (
     <div className="flex gap-4 w-full items-center justify-center">
-      <form onSubmit={handleSearch} className="flex gap-2 w-full max-w-lg">
+      <form
+        onSubmit={(e) => void handleSearch(e)}
+        className="flex gap-2 w-full max-w-lg"
+      >
         <Input
           ref={inputRef}
           type="search"

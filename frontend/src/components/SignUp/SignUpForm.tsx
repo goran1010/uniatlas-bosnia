@@ -44,7 +44,7 @@ function SignUpForm({ loading, setLoading }: SignUpFormProps) {
     <form
       className="flex flex-col gap-3"
       onSubmit={(e) =>
-        handleSignUpSubmit(
+        void handleSignUpSubmit(
           e,
           setLoading,
           inputFields,

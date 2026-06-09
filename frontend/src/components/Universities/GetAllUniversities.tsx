@@ -57,6 +57,21 @@ export interface Subject {
   sourceUrl?: string;
 }
 
+interface StatusSuccessResponse {
+  message: string;
+  data: University[];
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function GetAllUniversities() {
   const { t, addNotification } = use(RootContext);
   const [universities, setUniversities] = useState<University[]>([]);
@@ -70,13 +85,15 @@ function GetAllUniversities() {
           method: "GET",
           mode: "cors",
         });
-        const result = await res.json();
+
         if (res.ok) {
+          const result = await parseJson<StatusSuccessResponse>(res);
           setUniversities(result.data);
         } else {
+          const result = await parseJson<StatusErrorResponse>(res);
           addNotification({
             type: "error",
-            message: result?.error?.message ?? "Failed to load universities.",
+            message: result.error.message,
           });
         }
       } catch {
@@ -88,7 +105,7 @@ function GetAllUniversities() {
         setLoading(false);
       }
     }
-    fetchUniversities();
+    void fetchUniversities();
   }, [addNotification]);
 
   if (loading) return <Spinner />;
