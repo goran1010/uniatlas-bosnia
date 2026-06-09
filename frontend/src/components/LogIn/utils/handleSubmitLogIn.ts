@@ -72,8 +72,8 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
       addNotification({
         type: "error",
         message:
-          result?.error?.message ||
-          result?.error ||
+          result?.error?.message ??
+          result?.error ??
           t("messages.auth.loginFailed"),
       });
       return;

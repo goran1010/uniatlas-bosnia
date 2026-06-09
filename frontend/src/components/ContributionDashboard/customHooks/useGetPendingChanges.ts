@@ -63,8 +63,8 @@ function useGetPendingChanges(
         addNotification({
           type: "error",
           message:
-            result?.error?.message ||
-            result?.error ||
+            result?.error?.message ??
+            result?.error ??
             t("messages.pendingChanges.loadFailed"),
         });
       } catch (error) {

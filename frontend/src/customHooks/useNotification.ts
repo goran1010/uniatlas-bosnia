@@ -69,7 +69,8 @@ function useNotification() {
     [],
   );
 
-  const removeNotification = useCallback((id: string) => {
+  const removeNotification = useCallback((id: string | undefined) => {
+    if (!id) return;
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   }, []);
 

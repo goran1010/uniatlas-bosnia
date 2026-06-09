@@ -62,8 +62,8 @@ async function handleDiscardUniversityChange({
     addNotification({
       type: "error",
       message:
-        result?.error?.message ||
-        result?.error ||
+        result?.error?.message ??
+        result?.error ??
         t("messages.universities.deleteFailed"),
     });
   } catch (err) {

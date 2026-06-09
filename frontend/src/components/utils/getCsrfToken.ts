@@ -43,7 +43,7 @@ async function getCsrfToken({
     return csrfToken;
   } catch (error) {
     console.error("Error fetching CSRF token:", error);
-    throw new Error("Failed to fetch CSRF token");
+    throw new Error("Failed to fetch CSRF token", { cause: error });
   }
 }
 

@@ -76,7 +76,7 @@ function GetAllUniversities() {
         } else {
           addNotification({
             type: "error",
-            message: result?.error?.message || "Failed to load universities.",
+            message: result?.error?.message ?? "Failed to load universities.",
           });
         }
       } catch {

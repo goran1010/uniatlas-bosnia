@@ -74,7 +74,7 @@ function SearchStudyPrograms() {
       } else {
         addNotification({
           type: "error",
-          message: result?.error?.message || "Search failed.",
+          message: result?.error?.message ?? "Search failed.",
         });
       }
     } catch {

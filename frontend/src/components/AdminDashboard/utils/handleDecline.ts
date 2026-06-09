@@ -70,7 +70,7 @@ const handleDecline: HandleDecline = async function (
     }
     addNotification({
       type: "error",
-      message: result?.error?.message || t("messages.admin.declineFailed"),
+      message: result?.error?.message ?? t("messages.admin.declineFailed"),
     });
   } catch (error) {
     addNotification({

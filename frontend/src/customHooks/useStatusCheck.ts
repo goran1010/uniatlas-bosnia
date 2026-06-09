@@ -18,17 +18,16 @@ function useStatusCheck(
   serverStatus: ServerStatus,
 ) {
   const [userData, setUserData] = useState<UserData>(null);
-
   const tRef = useRef(t);
+  const checkLoginTimeoutId = useRef<number>(undefined);
 
   useEffect(() => {
     let isCancelled = false;
     const abortController = new AbortController();
-    let checkLoginTimeoutId;
 
     async function checkLogin() {
       try {
-        const response = await guardedFetch(
+        const response: Response = await guardedFetch(
           `${BACKEND_URL}/users/me`,
           {
             mode: "cors",
@@ -79,16 +78,16 @@ function useStatusCheck(
 
     // Need to add a slight delay before checking the server status to avoid race conditions ?!
     // To-Do : Implement a more robust solution for this
-    checkLoginTimeoutId = setTimeout(() => {
+    checkLoginTimeoutId.current = setTimeout(async () => {
       if (!isCancelled) {
-        checkLogin();
+        await checkLogin();
       }
     }, 100);
 
     return () => {
       isCancelled = true;
       abortController.abort();
-      clearTimeout(checkLoginTimeoutId);
+      clearTimeout(checkLoginTimeoutId.current);
     };
   }, [addNotification, serverStatus]);
 

@@ -75,8 +75,8 @@ const handleConfirm: HandleConfirm = async function (
     addNotification({
       type: "error",
       message:
-        result?.error?.message ||
-        result?.error ||
+        result?.error?.message ??
+        result?.error ??
         t("messages.admin.approveFailed"),
     });
   } catch (error) {

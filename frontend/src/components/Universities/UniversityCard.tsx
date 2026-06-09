@@ -136,7 +136,7 @@ function UniversityCard({ university }: { university: University }) {
     try {
       setLoadingDetail(true);
       const res = await fetch(
-        `${BACKEND_URL}/api/v1/universities/${university.id}`,
+        `${BACKEND_URL}/api/v1/universities/${university.id.toString()}`,
         {
           method: "GET",
           mode: "cors",
@@ -149,7 +149,7 @@ function UniversityCard({ university }: { university: University }) {
       } else {
         addNotification({
           type: "error",
-          message: result?.error?.message || "Failed to load details.",
+          message: result?.error?.message ?? "Failed to load details.",
         });
       }
     } catch {
