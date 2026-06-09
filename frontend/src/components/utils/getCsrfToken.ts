@@ -38,10 +38,6 @@ async function getCsrfToken({
       },
     );
 
-    if (!csrfResponse?.ok) {
-      throw new Error("Failed to fetch CSRF token");
-    }
-
     const { data: csrfToken } = await csrfResponse.json();
     cachedToken = csrfToken;
     return csrfToken;

@@ -1,5 +1,5 @@
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-import { useContext, useEffect, useState } from "react";
+import { BACKEND_URL } from "../../../utils/envConfig";
+import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -10,7 +10,7 @@ function useGetPendingChangesAdmin(
   setLoading: (loading: boolean) => void,
   t: TFunction,
 ) {
-  const { addNotification, serverStatus } = useContext(RootContext);
+  const { addNotification, serverStatus } = use(RootContext);
   const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
 
   useEffect(() => {
@@ -34,10 +34,6 @@ function useGetPendingChangesAdmin(
             t,
           },
         );
-
-        if (!response) {
-          return;
-        }
 
         const result = await response.json();
 

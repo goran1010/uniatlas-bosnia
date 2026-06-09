@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { use, useEffect, useRef } from "react";
 import { RootContext } from "../contextData/RootContext";
 import type { TypeNotification } from "../customHooks/useNotification";
 
@@ -24,15 +24,15 @@ function getNotificationRole(type: TypeNotification) {
 }
 
 function Notifications() {
-  const { notifications, removeNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
+  const { notifications, removeNotification } = use(RootContext);
+  const { t } = use(RootContext);
   const timerMapRef = useRef(new Map());
 
   useEffect(() => {
     const newTimerRef = timerMapRef.current;
 
     // Set timers for new notifications only
-    notifications?.forEach((notification) => {
+    notifications.forEach((notification) => {
       const shouldAutoDismiss =
         !notification.persistent &&
         typeof notification.duration === "number" &&
@@ -60,7 +60,7 @@ function Notifications() {
     // Clean up timers for notifications that were removed
     return () => {
       newTimerRef.forEach((timer, id) => {
-        const stillExists = notifications?.some(
+        const stillExists = notifications.some(
           (notification) => notification.id === id,
         );
         if (!stillExists) {
@@ -71,7 +71,7 @@ function Notifications() {
     };
   }, [notifications, removeNotification]);
 
-  if (!notifications?.length) return null;
+  if (!notifications.length) return null;
 
   return (
     <aside

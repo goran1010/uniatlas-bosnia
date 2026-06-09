@@ -1,9 +1,9 @@
 import { PendingChangesAdmin } from "./PendingChangesAdmin";
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
 function AdminForm() {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
 
   return (
     <div className="relative min-h-full w-full flex flex-1 flex-col items-center py-2 sm:p-3">

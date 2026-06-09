@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { ContributionForm } from "./ContributionForm";
 import { Helmet } from "react-helmet-async";
 
 function ContributionDashboard() {
-  const { userData } = useContext(RootContext);
-  const { t } = useContext(RootContext);
+  const { userData, t } = use(RootContext);
 
   if (!userData) {
     return (

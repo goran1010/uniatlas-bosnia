@@ -1,12 +1,11 @@
-import { useContext, type ChangeEvent } from "react";
+import { use, type ChangeEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
 import type { SetLanguage } from "../../customHooks/useLanguage";
 
 function LanguageSwitcher({ setLanguage }: { setLanguage: SetLanguage }) {
-  const { addNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
+  const { addNotification, t } = use(RootContext);
 
   function handleLanguageChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLanguage = event.target.value;

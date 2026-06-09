@@ -1,23 +1,22 @@
-import { useState, useContext, useRef, type SubmitEvent } from "react";
+import { useState, use, useRef, type SubmitEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
+import { BACKEND_URL } from "../../utils/envConfig";
 
 import type { University } from "./GetAllUniversities";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-
 function SearchUniversities() {
-  const { t, addNotification } = useContext(RootContext);
+  const { t, addNotification } = use(RootContext);
   const [results, setResults] = useState<University[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
-    const term = inputRef.current?.value?.trim();
+    const term = inputRef.current?.value.trim();
     if (!term || term.length < 2) {
       addNotification({
         type: "error",

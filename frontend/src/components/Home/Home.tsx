@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 
 function Home() {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
   const pageTitle = `${t("home.title")} | ${t("title.app")}`;
 
   return (
@@ -14,7 +14,10 @@ function Home() {
         <meta name="description" content={t("meta.home")} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/" />
-        <meta property="og:url" content="https://uniatlas-bosnia.netlify.app/" />
+        <meta
+          property="og:url"
+          content="https://uniatlas-bosnia.netlify.app/"
+        />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={t("meta.home")} />
         <meta name="twitter:title" content={pageTitle} />

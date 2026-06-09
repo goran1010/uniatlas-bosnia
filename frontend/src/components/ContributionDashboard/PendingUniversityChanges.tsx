@@ -1,4 +1,4 @@
-import { useContext, type Dispatch, type SetStateAction } from "react";
+import { use, type Dispatch, type SetStateAction } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { PendingUniversityChangesRow } from "./PendingUniversityChangesRow";
 import { Spinner } from "../../utils/Spinner";
@@ -16,11 +16,11 @@ function PendingUniversityChanges({
   setPendingChanges,
   loading,
 }: PendingUniversityChangesProps) {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
 
   if (loading) return <Spinner />;
 
-  if (!pendingChanges?.length) {
+  if (!pendingChanges.length) {
     return (
       <p className="text-center text-gray-500 dark:text-gray-400 py-4">
         {t("contribution.noPendingChanges")}

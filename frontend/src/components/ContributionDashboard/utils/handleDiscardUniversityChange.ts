@@ -1,4 +1,4 @@
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -51,8 +51,6 @@ async function handleDiscardUniversityChange({
       },
       { serverStatus, addNotification, t },
     );
-
-    if (!response) return;
 
     const result = await response.json();
 

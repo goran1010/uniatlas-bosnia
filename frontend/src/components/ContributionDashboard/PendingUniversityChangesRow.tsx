@@ -1,9 +1,4 @@
-import {
-  useState,
-  useContext,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useState, use, type Dispatch, type SetStateAction } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { handleDiscardUniversityChange } from "./utils/handleDiscardUniversityChange";
@@ -32,7 +27,7 @@ function PendingUniversityChangesRow({
   index,
   setPendingChanges,
 }: PendingUniversityChangesRowProps) {
-  const { t, addNotification, serverStatus } = useContext(RootContext);
+  const { t, addNotification, serverStatus } = use(RootContext);
   const [loading, setLoading] = useState(false);
 
   const isEven = index % 2 === 0;
@@ -47,7 +42,7 @@ function PendingUniversityChangesRow({
             {t("contribution.change")}
           </span>
           <span
-            className={`px-2 py-0.5 rounded text-xs font-semibold ${BADGE[change.typeOfChange] ?? ""}`}
+            className={`px-2 py-0.5 rounded text-xs font-semibold ${BADGE[change.typeOfChange]}`}
           >
             {change.typeOfChange}
           </span>

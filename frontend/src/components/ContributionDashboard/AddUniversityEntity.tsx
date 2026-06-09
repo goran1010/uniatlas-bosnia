@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Select } from "../sharedComponents/Select";
@@ -86,7 +86,7 @@ function AddUniversityEntity({
 }: {
   setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
 }) {
-  const { t, addNotification, serverStatus } = useContext(RootContext);
+  const { t, addNotification, serverStatus } = use(RootContext);
   const [formState, setFormState] = useState(INIT_FORM);
   const [loading, setLoading] = useState(false);
 
@@ -129,7 +129,9 @@ function AddUniversityEntity({
       setPendingChanges,
       addNotification,
       setLoading,
-      setFormState: () => { setFormState(INIT_FORM); },
+      setFormState: () => {
+        setFormState(INIT_FORM);
+      },
       t,
       serverStatus,
     });
@@ -146,7 +148,9 @@ function AddUniversityEntity({
           id="entityType"
           name="entityType"
           value={entityType}
-          onChange={(e) => { setField("entityType", e.target.value); }}
+          onChange={(e) => {
+            setField("entityType", e.target.value);
+          }}
           required
         >
           <option value="">{t("contribution.noDataset")}</option>
@@ -164,7 +168,9 @@ function AddUniversityEntity({
           id="typeOfChange"
           name="typeOfChange"
           value={typeOfChange}
-          onChange={(e) => { setField("typeOfChange", e.target.value); }}
+          onChange={(e) => {
+            setField("typeOfChange", e.target.value);
+          }}
           required
         >
           {TYPE_OF_CHANGES.map((c) => (
@@ -183,7 +189,9 @@ function AddUniversityEntity({
           min={1}
           required
           value={parentId}
-          onChange={(e) => { setField("parentId", e.target.value); }}
+          onChange={(e) => {
+            setField("parentId", e.target.value);
+          }}
         />
       )}
 
@@ -195,7 +203,9 @@ function AddUniversityEntity({
           min={1}
           required
           value={targetId}
-          onChange={(e) => { setField("targetId", e.target.value); }}
+          onChange={(e) => {
+            setField("targetId", e.target.value);
+          }}
         />
       )}
 
@@ -211,7 +221,9 @@ function AddUniversityEntity({
             type="text"
             required={typeOfChange === "CREATE"}
             value={data.name ?? ""}
-            onChange={(e) => { setDataField("name", e.target.value); }}
+            onChange={(e) => {
+              setDataField("name", e.target.value);
+            }}
           />
 
           {entityType === "UNIVERSITY" && (
@@ -222,7 +234,9 @@ function AddUniversityEntity({
                 type="text"
                 required={typeOfChange === "CREATE"}
                 value={data.city ?? ""}
-                onChange={(e) => { setDataField("city", e.target.value); }}
+                onChange={(e) => {
+                  setDataField("city", e.target.value);
+                }}
               />
               <div className="flex flex-col gap-1 self-center">
                 <div className="flex flex-col gap-1">
@@ -232,7 +246,9 @@ function AddUniversityEntity({
                   <Select
                     id="dataEntity"
                     value={data.entity ?? ""}
-                    onChange={(e) => { setDataField("entity", e.target.value); }}
+                    onChange={(e) => {
+                      setDataField("entity", e.target.value);
+                    }}
                     required={typeOfChange === "CREATE"}
                   >
                     <option value="">—</option>
@@ -250,7 +266,9 @@ function AddUniversityEntity({
                   <Select
                     id="dataOwnership"
                     value={data.ownership ?? ""}
-                    onChange={(e) => { setDataField("ownership", e.target.value); }}
+                    onChange={(e) => {
+                      setDataField("ownership", e.target.value);
+                    }}
                     required={typeOfChange === "CREATE"}
                   >
                     <option value="">—</option>
@@ -268,7 +286,9 @@ function AddUniversityEntity({
                 id="dataWebsite"
                 type="url"
                 value={data.website ?? ""}
-                onChange={(e) => { setDataField("website", e.target.value); }}
+                onChange={(e) => {
+                  setDataField("website", e.target.value);
+                }}
               />
             </>
           )}
@@ -282,7 +302,9 @@ function AddUniversityEntity({
                 <Select
                   id="dataCycle"
                   value={data.cycle ?? ""}
-                  onChange={(e) => { setDataField("cycle", e.target.value); }}
+                  onChange={(e) => {
+                    setDataField("cycle", e.target.value);
+                  }}
                   required={typeOfChange === "CREATE"}
                 >
                   <option value="">—</option>
@@ -300,9 +322,9 @@ function AddUniversityEntity({
                 min={1}
                 max={10}
                 value={data.durationYears ?? ""}
-                onChange={(e) =>
-                  { setDataField("durationYears", Number(e.target.value)); }
-                }
+                onChange={(e) => {
+                  setDataField("durationYears", Number(e.target.value));
+                }}
               />
               <DataField
                 label={t("contribution.dataFields.ects")}
@@ -310,14 +332,18 @@ function AddUniversityEntity({
                 type="number"
                 min={1}
                 value={data.ects ?? ""}
-                onChange={(e) => { setDataField("ects", Number(e.target.value)); }}
+                onChange={(e) => {
+                  setDataField("ects", Number(e.target.value));
+                }}
               />
               <DataField
                 label={t("contribution.dataFields.language")}
                 id="dataLanguage"
                 type="text"
                 value={data.language ?? ""}
-                onChange={(e) => { setDataField("language", e.target.value); }}
+                onChange={(e) => {
+                  setDataField("language", e.target.value);
+                }}
               />
             </>
           )}
@@ -331,9 +357,9 @@ function AddUniversityEntity({
                 min={1}
                 max={12}
                 value={data.semester ?? ""}
-                onChange={(e) =>
-                  { setDataField("semester", Number(e.target.value)); }
-                }
+                onChange={(e) => {
+                  setDataField("semester", Number(e.target.value));
+                }}
               />
               <DataField
                 label={t("contribution.dataFields.ects")}
@@ -341,7 +367,9 @@ function AddUniversityEntity({
                 type="number"
                 min={1}
                 value={data.ects ?? ""}
-                onChange={(e) => { setDataField("ects", Number(e.target.value)); }}
+                onChange={(e) => {
+                  setDataField("ects", Number(e.target.value));
+                }}
               />
               <div className="flex flex-col gap-1">
                 <Label htmlFor="dataSubjectType">
@@ -350,7 +378,9 @@ function AddUniversityEntity({
                 <Select
                   id="dataSubjectType"
                   value={data.type ?? ""}
-                  onChange={(e) => { setDataField("type", e.target.value); }}
+                  onChange={(e) => {
+                    setDataField("type", e.target.value);
+                  }}
                 >
                   <option value="">—</option>
                   {SUBJECT_TYPES.map((st) => (

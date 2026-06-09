@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { useTheme } from "../../customHooks/useTheme";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -11,7 +11,7 @@ import { type UseCloseMenu } from "../../customHooks/useCloseMenu";
 function Navbar({ closeMenu }: { closeMenu: UseCloseMenu }) {
   const { navRef, isMenuOpen, setIsMenuOpen } = closeMenu;
   const { setMode } = useTheme();
-  const { userData, setLanguage, t } = useContext(RootContext);
+  const { userData, setLanguage, t } = use(RootContext);
 
   return (
     <nav

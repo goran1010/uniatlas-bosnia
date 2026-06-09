@@ -1,13 +1,12 @@
-import { useState, useContext, useRef, type SubmitEvent } from "react";
+import { useState, use, useRef, type SubmitEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
+import { BACKEND_URL } from "../../utils/envConfig";
 
 import type { Faculty, StudyProgram } from "./GetAllUniversities";
 import type { TFunction } from "../../customHooks/useLanguage";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function StudyProgramResult({
   program,
@@ -28,15 +27,14 @@ function StudyProgramResult({
         )}
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-        {program.faculty?.name}
-        {program.faculty?.university && (
-          <span className="text-gray-400 dark:text-gray-500">
-            {" — "}
-            {program.faculty.university.name}
-            {program.faculty.university.acronym &&
-              ` (${program.faculty.university.acronym})`}
-          </span>
-        )}
+        {program.faculty.name}
+
+        <span className="text-gray-400 dark:text-gray-500">
+          {" — "}
+          {program.faculty.university.name}
+          {program.faculty.university.acronym &&
+            ` (${program.faculty.university.acronym})`}
+        </span>
       </p>
     </li>
   );
@@ -47,14 +45,14 @@ interface StudyWithFacultyResult extends StudyProgram {
 }
 
 function SearchStudyPrograms() {
-  const { t, addNotification } = useContext(RootContext);
+  const { t, addNotification } = use(RootContext);
   const [results, setResults] = useState<StudyWithFacultyResult[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
-    const term = inputRef.current?.value?.trim();
+    const term = inputRef.current?.value.trim();
     if (!term || term.length < 2) {
       addNotification({
         type: "error",

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, use } from "react";
 import { useNavigate } from "react-router-dom";
 import { RootContext } from "../../contextData/RootContext";
 import { Link } from "react-router-dom";
@@ -9,12 +9,8 @@ import { Helmet } from "react-helmet-async";
 
 function SignUp() {
   const [loading, setLoading] = useState(false);
-
-  const { addNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
-
+  const { addNotification, t, userData } = use(RootContext);
   const navigate = useNavigate();
-  const { userData } = useContext(RootContext);
 
   useEffect(() => {
     if (userData) {
@@ -23,7 +19,6 @@ function SignUp() {
         message: t("auth.signup.blockedWhileLoggedIn"),
       });
       navigate("/home");
-      return;
     }
   }, [userData, navigate, addNotification, t]);
 

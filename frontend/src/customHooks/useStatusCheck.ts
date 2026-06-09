@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../utils/envConfig";
 
 import type { Notification } from "./useNotification";
 import type { ServerStatus } from "../utils/serverStatus";
@@ -27,9 +27,8 @@ function useStatusCheck(
     let checkLoginTimeoutId;
 
     async function checkLogin() {
-      let response;
       try {
-        response = await guardedFetch(
+        const response = await guardedFetch(
           `${BACKEND_URL}/users/me`,
           {
             mode: "cors",
@@ -43,10 +42,6 @@ function useStatusCheck(
             t: tRef.current,
           },
         );
-
-        if (!response) {
-          return;
-        }
 
         const result = await response.json();
 

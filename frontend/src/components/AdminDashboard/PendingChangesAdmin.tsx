@@ -1,5 +1,5 @@
 import { useGetPendingChangesAdmin } from "./customHooks/useGetPendingChangesAdmin";
-import { useContext, useState } from "react";
+import { use, useState } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { PendingChangesAdminRow } from "./PendingChangesAdminRow";
@@ -11,7 +11,7 @@ const panelClass =
 function PendingChangesAdmin() {
   const [loading, setLoading] = useState(true);
 
-  const { addNotification, t } = useContext<RootContextType>(RootContext);
+  const { addNotification, t } = use<RootContextType>(RootContext);
   const { pendingChanges, setPendingChanges } = useGetPendingChangesAdmin(
     setLoading,
     t,
@@ -21,7 +21,7 @@ function PendingChangesAdmin() {
     return <Spinner />;
   }
 
-  if (!pendingChanges?.length) {
+  if (!pendingChanges.length) {
     return (
       <section className="flex flex-col justify-center items-center p-1 w-full">
         <p className="text-gray-600 dark:text-gray-300">

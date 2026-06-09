@@ -1,9 +1,8 @@
 import { checkFormValidity } from "./utils/checkFormValidity";
 import { checkFormValidityClick } from "./utils/checkFormValidityClick";
 import { handleSignUpSubmit } from "./utils/handleSignUpSubmit";
-import { useState, useRef } from "react";
+import { useState, useRef, use } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";
@@ -17,15 +16,11 @@ interface SignUpFormProps {
 
 function SignUpForm({ loading, setLoading }: SignUpFormProps) {
   const navigate = useNavigate();
-  const { addNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
-  const { serverStatus } = useContext(RootContext);
+  const { addNotification, t, serverStatus } = use(RootContext);
 
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-
-  console.log(passwordRef);
 
   const [inputFields, setInputFields] = useState({
     email: "",
@@ -36,9 +31,9 @@ function SignUpForm({ loading, setLoading }: SignUpFormProps) {
   function handleInputFields(e: ChangeEvent<HTMLInputElement>) {
     checkFormValidity(
       e.target.name,
-      passwordRef?.current,
-      confirmPasswordRef?.current,
-      emailRef?.current,
+      passwordRef.current,
+      confirmPasswordRef.current,
+      emailRef.current,
       t,
     );
 
@@ -98,14 +93,14 @@ function SignUpForm({ loading, setLoading }: SignUpFormProps) {
       </div>
       <div>
         <Button
-          onClick={() =>
-            { checkFormValidityClick(
-              passwordRef?.current,
-              confirmPasswordRef?.current,
-              emailRef?.current,
+          onClick={() => {
+            checkFormValidityClick(
+              passwordRef.current,
+              confirmPasswordRef.current,
+              emailRef.current,
               t,
-            ); }
-          }
+            );
+          }}
           type="submit"
           loading={loading}
           className="text-white"

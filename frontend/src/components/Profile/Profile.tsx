@@ -1,16 +1,13 @@
 import { RootContext } from "../../contextData/RootContext";
-import { useContext, useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "./utils/handleLogout";
 import { Button } from "../sharedComponents/Button";
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 function Profile() {
-  const { addNotification } = useContext(RootContext);
-  const { userData, setUserData } = useContext(RootContext);
-  const { t } = useContext(RootContext);
-  const { serverStatus } = useContext(RootContext);
+  const { userData, setUserData, t, serverStatus, addNotification } =
+    use(RootContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

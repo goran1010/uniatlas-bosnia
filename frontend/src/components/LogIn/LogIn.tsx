@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, use, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogInForm } from "./LogInForm";
 import { RootContext } from "../../contextData/RootContext";
@@ -10,9 +10,7 @@ import { Helmet } from "react-helmet-async";
 function LogIn() {
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
-  const { t } = useContext(RootContext);
-
-  const { addNotification } = useContext(RootContext);
+  const { t, addNotification, userData } = use(RootContext);
 
   useEffect(() => {
     if (searchParams.get("error") === "github") {
@@ -24,7 +22,6 @@ function LogIn() {
   }, [searchParams, addNotification, t]);
 
   const navigate = useNavigate();
-  const { userData } = useContext(RootContext);
   const wasLoggedInOnPageLoad = useRef(Boolean(userData));
 
   useEffect(() => {

@@ -1,10 +1,9 @@
 import { EndpointCard } from "./EndPointCard";
 import { apiEndpoints, authenticatedGroupsEndpoints } from "./utils/endpoints";
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
-
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../utils/envConfig";
 
 function MethodTag({
   method,
@@ -33,7 +32,7 @@ function MethodTag({
 }
 
 function Api() {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
 
   return (
     <>
@@ -67,7 +66,7 @@ function Api() {
           </h1>
           <p>{t("api.publicIntro")}</p>
           <pre className="mt-3 bg-gray-100 dark:bg-gray-800 rounded p-3 text-sm font-mono overflow-x-auto">
-            {BASE_URL}
+            {BACKEND_URL}
           </pre>
           <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
             {t("api.authIntro")}

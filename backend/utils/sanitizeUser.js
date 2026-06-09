@@ -4,7 +4,7 @@ function sanitizeUser(user) {
   }
 
   // eslint-disable-next-line no-unused-vars
-  const { password, ...safeUser } = user;
+  const { password, id, githubId, ...safeUser } = user;
   return safeUser;
 }
 

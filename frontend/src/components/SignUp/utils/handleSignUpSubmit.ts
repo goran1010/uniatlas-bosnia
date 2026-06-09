@@ -1,4 +1,4 @@
-const currentUrl = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
@@ -48,7 +48,7 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
     }
 
     const response = await guardedFetch(
-      `${currentUrl}/auth/signup`,
+      `${BACKEND_URL}/auth/signup`,
       {
         mode: "cors",
         method: "POST",
@@ -65,10 +65,6 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
       },
       { serverStatus, addNotification, t },
     );
-
-    if (!response) {
-      return;
-    }
 
     const result = await response.json();
     if (!response.ok) {

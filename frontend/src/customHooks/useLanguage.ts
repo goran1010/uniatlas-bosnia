@@ -31,7 +31,7 @@ function getSavedLanguage(): Language {
 }
 
 function useLanguage() {
-  const [language, setLanguageState] = useState<Language>(getSavedLanguage);
+  const [language, setLanguage] = useState<Language>(getSavedLanguage);
 
   const resolvedLanguage =
     language === "system" ? setSystemLanguage() : language;
@@ -40,17 +40,13 @@ function useLanguage() {
     localStorage.setItem("language", language);
   }, [language]);
 
-  const setLanguage = useCallback((lang: Language) => {
-    setLanguageState(lang);
-  }, []);
-
   const t: TFunction = useCallback(
     (key: string): string => {
       const keys = key.split(".");
       let value: TranslationValue = translations[resolvedLanguage];
 
       for (const k of keys) {
-        if (typeof value !== "object" || value === null) return key;
+        if (typeof value !== "object") return key;
         value = value[k];
       }
 

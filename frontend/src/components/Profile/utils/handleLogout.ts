@@ -1,4 +1,4 @@
-const currentURL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -40,7 +40,7 @@ const handleLogout: HandleLogout = async function (
     }
 
     const response = await guardedFetch(
-      `${currentURL}/users/logout`,
+      `${BACKEND_URL}/users/logout`,
       {
         mode: "cors",
         method: "POST",
@@ -53,9 +53,6 @@ const handleLogout: HandleLogout = async function (
       { serverStatus, addNotification, t },
     );
 
-    if (!response) {
-      return;
-    }
     const result = await response.json();
     if (response.ok) {
       addNotification({

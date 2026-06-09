@@ -1,10 +1,9 @@
 import { memo, type Dispatch, type SetStateAction } from "react";
 import { Button } from "../sharedComponents/Button";
-import { useState } from "react";
+import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { handleConfirm } from "./utils/handleConfirm";
 import { handleDecline } from "./utils/handleDecline";
-import { useContext } from "react";
 
 import type { Notification } from "../../customHooks/useNotification";
 import type { PendingChange } from "../ContributionDashboard/customHooks/useGetPendingChanges";
@@ -25,10 +24,10 @@ const PendingChangesAdminRow = memo(
     index,
   }: PendingChangesAdminRowProps) => {
     const [loading, setLoading] = useState(false);
-    const { t, serverStatus } = useContext(RootContext);
+    const { t, serverStatus } = use(RootContext);
 
     const getChangeTypeStyles = (type: TypeOfChange) => {
-      switch (type?.toLowerCase()) {
+      switch (type.toLowerCase()) {
         case "create":
           return "border-l-4 border-l-green-500 dark:border-l-green-400";
         case "update":
@@ -41,7 +40,7 @@ const PendingChangesAdminRow = memo(
     };
 
     const getChangeTypeBadgeStyles = (type: TypeOfChange) => {
-      switch (type?.toLowerCase()) {
+      switch (type.toLowerCase()) {
         case "create":
           return "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300";
         case "update":
@@ -83,12 +82,6 @@ const PendingChangesAdminRow = memo(
             <span className="font-mono font-medium text-gray-800 dark:text-gray-100 text-xs">
               {data.entityType}
             </span>
-          </div>
-          <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
-            <span className="sm:hidden font-semibold">
-              {t("endpoint.name")}
-            </span>
-            <span>{data.data?.name ?? "—"}</span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
             <span className="sm:hidden font-semibold">

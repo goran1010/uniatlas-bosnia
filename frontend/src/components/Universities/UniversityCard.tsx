@@ -1,7 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
+import { BACKEND_URL } from "../../utils/envConfig";
 
 import type { TFunction } from "../../customHooks/useLanguage";
 
@@ -11,8 +12,6 @@ import type {
   StudyProgram,
   Subject,
 } from "./GetAllUniversities";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function SubjectRow({ subject, t }: { subject: Subject; t: TFunction }) {
   return (
@@ -57,7 +56,9 @@ function StudyProgramRow({
     <li className="text-sm">
       <button
         type="button"
-        onClick={() => { setOpen((p) => !p); }}
+        onClick={() => {
+          setOpen((p) => !p);
+        }}
         className="w-full text-left flex justify-between items-center gap-2 py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
         <span className="font-medium">{program.name}</span>
@@ -73,7 +74,7 @@ function StudyProgramRow({
           <span>{open ? "▲" : "▼"}</span>
         </span>
       </button>
-      {open && program.subjects?.length > 0 && (
+      {open && program.subjects.length > 0 && (
         <ul className="ml-4 mt-1 mb-2 border-l-2 border-gray-200 dark:border-gray-600 pl-3">
           {program.subjects.map((s) => (
             <SubjectRow key={s.id} subject={s} t={t} />
@@ -90,12 +91,14 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
     <li className="text-sm">
       <button
         type="button"
-        onClick={() => { setOpen((p) => !p); }}
+        onClick={() => {
+          setOpen((p) => !p);
+        }}
         className="w-full text-left flex justify-between items-center gap-2 py-1.5 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-semibold"
       >
         <span>{faculty.name}</span>
         <span className="flex gap-2 items-center text-xs text-gray-500 dark:text-gray-400 shrink-0">
-          {faculty.studyPrograms?.length > 0 && (
+          {faculty.studyPrograms.length > 0 && (
             <span>
               {faculty.studyPrograms.length}{" "}
               {t("universitiesPage.studyPrograms")}
@@ -104,7 +107,7 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
           <span>{open ? "▲" : "▼"}</span>
         </span>
       </button>
-      {open && faculty.studyPrograms?.length > 0 && (
+      {open && faculty.studyPrograms.length > 0 && (
         <ul className="ml-4 mt-1 border-l-2 border-indigo-200 dark:border-indigo-700 pl-3 space-y-0.5">
           {faculty.studyPrograms.map((sp) => (
             <StudyProgramRow key={sp.id} program={sp} t={t} />
@@ -116,7 +119,7 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
 }
 
 function UniversityCard({ university }: { university: University }) {
-  const { t, addNotification } = useContext(RootContext);
+  const { t, addNotification } = use(RootContext);
   const [expanded, setExpanded] = useState(false);
   const [detailData, setDetailData] = useState<University>();
   const [loadingDetail, setLoadingDetail] = useState(false);
@@ -219,7 +222,7 @@ function UniversityCard({ university }: { university: University }) {
 
         {expanded && detailData && (
           <div className="mt-3 border-t border-gray-200 dark:border-gray-600 pt-3">
-            {detailData?.faculties?.length > 0 ? (
+            {detailData.faculties.length > 0 ? (
               <>
                 <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
                   {detailData.faculties.length}{" "}

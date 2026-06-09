@@ -1,10 +1,11 @@
-const currentUrl = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
 import type { AddNotification } from "../../../customHooks/useNotification";
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { ServerStatus } from "../../../utils/serverStatus";
+import type { UserData } from "../../../customHooks/useStatusCheck";
 
 type HandleLogInSubmit = (
   e: SubmitEvent<HTMLFormElement>,
@@ -12,7 +13,7 @@ type HandleLogInSubmit = (
     email: string;
     password: string;
   },
-  setUserData: (data: any) => void,
+  setUserData: (data: UserData) => void,
   addNotification: AddNotification,
   setLoading: (loading: boolean) => void,
   navigate: (path: string) => void,
@@ -49,7 +50,7 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     }
 
     const response = await guardedFetch(
-      `${currentUrl}/auth/login`,
+      `${BACKEND_URL}/auth/login`,
       {
         mode: "cors",
         method: "POST",
@@ -65,10 +66,6 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
       },
       { serverStatus, addNotification, t },
     );
-
-    if (!response) {
-      return;
-    }
 
     const result = await response.json();
     if (!response.ok) {

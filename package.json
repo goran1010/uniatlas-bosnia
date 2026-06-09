@@ -2,6 +2,9 @@
   "name": "uniatlas-bosnia",
   "private": true,
   "scripts": {
+    "lint:all": "concurrently \"npm run lint:backend\" \"npm run lint:frontend\"",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "db:migrate_dev": "cd backend && npx prisma migrate dev --name",
     "db:reset": "cd backend && npx prisma migrate reset",

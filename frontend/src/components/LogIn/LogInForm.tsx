@@ -1,6 +1,6 @@
 import { checkLoginFormClickValidity } from "./utils/checkLoginFormClickValidity";
 import { checkLoginFormValidity } from "./utils/checkLoginFormValidity";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { useNavigate } from "react-router-dom";
 import { handleSubmitLogIn } from "./utils/handleSubmitLogIn";
@@ -16,10 +16,7 @@ interface LogInFormProps {
 
 function LogInForm({ loading, setLoading }: LogInFormProps) {
   const navigate = useNavigate();
-  const { setUserData } = useContext(RootContext);
-  const { addNotification } = useContext(RootContext);
-  const { t } = useContext(RootContext);
-  const { serverStatus } = useContext(RootContext);
+  const { setUserData, addNotification, t, serverStatus } = use(RootContext);
 
   const [inputFields, setInputFields] = useState({
     email: "",
@@ -32,8 +29,8 @@ function LogInForm({ loading, setLoading }: LogInFormProps) {
   function handleInputFields(e: ChangeEvent<HTMLInputElement>) {
     checkLoginFormValidity(
       e.target.name,
-      emailInput?.current,
-      passwordInput?.current,
+      emailInput.current,
+      passwordInput.current,
       t,
     );
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
@@ -81,13 +78,13 @@ function LogInForm({ loading, setLoading }: LogInFormProps) {
       </div>
       <div>
         <Button
-          onClick={() =>
-            { checkLoginFormClickValidity(
-              emailInput?.current,
-              passwordInput?.current,
+          onClick={() => {
+            checkLoginFormClickValidity(
+              emailInput.current,
+              passwordInput.current,
               t,
-            ); }
-          }
+            );
+          }}
           type="submit"
           loading={loading}
           className="text-white"

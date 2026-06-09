@@ -4,7 +4,7 @@ export type SetMode = (mode: string) => void;
 
 function useTheme() {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "system",
+    () => localStorage.getItem("theme") ?? "system",
   );
 
   useEffect(() => {
@@ -19,7 +19,9 @@ function useTheme() {
         document.documentElement.classList.toggle("dark", media.matches);
 
       media.addEventListener("change", listener);
-      return () => { media.removeEventListener("change", listener); };
+      return () => {
+        media.removeEventListener("change", listener);
+      };
     }
   }, [theme]);
 

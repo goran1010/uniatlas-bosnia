@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use } from "react";
 import { Link } from "react-router-dom";
 import { RootContext } from "../../contextData/RootContext";
 
@@ -10,15 +10,16 @@ function Status({
 }: {
   setIsMenuOpen: (value: boolean) => void;
 }) {
-  const { userData } = useContext(RootContext);
-  const { t } = useContext(RootContext);
+  const { userData, t } = use(RootContext);
 
   if (userData) {
     return (
       <Link
         className={statusLinkClass}
         to="/profile"
-        onClick={() => { setIsMenuOpen(false); }}
+        onClick={() => {
+          setIsMenuOpen(false);
+        }}
       >
         {t("nav.profile")}
       </Link>
@@ -29,7 +30,9 @@ function Status({
     <Link
       className={statusLinkClass}
       to="/login"
-      onClick={() => { setIsMenuOpen(false); }}
+      onClick={() => {
+        setIsMenuOpen(false);
+      }}
     >
       {t("nav.login")}
     </Link>

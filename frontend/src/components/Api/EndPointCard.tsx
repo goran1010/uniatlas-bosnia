@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import type { Endpoint } from "./utils/endpoints";
 
@@ -12,7 +12,7 @@ const methodColor = {
 };
 
 function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
 
   return (
     <article className="border border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col gap-4 bg-white dark:bg-gray-800/70">

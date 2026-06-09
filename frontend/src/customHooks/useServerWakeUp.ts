@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SERVER_STATUS_NOTIFICATION_ID } from "../utils/serverStatus";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../utils/envConfig";
 const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;
 
@@ -28,9 +28,8 @@ function useServerWakeUp({
     let currentNumberOfAttempts = 0;
     let retryTimeoutId: number;
 
-    setServerStatus("waking");
-
     async function checkServer() {
+      setServerStatus("waking");
       if (isCancelled) {
         return;
       }
@@ -75,10 +74,6 @@ function useServerWakeUp({
         setServerStatus("live");
         removeNotification(SERVER_STATUS_NOTIFICATION_ID);
       } catch (err) {
-        if (isCancelled) {
-          return;
-        }
-
         console.error(err);
         retryTimeoutId = setTimeout(() => {
           currentNumberOfAttempts++;

@@ -13,7 +13,8 @@
     "build": "npx prisma generate && npx prisma migrate deploy",
     "test": "NODE_ENV=test vitest",
     "start": "node --env-file-if-exists=.env index.js",
-    "dev": "node --watch --env-file-if-exists=.env index.js | pino-pretty"
+    "dev": "node --watch --env-file-if-exists=.env index.js | pino-pretty",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

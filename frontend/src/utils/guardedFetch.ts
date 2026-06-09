@@ -16,7 +16,7 @@ type GuardedFetch = (
   url: Url,
   options: FetchOptions,
   guard: Guard,
-) => Promise<Response> | null;
+) => Promise<Response>;
 
 interface NotifyServerNotReadyParams {
   serverStatus?: ServerStatus;
@@ -52,7 +52,7 @@ const guardedFetch: GuardedFetch = (url, options, guard) => {
 
   if (shouldBlock) {
     notifyServerNotReady(guard);
-    return null;
+    throw new Error("Server is not ready");
   }
 
   return fetch(url, options);

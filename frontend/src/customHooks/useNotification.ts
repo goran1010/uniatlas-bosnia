@@ -25,7 +25,7 @@ function useNotification() {
       duration = 3000,
       persistent = false,
     }: Notification) => {
-      const notificationId = id || crypto.randomUUID();
+      const notificationId = id ?? crypto.randomUUID();
       const newNotification = {
         id: notificationId,
         type,

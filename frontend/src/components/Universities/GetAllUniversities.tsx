@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "../../utils/envConfig";
 
 export type Entity = "RS" | "FBiH" | "BD";
 
@@ -59,7 +58,7 @@ export interface Subject {
 }
 
 function GetAllUniversities() {
-  const { t, addNotification } = useContext(RootContext);
+  const { t, addNotification } = use(RootContext);
   const [universities, setUniversities] = useState<University[]>([]);
   const [loading, setLoading] = useState(true);
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 import { GetAllUniversities } from "./GetAllUniversities";
@@ -8,7 +8,7 @@ import { SearchStudyPrograms } from "./SearchStudyPrograms";
 const TABS = ["search", "findPrograms", "browseAll"];
 
 function Universities() {
-  const { t } = useContext(RootContext);
+  const { t } = use(RootContext);
   const [activeTab, setActiveTab] = useState("search");
 
   return (
@@ -46,7 +46,9 @@ function Universities() {
             <button
               key={tab}
               type="button"
-              onClick={() => { setActiveTab(tab); }}
+              onClick={() => {
+                setActiveTab(tab);
+              }}
               className={`px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
                 activeTab === tab
                   ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
