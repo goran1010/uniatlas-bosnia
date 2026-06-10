@@ -2,7 +2,6 @@ import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { routes } from "../src/routes";
-import { RootContextProvider } from "./rootContextProvider";
 
 const mockedResponse = new Response(
   JSON.stringify({
@@ -23,30 +22,12 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-function renderRoute(route: string, { withUserDataContext = false } = {}) {
+function renderRoute(route: string) {
   const router = createMemoryRouter(routes, {
     initialEntries: [route],
   });
 
-  if (withUserDataContext) {
-    render(
-      <RootContextProvider
-        rootValue={{
-          userData: { message: [], setMessage: vi.fn() },
-          setUserData: vi.fn(),
-        }}
-      >
-        <RouterProvider router={router} />
-      </RootContextProvider>,
-    );
-    return;
-  }
-
-  render(
-    <RootContextProvider>
-      <RouterProvider router={router} />
-    </RootContextProvider>,
-  );
+  render(<RouterProvider router={router} />);
 }
 
 describe("Loading components when visiting an address", () => {
