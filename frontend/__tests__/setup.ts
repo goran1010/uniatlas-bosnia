@@ -1,21 +1,26 @@
-import { expect, afterEach } from "vitest";
+import { afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
-import * as matchers from "@testing-library/jest-dom/matchers";
+import { vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
 
-expect.extend(matchers);
+const media: MediaQueryList = {
+  matches: false,
+  media: "(prefers-color-scheme: dark)",
+  onchange: null,
+  addListener: vi.fn(),
+  removeListener: vi.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+  dispatchEvent: () => {
+    return true;
+  },
+};
 
 // Mocking window.matchMedia for tests that rely on it,
 // since jsdom doesn't implement it by default.
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: (query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => {},
-  }),
+  value: vi.fn().mockImplementation(() => media),
 });
 // -----------------------------------------------------
 
