@@ -24,36 +24,34 @@ function getNotificationRole(type: TypeNotification) {
 }
 
 function Notifications() {
-  const { notifications, removeNotification } = use(RootContext);
-  const { t } = use(RootContext);
-  const timerMapRef = useRef(new Map());
+  const { notifications, removeNotification, t } = use(RootContext);
+  const timerMapRef = useRef<Map<string, number>>(new Map());
 
   useEffect(() => {
     const newTimerRef = timerMapRef.current;
 
     // Set timers for new notifications only
     notifications.forEach((notification) => {
+      const notificationId = notification.id;
+      if (!notificationId) return;
+
       const shouldAutoDismiss =
         !notification.persistent &&
         typeof notification.duration === "number" &&
         notification.duration > 0;
 
-      if (!shouldAutoDismiss && newTimerRef.has(notification.id)) {
-        clearTimeout(newTimerRef.get(notification.id));
-        newTimerRef.delete(notification.id);
+      if (!shouldAutoDismiss && newTimerRef.has(notificationId)) {
+        clearTimeout(newTimerRef.get(notificationId));
+        newTimerRef.delete(notificationId);
       }
 
-      if (shouldAutoDismiss && !newTimerRef.has(notification.id)) {
+      if (shouldAutoDismiss && !newTimerRef.has(notificationId)) {
         const timer = setTimeout(() => {
-          if (notification.id) {
-            removeNotification(notification.id);
-            newTimerRef.delete(notification.id);
-          }
+          removeNotification(notificationId);
+          newTimerRef.delete(notificationId);
         }, notification.duration ?? 0);
 
-        if (notification.id) {
-          newTimerRef.set(notification.id, timer);
-        }
+        newTimerRef.set(notificationId, timer);
       }
     });
 
