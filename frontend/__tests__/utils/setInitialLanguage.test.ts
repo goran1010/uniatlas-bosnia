@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
-import { setInitialLanguage } from "../../src/utils/setInitialLanguage";
+import { setSystemLanguage } from "../../src/utils/setInitialLanguage";
 
-let originalNavigatorLanguage;
+let originalNavigatorLanguage: string;
 
 beforeEach(() => {
   originalNavigatorLanguage = navigator.language;
@@ -14,7 +14,7 @@ afterEach(() => {
   });
 });
 
-function setNavigatorLanguage(language) {
+function setNavigatorLanguage(language: string) {
   Object.defineProperty(window.navigator, "language", {
     value: language,
     configurable: true,
@@ -25,7 +25,7 @@ describe("setInitialLanguage", () => {
   test("returns en when browser language starts with en", () => {
     setNavigatorLanguage("en-US");
 
-    const result = setInitialLanguage();
+    const result = setSystemLanguage();
 
     expect(result).toBe("en");
   });
@@ -33,7 +33,7 @@ describe("setInitialLanguage", () => {
   test("returns sr when browser language starts with sr", () => {
     setNavigatorLanguage("sr-Latn");
 
-    const result = setInitialLanguage();
+    const result = setSystemLanguage();
 
     expect(result).toBe("sr");
   });
@@ -41,7 +41,7 @@ describe("setInitialLanguage", () => {
   test("falls back to en for unsupported browser language", () => {
     setNavigatorLanguage("fr-FR");
 
-    const result = setInitialLanguage();
+    const result = setSystemLanguage();
 
     expect(result).toBe("en");
   });
