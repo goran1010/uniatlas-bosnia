@@ -17,16 +17,6 @@ export interface RootContextType {
   serverStatus: ServerStatus;
 }
 
-const RootContext = createContext<RootContextType>({
-  language: "en",
-  setLanguage: () => {},
-  t: (key) => key,
-  notifications: [],
-  addNotification: () => {},
-  removeNotification: () => {},
-  userData: null,
-  setUserData: () => {},
-  serverStatus: "live",
-});
+const RootContext = createContext<RootContextType | null>(null);
 
 export { RootContext };
