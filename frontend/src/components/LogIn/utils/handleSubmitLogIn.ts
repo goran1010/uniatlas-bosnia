@@ -22,6 +22,21 @@ type HandleLogInSubmit = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
+interface StatusSuccessResponse {
+  message: string;
+  data: UserData;
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 const handleSubmitLogIn: HandleLogInSubmit = async function (
   e,
   inputFields,
@@ -68,17 +83,15 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
     if (!response.ok) {
+      const result = await parseJson<StatusErrorResponse>(response);
       addNotification({
         type: "error",
-        message:
-          result?.error?.message ??
-          result?.error ??
-          t("messages.auth.loginFailed"),
+        message: result.error.message,
       });
       return;
     }
+    const result = await parseJson<StatusSuccessResponse>(response);
     addNotification({
       type: "success",
       message: result.message,

@@ -27,6 +27,21 @@ interface HandleSubmitUniversityEntityParams {
   serverStatus: ServerStatus;
 }
 
+interface StatusSuccessResponse {
+  message: string;
+  data: PendingChange;
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 async function handleSubmitUniversityEntity({
   entityType,
   parentId,
@@ -84,20 +99,17 @@ async function handleSubmitUniversityEntity({
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
-
     if (response.ok) {
+      const result = await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) => [result.data, ...prev]);
       addNotification({ type: "success", message: result.message });
       setFormState({ entityType: "", parentId: "", targetId: "", data: {} });
       return;
     }
+    const result = await parseJson<StatusErrorResponse>(response);
     addNotification({
       type: "error",
-      message:
-        result?.error?.message ??
-        result?.error ??
-        t("messages.universities.addFailed"),
+      message: result.error.message,
     });
   } catch (err) {
     addNotification({

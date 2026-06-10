@@ -17,6 +17,23 @@ type HandleConfirm = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
+interface StatusSuccessResponse {
+  message: string;
+  data: {
+    email: string;
+  };
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 const handleConfirm: HandleConfirm = async function (
   change,
   setPendingChanges,
@@ -60,9 +77,8 @@ const handleConfirm: HandleConfirm = async function (
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
-
     if (response.ok) {
+      const result = await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
@@ -72,12 +88,10 @@ const handleConfirm: HandleConfirm = async function (
       });
       return;
     }
+    const result = await parseJson<StatusErrorResponse>(response);
     addNotification({
       type: "error",
-      message:
-        result?.error?.message ??
-        result?.error ??
-        t("messages.admin.approveFailed"),
+      message: result.error.message,
     });
   } catch (error) {
     addNotification({

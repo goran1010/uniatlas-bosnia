@@ -17,6 +17,23 @@ type HandleDecline = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
+interface StatusSuccessResponse {
+  message: string;
+  data: {
+    email: string;
+  };
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 const handleDecline: HandleDecline = async function (
   change,
   setPendingChanges,
@@ -56,9 +73,8 @@ const handleDecline: HandleDecline = async function (
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
-
     if (response.ok) {
+      const result = await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
@@ -68,9 +84,10 @@ const handleDecline: HandleDecline = async function (
       });
       return;
     }
+    const result = await parseJson<StatusErrorResponse>(response);
     addNotification({
       type: "error",
-      message: result?.error?.message ?? t("messages.admin.declineFailed"),
+      message: result.error.message,
     });
   } catch (error) {
     addNotification({

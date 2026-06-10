@@ -19,6 +19,21 @@ export interface PendingChange {
   createdAt: Date;
 }
 
+interface StatusSuccessResponse {
+  message: string;
+  data: PendingChange[];
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function useGetPendingChanges(
   setLoading: (loading: boolean) => void,
   t: TFunction,
@@ -50,9 +65,8 @@ function useGetPendingChanges(
           },
         );
 
-        const result = await response.json();
-
         if (response.ok) {
+          const result = await parseJson<StatusSuccessResponse>(response);
           setPendingChanges(result.data);
           addNotification({
             type: "success",
@@ -60,12 +74,10 @@ function useGetPendingChanges(
           });
           return;
         }
+        const result = await parseJson<StatusErrorResponse>(response);
         addNotification({
           type: "error",
-          message:
-            result?.error?.message ??
-            result?.error ??
-            t("messages.pendingChanges.loadFailed"),
+          message: result.error.message,
         });
       } catch (error) {
         console.error("Error fetching pending changes:", error);

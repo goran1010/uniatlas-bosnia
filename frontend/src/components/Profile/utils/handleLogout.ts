@@ -17,6 +17,20 @@ type HandleLogout = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
+interface StatusSuccessResponse {
+  message: string;
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 const handleLogout: HandleLogout = async function (
   addNotification,
   navigate,
@@ -54,8 +68,8 @@ const handleLogout: HandleLogout = async function (
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
     if (response.ok) {
+      const result = await parseJson<StatusSuccessResponse>(response);
       addNotification({
         type: "success",
         message: result.message,
@@ -65,13 +79,10 @@ const handleLogout: HandleLogout = async function (
       void navigate("/");
       return;
     }
-
+    const result = await parseJson<StatusErrorResponse>(response);
     addNotification({
       type: "error",
-      message:
-        result?.error?.message ??
-        result?.error ??
-        t("messages.auth.logoutFailed"),
+      message: result.error.message,
     });
   } catch (err) {
     addNotification({

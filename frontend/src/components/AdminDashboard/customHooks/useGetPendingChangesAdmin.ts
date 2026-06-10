@@ -6,6 +6,21 @@ import { guardedFetch } from "../../../utils/guardedFetch";
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../customHooks/useLanguage";
 
+interface StatusSuccessResponse {
+  message: string;
+  data: PendingChange[];
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
 function useGetPendingChangesAdmin(
   setLoading: (loading: boolean) => void,
   t: TFunction,
@@ -35,9 +50,8 @@ function useGetPendingChangesAdmin(
           },
         );
 
-        const result = await response.json();
-
         if (response.ok) {
+          const result = await parseJson<StatusSuccessResponse>(response);
           setPendingChanges(result.data);
           addNotification({
             type: "success",
@@ -45,12 +59,10 @@ function useGetPendingChangesAdmin(
           });
           return;
         }
+        const result = await parseJson<StatusErrorResponse>(response);
         addNotification({
           type: "error",
-          message:
-            result?.error?.message ??
-            result?.error ??
-            t("messages.pendingChanges.loadFailed"),
+          message: result.error.message,
         });
       } catch (error) {
         console.error("Error fetching pending changes:", error);
