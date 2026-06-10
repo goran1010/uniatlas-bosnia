@@ -32,6 +32,7 @@ function NotificationProbe() {
         type="button"
         onClick={() =>
           addNotification({
+            type: "info",
             message: "Default values",
           })
         }
@@ -42,7 +43,7 @@ function NotificationProbe() {
         type="button"
         onClick={() => {
           for (let i = 0; i < 6; i++) {
-            addNotification({ message: `N${i}` });
+            addNotification({ type: "info", message: `N${i.toString()}` });
           }
         }}
       >
@@ -66,36 +67,42 @@ function NotificationProbe() {
         type="button"
         onClick={() => {
           addNotification({
+            type: "info",
             id: "p1",
             message: "P1",
             persistent: true,
             duration: null,
           });
           addNotification({
+            type: "error",
             id: "p2",
             message: "P2",
             persistent: true,
             duration: null,
           });
           addNotification({
+            type: "info",
             id: "p3",
             message: "P3",
             persistent: true,
             duration: null,
           });
           addNotification({
+            type: "info",
             id: "p4",
             message: "P4",
             persistent: true,
             duration: null,
           });
           addNotification({
+            type: "success",
             id: "p5",
             message: "P5",
             persistent: true,
             duration: null,
           });
           addNotification({
+            type: "warning",
             id: "p6",
             message: "P6",
             persistent: true,
