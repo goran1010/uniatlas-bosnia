@@ -106,20 +106,12 @@ function AddUniversityEntity({
     }));
   }
 
-  const needsParent =
-    typeOfChange === "CREATE" && entityType && entityType !== "UNIVERSITY";
+  const needsParent = typeOfChange === "CREATE" && entityType !== "UNIVERSITY";
   const needsTarget = typeOfChange !== "CREATE" && entityType;
   const needsDataFields = typeOfChange !== "DELETE";
 
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!entityType || !typeOfChange) {
-      addNotification({
-        type: "error",
-        message: "Entity type and change type are required.",
-      });
-      return;
-    }
     await handleSubmitUniversityEntity({
       entityType,
       parentId,
@@ -153,7 +145,6 @@ function AddUniversityEntity({
           }}
           required
         >
-          <option value="">{t("contribution.noDataset")}</option>
           {ENTITY_TYPES.map((et) => (
             <option key={et} value={et}>
               {t(`contribution.entityTypes.${et}`)}
@@ -161,7 +152,6 @@ function AddUniversityEntity({
           ))}
         </Select>
       </div>
-
       <div className="flex flex-col gap-1 items-center">
         <Label htmlFor="typeOfChange">{t("contribution.change")}</Label>
         <Select
@@ -180,7 +170,6 @@ function AddUniversityEntity({
           ))}
         </Select>
       </div>
-
       {needsParent && (
         <DataField
           label={`${t("contribution.parentId")} — ${t(`contribution.parentIdHelp.${entityType}`)}`}
@@ -194,7 +183,6 @@ function AddUniversityEntity({
           }}
         />
       )}
-
       {needsTarget && (
         <DataField
           label={`ID`}
@@ -208,7 +196,6 @@ function AddUniversityEntity({
           }}
         />
       )}
-
       {needsDataFields && (
         <fieldset className="flex flex-col gap-3 border border-gray-200 dark:border-gray-600 rounded-lg p-3">
           <legend className="text-xs font-semibold px-1 text-gray-600 dark:text-gray-300">
@@ -394,12 +381,9 @@ function AddUniversityEntity({
           )}
         </fieldset>
       )}
-
-      {entityType && (
-        <Button type="submit" loading={loading} className="max-w-xs">
-          {t("contribution.submitSuggestion")}
-        </Button>
-      )}
+      <Button type="submit" loading={loading} className="max-w-xs">
+        {t("contribution.submitSuggestion")}
+      </Button>
     </form>
   );
 }

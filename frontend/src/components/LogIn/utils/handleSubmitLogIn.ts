@@ -2,6 +2,7 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
+import type { NavigateFunction } from "react-router-dom";
 import type { AddNotification } from "../../../customHooks/useNotification";
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { ServerStatus } from "../../../utils/serverStatus";
@@ -16,7 +17,7 @@ type HandleLogInSubmit = (
   setUserData: (data: UserData) => void,
   addNotification: AddNotification,
   setLoading: (loading: boolean) => void,
-  navigate: (path: string) => void,
+  navigate: NavigateFunction,
   t: TFunction,
   serverStatus: ServerStatus,
 ) => Promise<void>;
@@ -85,7 +86,7 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     setUserData(result.data);
 
     clearCsrfToken();
-    navigate("/");
+    void navigate("/");
   } catch (err) {
     addNotification({
       type: "error",

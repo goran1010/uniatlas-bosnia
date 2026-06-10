@@ -6,10 +6,11 @@ import type { AddNotification } from "../../../customHooks/useNotification";
 import type { UserData } from "../../../customHooks/useStatusCheck";
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { ServerStatus } from "../../../utils/serverStatus";
+import type { NavigateFunction } from "react-router-dom";
 
 type HandleLogout = (
   addNotification: AddNotification,
-  navigate: (path: string) => void,
+  navigate: NavigateFunction,
   setUserData: (data: UserData) => void,
   setLoading: (loading: boolean) => void,
   t: TFunction,
@@ -59,10 +60,9 @@ const handleLogout: HandleLogout = async function (
         type: "success",
         message: result.message,
       });
-      navigate("/");
       setUserData(null);
-
       clearCsrfToken();
+      void navigate("/");
       return;
     }
 

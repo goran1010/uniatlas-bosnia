@@ -5,6 +5,7 @@ import type { SubmitEvent } from "react";
 import type { AddNotification } from "../../../customHooks/useNotification";
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { ServerStatus } from "../../../utils/serverStatus";
+import type { NavigateFunction } from "react-router-dom";
 
 type HandleSignUpSubmit = (
   event: SubmitEvent<HTMLFormElement>,
@@ -15,10 +16,27 @@ type HandleSignUpSubmit = (
     "confirm-password": string;
   },
   addNotification: AddNotification,
-  navigate: (path: string) => void,
+  navigate: NavigateFunction,
   t: TFunction,
   serverStatus: ServerStatus,
 ) => Promise<void>;
+
+interface StatusSuccessResponse {
+  message: string;
+  data: {
+    email: string;
+  };
+}
+
+interface StatusErrorResponse {
+  error: {
+    message: string;
+  };
+}
+
+async function parseJson<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
 
 const handleSignUpSubmit: HandleSignUpSubmit = async function (
   event,
@@ -66,22 +84,20 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
       { serverStatus, addNotification, t },
     );
 
-    const result = await response.json();
     if (!response.ok) {
+      const result = await parseJson<StatusErrorResponse>(response);
       addNotification({
         type: "error",
-        message:
-          result?.error?.message ??
-          result?.error ??
-          t("messages.auth.registrationFailed"),
+        message: result.error.message,
       });
       return;
     }
+    const result = await parseJson<StatusSuccessResponse>(response);
     addNotification({
       type: "success",
       message: result.message,
     });
-    navigate("/login");
+    void navigate("/login");
   } catch (err) {
     addNotification({
       type: "error",
