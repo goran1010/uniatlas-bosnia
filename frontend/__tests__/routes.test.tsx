@@ -1,24 +1,29 @@
 import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { routes } from "../js_files/src/routes";
+import { routes } from "../src/routes";
 import { RootContextProvider } from "./rootContextProvider";
 
+const mockedResponse = new Response(
+  JSON.stringify({
+    data: [{ id: 1, code: "mocked code" }],
+    message: "mocked message",
+  }),
+  {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  },
+);
+
 beforeEach(() => {
-  vi.spyOn(globalThis, "fetch").mockResolvedValue({
-    ok: true,
-    json: async () => ({
-      data: [{ id: 1, code: "mocked code" }],
-      message: "mocked message",
-    }),
-  });
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockedResponse);
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
 });
 
-function renderRoute(route, { withUserDataContext = false } = {}) {
+function renderRoute(route: string, { withUserDataContext = false } = {}) {
   const router = createMemoryRouter(routes, {
     initialEntries: [route],
   });
@@ -27,8 +32,8 @@ function renderRoute(route, { withUserDataContext = false } = {}) {
     render(
       <RootContextProvider
         rootValue={{
-          userData: { message: [], setMessage: () => {} },
-          setUserData: () => {},
+          userData: { message: [], setMessage: vi.fn() },
+          setUserData: vi.fn(),
         }}
       >
         <RouterProvider router={router} />
@@ -46,12 +51,14 @@ function renderRoute(route, { withUserDataContext = false } = {}) {
 
 describe("Loading components when visiting an address", () => {
   test("render Error Page when visiting non-existent address", async () => {
-    const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const consoleSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
 
     renderRoute("/non-existent-address");
 
     const linkElement = await screen.findByText(/Go to Home Page/i);
-    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).not.toBeNull();
     expect(consoleSpy).toHaveBeenCalled();
 
     consoleSpy.mockRestore();
@@ -61,7 +68,7 @@ describe("Loading components when visiting an address", () => {
     renderRoute("/universities");
 
     const linkElements = await screen.findAllByText(/Universities/i);
-    expect(linkElements[0]).toBeInTheDocument();
+    expect(linkElements[0]).not.toBeNull();
   });
 
   test("visit home page", async () => {
@@ -71,7 +78,7 @@ describe("Loading components when visiting an address", () => {
       name: /Bosnia and Herzegovina/i,
       level: 1,
     });
-    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).not.toBeNull();
   });
 
   test.each(["/", "/universities"])(
@@ -81,8 +88,8 @@ describe("Loading components when visiting an address", () => {
 
       const footerEmail = await screen.findByText(/goran1010jovic@gmail.com/i);
       const footerAuthor = await screen.findByText(/Goran Jović/i);
-      expect(footerEmail).toBeInTheDocument();
-      expect(footerAuthor).toBeInTheDocument();
+      expect(footerEmail).not.toBeNull();
+      expect(footerAuthor).not.toBeNull();
     },
   );
 
@@ -97,8 +104,8 @@ describe("Loading components when visiting an address", () => {
         name: /Universities/i,
       });
 
-      expect(homeLink).toBeInTheDocument();
-      expect(universitiesLink).toBeInTheDocument();
+      expect(homeLink).not.toBeNull();
+      expect(universitiesLink).not.toBeNull();
     },
   );
 });

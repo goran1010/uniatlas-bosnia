@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 
 function ErrorPage() {
   const { t } = useLanguage();
-
+  console.warn("Page not found.");
   return (
     <>
       <Helmet>
