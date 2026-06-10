@@ -5,9 +5,9 @@ import { useNotification } from "../../src/customHooks/useNotification";
 
 beforeEach(() => {
   vi.restoreAllMocks();
-  vi.spyOn(crypto, "randomUUID").mockImplementation(
-    () => `id-${Math.random().toString(36).slice(2, 8)}`,
-  );
+  vi.spyOn(crypto, "randomUUID").mockImplementation(() => {
+    return `123-123-123-123-${Math.random().toString(36).slice(2, 8)}`;
+  });
 });
 
 function NotificationProbe() {

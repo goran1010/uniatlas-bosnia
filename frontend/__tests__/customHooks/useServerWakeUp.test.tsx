@@ -2,6 +2,8 @@ import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, render } from "@testing-library/react";
 import { useServerWakeUp } from "../../src/customHooks/useServerWakeUp";
 
+import type { Notification } from "../../src/customHooks/useNotification";
+
 async function flushMicrotasks() {
   await Promise.resolve();
   await Promise.resolve();
@@ -10,7 +12,7 @@ async function flushMicrotasks() {
 beforeEach(() => {
   vi.useFakeTimers();
   vi.restoreAllMocks();
-  vi.spyOn(console, "error").mockImplementation(() => {});
+  vi.spyOn(console, "error").mockImplementation(() => vi.fn());
 });
 
 afterEach(() => {
@@ -19,9 +21,17 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-const identityTranslate = (key) => key;
+const identityTranslate = (key: string) => key;
 
-function ServerWakeUpProbe({ setLongWait, setServerIsDown }) {
+interface ServerWakeUpProbeProps {
+  setLongWait: (notification: Notification) => void;
+  setServerIsDown: (id: string) => void;
+}
+
+function ServerWakeUpProbe({
+  setLongWait,
+  setServerIsDown,
+}: ServerWakeUpProbeProps) {
   useServerWakeUp({
     addNotification: setLongWait,
     removeNotification: setServerIsDown,
@@ -31,12 +41,21 @@ function ServerWakeUpProbe({ setLongWait, setServerIsDown }) {
   return <div data-testid="server-wake-up-probe">Probe</div>;
 }
 
+const mockedResponse = new Response(
+  JSON.stringify({
+    message: "Server is live",
+  }),
+  {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  },
+);
+
 describe("useServerWakeUp", () => {
   test("clears long wait when server responds ok", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      json: async () => ({ message: "Server is live" }),
-    });
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(mockedResponse);
     const setLongWait = vi.fn();
     const setServerIsDown = vi.fn();
 
@@ -58,16 +77,19 @@ describe("useServerWakeUp", () => {
   });
 
   test("retries when response is not ok and then succeeds", async () => {
+    const mockedErrorResponse = new Response(
+      JSON.stringify({
+        message: "Wake up",
+      }),
+      {
+        status: 503,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     const fetchSpy = vi
       .spyOn(globalThis, "fetch")
-      .mockResolvedValueOnce({
-        ok: false,
-        json: async () => ({ message: "Wake up" }),
-      })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ message: "Server is live" }),
-      });
+      .mockResolvedValueOnce(mockedErrorResponse)
+      .mockResolvedValueOnce(mockedResponse);
     const setLongWait = vi.fn();
     const setServerIsDown = vi.fn();
 
