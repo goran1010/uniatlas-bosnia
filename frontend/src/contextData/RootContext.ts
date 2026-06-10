@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, type Dispatch, type SetStateAction } from "react";
 import { type ServerStatus } from "../utils/serverStatus";
 
 import { type Notification } from "../customHooks/useNotification";
@@ -13,10 +13,20 @@ export interface RootContextType {
   addNotification: (notification: Notification) => void;
   removeNotification: (id: string | undefined) => void;
   userData: UserData;
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
+  setUserData: Dispatch<SetStateAction<UserData>>;
   serverStatus: ServerStatus;
 }
 
-const RootContext = createContext<RootContextType | null>(null);
+const RootContext = createContext<RootContextType>({
+  language: "en",
+  setLanguage: (prop) => prop,
+  t: (prop) => prop,
+  notifications: [],
+  addNotification: (prop) => prop,
+  removeNotification: (prop) => prop,
+  userData: null,
+  setUserData: (prop) => prop,
+  serverStatus: "live",
+});
 
 export { RootContext };
