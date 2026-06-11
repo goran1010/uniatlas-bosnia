@@ -19,11 +19,11 @@ function Wrapper() {
 
 describe("SearchStudyPrograms", () => {
   beforeEach(() => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
+    const mockResponse = new Response(JSON.stringify({ data: [] }), {
       status: 200,
-      json: async () => ({ data: [] }),
+      headers: { "Content-Type": "application/json" },
     });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
   afterEach(() => {
@@ -51,10 +51,8 @@ describe("SearchStudyPrograms", () => {
   });
 
   test("renders study program results when API returns matches", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({
+    const mockResponse = new Response(
+      JSON.stringify({
         data: [
           {
             id: 7,
@@ -71,7 +69,12 @@ describe("SearchStudyPrograms", () => {
           },
         ],
       }),
-    });
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -95,11 +98,14 @@ describe("SearchStudyPrograms", () => {
   });
 
   test("renders no results message for 404", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 404,
-      json: async () => ({ error: { message: "Not found" } }),
-    });
+    const mockNotFoundResponse = new Response(
+      JSON.stringify({ error: { message: "Not found" } }),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockNotFoundResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -121,11 +127,14 @@ describe("SearchStudyPrograms", () => {
   });
 
   test("shows API error message on non-404 non-ok response", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-      json: async () => ({ error: { message: "Study search exploded." } }),
-    });
+    const mockErrorResponse = new Response(
+      JSON.stringify({ error: { message: "Study search exploded." } }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockErrorResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();

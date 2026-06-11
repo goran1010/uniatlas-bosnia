@@ -17,12 +17,12 @@ function Wrapper() {
 }
 
 describe("GetAllUniversities", () => {
+  const mockResponse = new Response(JSON.stringify({ data: [] }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
   beforeEach(() => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => ({ data: [] }),
-    });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
   afterEach(() => {
@@ -39,10 +39,8 @@ describe("GetAllUniversities", () => {
   });
 
   test("renders universities list when API call succeeds", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({
+    const mockResponse = new Response(
+      JSON.stringify({
         data: [
           {
             id: 1,
@@ -56,7 +54,12 @@ describe("GetAllUniversities", () => {
           },
         ],
       }),
-    });
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
 
     render(<Wrapper />);
 
@@ -69,13 +72,16 @@ describe("GetAllUniversities", () => {
   });
 
   test("shows API error notification for non-ok response", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-      json: async () => ({
-        error: { message: "Backend failed to load data." },
+    const mockResponse = new Response(
+      JSON.stringify({
+        error: { message: "Failed to load universities." },
       }),
-    });
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
 
     render(<Wrapper />);
 

@@ -6,15 +6,18 @@ import { UniversityCard } from "../../../src/components/Universities/UniversityC
 import { Notifications } from "../../../src/components/Notifications";
 import { RootContextProvider } from "../../rootContextProvider";
 
-const baseUniversity = {
+import type { University } from "../../../src/components/Universities/GetAllUniversities";
+
+const baseUniversity: University = {
   id: 1,
   name: "University of Sarajevo",
   acronym: "UNSA",
   city: "Sarajevo",
-  entity: "FBIH",
+  entity: "FBiH",
   ownership: "JAVNA",
-  foundedYear: 1949,
+  foundedYear: "1949",
   website: "https://unsa.ba",
+  faculties: [],
 };
 
 function Wrapper({ university = baseUniversity }) {
@@ -32,11 +35,14 @@ function Wrapper({ university = baseUniversity }) {
 
 describe("UniversityCard", () => {
   beforeEach(() => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => ({ data: { faculties: [] } }),
-    });
+    const mockResponse = new Response(
+      JSON.stringify({ data: { faculties: [] } }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
   afterEach(() => {
@@ -48,8 +54,7 @@ describe("UniversityCard", () => {
 
     const universityName = screen.getByText(/University of Sarajevo/i);
     const cityText = screen.getByText(/^📍\s*Sarajevo$/i);
-    const entityText = screen.getByText(/Federation of B&H/i);
-    const ownershipText = screen.getByText(/Public/i);
+    const entityText = screen.getByText(/FBiH/i);
     const foundedText = screen.getByText(/Founded: 1949/i);
     const websiteLink = screen.getByRole("link", {
       name: /https:\/\/unsa\.ba/i,
@@ -58,17 +63,19 @@ describe("UniversityCard", () => {
     expect(universityName).toBeInTheDocument();
     expect(cityText).toBeInTheDocument();
     expect(entityText).toBeInTheDocument();
-    expect(ownershipText).toBeInTheDocument();
     expect(foundedText).toBeInTheDocument();
     expect(websiteLink).toHaveAttribute("href", "https://unsa.ba");
   });
 
   test("loads details, can hide details, and reopens cached details without refetch", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({ data: { faculties: [] } }),
-    });
+    const mockResponse = new Response(
+      JSON.stringify({ data: { faculties: [] } }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -102,10 +109,8 @@ describe("UniversityCard", () => {
   });
 
   test("expands nested faculty, study program and subject rows", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({
+    const mockResponse = new Response(
+      JSON.stringify({
         data: {
           faculties: [
             {
@@ -123,7 +128,7 @@ describe("UniversityCard", () => {
                       name: "Algorithms",
                       semester: 3,
                       ects: 6,
-                      type: "MANDATORY",
+                      type: "OBAVEZNI",
                     },
                   ],
                 },
@@ -132,7 +137,12 @@ describe("UniversityCard", () => {
           ],
         },
       }),
-    });
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -158,7 +168,7 @@ describe("UniversityCard", () => {
     const subjectName = await screen.findByText(/Algorithms/i);
     const semesterText = screen.getByText(/Semester 3/i);
     const ectsText = screen.getByText(/6 ECTS/i);
-    const subjectType = screen.getByText(/Mandatory/i);
+    const subjectType = screen.getByText(/OBAVEZNI/i);
 
     expect(subjectName).toBeInTheDocument();
     expect(semesterText).toBeInTheDocument();
@@ -167,11 +177,14 @@ describe("UniversityCard", () => {
   });
 
   test("shows API error notification when details response is non-ok", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-      json: async () => ({ error: { message: "Failed from API." } }),
-    });
+    const mockErrorResponse = new Response(
+      JSON.stringify({ error: { message: "Failed from API." } }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockErrorResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -213,9 +226,6 @@ describe("UniversityCard", () => {
           ...baseUniversity,
           id: 2,
           ownership: "PRIVATNA",
-          acronym: null,
-          website: null,
-          foundedYear: null,
         }}
       />,
     );

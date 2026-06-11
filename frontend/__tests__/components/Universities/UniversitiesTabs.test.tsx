@@ -18,11 +18,11 @@ function Wrapper() {
 }
 
 beforeEach(() => {
-  vi.spyOn(globalThis, "fetch").mockResolvedValue({
-    ok: true,
+  const mockResponse = new Response(JSON.stringify({ data: [] }), {
     status: 200,
-    json: async () => ({ data: [] }),
+    headers: { "Content-Type": "application/json" },
   });
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
 });
 
 afterEach(() => {

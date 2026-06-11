@@ -18,12 +18,28 @@ function Wrapper() {
 }
 
 describe("SearchUniversities", () => {
-  beforeEach(() => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
+  const mockResponse = new Response(
+    JSON.stringify({
+      data: [
+        {
+          id: 5,
+          name: "University of Mostar",
+          acronym: "SUM",
+          city: "Mostar",
+          entity: "FBIH",
+          ownership: "PRIVATNA",
+          foundedYear: 1977,
+          website: "https://sum.ba",
+        },
+      ],
+    }),
+    {
       status: 200,
-      json: async () => ({ data: [] }),
-    });
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+  beforeEach(() => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
   afterEach(() => {
@@ -49,25 +65,6 @@ describe("SearchUniversities", () => {
   });
 
   test("renders search results when API returns matches", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({
-        data: [
-          {
-            id: 5,
-            name: "University of Mostar",
-            acronym: "SUM",
-            city: "Mostar",
-            entity: "FBIH",
-            ownership: "PRIVATNA",
-            foundedYear: 1977,
-            website: "https://sum.ba",
-          },
-        ],
-      }),
-    });
-
     render(<Wrapper />);
     const user = userEvent.setup();
 
@@ -84,11 +81,14 @@ describe("SearchUniversities", () => {
   });
 
   test("renders no results message for 404", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 404,
-      json: async () => ({ error: { message: "Not found" } }),
-    });
+    const mockNotFoundResponse = new Response(
+      JSON.stringify({ error: { message: "Not found" } }),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockNotFoundResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -108,11 +108,14 @@ describe("SearchUniversities", () => {
   });
 
   test("shows API error message on non-404 non-ok response", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-      json: async () => ({ error: { message: "Search exploded." } }),
-    });
+    const mockErrorResponse = new Response(
+      JSON.stringify({ error: { message: "Search exploded." } }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockErrorResponse);
 
     render(<Wrapper />);
     const user = userEvent.setup();
