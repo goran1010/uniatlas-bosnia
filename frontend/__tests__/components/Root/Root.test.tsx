@@ -4,28 +4,41 @@ import { createMemoryRouter } from "react-router-dom";
 import { routes } from "../../../src/routes";
 import { RouterProvider } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-let fetchSpy;
 
 beforeEach(() => {
-  fetchSpy = vi.spyOn(globalThis, "fetch");
-  vi.spyOn(console, "error").mockImplementation(() => {});
+  const fetchSpy = vi.spyOn(globalThis, "fetch");
+  vi.spyOn(console, "error").mockImplementation(() => vi.fn());
+
   fetchSpy.mockImplementation((url) => {
-    if (String(url).endsWith("/api")) {
-      return Promise.resolve({
-        ok: true,
-        json: async () => ({
-          message: "Server is LIVE",
-          data: null,
-        }),
-      });
+    if (typeof url !== "string") {
+      return Promise.reject(new Error("Invalid URL"));
+    }
+    if (url.endsWith("/api")) {
+      return Promise.resolve(
+        new Response(
+          JSON.stringify({
+            message: "Server is live.",
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        ),
+      );
     }
 
-    return Promise.resolve({
-      ok: false,
-      json: async () => ({
-        error: "User not authenticated.",
-      }),
-    });
+    return Promise.resolve(
+      new Response(
+        JSON.stringify({
+          message: "User not authenticated.",
+          data: null,
+        }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
   });
 });
 
@@ -43,7 +56,13 @@ function renderRoot() {
   render(<RouterProvider router={router} />);
 }
 
-async function expectNotificationAndLink({ notificationText, linkName }) {
+async function expectNotificationAndLink({
+  notificationText,
+  linkName,
+}: {
+  notificationText: RegExp;
+  linkName: RegExp;
+}) {
   const notification = await screen.findByText(notificationText);
   const link = await screen.findByRole("link", { name: linkName });
 
@@ -61,18 +80,58 @@ describe("Root component", () => {
   });
 
   test("renders Profile link when user is logged in", async () => {
-    fetchSpy.mockImplementation(() => {
-      return Promise.resolve({
-        ok: true,
-        json: async () => ({
-          message: "User retrieved successfully.",
-          data: {
-            id: 1,
-            username: "testuser",
-            email: "testuser@example.com",
+    const mockUserData = new Response(
+      JSON.stringify({
+        message: "User retrieved successfully.",
+        data: {
+          role: "user",
+          email: "testuser@example.com",
+        },
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+
+    vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+      const requestUrl =
+        typeof url === "string"
+          ? url
+          : url instanceof URL
+            ? url.toString()
+            : url.url;
+
+      if (requestUrl.endsWith("/api")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              message: "Server is live.",
+            }),
+            {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            },
+          ),
+        );
+      }
+
+      if (requestUrl.endsWith("/users/me")) {
+        return Promise.resolve(mockUserData.clone());
+      }
+
+      return Promise.resolve(
+        new Response(
+          JSON.stringify({
+            message: "User not authenticated.",
+            data: null,
+          }),
+          {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
           },
-        }),
-      });
+        ),
+      );
     });
 
     renderRoot();
