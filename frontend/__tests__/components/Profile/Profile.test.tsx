@@ -7,39 +7,40 @@ import { LogIn } from "../../../src/components/LogIn/LogIn";
 import userEvent from "@testing-library/user-event";
 import { RootContextProvider } from "../../rootContextProvider";
 
-let getCsrfTokenMock = "mocked-csrf-token";
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+
+let getCsrfTokenMock: string | null = "mocked-csrf-token";
 
 vi.mock("../../../src/components/utils/getCsrfToken", () => ({
-  getCsrfToken: async () => getCsrfTokenMock,
-  clearCsrfToken: () => {},
+  getCsrfToken: () => getCsrfTokenMock,
+  clearCsrfToken: () => vi.fn(),
 }));
 
 const user = userEvent.setup();
 
-let fetchSpy;
-let consoleErrorSpy;
-
 beforeEach(() => {
   getCsrfTokenMock = "mocked-csrf-token";
-
-  fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(() =>
-    Promise.resolve({
-      ok: true,
-      json: async () => ({
-        message: "default response",
-        data: null,
-      }),
+  const mockResponse = new Response(
+    JSON.stringify({
+      message: "User logged out successfully",
+      data: null,
     }),
+    {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    },
   );
+  const mockConsoleError = vi.fn();
 
-  consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
+  vi.spyOn(console, "error").mockImplementation(mockConsoleError);
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
 });
 
-function Wrapper({ initialUser = null }) {
+function Wrapper({ initialUser = null }: { initialUser?: UserData }) {
   return (
     <RootContextProvider initialUserData={initialUser}>
       <MemoryRouter initialEntries={["/profile"]}>
@@ -75,7 +76,9 @@ describe("Profile Component", () => {
   });
 
   test("renders profile component when user is logged in", async () => {
-    render(<Wrapper initialUser={{ username: "testuser" }} />);
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
     const headingElement = await screen.findByRole("heading", {
       name: /My Profile/i,
     });
@@ -122,7 +125,9 @@ describe("Profile Component", () => {
 describe("Profile Component handle logout", () => {
   test("handles logout failure due to missing CSRF token", async () => {
     getCsrfTokenMock = null;
-    render(<Wrapper initialUser={{ username: "testuser" }} />);
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
 
     await clickLogout();
 
@@ -133,29 +138,41 @@ describe("Profile Component handle logout", () => {
   });
 
   test("handles logout failure due to server error", async () => {
-    fetchSpy.mockResolvedValueOnce({
-      ok: false,
-      json: async () => ({
-        error: "Network error.",
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const mockErrorResponse = new Response(
+      JSON.stringify({
+        error: { message: "An error occurred while logging out." },
       }),
-    });
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    fetchSpy.mockResolvedValueOnce(mockErrorResponse);
 
-    render(<Wrapper initialUser={{ username: "testuser" }} />);
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
 
     await clickLogout();
 
-    const notificationElement = await screen.findByText(/Network error./i);
+    const notificationElement = await screen.findByText(
+      "An error occurred while logging out.",
+    );
     expect(notificationElement).toBeInTheDocument();
   });
 
   test("handles logout failure due to unexpected error", async () => {
-    fetchSpy.mockImplementation((url) => {
-      if (url.endsWith("/users/logout")) {
-        throw new Error("Unexpected error");
-      }
-    });
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => vi.fn());
 
-    render(<Wrapper initialUser={{ username: "testuser" }} />);
+    fetchSpy.mockRejectedValueOnce(new Error("Network error"));
+
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
 
     await clickLogout();
 
@@ -167,19 +184,22 @@ describe("Profile Component handle logout", () => {
   });
 
   test("handles logout correctly", async () => {
-    fetchSpy.mockImplementation((url) => {
-      if (url.endsWith("/users/logout")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            message: "User logged out successfully",
-            data: null,
-          }),
-        });
-      }
-    });
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const mockSuccessResponse = new Response(
+      JSON.stringify({
+        message: "User logged out successfully",
+        data: null,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    fetchSpy.mockResolvedValueOnce(mockSuccessResponse);
 
-    render(<Wrapper initialUser={{ username: "testuser" }} />);
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
     const logoutButton = await clickLogout();
 
     const notificationElement = await screen.findByText(
