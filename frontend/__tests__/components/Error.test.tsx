@@ -7,7 +7,7 @@ import { RouterProvider } from "react-router-dom";
 
 const user = userEvent.setup();
 
-vi.spyOn(console, "warn").mockImplementation(() => {});
+vi.spyOn(console, "warn").mockImplementation(() => vi.fn());
 
 function renderErrorPage() {
   const router = createMemoryRouter(routes, {
@@ -44,7 +44,7 @@ describe("ErrorPage component", () => {
 
 describe("ErrorPage navigation", () => {
   test("navigates to home page when Go Home link is clicked", async () => {
-    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(console, "error").mockImplementation(() => vi.fn());
     renderErrorPage();
 
     const goHomeLink = await getGoHomeLink();

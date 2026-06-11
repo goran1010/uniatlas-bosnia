@@ -1,42 +1,41 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import { Universities } from "../../src/components/Universities/Universities";
-import { RootContextProvider } from "../rootContextProvider";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { routes } from "../../src/routes";
 
-beforeEach(() => {
-  vi.spyOn(globalThis, "fetch").mockResolvedValue({
-    ok: true,
-    json: async () => ({ data: [], message: "ok" }),
-  });
+const mockValue = new Response(JSON.stringify({ universities: [] }), {
+  status: 200,
+  headers: { "Content-type": "application/json" },
 });
 
+beforeEach(() => {
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockValue);
+});
 afterEach(() => {
   vi.restoreAllMocks();
 });
 
 function Wrapper() {
-  return (
-    <RootContextProvider>
-      <MemoryRouter>
-        <Universities />
-      </MemoryRouter>
-    </RootContextProvider>
-  );
+  const router = createMemoryRouter(routes, {
+    initialEntries: ["/universities"],
+  });
+  render(<RouterProvider router={router} />);
 }
 
-describe("Universities page", async () => {
+describe("Universities page", () => {
   test("renders tab buttons: Browse All, Search, Find Study Programs", async () => {
-    render(<Wrapper />);
+    Wrapper();
 
-    expect(
-      await screen.findByRole("button", { name: /Browse All/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByRole("button", { name: /Search/i })[0],
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Find Study Programs/i }),
-    ).toBeInTheDocument();
+    const BrowseAllButton = await screen.findByRole("button", {
+      name: /Browse All/i,
+    });
+    const SearchButton = screen.getAllByRole("button", { name: /Search/i })[0];
+    const FindStudyProgramsButton = screen.getByRole("button", {
+      name: /Find Study Programs/i,
+    });
+
+    expect(BrowseAllButton).toBeInTheDocument();
+    expect(SearchButton).toBeInTheDocument();
+    expect(FindStudyProgramsButton).toBeInTheDocument();
   });
 });

@@ -1,19 +1,14 @@
 import { describe, test, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { Footer } from "../../src/components/Footer";
-import { RootContextProvider } from "../rootContextProvider";
-
-function MockLanguageProvider({ children }) {
-  return <RootContextProvider>{children}</RootContextProvider>;
-}
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { routes } from "../../src/routes";
 
 describe("ErrorPage Component", () => {
   test("Footer component", () => {
-    render(
-      <MockLanguageProvider>
-        <Footer />
-      </MockLanguageProvider>,
-    );
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/"],
+    });
+    render(<RouterProvider router={router} />);
 
     const name = screen.getByText(/goran jovi/i);
     expect(name).toBeInTheDocument();

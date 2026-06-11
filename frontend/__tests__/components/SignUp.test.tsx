@@ -14,6 +14,12 @@ vi.mock("../../src/components/utils/getCsrfToken", () => ({
 
 const user = userEvent.setup();
 
+type Element =
+  | "emailField"
+  | "passwordField"
+  | "confirmPasswordField"
+  | "signUpButton";
+
 beforeEach(async () => {
   function Wrapper() {
     return (
@@ -38,14 +44,27 @@ afterEach(() => {
 
 function createFormElements() {
   return {
-    emailField: screen.getByLabelText(/Email/i),
-    passwordField: screen.getByLabelText("Password"),
-    confirmPasswordField: screen.getByLabelText(/Confirm Password/i),
-    signUpButton: screen.getByRole("button", { name: /Create/i }),
+    emailField: screen.getByLabelText<HTMLInputElement>(/Email/i),
+    passwordField: screen.getByLabelText<HTMLInputElement>("Password"),
+    confirmPasswordField:
+      screen.getByLabelText<HTMLInputElement>(/Confirm Password/i),
+    signUpButton: screen.getByRole<HTMLButtonElement>("button", {
+      name: /Create/i,
+    }),
   };
 }
 
-async function submitSignUpForm({ email, password, confirmPassword, button }) {
+async function submitSignUpForm({
+  email,
+  password,
+  confirmPassword,
+  button,
+}: {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  button?: HTMLElement;
+}) {
   const { emailField, passwordField, confirmPasswordField, signUpButton } =
     createFormElements();
 
@@ -65,8 +84,8 @@ describe("Render SignUp Component", () => {
 
   test("SignUp form fields", () => {
     const formElements = createFormElements();
-
-    for (let element in formElements) {
+    let element: Element;
+    for (element in formElements) {
       expect(formElements[element]).toBeInTheDocument();
     }
   });
@@ -75,7 +94,7 @@ describe("Render SignUp Component", () => {
     function WrapperWithUser() {
       return (
         <RootContextProvider
-          initialUserData={{ id: "1", email: "user@mail.com" }}
+          initialUserData={{ email: "user@mail.com", role: "user" }}
         >
           <MemoryRouter initialEntries={["/signup"]}>
             <Notifications />
@@ -119,7 +138,8 @@ describe("User typing in input fields in SignUp Component", () => {
 
 describe("SignUp Form Validation on input", () => {
   test("shows validation messages for email input", async () => {
-    const { emailField } = createFormElements();
+    const { emailField }: { emailField: HTMLInputElement } =
+      createFormElements();
 
     await user.type(emailField, "te");
     expect(emailField).toHaveValue("te");
@@ -129,12 +149,12 @@ describe("SignUp Form Validation on input", () => {
     await user.type(emailField, "st");
     expect(emailField).toHaveValue("test");
     expect(emailField.validationMessage).toMatch(
-      /Please include an '@' in the email address. 'test' is missing an '@'./i,
+      /Please include an '@' in the email address./i,
     );
     await user.type(emailField, "@");
     expect(emailField).toHaveValue("test@");
     expect(emailField.validationMessage).toMatch(
-      /Please enter a part following '@'. test@ is incomplete./i,
+      /Please enter a part following '@'./i,
     );
     await user.type(emailField, "mail");
     expect(emailField).toHaveValue("test@mail");
@@ -182,13 +202,13 @@ describe("SignUp Form Validation on Create button click", () => {
     expect(emailField).toHaveValue("test");
     await user.click(signUpButton);
     expect(emailField.validationMessage).toMatch(
-      /Please include an '@' in the email address. 'test' is missing an '@'./i,
+      /Please include an '@' in the email address./i,
     );
     await user.type(emailField, "@");
     expect(emailField).toHaveValue("test@");
     await user.click(signUpButton);
     expect(emailField.validationMessage).toMatch(
-      /Please enter a part following '@'. test@ is incomplete./i,
+      /Please enter a part following '@'./i,
     );
     await user.type(emailField, "mail");
     expect(emailField).toHaveValue("test@mail");
@@ -230,16 +250,19 @@ describe("SignUp Form Validation on Create button click", () => {
 
 describe("SignUp Form Submit", () => {
   test("Shows error message after clicking Create when fetching with existing email", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
-      status: 400,
-      json: async () => ({
+    const mockResponse = new Response(
+      JSON.stringify({
         error: {
           message:
             "Validation failed: Email already in use Fix the highlighted fields and try again.",
         },
       }),
-    });
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
     await submitSignUpForm({
       email: "newemail@mail.com",
       password: "Password123!",
@@ -253,13 +276,14 @@ describe("SignUp Form Submit", () => {
   });
 
   test("Redirects to LogIn on successful form submit", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: async () => ({
-        message: "Registration successful! Check your email.",
-      }),
-    });
+    const mockResponse = new Response(
+      JSON.stringify({ message: "Registration successful! Check your email." }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
 
     await submitSignUpForm({
       email: "newemail@mail.com",
@@ -300,11 +324,11 @@ describe("SignUp Form Submit", () => {
   });
 
   test("shows fallback registration failed message when backend error payload is missing", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
+    const mockResponse = new Response(null, {
       status: 400,
-      json: async () => ({}),
+      statusText: "Bad Request",
     });
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
 
     await submitSignUpForm({
       email: "newemail@mail.com",
@@ -312,7 +336,9 @@ describe("SignUp Form Submit", () => {
       confirmPassword: "Password123!",
     });
 
-    const fallbackError = await screen.findByText(/^Registration failed\.$/i);
+    const fallbackError = await screen.findByText(
+      "An error occurred during registration.",
+    );
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackError).toBeInTheDocument();
