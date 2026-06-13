@@ -73,7 +73,7 @@ enum subjectType {
   ELECTIVE
 }
 
-enum universityEntityType {
+enum entityType {
   UNIVERSITY
   FACULTY
   STUDY_PROGRAM
@@ -143,15 +143,15 @@ model Subject {
 }
 
 model PendingChangesUniversity {
-  id           String               @id @default(uuid())
-  entityType   universityEntityType
+  id           String       @id @default(uuid())
+  entityType   entityType
   typeOfChange typeOfChange
   targetId     Int?
   parentId     Int?
   data         Json
   userId       String
-  user         User                 @relation(fields: [userId], references: [id])
-  createdAt    DateTime             @default(now())
+  user         User         @relation(fields: [userId], references: [id])
+  createdAt    DateTime     @default(now())
 
   @@map("pending_changes_university")
 }

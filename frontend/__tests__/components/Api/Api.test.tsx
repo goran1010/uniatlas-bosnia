@@ -3,11 +3,11 @@ import { render, screen, within } from "@testing-library/react";
 import { Api } from "../../../src/components/Api/Api";
 import { RootContextProvider } from "../../rootContextProvider";
 import {
-  endpoints,
-  authenticatedGroups,
+  apiEndpoints,
+  authenticatedGroupsEndpoints,
 } from "../../../src/components/Api/utils/endpoints";
 
-function MockLanguageProvider({ children }) {
+function MockLanguageProvider({ children }: { children: React.ReactNode }) {
   return <RootContextProvider>{children}</RootContextProvider>;
 }
 
@@ -51,7 +51,7 @@ describe("Api component", () => {
 
   test("renders all public endpoint paths", () => {
     renderApi();
-    for (const ep of endpoints) {
+    for (const ep of apiEndpoints) {
       expect(screen.getAllByText(ep.path).length).toBeGreaterThan(0);
     }
   });
@@ -69,13 +69,13 @@ describe("Api component", () => {
   test("renders all authenticated group titles", () => {
     renderApi();
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(
-      authenticatedGroups.length,
+      authenticatedGroupsEndpoints.length,
     );
   });
 
   test("renders all authenticated endpoint paths", () => {
     renderApi();
-    for (const group of authenticatedGroups) {
+    for (const group of authenticatedGroupsEndpoints) {
       for (const ep of group.endpoints) {
         expect(screen.getAllByText(ep.path).length).toBeGreaterThan(0);
       }
@@ -87,6 +87,9 @@ describe("Api component", () => {
     const authSection = screen
       .getByRole("heading", { name: /Authenticated Data Contribution Flow/i })
       .closest("section");
+    if (!authSection) {
+      throw new Error("Authenticated section not found");
+    }
     expect(within(authSection).getAllByText("GET").length).toBeGreaterThan(0);
     expect(within(authSection).getAllByText("POST").length).toBeGreaterThan(0);
   });

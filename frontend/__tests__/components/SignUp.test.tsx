@@ -8,8 +8,8 @@ import { Notifications } from "../../src/components/Notifications";
 import { RootContextProvider } from "../rootContextProvider";
 
 vi.mock("../../src/components/utils/getCsrfToken", () => ({
-  getCsrfToken: async () => "mocked-csrf-token",
-  clearCsrfToken: () => {},
+  getCsrfToken: () => Promise.resolve("mocked-csrf-token"),
+  clearCsrfToken: () => vi.fn(),
 }));
 
 const user = userEvent.setup();
@@ -20,7 +20,7 @@ type Element =
   | "confirmPasswordField"
   | "signUpButton";
 
-beforeEach(async () => {
+beforeEach(() => {
   function Wrapper() {
     return (
       <RootContextProvider>
@@ -94,7 +94,7 @@ describe("Render SignUp Component", () => {
     function WrapperWithUser() {
       return (
         <RootContextProvider
-          initialUserData={{ email: "user@mail.com", role: "user" }}
+          initialUserData={{ email: "user@mail.com", role: "USER" }}
         >
           <MemoryRouter initialEntries={["/signup"]}>
             <Notifications />
@@ -303,7 +303,7 @@ describe("SignUp Form Submit", () => {
   test("shows error message when network request throws", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
-      .mockImplementation(() => {});
+      .mockImplementation(() => vi.fn());
 
     vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(
       new Error("Network error"),

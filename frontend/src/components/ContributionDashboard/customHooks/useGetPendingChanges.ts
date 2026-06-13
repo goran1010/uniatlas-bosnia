@@ -5,11 +5,10 @@ import { guardedFetch } from "../../../utils/guardedFetch";
 
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { UserData } from "../../../customHooks/useStatusCheck";
-import type { Entity } from "../../Universities/GetAllUniversities";
 
 export interface PendingChange {
   id: string;
-  entityType: Entity;
+  entityType: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
   typeOfChange: "CREATE" | "UPDATE" | "DELETE";
   targetId: number | null;
   parentId: number | null;

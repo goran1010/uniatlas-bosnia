@@ -4,6 +4,12 @@ import userEvent from "@testing-library/user-event";
 import { PendingUniversityChangesRow } from "../../../src/components/ContributionDashboard/PendingUniversityChangesRow";
 import { RootContextProvider } from "../../rootContextProvider";
 
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+import type { Entity } from "../../../src/components/Universities/GetAllUniversities";
+import type { ReactElement } from "react";
+
+import type { AddNotification } from "../../../src/customHooks/useNotification";
+
 const handleDiscardUniversityChangeMock = vi.fn();
 
 vi.mock(
@@ -14,14 +20,37 @@ vi.mock(
   }),
 );
 
-const change = {
+interface Change {
+  id: string;
+  entityType: Entity;
+  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
+  targetId: number | null;
+  parentId: number | null;
+  data: UserData;
+  userId: string;
+  user: UserData;
+  createdAt: Date;
+}
+
+const change: Change = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
-  entityType: "FACULTY",
+  entityType: "BD",
   typeOfChange: "DELETE",
-  data: {},
+  targetId: null,
+  parentId: null,
+  data: {
+    email: "",
+    role: "ADMIN",
+  },
+  userId: "",
+  user: {
+    email: "",
+    role: "ADMIN",
+  },
+  createdAt: new Date(),
 };
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: ReactElement }) {
   return <RootContextProvider>{children}</RootContextProvider>;
 }
 

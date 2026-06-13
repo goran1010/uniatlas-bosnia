@@ -5,7 +5,9 @@ import { ContributionDashboard } from "../../../src/components/ContributionDashb
 import { Notifications } from "../../../src/components/Notifications";
 import { RootContextProvider } from "../../rootContextProvider";
 
-function Wrapper({ initialUser = null }) {
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+
+function Wrapper({ initialUser }: { initialUser: UserData }) {
   return (
     <RootContextProvider initialUserData={initialUser}>
       <MemoryRouter initialEntries={["/improve-data"]}>
@@ -20,7 +22,7 @@ function Wrapper({ initialUser = null }) {
 
 describe("render ContributionDashboard component", () => {
   test("render message if user doesn't exist", async () => {
-    render(<Wrapper />);
+    render(<Wrapper initialUser={null} />);
 
     const paragraphElement = await screen.findByText(
       /You need to be a registered user to propose changes to the content./i,
@@ -29,7 +31,11 @@ describe("render ContributionDashboard component", () => {
   });
 
   test("renders contribution form when user exists", async () => {
-    render(<Wrapper initialUser={{ email: "some@email.com" }} />);
+    const userData: UserData = {
+      email: "some@email.com",
+      role: "USER",
+    };
+    render(<Wrapper initialUser={userData} />);
 
     const headingElement = await screen.findByRole("heading", {
       name: /Improve the Data/i,

@@ -3,14 +3,16 @@ import { render, screen } from "@testing-library/react";
 import { PendingUniversityChanges } from "../../../src/components/ContributionDashboard/PendingUniversityChanges";
 import { RootContextProvider } from "../../rootContextProvider";
 
+import type { PendingChange } from "../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+
 const PendingUniversityChangesRowMock = vi.fn();
 
 vi.mock(
   "../../../src/components/ContributionDashboard/PendingUniversityChangesRow",
   () => ({
-    PendingUniversityChangesRow: (props) => {
+    PendingUniversityChangesRow: (props: { change: PendingChange }) => {
       PendingUniversityChangesRowMock(props);
-      return <li>{props.change.data?.name ?? "Mock row"}</li>;
+      return <li>{props.change.data?.email ?? "Mock row"}</li>;
     },
   }),
 );
@@ -19,22 +21,38 @@ vi.mock("../../../src/utils/Spinner", () => ({
   Spinner: () => <p>Loading...</p>,
 }));
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: React.ReactNode }) {
   return <RootContextProvider>{children}</RootContextProvider>;
 }
 
-const pendingChanges = [
+const pendingChanges: PendingChange[] = [
   {
     id: "1",
     entityType: "UNIVERSITY",
     typeOfChange: "CREATE",
-    data: { name: "University of Sarajevo" },
+    data: { email: "University of Sarajevo", role: "ADMIN" },
+    targetId: 1,
+    parentId: null,
+    userId: "user-123",
+    createdAt: new Date(),
+    user: {
+      role: "ADMIN",
+      email: "user-123@example.com",
+    },
   },
   {
     id: "2",
     entityType: "FACULTY",
     typeOfChange: "UPDATE",
-    data: { name: "Faculty of Engineering" },
+    data: { email: "Faculty of Engineering", role: "ADMIN" },
+    targetId: 2,
+    parentId: null,
+    userId: "user-456",
+    createdAt: new Date(),
+    user: {
+      role: "ADMIN",
+      email: "user-456@example.com",
+    },
   },
 ];
 
