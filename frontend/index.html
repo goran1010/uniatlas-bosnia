@@ -2,98 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
-    <link rel="shortcut icon" href="/images/favicon.ico" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/images/favicon-16x16.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/images/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/images/android-chrome-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="512x512"
-      href="/images/android-chrome-512x512.png"
-    />
-
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Open Graph: site-wide defaults (title, description, url, canonical managed per-page via Helmet) -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://uniatlas-bosnia.netlify.app/images/og-image-home.png"
-    />
-
-    <!-- Twitter: site-wide defaults -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:image"
-      content="https://uniatlas-bosnia.netlify.app/images/og-image-home.png"
-    />
-
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": "https://uniatlas-bosnia.netlify.app/#website",
-            "url": "https://uniatlas-bosnia.netlify.app/",
-            "name": "UniAtlas Bosnia",
-            "description": "Free, open-source public data about Bosnia and Herzegovina. Browse universities and academic programs via REST API or interactive interface.",
-            "inLanguage": "en"
-          },
-          {
-            "@type": "Dataset",
-            "@id": "https://uniatlas-bosnia.netlify.app/#universities",
-            "name": "Bosnia and Herzegovina Universities",
-            "description": "A comprehensive dataset of accredited universities, faculties, study programs, and subjects in Bosnia and Herzegovina.",
-            "url": "https://uniatlas-bosnia.netlify.app/universities",
-            "license": "https://www.gnu.org/licenses/agpl-3.0.html",
-            "isAccessibleForFree": true,
-            "creator": {
-              "@type": "Person",
-              "name": "Goran Jovic",
-              "url": "https://github.com/goran1010"
-            },
-            "distribution": [
-              {
-                "@type": "DataDownload",
-                "encodingFormat": "application/json",
-                "contentUrl": "https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities"
-              }
-            ],
-            "spatialCoverage": {
-              "@type": "Place",
-              "name": "Bosnia and Herzegovina"
-            }
-          }
-        ]
-      }
-    </script>
+    <title>uniatlas-bosnia</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

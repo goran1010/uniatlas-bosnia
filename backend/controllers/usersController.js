@@ -15,7 +15,6 @@ class UsersController {
     }
 
     const loggedInUser = sanitizeUser(req.user);
-
     return sendSuccess(res, {
       message: "User info retrieved",
       data: loggedInUser,

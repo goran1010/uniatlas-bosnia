@@ -13,6 +13,12 @@
     "serverDown": "Server Down",
     "wakingUp": "Waking Up..."
   },
+  "loginStatus": {
+    "success": "Successfully logged in. Redirecting to the home page.",
+    "failed": "Login failed. Please check your credentials and try again.",
+    "error": "An error occurred while logging in. Please try again later.",
+    "alreadyLoggedIn": "You are already logged in. Redirected to the home page."
+  },
   "meta": {
     "home": "Explore universities, faculties, study programs, and subjects in Bosnia and Herzegovina with a free public dataset, searchable web interface, and REST API.",
     "universities": "Explore universities and academic programs in Bosnia and Herzegovina.",
@@ -280,8 +286,8 @@
     "email": {
       "invalid": "Please enter a valid email address",
       "minLength": "Email must have at least 3 characters",
-      "missingAt": "Please include an '@' in the email address. '{{email}}' is missing an '@'.",
-      "missingDomain": "Please enter a part following '@'. {{email}} is incomplete."
+      "missingAt": "Please include an '@' in the email address.",
+      "missingDomain": "Please enter a part following '@'."
     },
     "password": {
       "minLength": "Password must have at least 6 characters",
@@ -307,9 +313,9 @@
     },
     "admin": {
       "approveFailed": "Failed to approve pending change.",
-      "approveError": "Error approving pending change for {{email}}.",
+      "approveError": "Error approving pending change.",
       "declineFailed": "Failed to decline request.",
-      "declineError": "Error declining {{email}}'s request."
+      "declineError": "Error declining request."
     },
     "universities": {
       "addFailed": "Failed to submit suggestion.",

@@ -1,0 +1,342 @@
+import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
+import { SERVER_STATUS } from "../../../../src/utils/serverStatus";
+import type { ServerStatus } from "../../../../src/utils/serverStatus";
+import type { SetStateAction } from "react";
+import type { PendingChange } from "../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { GuardedFetch } from "../../../../src/utils/guardedFetch";
+import type { HandleSubmitUniversityEntityParams } from "../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity";
+
+const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
+const guardedFetchMock = vi.fn<GuardedFetch>();
+
+vi.mock("../../../../src/components/utils/getCsrfToken", () => ({
+  getCsrfToken: (args: unknown) => getCsrfTokenMock(args),
+}));
+
+vi.mock("../../../../src/utils/guardedFetch", () => ({
+  guardedFetch: (...args: Parameters<GuardedFetch>) =>
+    guardedFetchMock(...args),
+}));
+
+const t = (key: string) => key;
+
+const baseArgs = {
+  entityType: "UNIVERSITY",
+  parentId: "",
+  targetId: "",
+  typeOfChange: "CREATE" as const,
+  data: { name: "University of Sarajevo", city: "Sarajevo" },
+  setPendingChanges: vi.fn(),
+  addNotification: vi.fn(),
+  setLoading: vi.fn(),
+  setFormState: vi.fn(),
+  t,
+  serverStatus: "live" as ServerStatus,
+} satisfies HandleSubmitUniversityEntityParams;
+
+function createSuccessResponse(
+  data: PendingChange | Partial<PendingChange>,
+  message: string,
+) {
+  return {
+    ok: true,
+    json: () => Promise.resolve({ data, message }),
+  } as Response;
+}
+
+function createErrorResponse(error: Record<string, unknown>) {
+  return {
+    ok: false,
+    json: () => Promise.resolve(error),
+  } as Response;
+}
+
+beforeEach(() => {
+  getCsrfTokenMock.mockReset();
+  guardedFetchMock.mockReset();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
+describe("handleSubmitUniversityEntity", () => {
+  test("uses POST with numeric parent id for create under parent entity", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "FACULTY",
+          typeOfChange: "CREATE",
+          targetId: null,
+          parentId: 15,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Created.",
+      ),
+    );
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      entityType: "FACULTY",
+      parentId: "15",
+      data: { name: "Faculty of Law" },
+    });
+
+    expect(guardedFetchMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({
+          entityType: "FACULTY",
+          parentId: 15,
+          data: { name: "Faculty of Law" },
+        }),
+      }),
+      expect.any(Object),
+    );
+  });
+
+  test("submits a create request and prepends the pending change", async () => {
+    const pendingChange: PendingChange = {
+      id: "1",
+      entityType: "UNIVERSITY",
+      typeOfChange: "CREATE",
+      targetId: null,
+      parentId: null,
+      data: { email: "University of Sarajevo", role: "USER" },
+      createdAt: new Date(),
+      user: { email: "submitter@email.com", role: "USER" },
+      userId: "user-1",
+    };
+
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        pendingChange,
+        "Pending change created successfully.",
+      ),
+    );
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+    let updatePendingChanges:
+      | ((prev: PendingChange[]) => PendingChange[])
+      | undefined;
+    const setPendingChanges = (updater: SetStateAction<PendingChange[]>) => {
+      if (typeof updater === "function") {
+        updatePendingChanges = updater;
+      }
+    };
+    const addNotification = vi.fn();
+    const setLoading = vi.fn();
+    const setFormState = vi.fn();
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      setPendingChanges,
+      addNotification,
+      setLoading,
+      setFormState,
+    });
+
+    expect(guardedFetchMock).toHaveBeenCalledWith(
+      expect.stringContaining("/users/contribution/universities"),
+      expect.objectContaining({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-csrf-token": "csrf-token",
+        },
+      }),
+      expect.objectContaining({ serverStatus: SERVER_STATUS.LIVE }),
+    );
+    expect(setLoading).toHaveBeenNthCalledWith(1, true);
+    expect(setLoading).toHaveBeenLastCalledWith(false);
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "success",
+      message: "Pending change created successfully.",
+    });
+    expect(setFormState).toHaveBeenCalledWith({
+      entityType: "",
+      parentId: "",
+      targetId: "",
+      data: {},
+    });
+
+    expect(typeof updatePendingChanges).toBe("function");
+
+    const existingPendingChange: PendingChange = {
+      ...pendingChange,
+      id: "existing",
+    };
+
+    expect(
+      (updatePendingChanges as (prev: PendingChange[]) => PendingChange[])([
+        existingPendingChange,
+      ]),
+    ).toEqual([pendingChange, existingPendingChange]);
+  });
+
+  test("uses PUT and target id for updates", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "FACULTY",
+          typeOfChange: "UPDATE",
+          targetId: 7,
+          parentId: 1,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Updated.",
+      ),
+    );
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      entityType: "FACULTY",
+      targetId: "7",
+      typeOfChange: "UPDATE",
+      data: { name: "Updated Faculty" },
+    });
+
+    expect(guardedFetchMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        method: "PUT",
+        body: JSON.stringify({
+          entityType: "FACULTY",
+          targetId: 7,
+          data: { name: "Updated Faculty" },
+        }),
+      }),
+      expect.any(Object),
+    );
+  });
+
+  test("uses DELETE and target id for delete changes", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "SUBJECT",
+          typeOfChange: "DELETE",
+          targetId: 42,
+          parentId: 7,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Deleted.",
+      ),
+    );
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      entityType: "SUBJECT",
+      targetId: "42",
+      typeOfChange: "DELETE",
+      data: {},
+    });
+
+    expect(guardedFetchMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        method: "DELETE",
+        body: JSON.stringify({
+          entityType: "SUBJECT",
+          targetId: 42,
+        }),
+      }),
+      expect.any(Object),
+    );
+  });
+
+  test("shows an error notification when the csrf token is missing", async () => {
+    getCsrfTokenMock.mockResolvedValue(null);
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+    const addNotification = vi.fn();
+    const setLoading = vi.fn();
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      addNotification,
+      setLoading,
+    });
+
+    expect(guardedFetchMock).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.csrfTokenFailed",
+    });
+    expect(setLoading).toHaveBeenLastCalledWith(false);
+  });
+
+  test("falls back to the generic add error when the backend error payload is missing", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue(createErrorResponse({}));
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+    const addNotification = vi.fn();
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      addNotification,
+    });
+
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.addError",
+    });
+  });
+
+  test("shows the fallback error when the request throws", async () => {
+    const requestError = new Error("Network failure");
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockRejectedValue(requestError);
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+    const addNotification = vi.fn();
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      addNotification,
+    });
+
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.addError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "Error submitting university entity:",
+      requestError,
+    );
+  });
+});
