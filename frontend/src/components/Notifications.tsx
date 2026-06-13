@@ -1,6 +1,6 @@
 import { use, useEffect, useRef } from "react";
 import { RootContext } from "../contextData/RootContext";
-import type { TypeNotification } from "../customHooks/useNotification";
+import type { TypeNotification } from "../types/notification";
 
 function getNotificationStyles(type: TypeNotification) {
   switch (type) {

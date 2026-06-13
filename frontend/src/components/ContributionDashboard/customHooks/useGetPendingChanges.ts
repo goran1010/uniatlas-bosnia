@@ -3,22 +3,8 @@ import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-import type { TFunction } from "../../../customHooks/useLanguage";
-import type { UserData } from "../../../customHooks/useStatusCheck";
-
-export type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-
-export interface PendingChange {
-  id: string;
-  entityType: EntityType;
-  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
-  targetId: number | null;
-  parentId: number | null;
-  data: UserData;
-  userId: string;
-  user: UserData;
-  createdAt: Date;
-}
+import type { TFunction } from "../../../types/i18n";
+import type { PendingChange } from "../types";
 
 interface StatusSuccessResponse {
   message: string;
@@ -97,3 +83,4 @@ function useGetPendingChanges(
 }
 
 export { useGetPendingChanges };
+export type { PendingChange } from "../types";

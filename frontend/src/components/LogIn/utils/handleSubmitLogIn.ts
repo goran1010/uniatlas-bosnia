@@ -3,10 +3,10 @@ import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
 import type { NavigateFunction } from "react-router-dom";
-import type { AddNotification } from "../../../customHooks/useNotification";
-import type { TFunction } from "../../../customHooks/useLanguage";
+import type { AddNotification } from "../../../types/notification";
+import type { TFunction } from "../../../types/i18n";
 import type { ServerStatus } from "../../../utils/serverStatus";
-import type { UserData } from "../../../customHooks/useStatusCheck";
+import type { UserData } from "../../../types/auth";
 
 type HandleLogInSubmit = (
   e: SubmitEvent<HTMLFormElement>,

@@ -6,7 +6,7 @@ import { Spinner } from "../../utils/Spinner";
 import { BACKEND_URL } from "../../utils/envConfig";
 
 import type { Faculty, StudyProgram } from "./GetAllUniversities";
-import type { TFunction } from "../../customHooks/useLanguage";
+import type { TFunction } from "../../types/i18n";
 
 interface StatusSuccessResponse {
   message: string;

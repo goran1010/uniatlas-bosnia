@@ -5,7 +5,10 @@ const ALLOWED_ATTEMPTS = 30;
 const DELAY_BETWEEN_ATTEMPTS = 2000;
 
 import { type ServerStatus } from "../utils/serverStatus";
-import type { AddNotification, RemoveNotification } from "./useNotification";
+import type {
+  AddNotification,
+  RemoveNotification,
+} from "../types/notification";
 import type { TFunction } from "./useLanguage";
 
 interface UseServerWakeUp {

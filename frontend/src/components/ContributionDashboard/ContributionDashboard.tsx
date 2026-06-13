@@ -3,6 +3,8 @@ import { RootContext } from "../../contextData/RootContext";
 import { ContributionForm } from "./ContributionForm";
 import { Helmet } from "react-helmet-async";
 
+export type { PendingChange } from "./types";
+
 function ContributionDashboard() {
   const { userData, t } = use(RootContext);
 

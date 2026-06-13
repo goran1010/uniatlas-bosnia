@@ -3,8 +3,8 @@ import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
-import type { TFunction } from "../../../customHooks/useLanguage";
-import type { AddNotification } from "../../../customHooks/useNotification";
+import type { TFunction } from "../../../types/i18n";
+import type { AddNotification } from "../../../types/notification";
 import type { PendingChange } from "../customHooks/useGetPendingChanges";
 import type { Dispatch, SetStateAction } from "react";
 

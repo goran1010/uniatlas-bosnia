@@ -1,18 +1,7 @@
 import { useCallback, useState } from "react";
+import type { Notification } from "../types/notification";
+
 const MAX_NOTIFICATIONS = 5;
-
-export type TypeNotification = "success" | "error" | "info" | "warning";
-
-export interface Notification {
-  id?: string;
-  type: TypeNotification;
-  message: string;
-  duration?: number | null;
-  persistent?: boolean;
-}
-
-export type AddNotification = (notification: Notification) => void;
-export type RemoveNotification = (id: string) => void;
 
 function useNotification() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -78,3 +67,9 @@ function useNotification() {
 }
 
 export { useNotification };
+export type {
+  AddNotification,
+  Notification,
+  RemoveNotification,
+  TypeNotification,
+} from "../types/notification";

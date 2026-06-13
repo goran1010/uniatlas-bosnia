@@ -4,7 +4,7 @@ import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
 import type { SetIsMenuOpen } from "../../customHooks/useCloseMenu";
-import type { UserData } from "../../customHooks/useStatusCheck";
+import type { UserData } from "../../types/auth";
 
 interface StandardMenuProps {
   setIsMenuOpen: SetIsMenuOpen;

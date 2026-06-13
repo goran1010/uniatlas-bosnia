@@ -2,9 +2,9 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
-import type { AddNotification } from "../../../customHooks/useNotification";
-import type { UserData } from "../../../customHooks/useStatusCheck";
-import type { TFunction } from "../../../customHooks/useLanguage";
+import type { AddNotification } from "../../../types/notification";
+import type { UserData } from "../../../types/auth";
+import type { TFunction } from "../../../types/i18n";
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { NavigateFunction } from "react-router-dom";
 

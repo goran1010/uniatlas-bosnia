@@ -6,14 +6,17 @@ import { Label } from "../sharedComponents/Label";
 import { Button } from "../sharedComponents/Button";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
-import type { PendingChange } from "./customHooks/useGetPendingChanges";
+import type {
+  ContributionFormData,
+  ContributionFormState,
+  Cycle,
+  Entity,
+  EntityType,
+  SubjectType,
+  TypeOfChange,
+  PendingChange,
+} from "./types";
 import type { Dispatch, SetStateAction, SubmitEvent } from "react";
-
-type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-export type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
-type Cycle = "FIRST" | "SECOND" | "THIRD";
-type SubjectType = "MANDATORY" | "ELECTIVE";
-type Entity = "FBIH" | "RS" | "BD";
 
 interface DataFieldProps {
   label: string;
@@ -28,27 +31,7 @@ interface DataFieldProps {
   ) => void;
 }
 
-interface FormState {
-  entityType: EntityType;
-  typeOfChange: TypeOfChange;
-  parentId: string;
-  targetId: string;
-  data: {
-    name?: string;
-    city?: string;
-    entity?: Entity;
-    ownership?: "JAVNA" | "PRIVATNA";
-    website?: string;
-    cycle?: Cycle;
-    durationYears?: number;
-    ects?: number;
-    language?: string;
-    semester?: number;
-    type?: SubjectType;
-  };
-}
-
-const INIT_FORM: FormState = {
+const INIT_FORM: ContributionFormState = {
   entityType: "UNIVERSITY",
   typeOfChange: "CREATE",
   parentId: "",
@@ -92,12 +75,12 @@ function AddUniversityEntity({
 
   const { entityType, typeOfChange, parentId, targetId, data } = formState;
 
-  function setField(field: keyof FormState, value: string) {
+  function setField(field: keyof ContributionFormState, value: string) {
     setFormState((prev) => ({ ...prev, [field]: value }));
   }
 
   function setDataField(
-    field: keyof FormState["data"],
+    field: keyof ContributionFormData,
     value: string | number,
   ) {
     setFormState((prev) => ({

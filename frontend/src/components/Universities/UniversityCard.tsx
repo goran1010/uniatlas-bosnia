@@ -4,7 +4,7 @@ import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { BACKEND_URL } from "../../utils/envConfig";
 
-import type { TFunction } from "../../customHooks/useLanguage";
+import type { TFunction } from "../../types/i18n";
 
 import type {
   University,

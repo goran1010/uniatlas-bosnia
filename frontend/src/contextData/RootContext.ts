@@ -1,21 +1,6 @@
-import { createContext, type Dispatch, type SetStateAction } from "react";
-import { type ServerStatus } from "../utils/serverStatus";
+import { createContext } from "react";
 
-import { type Notification } from "../customHooks/useNotification";
-import type { UserData } from "../customHooks/useStatusCheck";
-import type { Language, SetLanguage } from "../customHooks/useLanguage";
-
-export interface RootContextType {
-  language: Language;
-  setLanguage: SetLanguage;
-  t: (key: string) => string;
-  notifications: Notification[];
-  addNotification: (notification: Notification) => void;
-  removeNotification: (id: string | undefined) => void;
-  userData: UserData;
-  setUserData: Dispatch<SetStateAction<UserData>>;
-  serverStatus: ServerStatus;
-}
+import type { RootContextType } from "./types";
 
 const RootContext = createContext<RootContextType>({
   language: "en",
@@ -30,3 +15,4 @@ const RootContext = createContext<RootContextType>({
 });
 
 export { RootContext };
+export type { RootContextType } from "./types";

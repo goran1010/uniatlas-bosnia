@@ -3,7 +3,7 @@ import { Status } from "./Status";
 import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
-import type { UserData } from "../../customHooks/useStatusCheck";
+import type { UserData } from "../../types/auth";
 import type { SetIsMenuOpen } from "../../customHooks/useCloseMenu";
 
 const menuItemClass = `block p-2 w-full text-center text-nowrap rounded-lg hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 

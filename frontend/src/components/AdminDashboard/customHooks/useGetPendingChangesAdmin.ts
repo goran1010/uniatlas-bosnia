@@ -4,7 +4,7 @@ import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
-import type { TFunction } from "../../../customHooks/useLanguage";
+import type { TFunction } from "../../../types/i18n";
 
 interface StatusSuccessResponse {
   message: string;

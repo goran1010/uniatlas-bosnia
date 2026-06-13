@@ -3,10 +3,7 @@ import en from "../locales/en.json";
 import sr from "../locales/sr.json";
 import { setSystemLanguage } from "../utils/setInitialLanguage";
 import type { SystemLanguage } from "../utils/setInitialLanguage";
-
-export type Language = SystemLanguage | "system";
-export type SetLanguage = (language: Language) => void;
-export type TFunction = (key: string) => string;
+import type { Language, TFunction } from "../types/i18n";
 
 type TranslationValue = string | TranslationMap;
 
@@ -61,3 +58,4 @@ function useLanguage() {
 }
 
 export { useLanguage };
+export type { Language, SetLanguage, TFunction } from "../types/i18n";

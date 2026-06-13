@@ -1,7 +1,7 @@
 import { SERVER_STATUS, SERVER_STATUS_NOTIFICATION_ID } from "./serverStatus";
 
-import type { AddNotification } from "../customHooks/useNotification";
-import type { TFunction } from "../customHooks/useLanguage";
+import type { AddNotification } from "../types/notification";
+import type { TFunction } from "../types/i18n";
 import type { ServerStatus } from "./serverStatus";
 
 export type Url = string;

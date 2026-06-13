@@ -2,8 +2,8 @@ import { BACKEND_URL } from "../../utils/envConfig";
 import { guardedFetch } from "../../utils/guardedFetch";
 
 import type { ServerStatus } from "../../utils/serverStatus";
-import type { AddNotification } from "../../customHooks/useNotification";
-import type { TFunction } from "../../customHooks/useLanguage";
+import type { AddNotification } from "../../types/notification";
+import type { TFunction } from "../../types/i18n";
 
 let cachedToken: string | null = null;
 

@@ -2,7 +2,7 @@ import { use, type ChangeEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 
-import type { SetLanguage } from "../../customHooks/useLanguage";
+import type { SetLanguage } from "../../types/i18n";
 
 function LanguageSwitcher({ setLanguage }: { setLanguage: SetLanguage }) {
   const { addNotification, t } = use(RootContext);

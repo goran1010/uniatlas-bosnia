@@ -2,16 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 import { BACKEND_URL } from "../utils/envConfig";
 
-import type { Notification } from "./useNotification";
+import type { Notification } from "../types/notification";
 import type { ServerStatus } from "../utils/serverStatus";
+import type { UserData } from "../types/auth";
 
 type AddNotificationFunction = (notification: Notification) => string;
 
-export type UserData = {
-  email: string;
-  role: "ADMIN" | "USER";
-} | null;
-
+export type { UserData } from "../types/auth";
 export type Message = string | null;
 
 interface StatusSuccessResponse {

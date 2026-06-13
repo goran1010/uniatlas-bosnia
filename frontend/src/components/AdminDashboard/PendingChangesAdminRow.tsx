@@ -5,9 +5,11 @@ import { RootContext } from "../../contextData/RootContext";
 import { handleConfirm } from "./utils/handleConfirm";
 import { handleDecline } from "./utils/handleDecline";
 
-import type { Notification } from "../../customHooks/useNotification";
-import type { PendingChange } from "../ContributionDashboard/customHooks/useGetPendingChanges";
-import type { TypeOfChange } from "../ContributionDashboard/AddUniversityEntity";
+import type { Notification } from "../../types/notification";
+import type {
+  PendingChange,
+  TypeOfChange,
+} from "../ContributionDashboard/types";
 
 interface PendingChangesAdminRowProps {
   data: PendingChange;
