@@ -4,17 +4,21 @@ import userEvent from "@testing-library/user-event";
 import { AddUniversityEntity } from "../../../src/components/ContributionDashboard/AddUniversityEntity";
 import { RootContextProvider } from "../../rootContextProvider";
 
-const handleSubmitUniversityEntityMock = vi.fn();
+import type { ReactElement } from "react";
+
+const handleSubmitUniversityEntityMock =
+  vi.fn<(...args: unknown[]) => undefined>();
 
 vi.mock(
   "../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity",
   () => ({
-    handleSubmitUniversityEntity: (...args) =>
-      handleSubmitUniversityEntityMock(...args),
+    handleSubmitUniversityEntity: (...args: unknown[]) => {
+      handleSubmitUniversityEntityMock(...args);
+    },
   }),
 );
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: ReactElement }) {
   return <RootContextProvider>{children}</RootContextProvider>;
 }
 
@@ -173,12 +177,12 @@ describe("AddUniversityEntity", () => {
           city: "Sarajevo",
           entity: "FBIH",
           ownership: "JAVNA",
-        }),
+        }) as unknown,
         setPendingChanges,
-        addNotification: expect.any(Function),
-        setLoading: expect.any(Function),
-        setFormState: expect.any(Function),
-        t: expect.any(Function),
+        addNotification: expect.any(Function) as unknown,
+        setLoading: expect.any(Function) as unknown,
+        setFormState: expect.any(Function) as unknown,
+        t: expect.any(Function) as unknown,
         serverStatus: "live",
       }),
     );
@@ -227,7 +231,7 @@ describe("AddUniversityEntity", () => {
           semester: 3,
           ects: 6,
           type: "MANDATORY",
-        }),
+        }) as unknown,
         setPendingChanges,
       }),
     );

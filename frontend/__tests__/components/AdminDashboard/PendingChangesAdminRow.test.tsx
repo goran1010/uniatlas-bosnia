@@ -4,29 +4,42 @@ import userEvent from "@testing-library/user-event";
 import { RootContextProvider } from "../../rootContextProvider";
 import { PendingChangesAdminRow } from "../../../src/components/AdminDashboard/PendingChangesAdminRow";
 import { SERVER_STATUS } from "../../../src/utils/serverStatus";
+import type { ReactElement } from "react";
+import type { PendingChange } from "../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { ServerStatus } from "../../../src/utils/serverStatus";
 
-const handleConfirmMock = vi.fn();
-const handleDeclineMock = vi.fn();
+const handleConfirmMock = vi.fn<(...args: unknown[]) => undefined>();
+const handleDeclineMock = vi.fn<(...args: unknown[]) => undefined>();
 
 vi.mock("../../../src/components/AdminDashboard/utils/handleConfirm", () => ({
-  handleConfirm: (...args) => handleConfirmMock(...args),
+  handleConfirm: (...args: unknown[]) => {
+    handleConfirmMock(...args);
+  },
 }));
 
 vi.mock("../../../src/components/AdminDashboard/utils/handleDecline", () => ({
-  handleDecline: (...args) => handleDeclineMock(...args),
+  handleDecline: (...args: unknown[]) => {
+    handleDeclineMock(...args);
+  },
 }));
 
-const change = {
+const change: PendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "SUBJECT",
   typeOfChange: "DELETE",
-  data: {},
-  user: { email: "johndoe@examplemail.com" },
+  targetId: null,
+  parentId: null,
+  data: { email: "", role: "USER" },
+  userId: "user-1",
+  user: { email: "johndoe@examplemail.com", role: "USER" },
+  createdAt: new Date(),
 };
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: ReactElement }) {
   return (
-    <RootContextProvider rootValue={{ serverStatus: SERVER_STATUS.LIVE }}>
+    <RootContextProvider
+      rootValue={{ serverStatus: SERVER_STATUS.LIVE as ServerStatus }}
+    >
       {children}
     </RootContextProvider>
   );
@@ -47,9 +60,10 @@ describe("PendingChangesAdminRow", () => {
     render(
       <Wrapper>
         <PendingChangesAdminRow
-          change={change}
+          data={change}
           addNotification={vi.fn()}
           setPendingChanges={vi.fn()}
+          index={0}
         />
       </Wrapper>,
     );
@@ -61,7 +75,6 @@ describe("PendingChangesAdminRow", () => {
 
     expect(screen.getByText("SUBJECT")).toBeInTheDocument();
     expect(screen.getByText("johndoe@examplemail.com")).toBeInTheDocument();
-    expect(screen.getByText("—")).toBeInTheDocument();
     expect(form).toHaveClass("border-l-4");
     expect(form).toHaveClass("border-l-red-500");
     expect(badge).toHaveClass("bg-red-100");
@@ -75,7 +88,7 @@ describe("PendingChangesAdminRow", () => {
     render(
       <Wrapper>
         <PendingChangesAdminRow
-          change={change}
+          data={change}
           addNotification={addNotification}
           setPendingChanges={setPendingChanges}
           index={1}

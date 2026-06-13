@@ -1,17 +1,21 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 
-const getCsrfTokenMock = vi.fn();
-const guardedFetchMock = vi.fn();
+const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
+const guardedFetchMock =
+  vi.fn<
+    (url: unknown, options: unknown, context: unknown) => Promise<Response>
+  >();
 
 vi.mock("../../../../src/components/utils/getCsrfToken", () => ({
-  getCsrfToken: (...args) => getCsrfTokenMock(...args),
+  getCsrfToken: (args: unknown) => getCsrfTokenMock(args),
 }));
 
 vi.mock("../../../../src/utils/guardedFetch", () => ({
-  guardedFetch: (...args) => guardedFetchMock(...args),
+  guardedFetch: (url: unknown, options: unknown, context: unknown) =>
+    guardedFetchMock(url, options, context),
 }));
 
-const t = (key) => key;
+const t = (key: string) => key;
 
 beforeEach(() => {
   getCsrfTokenMock.mockReset();
@@ -27,12 +31,12 @@ describe("handleDiscardUniversityChange", () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: true,
-      json: async () => ({ message: "Pending change deleted successfully." }),
-    });
+      json: () =>
+        Promise.resolve({ message: "Pending change deleted successfully." }),
+    } as Response);
 
-    const { handleDiscardUniversityChange } = await import(
-      "../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange"
-    );
+    const { handleDiscardUniversityChange } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
     const setPendingChanges = vi.fn();
     const addNotification = vi.fn();
     const setLoading = vi.fn();
@@ -59,16 +63,19 @@ describe("handleDiscardUniversityChange", () => {
       message: "Pending change deleted successfully.",
     });
 
-    const updatePendingChanges = setPendingChanges.mock.calls[0][0];
-    expect(updatePendingChanges([{ id: "1" }, { id: "2" }])).toEqual([{ id: "2" }]);
+    const updatePendingChanges = setPendingChanges.mock.calls[0]?.[0] as (
+      prev: { id: string }[],
+    ) => { id: string }[];
+    expect(updatePendingChanges([{ id: "1" }, { id: "2" }])).toEqual([
+      { id: "2" },
+    ]);
   });
 
   test("shows an error notification when the csrf token is missing", async () => {
     getCsrfTokenMock.mockResolvedValue(null);
 
-    const { handleDiscardUniversityChange } = await import(
-      "../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange"
-    );
+    const { handleDiscardUniversityChange } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
     const addNotification = vi.fn();
     const setLoading = vi.fn();
 
@@ -93,12 +100,14 @@ describe("handleDiscardUniversityChange", () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: false,
-      json: async () => ({ error: "Discard failed on the server." }),
-    });
+      json: () =>
+        Promise.resolve({
+          error: { message: "Discard failed on the server." },
+        }),
+    } as Response);
 
-    const { handleDiscardUniversityChange } = await import(
-      "../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange"
-    );
+    const { handleDiscardUniversityChange } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
     const setPendingChanges = vi.fn();
     const addNotification = vi.fn();
 
@@ -122,11 +131,12 @@ describe("handleDiscardUniversityChange", () => {
     const requestError = new Error("Network failure");
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockRejectedValue(requestError);
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
 
-    const { handleDiscardUniversityChange } = await import(
-      "../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange"
-    );
+    const { handleDiscardUniversityChange } =
+      await import("../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
     const addNotification = vi.fn();
 
     await handleDiscardUniversityChange({

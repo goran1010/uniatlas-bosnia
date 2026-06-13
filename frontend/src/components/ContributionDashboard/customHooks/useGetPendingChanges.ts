@@ -6,9 +6,11 @@ import { guardedFetch } from "../../../utils/guardedFetch";
 import type { TFunction } from "../../../customHooks/useLanguage";
 import type { UserData } from "../../../customHooks/useStatusCheck";
 
+export type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
+
 export interface PendingChange {
   id: string;
-  entityType: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
+  entityType: EntityType;
   typeOfChange: "CREATE" | "UPDATE" | "DELETE";
   targetId: number | null;
   parentId: number | null;

@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RootContextProvider } from "../../rootContextProvider";
 
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+
 const mockChanges = [
   {
     city: "Divičani",
@@ -16,15 +18,17 @@ const mockChanges = [
   },
 ];
 
-const createFetchResponse = (data, ok = true) => ({
+type MockChange = (typeof mockChanges)[number];
+
+const createFetchResponse = (data: unknown, ok = true) => ({
   ok,
-  json: async () => data,
+  json: () => Promise.resolve(data),
 });
 
 const fetchMock = vi.fn();
 
 const setupFetchMock = ({
-  pendingRequests = [],
+  pendingRequests = [] as MockChange[],
   csrfToken = "csrf-token",
 } = {}) => {
   fetchMock.mockImplementation((url) => {
@@ -67,9 +71,12 @@ import { AdminDashboard } from "../../../src/components/AdminDashboard/AdminDash
 import { Notifications } from "../../../src/components/Notifications";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
-function Wrapper({ initialUser = null }) {
+function Wrapper({ initialUser = null }: { initialUser?: UserData }) {
   return (
-    <RootContextProvider initialUserData={initialUser} rootValue={{ addNotification: vi.fn() }}>
+    <RootContextProvider
+      initialUserData={initialUser}
+      rootValue={{ addNotification: vi.fn() }}
+    >
       <MemoryRouter initialEntries={["/admin-dashboard"]}>
         <Notifications />
         <Routes>
@@ -92,7 +99,9 @@ afterEach(() => {
 describe("AdminForm component rendering", () => {
   test("renders AdminForm component's heading", async () => {
     setupFetchMock();
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
 
     const heading = await screen.findByRole("heading", {
       name: /Admin Dashboard/i,
@@ -106,7 +115,9 @@ describe("AdminForm component rendering", () => {
   test("renders pending changes list", async () => {
     setupFetchMock({ pendingRequests: mockChanges });
 
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
 
     const email = await screen.findByText(/johndoe@examplemail.com/i);
 
@@ -117,7 +128,9 @@ describe("AdminForm component rendering", () => {
 describe("AdminForm component pending changes interaction", () => {
   test("updates pending changes list when a pending request is approved", async () => {
     setupFetchMock({ pendingRequests: mockChanges });
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
 
     const pendingCount = await screen.findByLabelText(/pending changes count/i);
     expect(pendingCount).toHaveTextContent("1");
@@ -142,7 +155,9 @@ describe("AdminForm component pending changes interaction", () => {
 
   test("removes pending request from the list when declined", async () => {
     setupFetchMock({ pendingRequests: mockChanges });
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
     const pendingCount = await screen.findByLabelText(/pending changes count/i);
 
     const user = userEvent.setup();

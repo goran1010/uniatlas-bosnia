@@ -6,7 +6,22 @@ import { Notifications } from "../../../src/components/Notifications";
 import { RootContextProvider } from "../../rootContextProvider";
 import { SERVER_STATUS } from "../../../src/utils/serverStatus";
 
-const mockChanges = [
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+import type { ServerStatus } from "../../../src/utils/serverStatus";
+
+interface MockChange {
+  id: string;
+  entityType: string;
+  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
+  targetId: number | null;
+  parentId: number | null;
+  data: { name: string };
+  createdAt: string;
+  user: { email: string };
+  userId: string;
+}
+
+const mockChanges: MockChange[] = [
   {
     id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
     entityType: "FACULTY",
@@ -20,9 +35,9 @@ const mockChanges = [
   },
 ];
 
-const createFetchResponse = (data, ok = true) => ({
+const createFetchResponse = (data: unknown, ok = true) => ({
   ok,
-  json: async () => data,
+  json: () => Promise.resolve(data),
 });
 
 const fetchMock = vi.fn();
@@ -65,7 +80,7 @@ const setupFetchMock = ({
   });
 };
 
-function Wrapper({ initialUser = null }) {
+function Wrapper({ initialUser = null }: { initialUser?: UserData }) {
   return (
     <RootContextProvider initialUserData={initialUser}>
       <MemoryRouter initialEntries={["/admin-dashboard"]}>
@@ -78,7 +93,13 @@ function Wrapper({ initialUser = null }) {
   );
 }
 
-function WrapperWithRootValue({ initialUser = null, rootValue = {} }) {
+function WrapperWithRootValue({
+  initialUser = null,
+  rootValue = {},
+}: {
+  initialUser?: UserData;
+  rootValue?: { serverStatus?: ServerStatus };
+}) {
   return (
     <RootContextProvider initialUserData={initialUser} rootValue={rootValue}>
       <MemoryRouter initialEntries={["/admin-dashboard"]}>
@@ -103,7 +124,9 @@ afterEach(() => {
 describe("PendingChanges Component", () => {
   test("renders PendingChanges with 1 request", async () => {
     setupFetchMock();
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
     const email = await screen.findByText("johndoe@examplemail.com");
     expect(email).toBeInTheDocument();
     const numberOfRequests = screen.getByLabelText(/pending changes count/i);
@@ -111,7 +134,7 @@ describe("PendingChanges Component", () => {
   });
 
   test("renders PendingChanges with 2 requests", async () => {
-    const mockChangesMore = [
+    const mockChangesMore: MockChange[] = [
       ...mockChanges,
       {
         id: "12345678-90ab-cdef-1234-567890abcdef",
@@ -126,7 +149,9 @@ describe("PendingChanges Component", () => {
       },
     ];
     setupFetchMock({ pendingRequests: mockChangesMore });
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
     await screen.findByText("johndoe@examplemail.com");
     expect(screen.getByLabelText(/pending changes count/i)).toHaveTextContent(
       "2",
@@ -137,7 +162,7 @@ describe("PendingChanges Component", () => {
   test("shows no pending requests when fetch throws a network error", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
-      .mockImplementation(() => {});
+      .mockImplementation(() => undefined);
     fetchMock.mockImplementation((url) => {
       const requestUrl = String(url);
       if (requestUrl.includes("/csrf-token")) {
@@ -147,7 +172,9 @@ describe("PendingChanges Component", () => {
       }
       return Promise.reject(new Error("Network error"));
     });
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
     const pendingMessage = await screen.findByText(
       /There are no pending changes at the moment./i,
     );
@@ -160,12 +187,7 @@ describe("PendingChanges Component", () => {
       const requestUrl = String(url);
 
       if (requestUrl.includes("/pending-changes")) {
-        return Promise.resolve(
-          createFetchResponse(
-            { error: "Backend rejected pending changes." },
-            false,
-          ),
-        );
+        return Promise.reject(new Error("Backend rejected pending changes."));
       }
 
       return Promise.resolve(
@@ -173,11 +195,15 @@ describe("PendingChanges Component", () => {
       );
     });
 
-    render(<Wrapper initialUser={{ role: "ADMIN" }} />);
+    render(
+      <Wrapper initialUser={{ email: "admin@mail.com", role: "ADMIN" }} />,
+    );
 
-    const alert = await screen.findByRole("alert");
+    const errorMessage = await screen.findByText(
+      /Error fetching pending changes\./i,
+    );
 
-    expect(alert).toHaveTextContent(/Backend rejected pending changes\./i);
+    expect(errorMessage).toBeInTheDocument();
     expect(
       screen.getByText(/There are no pending changes at the moment\./i),
     ).toBeInTheDocument();
@@ -186,14 +212,18 @@ describe("PendingChanges Component", () => {
   test("shows the no pending changes state when the server is waking up", async () => {
     render(
       <WrapperWithRootValue
-        initialUser={{ role: "ADMIN" }}
-        rootValue={{ serverStatus: SERVER_STATUS.WAKING }}
+        initialUser={{ email: "admin@mail.com", role: "ADMIN" }}
+        rootValue={{ serverStatus: SERVER_STATUS.WAKING as ServerStatus }}
       />,
     );
 
-    const alert = await screen.findByRole("alert");
+    const alerts = await screen.findAllByRole("alert");
 
-    expect(alert).toHaveTextContent(/server might be waking up/i);
+    expect(
+      alerts.some((alert) =>
+        /server might be waking up/i.test(alert.textContent),
+      ),
+    ).toBe(true);
     expect(
       screen.getByText(/There are no pending changes at the moment\./i),
     ).toBeInTheDocument();

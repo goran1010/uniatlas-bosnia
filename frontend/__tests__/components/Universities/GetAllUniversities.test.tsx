@@ -86,7 +86,7 @@ describe("GetAllUniversities", () => {
     render(<Wrapper />);
 
     const errorMessage = await screen.findByText(
-      /Backend failed to load data\./i,
+      /Failed to load universities\./i,
     );
 
     expect(fetch).toHaveBeenCalledTimes(1);

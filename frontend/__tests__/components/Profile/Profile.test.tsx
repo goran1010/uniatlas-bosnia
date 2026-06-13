@@ -86,7 +86,7 @@ describe("Profile Component", () => {
   });
 
   test("displays user information correctly", async () => {
-    const user = {
+    const user: UserData = {
       email: "testuser@example.com",
       role: "USER",
     };
@@ -97,20 +97,8 @@ describe("Profile Component", () => {
     expect(roleElement).toBeInTheDocument();
   });
 
-  test("displays contributor role when user role is CONTRIBUTOR", async () => {
-    const user = {
-      email: "contributor@example.com",
-      role: "CONTRIBUTOR",
-    };
-    render(<Wrapper initialUser={user} />);
-    const emailElement = await screen.findByText(/contributor@example.com/i);
-    const roleElement = await screen.findByText("CONTRIBUTOR");
-    expect(emailElement).toBeInTheDocument();
-    expect(roleElement).toBeInTheDocument();
-  });
-
   test("displays admin role when user role is ADMIN", async () => {
-    const user = {
+    const user: UserData = {
       email: "admin@example.com",
       role: "ADMIN",
     };

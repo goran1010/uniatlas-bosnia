@@ -1,24 +1,36 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 
-const getCsrfTokenMock = vi.fn();
-const guardedFetchMock = vi.fn();
+import type { PendingChange } from "../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { Dispatch, SetStateAction } from "react";
+
+const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
+const guardedFetchMock =
+  vi.fn<
+    (url: unknown, options: unknown, context: unknown) => Promise<Response>
+  >();
 
 vi.mock("../../../../src/components/utils/getCsrfToken", () => ({
-  getCsrfToken: (...args) => getCsrfTokenMock(...args),
+  getCsrfToken: (args: unknown) => getCsrfTokenMock(args),
 }));
 
 vi.mock("../../../../src/utils/guardedFetch", () => ({
-  guardedFetch: (...args) => guardedFetchMock(...args),
+  guardedFetch: (url: unknown, options: unknown, context: unknown) =>
+    guardedFetchMock(url, options, context),
 }));
 
-const change = {
+const change: PendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "FACULTY",
   typeOfChange: "UPDATE",
-  user: { email: "johndoe@examplemail.com" },
+  targetId: 1,
+  parentId: 1,
+  data: { email: "", role: "USER" },
+  userId: "user-1",
+  user: { email: "johndoe@examplemail.com", role: "USER" },
+  createdAt: new Date(),
 };
 
-const t = (key) => key;
+const t = (key: string) => key;
 
 beforeEach(() => {
   getCsrfTokenMock.mockReset();
@@ -34,12 +46,22 @@ describe("handleConfirm", () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: true,
-      json: async () => ({ message: "Pending change approved successfully." }),
-    });
+      json: () =>
+        Promise.resolve({ message: "Pending change approved successfully." }),
+    } as Response);
 
     const { handleConfirm } =
       await import("../../../../src/components/AdminDashboard/utils/handleConfirm");
-    const setPendingChanges = vi.fn();
+    let updatePendingChanges:
+      | ((prev: PendingChange[]) => PendingChange[])
+      | undefined;
+    const setPendingChanges: Dispatch<SetStateAction<PendingChange[]>> = (
+      value,
+    ) => {
+      if (typeof value === "function") {
+        updatePendingChanges = value;
+      }
+    };
     const addNotification = vi.fn();
     const setLoading = vi.fn();
 
@@ -56,7 +78,10 @@ describe("handleConfirm", () => {
       expect.stringContaining("/approve-pending-change"),
       expect.objectContaining({
         method: "POST",
-        headers: expect.objectContaining({ "x-csrf-token": "csrf-token" }),
+        headers: {
+          "Content-Type": "application/json",
+          "x-csrf-token": "csrf-token",
+        },
         body: JSON.stringify({
           id: change.id,
           entityType: change.entityType,
@@ -72,9 +97,9 @@ describe("handleConfirm", () => {
       message: "Pending change approved successfully.",
     });
 
-    const updatePendingChanges = setPendingChanges.mock.calls[0][0];
-
-    expect(updatePendingChanges([change, { id: "2" }])).toEqual([{ id: "2" }]);
+    expect(updatePendingChanges?.([change, { ...change, id: "2" }])).toEqual([
+      { ...change, id: "2" },
+    ]);
   });
 
   test("shows an error notification when the csrf token is missing", async () => {
@@ -106,8 +131,11 @@ describe("handleConfirm", () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: false,
-      json: async () => ({ error: "Approval failed on the server." }),
-    });
+      json: () =>
+        Promise.resolve({
+          error: { message: "Approval failed on the server." },
+        }),
+    } as Response);
 
     const { handleConfirm } =
       await import("../../../../src/components/AdminDashboard/utils/handleConfirm");
@@ -136,7 +164,7 @@ describe("handleConfirm", () => {
     guardedFetchMock.mockRejectedValue(requestError);
     const consoleErrorSpy = vi
       .spyOn(console, "error")
-      .mockImplementation(() => {});
+      .mockImplementation(() => undefined);
 
     const { handleConfirm } =
       await import("../../../../src/components/AdminDashboard/utils/handleConfirm");
@@ -146,10 +174,10 @@ describe("handleConfirm", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.approveError",
+      message: "messages.admin.approveError johndoe@examplemail.com",
     });
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      `Error approving pending change for ${change.user.email}:`,
+      `Error approving pending change for ${change.user?.email ?? ""}:`,
       requestError,
     );
   });
