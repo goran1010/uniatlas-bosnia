@@ -5,12 +5,20 @@ import { MemoryRouter } from "react-router-dom";
 import { Status } from "../../../src/components/Navbar/Status";
 import { RootContextProvider } from "../../rootContextProvider";
 
-function Wrapper({ userData, setIsMenuOpen }) {
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+import type { SetIsMenuOpen } from "../../../src/customHooks/useCloseMenu";
+
+interface WrapperProps {
+  userData: UserData;
+  setIsMenuOpen: SetIsMenuOpen;
+}
+
+function Wrapper({ userData, setIsMenuOpen }: WrapperProps) {
   return (
     <RootContextProvider rootValue={{ userData, setUserData: vi.fn() }}>
-        <MemoryRouter>
-          <Status setIsMenuOpen={setIsMenuOpen} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <Status setIsMenuOpen={setIsMenuOpen} />
+      </MemoryRouter>
     </RootContextProvider>
   );
 }
@@ -21,7 +29,7 @@ describe("Status", () => {
 
     render(
       <Wrapper
-        userData={{ id: "1", username: "Test User", role: "USER" }}
+        userData={{ email: "test@example.com", role: "USER" }}
         setIsMenuOpen={setIsMenuOpen}
       />,
     );

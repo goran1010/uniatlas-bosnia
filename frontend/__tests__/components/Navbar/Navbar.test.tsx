@@ -1,17 +1,17 @@
 import { test, describe, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import { Root } from "../../../src/Root";
+import { App } from "../../../src/App";
 import { Notifications } from "../../../src/components/Notifications";
 import { Navbar } from "../../../src/components/Navbar/Navbar";
 import userEvent from "@testing-library/user-event";
 import { useCloseMenu } from "../../../src/customHooks/useCloseMenu";
 import { RootContextProvider } from "../../rootContextProvider";
 
-function createUser(role = "ADMIN") {
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+
+function createUser(role: Role = "ADMIN"): UserData {
   return {
-    id: "1",
-    username: "Test User",
     email: "test@example.com",
     role,
   };
@@ -19,14 +19,18 @@ function createUser(role = "ADMIN") {
 
 beforeEach(() => {
   localStorage.setItem("language", "en");
-
-  vi.spyOn(globalThis, "fetch").mockResolvedValue({
-    ok: true,
-    json: async () => ({
+  const mockResponse = new Response(
+    JSON.stringify({
       data: [{ id: 1, code: "mocked code" }],
       message: "mocked message",
     }),
-  });
+    {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
 });
 
 afterEach(() => {
@@ -45,11 +49,17 @@ async function openMobileMenu() {
   });
 
   const controlsId = menuButton.getAttribute("aria-controls");
-  const mobileMenu =
-    screen
-      .getAllByRole("link")
-      .find((link) => link.closest(`#${controlsId}`))
-      ?.closest("div") ?? null;
+  if (!controlsId) {
+    throw new Error("Menu button does not have aria-controls attribute");
+  }
+  const mobileMenu = screen
+    .getAllByRole("link")
+    .find((link) => link.closest(`#${controlsId}`))
+    ?.closest("div");
+
+  if (!mobileMenu) {
+    throw new Error("Mobile menu not found");
+  }
 
   return {
     menuButton,
@@ -63,13 +73,13 @@ function expectSharedNavbarLinks() {
 }
 
 describe("Render Navbar on root route", () => {
-  function Wrapper({ initialUser = null }) {
+  function Wrapper({ initialUser }: { initialUser: UserData }) {
     return (
       <RootContextProvider initialUserData={initialUser}>
         <MemoryRouter initialEntries={["/"]}>
           <Notifications />
           <Routes>
-            <Route path="/" element={<Root />} />
+            <Route path="/" element={<App />} />
           </Routes>
         </MemoryRouter>
       </RootContextProvider>
@@ -90,9 +100,7 @@ describe("Render Navbar on root route", () => {
 
   test("user logged in", async () => {
     render(
-      <Wrapper
-        initialUser={{ id: "1", username: "Test User", role: "USER" }}
-      />,
+      <Wrapper initialUser={{ email: "test@example.com", role: "USER" }} />,
     );
     await screen.findByText(/Home/i);
 
@@ -106,7 +114,13 @@ describe("Render Navbar on root route", () => {
   });
 });
 
-function NavbarWrapper({ role = "ADMIN", withUser = true }) {
+function NavbarWrapper({
+  role = "ADMIN",
+  withUser = true,
+}: {
+  role?: "ADMIN" | "USER";
+  withUser?: boolean;
+}) {
   const userData = withUser ? createUser(role) : null;
 
   const closeMenu = useCloseMenu();
@@ -119,22 +133,22 @@ function NavbarWrapper({ role = "ADMIN", withUser = true }) {
   );
 }
 
+type Role = "ADMIN" | "USER";
+const roles: Role[] = ["ADMIN", "USER"];
+
 describe("render Navbar mobile menu", () => {
-  test.each(["ADMIN", "CONTRIBUTOR"])(
-    "opens mobile menu for %s role",
-    async (role) => {
-      render(<NavbarWrapper role={role} />);
+  test.each(roles)("opens mobile menu for %s role", async (role) => {
+    render(<NavbarWrapper role={role} />);
 
-      const { menuButton, mobileMenu } = await openMobileMenu();
+    const { menuButton, mobileMenu } = await openMobileMenu();
 
-      expect(menuButton).toBeInTheDocument();
-      expect(mobileMenu).toBeInTheDocument();
-      expect(menuButton).toHaveAttribute("aria-expanded", "true");
-    },
-  );
+    expect(menuButton).toBeInTheDocument();
+    expect(mobileMenu).toBeInTheDocument();
+    expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  });
 
-  test("shows user-only links for contributor in mobile menu", async () => {
-    render(<NavbarWrapper role="CONTRIBUTOR" />);
+  test("shows user-only links for user in mobile menu", async () => {
+    render(<NavbarWrapper role="USER" />);
 
     const { mobileMenu } = await openMobileMenu();
 
@@ -180,10 +194,10 @@ describe("Navbar switchers", () => {
   test("opens language menu and closes theme menu", async () => {
     render(<NavbarWrapper />);
 
-    const themeSelect = screen.getByRole("combobox", {
+    const themeSelect: HTMLSelectElement = screen.getByRole("combobox", {
       name: /Toggle theme/i,
     });
-    const languageSelect = screen.getByRole("combobox", {
+    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
       name: /Toggle language/i,
     });
 
@@ -202,7 +216,7 @@ describe("Navbar switchers", () => {
   test("closes open menus when navbar is clicked", async () => {
     render(<NavbarWrapper />);
 
-    const languageSelect = screen.getByRole("combobox", {
+    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
       name: /Toggle language/i,
     });
     expect(languageSelect).toBeInTheDocument();

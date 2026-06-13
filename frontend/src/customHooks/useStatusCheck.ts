@@ -9,7 +9,7 @@ type AddNotificationFunction = (notification: Notification) => string;
 
 export type UserData = {
   email: string;
-  role: string;
+  role: "ADMIN" | "USER";
 } | null;
 
 export type Message = string | null;

@@ -4,7 +4,15 @@ import userEvent from "@testing-library/user-event";
 import { ThemeSwitcher } from "../../../src/components/Navbar/ThemeSwitcher";
 import { RootContextProvider } from "../../rootContextProvider";
 
-function Wrapper({ addNotification, setThemeMenuOpen, setMode }) {
+import type { AddNotification } from "../../../src/customHooks/useNotification";
+import type { SetMode } from "../../../src/customHooks/useTheme";
+
+interface WrapperProps {
+  addNotification: AddNotification;
+  setMode: SetMode;
+}
+
+function Wrapper({ addNotification, setMode }: WrapperProps) {
   return (
     <RootContextProvider
       rootValue={{
@@ -12,7 +20,7 @@ function Wrapper({ addNotification, setThemeMenuOpen, setMode }) {
         removeNotification: vi.fn(),
       }}
     >
-      <ThemeSwitcher setMode={setMode} setThemeMenuOpen={setThemeMenuOpen} />
+      <ThemeSwitcher setMode={setMode} />
     </RootContextProvider>
   );
 }
@@ -40,13 +48,7 @@ describe("ThemeSwitcher", () => {
       const addNotification = vi.fn();
       const setMode = vi.fn();
 
-      render(
-        <Wrapper
-          addNotification={addNotification}
-          setThemeMenuOpen={vi.fn()}
-          setMode={setMode}
-        />,
-      );
+      render(<Wrapper addNotification={addNotification} setMode={setMode} />);
 
       const themeSelect = screen.getByRole("combobox", {
         name: /Toggle theme menu/i,

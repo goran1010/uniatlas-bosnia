@@ -4,6 +4,9 @@ import userEvent from "@testing-library/user-event";
 import { LanguageSwitcher } from "../../../src/components/Navbar/LanguageSwitcher";
 import { RootContextProvider } from "../../rootContextProvider";
 
+import type { AddNotification } from "../../../src/customHooks/useNotification";
+import type { SetLanguage } from "../../../src/customHooks/useLanguage";
+
 afterEach(() => {
   vi.restoreAllMocks();
 });
@@ -12,7 +15,12 @@ beforeEach(() => {
   localStorage.setItem("language", "en");
 });
 
-function Wrapper({ addNotification, setLanguageMenuOpen, setLanguage }) {
+interface WrapperProps {
+  addNotification: AddNotification;
+  setLanguage: SetLanguage;
+}
+
+function Wrapper({ addNotification, setLanguage }: WrapperProps) {
   return (
     <RootContextProvider
       rootValue={{
@@ -21,10 +29,7 @@ function Wrapper({ addNotification, setLanguageMenuOpen, setLanguage }) {
         setLanguage,
       }}
     >
-      <LanguageSwitcher
-        setLanguageMenuOpen={setLanguageMenuOpen}
-        setLanguage={setLanguage}
-      />
+      <LanguageSwitcher setLanguage={setLanguage} />
     </RootContextProvider>
   );
 }
@@ -35,11 +40,7 @@ describe("LanguageSwitcher", () => {
     const setLanguage = vi.fn();
 
     render(
-      <Wrapper
-        addNotification={addNotification}
-        setLanguageMenuOpen={vi.fn()}
-        setLanguage={setLanguage}
-      />,
+      <Wrapper addNotification={addNotification} setLanguage={setLanguage} />,
     );
 
     const languageSelect = screen.getByRole("combobox", {
@@ -69,16 +70,12 @@ describe("LanguageSwitcher", () => {
     },
   ])(
     "switches language using $languageButton",
-    async ({ languageButton, expectedLanguage, expectedMessage }) => {
+    async ({ expectedLanguage, expectedMessage }) => {
       const addNotification = vi.fn();
       const setLanguage = vi.fn();
 
       render(
-        <Wrapper
-          addNotification={addNotification}
-          setLanguageMenuOpen={vi.fn()}
-          setLanguage={setLanguage}
-        />,
+        <Wrapper addNotification={addNotification} setLanguage={setLanguage} />,
       );
 
       const languageSelect = screen.getByRole("combobox", {

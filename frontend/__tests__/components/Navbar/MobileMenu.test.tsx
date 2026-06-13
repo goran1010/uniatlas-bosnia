@@ -5,11 +5,19 @@ import { MemoryRouter } from "react-router-dom";
 import { MobileMenu } from "../../../src/components/Navbar/MobileMenu";
 import { RootContextProvider } from "../../rootContextProvider";
 
+import type { UserData } from "../../../src/customHooks/useStatusCheck";
+import type { SetIsMenuOpen } from "../../../src/customHooks/useCloseMenu";
+
 beforeEach(() => {
   localStorage.setItem("language", "en");
 });
 
-function Wrapper({ userData, setIsMenuOpen }) {
+interface WrapperProps {
+  userData: UserData | null;
+  setIsMenuOpen: SetIsMenuOpen;
+}
+
+function Wrapper({ userData, setIsMenuOpen }: WrapperProps) {
   return (
     <RootContextProvider rootValue={{ userData, setUserData: vi.fn() }}>
       <MemoryRouter>
@@ -38,10 +46,10 @@ describe("MobileMenu", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("renders contributor link for authenticated contributor", () => {
+  test("renders improve data link for authenticated user", () => {
     render(
       <Wrapper
-        userData={{ id: "1", username: "User", role: "CONTRIBUTOR" }}
+        userData={{ email: "user@example.com", role: "USER" }}
         setIsMenuOpen={vi.fn()}
       />,
     );
@@ -57,7 +65,7 @@ describe("MobileMenu", () => {
   test("renders admin link for authenticated admin", () => {
     render(
       <Wrapper
-        userData={{ id: "1", username: "Admin", role: "ADMIN" }}
+        userData={{ email: "admin@example.com", role: "ADMIN" }}
         setIsMenuOpen={vi.fn()}
       />,
     );
@@ -74,7 +82,7 @@ describe("MobileMenu", () => {
 
     render(
       <Wrapper
-        userData={{ id: "1", username: "Admin", role: "ADMIN" }}
+        userData={{ email: "admin@example.com", role: "ADMIN" }}
         setIsMenuOpen={setIsMenuOpen}
       />,
     );
