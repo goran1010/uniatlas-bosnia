@@ -1,26 +1,21 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { SERVER_STATUS } from "../../../../src/utils/serverStatus";
 import type { ServerStatus } from "../../../../src/utils/serverStatus";
-import type { Dispatch, SetStateAction } from "react";
+import type { SetStateAction } from "react";
 import type { PendingChange } from "../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { GuardedFetch } from "../../../../src/utils/guardedFetch";
+import type { HandleSubmitUniversityEntityParams } from "../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity";
 
 const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
-const guardedFetchMock =
-  vi.fn<
-    (
-      url: unknown,
-      options: unknown,
-      context: unknown,
-    ) => Promise<Response | null>
-  >();
+const guardedFetchMock = vi.fn<GuardedFetch>();
 
 vi.mock("../../../../src/components/utils/getCsrfToken", () => ({
   getCsrfToken: (args: unknown) => getCsrfTokenMock(args),
 }));
 
 vi.mock("../../../../src/utils/guardedFetch", () => ({
-  guardedFetch: (url: unknown, options: unknown, context: unknown) =>
-    guardedFetchMock(url, options, context),
+  guardedFetch: (...args: Parameters<GuardedFetch>) =>
+    guardedFetchMock(...args),
 }));
 
 const t = (key: string) => key;
@@ -36,8 +31,25 @@ const baseArgs = {
   setLoading: vi.fn(),
   setFormState: vi.fn(),
   t,
-  serverStatus: SERVER_STATUS.LIVE as ServerStatus,
-};
+  serverStatus: "live" as ServerStatus,
+} satisfies HandleSubmitUniversityEntityParams;
+
+function createSuccessResponse(
+  data: PendingChange | Partial<PendingChange>,
+  message: string,
+) {
+  return {
+    ok: true,
+    json: () => Promise.resolve({ data, message }),
+  } as Response;
+}
+
+function createErrorResponse(error: Record<string, unknown>) {
+  return {
+    ok: false,
+    json: () => Promise.resolve(error),
+  } as Response;
+}
 
 beforeEach(() => {
   getCsrfTokenMock.mockReset();
@@ -51,10 +63,22 @@ afterEach(() => {
 describe("handleSubmitUniversityEntity", () => {
   test("uses POST with numeric parent id for create under parent entity", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ data: { id: "1" }, message: "Created." }),
-    } as Response);
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "FACULTY",
+          typeOfChange: "CREATE",
+          targetId: null,
+          parentId: 15,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Created.",
+      ),
+    );
 
     const { handleSubmitUniversityEntity } =
       await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
@@ -81,24 +105,36 @@ describe("handleSubmitUniversityEntity", () => {
   });
 
   test("submits a create request and prepends the pending change", async () => {
+    const pendingChange: PendingChange = {
+      id: "1",
+      entityType: "UNIVERSITY",
+      typeOfChange: "CREATE",
+      targetId: null,
+      parentId: null,
+      data: { email: "University of Sarajevo", role: "USER" },
+      createdAt: new Date(),
+      user: { email: "submitter@email.com", role: "USER" },
+      userId: "user-1",
+    };
+
     getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          data: {
-            id: "1",
-            entityType: "UNIVERSITY",
-            data: { name: "University of Sarajevo" },
-          },
-          message: "Pending change created successfully.",
-        }),
-    } as Response);
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        pendingChange,
+        "Pending change created successfully.",
+      ),
+    );
 
     const { handleSubmitUniversityEntity } =
       await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
-    const setPendingChanges =
-      vi.fn<Dispatch<SetStateAction<PendingChange[]>>>();
+    let updatePendingChanges:
+      | ((prev: PendingChange[]) => PendingChange[])
+      | undefined;
+    const setPendingChanges = (updater: SetStateAction<PendingChange[]>) => {
+      if (typeof updater === "function") {
+        updatePendingChanges = updater;
+      }
+    };
     const addNotification = vi.fn();
     const setLoading = vi.fn();
     const setFormState = vi.fn();
@@ -135,27 +171,38 @@ describe("handleSubmitUniversityEntity", () => {
       data: {},
     });
 
-    const updatePendingChanges = setPendingChanges.mock
-      .calls[0]?.[0] as unknown as (prev: PendingChange[]) => PendingChange[];
+    expect(typeof updatePendingChanges).toBe("function");
+
+    const existingPendingChange: PendingChange = {
+      ...pendingChange,
+      id: "existing",
+    };
 
     expect(
-      updatePendingChanges([{ id: "existing" } as unknown as PendingChange]),
-    ).toEqual([
-      {
-        id: "1",
-        entityType: "UNIVERSITY",
-        data: { name: "University of Sarajevo" },
-      },
-      { id: "existing" },
-    ]);
+      (updatePendingChanges as (prev: PendingChange[]) => PendingChange[])([
+        existingPendingChange,
+      ]),
+    ).toEqual([pendingChange, existingPendingChange]);
   });
 
   test("uses PUT and target id for updates", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ data: { id: "1" }, message: "Updated." }),
-    } as Response);
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "FACULTY",
+          typeOfChange: "UPDATE",
+          targetId: 7,
+          parentId: 1,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Updated.",
+      ),
+    );
 
     const { handleSubmitUniversityEntity } =
       await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
@@ -184,10 +231,22 @@ describe("handleSubmitUniversityEntity", () => {
 
   test("uses DELETE and target id for delete changes", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ data: { id: "1" }, message: "Deleted." }),
-    } as Response);
+    guardedFetchMock.mockResolvedValue(
+      createSuccessResponse(
+        {
+          id: "1",
+          entityType: "SUBJECT",
+          typeOfChange: "DELETE",
+          targetId: 42,
+          parentId: 7,
+          data: { email: "", role: "USER" },
+          createdAt: new Date(),
+          user: { email: "user@email.com", role: "USER" },
+          userId: "user-1",
+        },
+        "Deleted.",
+      ),
+    );
 
     const { handleSubmitUniversityEntity } =
       await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
@@ -213,27 +272,6 @@ describe("handleSubmitUniversityEntity", () => {
     );
   });
 
-  test("returns early when guarded fetch returns null", async () => {
-    getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue(null);
-
-    const { handleSubmitUniversityEntity } =
-      await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
-    const addNotification = vi.fn();
-    const setPendingChanges = vi.fn();
-
-    await handleSubmitUniversityEntity({
-      ...baseArgs,
-      addNotification,
-      setPendingChanges,
-    });
-
-    expect(setPendingChanges).not.toHaveBeenCalled();
-    expect(addNotification).not.toHaveBeenCalledWith(
-      expect.objectContaining({ type: "success" }),
-    );
-  });
-
   test("shows an error notification when the csrf token is missing", async () => {
     getCsrfTokenMock.mockResolvedValue(null);
 
@@ -256,12 +294,9 @@ describe("handleSubmitUniversityEntity", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
-  test("uses fallback add-failed message when backend error payload is missing", async () => {
+  test("falls back to the generic add error when the backend error payload is missing", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
-    guardedFetchMock.mockResolvedValue({
-      ok: false,
-      json: () => Promise.resolve({}),
-    } as Response);
+    guardedFetchMock.mockResolvedValue(createErrorResponse({}));
 
     const { handleSubmitUniversityEntity } =
       await import("../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");

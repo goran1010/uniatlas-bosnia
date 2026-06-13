@@ -5,21 +5,33 @@ import { AddUniversityEntity } from "../../../src/components/ContributionDashboa
 import { RootContextProvider } from "../../rootContextProvider";
 
 import type { ReactElement } from "react";
+import type { PendingChange } from "../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { HandleSubmitUniversityEntityParams } from "../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity";
 
 const handleSubmitUniversityEntityMock =
-  vi.fn<(...args: unknown[]) => undefined>();
+  vi.fn<(args: HandleSubmitUniversityEntityParams) => undefined>();
 
 vi.mock(
   "../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity",
   () => ({
-    handleSubmitUniversityEntity: (...args: unknown[]) => {
-      handleSubmitUniversityEntityMock(...args);
+    handleSubmitUniversityEntity: (
+      args: HandleSubmitUniversityEntityParams,
+    ) => {
+      handleSubmitUniversityEntityMock(args);
     },
   }),
 );
 
 function Wrapper({ children }: { children: ReactElement }) {
   return <RootContextProvider>{children}</RootContextProvider>;
+}
+
+function expectSubmitArgs() {
+  const submittedArgs = handleSubmitUniversityEntityMock.mock.calls[0]?.[0];
+
+  expect(submittedArgs).toBeDefined();
+
+  return submittedArgs;
 }
 
 beforeEach(() => {
@@ -143,7 +155,8 @@ describe("AddUniversityEntity", () => {
   });
 
   test("submits the selected entity data through the handler", async () => {
-    const setPendingChanges = vi.fn();
+    const setPendingChanges =
+      vi.fn<(value: React.SetStateAction<PendingChange[]>) => void>();
 
     render(
       <Wrapper>
@@ -166,30 +179,29 @@ describe("AddUniversityEntity", () => {
       screen.getByRole("button", { name: /Submit Suggestion/i }),
     );
 
-    expect(handleSubmitUniversityEntityMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        entityType: "UNIVERSITY",
-        parentId: "",
-        targetId: "",
-        typeOfChange: "CREATE",
-        data: expect.objectContaining({
-          name: "University of Sarajevo",
-          city: "Sarajevo",
-          entity: "FBIH",
-          ownership: "JAVNA",
-        }) as unknown,
-        setPendingChanges,
-        addNotification: expect.any(Function) as unknown,
-        setLoading: expect.any(Function) as unknown,
-        setFormState: expect.any(Function) as unknown,
-        t: expect.any(Function) as unknown,
-        serverStatus: "live",
-      }),
-    );
+    const submittedArgs = expectSubmitArgs();
+
+    expect(submittedArgs.entityType).toBe("UNIVERSITY");
+    expect(submittedArgs.parentId).toBe("");
+    expect(submittedArgs.targetId).toBe("");
+    expect(submittedArgs.typeOfChange).toBe("CREATE");
+    expect(submittedArgs.data).toMatchObject({
+      name: "University of Sarajevo",
+      city: "Sarajevo",
+      entity: "FBIH",
+      ownership: "JAVNA",
+    });
+    expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
+    expect(typeof submittedArgs.addNotification).toBe("function");
+    expect(typeof submittedArgs.setLoading).toBe("function");
+    expect(typeof submittedArgs.setFormState).toBe("function");
+    expect(typeof submittedArgs.t).toBe("function");
+    expect(submittedArgs.serverStatus).toBe("live");
   });
 
   test("submits subject data with numeric conversions on update", async () => {
-    const setPendingChanges = vi.fn();
+    const setPendingChanges =
+      vi.fn<(value: React.SetStateAction<PendingChange[]>) => void>();
 
     render(
       <Wrapper>
@@ -221,19 +233,17 @@ describe("AddUniversityEntity", () => {
       screen.getByRole("button", { name: /Submit Suggestion/i }),
     );
 
-    expect(handleSubmitUniversityEntityMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        entityType: "SUBJECT",
-        targetId: "123",
-        typeOfChange: "UPDATE",
-        data: expect.objectContaining({
-          name: "Algorithms",
-          semester: 3,
-          ects: 6,
-          type: "MANDATORY",
-        }) as unknown,
-        setPendingChanges,
-      }),
-    );
+    const submittedArgs = expectSubmitArgs();
+
+    expect(submittedArgs.entityType).toBe("SUBJECT");
+    expect(submittedArgs.targetId).toBe("123");
+    expect(submittedArgs.typeOfChange).toBe("UPDATE");
+    expect(submittedArgs.data).toMatchObject({
+      name: "Algorithms",
+      semester: 3,
+      ects: 6,
+      type: "MANDATORY",
+    });
+    expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
   });
 });

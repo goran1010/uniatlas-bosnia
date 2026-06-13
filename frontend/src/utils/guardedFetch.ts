@@ -12,7 +12,7 @@ export interface Guard {
   t: TFunction;
 }
 
-type GuardedFetch = (
+export type GuardedFetch = (
   url: Url,
   options: FetchOptions,
   guard: Guard,

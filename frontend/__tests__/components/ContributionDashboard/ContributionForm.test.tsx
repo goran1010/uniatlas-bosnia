@@ -5,11 +5,10 @@ import { ContributionDashboard } from "../../../src/components/ContributionDashb
 import { Notifications } from "../../../src/components/Notifications";
 import userEvent from "@testing-library/user-event";
 import { RootContextProvider } from "../../rootContextProvider";
-import { SERVER_STATUS } from "../../../src/utils/serverStatus";
 
 import type { UserData } from "../../../src/customHooks/useStatusCheck";
-import type { ServerStatus } from "../../../src/utils/serverStatus";
 import type { PendingChange } from "../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { RootContextType } from "../../../src/contextData/RootContext";
 
 const mockPendingChanges: PendingChange[] = [
   {
@@ -18,12 +17,16 @@ const mockPendingChanges: PendingChange[] = [
     typeOfChange: "UPDATE",
     targetId: 1,
     parentId: 1,
-    data: { email: "", role: "USER" },
+    data: { email: "Faculty of Engineering", role: "USER" },
     createdAt: new Date(),
     user: { email: "johndoe@examplemail.com", role: "USER" },
     userId: "058d1adc-58e4-4f31-8021-64e37e7d0dd0",
   },
 ];
+
+const wakingRootValue: Partial<RootContextType> = {
+  serverStatus: "waking",
+};
 
 function createFetchResponse(payload: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(payload), {
@@ -34,10 +37,13 @@ function createFetchResponse(payload: Record<string, unknown>, status = 200) {
 
 const fetchMock = vi.fn();
 
-const setupFetchMock = ({
-  pendingChanges = [] as PendingChange[],
-  error = null as string | null,
-} = {}) => {
+function setupFetchMock({
+  pendingChanges = [],
+  error = null,
+}: {
+  pendingChanges?: PendingChange[];
+  error?: string | null;
+} = {}) {
   fetchMock.mockReset();
   fetchMock.mockImplementation((url) => {
     const requestUrl = String(url);
@@ -59,7 +65,7 @@ const setupFetchMock = ({
 
     throw new Error(`Unexpected fetch request: ${requestUrl}`);
   });
-};
+}
 
 beforeEach(() => {
   vi.spyOn(globalThis, "fetch").mockImplementation(fetchMock);
@@ -90,9 +96,7 @@ function WrapperWithRootValue({
   rootValue = {},
 }: {
   initialUser: UserData;
-  rootValue: Partial<
-    React.ComponentProps<typeof RootContextProvider>["rootValue"]
-  >;
+  rootValue?: Partial<RootContextType>;
 }) {
   return (
     <RootContextProvider initialUserData={initialUser} rootValue={rootValue}>
@@ -147,6 +151,7 @@ describe("ContributionForm component rendering", () => {
     const pendingCount = await screen.findByLabelText(/pending changes count/i);
 
     expect(pendingCount).toHaveTextContent("1");
+    expect(screen.getByText(/Faculty of Engineering/i)).toBeInTheDocument();
   });
 
   test("shows an error notification when pending changes fail to load", async () => {
@@ -168,7 +173,7 @@ describe("ContributionForm component rendering", () => {
     render(
       <WrapperWithRootValue
         initialUser={{ email: "some@email.com", role: "USER" }}
-        rootValue={{ serverStatus: SERVER_STATUS.WAKING as ServerStatus }}
+        rootValue={wakingRootValue}
       />,
     );
 

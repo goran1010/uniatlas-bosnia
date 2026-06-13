@@ -8,7 +8,7 @@ import type { AddNotification } from "../../../customHooks/useNotification";
 import type { PendingChange } from "../customHooks/useGetPendingChanges";
 import type { Dispatch, SetStateAction } from "react";
 
-interface HandleSubmitUniversityEntityParams {
+export interface HandleSubmitUniversityEntityParams {
   entityType: string;
   parentId?: string;
   targetId?: string;
