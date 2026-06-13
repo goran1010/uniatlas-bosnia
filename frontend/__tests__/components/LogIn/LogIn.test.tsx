@@ -8,13 +8,19 @@ import { Notifications } from "../../../src/components/Notifications";
 import { RootContextProvider } from "../../rootContextProvider";
 
 vi.mock("../../../src/components/utils/getCsrfToken", () => ({
-  getCsrfToken: async () => "mocked-csrf-token",
-  clearCsrfToken: () => {},
+  getCsrfToken: () => Promise.resolve("mocked-csrf-token"),
+  clearCsrfToken: () => vi.fn(),
 }));
 
 const user = userEvent.setup();
 
-function createFormElements() {
+interface FormElements {
+  emailField: HTMLInputElement;
+  passwordField: HTMLInputElement;
+  logInButton: HTMLButtonElement;
+}
+
+function createFormElements(): FormElements {
   return {
     emailField: screen.getByLabelText(/Email/i),
     passwordField: screen.getByLabelText("Password"),
@@ -22,7 +28,13 @@ function createFormElements() {
   };
 }
 
-async function submitLogInForm({ email, password }) {
+async function submitLogInForm({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
   const { emailField, passwordField, logInButton } = createFormElements();
 
   await user.type(emailField, email);
@@ -30,7 +42,7 @@ async function submitLogInForm({ email, password }) {
   await user.click(logInButton);
 }
 
-beforeEach(async () => {
+beforeEach(() => {
   function Wrapper() {
     return (
       <RootContextProvider>
@@ -38,6 +50,7 @@ beforeEach(async () => {
           <Notifications />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/login" element={<LogIn />} />
           </Routes>
         </MemoryRouter>
@@ -61,11 +74,10 @@ describe("Render LogIn Component", () => {
   });
 
   test("LogIn form fields", () => {
-    const formElements = createFormElements();
-
-    for (let element in formElements) {
-      expect(formElements[element]).toBeInTheDocument();
-    }
+    const { emailField, passwordField, logInButton } = createFormElements();
+    expect(emailField).toBeInTheDocument();
+    expect(passwordField).toBeInTheDocument();
+    expect(logInButton).toBeInTheDocument();
   });
 
   test("shows github login error notification from query params", async () => {
@@ -94,7 +106,7 @@ describe("Render LogIn Component", () => {
     function WrapperWithUser() {
       return (
         <RootContextProvider
-          initialUserData={{ id: "1", email: "user@mail.com" }}
+          initialUserData={{ email: "user@mail.com", role: "USER" }}
         >
           <MemoryRouter initialEntries={["/login"]}>
             <Notifications />
@@ -193,16 +205,20 @@ describe("LogIn for validation on button click", () => {
 
 describe("LogIn Form Submit", () => {
   test("Shows error message after clicking Create when fetching with wrong email/password", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: false,
-      status: 400,
-      json: async () => ({
+    const mockErrorResponse = new Response(
+      JSON.stringify({
         error: {
           message:
             "Login failed: Invalid email or password. Check your credentials and try again.",
         },
       }),
-    });
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockErrorResponse);
 
     await submitLogInForm({
       email: "existing@user.com",
@@ -216,18 +232,22 @@ describe("LogIn Form Submit", () => {
   });
 
   test("Redirects to Home on successful form submit", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => ({
-        username: "new_user",
+    const mockedResponse = new Response(
+      JSON.stringify({
+        data: { email: "new@user.com", role: "USER" },
       }),
-    });
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockedResponse);
 
     await submitLogInForm({ email: "new@user.com", password: "Password123!" });
 
     const homePageText = await screen.findByText(
-      /A free, open-source project/i,
+      /Universities and Academic Programs in Bosnia and Herzegovina/i,
     );
     expect(homePageText).toBeInTheDocument();
   });
@@ -235,7 +255,7 @@ describe("LogIn Form Submit", () => {
   test("shows error message when network request throws", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
-      .mockImplementation(() => {});
+      .mockImplementation(() => vi.fn());
 
     vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(
       new Error("Network error"),
@@ -255,18 +275,21 @@ describe("LogIn Form Submit", () => {
   });
 
   test("shows fallback login failed message when backend error payload is missing", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
-      ok: false,
+    const mockedResponse = new Response(JSON.stringify({}), {
       status: 400,
-      json: async () => ({}),
+      headers: { "Content-Type": "application/json" },
     });
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockedResponse);
 
     await submitLogInForm({
       email: "existing@user.com",
       password: "Password123!",
     });
 
-    const fallbackError = await screen.findByText(/^Login failed\.$/i);
+    const fallbackError = await screen.findByText(
+      /^An error occurred while logging in\.$/i,
+    );
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackError).toBeInTheDocument();
