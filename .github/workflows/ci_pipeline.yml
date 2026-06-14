@@ -37,6 +37,13 @@ jobs:
     name: Run tests
     env:
       VITE_BACKEND_URL: http://localhost:3000
+      PORT: 3000
+      FRONTEND_URL: http://localhost:5173
+      NODE_ENV: test
+      BACKEND_URL: http://localhost:3000
+      COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
 
     steps:
       - name: Checkout
