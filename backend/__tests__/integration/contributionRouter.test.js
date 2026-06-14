@@ -4,6 +4,7 @@ import { app } from "../../app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { pendingChangesUniversityModel } from "../../models/pendingChangesUniversityModel.js";
 import { usersModel } from "../../models/usersModel.js";
+import { prisma } from "../../db/prisma.js";
 
 describe("Contributor Router - POST /users/contribution/universities", () => {
   test("Responds with status 201 and message if suggestion created successfully", async () => {
@@ -123,8 +124,11 @@ describe("Contributor Router - DELETE /users/contribution/pending-changes/univer
     const agent = request.agent(app);
     const loginResponse = await createAndLoginUser(agent);
 
+    const user = await usersModel.findMany({
+      email: loginResponse.body.data.email,
+    });
     const pendingChange = await pendingChangesUniversityModel.create({
-      userId: loginResponse.body.data.id,
+      userId: user[0].id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
       data: {

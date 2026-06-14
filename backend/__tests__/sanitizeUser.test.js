@@ -20,7 +20,6 @@ describe("sanitizeUser", () => {
     const sanitizedUser = sanitizeUser(user);
 
     expect(sanitizedUser).not.toHaveProperty("password");
-    expect(sanitizedUser).toHaveProperty("id", 1);
     expect(sanitizedUser).toHaveProperty("username", "testuser");
     expect(sanitizedUser).toHaveProperty("email", "testuser@example.com");
   });
@@ -49,7 +48,6 @@ describe("sanitizeUsers", () => {
     const sanitizedUsers = sanitizeUsers(users);
     sanitizedUsers.forEach((user) => {
       expect(user).not.toHaveProperty("password");
-      expect(user).toHaveProperty("id");
       expect(user).toHaveProperty("username");
       expect(user).toHaveProperty("email");
     });
