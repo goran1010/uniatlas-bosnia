@@ -59,7 +59,7 @@ jobs:
       BACKEND_URL: http://localhost:3000
       COOKIE_SECRET: "123456789"
       TEST_DATABASE_URL: postgresql://test_user:test_password@localhost:5432/postgres
-
+      DATABASE_URL: random_text_for_ci,
       RESEND_API_KEY: random_text_for_ci,
       GITHUB_CLIENT_ID: random_text_for_ci,
       GITHUB_CLIENT_SECRET: random_text_for_ci,
