@@ -1,4 +1,4 @@
-name: Run lint and tests
+name: Run CI pipeline
 
 on:
   push:
