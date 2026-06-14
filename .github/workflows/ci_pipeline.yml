@@ -76,5 +76,8 @@ jobs:
       - name: Test frontend
         run: npm run test:frontend
 
+      - name: Migrate database and generate Prisma client
+        run: npm run db:deploy_generate
+
       - name: Test backend
         run: npm run test:backend
