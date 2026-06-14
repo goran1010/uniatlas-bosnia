@@ -123,8 +123,11 @@ describe("Contributor Router - DELETE /users/contribution/pending-changes/univer
     const agent = request.agent(app);
     const loginResponse = await createAndLoginUser(agent);
 
+    const user = await usersModel.findMany({
+      email: loginResponse.body.data.email,
+    });
     const pendingChange = await pendingChangesUniversityModel.create({
-      userId: loginResponse.body.data.id,
+      userId: user[0].id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
       data: {
