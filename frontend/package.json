@@ -1,8 +1,10 @@
 {
-  "name": "uniatlas-bosnia",
+  "name": "uniatlas-bosnia-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Goran Jović",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
