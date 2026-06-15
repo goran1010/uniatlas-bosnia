@@ -26,7 +26,13 @@
     "test:coverage:backend": "cd backend && npx vitest --coverage",
     "test:coverage:frontend": "cd frontend && npx vitest --coverage",
     "prisma_studio": "cd backend && npx prisma studio",
-    "remove_merged": "git branch --merged | grep -Ev '(^\\*|main|master)' | xargs git branch -d && git fetch -p"
+    "remove_merged": "git branch --merged | grep -Ev '(^\\*|main|master)' | xargs git branch -d && git fetch -p",
+    "format:all": "concurrently \"npm run format:backend\" \"npm run format:frontend\"",
+    "format:backend": "cd backend && npm run format",
+    "format:frontend": "cd frontend && npm run format",
+    "format:check:all": "concurrently \"npm run format:check:backend\" \"npm run format:check:frontend\"",
+    "format:check:backend": "cd backend && npm run format:check",
+    "format:check:frontend": "cd frontend && npm run format:check"
   },
   "repository": {
     "type": "git",

@@ -2,11 +2,13 @@ export interface Endpoint {
   method: "GET" | "POST" | "PUT" | "DELETE";
   path: string;
   descriptionKey: string;
-  params?: {
+  params?:
+  | {
     name?: string;
     required?: boolean;
     descriptionKey?: string;
-  }[] | null;
+  }[]
+  | null;
   successExample?: string | null;
   errorExample?: string | null;
 }
@@ -120,111 +122,111 @@ const authenticatedGroupsEndpoints: {
   titleKey: string;
   endpoints: Endpoint[];
 }[] = [
-  {
-    titleKey: "api.groups.csrf",
-    endpoints: [
-      {
-        method: "GET",
-        path: "/csrf-token",
-        descriptionKey: "api.endpointsData.csrfIssue",
-      },
-    ],
-  },
-  {
-    titleKey: "api.groups.auth",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/auth/signup",
-        descriptionKey: "api.endpointsData.authSignup",
-      },
-      {
-        method: "GET",
-        path: "/auth/confirm/:token",
-        descriptionKey: "api.endpointsData.authConfirm",
-      },
-      {
-        method: "POST",
-        path: "/auth/login",
-        descriptionKey: "api.endpointsData.authLogin",
-      },
-      {
-        method: "GET",
-        path: "/auth/github",
-        descriptionKey: "api.endpointsData.authGithubStart",
-      },
-      {
-        method: "GET",
-        path: "/auth/github/callback",
-        descriptionKey: "api.endpointsData.authGithubCallback",
-      },
-    ],
-  },
-  {
-    titleKey: "api.groups.users",
-    endpoints: [
-      {
-        method: "GET",
-        path: "/users/me",
-        descriptionKey: "api.endpointsData.usersMe",
-      },
-      {
-        method: "POST",
-        path: "/users/logout",
-        descriptionKey: "api.endpointsData.usersLogout",
-      },
-    ],
-  },
-  {
-    titleKey: "api.groups.contributions",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/users/contribution/universities",
-        descriptionKey: "api.endpointsData.contributionCreate",
-      },
-      {
-        method: "PUT",
-        path: "/users/contribution/universities",
-        descriptionKey: "api.endpointsData.contributionUpdate",
-      },
-      {
-        method: "DELETE",
-        path: "/users/contribution/universities",
-        descriptionKey: "api.endpointsData.contributionDelete",
-      },
-      {
-        method: "GET",
-        path: "/users/contribution/pending-changes/universities",
-        descriptionKey: "api.endpointsData.contributionPendingList",
-      },
-      {
-        method: "DELETE",
-        path: "/users/contribution/pending-changes/universities",
-        descriptionKey: "api.endpointsData.contributionPendingDelete",
-      },
-    ],
-  },
-  {
-    titleKey: "api.groups.admin",
-    endpoints: [
-      {
-        method: "GET",
-        path: "/users/admin/pending-changes",
-        descriptionKey: "api.endpointsData.adminPendingList",
-      },
-      {
-        method: "POST",
-        path: "/users/admin/approve-pending-change",
-        descriptionKey: "api.endpointsData.adminApprove",
-      },
-      {
-        method: "DELETE",
-        path: "/users/admin/decline-pending-change",
-        descriptionKey: "api.endpointsData.adminDecline",
-      },
-    ],
-  },
-];
+    {
+      titleKey: "api.groups.csrf",
+      endpoints: [
+        {
+          method: "GET",
+          path: "/csrf-token",
+          descriptionKey: "api.endpointsData.csrfIssue",
+        },
+      ],
+    },
+    {
+      titleKey: "api.groups.auth",
+      endpoints: [
+        {
+          method: "POST",
+          path: "/auth/signup",
+          descriptionKey: "api.endpointsData.authSignup",
+        },
+        {
+          method: "GET",
+          path: "/auth/confirm/:token",
+          descriptionKey: "api.endpointsData.authConfirm",
+        },
+        {
+          method: "POST",
+          path: "/auth/login",
+          descriptionKey: "api.endpointsData.authLogin",
+        },
+        {
+          method: "GET",
+          path: "/auth/github",
+          descriptionKey: "api.endpointsData.authGithubStart",
+        },
+        {
+          method: "GET",
+          path: "/auth/github/callback",
+          descriptionKey: "api.endpointsData.authGithubCallback",
+        },
+      ],
+    },
+    {
+      titleKey: "api.groups.users",
+      endpoints: [
+        {
+          method: "GET",
+          path: "/users/me",
+          descriptionKey: "api.endpointsData.usersMe",
+        },
+        {
+          method: "POST",
+          path: "/users/logout",
+          descriptionKey: "api.endpointsData.usersLogout",
+        },
+      ],
+    },
+    {
+      titleKey: "api.groups.contributions",
+      endpoints: [
+        {
+          method: "POST",
+          path: "/users/contribution/universities",
+          descriptionKey: "api.endpointsData.contributionCreate",
+        },
+        {
+          method: "PUT",
+          path: "/users/contribution/universities",
+          descriptionKey: "api.endpointsData.contributionUpdate",
+        },
+        {
+          method: "DELETE",
+          path: "/users/contribution/universities",
+          descriptionKey: "api.endpointsData.contributionDelete",
+        },
+        {
+          method: "GET",
+          path: "/users/contribution/pending-changes/universities",
+          descriptionKey: "api.endpointsData.contributionPendingList",
+        },
+        {
+          method: "DELETE",
+          path: "/users/contribution/pending-changes/universities",
+          descriptionKey: "api.endpointsData.contributionPendingDelete",
+        },
+      ],
+    },
+    {
+      titleKey: "api.groups.admin",
+      endpoints: [
+        {
+          method: "GET",
+          path: "/users/admin/pending-changes",
+          descriptionKey: "api.endpointsData.adminPendingList",
+        },
+        {
+          method: "POST",
+          path: "/users/admin/approve-pending-change",
+          descriptionKey: "api.endpointsData.adminApprove",
+        },
+        {
+          method: "DELETE",
+          path: "/users/admin/decline-pending-change",
+          descriptionKey: "api.endpointsData.adminDecline",
+        },
+      ],
+    },
+  ];
 
 export { apiEndpoints, authenticatedGroupsEndpoints };
