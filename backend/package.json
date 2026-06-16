@@ -6,7 +6,7 @@
   "license": "AGPL-3.0-only",
   "type": "module",
   "scripts": {
-    "build": "tsc && npm run db:deploy_generate",
+    "build": "tsc --build && npm run db:deploy_generate",
     "db:deploy_generate": "npx prisma migrate deploy && npx prisma generate",
     "db:generate": "npx prisma generate",
     "db:seed": "npx prisma db seed",
@@ -14,7 +14,7 @@
     "db:test:seed": "NODE_ENV=test npx prisma db seed",
     "test": "NODE_ENV=test vitest",
     "start": "node --env-file-if-exists=.env dist/index.js",
-    "dev": "tsc && concurrently \"tsc --watch\" \"node --watch --env-file-if-exists=.env dist/index.js | pino-pretty\"",
+    "dev": "tsx watch src/index.ts | pino-pretty",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -32,6 +32,7 @@
     "prettier": "^3.8.4",
     "prisma": "^7.8.0",
     "supertest": "^7.2.2",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.0",
     "vitest": "^4.1.8"
