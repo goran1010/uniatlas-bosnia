@@ -5,6 +5,9 @@
   "author": "Goran Jović",
   "license": "AGPL-3.0-only",
   "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
   "scripts": {
     "build": "tsc --build && npm run db:deploy_generate",
     "db:deploy_generate": "cd ./src && npx prisma migrate deploy && npx prisma generate",
@@ -17,7 +20,8 @@
     "dev": "tsx watch --env-file-if-exists=./src/.env src/index.ts | pino-pretty",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

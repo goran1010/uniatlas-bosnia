@@ -1,35 +1,66 @@
 class Env {
-  readonly DATABASE_URL: string;
-  readonly FRONTEND_URL: string;
-  readonly BACKEND_URL: string;
-  readonly PORT: string;
-  readonly RESEND_API_KEY: string;
-  readonly COOKIE_SECRET: string;
-  readonly NODE_ENV: string;
-  readonly GITHUB_CLIENT_ID: string;
-  readonly GITHUB_CLIENT_SECRET: string;
-  readonly GITHUB_CALLBACK_URL: string;
-  readonly TEST_DATABASE_URL: string;
+  public readonly DATABASE_URL: string;
+  public readonly FRONTEND_URL: string;
+  public readonly BACKEND_URL: string;
+  public readonly PORT: number;
+  public readonly RESEND_API_KEY: string;
+  public readonly COOKIE_SECRET: string;
+  public readonly NODE_ENV: "development" | "test" | "production";
+  public readonly GITHUB_CLIENT_ID: string;
+  public readonly GITHUB_CLIENT_SECRET: string;
+  public readonly GITHUB_CALLBACK_URL: string;
+  public readonly TEST_DATABASE_URL?: string | undefined;
 
   constructor() {
+    this.NODE_ENV = Env.#getNodeEnv();
+
     this.DATABASE_URL = Env.#getEnv("DATABASE_URL");
     this.FRONTEND_URL = Env.#getEnv("FRONTEND_URL");
     this.BACKEND_URL = Env.#getEnv("BACKEND_URL");
-    this.PORT = Env.#getEnv("PORT");
+    this.PORT = Env.#getNumberEnv("PORT");
+
     this.RESEND_API_KEY = Env.#getEnv("RESEND_API_KEY");
     this.COOKIE_SECRET = Env.#getEnv("COOKIE_SECRET");
-    this.NODE_ENV = Env.#getEnv("NODE_ENV");
+
     this.GITHUB_CLIENT_ID = Env.#getEnv("GITHUB_CLIENT_ID");
     this.GITHUB_CLIENT_SECRET = Env.#getEnv("GITHUB_CLIENT_SECRET");
     this.GITHUB_CALLBACK_URL = Env.#getEnv("GITHUB_CALLBACK_URL");
-    this.TEST_DATABASE_URL = Env.#getEnv("TEST_DATABASE_URL");
+
+    this.TEST_DATABASE_URL = Env.#getOptionalEnv("TEST_DATABASE_URL");
   }
 
   static #getEnv(name: string): string {
     const value = process.env[name];
+
     if (!value) {
       throw new Error(`Missing environment variable: ${name}`);
     }
+
+    return value;
+  }
+
+  static #getOptionalEnv(name: string): string | undefined {
+    return process.env[name];
+  }
+
+  static #getNumberEnv(name: string): number {
+    const value = Env.#getEnv(name);
+    const numberValue = Number(value);
+
+    if (Number.isNaN(numberValue)) {
+      throw new Error(`Environment variable ${name} must be a number`);
+    }
+
+    return numberValue;
+  }
+
+  static #getNodeEnv(): "development" | "test" | "production" {
+    const value = process.env["NODE_ENV"] ?? "development";
+
+    if (value !== "development" && value !== "test" && value !== "production") {
+      throw new Error("NODE_ENV must be one of: development, test, production");
+    }
+
     return value;
   }
 }
