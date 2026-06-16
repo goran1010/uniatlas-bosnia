@@ -1,10 +1,11 @@
 import express from "express";
+import { DATABASE_URL } from "./config/env.js";
 
 const app = express();
 const PORT = 3000;
 
 app.get("/", (_req, res) => {
-  res.send("Hello, World! 1000");
+  res.send(`Hello, World! 1000 ${DATABASE_URL}`);
 });
 
 app.listen(PORT, (error?: Error) => {
