@@ -8,6 +8,7 @@ interface FindManyWhere {
   entityType?: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
   typeOfChange?: "CREATE" | "UPDATE" | "DELETE";
   userId?: string;
+  id?: string;
 }
 
 class PendingChangesUniversityModel {

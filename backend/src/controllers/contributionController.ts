@@ -3,8 +3,10 @@ import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 
+import type { Response } from "express";
+import type { AuthenticatedRequest } from "./controllerTypes.js";
 class ContributionController {
-  async createEntity(req, res) {
+  async createEntity(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user.id;
       const { entityType, parentId } = matchedData(req);
@@ -32,7 +34,7 @@ class ContributionController {
     }
   }
 
-  async editEntity(req, res) {
+  async editEntity(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
@@ -60,7 +62,7 @@ class ContributionController {
     }
   }
 
-  async deleteEntity(req, res) {
+  async deleteEntity(req: AuthenticatedRequest, res: Response) {
     try {
       const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
@@ -87,7 +89,7 @@ class ContributionController {
     }
   }
 
-  async getPendingChanges(req, res) {
+  async getPendingChanges(req: AuthenticatedRequest, res: Response) {
     const { id } = req.user;
     const pendingChanges = await pendingChangesUniversityModel.findMany({
       userId: id,
@@ -99,7 +101,7 @@ class ContributionController {
     });
   }
 
-  async deletePendingChange(req, res) {
+  async deletePendingChange(req: AuthenticatedRequest, res: Response) {
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData(req);
 
@@ -116,7 +118,7 @@ class ContributionController {
     }
 
     await pendingChangesUniversityModel.delete({
-      id: pendingChange[0].id,
+      id: pendingChangeId,
     });
 
     return sendSuccess(res, {

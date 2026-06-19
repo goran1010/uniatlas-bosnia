@@ -9,6 +9,8 @@ import {
   GITHUB_CLIENT_SECRET,
 } from "./env.js";
 
+import type { DoneCallback } from "passport";
+
 passport.use(
   new LocalStrategy(
     { usernameField: "email" },
@@ -31,6 +33,11 @@ passport.use(
   ),
 );
 
+interface GitHubProfile {
+  id: string;
+  emails?: { value: string }[];
+}
+
 passport.use(
   new GitHubStrategy(
     {
@@ -39,7 +46,12 @@ passport.use(
       callbackURL: GITHUB_CALLBACK_URL,
       scope: ["user:email"],
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: GitHubProfile,
+      done: DoneCallback,
+    ) => {
       try {
         let user = await usersModel.findOne({
           githubId: profile.id.toString(),
@@ -48,9 +60,7 @@ passport.use(
 
         const primaryEmail = profile.emails?.[0]?.value;
         if (!primaryEmail) {
-          return done(null, false, {
-            message: "GitHub account has no public email",
-          });
+          return done(null, false);
         }
 
         if (primaryEmail) {
@@ -68,7 +78,14 @@ passport.use(
           email: primaryEmail,
           githubId: profile.id.toString(),
         });
-        return done(null, user);
+        const safeUser = {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          githubId: user.githubId,
+        };
+
+        return done(null, safeUser);
       } catch (err) {
         return done(err);
       }

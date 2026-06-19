@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "tsc --build && npm run db:deploy_generate",
+    "db:migrate_dev": "cd ./src && npx prisma migrate dev --name",
     "db:deploy_generate": "cd ./src && npx prisma migrate deploy && npx prisma generate",
     "db:generate": "cd ./src && npx prisma generate",
     "db:seed": "cd ./src && npx prisma db seed",
