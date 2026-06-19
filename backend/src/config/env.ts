@@ -26,7 +26,7 @@ class Env {
     this.GITHUB_CLIENT_SECRET = Env.#getEnv("GITHUB_CLIENT_SECRET");
     this.GITHUB_CALLBACK_URL = Env.#getEnv("GITHUB_CALLBACK_URL");
 
-    this.TEST_DATABASE_URL = Env.#getOptionalEnv("TEST_DATABASE_URL");
+    this.TEST_DATABASE_URL = Env.#getTestEnv("TEST_DATABASE_URL");
   }
 
   static #getEnv(name: string): string {
@@ -39,7 +39,12 @@ class Env {
     return value;
   }
 
-  static #getOptionalEnv(name: string): string | undefined {
+  static #getTestEnv(name: string): string | undefined {
+    if (process.env["NODE_ENV"] === "test") {
+      throw new Error(
+        `Missing environment variable for test environment: ${name}`,
+      );
+    }
     return process.env[name];
   }
 
