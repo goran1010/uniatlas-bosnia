@@ -2,8 +2,10 @@ import { universitiesModel } from "../models/universitiesModel.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 
+import type { Request, Response } from "express";
+
 class V1Controller {
-  status(req, res) {
+  status(_req: Request, res: Response) {
     return sendSuccess(res, {
       data: {
         status: "ok",
@@ -12,7 +14,7 @@ class V1Controller {
     });
   }
 
-  async getUniversities(req, res) {
+  async getUniversities(_req: Request, res: Response) {
     const universities = await universitiesModel.getAll();
     return sendSuccess(res, {
       message: "Universities retrieved successfully.",
@@ -20,7 +22,7 @@ class V1Controller {
     });
   }
 
-  async searchUniversities(req, res) {
+  async searchUniversities(req: Request, res: Response) {
     const { searchTerm } = matchedData(req);
     const result = await universitiesModel.searchUniversities(searchTerm);
 
@@ -37,8 +39,8 @@ class V1Controller {
     });
   }
 
-  async getUniversityById(req, res) {
-    const id = Number(req.params.id);
+  async getUniversityById(req: Request, res: Response) {
+    const id = Number(req.params["id"]);
 
     if (!Number.isInteger(id) || id < 1) {
       return sendError(res, {
@@ -62,7 +64,7 @@ class V1Controller {
     });
   }
 
-  async searchStudyPrograms(req, res) {
+  async searchStudyPrograms(req: Request, res: Response) {
     const { searchTerm } = matchedData(req);
     const result = await universitiesModel.searchStudyPrograms(searchTerm);
 

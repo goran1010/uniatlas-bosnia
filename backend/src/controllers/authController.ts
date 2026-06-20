@@ -10,8 +10,10 @@ import { sanitizeUser } from "../utils/sanitizeUser.js";
 import { pendingUserModel } from "../models/pendingUsersModel.js";
 import { BACKEND_URL, FRONTEND_URL } from "../config/env.js";
 
+import type { Request, Response, NextFunction } from "express";
+
 class AuthController {
-  async signup(req, res) {
+  async signup(req: Request, res: Response) {
     try {
       const { email, password } = matchedData(req);
 
@@ -73,27 +75,30 @@ class AuthController {
     }
   }
 
-  async confirmEmail(req, res) {
+  async confirmEmail(req: Request, res: Response) {
     try {
       const { token } = matchedData(req);
 
       const pendingUsers = await pendingUserModel.findMany({ token });
       const pendingUser = pendingUsers?.[0];
 
-      if (!pendingUser)
-        return sendError(res, {
+      if (!pendingUser) {
+        sendError(res, {
           status: 400,
           message:
             "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
         });
+        return;
+      }
 
       if (pendingUser.expiresAt < new Date()) {
         await pendingUserModel.delete({ id: pendingUser.id });
 
-        return sendError(res, {
+        sendError(res, {
           status: 400,
           message: "Token expired. Please sign up again.",
         });
+        return;
       }
 
       const user = await usersModel.create({
@@ -104,17 +109,18 @@ class AuthController {
       await pendingUserModel.delete({ id: pendingUser.id });
 
       if (!user) {
-        return sendError(res, {
+        sendError(res, {
           status: 500,
           message: "Email confirmation failed: account couldn't be created.",
         });
+        return;
       }
 
       res.send(emailConfirmHTML());
     } catch (err) {
       console.error(err);
 
-      return sendError(res, {
+      sendError(res, {
         status: 500,
         message:
           "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
@@ -122,74 +128,84 @@ class AuthController {
     }
   }
 
-  async login(req, res, next) {
-    passport.authenticate("local", (err, user, info) => {
-      if (err) return next(err);
-      if (!user) {
-        const loginReason = info?.message || "Invalid email or password";
-        return sendError(res, {
-          status: 401,
-          message: `Login failed: ${loginReason}. Check your credentials and try again.`,
-        });
-      }
-
-      const continueWithLogin = () => {
-        req.logIn(user, (loginError) => {
-          if (loginError) {
-            return next(loginError);
-          }
-
-          return sendSuccess(res, {
-            message: "Logged in successfully",
-            data: sanitizeUser(user),
+  async login(req: Request, res: Response, next: NextFunction) {
+    passport.authenticate(
+      "local",
+      (
+        err: unknown,
+        user: Express.User | false | null,
+        info: { message?: string } | undefined,
+      ) => {
+        if (err) return next(err);
+        if (!user) {
+          const loginReason = info?.message || "Invalid email or password";
+          return sendError(res, {
+            status: 401,
+            message: `Login failed: ${loginReason}. Check your credentials and try again.`,
           });
-        });
-      };
-
-      if (!req.session?.regenerate) {
-        return continueWithLogin();
-      }
-
-      req.session.regenerate((regenerateError) => {
-        if (regenerateError) {
-          return next(regenerateError);
         }
 
-        return continueWithLogin();
-      });
-    })(req, res, next);
+        const continueWithLogin = () => {
+          req.logIn(user, (loginError) => {
+            if (loginError) {
+              return next(loginError);
+            }
+
+            return sendSuccess(res, {
+              message: "Logged in successfully",
+              data: sanitizeUser(user),
+            });
+          });
+        };
+
+        if (!req.session?.regenerate) {
+          return continueWithLogin();
+        }
+
+        req.session.regenerate((regenerateError) => {
+          if (regenerateError) {
+            return next(regenerateError);
+          }
+
+          return continueWithLogin();
+        });
+      },
+    )(req, res, next);
   }
 
-  githubLogin(req, res, next) {
+  githubLogin(req: Request, res: Response, next: NextFunction) {
     passport.authenticate("github", { scope: ["user:email"] })(req, res, next);
   }
 
-  githubCallback(req, res, next) {
-    passport.authenticate("github", (err, user) => {
-      if (err) return next(err);
-      if (!user) {
-        return res.redirect(`${FRONTEND_URL}/login?error=github`);
-      }
+  githubCallback(req: Request, res: Response, next: NextFunction) {
+    passport.authenticate(
+      "github",
+      (err: unknown, user: Express.User | false | null) => {
+        if (err) return next(err);
+        if (!user) {
+          return res.redirect(`${FRONTEND_URL}/login?error=github`);
+        }
 
-      const continueWithLogin = () => {
-        req.logIn(user, (loginError) => {
-          if (loginError) return next(loginError);
-          req.session.save((saveError) => {
-            if (saveError) return next(saveError);
-            return res.redirect(FRONTEND_URL);
+        const continueWithLogin = () => {
+          req.logIn(user, (loginError) => {
+            if (loginError) return next(loginError);
+            req.session.save((saveError) => {
+              if (saveError) return next(saveError);
+              return res.redirect(FRONTEND_URL);
+            });
           });
+        };
+
+        if (!req.session?.regenerate) {
+          return continueWithLogin();
+        }
+
+        req.session.regenerate((regenerateError) => {
+          if (regenerateError) return next(regenerateError);
+          return continueWithLogin();
         });
-      };
-
-      if (!req.session?.regenerate) {
-        return continueWithLogin();
-      }
-
-      req.session.regenerate((regenerateError) => {
-        if (regenerateError) return next(regenerateError);
-        return continueWithLogin();
-      });
-    })(req, res, next);
+      },
+    )(req, res, next);
   }
 }
 

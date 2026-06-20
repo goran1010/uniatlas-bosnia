@@ -1,25 +1,26 @@
 type Role = "ADMIN" | "USER";
 
 interface User {
-  id: number;
+  id: string;
   role: Role;
   email: string;
-  password: string;
-  githubId?: number;
+  githubId: string | null;
 }
 
-function sanitizeUser(user: User | null): Pick<User, "role" | "email"> | null {
+function sanitizeUser(
+  user: User | null,
+): Omit<User, "password" | "githubId"> | null {
   if (!user) {
     return null;
   }
 
-  const { role, email } = user;
-  return { role, email };
+  const { id, role, email } = user;
+  return { id, role, email };
 }
 
 function sanitizeUsers(
   users: User[] = [],
-): (Pick<User, "role" | "email"> | null)[] {
+): (Omit<User, "password" | "githubId"> | null)[] {
   return users.map((user) => sanitizeUser(user));
 }
 

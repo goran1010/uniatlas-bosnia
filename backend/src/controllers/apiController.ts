@@ -1,7 +1,8 @@
 import { sendSuccess } from "../utils/response.js";
+import type { Request, Response } from "express";
 
 class APIController {
-  status(req, res) {
+  status(_req: Request, res: Response) {
     return sendSuccess(res, {
       data: {
         status: "ok",

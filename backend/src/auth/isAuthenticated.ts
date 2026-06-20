@@ -6,7 +6,7 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   try {
     if (req.user) return next();
 
-    return sendError(res, {
+    sendError(res, {
       status: 401,
       message: "Authentication required: log in and try again.",
     });

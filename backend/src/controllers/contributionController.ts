@@ -3,11 +3,17 @@ import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 
-import type { Response } from "express";
-import type { AuthenticatedRequest } from "./controllerTypes.js";
+import type { Request, Response } from "express";
+
 class ContributionController {
-  async createEntity(req: AuthenticatedRequest, res: Response) {
+  async createEntity(req: Request, res: Response) {
     try {
+      if (!req.user) {
+        return sendError(res, {
+          status: 401,
+          message: "Authentication required: log in and try again.",
+        });
+      }
       const userId = req.user.id;
       const { entityType, parentId } = matchedData(req);
       const data = req.body.data;
@@ -34,8 +40,14 @@ class ContributionController {
     }
   }
 
-  async editEntity(req: AuthenticatedRequest, res: Response) {
+  async editEntity(req: Request, res: Response) {
     try {
+      if (!req.user) {
+        return sendError(res, {
+          status: 401,
+          message: "Authentication required: log in and try again.",
+        });
+      }
       const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
       const data = req.body.data;
@@ -62,8 +74,14 @@ class ContributionController {
     }
   }
 
-  async deleteEntity(req: AuthenticatedRequest, res: Response) {
+  async deleteEntity(req: Request, res: Response) {
     try {
+      if (!req.user) {
+        return sendError(res, {
+          status: 401,
+          message: "Authentication required: log in and try again.",
+        });
+      }
       const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
 
@@ -89,7 +107,13 @@ class ContributionController {
     }
   }
 
-  async getPendingChanges(req: AuthenticatedRequest, res: Response) {
+  async getPendingChanges(req: Request, res: Response) {
+    if (!req.user) {
+      return sendError(res, {
+        status: 401,
+        message: "Authentication required: log in and try again.",
+      });
+    }
     const { id } = req.user;
     const pendingChanges = await pendingChangesUniversityModel.findMany({
       userId: id,
@@ -101,7 +125,13 @@ class ContributionController {
     });
   }
 
-  async deletePendingChange(req: AuthenticatedRequest, res: Response) {
+  async deletePendingChange(req: Request, res: Response) {
+    if (!req.user) {
+      return sendError(res, {
+        status: 401,
+        message: "Authentication required: log in and try again.",
+      });
+    }
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData(req);
 

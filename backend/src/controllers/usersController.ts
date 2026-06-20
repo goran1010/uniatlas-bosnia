@@ -2,11 +2,13 @@ import { sendError, sendSuccess } from "../utils/response.js";
 import { sanitizeUser } from "../utils/sanitizeUser.js";
 import { NODE_ENV } from "../config/env.js";
 
+import type { Request, Response } from "express";
+
 const IS_PRODUCTION = NODE_ENV === "production";
 const NUMBER_OF_DAYS = 30;
 
 class UsersController {
-  async me(req, res) {
+  async me(req: Request, res: Response) {
     if (!req.user) {
       return sendSuccess(res, {
         message: "No user logged in",
@@ -21,14 +23,15 @@ class UsersController {
     });
   }
 
-  logout(req, res) {
+  logout(req: Request, res: Response) {
     req.logout((err) => {
       if (err) {
         console.error(err);
-        return sendError(res, {
+        sendError(res, {
           status: 500,
           message: "Logout failed: try again.",
         });
+        return;
       }
 
       req.session.destroy(() => {
@@ -40,7 +43,7 @@ class UsersController {
           httpOnly: true,
           path: "/",
         });
-        return sendSuccess(res, {
+        sendSuccess(res, {
           message: "User logged out successfully",
           data: { success: true },
         });
