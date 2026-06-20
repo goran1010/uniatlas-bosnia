@@ -1,7 +1,5 @@
 import { prisma } from "../db/prisma.js";
-import { Prisma } from "#generated/prisma/client.js";
-
-import type { User } from "#generated/prisma/client.js";
+import type { User, Prisma } from "#generated/prisma/client.js";
 
 class UsersModel {
   findOne(where: Prisma.UserWhereUniqueInput): Promise<User | null> {

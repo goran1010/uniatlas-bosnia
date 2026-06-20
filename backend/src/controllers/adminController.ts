@@ -1,4 +1,4 @@
-import { pendingChangesUniversityModel } from "../models/pendingChangesUniversityModel.js";
+import { pendingChangesModel } from "../models/pendingChangesModel.js";
 import { transactionModel } from "../models/transactionModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { matchedData } from "express-validator";
@@ -7,7 +7,7 @@ import type { Request, Response } from "express";
 
 class AdminController {
   async getPendingChanges(_req: Request, res: Response) {
-    const pendingChanges = await pendingChangesUniversityModel.findMany();
+    const pendingChanges = await pendingChangesModel.findMany();
 
     return sendSuccess(res, {
       data: pendingChanges,
@@ -18,7 +18,7 @@ class AdminController {
   async declinePendingChange(req: Request, res: Response) {
     const { id } = matchedData(req);
 
-    await pendingChangesUniversityModel.delete({ id });
+    await pendingChangesModel.delete({ id });
 
     return sendSuccess(res, {
       message: "Pending change declined successfully.",

@@ -1,8 +1,7 @@
-import { pendingChangesUniversityModel } from "../models/pendingChangesUniversityModel.js";
+import { pendingChangesModel } from "../models/pendingChangesModel.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
-
 import type { Request, Response } from "express";
 
 class ContributionController {
@@ -14,12 +13,16 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user["id"];
+      const userId = req.user.id;
       const { entityType, parentId } = matchedData(req);
       const data = req.body.data;
 
-      const result = await pendingChangesUniversityModel.create({
-        userId,
+      const result = await pendingChangesModel.create({
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
         entityType,
         typeOfChange: "CREATE",
         parentId: parentId ? Number(parentId) : null,
@@ -48,12 +51,16 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user["id"];
+      const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
       const data = req.body.data;
 
-      const result = await pendingChangesUniversityModel.create({
-        userId,
+      const result = await pendingChangesModel.create({
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
         entityType,
         typeOfChange: "UPDATE",
         targetId: Number(targetId),
@@ -82,11 +89,15 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user["id"];
+      const userId = req.user.id;
       const { entityType, targetId } = matchedData(req);
 
-      const result = await pendingChangesUniversityModel.create({
-        userId,
+      const result = await pendingChangesModel.create({
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
         entityType,
         typeOfChange: "DELETE",
         targetId: Number(targetId),
@@ -115,7 +126,7 @@ class ContributionController {
       });
     }
     const { id } = req.user;
-    const pendingChanges = await pendingChangesUniversityModel.findMany({
+    const pendingChanges = await pendingChangesModel.findMany({
       userId: id,
     });
 
@@ -135,7 +146,7 @@ class ContributionController {
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData(req);
 
-    const pendingChange = await pendingChangesUniversityModel.findMany({
+    const pendingChange = await pendingChangesModel.findMany({
       userId: id,
       id: pendingChangeId,
     });
@@ -147,7 +158,7 @@ class ContributionController {
       });
     }
 
-    await pendingChangesUniversityModel.delete({
+    await pendingChangesModel.delete({
       id: pendingChangeId,
     });
 

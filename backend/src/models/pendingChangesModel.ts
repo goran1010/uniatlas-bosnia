@@ -1,22 +1,12 @@
 import { prisma } from "../db/prisma.js";
+import type { Prisma } from "#generated/prisma/client.js";
 
-interface FindUniqueWhere {
-  id: string;
-}
-
-interface FindManyWhere {
-  entityType?: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-  typeOfChange?: "CREATE" | "UPDATE" | "DELETE";
-  userId?: string;
-  id?: string;
-}
-
-class PendingChangesUniversityModel {
-  create(data) {
+class PendingChangesModel {
+  create(data: Prisma.PendingChangeCreateInput) {
     return prisma.pendingChange.create({ data });
   }
 
-  findMany(where: FindManyWhere | undefined = undefined) {
+  findMany(where: Prisma.PendingChangeWhereInput | undefined = undefined) {
     if (!where) {
       return prisma.pendingChange.findMany({
         include: {
@@ -38,18 +28,21 @@ class PendingChangesUniversityModel {
     });
   }
 
-  delete(where: FindUniqueWhere) {
+  delete(where: Prisma.PendingChangeWhereUniqueInput) {
     return prisma.pendingChange.delete({ where });
   }
 
-  update(where, data) {
+  update(
+    where: Prisma.PendingChangeWhereUniqueInput,
+    data: Prisma.PendingChangeUpdateInput,
+  ) {
     return prisma.pendingChange.update({
-      where: { ...where },
-      data: { ...data },
+      where,
+      data,
     });
   }
 }
 
-const pendingChangesUniversityModel = new PendingChangesUniversityModel();
+const pendingChangesModel = new PendingChangesModel();
 
-export { pendingChangesUniversityModel };
+export { pendingChangesModel };
