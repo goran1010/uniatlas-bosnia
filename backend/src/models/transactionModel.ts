@@ -13,7 +13,7 @@ class TransactionModel {
     typeOfChange,
   }: ApprovePendingChangeParams) {
     return prisma.$transaction(async (tx) => {
-      const pendingChange = await tx.pendingChangesUniversity.findUnique({
+      const pendingChange = await tx.pendingChange.findUnique({
         where: { id },
       });
 
@@ -69,7 +69,7 @@ class TransactionModel {
         }
       }
 
-      await tx.pendingChangesUniversity.delete({ where: { id } });
+      await tx.pendingChange.delete({ where: { id } });
 
       return true;
     });

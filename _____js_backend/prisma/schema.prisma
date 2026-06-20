@@ -25,12 +25,12 @@ enum role {
 }
 
 model User {
-  id             String                     @id @default(uuid())
-  email          String                     @unique
+  id             String          @id @default(uuid())
+  email          String          @unique
   password       String?
-  githubId       String?                    @unique
-  role           role                       @default(USER)
-  pendingChanges PendingChangesUniversity[]
+  githubId       String?         @unique
+  role           role            @default(USER)
+  pendingChanges PendingChange[]
 
   @@map("users")
 }
@@ -73,13 +73,6 @@ enum subjectType {
   ELECTIVE
 }
 
-enum entityType {
-  UNIVERSITY
-  FACULTY
-  STUDY_PROGRAM
-  SUBJECT
-}
-
 model University {
   id                Int       @id @default(autoincrement())
   name              String    @unique
@@ -96,6 +89,7 @@ model University {
   lastChecked       DateTime?
   faculties         Faculty[]
 
+  @@unique([name, city])
   @@map("universities")
 }
 
@@ -142,16 +136,40 @@ model Subject {
   @@map("subjects")
 }
 
-model PendingChangesUniversity {
+enum entityType {
+  UNIVERSITY
+  FACULTY
+  STUDY_PROGRAM
+  SUBJECT
+}
+
+model PendingChange {
   id           String       @id @default(uuid())
   entityType   entityType
   typeOfChange typeOfChange
-  targetId     Int?
-  parentId     Int?
-  data         Json
-  userId       String
-  user         User         @relation(fields: [userId], references: [id])
-  createdAt    DateTime     @default(now())
 
-  @@map("pending_changes_university")
+  // UPDATE or DELETE target
+  targetId Int?
+
+  // CREATE child parent
+  // FACULTY -> universityId
+  // STUDY_PROGRAM -> facultyId
+  // SUBJECT -> studyProgramId
+  parentId Int?
+
+  // proposed data
+  data Json?
+
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  createdAt       DateTime  @default(now())
+  reviewedAt      DateTime?
+  rejectionReason String?
+
+  @@index([createdAt])
+  @@index([entityType, typeOfChange])
+  @@index([targetId])
+  @@index([parentId])
+  @@index([userId])
+  @@map("pending_changes")
 }

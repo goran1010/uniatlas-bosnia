@@ -13,12 +13,12 @@ interface FindManyWhere {
 
 class PendingChangesUniversityModel {
   create(data) {
-    return prisma.pendingChangesUniversity.create({ data });
+    return prisma.pendingChange.create({ data });
   }
 
   findMany(where: FindManyWhere | undefined = undefined) {
     if (!where) {
-      return prisma.pendingChangesUniversity.findMany({
+      return prisma.pendingChange.findMany({
         include: {
           user: {
             select: { email: true },
@@ -27,7 +27,7 @@ class PendingChangesUniversityModel {
         orderBy: { createdAt: "desc" },
       });
     }
-    return prisma.pendingChangesUniversity.findMany({
+    return prisma.pendingChange.findMany({
       where,
       include: {
         user: {
@@ -39,11 +39,11 @@ class PendingChangesUniversityModel {
   }
 
   delete(where: FindUniqueWhere) {
-    return prisma.pendingChangesUniversity.delete({ where });
+    return prisma.pendingChange.delete({ where });
   }
 
   update(where, data) {
-    return prisma.pendingChangesUniversity.update({
+    return prisma.pendingChange.update({
       where: { ...where },
       data: { ...data },
     });

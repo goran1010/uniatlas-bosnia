@@ -73,7 +73,6 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(err);
 
   return sendError(res, {
-    status: err.statusCode || 500,
     message: "Server error: please try again later.",
   });
 });
