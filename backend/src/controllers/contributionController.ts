@@ -14,7 +14,7 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user.id;
+      const userId = req.user["id"];
       const { entityType, parentId } = matchedData(req);
       const data = req.body.data;
 
@@ -48,7 +48,7 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user.id;
+      const userId = req.user["id"];
       const { entityType, targetId } = matchedData(req);
       const data = req.body.data;
 
@@ -82,7 +82,7 @@ class ContributionController {
           message: "Authentication required: log in and try again.",
         });
       }
-      const userId = req.user.id;
+      const userId = req.user["id"];
       const { entityType, targetId } = matchedData(req);
 
       const result = await pendingChangesUniversityModel.create({

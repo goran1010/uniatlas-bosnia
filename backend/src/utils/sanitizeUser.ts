@@ -1,26 +1,13 @@
-type Role = "ADMIN" | "USER";
+import type { User as PrismaUser } from "#generated/prisma/client.js";
 
-interface User {
-  id: string;
-  role: Role;
-  email: string;
-  githubId: string | null;
-}
-
-function sanitizeUser(
-  user: User | null,
-): Omit<User, "password" | "githubId"> | null {
-  if (!user) {
-    return null;
-  }
-
-  const { id, role, email } = user;
-  return { id, role, email };
+function sanitizeUser(user: PrismaUser): Omit<PrismaUser, "password"> {
+  const { id, role, email, githubId } = user;
+  return { id, role, email, githubId };
 }
 
 function sanitizeUsers(
-  users: User[] = [],
-): (Omit<User, "password" | "githubId"> | null)[] {
+  users: PrismaUser[] = [],
+): Omit<PrismaUser, "password">[] {
   return users.map((user) => sanitizeUser(user));
 }
 

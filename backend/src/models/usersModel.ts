@@ -1,39 +1,43 @@
 import { prisma } from "../db/prisma.js";
+import { Prisma } from "#generated/prisma/client.js";
+
+import type { User } from "#generated/prisma/client.js";
 
 class UsersModel {
-  findOne(where) {
-    return prisma.user.findUnique({ where: { ...where } });
+  findOne(where: Prisma.UserWhereUniqueInput): Promise<User | null> {
+    return prisma.user.findUnique({ where });
   }
 
-  findMany(where) {
+  findMany(where?: Prisma.UserWhereInput): Promise<User[]> {
     if (!where) {
       return prisma.user.findMany();
     }
-    return prisma.user.findMany({ where: { ...where } });
+    return prisma.user.findMany({ where });
   }
 
-  update(where, data) {
+  update(
+    where: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput,
+  ): Promise<User> {
     return prisma.user.update({
-      where: { ...where },
-      data: { ...data },
+      where,
+      data,
     });
   }
 
-  create(data) {
+  create(data: Prisma.UserCreateInput): Promise<User> {
     return prisma.user.create({
-      data: {
-        ...data,
-      },
+      data,
     });
   }
 
-  deleteAll() {
+  deleteAll(): Promise<Prisma.BatchPayload> {
     return prisma.user.deleteMany();
   }
 
-  deleteUser(where) {
+  deleteUser(where: Prisma.UserWhereInput): Promise<Prisma.BatchPayload> {
     return prisma.user.deleteMany({
-      where: { ...where },
+      where,
     });
   }
 }

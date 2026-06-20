@@ -8,6 +8,7 @@ import {
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
 } from "./env.js";
+import { sanitizeUser } from "#utils/sanitizeUser.js";
 
 import type { DoneCallback } from "passport";
 
@@ -25,7 +26,8 @@ passport.use(
           return done(null, false, { message: "Incorrect email or password" });
         }
 
-        return done(null, user);
+        const safeUser = sanitizeUser(user);
+        return done(null, safeUser);
       } catch (err) {
         return done(err);
       }
@@ -56,7 +58,10 @@ passport.use(
         let user = await usersModel.findOne({
           githubId: profile.id.toString(),
         });
-        if (user) return done(null, user);
+        if (user) {
+          const safeUser = sanitizeUser(user);
+          return done(null, safeUser);
+        }
 
         const primaryEmail = profile.emails?.[0]?.value;
         if (!primaryEmail) {
@@ -70,7 +75,8 @@ passport.use(
               { id: user.id },
               { githubId: profile.id.toString() },
             );
-            return done(null, user);
+            const safeUser = sanitizeUser(user);
+            return done(null, safeUser);
           }
         }
 
@@ -78,12 +84,7 @@ passport.use(
           email: primaryEmail,
           githubId: profile.id.toString(),
         });
-        const safeUser = {
-          id: user.id,
-          email: user.email,
-          role: user.role,
-          githubId: user.githubId,
-        };
+        const safeUser = sanitizeUser(user);
 
         return done(null, safeUser);
       } catch (err) {
@@ -95,16 +96,17 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   try {
-    done(null, user.id);
+    done(null, user["id"]);
   } catch (err) {
     done(err);
   }
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id: string, done) => {
   try {
     const user = await usersModel.findOne({ id });
-    done(null, user);
+    const safeUser = user ? sanitizeUser(user) : null;
+    done(null, safeUser);
   } catch (err) {
     done(err);
   }

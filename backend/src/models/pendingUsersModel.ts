@@ -7,9 +7,9 @@ class PendingUserModel {
     });
   }
 
-  async update(query, data) {
+  async update(where, data) {
     return await prisma.pendingUser.updateMany({
-      where: query,
+      where,
       data,
     });
   }
@@ -18,12 +18,12 @@ class PendingUserModel {
     if (!where) {
       return prisma.pendingUser.findMany();
     }
-    return prisma.pendingUser.findMany({ where: { ...where } });
+    return prisma.pendingUser.findMany({ where });
   }
 
-  async delete(query) {
+  async delete(where) {
     return await prisma.pendingUser.deleteMany({
-      where: query,
+      where,
     });
   }
 }

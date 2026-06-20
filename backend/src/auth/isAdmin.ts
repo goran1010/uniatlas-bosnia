@@ -4,7 +4,13 @@ import type { Request, Response, NextFunction } from "express";
 
 function isAdmin(req: Request, res: Response, next: NextFunction) {
   try {
-    if (req?.user?.role === "ADMIN") return next();
+    if (!req?.user) {
+      return sendError(res, {
+        status: 401,
+        message: "Unauthorized: user not authenticated.",
+      });
+    }
+    if (req?.user["role"] === "ADMIN") return next();
 
     return sendError(res, {
       status: 403,

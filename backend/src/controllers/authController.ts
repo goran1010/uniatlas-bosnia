@@ -6,7 +6,6 @@ import { sendConfirmationEmail } from "../email/confirmationEmail.js";
 import bcrypt from "bcryptjs";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
-import { sanitizeUser } from "../utils/sanitizeUser.js";
 import { pendingUserModel } from "../models/pendingUsersModel.js";
 import { BACKEND_URL, FRONTEND_URL } from "../config/env.js";
 
@@ -153,7 +152,7 @@ class AuthController {
 
             return sendSuccess(res, {
               message: "Logged in successfully",
-              data: sanitizeUser(user),
+              data: user,
             });
           });
         };

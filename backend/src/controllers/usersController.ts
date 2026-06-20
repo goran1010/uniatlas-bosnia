@@ -1,5 +1,4 @@
 import { sendError, sendSuccess } from "../utils/response.js";
-import { sanitizeUser } from "../utils/sanitizeUser.js";
 import { NODE_ENV } from "../config/env.js";
 
 import type { Request, Response } from "express";
@@ -16,10 +15,9 @@ class UsersController {
       });
     }
 
-    const loggedInUser = sanitizeUser(req.user);
     return sendSuccess(res, {
       message: "User info retrieved",
-      data: loggedInUser,
+      data: req.user,
     });
   }
 
