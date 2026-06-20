@@ -25,7 +25,7 @@ class AdminController {
     });
   }
 
-  async confirmPendingChange(req: Request, res: Response) {
+  async approvePendingChange(req: Request, res: Response) {
     const { id, entityType, typeOfChange } = matchedData(req);
 
     const wasApplied = await transactionModel.approveUniversityPendingChange({

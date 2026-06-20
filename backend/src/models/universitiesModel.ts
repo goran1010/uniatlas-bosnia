@@ -1,4 +1,5 @@
 import { prisma } from "../db/prisma.js";
+import type { Prisma } from "#generated/prisma/client.js";
 
 const fullUniversityInclude = {
   faculties: {
@@ -17,14 +18,14 @@ class UniversitiesModel {
     return prisma.university.findMany({ orderBy: { name: "asc" } });
   }
 
-  getById(id) {
+  getById(id: number) {
     return prisma.university.findUnique({
       where: { id },
       include: fullUniversityInclude,
     });
   }
 
-  searchUniversities(term) {
+  searchUniversities(term: string) {
     return prisma.university.findMany({
       where: {
         OR: [
@@ -37,7 +38,7 @@ class UniversitiesModel {
     });
   }
 
-  searchStudyPrograms(term) {
+  searchStudyPrograms(term: string) {
     return prisma.studyProgram.findMany({
       where: {
         name: { contains: term, mode: "insensitive" },
@@ -53,63 +54,63 @@ class UniversitiesModel {
     });
   }
 
-  getFacultyById(id) {
+  getFacultyById(id: number) {
     return prisma.faculty.findUnique({ where: { id } });
   }
 
-  getStudyProgramById(id) {
+  getStudyProgramById(id: number) {
     return prisma.studyProgram.findUnique({ where: { id } });
   }
 
-  getSubjectById(id) {
+  getSubjectById(id: number) {
     return prisma.subject.findUnique({ where: { id } });
   }
 
-  createUniversity(data) {
+  createUniversity(data: Prisma.UniversityCreateInput) {
     return prisma.university.create({ data });
   }
 
-  updateUniversity(id, data) {
+  updateUniversity(id: number, data: Prisma.UniversityUpdateInput) {
     return prisma.university.update({ where: { id }, data });
   }
 
-  deleteUniversity(id) {
+  deleteUniversity(id: number) {
     return prisma.university.delete({ where: { id } });
   }
 
-  createFaculty(data) {
+  createFaculty(data: Prisma.FacultyCreateInput) {
     return prisma.faculty.create({ data });
   }
 
-  updateFaculty(id, data) {
+  updateFaculty(id: number, data: Prisma.FacultyUpdateInput) {
     return prisma.faculty.update({ where: { id }, data });
   }
 
-  deleteFaculty(id) {
+  deleteFaculty(id: number) {
     return prisma.faculty.delete({ where: { id } });
   }
 
-  createStudyProgram(data) {
+  createStudyProgram(data: Prisma.StudyProgramCreateInput) {
     return prisma.studyProgram.create({ data });
   }
 
-  updateStudyProgram(id, data) {
+  updateStudyProgram(id: number, data: Prisma.StudyProgramUpdateInput) {
     return prisma.studyProgram.update({ where: { id }, data });
   }
 
-  deleteStudyProgram(id) {
+  deleteStudyProgram(id: number) {
     return prisma.studyProgram.delete({ where: { id } });
   }
 
-  createSubject(data) {
+  createSubject(data: Prisma.SubjectCreateInput) {
     return prisma.subject.create({ data });
   }
 
-  updateSubject(id, data) {
+  updateSubject(id: number, data: Prisma.SubjectUpdateInput) {
     return prisma.subject.update({ where: { id }, data });
   }
 
-  deleteSubject(id) {
+  deleteSubject(id: number) {
     return prisma.subject.delete({ where: { id } });
   }
 }

@@ -1,23 +1,21 @@
 import { prisma } from "../db/prisma.js";
 
-interface ApprovePendingChangeParams {
-  id: string;
-  entityType: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-  typeOfChange: "CREATE" | "UPDATE" | "DELETE";
-}
-
 class TransactionModel {
   async approveUniversityPendingChange({
     id,
     entityType,
     typeOfChange,
-  }: ApprovePendingChangeParams) {
+  }: {
+    id: string;
+    entityType: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
+    typeOfChange: "CREATE" | "UPDATE" | "DELETE";
+  }): Promise<boolean> {
     return prisma.$transaction(async (tx) => {
       const pendingChange = await tx.pendingChange.findUnique({
         where: { id },
       });
 
-      if (!pendingChange) {
+      if (!pendingChange || typeof pendingChange.data !== "string") {
         return false;
       }
 
@@ -26,8 +24,7 @@ class TransactionModel {
       if (!targetId) {
         return false;
       }
-
-      const data = pendingChange.data;
+      const data = JSON.parse(pendingChange.data);
 
       if (entityType === "UNIVERSITY") {
         if (typeOfChange === "CREATE") {

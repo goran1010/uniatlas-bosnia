@@ -15,7 +15,7 @@ adminRouter.delete(
 adminRouter.post(
   "/approve-pending-change",
   adminValidation.approvePendingChange,
-  adminController.confirmPendingChange,
+  adminController.approvePendingChange,
 );
 
 export { adminRouter };
