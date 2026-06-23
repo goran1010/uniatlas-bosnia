@@ -2,7 +2,21 @@ import { createNewUserInput } from "./createNewUserInput.js";
 import { usersModel } from "../../src/models/usersModel.js";
 import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
-async function createAndLoginUser(agent, newUser) {
+interface CreateNewUserInputOptions {
+  id?: string;
+  email?: string;
+  password?: string;
+  role?: "USER" | "ADMIN";
+  githubId?: string | null;
+  "confirm-password"?: string;
+}
+
+import type { Agent } from "supertest";
+
+async function createAndLoginUser(
+  agent: Agent,
+  newUser: CreateNewUserInputOptions,
+) {
   const userData = createNewUserInput(newUser);
 
   if (!agent) throw new Error("Agent is required to create and login user.");
@@ -18,13 +32,6 @@ async function createAndLoginUser(agent, newUser) {
 
   if (userData.role !== "USER") {
     await usersModel.update({ email: userData.email }, { role: userData.role });
-  }
-
-  if (userData.requestedContributor === true) {
-    await usersModel.update(
-      { email: userData.email },
-      { requestedContributor: true },
-    );
   }
 
   const response = await agent.post("/auth/login").send({
