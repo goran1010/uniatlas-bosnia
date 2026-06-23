@@ -1,9 +1,9 @@
 import { sendError, sendSuccess } from "../utils/response.js";
-import { NODE_ENV } from "../config/env.js";
+import { env } from "../config/env.js";
 
 import type { Request, Response } from "express";
 
-const IS_PRODUCTION = NODE_ENV === "production";
+const IS_PRODUCTION = env.NODE_ENV === "production";
 const NUMBER_OF_DAYS = 30;
 
 class UsersController {

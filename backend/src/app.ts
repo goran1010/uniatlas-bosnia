@@ -1,7 +1,7 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-import { FRONTEND_URL } from "./config/env.js";
+import { env } from "./config/env.js";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -45,7 +45,7 @@ app.use("/api", cors(), rateLimiter.api, apiRouter);
 
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: env.FRONTEND_URL,
     credentials: true,
   }),
 );

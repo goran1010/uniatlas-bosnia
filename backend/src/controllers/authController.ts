@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { pendingUserModel } from "../models/pendingUsersModel.js";
-import { BACKEND_URL, FRONTEND_URL } from "../config/env.js";
+import { env } from "../config/env.js";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -27,7 +27,7 @@ class AuthController {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const confirmationToken = crypto.randomBytes(32).toString("hex");
-      const confirmationLink = `${BACKEND_URL}/auth/confirm/${confirmationToken}`;
+      const confirmationLink = `${env.BACKEND_URL}/auth/confirm/${confirmationToken}`;
 
       const existingPending = await pendingUserModel.findMany({ email });
 
@@ -182,7 +182,7 @@ class AuthController {
       (err: unknown, user: Express.User | false | null) => {
         if (err) return next(err);
         if (!user) {
-          return res.redirect(`${FRONTEND_URL}/login?error=github`);
+          return res.redirect(`${env.FRONTEND_URL}/login?error=github`);
         }
 
         const continueWithLogin = () => {
@@ -190,7 +190,7 @@ class AuthController {
             if (loginError) return next(loginError);
             req.session.save((saveError) => {
               if (saveError) return next(saveError);
-              return res.redirect(FRONTEND_URL);
+              return res.redirect(env.FRONTEND_URL);
             });
           });
         };

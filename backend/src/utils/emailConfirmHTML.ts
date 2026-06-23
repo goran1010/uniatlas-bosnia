@@ -1,4 +1,4 @@
-import { FRONTEND_URL } from "../config/env.js";
+import { env } from "../config/env.js";
 
 function emailConfirmHTML() {
   return `    <html>
@@ -23,7 +23,7 @@ function emailConfirmHTML() {
       </head>
       <body>
         <h1>Your email has been confirmed!</h1>
-        <p>You can now close this window and <a href="${FRONTEND_URL}/login">log in</a> to your account.</p>
+        <p>You can now close this window and <a href="${env.FRONTEND_URL}/login">log in</a> to your account.</p>
       </body>
     </html>
    `;

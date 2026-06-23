@@ -1,10 +1,10 @@
 import { app } from "./app.js";
-import { PORT } from "./config/env.js";
+import { env } from "./config/env.js";
 
-const server = app.listen(PORT, (error: unknown) => {
+const server = app.listen(env.PORT, (error: unknown) => {
   if (error) throw error;
   // eslint-disable-next-line no-console
-  console.log(`App started at port: ${PORT}`);
+  console.log(`App started at port: ${env.PORT}`);
 });
 
 let shuttingDown = false;

@@ -1,9 +1,9 @@
 import rateLimit from "express-rate-limit";
-import { NODE_ENV } from "../config/env.js";
+import { env } from "../config/env.js";
 const MINUTE = 60 * 1000;
 
 let testEnvironmentIncrease = 1;
-if (NODE_ENV === "test") {
+if (env.NODE_ENV === "test") {
   testEnvironmentIncrease = 100;
 }
 

@@ -3,11 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import bcrypt from "bcryptjs";
 import { usersModel } from "../models/usersModel.js";
-import {
-  GITHUB_CALLBACK_URL,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET,
-} from "./env.js";
+import { env } from "./env.js";
 import { sanitizeUser } from "#utils/sanitizeUser.js";
 
 import type { DoneCallback } from "passport";
@@ -43,9 +39,9 @@ interface GitHubProfile {
 passport.use(
   new GitHubStrategy(
     {
-      clientID: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: GITHUB_CALLBACK_URL,
+      clientID: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+      callbackURL: env.GITHUB_CALLBACK_URL,
       scope: ["user:email"],
     },
     async (

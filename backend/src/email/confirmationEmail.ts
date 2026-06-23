@@ -1,7 +1,7 @@
 import { Resend } from "resend";
-import { RESEND_API_KEY } from "../config/env.js";
+import { env } from "../config/env.js";
 
-const resend = new Resend(RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 async function sendConfirmationEmail(
   userEmail: string,

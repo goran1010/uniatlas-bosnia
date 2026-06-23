@@ -1,10 +1,17 @@
 import { vi, afterAll } from "vitest";
 import pg from "pg";
+import { env } from "#config/env.js";
+
+import type { Request, Response, NextFunction } from "express";
 
 const { Client } = pg;
 const dbName = `test_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
-const _adminUrl = new URL(process.env.TEST_DATABASE_URL);
+if (!env.TEST_DATABASE_URL) {
+  throw new Error("TEST_DATABASE_URL not found in environment variables.");
+}
+
+const _adminUrl = new URL(env.TEST_DATABASE_URL);
 _adminUrl.pathname = "/postgres";
 const _adminUrlStr = _adminUrl.toString();
 
@@ -15,12 +22,12 @@ await _createClient.query(
 );
 await _createClient.end();
 
-const _testDbUrl = new URL(process.env.TEST_DATABASE_URL);
+const _testDbUrl = new URL(env.TEST_DATABASE_URL);
 _testDbUrl.pathname = `/${dbName}`;
 process.env.TEST_DATABASE_URL = _testDbUrl.toString();
 
 afterAll(async () => {
-  const { prisma } = await import("../../db/prisma.js");
+  const { prisma } = await import("../../src/db/prisma.js");
   await prisma.$disconnect();
 
   const dropClient = new Client({ connectionString: _adminUrlStr });
@@ -50,7 +57,11 @@ vi.mock("csrf-sync", () => {
     ...originalModule,
     csrfSync: () => {
       return {
-        csrfSynchronisedProtection: (req, res, next) => {
+        csrfSynchronisedProtection: (
+          req: Request,
+          res: Response,
+          next: NextFunction,
+        ) => {
           next();
         },
         generateToken: () => {

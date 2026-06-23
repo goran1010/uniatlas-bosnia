@@ -2,17 +2,22 @@ import "dotenv/config.js";
 import pg from "pg";
 import { execSync } from "child_process";
 import path from "path";
+import { env } from "#config/env.js";
 
 const { Client } = pg;
 
 export default async function () {
   process.env.NODE_ENV = "test";
 
-  const adminUrl = new URL(process.env.TEST_DATABASE_URL);
+  if (!env.TEST_DATABASE_URL) {
+    throw new Error("TEST_DATABASE_URL not found in environment variables.");
+  }
+
+  const adminUrl = new URL(env.TEST_DATABASE_URL);
   adminUrl.pathname = "/postgres";
 
   const templateDbName = `test_template_${Date.now()}`;
-  const templateUrl = new URL(process.env.TEST_DATABASE_URL);
+  const templateUrl = new URL(env.TEST_DATABASE_URL);
   templateUrl.pathname = `/${templateDbName}`;
 
   const client = new Client({ connectionString: adminUrl.toString() });

@@ -1,10 +1,10 @@
 import "dotenv/config.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "#generated/prisma/client.js";
-import { DATABASE_URL, TEST_DATABASE_URL } from "#config/env.js";
+import { env } from "#config/env.js";
 
 const connectionString =
-  process.env["NODE_ENV"] === "test" ? TEST_DATABASE_URL : DATABASE_URL;
+  process.env["NODE_ENV"] === "test" ? env.TEST_DATABASE_URL : env.DATABASE_URL;
 
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });

@@ -1,10 +1,10 @@
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { prisma } from "../db/prisma.js";
-import { COOKIE_SECRET, NODE_ENV } from "./env.js";
+import { env } from "./env.js";
 
 const NUMBER_OF_DAYS = 30;
-const IS_PRODUCTION = NODE_ENV === "production";
+const IS_PRODUCTION = env.NODE_ENV === "production";
 
 const sessionMiddleware = expressSession({
   name: "sessionId",
@@ -16,7 +16,7 @@ const sessionMiddleware = expressSession({
     httpOnly: true,
     path: "/",
   },
-  secret: COOKIE_SECRET,
+  secret: env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new PrismaSessionStore(prisma, {
