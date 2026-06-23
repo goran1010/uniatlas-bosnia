@@ -22,8 +22,8 @@ vi.mock("passport", () => ({
 
 vi.mock("passport-local", () => ({
   Strategy: class LocalStrategy {
+    name = "local";
     constructor(options, verify) {
-      this.name = "local";
       this.options = options;
       this._verify = verify;
     }
@@ -32,8 +32,8 @@ vi.mock("passport-local", () => ({
 
 vi.mock("passport-github2", () => ({
   Strategy: class GitHubStrategy {
+    name = "github";
     constructor(options, verify) {
-      this.name = "github";
       this.options = options;
       this._verify = verify;
     }
@@ -224,7 +224,7 @@ describe("passport config", () => {
       .mockImplementationOnce(() => {
         throw new Error("done explode");
       })
-      .mockImplementation(() => {});
+      .mockImplementation(() => vi.fn());
 
     serializeUser({ id: 42 }, done);
 

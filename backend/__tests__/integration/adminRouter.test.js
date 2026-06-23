@@ -9,9 +9,8 @@ import { universitiesModel } from "../../models/universitiesModel.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    // eslint-disable-next-line no-unused-vars
-    const { ["confirm-password"]: confirmPassword, ...userRequested } =
-      createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUser({ role: "ADMIN" });
+    delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);
 
@@ -47,9 +46,8 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
 describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
   test("Responds with status 200 if role ADMIN", async () => {
-    // eslint-disable-next-line no-unused-vars
-    const { ["confirm-password"]: confirmPassword, ...userRequested } =
-      createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUser({ role: "ADMIN" });
+    delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);
 
@@ -88,9 +86,8 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
 describe("Admin Router - POST /users/admin/approve-pending-change", () => {
   test("Responds with status 200 and message if a pending change is approved successfully", async () => {
-    // eslint-disable-next-line no-unused-vars
-    const { ["confirm-password"]: confirmPassword, ...userRequested } =
-      createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUser({ role: "ADMIN" });
+    delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);
 

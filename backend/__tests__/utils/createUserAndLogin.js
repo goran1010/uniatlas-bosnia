@@ -1,4 +1,4 @@
-import { createNewUser } from "./createNewUser";
+import { createNewUser } from "./createNewUser.js";
 import { usersModel } from "../../models/usersModel.js";
 import { pendingUserModel } from "../../models/pendingUsersModel.js";
 

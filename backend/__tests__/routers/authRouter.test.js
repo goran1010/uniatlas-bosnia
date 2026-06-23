@@ -148,7 +148,7 @@ describe("GET /auth/confirm/:token", () => {
   });
 
   test("responds with status 400 and message for invalid token", async () => {
-    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(console, "error").mockImplementation(() => vi.fn());
 
     const response = await request(app).get("/auth/confirm/12345");
     const expectedResponse = {
