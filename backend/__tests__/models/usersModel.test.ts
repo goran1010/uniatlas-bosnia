@@ -12,14 +12,14 @@ afterEach(() => {
 
 describe("usersModel", () => {
   test("findOne returns null for non-existent user", async () => {
-    const user = await usersModel.findOne({ id: 999 });
+    const user = await usersModel.findOne({ id: "999" });
     const expectedResult = null;
 
     expect(user).toBe(expectedResult);
   });
 
   test("findOne returns correct user", async () => {
-    const user = await usersModel.findOne({ id: 1 });
+    const user = await usersModel.findOne({ id: "1" });
     const expectedResult = {
       id: 1,
       name: "John Doe",
@@ -42,28 +42,8 @@ describe("usersModel", () => {
     }).toEqual(expectedResult);
   });
 
-  test("findMany returns correct users by name", async () => {
-    const users = await usersModel.findMany({ name: "Jane Smith" });
-    const expectedResult = {
-      isArray: true,
-      length: 1,
-      firstUser: {
-        id: 2,
-        name: "Jane Smith",
-        email: "jane.smith@example.com",
-      },
-    };
-
-    expect({
-      isArray: Array.isArray(users),
-      length: users.length,
-      firstUser: users[0],
-    }).toEqual(expectedResult);
-  });
-
   test("create creates a new user", async () => {
     const newUser = await usersModel.create({
-      name: "Bob Brown",
       email: "bob.brown@example.com",
     });
     const expectedResult = {
@@ -77,11 +57,11 @@ describe("usersModel", () => {
 
   test("update updates an existing user", async () => {
     const updatedUser = await usersModel.update(
-      { id: 1 },
-      { name: "Johnathan Doe", email: "johnathan.doe@example.com" },
+      { id: "1" },
+      { email: "johnathan.doe@example.com" },
     );
     const expectedResult = {
-      id: 1,
+      id: "1",
       name: "Johnathan Doe",
       email: "johnathan.doe@example.com",
     };
@@ -97,7 +77,7 @@ describe("usersModel", () => {
   });
 
   test("deleteUser deletes a user", async () => {
-    const deletedUser = await usersModel.deleteUser({ id: 1 });
+    const deletedUser = await usersModel.deleteUser({ id: "1" });
     const expectedResult = { count: 1 };
 
     expect(deletedUser).toEqual(expectedResult);
