@@ -41,9 +41,11 @@ class Env {
 
   static #getTestEnv(name: string): string | undefined {
     if (process.env["NODE_ENV"] === "test") {
-      throw new Error(
-        `Missing environment variable for test environment: ${name}`,
-      );
+      if (!process.env[name]) {
+        throw new Error(
+          `Missing environment variable for test environment: ${name}`,
+        );
+      }
     }
     return process.env[name];
   }

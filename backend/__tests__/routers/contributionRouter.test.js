@@ -1,11 +1,11 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { pendingChangesUniversityModel } from "../../models/pendingChangesUniversityModel.js";
-import { app } from "../../app.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { app } from "../../src/app.js";
 
 let mockedUser = null;
 
-vi.mock("../../auth/isAuthenticated.js", () => {
+vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req, res, next) => {
       req.user = mockedUser;
@@ -165,13 +165,11 @@ describe("PUT /users/contribution/universities", () => {
     };
     const agent = request.agent(app);
 
-    const response = await agent
-      .put("/users/contribution/universities")
-      .send({
-        entityType: "UNIVERSITY",
-        targetId: 1,
-        data: { name: "Updated Name" },
-      });
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 1,
+      data: { name: "Updated Name" },
+    });
     const expectedResponseData = {
       status: 201,
       body: {

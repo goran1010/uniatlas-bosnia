@@ -1,9 +1,9 @@
-import { createNewUser } from "./createNewUser.js";
-import { usersModel } from "../../models/usersModel.js";
-import { pendingUserModel } from "../../models/pendingUsersModel.js";
+import { createNewUserInput } from "./createNewUserInput.js";
+import { usersModel } from "../../src/models/usersModel.js";
+import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
 async function createAndLoginUser(agent, newUser) {
-  const userData = createNewUser(newUser);
+  const userData = createNewUserInput(newUser);
 
   if (!agent) throw new Error("Agent is required to create and login user.");
 

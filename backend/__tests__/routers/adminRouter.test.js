@@ -1,12 +1,12 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { app } from "../../app.js";
-import { pendingChangesUniversityModel } from "../../models/pendingChangesUniversityModel.js";
-import { transactionModel } from "../../models/transactionModel.js";
+import { app } from "../../src/app.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { transactionModel } from "../../src/models/transactionModel.js";
 
 let mockedUser = null;
 
-vi.mock("../../auth/isAuthenticated.js", () => {
+vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req, res, next) => {
       req.user = mockedUser;

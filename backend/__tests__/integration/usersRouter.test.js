@@ -1,8 +1,8 @@
 import request from "supertest";
 import { describe, test, expect } from "vitest";
-import { app } from "../../app.js";
+import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
-import { createNewUser } from "../utils/createNewUser.js";
+import { createNewUserInput } from "../utils/createNewUserInput.js";
 
 describe("usersRouter", () => {
   test("successfully create a user and returns status 201 and message", async () => {
@@ -14,7 +14,7 @@ describe("usersRouter", () => {
       },
     };
 
-    const newUserData = createNewUser();
+    const newUserData = createNewUserInput();
 
     const response = await request(app).post("/auth/signup").send(newUserData);
 
@@ -23,7 +23,7 @@ describe("usersRouter", () => {
 
   test("responds with 200 and User test_user logged in successfully for correct login input", async () => {
     const agent = request.agent(app);
-    const newUserData = createNewUser();
+    const newUserData = createNewUserInput();
 
     const response = await createAndLoginUser(agent, newUserData);
     const expectedResponse = {
@@ -38,7 +38,7 @@ describe("usersRouter", () => {
 
   test("responds User logged out successfully", async () => {
     const agent = request.agent(app);
-    const userData = createNewUser();
+    const userData = createNewUserInput();
     await createAndLoginUser(agent, userData);
 
     const response = await agent.post("/users/logout");

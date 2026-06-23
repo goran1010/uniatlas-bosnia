@@ -1,18 +1,18 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
-import { app } from "../../app.js";
-import { emailConfirmHTML } from "../../utils/emailConfirmHTML.js";
-import { createNewUser } from "../utils/createNewUser.js";
-import { usersModel } from "../../models/usersModel.js";
-import { sendConfirmationEmail } from "../../email/confirmationEmail.js";
+import { app } from "../../src/app.js";
+import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
+import { createNewUserInput } from "../utils/createNewUserInput.js";
+import { usersModel } from "../../src/models/usersModel.js";
+import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
-import { sanitizeUser } from "../../utils/sanitizeUser.js";
-import { pendingUserModel } from "../../models/pendingUsersModel.js";
+import { sanitizeUser } from "../../src/utils/sanitizeUser.js";
+import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
 const isAuthenticatedMock = vi.fn();
 
-vi.mock("../../auth/isAuthenticated.js", () => ({
+vi.mock("../../src/auth/isAuthenticated.js", () => ({
   isAuthenticated: (req, res, next) => isAuthenticatedMock(req, res, next),
 }));
 
@@ -28,7 +28,7 @@ beforeEach(() => {
 
 describe("POST /auth/signup", () => {
   test("responds with status 400 and message for incorrect password input", async () => {
-    const newUser = createNewUser({
+    const newUser = createNewUserInput({
       password: "123",
       "confirm-password": "123",
     });
@@ -54,7 +54,7 @@ describe("POST /auth/signup", () => {
   });
 
   test("responds with status 400 and message for incorrect confirm-password input", async () => {
-    const newUser = createNewUser({
+    const newUser = createNewUserInput({
       "confirm-password": "123",
     });
 
@@ -78,7 +78,7 @@ describe("POST /auth/signup", () => {
   });
 
   test("successfully create a user and returns status 201 and message", async () => {
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
     const createdUser = {
       id: "mock-user-id",
       email: newUser.email,
@@ -107,7 +107,7 @@ describe("POST /auth/signup", () => {
   });
 
   test("responds with generic 400 error if given email exists", async () => {
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce({
       email: newUser.email,
     });
@@ -198,7 +198,7 @@ describe("GET /auth/confirm/:token", () => {
 
 describe("POST /auth/login", () => {
   test("responds with Incorrect email for wrong input", async () => {
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
 
     const responseData = {
       error: {
@@ -220,7 +220,7 @@ describe("POST /auth/login", () => {
   });
 
   test("responds with User test_user logged in successfully for correct input", async () => {
-    const newUser = createNewUser({ isEmailConfirmed: true });
+    const newUser = createNewUserInput({ isEmailConfirmed: true });
 
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(newUser);
     vi.spyOn(bcrypt, "compare").mockResolvedValueOnce(true);

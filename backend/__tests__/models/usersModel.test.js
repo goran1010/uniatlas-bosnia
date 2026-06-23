@@ -1,4 +1,4 @@
-import { usersModel } from "../../models/usersModel.js";
+import { usersModel } from "../../src/models/usersModel.js";
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { prismaUsersModelSpyOnMock } from "./utils/prismaUsersModelSpyOnMocks.js";
 

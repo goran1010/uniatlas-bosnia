@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../../app.js";
+import { app } from "../../src/app.js";
 import { describe, test, expect } from "vitest";
 
 describe("CSRF Router", () => {

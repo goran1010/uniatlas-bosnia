@@ -1,7 +1,7 @@
 import request from "supertest";
-import { app } from "../../app.js";
+import { app } from "../../src/app.js";
 import { describe, test, expect } from "vitest";
-import { universitiesModel } from "../../models/universitiesModel.js";
+import { universitiesModel } from "../../src/models/universitiesModel.js";
 
 describe("GET /", () => {
   test("responds with status 200 when LIVE", async () => {

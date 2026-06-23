@@ -1,13 +1,13 @@
 import request from "supertest";
 import { describe, test, expect } from "vitest";
-import { app } from "../../app.js";
-import { createNewUser } from "../utils/createNewUser.js";
-import { emailConfirmHTML } from "../../utils/emailConfirmHTML.js";
-import { pendingUserModel } from "../../models/pendingUsersModel.js";
+import { app } from "../../src/app.js";
+import { createNewUserInput } from "../utils/createNewUserInput.js";
+import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
+import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
 describe("Auth Router - POST /auth/signup", () => {
   test("responds with status 201 and Registration successful! Check your email message if user created successfully", async () => {
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
 
     const expectedResponse = {
       status: 201,
@@ -25,7 +25,7 @@ describe("Auth Router - POST /auth/signup", () => {
 describe("Auth Router - GET /auth/confirm/:token", () => {
   test("responds with status 200 and Email confirmed successfully message if token is valid", async () => {
     const agent = request.agent(app);
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
     await agent.post("/auth/signup").send(newUser);
 
     const users = await pendingUserModel.findMany({
@@ -46,7 +46,7 @@ describe("Auth Router - GET /auth/confirm/:token", () => {
 describe("Auth Router - POST /auth/login", () => {
   test("responds with status 200 and access token if login is successful", async () => {
     const agent = request.agent(app);
-    const newUser = createNewUser();
+    const newUser = createNewUserInput();
     await agent.post("/auth/signup").send(newUser);
 
     const users = await pendingUserModel.findMany({

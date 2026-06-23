@@ -1,15 +1,15 @@
 import request from "supertest";
 import { describe, test, expect } from "vitest";
-import { app } from "../../app.js";
+import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
-import { createNewUser } from "../utils/createNewUser.js";
-import { usersModel } from "../../models/usersModel.js";
-import { pendingChangesUniversityModel } from "../../models/pendingChangesUniversityModel.js";
-import { universitiesModel } from "../../models/universitiesModel.js";
+import { createNewUserInput } from "../utils/createNewUserInput.js";
+import { usersModel } from "../../src/models/usersModel.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { universitiesModel } from "../../src/models/universitiesModel.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    const userRequested = createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUserInput({ role: "ADMIN" });
     delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);
@@ -46,7 +46,7 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
 describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
   test("Responds with status 200 if role ADMIN", async () => {
-    const userRequested = createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUserInput({ role: "ADMIN" });
     delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);
@@ -86,7 +86,7 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
 describe("Admin Router - POST /users/admin/approve-pending-change", () => {
   test("Responds with status 200 and message if a pending change is approved successfully", async () => {
-    const userRequested = createNewUser({ role: "ADMIN" });
+    const userRequested = createNewUserInput({ role: "ADMIN" });
     delete userRequested["confirm-password"];
 
     const userInDb = await usersModel.create(userRequested);

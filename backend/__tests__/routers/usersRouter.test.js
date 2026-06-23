@@ -1,11 +1,11 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { createNewUser } from "../utils/createNewUser.js";
-import { app } from "../../app.js";
+import { createNewUserInput } from "../utils/createNewUserInput";
+import { app } from "../../src/app.js";
 
 let mockedUser = null;
 
-vi.mock("../../auth/isAuthenticated.js", () => {
+vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req, res, next) => {
       req.user = mockedUser;
@@ -43,7 +43,7 @@ describe("GET /me", () => {
 
 describe("POST /logout", () => {
   test("responds User logged out successfully", async () => {
-    const user = createNewUser();
+    const user = createNewUserInput();
     mockedUser = user;
 
     const response = await request(app).post("/users/logout");

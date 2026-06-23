@@ -1,4 +1,4 @@
-import { prisma } from "../../../db/prisma.js";
+import { prisma } from "../../../src/db/prisma.js";
 import { vi } from "vitest";
 
 function prismaPostalCodesSpyOnMock() {

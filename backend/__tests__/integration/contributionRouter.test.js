@@ -1,9 +1,9 @@
 import request from "supertest";
 import { describe, test, expect } from "vitest";
-import { app } from "../../app.js";
+import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
-import { pendingChangesUniversityModel } from "../../models/pendingChangesUniversityModel.js";
-import { usersModel } from "../../models/usersModel.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { usersModel } from "../../src/models/usersModel.js";
 
 describe("Contributor Router - POST /users/contribution/universities", () => {
   test("Responds with status 201 and message if suggestion created successfully", async () => {
