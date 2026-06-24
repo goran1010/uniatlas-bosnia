@@ -77,9 +77,17 @@ class AuthController {
   async confirmEmail(req: Request, res: Response) {
     try {
       const { token } = matchedData(req);
+      if (!token || typeof token !== "string") {
+        sendError(res, {
+          status: 400,
+          message:
+            "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
+        });
+        return;
+      }
 
       const pendingUsers = await pendingUserModel.findMany({ token });
-      const pendingUser = pendingUsers?.[0];
+      const pendingUser = pendingUsers[0];
 
       if (!pendingUser) {
         sendError(res, {

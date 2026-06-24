@@ -4,7 +4,7 @@ import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { usersModel } from "../../src/models/usersModel.js";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
+import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
 import { universitiesModel } from "../../src/models/universitiesModel.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
@@ -14,7 +14,7 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
     const userInDb = await usersModel.create(userRequested);
 
-    const pendingChange = await pendingChangesUniversityModel.create({
+    const pendingChange = await pendingChangesModel.create({
       userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
@@ -39,7 +39,7 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
 
-    await pendingChangesUniversityModel.delete({ id: pendingChange.id });
+    await pendingChangesModel.delete({ id: pendingChange.id });
     await usersModel.deleteUser({ id: userInDb.id });
   });
 });
@@ -51,7 +51,7 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
     const userInDb = await usersModel.create(userRequested);
 
-    const pendingChange = await pendingChangesUniversityModel.create({
+    const pendingChange = await pendingChangesModel.create({
       userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
@@ -98,7 +98,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       ownership: "JAVNA",
     });
 
-    const pendingChange = await pendingChangesUniversityModel.create({
+    const pendingChange = await pendingChangesModel.create({
       userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "DELETE",

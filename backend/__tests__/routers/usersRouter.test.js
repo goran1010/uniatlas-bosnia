@@ -1,6 +1,17 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { createNewUserInput } from "../utils/createNewUserInput";
+
+vi.mock("../../src/config/sessionMiddleware.js", () => ({
+  sessionMiddleware: (req, _res, next) => {
+    req.session ??= {};
+    req.session.destroy ??= (done) => done?.(null);
+    req.session.regenerate ??= (done) => done?.(null);
+    req.session.save ??= (done) => done?.(null);
+    next();
+  },
+}));
+
 import { app } from "../../src/app.js";
 
 let mockedUser = null;

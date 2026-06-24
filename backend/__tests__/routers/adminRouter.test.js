@@ -1,7 +1,7 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { app } from "../../src/app.js";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
+import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
 import { transactionModel } from "../../src/models/transactionModel.js";
 
 let mockedUser = null;
@@ -67,7 +67,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
   });
 
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    vi.spyOn(pendingChangesUniversityModel, "findMany").mockResolvedValueOnce([
+    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValueOnce([
       {
         id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
         entityType: "UNIVERSITY",
@@ -145,7 +145,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
   });
 
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    vi.spyOn(pendingChangesUniversityModel, "delete").mockResolvedValueOnce(
+    vi.spyOn(pendingChangesModel, "delete").mockResolvedValueOnce(
       "Successfully deleted pending change",
     );
 

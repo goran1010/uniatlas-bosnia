@@ -68,14 +68,21 @@ app.use((_req, res) => {
   });
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  logger.error(err);
+app.use(
+  (
+    err: Error & { status?: number },
+    _req: Request,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _next: NextFunction,
+  ) => {
+    logger.error(err);
 
-  return sendError(res, {
-    status: 500,
-    message: "Server error: please try again later.",
-  });
-});
+    return sendError(res, {
+      status: err?.status || 500,
+      message: "Server error: please try again later.",
+    });
+  },
+);
 
 export { app };

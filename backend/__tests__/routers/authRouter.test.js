@@ -1,5 +1,15 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
+
+vi.mock("../../src/config/sessionMiddleware.js", () => ({
+  sessionMiddleware: (req, _res, next) => {
+    req.session ??= {};
+    req.session.regenerate ??= (done) => done?.(null);
+    req.session.save ??= (done) => done?.(null);
+    next();
+  },
+}));
+
 import { app } from "../../src/app.js";
 import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
@@ -17,7 +27,7 @@ vi.mock("../../src/auth/isAuthenticated.js", () => ({
 }));
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  vi.clearAllMocks();
   vi.restoreAllMocks();
   // Set default behavior
   isAuthenticatedMock.mockImplementation((req, res, next) => {
@@ -87,6 +97,15 @@ describe("POST /auth/signup", () => {
       requestedContributor: false,
       password: "hashed-password",
     };
+    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(null);
+    vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([]);
+    vi.spyOn(pendingUserModel, "create").mockResolvedValueOnce({
+      id: "mock-pending-user-id",
+      email: newUser.email,
+      password: "hashed-password",
+      token: "mock-token",
+      expiresAt: new Date(Date.now() + 60 * 60 * 1000),
+    });
     vi.spyOn(usersModel, "create").mockResolvedValueOnce(
       sanitizeUser(createdUser),
     );
@@ -149,6 +168,7 @@ describe("GET /auth/confirm/:token", () => {
 
   test("responds with status 400 and message for invalid token", async () => {
     vi.spyOn(console, "error").mockImplementation(() => vi.fn());
+    vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([]);
 
     const response = await request(app).get("/auth/confirm/12345");
     const expectedResponse = {
@@ -199,6 +219,7 @@ describe("GET /auth/confirm/:token", () => {
 describe("POST /auth/login", () => {
   test("responds with Incorrect email for wrong input", async () => {
     const newUser = createNewUserInput();
+    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(null);
 
     const responseData = {
       error: {

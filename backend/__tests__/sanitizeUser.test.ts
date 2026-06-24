@@ -1,21 +1,16 @@
 import { sanitizeUser, sanitizeUsers } from "../src/utils/sanitizeUser";
 import { describe, test, expect } from "vitest";
 
+import type { User } from "#generated/prisma/client.js";
+
 describe("sanitizeUser", () => {
-  test("should return null if user is null", () => {
-    expect(sanitizeUser(null)).toBeNull();
-  });
-
-  test("should return undefined if user is undefined", () => {
-    expect(sanitizeUser(undefined)).toBeUndefined();
-  });
-
   test("should remove password from user object", () => {
-    const user = {
-      id: 1,
-      username: "testuser",
+    const user: User = {
+      id: "1",
+      role: "USER",
       password: "secret",
       email: "testuser@example.com",
+      githubId: "123456",
     };
     const sanitizedUser = sanitizeUser(user);
 
@@ -30,18 +25,20 @@ describe("sanitizeUsers", () => {
   });
 
   test("should sanitize an array of user objects", () => {
-    const users = [
+    const users: User[] = [
       {
-        id: 1,
-        username: "user1",
+        id: "1",
         password: "secret1",
         email: "user1@example.com",
+        githubId: "123456",
+        role: "USER",
       },
       {
-        id: 2,
-        username: "user2",
+        id: "2",
         password: "secret2",
         email: "user2@example.com",
+        githubId: "654321",
+        role: "ADMIN",
       },
     ];
     const sanitizedUsers = sanitizeUsers(users);

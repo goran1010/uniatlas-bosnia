@@ -1,6 +1,6 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
+import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
 import { app } from "../../src/app.js";
 
 let mockedUser = null;
@@ -76,9 +76,7 @@ describe("POST /users/contribution/universities", () => {
         ownership: "JAVNA",
       },
     };
-    vi.spyOn(pendingChangesUniversityModel, "create").mockResolvedValue(
-      mockResult,
-    );
+    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
 
     mockedUser = {
       id: 1,
@@ -154,9 +152,7 @@ describe("PUT /users/contribution/universities", () => {
       targetId: 1,
       data: { name: "Updated Name" },
     };
-    vi.spyOn(pendingChangesUniversityModel, "create").mockResolvedValue(
-      mockResult,
-    );
+    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
 
     mockedUser = {
       id: 1,
@@ -230,9 +226,7 @@ describe("DELETE /users/contribution/universities", () => {
       targetId: 1,
       data: {},
     };
-    vi.spyOn(pendingChangesUniversityModel, "create").mockResolvedValue(
-      mockResult,
-    );
+    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
 
     const agent = request.agent(app);
     mockedUser = {
@@ -285,9 +279,7 @@ describe("GET /users/contribution/pending-changes/universities", () => {
       },
     ];
 
-    vi.spyOn(pendingChangesUniversityModel, "findMany").mockResolvedValue(
-      pendingChanges,
-    );
+    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValue(pendingChanges);
 
     mockedUser = {
       id: 1,
@@ -340,12 +332,10 @@ describe("DELETE /users/contribution/pending-changes/universities", () => {
       data: { name: "TestCity University" },
     };
 
-    vi.spyOn(pendingChangesUniversityModel, "findMany").mockResolvedValue([
+    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValue([
       pendingChange,
     ]);
-    vi.spyOn(pendingChangesUniversityModel, "delete").mockResolvedValue(
-      pendingChange,
-    );
+    vi.spyOn(pendingChangesModel, "delete").mockResolvedValue(pendingChange);
 
     mockedUser = {
       id: "1",
