@@ -28,7 +28,7 @@ _testDbUrl.pathname = `/${dbName}`;
 env.TEST_DATABASE_URL = _testDbUrl.toString();
 
 afterAll(async () => {
-  const { prisma } = await import("../../db/prisma.js");
+  const { prisma } = await import("../../src/db/prisma.js");
   await prisma.$disconnect();
 
   const dropClient = new Client({ connectionString: _adminUrlStr });
@@ -37,7 +37,7 @@ afterAll(async () => {
   await dropClient.end();
 });
 
-vi.mock("../../email/confirmationEmail.js", () => ({
+vi.mock("../../src/email/confirmationEmail.js", () => ({
   sendConfirmationEmail: vi.fn(async () => {
     return { success: true };
   }),

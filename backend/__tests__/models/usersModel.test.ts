@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { prismaUsersModelSpyOnMock } from "./utils/prismaUsersModelSpyOnMocks.js";
 
-const { usersModel } = await import("../../models/usersModel.js");
+const { usersModel } = await import("../../src/models/usersModel.js");
 
 beforeEach(() => {
   prismaUsersModelSpyOnMock();

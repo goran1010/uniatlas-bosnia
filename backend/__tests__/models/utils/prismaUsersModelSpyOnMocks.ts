@@ -70,7 +70,7 @@ const deleteManyMock = vi.fn().mockImplementation(async (args) => {
   return { count: 1 };
 });
 
-vi.mock("../../../db/prisma.js", () => {
+vi.mock("../../../src/db/prisma.js", () => {
   return {
     prisma: {
       $disconnect: disconnectMock,

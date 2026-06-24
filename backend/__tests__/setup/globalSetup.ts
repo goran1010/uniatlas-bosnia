@@ -25,7 +25,7 @@ export default async function () {
   await client.query(`CREATE DATABASE "${templateDbName}"`);
   await client.end();
 
-  const backendRoot = path.resolve(import.meta.dirname, "../../..");
+  const backendRoot = path.resolve(import.meta.dirname, "../..");
   const prismaRoot = path.resolve(backendRoot, "src");
 
   execSync("npx prisma migrate deploy", {
