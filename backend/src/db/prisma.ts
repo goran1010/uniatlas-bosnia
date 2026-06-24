@@ -6,7 +6,6 @@ import { env } from "#config/env.js";
 const connectionString =
   process.env["NODE_ENV"] === "test" ? env.TEST_DATABASE_URL : env.DATABASE_URL;
 
-console.log("Using database connection string:", connectionString);
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
