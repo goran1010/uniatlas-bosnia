@@ -4,7 +4,7 @@ import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { usersModel } from "../../src/models/usersModel.js";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
 import { universitiesModel } from "../../src/models/universitiesModel.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {

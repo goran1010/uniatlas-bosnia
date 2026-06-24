@@ -2,7 +2,7 @@ import request from "supertest";
 import { describe, test, expect } from "vitest";
 import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
 import { usersModel } from "../../src/models/usersModel.js";
 
 describe("Contributor Router - POST /users/contribution/universities", () => {

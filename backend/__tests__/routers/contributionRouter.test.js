@@ -1,6 +1,6 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { pendingChangesUniversityModel } from "../../src/models/pendingChangesUniversityModel.js";
+import { pendingChangesUniversityModel } from "../../src/models/pendingChangesModel.js";
 import { app } from "../../src/app.js";
 
 let mockedUser = null;

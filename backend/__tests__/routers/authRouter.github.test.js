@@ -1,7 +1,7 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 
-vi.mock("../../config/passport.js", async (importOriginal) => {
+vi.mock("../../src/config/passport.js", async (importOriginal) => {
   const actual = await importOriginal();
 
   actual.passport.authenticate = vi.fn(() => (req, res, next) => next());
@@ -9,8 +9,8 @@ vi.mock("../../config/passport.js", async (importOriginal) => {
   return actual;
 });
 
-const { app } = await import("../../app.js");
-const { passport } = await import("../../config/passport.js");
+const { app } = await import("../../src/app.js");
+const { passport } = await import("../../src/config/passport.js");
 
 beforeEach(() => {
   vi.clearAllMocks();
