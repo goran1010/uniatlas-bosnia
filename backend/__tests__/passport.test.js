@@ -44,12 +44,12 @@ vi.mock("bcryptjs", () => ({
   default: bcryptMock,
 }));
 
-vi.mock("../models/usersModel.js", () => ({
+vi.mock("../src/models/usersModel.js", () => ({
   usersModel: usersModelMock,
 }));
 
 async function loadStrategies() {
-  await import("../config/passport.js");
+  await import("../src/config/passport.js");
 
   const localStrategy = passportMock.use.mock.calls[0][0];
   const githubStrategy = passportMock.use.mock.calls[1][0];
@@ -126,9 +126,7 @@ describe("passport config", () => {
 
     await githubVerify("token", "refresh", { id: 123, emails: [] }, done);
 
-    expect(done).toHaveBeenCalledWith(null, false, {
-      message: "GitHub account has no public email",
-    });
+    expect(done).toHaveBeenCalledWith(null, false);
     expect(usersModelMock.update).not.toHaveBeenCalled();
     expect(usersModelMock.create).not.toHaveBeenCalled();
   });

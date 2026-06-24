@@ -1,25 +1,16 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 
 describe("process.env variable missing or undefined", () => {
-  test("envCheck should throw an error if process.env.FRONTEND_URL is missing", async () => {
-    const { envCheck } = await import("../config/env.js");
+  test("envCheck should throw an error if process.env.DATABASE_URL is missing", async () => {
+    const originalDatabaseUrl = process.env.DATABASE_URL;
 
-    const validEnv = {
-      DATABASE_URL: "postgres://database",
-      FRONTEND_URL: undefined,
-      BACKEND_URL: "http://localhost:3000",
-      PORT: "3000",
-      RESEND_API_KEY: "resend-key",
-      COOKIE_SECRET: "cookie-secret",
-      NODE_ENV: "test",
-      GITHUB_CLIENT_ID: "github-client-id",
-      GITHUB_CLIENT_SECRET: "github-client-secret",
-      GITHUB_CALLBACK_URL: "http://localhost:3000/auth/github/callback",
-      TEST_DATABASE_URL: "postgres://test-database",
-    };
+    delete process.env.DATABASE_URL;
+    vi.resetModules();
 
-    expect(() => envCheck(validEnv)).toThrow(
-      /Missing required environment variables?: FRONTEND_URL/i,
+    await expect(import("../src/config/env.js")).rejects.toThrowError(
+      "Missing environment variable: DATABASE_URL",
     );
+
+    process.env.DATABASE_URL = originalDatabaseUrl;
   });
 });

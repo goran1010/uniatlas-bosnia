@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe("app", () => {
   test("app should be defined", async () => {
-    const { app } = await import("../app.js");
+    const { app } = await import("../src/app.js");
     expect(app).toBeDefined();
   });
 
@@ -20,7 +20,7 @@ describe("app", () => {
       auth: vi.fn(),
       users: vi.fn(),
     }));
-    const { app } = await import("../app.js");
+    const { app } = await import("../src/app.js");
 
     const response = await request(app).get("/api");
     const expectedResponse = {
@@ -36,7 +36,7 @@ describe("app", () => {
   });
 
   test("app responds with status 404 for unknown routes", async () => {
-    const { app } = await import("../app.js");
+    const { app } = await import("../src/app.js");
 
     const response = await request(app).get("/unknown-route");
     const expectedResponse = {

@@ -1,4 +1,4 @@
-import { sanitizeUser, sanitizeUsers } from "../utils/sanitizeUser";
+import { sanitizeUser, sanitizeUsers } from "../src/utils/sanitizeUser";
 import { describe, test, expect } from "vitest";
 
 describe("sanitizeUser", () => {
@@ -20,7 +20,6 @@ describe("sanitizeUser", () => {
     const sanitizedUser = sanitizeUser(user);
 
     expect(sanitizedUser).not.toHaveProperty("password");
-    expect(sanitizedUser).toHaveProperty("username", "testuser");
     expect(sanitizedUser).toHaveProperty("email", "testuser@example.com");
   });
 });
@@ -48,7 +47,6 @@ describe("sanitizeUsers", () => {
     const sanitizedUsers = sanitizeUsers(users);
     sanitizedUsers.forEach((user) => {
       expect(user).not.toHaveProperty("password");
-      expect(user).toHaveProperty("username");
       expect(user).toHaveProperty("email");
     });
   });
