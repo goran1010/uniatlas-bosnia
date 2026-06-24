@@ -2,11 +2,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    globalSetup: "./__tests__/setup/globalSetup.ts",
-    setupFiles: "./__tests__/setup/setup.ts",
+    globalSetup: "./src/__tests__/setup/globalSetup.ts",
+    setupFiles: "./src/__tests__/setup/setup.ts",
     coverage: {
       exclude: [
-        "__tests__/**",
+        "./src/__tests__/**",
         "vitest.config.ts",
         "node_modules/**",
         "generated/**",

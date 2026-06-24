@@ -1,8 +1,9 @@
+import "dotenv/config";
 import { vi, afterAll } from "vitest";
 import pg from "pg";
-import { env } from "#config/env.js";
 
 import type { Request, Response, NextFunction } from "express";
+import { env } from "#config/env.js";
 
 const { Client } = pg;
 const dbName = `test_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -18,16 +19,16 @@ const _adminUrlStr = _adminUrl.toString();
 const _createClient = new Client({ connectionString: _adminUrlStr });
 await _createClient.connect();
 await _createClient.query(
-  `CREATE DATABASE "${dbName}" TEMPLATE "${process.env.TEST_DB_TEMPLATE}"`,
+  `CREATE DATABASE "${dbName}" TEMPLATE "${process.env["TEST_DB_TEMPLATE"]}"`,
 );
 await _createClient.end();
 
 const _testDbUrl = new URL(env.TEST_DATABASE_URL);
 _testDbUrl.pathname = `/${dbName}`;
-process.env.TEST_DATABASE_URL = _testDbUrl.toString();
+env.TEST_DATABASE_URL = _testDbUrl.toString();
 
 afterAll(async () => {
-  const { prisma } = await import("../../src/db/prisma.js");
+  const { prisma } = await import("../../db/prisma.js");
   await prisma.$disconnect();
 
   const dropClient = new Client({ connectionString: _adminUrlStr });
@@ -58,8 +59,8 @@ vi.mock("csrf-sync", () => {
     csrfSync: () => {
       return {
         csrfSynchronisedProtection: (
-          req: Request,
-          res: Response,
+          _req: Request,
+          _res: Response,
           next: NextFunction,
         ) => {
           next();

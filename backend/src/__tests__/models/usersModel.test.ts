@@ -1,6 +1,7 @@
-import { usersModel } from "../../src/models/usersModel.js";
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { prismaUsersModelSpyOnMock } from "./utils/prismaUsersModelSpyOnMocks.js";
+
+const { usersModel } = await import("../../models/usersModel.js");
 
 beforeEach(() => {
   prismaUsersModelSpyOnMock();
@@ -21,9 +22,11 @@ describe("usersModel", () => {
   test("findOne returns correct user", async () => {
     const user = await usersModel.findOne({ id: "1" });
     const expectedResult = {
-      id: 1,
-      name: "John Doe",
+      id: "1",
       email: "john.doe@example.com",
+      githubId: "123",
+      password: null,
+      role: "USER",
     };
 
     expect(user).toEqual(expectedResult);
@@ -47,9 +50,11 @@ describe("usersModel", () => {
       email: "bob.brown@example.com",
     });
     const expectedResult = {
-      id: 4,
-      name: "Bob Brown",
+      id: "4",
       email: "bob.brown@example.com",
+      githubId: null,
+      password: null,
+      role: "USER",
     };
 
     expect(newUser).toEqual(expectedResult);
@@ -62,8 +67,10 @@ describe("usersModel", () => {
     );
     const expectedResult = {
       id: "1",
-      name: "Johnathan Doe",
       email: "johnathan.doe@example.com",
+      githubId: "updatedGithubId",
+      password: null,
+      role: "USER",
     };
 
     expect(updatedUser).toEqual(expectedResult);

@@ -5,11 +5,11 @@ class Env {
   public readonly PORT: number;
   public readonly RESEND_API_KEY: string;
   public readonly COOKIE_SECRET: string;
-  public readonly NODE_ENV: "development" | "test" | "production";
+  public NODE_ENV: "development" | "test" | "production";
   public readonly GITHUB_CLIENT_ID: string;
   public readonly GITHUB_CLIENT_SECRET: string;
   public readonly GITHUB_CALLBACK_URL: string;
-  public readonly TEST_DATABASE_URL?: string | undefined;
+  public TEST_DATABASE_URL?: string | undefined;
 
   constructor() {
     this.NODE_ENV = Env.#getNodeEnv();

@@ -1,6 +1,6 @@
 import { createNewUserInput } from "./createNewUserInput.js";
-import { usersModel } from "../../src/models/usersModel.js";
-import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
+import { usersModel } from "../../models/usersModel.js";
+import { pendingUserModel } from "../../models/pendingUsersModel.js";
 
 interface CreateNewUserInputOptions {
   id?: string;

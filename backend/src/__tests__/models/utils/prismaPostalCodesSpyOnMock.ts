@@ -57,8 +57,8 @@ function prismaPostalCodesSpyOnMock() {
   vi.mock("../../../src/db/prisma.js", () => {
     const originalModule = vi.importActual("../../../src/db/prisma.js");
     return {
-      ...originalModule,
       prisma: {
+        ...originalModule,
         postalCode: {
           findUnique: findUniqueMock,
           findMany: findManyMock,
