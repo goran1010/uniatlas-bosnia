@@ -1,4 +1,41 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
+import type { VerifyFunction, IStrategyOptions } from "passport-local";
+import type { StrategyOptions } from "passport-github2";
+import type { DoneCallback } from "passport";
+
+interface MockGitHubProfile {
+  id: string | number;
+  emails?: { value: string }[];
+}
+
+type GitHubVerifyFunction = (
+  accessToken: string,
+  refreshToken: string,
+  profile: MockGitHubProfile,
+  done: DoneCallback,
+) => void | Promise<void>;
+
+class MockLocalStrategy {
+  name = "local";
+  options: IStrategyOptions;
+  _verify: VerifyFunction;
+
+  constructor(options: IStrategyOptions, verify: VerifyFunction) {
+    this.options = options;
+    this._verify = verify;
+  }
+}
+
+class MockGitHubStrategy {
+  name = "github";
+  options: StrategyOptions;
+  _verify: GitHubVerifyFunction;
+
+  constructor(options: StrategyOptions, verify: GitHubVerifyFunction) {
+    this.options = options;
+    this._verify = verify;
+  }
+}
 
 const passportMock = {
   use: vi.fn(),
@@ -21,23 +58,11 @@ vi.mock("passport", () => ({
 }));
 
 vi.mock("passport-local", () => ({
-  Strategy: class LocalStrategy {
-    name = "local";
-    constructor(options, verify) {
-      this.options = options;
-      this._verify = verify;
-    }
-  },
+  Strategy: MockLocalStrategy,
 }));
 
 vi.mock("passport-github2", () => ({
-  Strategy: class GitHubStrategy {
-    name = "github";
-    constructor(options, verify) {
-      this.options = options;
-      this._verify = verify;
-    }
-  },
+  Strategy: MockGitHubStrategy,
 }));
 
 vi.mock("bcryptjs", () => ({
@@ -51,14 +76,33 @@ vi.mock("../src/models/usersModel.js", () => ({
 async function loadStrategies() {
   await import("../src/config/passport.js");
 
-  const localStrategy = passportMock.use.mock.calls[0][0];
-  const githubStrategy = passportMock.use.mock.calls[1][0];
+  const localStrategy = passportMock.use.mock.calls[0]?.[0] as
+    | MockLocalStrategy
+    | undefined;
+  const githubStrategy = passportMock.use.mock.calls[1]?.[0] as
+    | MockGitHubStrategy
+    | undefined;
+
+  if (!localStrategy || !githubStrategy) {
+    throw new Error(
+      "Passport strategies were not registered during test setup.",
+    );
+  }
+
+  const serializeUser = passportMock.serializeUser.mock.calls[0]?.[0];
+  const deserializeUser = passportMock.deserializeUser.mock.calls[0]?.[0];
+
+  if (!serializeUser || !deserializeUser) {
+    throw new Error(
+      "Passport serializers were not registered during test setup.",
+    );
+  }
 
   return {
     localVerify: localStrategy._verify,
     githubVerify: githubStrategy._verify,
-    serializeUser: passportMock.serializeUser.mock.calls[0][0],
-    deserializeUser: passportMock.deserializeUser.mock.calls[0][0],
+    serializeUser,
+    deserializeUser,
   };
 }
 
@@ -227,8 +271,10 @@ describe("passport config", () => {
     serializeUser({ id: 42 }, done);
 
     expect(done).toHaveBeenCalledTimes(2);
-    expect(done.mock.calls[1][0]).toBeInstanceOf(Error);
-    expect(done.mock.calls[1][0].message).toBe("done explode");
+    const secondCallError = done.mock.calls[1]?.[0];
+
+    expect(secondCallError).toBeInstanceOf(Error);
+    expect((secondCallError as Error).message).toBe("done explode");
   });
 
   test("deserializeUser returns fetched user", async () => {
