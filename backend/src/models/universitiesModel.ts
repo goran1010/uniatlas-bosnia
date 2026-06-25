@@ -1,5 +1,5 @@
 import { prisma } from "../db/prisma.js";
-import type { Prisma } from "#generated/prisma/client.js";
+import type { Prisma, University } from "#generated/prisma/client.js";
 
 const fullUniversityInclude = {
   faculties: {
@@ -13,6 +13,11 @@ const fullUniversityInclude = {
   },
 };
 
+type searchUniversitiesParam =
+  | University["name"]
+  | University["city"]
+  | University["acronym"];
+
 class UniversitiesModel {
   getAll() {
     return prisma.university.findMany({ orderBy: { name: "asc" } });
@@ -25,7 +30,7 @@ class UniversitiesModel {
     });
   }
 
-  searchUniversities(term: string) {
+  searchUniversities(term: NonNullable<searchUniversitiesParam>) {
     return prisma.university.findMany({
       where: {
         OR: [
