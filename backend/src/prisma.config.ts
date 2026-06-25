@@ -3,8 +3,24 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
-if (!process.env["DATABASE_URL"]) {
-  throw new Error("DATABASE_URL environment variable is not set");
+let DATABASE_URL: string;
+
+if (process.env["NODE_ENV"] === "test") {
+  if (process.env["TEST_DATABASE_URL"]) {
+    DATABASE_URL = process.env["TEST_DATABASE_URL"];
+  } else {
+    throw new Error(
+      "TEST_DATABASE_URL environment variable is not set for test environment",
+    );
+  }
+} else {
+  if (process.env["DATABASE_URL"]) {
+    DATABASE_URL = process.env["DATABASE_URL"];
+  } else {
+    throw new Error(
+      "DATABASE_URL environment variable is not set for non-test environment",
+    );
+  }
 }
 
 export default defineConfig({
@@ -13,6 +29,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: DATABASE_URL,
   },
 });

@@ -30,7 +30,10 @@ export default async function () {
 
   execSync("npx prisma migrate deploy", {
     cwd: prismaRoot,
-    env: { ...process.env, TEST_DATABASE_URL: templateUrl.toString() },
+    env: {
+      ...process.env,
+      TEST_DATABASE_URL: templateUrl.toString(),
+    },
     stdio: "pipe",
   });
 
