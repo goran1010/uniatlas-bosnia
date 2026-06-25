@@ -1,4 +1,4 @@
-import { sanitizeUser, sanitizeUsers } from "../src/utils/sanitizeUser";
+import { sanitizeUser, sanitizeUsers } from "../src/utils/sanitizeUser.js";
 import { describe, test, expect } from "vitest";
 
 import type { User } from "#generated/prisma/client.js";
