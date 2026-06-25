@@ -32,6 +32,7 @@ export default async function () {
     cwd: prismaRoot,
     env: {
       ...process.env,
+      DATABASE_URL: templateUrl.toString(),
       TEST_DATABASE_URL: templateUrl.toString(),
     },
     stdio: "pipe",
