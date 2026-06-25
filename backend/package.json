@@ -14,8 +14,6 @@
     "db:deploy_generate": "cd ./src && npx prisma migrate deploy && npx prisma generate",
     "db:generate": "cd ./src && npx prisma generate",
     "db:seed": "cd ./src && npx prisma db seed",
-    "db:test:deploy_generate": "cd ./src && DATABASE_URL=$TEST_DATABASE_URL npx prisma migrate deploy && DATABASE_URL=$TEST_DATABASE_URL npx prisma generate",
-    "db:test:seed": "cd ./src && DATABASE_URL=$TEST_DATABASE_URL npx prisma db seed",
     "test": "NODE_ENV=test vitest",
     "start": "node --env-file-if-exists=.env dist/index.js",
     "dev": "tsx watch --env-file-if-exists=.env src/index.ts | pino-pretty",
