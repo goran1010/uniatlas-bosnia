@@ -26,6 +26,9 @@ async function createAndLoginUser(
   const users = await pendingUserModel.findMany({
     email: userData.email,
   });
+  if (!users[0]) {
+    throw new Error("Pending user not found after signup.");
+  }
   const token = users[0].token;
 
   await agent.get(`/auth/confirm/${token}`);
