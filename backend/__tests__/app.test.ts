@@ -13,7 +13,7 @@ describe("app", () => {
 
   test("app responds with status 500 if an unexpected error occurs", async () => {
     vi.doMock("../src/utils/rateLimiter.js", () => ({
-      global: vi.fn((req, res, next) => next()),
+      global: vi.fn((_req, _res, next) => next()),
       api: vi.fn(() => {
         throw new Error("Unexpected error");
       }),
