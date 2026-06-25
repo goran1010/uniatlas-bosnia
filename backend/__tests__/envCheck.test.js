@@ -12,5 +12,6 @@ describe("process.env variable missing or undefined", () => {
     );
 
     process.env.DATABASE_URL = originalDatabaseUrl;
+    vi.resetModules();
   });
 });
