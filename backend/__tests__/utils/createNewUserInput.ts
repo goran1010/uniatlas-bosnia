@@ -1,12 +1,3 @@
-interface UserInput {
-  id?: string;
-  email: string;
-  password: string;
-  role: "USER" | "ADMIN";
-  githubId: string | null;
-  "confirm-password": string;
-}
-
 interface CreateNewUserInputOptions {
   id?: string;
   email?: string;
@@ -20,7 +11,7 @@ function createNewUserInput(user: CreateNewUserInputOptions = {}) {
   const timestamp = Date.now();
   const randomSuffix = Math.floor(Math.random() * 10000);
 
-  const newUser: UserInput = {
+  const newUser = {
     id: user.id || `${timestamp}_${randomSuffix}`,
     email:
       user.email ||

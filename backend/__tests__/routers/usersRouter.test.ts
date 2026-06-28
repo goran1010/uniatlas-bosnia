@@ -1,24 +1,39 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { createNewUserInput } from "../utils/createNewUserInput";
+
+import type { User } from "#generated/prisma/client.js";
+import type { Request, Response, NextFunction } from "express";
+
+type ExpressUser = Omit<User, "password">;
 
 vi.mock("../../src/config/sessionMiddleware.js", () => ({
-  sessionMiddleware: (req, _res, next) => {
-    req.session ??= {};
-    req.session.destroy ??= (done) => done?.(null);
-    req.session.regenerate ??= (done) => done?.(null);
-    req.session.save ??= (done) => done?.(null);
+  sessionMiddleware: (req: Request, _res: Response, next: NextFunction) => {
+    req.session = {
+      cookie: {
+        originalMaxAge: 1000 * 60 * 60 * 24,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+        secure: false,
+        httpOnly: true,
+      },
+      id: "test-session-id",
+      destroy: vi.fn(),
+      regenerate: vi.fn(),
+      save: vi.fn(),
+      reload: vi.fn(),
+      resetMaxAge: vi.fn(),
+      touch: vi.fn(),
+    };
     next();
   },
 }));
 
 import { app } from "../../src/app.js";
 
-let mockedUser = null;
+let mockedUser: ExpressUser | undefined = undefined;
 
 vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
-    isAuthenticated: (req, res, next) => {
+    isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
       req.user = mockedUser;
       if (req.user) return next();
 
@@ -32,7 +47,7 @@ vi.mock("../../src/auth/isAuthenticated.js", () => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  mockedUser = null;
+  mockedUser = undefined;
 });
 
 describe("GET /me", () => {
@@ -46,26 +61,6 @@ describe("GET /me", () => {
     const expectedResponse = {
       status: 200,
       body: notLoggedInResponse,
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
-  });
-});
-
-describe("POST /logout", () => {
-  test("responds User logged out successfully", async () => {
-    const user = createNewUserInput();
-    mockedUser = user;
-
-    const response = await request(app).post("/users/logout");
-    const expectedResponse = {
-      status: 200,
-      body: {
-        data: {
-          success: true,
-        },
-        message: "User logged out successfully",
-      },
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));

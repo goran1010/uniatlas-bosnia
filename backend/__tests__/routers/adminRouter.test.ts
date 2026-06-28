@@ -4,11 +4,32 @@ import { app } from "../../src/app.js";
 import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
 import { transactionModel } from "../../src/models/transactionModel.js";
 
-let mockedUser = null;
+import type {
+  User,
+  entityType,
+  typeOfChange,
+} from "#generated/prisma/client.js";
+import type { Request, Response, NextFunction } from "express";
+import type { JsonValue } from "@prisma/client/runtime/client";
+
+let mockedUser: Omit<User, "password"> | undefined;
+
+interface MockedResult {
+  id: string;
+  entityType: entityType;
+  typeOfChange: typeOfChange;
+  targetId: number | null;
+  parentId: number | null;
+  userId: string;
+  createdAt: Date;
+  reviewedAt: Date | null;
+  data: JsonValue;
+  user: Omit<User, "password">;
+}
 
 vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
-    isAuthenticated: (req, res, next) => {
+    isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
       req.user = mockedUser;
       if (req.user) return next();
 
@@ -22,7 +43,7 @@ vi.mock("../../src/auth/isAuthenticated.js", () => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  mockedUser = null;
+  mockedUser = undefined;
 });
 
 function mockTransactionWrapper(result = true) {
@@ -47,10 +68,10 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
 
   test("Responds with You need to be admin to access this route if role USER", async () => {
     mockedUser = {
-      id: 1,
-      username: "user1",
+      id: "1",
       email: "user1@example.com",
       role: "USER",
+      githubId: null,
     };
 
     const response = await request(app).get("/users/admin//pending-changes");
@@ -67,21 +88,34 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
   });
 
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValueOnce([
+    const mockPendingChanges: MockedResult[] = [
       {
         id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
         entityType: "UNIVERSITY",
         typeOfChange: "DELETE",
         targetId: 1,
+        parentId: null,
+        userId: "1",
+        createdAt: new Date(),
+        reviewedAt: null,
         data: {},
+        user: {
+          id: "1",
+          email: "admin1@example.com",
+          role: "ADMIN",
+          githubId: null,
+        },
       },
-    ]);
+    ];
+    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValueOnce(
+      mockPendingChanges,
+    );
 
     mockedUser = {
-      id: 1,
-      username: "admin1",
+      id: "1",
       email: "admin1@example.com",
       role: "ADMIN",
+      githubId: null,
     };
 
     const response = await request(app).get("/users/admin/pending-changes");
@@ -89,15 +123,13 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
       status: 200,
       body: {
         message: "Pending changes retrieved successfully.",
-        data: [
-          {
-            id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
-            entityType: "UNIVERSITY",
-            typeOfChange: "DELETE",
-            targetId: 1,
-            data: {},
-          },
-        ],
+        data: mockPendingChanges.map((change) => ({
+          ...change,
+          createdAt: change.createdAt.toISOString(),
+          reviewedAt: change.reviewedAt
+            ? change.reviewedAt.toISOString()
+            : null,
+        })),
       },
     };
 
@@ -123,10 +155,10 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
 
   test("Responds with You need to be admin to access this route if role USER", async () => {
     mockedUser = {
-      id: 1,
-      username: "user1",
+      id: "1",
       email: "user1@example.com",
       role: "USER",
+      githubId: null,
     };
 
     const response = await request(app).delete(
@@ -145,15 +177,32 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
   });
 
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
+    const mockPendingChanges: MockedResult = {
+      id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
+      entityType: "UNIVERSITY",
+      typeOfChange: "DELETE",
+      targetId: 1,
+      parentId: null,
+      userId: "1",
+      createdAt: new Date(),
+      reviewedAt: null,
+      data: {},
+      user: {
+        id: "1",
+        email: "admin1@example.com",
+        role: "ADMIN",
+        githubId: null,
+      },
+    };
     vi.spyOn(pendingChangesModel, "delete").mockResolvedValueOnce(
-      "Successfully deleted pending change",
+      mockPendingChanges,
     );
 
     mockedUser = {
-      id: 1,
-      username: "admin1",
+      id: "1",
       email: "admin1@example.com",
       role: "ADMIN",
+      githubId: null,
     };
 
     const response = await request(app)
@@ -189,10 +238,10 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
   test("Responds with You need to be admin to access this route if role USER", async () => {
     mockedUser = {
-      id: 1,
-      username: "user1",
+      id: "1",
       email: "user1@example.com",
       role: "USER",
+      githubId: null,
     };
 
     const response = await request(app).post(
@@ -212,10 +261,10 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
   test("Responds with status 404 and Pending change not found if no valid id is provided", async () => {
     mockedUser = {
-      id: 1,
-      username: "user1",
+      id: "1",
       email: "user1@example.com",
       role: "ADMIN",
+      githubId: null,
     };
 
     mockTransactionWrapper(false);
@@ -243,10 +292,10 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
     mockTransactionWrapper(true);
 
     mockedUser = {
-      id: 1,
-      username: "user1",
+      id: "1",
       email: "user1@example.com",
       role: "ADMIN",
+      githubId: null,
     };
 
     const response = await request(app)

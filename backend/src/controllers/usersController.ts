@@ -32,9 +32,18 @@ class UsersController {
         return;
       }
 
-      req.session.destroy(() => {
+      req.session.destroy((err) => {
+        if (err) {
+          console.error(err);
+          sendError(res, {
+            status: 500,
+            message: "Logout failed: try again.",
+          });
+          return;
+        }
+
         res.clearCookie("sessionId", {
-          // Must set clearCookie options to match cookie set options, otherwise client will not clear cookie
+          // Must set clearCookie options to match cookie set options, otherwise browser will not clear cookies
           maxAge: NUMBER_OF_DAYS * 24 * 60 * 60 * 1000,
           sameSite: IS_PRODUCTION ? "none" : "lax",
           secure: IS_PRODUCTION,

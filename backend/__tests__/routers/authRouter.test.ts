@@ -1,11 +1,39 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
 
+import type { Request, Response, NextFunction } from "express";
+
 vi.mock("../../src/config/sessionMiddleware.js", () => ({
-  sessionMiddleware: (req, _res, next) => {
-    req.session ??= {};
-    req.session.regenerate ??= (done) => done?.(null);
-    req.session.save ??= (done) => done?.(null);
+  sessionMiddleware: (req: Request, _res: Response, next: NextFunction) => {
+    const session = {
+      cookie: {
+        originalMaxAge: 1000 * 60 * 60 * 24,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+        secure: false,
+        httpOnly: true,
+      },
+      id: "test-session-id",
+      destroy: vi.fn((callback?: (err?: unknown) => void) => {
+        callback?.();
+        return session;
+      }),
+      regenerate: vi.fn((callback?: (err?: unknown) => void) => {
+        callback?.();
+        return session;
+      }),
+      save: vi.fn((callback?: (err?: unknown) => void) => {
+        callback?.();
+        return session;
+      }),
+      reload: vi.fn((callback?: (err?: unknown) => void) => {
+        callback?.();
+        return session;
+      }),
+      resetMaxAge: vi.fn(),
+      touch: vi.fn(),
+    } as Request["session"];
+
+    req.session = session;
     next();
   },
 }));
@@ -17,13 +45,13 @@ import { usersModel } from "../../src/models/usersModel.js";
 import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
-import { sanitizeUser } from "../../src/utils/sanitizeUser.js";
 import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
 const isAuthenticatedMock = vi.fn();
 
 vi.mock("../../src/auth/isAuthenticated.js", () => ({
-  isAuthenticated: (req, res, next) => isAuthenticatedMock(req, res, next),
+  isAuthenticated: (req: Request, res: Response, next: NextFunction) =>
+    isAuthenticatedMock(req, res, next),
 }));
 
 beforeEach(() => {
@@ -89,14 +117,7 @@ describe("POST /auth/signup", () => {
 
   test("successfully create a user and returns status 201 and message", async () => {
     const newUser = createNewUserInput();
-    const createdUser = {
-      id: "mock-user-id",
-      email: newUser.email,
-      isEmailConfirmed: false,
-      role: "USER",
-      requestedContributor: false,
-      password: "hashed-password",
-    };
+
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(null);
     vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([]);
     vi.spyOn(pendingUserModel, "create").mockResolvedValueOnce({
@@ -106,9 +127,7 @@ describe("POST /auth/signup", () => {
       token: "mock-token",
       expiresAt: new Date(Date.now() + 60 * 60 * 1000),
     });
-    vi.spyOn(usersModel, "create").mockResolvedValueOnce(
-      sanitizeUser(createdUser),
-    );
+    vi.spyOn(usersModel, "create").mockResolvedValueOnce(newUser);
 
     const response = await request(app).post("/auth/signup").send(newUser);
     const expectedResponse = {
@@ -128,7 +147,11 @@ describe("POST /auth/signup", () => {
   test("responds with generic 400 error if given email exists", async () => {
     const newUser = createNewUserInput();
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce({
+      id: "existing-user-id",
       email: newUser.email,
+      password: "hashed-password",
+      role: "USER",
+      githubId: null,
     });
 
     const responseData = {
@@ -189,22 +212,37 @@ describe("GET /auth/confirm/:token", () => {
       {
         id: "mock-pending-user-id",
         email: "test_user@example.com",
-        expiresAt: new Date(Date.now() + 60 * 60 * 1000), // expires in 1 hour
+        expiresAt: new Date(Date.now() + 60 * 60 * 1000),
+        password: "hashed-password",
+        token: "mock-token",
       },
     ]);
 
-    vi.spyOn(pendingUserModel, "delete").mockResolvedValueOnce(true);
+    vi.spyOn(pendingUserModel, "delete").mockResolvedValueOnce({ count: 1 });
     vi.spyOn(usersModel, "create").mockResolvedValueOnce({
       id: "mock-user-id",
       email: "test_user@example.com",
+      password: "hashed-password",
+      role: "USER",
+      githubId: null,
     });
 
     const token = crypto.randomBytes(32).toString("hex");
 
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce({
-      isEmailConfirmed: false,
+      id: "existing-user-id",
+      email: "test_user@example.com",
+      password: "hashed-password",
+      role: "USER",
+      githubId: null,
     });
-    vi.spyOn(usersModel, "update").mockResolvedValueOnce(true);
+    vi.spyOn(usersModel, "update").mockResolvedValueOnce({
+      id: "existing-user-id",
+      email: "test_user@example.com",
+      password: "hashed-password",
+      role: "USER",
+      githubId: null,
+    });
 
     const response = await request(app).get(`/auth/confirm/${token}`);
     const expectedResponse = {
@@ -241,10 +279,10 @@ describe("POST /auth/login", () => {
   });
 
   test("responds with User test_user logged in successfully for correct input", async () => {
-    const newUser = createNewUserInput({ isEmailConfirmed: true });
+    const newUser = createNewUserInput();
 
     vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(newUser);
-    vi.spyOn(bcrypt, "compare").mockResolvedValueOnce(true);
+    vi.spyOn(bcrypt, "compare").mockImplementationOnce(async () => true);
 
     const response = await request(app).post("/auth/login").send(newUser);
 

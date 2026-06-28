@@ -2,6 +2,7 @@ import request from "supertest";
 import { app } from "../../src/app.js";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { universitiesModel } from "../../src/models/universitiesModel.js";
+
 import type { University } from "#generated/prisma/client.js";
 
 beforeEach(() => {
@@ -16,12 +17,12 @@ const dummyData: { data: University[] } = {
       city: "Sarajevo",
       acronym: "UNSA",
       entity: "FBIH",
-      accreditationFrom: new Date("1949-01-01T00:00:00.000Z"),
-      accreditationTo: new Date("2024-12-31T00:00:00.000Z"),
+      accreditationFrom: null,
+      accreditationTo: null,
       authority:
         "Ministry of Education and Science of the Federation of Bosnia and Herzegovina",
       foundedYear: "1949",
-      lastChecked: new Date("2024-01-01T00:00:00.000Z"),
+      lastChecked: null,
       ownership: "JAVNA",
       sourceUrl: "https://www.unsa.ba/en/university",
       website: "https://www.unsa.ba/en",
@@ -32,11 +33,11 @@ const dummyData: { data: University[] } = {
       city: "Banja Luka",
       acronym: "UNIBL",
       entity: "RS",
-      accreditationFrom: new Date("1975-01-01T00:00:00.000Z"),
-      accreditationTo: new Date("2024-12-31T00:00:00.000Z"),
+      accreditationFrom: null,
+      accreditationTo: null,
       authority: "Ministry of Education and Culture of the Republika Srpska",
       foundedYear: "1975",
-      lastChecked: new Date("2024-01-01T00:00:00.000Z"),
+      lastChecked: null,
       ownership: "JAVNA",
       sourceUrl: "https://www.unibl.org/en/university",
       website: "https://www.unibl.org/en",
