@@ -9,21 +9,27 @@ import { universitiesModel } from "../../src/models/universitiesModel.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
-    const userRequested = createNewUserInput({ role: "ADMIN" });
-    delete userRequested["confirm-password"];
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
 
     const userInDb = await usersModel.create(userRequested);
 
     const pendingChange = await pendingChangesModel.create({
-      userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
+      targetId: 1,
+      parentId: null,
       data: {
         name: "Test Admin GET University",
         city: "Test City",
         entity: "FBIH",
         ownership: "JAVNA",
       },
+      createdAt: new Date("2024-01-01T00:00:00.000Z"),
+      reviewedAt: null,
+      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);
@@ -46,21 +52,27 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
 describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
   test("Responds with status 200 if role ADMIN", async () => {
-    const userRequested = createNewUserInput({ role: "ADMIN" });
-    delete userRequested["confirm-password"];
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
 
     const userInDb = await usersModel.create(userRequested);
 
     const pendingChange = await pendingChangesModel.create({
-      userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "CREATE",
+      targetId: 1,
+      parentId: null,
       data: {
         name: "Test Decline University",
         city: "Test City",
         entity: "FBIH",
         ownership: "JAVNA",
       },
+      createdAt: new Date("2024-01-01T00:00:00.000Z"),
+      reviewedAt: null,
+      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);
@@ -86,8 +98,10 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
 describe("Admin Router - POST /users/admin/approve-pending-change", () => {
   test("Responds with status 200 and message if a pending change is approved successfully", async () => {
-    const userRequested = createNewUserInput({ role: "ADMIN" });
-    delete userRequested["confirm-password"];
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
 
     const userInDb = await usersModel.create(userRequested);
 
@@ -99,11 +113,19 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
     });
 
     const pendingChange = await pendingChangesModel.create({
-      userId: userInDb.id,
       entityType: "UNIVERSITY",
       typeOfChange: "DELETE",
       targetId: university.id,
-      data: {},
+      parentId: null,
+      data: {
+        name: "Test Approve University",
+        city: "Test City",
+        entity: "FBIH",
+        ownership: "JAVNA",
+      },
+      createdAt: new Date("2024-01-01T00:00:00.000Z"),
+      reviewedAt: null,
+      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);

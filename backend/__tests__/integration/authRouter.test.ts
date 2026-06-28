@@ -31,6 +31,9 @@ describe("Auth Router - GET /auth/confirm/:token", () => {
     const users = await pendingUserModel.findMany({
       email: newUser.email,
     });
+    if (!users[0] || users.length === 0) {
+      throw new Error("No pending user found for the provided email.");
+    }
     const token = users[0].token;
 
     const response = await agent.get(`/auth/confirm/${token}`);
@@ -52,6 +55,9 @@ describe("Auth Router - POST /auth/login", () => {
     const users = await pendingUserModel.findMany({
       email: newUser.email,
     });
+    if (!users[0] || users.length === 0) {
+      throw new Error("No pending user found for the provided email.");
+    }
     const token = users[0].token;
 
     await agent.get(`/auth/confirm/${token}`);
