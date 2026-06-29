@@ -2,7 +2,17 @@ import { pendingChangesModel } from "../models/pendingChangesModel.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
+import {
+  buildPendingChangeData,
+  type ContributionEntityType,
+} from "../utils/pendingChangeData.js";
 import type { Request, Response } from "express";
+
+interface ContributionRequestData {
+  entityType?: ContributionEntityType;
+  parentId?: string | number;
+  targetId?: string | number;
+}
 
 class ContributionController {
   async createEntity(req: Request, res: Response) {
@@ -14,8 +24,32 @@ class ContributionController {
         });
       }
       const userId = req.user.id;
-      const { entityType, parentId } = matchedData(req);
-      const data = req.body.data;
+      const { entityType: matchedEntityType, parentId } =
+        matchedData<ContributionRequestData>(req, {
+          includeOptionals: true,
+        });
+      const entityType = matchedEntityType ?? req.body.entityType;
+
+      if (
+        entityType !== "UNIVERSITY" &&
+        entityType !== "FACULTY" &&
+        entityType !== "STUDY_PROGRAM" &&
+        entityType !== "SUBJECT"
+      ) {
+        return sendError(res, {
+          status: 400,
+          message: "Invalid entity type.",
+        });
+      }
+
+      const data = buildPendingChangeData(entityType, req.body.data);
+
+      if (!data) {
+        return sendError(res, {
+          status: 400,
+          message: "Invalid contribution data.",
+        });
+      }
 
       const result = await pendingChangesModel.create({
         user: {
@@ -52,8 +86,32 @@ class ContributionController {
         });
       }
       const userId = req.user.id;
-      const { entityType, targetId } = matchedData(req);
-      const data = req.body.data;
+      const { entityType: matchedEntityType, targetId } =
+        matchedData<ContributionRequestData>(req, {
+          includeOptionals: true,
+        });
+      const entityType = matchedEntityType ?? req.body.entityType;
+
+      if (
+        entityType !== "UNIVERSITY" &&
+        entityType !== "FACULTY" &&
+        entityType !== "STUDY_PROGRAM" &&
+        entityType !== "SUBJECT"
+      ) {
+        return sendError(res, {
+          status: 400,
+          message: "Invalid entity type.",
+        });
+      }
+
+      const data = buildPendingChangeData(entityType, req.body.data);
+
+      if (!data) {
+        return sendError(res, {
+          status: 400,
+          message: "Invalid contribution data.",
+        });
+      }
 
       const result = await pendingChangesModel.create({
         user: {

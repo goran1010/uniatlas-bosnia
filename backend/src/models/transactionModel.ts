@@ -1,5 +1,11 @@
 import { prisma } from "../db/prisma.js";
-import type { Prisma } from "#generated/prisma/client.js";
+import {
+  buildPendingChangeData,
+  isCompleteFacultyPendingChangeData,
+  isCompleteStudyProgramPendingChangeData,
+  isCompleteSubjectPendingChangeData,
+  isCompleteUniversityPendingChangeData,
+} from "../utils/pendingChangeData.js";
 
 class TransactionModel {
   async approveUniversityPendingChange({
@@ -12,11 +18,7 @@ class TransactionModel {
         where: { id },
       });
 
-      if (
-        !pendingChange ||
-        typeof pendingChange.data !== "object" ||
-        pendingChange.data === null
-      ) {
+      if (!pendingChange) {
         return false;
       }
 
@@ -25,32 +27,64 @@ class TransactionModel {
       const { entityType, typeOfChange } = pendingChange;
 
       if (entityType === "UNIVERSITY") {
-        const data = pendingChange.data as Prisma.UniversityCreateInput;
+        if (typeOfChange === "DELETE") {
+          if (targetId === null) {
+            return false;
+          }
+
+          await tx.university.delete({ where: { id: targetId } });
+          await tx.pendingChange.delete({ where: { id } });
+          return true;
+        }
+
+        const data = buildPendingChangeData(entityType, pendingChange.data);
+        if (!data) {
+          return false;
+        }
+
         if (typeOfChange === "CREATE") {
+          if (!isCompleteUniversityPendingChangeData(data)) {
+            return false;
+          }
+
           await tx.university.create({ data });
           await tx.pendingChange.delete({ where: { id } });
           return true;
         }
+
         if (targetId === null) {
           return false;
         }
+
         if (typeOfChange === "UPDATE") {
           await tx.university.update({ where: { id: targetId }, data });
-        } else if (typeOfChange === "DELETE") {
-          await tx.university.delete({ where: { id: targetId } });
         }
+
         await tx.pendingChange.delete({ where: { id } });
         return true;
       }
-      if (parentId === null) {
-        return false;
-      }
+
       if (entityType === "FACULTY") {
-        const data = pendingChange.data as Omit<
-          Prisma.FacultyUncheckedCreateInput,
-          "universityId"
-        >;
+        if (typeOfChange === "DELETE") {
+          if (targetId === null) {
+            return false;
+          }
+
+          await tx.faculty.delete({ where: { id: targetId } });
+          await tx.pendingChange.delete({ where: { id } });
+          return true;
+        }
+
+        const data = buildPendingChangeData(entityType, pendingChange.data);
+        if (!data) {
+          return false;
+        }
+
         if (typeOfChange === "CREATE") {
+          if (parentId === null || !isCompleteFacultyPendingChangeData(data)) {
+            return false;
+          }
+
           await tx.faculty.create({
             data: { ...data, universityId: parentId },
           });
@@ -60,19 +94,37 @@ class TransactionModel {
         if (targetId === null) {
           return false;
         }
+
         if (typeOfChange === "UPDATE") {
           await tx.faculty.update({ where: { id: targetId }, data });
-        } else if (typeOfChange === "DELETE") {
-          await tx.faculty.delete({ where: { id: targetId } });
         }
+
         await tx.pendingChange.delete({ where: { id } });
         return true;
       } else if (entityType === "STUDY_PROGRAM") {
-        const data = pendingChange.data as Omit<
-          Prisma.StudyProgramUncheckedCreateInput,
-          "facultyId"
-        >;
+        if (typeOfChange === "DELETE") {
+          if (targetId === null) {
+            return false;
+          }
+
+          await tx.studyProgram.delete({ where: { id: targetId } });
+          await tx.pendingChange.delete({ where: { id } });
+          return true;
+        }
+
+        const data = buildPendingChangeData(entityType, pendingChange.data);
+        if (!data) {
+          return false;
+        }
+
         if (typeOfChange === "CREATE") {
+          if (
+            parentId === null ||
+            !isCompleteStudyProgramPendingChangeData(data)
+          ) {
+            return false;
+          }
+
           await tx.studyProgram.create({
             data: { ...data, facultyId: parentId },
           });
@@ -82,17 +134,31 @@ class TransactionModel {
         if (targetId === null) {
           return false;
         }
+
         if (typeOfChange === "UPDATE") {
           await tx.studyProgram.update({ where: { id: targetId }, data });
-        } else if (typeOfChange === "DELETE") {
-          await tx.studyProgram.delete({ where: { id: targetId } });
         }
       } else if (entityType === "SUBJECT") {
-        const data = pendingChange.data as Omit<
-          Prisma.SubjectUncheckedCreateInput,
-          "studyProgramId"
-        >;
+        if (typeOfChange === "DELETE") {
+          if (targetId === null) {
+            return false;
+          }
+
+          await tx.subject.delete({ where: { id: targetId } });
+          await tx.pendingChange.delete({ where: { id } });
+          return true;
+        }
+
+        const data = buildPendingChangeData(entityType, pendingChange.data);
+        if (!data) {
+          return false;
+        }
+
         if (typeOfChange === "CREATE") {
+          if (parentId === null || !isCompleteSubjectPendingChangeData(data)) {
+            return false;
+          }
+
           await tx.subject.create({
             data: { ...data, studyProgramId: parentId },
           });
@@ -102,10 +168,9 @@ class TransactionModel {
         if (targetId === null) {
           return false;
         }
+
         if (typeOfChange === "UPDATE") {
           await tx.subject.update({ where: { id: targetId }, data });
-        } else if (typeOfChange === "DELETE") {
-          await tx.subject.delete({ where: { id: targetId } });
         }
       }
 

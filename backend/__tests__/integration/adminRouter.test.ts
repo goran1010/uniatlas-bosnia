@@ -148,4 +148,40 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
     await usersModel.deleteUser({ id: userInDb.id });
   });
+
+  test("Responds with status 404 if stored pending change data is invalid for its entity type", async () => {
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
+
+    const userInDb = await usersModel.create(userRequested);
+
+    const pendingChange = await pendingChangesModel.create({
+      entityType: "UNIVERSITY",
+      typeOfChange: "CREATE",
+      targetId: null,
+      parentId: null,
+      data: {
+        name: "Malformed University",
+      },
+      createdAt: new Date("2024-01-01T00:00:00.000Z"),
+      reviewedAt: null,
+      user: { connect: { id: userInDb.id } },
+    });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-pending-change")
+      .send({
+        id: pendingChange.id,
+      });
+
+    expect(response.status).toBe(404);
+
+    await pendingChangesModel.delete({ id: pendingChange.id });
+    await usersModel.deleteUser({ id: userInDb.id });
+  });
 });

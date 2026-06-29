@@ -144,6 +144,32 @@ describe("POST /users/contribution/universities", () => {
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
   });
+
+  test("Unsupported data fields respond with status 400", async () => {
+    mockedUser = {
+      id: "1",
+      email: "user1@example.com",
+      role: "USER",
+      githubId: null,
+    };
+    const agent = request.agent(app);
+
+    const response = await agent.post("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      data: {
+        name: "TestCity University",
+        city: "TestCity",
+        entity: "FBIH",
+        ownership: "JAVNA",
+        ects: 240,
+      },
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error.message).toContain(
+      "Data contains unsupported fields for this entity type",
+    );
+  });
 });
 
 describe("PUT /users/contribution/universities", () => {

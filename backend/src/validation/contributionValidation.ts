@@ -1,11 +1,33 @@
 import { body } from "express-validator";
 import { validationError } from "./validationError.js";
+import { hasValidPendingChangeDataShape } from "../utils/pendingChangeData.js";
 
 const ENTITY_TYPES = ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"];
 const STUDY_CYCLES = ["FIRST", "SECOND", "THIRD"];
 const SUBJECT_TYPES = ["MANDATORY", "ELECTIVE"];
 const ENTITIES = ["FBIH", "RS", "BD"];
 const OWNERSHIP = ["JAVNA", "PRIVATNA"];
+
+function validateContributionDataShape(value: unknown, entityType: unknown) {
+  if (typeof entityType !== "string") {
+    return true;
+  }
+
+  if (
+    entityType !== "UNIVERSITY" &&
+    entityType !== "FACULTY" &&
+    entityType !== "STUDY_PROGRAM" &&
+    entityType !== "SUBJECT"
+  ) {
+    return true;
+  }
+
+  if (!hasValidPendingChangeDataShape(entityType, value)) {
+    throw new Error("Data contains unsupported fields for this entity type");
+  }
+
+  return true;
+}
 
 class ContributionValidation {
   createEntity = [
@@ -24,6 +46,12 @@ class ContributionValidation {
       .bail()
       .isInt({ min: 1 })
       .withMessage("Parent ID must be a positive integer"),
+
+    body("data")
+      .custom((value, { req }) =>
+        validateContributionDataShape(value, req.body.entityType),
+      )
+      .withMessage("Data contains unsupported fields for this entity type"),
 
     body("data.name").trim().notEmpty().withMessage("Name is required"),
 
@@ -95,6 +123,12 @@ class ContributionValidation {
       .bail()
       .isInt({ min: 1 })
       .withMessage("Target ID must be a positive integer"),
+
+    body("data")
+      .custom((value, { req }) =>
+        validateContributionDataShape(value, req.body.entityType),
+      )
+      .withMessage("Data contains unsupported fields for this entity type"),
 
     body("data.name")
       .optional()
