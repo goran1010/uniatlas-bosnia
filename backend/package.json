@@ -9,13 +9,13 @@
     "#*": "./src/*"
   },
   "scripts": {
-    "build": "tsc --build && npm run db:deploy_generate",
+    "build": "tsc --build",
     "db:migrate_dev": "cd ./src && npx prisma migrate dev --name",
     "db:deploy_generate": "cd ./src && npx prisma migrate deploy && npx prisma generate",
     "db:generate": "cd ./src && npx prisma generate",
     "db:seed": "cd ./src && npx prisma db seed",
     "test": "NODE_ENV=test vitest",
-    "start": "node --env-file-if-exists=.env dist/index.js",
+    "start": "npm run db:deploy_generate && node --env-file-if-exists=.env dist/index.js",
     "dev": "tsx watch --env-file-if-exists=.env src/index.ts | pino-pretty",
     "lint": "eslint .",
     "format": "prettier --write .",
