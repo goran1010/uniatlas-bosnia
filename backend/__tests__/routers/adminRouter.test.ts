@@ -273,8 +273,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       .post("/users/admin/approve-pending-change")
       .send({
         id: "a1b2c3d4-e5f6-4789-abcd-000000000999",
-        entityType: "UNIVERSITY",
-        typeOfChange: "CREATE",
       });
     const expectedResponse = {
       status: 404,
@@ -302,8 +300,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       .post("/users/admin/approve-pending-change")
       .send({
         id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
-        entityType: "UNIVERSITY",
-        typeOfChange: "CREATE",
       });
     const expectedResponse = {
       status: 200,
@@ -318,8 +314,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       transactionModel.approveUniversityPendingChange,
     ).toHaveBeenCalledWith({
       id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
-      entityType: "UNIVERSITY",
-      typeOfChange: "CREATE",
     });
   });
 });

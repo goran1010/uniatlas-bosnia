@@ -135,8 +135,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       .post("/users/admin/approve-pending-change")
       .send({
         id: pendingChange.id,
-        entityType: "UNIVERSITY",
-        typeOfChange: "DELETE",
       });
     const expectedResponse = {
       status: 200,

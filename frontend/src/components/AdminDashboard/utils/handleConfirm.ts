@@ -69,8 +69,6 @@ const handleConfirm: HandleConfirm = async function (
         },
         body: JSON.stringify({
           id: change.id,
-          entityType: change.entityType,
-          typeOfChange: change.typeOfChange,
         }),
         credentials: "include",
       },

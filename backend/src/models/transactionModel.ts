@@ -4,12 +4,8 @@ import type { Prisma } from "#generated/prisma/client.js";
 class TransactionModel {
   async approveUniversityPendingChange({
     id,
-    entityType,
-    typeOfChange,
   }: {
     id: string;
-    entityType: "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
-    typeOfChange: "CREATE" | "UPDATE" | "DELETE";
   }): Promise<boolean> {
     return prisma.$transaction(async (tx) => {
       const pendingChange = await tx.pendingChange.findUnique({
@@ -26,6 +22,7 @@ class TransactionModel {
 
       const parentId = pendingChange.parentId;
       const targetId = pendingChange.targetId;
+      const { entityType, typeOfChange } = pendingChange;
 
       if (entityType === "UNIVERSITY") {
         const data = pendingChange.data as Prisma.UniversityCreateInput;
