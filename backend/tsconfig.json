@@ -3,6 +3,7 @@
   "compilerOptions": {
     // File Layout
     "outDir": "./dist",
+    "rootDir": "./src",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -39,5 +40,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": ["src", "__tests__"]
+  "include": ["src"]
 }
