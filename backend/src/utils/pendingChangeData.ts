@@ -43,6 +43,8 @@ type PendingChangeData =
   | StudyProgramPendingChangeData
   | SubjectPendingChangeData;
 
+type SanitizedPendingChangeData = PendingChangeData & Prisma.InputJsonObject;
+
 type JsonRecord = Record<string, Prisma.InputJsonValue | null | undefined>;
 
 const ENTITY_DATA_KEYS: Record<ContributionEntityType, readonly string[]> = {
@@ -127,7 +129,7 @@ export function hasValidPendingChangeDataShape(
 export function buildPendingChangeData(
   entityType: ContributionEntityType,
   value: unknown,
-): (PendingChangeData & Prisma.InputJsonObject) | null {
+): SanitizedPendingChangeData | null {
   if (!isRecord(value)) {
     return null;
   }
@@ -151,14 +153,14 @@ export function buildPendingChangeData(
         safeValue["ownership"],
         UNIVERSITY_OWNERSHIP,
       );
-      return data as UniversityPendingChangeData & Prisma.InputJsonObject;
+      return data as SanitizedPendingChangeData;
     }
 
     case "FACULTY": {
       const data: JsonRecord = {};
       withOptionalString(data, "name", safeValue["name"]);
       withOptionalString(data, "city", safeValue["city"]);
-      return data as FacultyPendingChangeData & Prisma.InputJsonObject;
+      return data as SanitizedPendingChangeData;
     }
 
     case "STUDY_PROGRAM": {
@@ -167,7 +169,7 @@ export function buildPendingChangeData(
       withOptionalEnum(data, "cycle", safeValue["cycle"], STUDY_CYCLES);
       withOptionalInteger(data, "durationYears", safeValue["durationYears"]);
       withOptionalInteger(data, "ects", safeValue["ects"]);
-      return data as StudyProgramPendingChangeData & Prisma.InputJsonObject;
+      return data as SanitizedPendingChangeData;
     }
 
     case "SUBJECT": {
@@ -176,7 +178,7 @@ export function buildPendingChangeData(
       withOptionalInteger(data, "semester", safeValue["semester"]);
       withOptionalInteger(data, "ects", safeValue["ects"]);
       withOptionalEnum(data, "type", safeValue["type"], SUBJECT_TYPES);
-      return data as SubjectPendingChangeData & Prisma.InputJsonObject;
+      return data as SanitizedPendingChangeData;
     }
   }
 }
@@ -217,6 +219,7 @@ export type {
   ContributionEntityType,
   FacultyPendingChangeData,
   PendingChangeData,
+  SanitizedPendingChangeData,
   StudyProgramPendingChangeData,
   SubjectPendingChangeData,
   UniversityPendingChangeData,

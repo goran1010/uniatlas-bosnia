@@ -1,6 +1,9 @@
 import { body } from "express-validator";
 import { validationError } from "./validationError.js";
-import { hasValidPendingChangeDataShape } from "../utils/pendingChangeData.js";
+import {
+  buildPendingChangeData,
+  hasValidPendingChangeDataShape,
+} from "../utils/pendingChangeData.js";
 
 const ENTITY_TYPES = ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"];
 const STUDY_CYCLES = ["FIRST", "SECOND", "THIRD"];
@@ -29,8 +32,18 @@ function validateContributionDataShape(value: unknown, entityType: unknown) {
   return true;
 }
 
+function getEntityTypeFromRequestBody(req: {
+  body?: { entityType?: unknown };
+}) {
+  return req.body?.entityType;
+}
+
 class ContributionValidation {
   createEntity = [
+    body("entityType").customSanitizer((value) =>
+      typeof value === "string" ? value.toUpperCase() : value,
+    ),
+
     body("entityType")
       .trim()
       .notEmpty()
@@ -40,29 +53,51 @@ class ContributionValidation {
       .withMessage("Invalid entity type"),
 
     body("parentId")
-      .if((_, { req }) => req.body.entityType !== "UNIVERSITY")
+      .if((_, { req }) => getEntityTypeFromRequestBody(req) !== "UNIVERSITY")
       .notEmpty()
       .withMessage("Parent ID is required")
       .bail()
       .isInt({ min: 1 })
-      .withMessage("Parent ID must be a positive integer"),
+      .withMessage("Parent ID must be a positive integer")
+      .toInt(),
 
     body("data")
       .custom((value, { req }) =>
-        validateContributionDataShape(value, req.body.entityType),
+        validateContributionDataShape(value, getEntityTypeFromRequestBody(req)),
       )
-      .withMessage("Data contains unsupported fields for this entity type"),
+      .withMessage("Data contains unsupported fields for this entity type")
+      .customSanitizer((value, { req }) => {
+        if (
+          getEntityTypeFromRequestBody(req) !== "UNIVERSITY" &&
+          getEntityTypeFromRequestBody(req) !== "FACULTY" &&
+          getEntityTypeFromRequestBody(req) !== "STUDY_PROGRAM" &&
+          getEntityTypeFromRequestBody(req) !== "SUBJECT"
+        ) {
+          return value;
+        }
+
+        return (
+          buildPendingChangeData(
+            getEntityTypeFromRequestBody(req) as
+              | "UNIVERSITY"
+              | "FACULTY"
+              | "STUDY_PROGRAM"
+              | "SUBJECT",
+            value,
+          ) ?? value
+        );
+      }),
 
     body("data.name").trim().notEmpty().withMessage("Name is required"),
 
     body("data.city")
-      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .if((_, { req }) => getEntityTypeFromRequestBody(req) === "UNIVERSITY")
       .trim()
       .notEmpty()
       .withMessage("City is required"),
 
     body("data.entity")
-      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .if((_, { req }) => getEntityTypeFromRequestBody(req) === "UNIVERSITY")
       .notEmpty()
       .withMessage("Entity (FBIH/RS/BD) is required")
       .bail()
@@ -70,7 +105,7 @@ class ContributionValidation {
       .withMessage("Invalid entity — must be FBIH, RS, or BD"),
 
     body("data.ownership")
-      .if((_, { req }) => req.body.entityType === "UNIVERSITY")
+      .if((_, { req }) => getEntityTypeFromRequestBody(req) === "UNIVERSITY")
       .notEmpty()
       .withMessage("ownership is required")
       .bail()
@@ -78,7 +113,7 @@ class ContributionValidation {
       .withMessage("ownership must be JAVNA or PRIVATNA"),
 
     body("data.cycle")
-      .if((_, { req }) => req.body.entityType === "STUDY_PROGRAM")
+      .if((_, { req }) => getEntityTypeFromRequestBody(req) === "STUDY_PROGRAM")
       .notEmpty()
       .withMessage("Study cycle is required")
       .bail()
@@ -109,6 +144,10 @@ class ContributionValidation {
   ];
 
   editEntity = [
+    body("entityType").customSanitizer((value) =>
+      typeof value === "string" ? value.toUpperCase() : value,
+    ),
+
     body("entityType")
       .trim()
       .notEmpty()
@@ -122,13 +161,35 @@ class ContributionValidation {
       .withMessage("Target ID is required")
       .bail()
       .isInt({ min: 1 })
-      .withMessage("Target ID must be a positive integer"),
+      .withMessage("Target ID must be a positive integer")
+      .toInt(),
 
     body("data")
       .custom((value, { req }) =>
-        validateContributionDataShape(value, req.body.entityType),
+        validateContributionDataShape(value, getEntityTypeFromRequestBody(req)),
       )
-      .withMessage("Data contains unsupported fields for this entity type"),
+      .withMessage("Data contains unsupported fields for this entity type")
+      .customSanitizer((value, { req }) => {
+        if (
+          getEntityTypeFromRequestBody(req) !== "UNIVERSITY" &&
+          getEntityTypeFromRequestBody(req) !== "FACULTY" &&
+          getEntityTypeFromRequestBody(req) !== "STUDY_PROGRAM" &&
+          getEntityTypeFromRequestBody(req) !== "SUBJECT"
+        ) {
+          return value;
+        }
+
+        return (
+          buildPendingChangeData(
+            getEntityTypeFromRequestBody(req) as
+              | "UNIVERSITY"
+              | "FACULTY"
+              | "STUDY_PROGRAM"
+              | "SUBJECT",
+            value,
+          ) ?? value
+        );
+      }),
 
     body("data.name")
       .optional()
@@ -175,6 +236,10 @@ class ContributionValidation {
   ];
 
   deleteEntity = [
+    body("entityType").customSanitizer((value) =>
+      typeof value === "string" ? value.toUpperCase() : value,
+    ),
+
     body("entityType")
       .trim()
       .notEmpty()
@@ -188,7 +253,8 @@ class ContributionValidation {
       .withMessage("Target ID is required")
       .bail()
       .isInt({ min: 1 })
-      .withMessage("Target ID must be a positive integer"),
+      .withMessage("Target ID must be a positive integer")
+      .toInt(),
 
     validationError,
   ];

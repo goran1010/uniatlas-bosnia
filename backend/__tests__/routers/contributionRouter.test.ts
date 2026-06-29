@@ -143,6 +143,19 @@ describe("POST /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
+    expect(pendingChangesModel.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        entityType: "UNIVERSITY",
+        parentId: null,
+        typeOfChange: "CREATE",
+        data: {
+          name: "TestCity University",
+          city: "TestCity",
+          entity: "FBIH",
+          ownership: "JAVNA",
+        },
+      }),
+    );
   });
 
   test("Unsupported data fields respond with status 400", async () => {
@@ -256,6 +269,16 @@ describe("PUT /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
+    expect(pendingChangesModel.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        entityType: "UNIVERSITY",
+        targetId: 1,
+        typeOfChange: "UPDATE",
+        data: {
+          name: "Updated Name",
+        },
+      }),
+    );
   });
 });
 

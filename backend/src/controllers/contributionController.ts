@@ -3,15 +3,16 @@ import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 import {
-  buildPendingChangeData,
+  type SanitizedPendingChangeData,
   type ContributionEntityType,
 } from "../utils/pendingChangeData.js";
 import type { Request, Response } from "express";
 
 interface ContributionRequestData {
-  entityType?: ContributionEntityType;
-  parentId?: string | number;
-  targetId?: string | number;
+  entityType: ContributionEntityType;
+  parentId?: number;
+  targetId?: number;
+  data?: SanitizedPendingChangeData;
 }
 
 class ContributionController {
@@ -24,25 +25,10 @@ class ContributionController {
         });
       }
       const userId = req.user.id;
-      const { entityType: matchedEntityType, parentId } =
+      const { entityType, parentId, data } =
         matchedData<ContributionRequestData>(req, {
           includeOptionals: true,
         });
-      const entityType = matchedEntityType ?? req.body.entityType;
-
-      if (
-        entityType !== "UNIVERSITY" &&
-        entityType !== "FACULTY" &&
-        entityType !== "STUDY_PROGRAM" &&
-        entityType !== "SUBJECT"
-      ) {
-        return sendError(res, {
-          status: 400,
-          message: "Invalid entity type.",
-        });
-      }
-
-      const data = buildPendingChangeData(entityType, req.body.data);
 
       if (!data) {
         return sendError(res, {
@@ -86,25 +72,10 @@ class ContributionController {
         });
       }
       const userId = req.user.id;
-      const { entityType: matchedEntityType, targetId } =
+      const { entityType, targetId, data } =
         matchedData<ContributionRequestData>(req, {
           includeOptionals: true,
         });
-      const entityType = matchedEntityType ?? req.body.entityType;
-
-      if (
-        entityType !== "UNIVERSITY" &&
-        entityType !== "FACULTY" &&
-        entityType !== "STUDY_PROGRAM" &&
-        entityType !== "SUBJECT"
-      ) {
-        return sendError(res, {
-          status: 400,
-          message: "Invalid entity type.",
-        });
-      }
-
-      const data = buildPendingChangeData(entityType, req.body.data);
 
       if (!data) {
         return sendError(res, {
@@ -148,7 +119,12 @@ class ContributionController {
         });
       }
       const userId = req.user.id;
-      const { entityType, targetId } = matchedData(req);
+      const { entityType, targetId } = matchedData<ContributionRequestData>(
+        req,
+        {
+          includeOptionals: true,
+        },
+      );
 
       const result = await pendingChangesModel.create({
         user: {
