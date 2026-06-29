@@ -1,6 +1,7 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 import type { SubmitEvent } from "react";
 import type { AddNotification } from "../../../types/notification";
 import type { TFunction } from "../../../types/i18n";
@@ -25,12 +26,6 @@ interface StatusSuccessResponse {
   message: string;
   data: {
     email: string;
-  };
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
   };
 }
 
@@ -85,10 +80,12 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
     );
 
     if (!response.ok) {
-      const result = await parseJson<StatusErrorResponse>(response);
+      const message =
+        (await readErrorMessage(response)) ??
+        t("messages.auth.registrationError");
       addNotification({
         type: "error",
-        message: result.error.message,
+        message,
       });
       return;
     }

@@ -4,6 +4,14 @@ import { sendError, sendSuccess } from "../utils/response.js";
 
 import type { Request, Response } from "express";
 
+interface SearchInput {
+  searchTerm: string;
+}
+
+interface UniversityIdInput {
+  id: number;
+}
+
 class V1Controller {
   status(_req: Request, res: Response) {
     return sendSuccess(res, {
@@ -23,7 +31,7 @@ class V1Controller {
   }
 
   async searchUniversities(req: Request, res: Response) {
-    const { searchTerm } = matchedData(req);
+    const { searchTerm } = matchedData<SearchInput>(req);
     const result = await universitiesModel.searchUniversities(searchTerm);
 
     if (result.length > 0) {
@@ -40,14 +48,7 @@ class V1Controller {
   }
 
   async getUniversityById(req: Request, res: Response) {
-    const id = Number(req.params["id"]);
-
-    if (!Number.isInteger(id) || id < 1) {
-      return sendError(res, {
-        status: 400,
-        message: "Invalid university ID.",
-      });
-    }
+    const { id } = matchedData<UniversityIdInput>(req);
 
     const university = await universitiesModel.getById(id);
 
@@ -65,7 +66,7 @@ class V1Controller {
   }
 
   async searchStudyPrograms(req: Request, res: Response) {
-    const { searchTerm } = matchedData(req);
+    const { searchTerm } = matchedData<SearchInput>(req);
     const result = await universitiesModel.searchStudyPrograms(searchTerm);
 
     if (result.length > 0) {

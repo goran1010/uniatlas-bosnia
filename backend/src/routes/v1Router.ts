@@ -12,7 +12,11 @@ v1Router.get(
   universityValidation.searchUniversities,
   v1Controller.searchUniversities,
 );
-v1Router.get("/universities/:id", v1Controller.getUniversityById);
+v1Router.get(
+  "/universities/:id",
+  universityValidation.getUniversityById,
+  v1Controller.getUniversityById,
+);
 v1Router.get(
   "/study-programs/search",
   universityValidation.searchStudyPrograms,

@@ -46,6 +46,13 @@ const dummyData: { data: University[] } = {
 };
 
 vi.spyOn(universitiesModel, "getAll").mockResolvedValue(dummyData.data);
+vi.spyOn(universitiesModel, "getById").mockImplementation((id) => {
+  return vi
+    .fn()
+    .mockResolvedValue(
+      dummyData.data.find((university) => university.id === id) ?? null,
+    )();
+});
 vi.spyOn(universitiesModel, "searchUniversities").mockImplementation((term) => {
   const lower = term.toLowerCase();
 
@@ -140,5 +147,37 @@ describe("GET /api/v1/universities/search", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
+  });
+});
+
+describe("GET /api/v1/universities/:id", () => {
+  test("responds with status 200 and the requested university", async () => {
+    const response = await request(app).get("/api/v1/universities/1");
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        message: "University retrieved successfully.",
+        data: expect.objectContaining({
+          id: 1,
+          name: "University of Sarajevo",
+        }),
+      }),
+    );
+  });
+
+  test("responds with status 400 for invalid university id", async () => {
+    const response = await request(app).get(
+      "/api/v1/universities/not-a-number",
+    );
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        error: expect.objectContaining({
+          message: expect.stringContaining("Invalid university ID."),
+        }),
+      }),
+    );
   });
 });

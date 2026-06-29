@@ -90,3 +90,46 @@ describe("GET /api/v1/universities/search", () => {
     await universitiesModel.deleteUniversity(uniInDb.id);
   });
 });
+
+describe("GET /api/v1/universities/:id", () => {
+  test("responds with status 200 and a university by id", async () => {
+    const uniInDb = await universitiesModel.createUniversity({
+      name: "Test Integration University By ID",
+      city: "Sarajevo",
+      entity: "FBIH",
+      ownership: "JAVNA",
+    });
+
+    const response = await request(app).get(
+      `/api/v1/universities/${uniInDb.id}`,
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        message: "University retrieved successfully.",
+        data: expect.objectContaining({
+          id: uniInDb.id,
+          name: uniInDb.name,
+        }),
+      }),
+    );
+
+    await universitiesModel.deleteUniversity(uniInDb.id);
+  });
+
+  test("responds with status 400 for invalid university id", async () => {
+    const response = await request(app).get(
+      "/api/v1/universities/not-a-number",
+    );
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        error: expect.objectContaining({
+          message: expect.stringContaining("Invalid university ID."),
+        }),
+      }),
+    );
+  });
+});
