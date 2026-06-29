@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { env } from "#config/env.js";
+import { env } from "../../src/config/env.js";
 import pg from "pg";
 import { execSync } from "child_process";
 import path from "path";

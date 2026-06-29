@@ -1,7 +1,7 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 
-import type { User } from "#generated/prisma/client.js";
+import type { User } from "../../src/generated/prisma/client.js";
 import type { Request, Response, NextFunction } from "express";
 
 type ExpressUser = Omit<User, "password">;

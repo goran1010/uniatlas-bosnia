@@ -3,7 +3,7 @@ import { app } from "../../src/app.js";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { universitiesModel } from "../../src/models/universitiesModel.js";
 
-import type { University } from "#generated/prisma/client.js";
+import type { University } from "../../src/generated/prisma/client.js";
 
 beforeEach(() => {
   vi.clearAllMocks();

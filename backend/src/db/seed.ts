@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "#generated/prisma/client.js";
+import { PrismaClient } from "../generated/prisma/client.js";
 import { env } from "../config/env.js";
 
 const __dirname = import.meta.dirname;

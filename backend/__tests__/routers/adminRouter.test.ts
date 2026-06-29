@@ -8,7 +8,7 @@ import type {
   User,
   entityType,
   typeOfChange,
-} from "#generated/prisma/client.js";
+} from "../../src/generated/prisma/client.js";
 import type { Request, Response, NextFunction } from "express";
 import type { JsonValue } from "@prisma/client/runtime/client";
 

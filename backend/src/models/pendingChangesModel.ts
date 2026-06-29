@@ -1,5 +1,5 @@
 import { prisma } from "../db/prisma.js";
-import type { Prisma } from "#generated/prisma/client.js";
+import type { Prisma } from "../generated/prisma/client.js";
 
 class PendingChangesModel {
   create(data: Prisma.PendingChangeCreateInput) {

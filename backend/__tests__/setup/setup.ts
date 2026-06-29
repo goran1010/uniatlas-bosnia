@@ -3,7 +3,7 @@ import { vi, afterAll } from "vitest";
 import pg from "pg";
 
 import type { Request, Response, NextFunction } from "express";
-import { env } from "#config/env.js";
+import { env } from "../../src/config/env.js";
 
 const { Client } = pg;
 const dbName = `test_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;

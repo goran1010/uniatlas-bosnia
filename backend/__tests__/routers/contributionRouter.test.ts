@@ -3,9 +3,12 @@ import { describe, test, expect, vi, beforeEach } from "vitest";
 import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
 import { app } from "../../src/app.js";
 
-import type { User } from "#generated/prisma/client.js";
+import type { User } from "../../src/generated/prisma/client.js";
 import type { Request, Response, NextFunction } from "express";
-import type { entityType, typeOfChange } from "#generated/prisma/client.js";
+import type {
+  entityType,
+  typeOfChange,
+} from "../../src/generated/prisma/client.js";
 import type { JsonValue } from "@prisma/client/runtime/client";
 
 let mockedUser: Omit<User, "password"> | undefined;

@@ -1,4 +1,4 @@
-import type { User as PrismaUser } from "#generated/prisma/client.js";
+import type { User as PrismaUser } from "../generated/prisma/client.js";
 
 function sanitizeUser(user: PrismaUser): Omit<PrismaUser, "password"> {
   if (!user) {

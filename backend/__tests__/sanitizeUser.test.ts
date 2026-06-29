@@ -1,7 +1,7 @@
 import { sanitizeUser, sanitizeUsers } from "../src/utils/sanitizeUser.js";
 import { describe, test, expect } from "vitest";
 
-import type { User } from "#generated/prisma/client.js";
+import type { User } from "../src/generated/prisma/client.js";
 
 describe("sanitizeUser", () => {
   test("should remove password from user object", () => {

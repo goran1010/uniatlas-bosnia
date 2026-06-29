@@ -4,7 +4,7 @@ import { Strategy as GitHubStrategy } from "passport-github2";
 import bcrypt from "bcryptjs";
 import { usersModel } from "../models/usersModel.js";
 import { env } from "./env.js";
-import { sanitizeUser } from "#utils/sanitizeUser.js";
+import { sanitizeUser } from "../utils/sanitizeUser.js";
 
 import type { DoneCallback } from "passport";
 

@@ -1,6 +1,6 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { env } from "#config/env.js";
+import { env } from "../../src/config/env.js";
 
 import type { Request, Response, NextFunction } from "express";
 

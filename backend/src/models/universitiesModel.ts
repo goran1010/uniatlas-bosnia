@@ -1,5 +1,5 @@
 import { prisma } from "../db/prisma.js";
-import type { Prisma, University } from "#generated/prisma/client.js";
+import type { Prisma, University } from "../generated/prisma/client.js";
 
 const fullUniversityInclude = {
   faculties: {
