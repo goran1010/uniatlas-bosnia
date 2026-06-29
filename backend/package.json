@@ -9,14 +9,13 @@
     "#*": "./src/*"
   },
   "scripts": {
-    "build": "tsc --build",
-    "heroku-prebuild": "npm run db:generate",
+    "build": "npm run db:deploy_generate && tsc --build",
     "db:migrate_dev": "npx prisma migrate dev --config ./src/prisma.config.ts --name",
     "db:deploy_generate": "npx prisma migrate deploy --config ./src/prisma.config.ts && npx prisma generate --config ./src/prisma.config.ts",
     "db:generate": "npx prisma generate --config ./src/prisma.config.ts",
     "db:seed": "npx prisma db seed --config ./src/prisma.config.ts",
     "test": "NODE_ENV=test vitest",
-    "start": "npm run db:deploy_generate && node --env-file-if-exists=.env dist/index.js",
+    "start": "node --env-file-if-exists=.env dist/src/index.js",
     "dev": "tsx watch --env-file-if-exists=.env src/index.ts | pino-pretty",
     "lint": "eslint .",
     "format": "prettier --write .",
