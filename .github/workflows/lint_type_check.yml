@@ -49,7 +49,7 @@ jobs:
         run: npm run install:all
 
       - name: Generate Prisma client
-        run: npx run db:generate
+        run: npm run db:generate
 
       - name: Type check frontend
         run: npm run typecheck:frontend
