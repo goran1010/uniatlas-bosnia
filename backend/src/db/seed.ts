@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import fs from "node:fs";
 import path from "node:path";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -17,7 +16,7 @@ if (!connectionString) {
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
-const filePath = path.resolve(__dirname, "JSON_files/universities.json");
+const filePath = path.resolve(__dirname, "../../JSON_files/universities.json");
 const JSONdata = fs.readFileSync(filePath, "utf-8");
 const universities = JSON.parse(JSONdata);
 
@@ -40,6 +39,7 @@ interface University {
 }
 
 async function main() {
+  // eslint-disable-next-line no-console
   console.log("Seeding universities...");
 
   const result = await prisma.university.createMany({
@@ -60,6 +60,7 @@ async function main() {
     skipDuplicates: true,
   });
 
+  // eslint-disable-next-line no-console
   console.log(`Inserted ${result.count} new universities.`);
 }
 
