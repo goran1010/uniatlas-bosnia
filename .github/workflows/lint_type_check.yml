@@ -1,0 +1,55 @@
+name: Lint and Type Check
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Run lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Lint frontend
+        run: npm run lint:frontend
+
+      - name: Lint backend
+        run: npm run lint:backend
+
+  type_check:
+    runs-on: ubuntu-latest
+    name: Run type check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Type check frontend
+        run: npm run typecheck:frontend
+
+      - name: Type check backend
+        run: npm run typecheck:backend

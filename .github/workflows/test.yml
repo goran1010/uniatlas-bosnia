@@ -1,4 +1,4 @@
-name: CI pipeline
+name: Test CI Pipeline
 
 on:
   push:
@@ -10,28 +10,6 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    name: Run lint
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Node.js 24
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: npm
-
-      - name: Install dependencies
-        run: npm run install:all
-
-      - name: Lint frontend
-        run: npm run lint:frontend
-
-      - name: Lint backend
-        run: npm run lint:backend
-
   test:
     runs-on: ubuntu-latest
     name: Run tests
