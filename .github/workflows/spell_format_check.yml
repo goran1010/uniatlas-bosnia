@@ -1,0 +1,44 @@
+name: Spell and Format Check
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    name: Run formatting check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Check frontend formatting
+        run: npm run format:check:frontend
+
+      - name: Check backend formatting
+        run: npm run format:check:backend
+
+  spell:
+    runs-on: ubuntu-latest
+    name: Run spell check
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: streetsidesoftware/cspell-action@v1
+        with:
+          files: "**/*.{js,ts,jsx,tsx,md}"
+          config: ".cspellrc.json"
