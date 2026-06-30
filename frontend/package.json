@@ -1,14 +1,19 @@
 {
-  "name": "uniatlas-bosnia",
+  "name": "uniatlas-bosnia-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Goran Jović",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -39,6 +44,7 @@
     "eslint-plugin-react-x": "^5.8.9",
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
+    "prettier": "^3.8.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12",

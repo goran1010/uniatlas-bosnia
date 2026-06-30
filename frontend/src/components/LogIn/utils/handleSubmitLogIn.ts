@@ -1,6 +1,7 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 import type { SubmitEvent } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { AddNotification } from "../../../types/notification";
@@ -25,12 +26,6 @@ type HandleLogInSubmit = (
 interface StatusSuccessResponse {
   message: string;
   data: UserData;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
 }
 
 async function parseJson<T>(response: Response): Promise<T> {
@@ -84,10 +79,11 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     );
 
     if (!response.ok) {
-      const result = await parseJson<StatusErrorResponse>(response);
+      const message =
+        (await readErrorMessage(response)) ?? t("messages.auth.loginError");
       addNotification({
         type: "error",
-        message: result.error.message,
+        message,
       });
       return;
     }

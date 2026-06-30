@@ -1,6 +1,7 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
@@ -30,12 +31,6 @@ export interface HandleSubmitUniversityEntityParams {
 interface StatusSuccessResponse {
   message: string;
   data: PendingChange;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
 }
 
 async function parseJson<T>(response: Response): Promise<T> {
@@ -106,10 +101,11 @@ async function handleSubmitUniversityEntity({
       setFormState({ entityType: "", parentId: "", targetId: "", data: {} });
       return;
     }
-    const result = await parseJson<StatusErrorResponse>(response);
+    const message =
+      (await readErrorMessage(response)) ?? t("messages.universities.addError");
     addNotification({
       type: "error",
-      message: result.error.message,
+      message,
     });
   } catch (err) {
     addNotification({

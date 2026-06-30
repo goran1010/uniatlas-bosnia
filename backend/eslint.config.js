@@ -1,30 +1,23 @@
 import js from "@eslint/js";
+import { defineConfig, globalIgnores } from "eslint/config";
+import tseslint from "typescript-eslint";
 import globals from "globals";
-import { defineConfig } from "eslint/config";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default defineConfig([
+  globalIgnores(["dist/", "node_modules/", "coverage/", "src/generated/"]),
+
   {
-    ignores: ["generated/**"],
-  },
-  {
-    files: ["**/*.{js,mjs,cjs}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-  },
-  { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.node } },
-  {
+    files: ["**/*.{js,ts}"],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.strict,
+      tseslint.configs.stylistic,
+    ],
     rules: {
       "no-console": ["warn", { allow: ["error", "warn"] }],
     },
-  },
-  {
-    files: ["**/*.test.js", "**/*.spec.js"],
     languageOptions: {
-      globals: {
-        ...globals.jest,
-      },
+      globals: globals.node,
     },
   },
-  eslintConfigPrettier,
 ]);

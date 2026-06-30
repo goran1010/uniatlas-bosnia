@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 import { BACKEND_URL } from "../utils/envConfig";
+import {
+  isExpectedFetchError,
+  readErrorMessage,
+} from "../utils/fetchErrorHandling";
 
 import type { Notification } from "../types/notification";
 import type { ServerStatus } from "../utils/serverStatus";
@@ -14,12 +18,6 @@ export type Message = string | null;
 interface StatusSuccessResponse {
   message: Message;
   data: UserData;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
 }
 
 async function parseJson<T>(response: Response): Promise<T> {
@@ -63,7 +61,9 @@ function useStatusCheck(
         );
 
         if (!response.ok) {
-          const result = await parseJson<StatusErrorResponse>(response);
+          const message =
+            (await readErrorMessage(response)) ??
+            tRef.current("loginStatus.error");
 
           if (isCancelled) {
             return;
@@ -71,7 +71,7 @@ function useStatusCheck(
 
           addNotification({
             type: "error",
-            message: result.error.message,
+            message,
           });
 
           return;
@@ -91,6 +91,10 @@ function useStatusCheck(
         setUserData(result.data);
       } catch (err) {
         if (isCancelled) {
+          return;
+        }
+
+        if (isExpectedFetchError(err)) {
           return;
         }
 

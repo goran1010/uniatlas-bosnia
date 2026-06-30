@@ -2,6 +2,10 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import {
+  isExpectedFetchError,
+  readErrorMessage,
+} from "../../../utils/fetchErrorHandling";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -9,12 +13,6 @@ import type { TFunction } from "../../../types/i18n";
 interface StatusSuccessResponse {
   message: string;
   data: PendingChange[];
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
 }
 
 async function parseJson<T>(response: Response): Promise<T> {
@@ -59,12 +57,18 @@ function useGetPendingChangesAdmin(
           });
           return;
         }
-        const result = await parseJson<StatusErrorResponse>(response);
+        const message =
+          (await readErrorMessage(response)) ??
+          t("messages.pendingChanges.fetchError");
         addNotification({
           type: "error",
-          message: result.error.message,
+          message,
         });
       } catch (error) {
+        if (isExpectedFetchError(error)) {
+          return;
+        }
+
         console.error("Error fetching pending changes:", error);
         addNotification({
           type: "error",

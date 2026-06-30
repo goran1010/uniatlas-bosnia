@@ -2,11 +2,13 @@ export interface Endpoint {
   method: "GET" | "POST" | "PUT" | "DELETE";
   path: string;
   descriptionKey: string;
-  params?: {
-    name?: string;
-    required?: boolean;
-    descriptionKey?: string;
-  }[] | null;
+  params?:
+    | {
+        name?: string;
+        required?: boolean;
+        descriptionKey?: string;
+      }[]
+    | null;
   successExample?: string | null;
   errorExample?: string | null;
 }

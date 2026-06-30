@@ -1,6 +1,7 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -21,12 +22,6 @@ interface StatusSuccessResponse {
   message: string;
   data: {
     email: string;
-  };
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
   };
 }
 
@@ -69,8 +64,6 @@ const handleConfirm: HandleConfirm = async function (
         },
         body: JSON.stringify({
           id: change.id,
-          entityType: change.entityType,
-          typeOfChange: change.typeOfChange,
         }),
         credentials: "include",
       },
@@ -88,10 +81,12 @@ const handleConfirm: HandleConfirm = async function (
       });
       return;
     }
-    const result = await parseJson<StatusErrorResponse>(response);
+    const message =
+      (await readErrorMessage(response)) ??
+      `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`;
     addNotification({
       type: "error",
-      message: result.error.message,
+      message,
     });
   } catch (error) {
     addNotification({
