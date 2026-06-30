@@ -12,7 +12,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    name: Run lint
+    name: Run lint check
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -34,7 +34,7 @@ jobs:
 
   type_check:
     runs-on: ubuntu-latest
-    name: Run type check
+    name: Run type-check
     steps:
       - name: Checkout
         uses: actions/checkout@v6
