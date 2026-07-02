@@ -1,4 +1,4 @@
-import { universitiesModel } from "../models/universitiesModel.js";
+import { prisma } from "../db/prisma.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 
@@ -23,7 +23,7 @@ class V1Controller {
   }
 
   async getUniversities(_req: Request, res: Response) {
-    const universities = await universitiesModel.getAll();
+    const universities = await prisma.university.findMany();
     return sendSuccess(res, {
       message: "Universities retrieved successfully.",
       data: universities,
@@ -32,7 +32,14 @@ class V1Controller {
 
   async searchUniversities(req: Request, res: Response) {
     const { searchTerm } = matchedData<SearchInput>(req);
-    const result = await universitiesModel.searchUniversities(searchTerm);
+    const result = await prisma.university.findMany({
+      where: {
+        name: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+    });
 
     if (result.length > 0) {
       return sendSuccess(res, {
@@ -50,7 +57,9 @@ class V1Controller {
   async getUniversityById(req: Request, res: Response) {
     const { id } = matchedData<UniversityIdInput>(req);
 
-    const university = await universitiesModel.getById(id);
+    const university = await prisma.university.findUnique({
+      where: { id },
+    });
 
     if (!university) {
       return sendError(res, {
@@ -67,7 +76,14 @@ class V1Controller {
 
   async searchStudyPrograms(req: Request, res: Response) {
     const { searchTerm } = matchedData<SearchInput>(req);
-    const result = await universitiesModel.searchStudyPrograms(searchTerm);
+    const result = await prisma.studyProgram.findMany({
+      where: {
+        name: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
+    });
 
     if (result.length > 0) {
       return sendSuccess(res, {

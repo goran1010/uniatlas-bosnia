@@ -1,4 +1,3 @@
-import { usersModel } from "../models/usersModel.js";
 import crypto from "crypto";
 import { emailConfirmHTML } from "../utils/emailConfirmHTML.js";
 import { passport } from "../config/passport.js";
@@ -6,8 +5,8 @@ import { sendConfirmationEmail } from "../email/confirmationEmail.js";
 import bcrypt from "bcryptjs";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
-import { pendingUserModel } from "../models/pendingUsersModel.js";
 import { env } from "../config/env.js";
+import { prisma } from "../db/prisma.js";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -16,7 +15,7 @@ class AuthController {
     try {
       const { email, password } = matchedData(req);
 
-      const existingUser = await usersModel.findOne({ email });
+      const existingUser = await prisma.user.findUnique({ where: { email } });
       if (existingUser) {
         return sendError(res, {
           status: 400,
@@ -29,23 +28,27 @@ class AuthController {
       const confirmationToken = crypto.randomBytes(32).toString("hex");
       const confirmationLink = `${env.BACKEND_URL}/auth/confirm/${confirmationToken}`;
 
-      const existingPending = await pendingUserModel.findMany({ email });
+      const existingPending = await prisma.pendingUser.findMany({
+        where: { email },
+      });
 
       if (existingPending.length > 0) {
-        await pendingUserModel.update(
-          { email },
-          {
+        await prisma.pendingUser.updateMany({
+          where: { email },
+          data: {
             password: hashedPassword,
             token: confirmationToken,
             expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
           },
-        );
+        });
       } else {
-        await pendingUserModel.create({
-          email,
-          password: hashedPassword,
-          token: confirmationToken,
-          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        await prisma.pendingUser.create({
+          data: {
+            email,
+            password: hashedPassword,
+            token: confirmationToken,
+            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          },
         });
       }
 
@@ -58,7 +61,7 @@ class AuthController {
           message: "Registration successful! Check your email.",
         });
       }
-      await pendingUserModel.delete({ email });
+      await prisma.pendingUser.deleteMany({ where: { email } });
       return sendError(res, {
         status: 500,
         message:
@@ -86,7 +89,9 @@ class AuthController {
         return;
       }
 
-      const pendingUsers = await pendingUserModel.findMany({ token });
+      const pendingUsers = await prisma.pendingUser.findMany({
+        where: { token },
+      });
       const pendingUser = pendingUsers[0];
 
       if (!pendingUser) {
@@ -99,7 +104,7 @@ class AuthController {
       }
 
       if (pendingUser.expiresAt < new Date()) {
-        await pendingUserModel.delete({ id: pendingUser.id });
+        await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
 
         sendError(res, {
           status: 400,
@@ -108,12 +113,14 @@ class AuthController {
         return;
       }
 
-      const user = await usersModel.create({
-        email: pendingUser.email,
-        password: pendingUser.password,
+      const user = await prisma.user.create({
+        data: {
+          email: pendingUser.email,
+          password: pendingUser.password,
+        },
       });
 
-      await pendingUserModel.delete({ id: pendingUser.id });
+      await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
 
       if (!user) {
         sendError(res, {

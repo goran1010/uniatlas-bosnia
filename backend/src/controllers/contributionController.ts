@@ -1,4 +1,4 @@
-import { pendingChangesModel } from "../models/pendingChangesModel.js";
+import { prisma } from "../db/prisma.js";
 import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
@@ -37,16 +37,18 @@ class ContributionController {
         });
       }
 
-      const result = await pendingChangesModel.create({
-        user: {
-          connect: {
-            id: userId,
+      const result = await prisma.pendingChange.create({
+        data: {
+          user: {
+            connect: {
+              id: userId,
+            },
           },
+          entityType,
+          typeOfChange: "CREATE",
+          parentId: parentId ? Number(parentId) : null,
+          data,
         },
-        entityType,
-        typeOfChange: "CREATE",
-        parentId: parentId ? Number(parentId) : null,
-        data,
       });
 
       return sendSuccess(res, {
@@ -84,16 +86,19 @@ class ContributionController {
         });
       }
 
-      const result = await pendingChangesModel.create({
-        user: {
-          connect: {
-            id: userId,
+      const result = await prisma.pendingChange.create({
+        data: {
+          user: {
+            connect: {
+              id: userId,
+            },
           },
+
+          entityType,
+          typeOfChange: "UPDATE",
+          targetId: Number(targetId),
+          data,
         },
-        entityType,
-        typeOfChange: "UPDATE",
-        targetId: Number(targetId),
-        data,
       });
 
       return sendSuccess(res, {
@@ -126,16 +131,18 @@ class ContributionController {
         },
       );
 
-      const result = await pendingChangesModel.create({
-        user: {
-          connect: {
-            id: userId,
+      const result = await prisma.pendingChange.create({
+        data: {
+          user: {
+            connect: {
+              id: userId,
+            },
           },
+          entityType,
+          typeOfChange: "DELETE",
+          targetId: Number(targetId),
+          data: {},
         },
-        entityType,
-        typeOfChange: "DELETE",
-        targetId: Number(targetId),
-        data: {},
       });
 
       return sendSuccess(res, {
@@ -160,8 +167,8 @@ class ContributionController {
       });
     }
     const { id } = req.user;
-    const pendingChanges = await pendingChangesModel.findMany({
-      userId: id,
+    const pendingChanges = await prisma.pendingChange.findMany({
+      where: { userId: id },
     });
 
     return sendSuccess(res, {
@@ -180,9 +187,8 @@ class ContributionController {
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData(req);
 
-    const pendingChange = await pendingChangesModel.findMany({
-      userId: id,
-      id: pendingChangeId,
+    const pendingChange = await prisma.pendingChange.findMany({
+      where: { userId: id, id: pendingChangeId },
     });
 
     if (!pendingChange || pendingChange.length === 0) {
@@ -192,8 +198,8 @@ class ContributionController {
       });
     }
 
-    await pendingChangesModel.delete({
-      id: pendingChangeId,
+    await prisma.pendingChange.delete({
+      where: { id: pendingChangeId },
     });
 
     return sendSuccess(res, {
