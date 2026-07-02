@@ -132,7 +132,7 @@
     "improveContribute": "Improve Data",
     "improveSignUp": "Create an Account",
     "forDevsHeading": "For Developers",
-    "forDevsDescription": "UniAtlas Bosnia exposes a free, unauthenticated REST API. Fetch all universities, search by name or city, retrieve full detail for a single university, or search study programs across all institutions.",
+    "forDevsDescription": "UniAtlas Bosnia exposes a free, unauthenticated REST API. Fetch all universities, search by name, city, or acronym, retrieve full detail for a single university, or search study programs across all institutions.",
     "forDevsNote": "No authentication required for public endpoints.",
     "forDevsCta": "View API Docs"
   },
@@ -141,7 +141,7 @@
     "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
     "authIntro": "Authenticated endpoints are separate from the public base URL and use session cookies plus CSRF tokens for write operations.",
     "dataObject": "University object",
-    "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": number | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
+    "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoints",
     "authFlowTitle": "Authenticated Data Contribution Flow",
     "authFlowBody": "These endpoints require an authenticated session (credentials: include) and use CSRF protection for mutating requests.",

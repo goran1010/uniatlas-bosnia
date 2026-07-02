@@ -126,7 +126,7 @@
     "improveContribute": "Poboljšaj podatke",
     "improveSignUp": "Kreirajte nalog",
     "forDevsHeading": "Za programere",
-    "forDevsDescription": "UniAtlas Bosnia nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu ili gradu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
+    "forDevsDescription": "UniAtlas Bosnia nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu, gradu ili akronimu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
     "forDevsNote": "Autentifikacija nije potrebna za javne endpoint-e.",
     "forDevsCta": "Pogledajte API dokumentaciju"
   },
@@ -135,7 +135,7 @@
     "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
     "authIntro": "Autentifikovani endpoint-i su odvojeni od javnog osnovnog URL-a i koriste sesijske kolačiće plus CSRF tokene za izmjene podataka.",
     "dataObject": "Objekat univerziteta",
-    "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": number | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
+    "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoint-i",
     "authFlowTitle": "Autentifikovani tok za doprinos podacima",
     "authFlowBody": "Ovi endpoint-i zahtijevaju autentifikovanu sesiju (credentials: include) i koriste CSRF zaštitu za zahtjeve koji mijenjaju podatke.",
