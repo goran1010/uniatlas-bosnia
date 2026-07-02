@@ -44,9 +44,14 @@ const passportMock = {
 };
 
 const usersModelMock = {
-  findOne: vi.fn(),
+  findUnique: vi.fn(),
   update: vi.fn(),
   create: vi.fn(),
+};
+
+const prismaMock = {
+  user: usersModelMock,
+  $disconnect: vi.fn(),
 };
 
 const bcryptMock = {
@@ -69,8 +74,9 @@ vi.mock("bcryptjs", () => ({
   default: bcryptMock,
 }));
 
-vi.mock("../src/models/usersModel.js", () => ({
-  usersModel: usersModelMock,
+vi.mock("../src/db/prisma.js", (originalModule) => ({
+  ...originalModule,
+  prisma: prismaMock,
 }));
 
 async function loadStrategies() {
@@ -110,9 +116,10 @@ beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
 
-  usersModelMock.findOne.mockReset();
+  usersModelMock.findUnique.mockReset();
   usersModelMock.update.mockReset();
   usersModelMock.create.mockReset();
+  prismaMock.$disconnect.mockReset();
   bcryptMock.compare.mockReset();
 });
 
@@ -121,13 +128,13 @@ describe("passport config", () => {
     const { localVerify } = await loadStrategies();
     const done = vi.fn();
 
-    usersModelMock.findOne.mockResolvedValue({ id: 1, password: "hashed" });
+    usersModelMock.findUnique.mockResolvedValue({ id: 1, password: "hashed" });
     bcryptMock.compare.mockResolvedValue(false);
 
     await localVerify("john@example.com", "wrong-password", done);
 
-    expect(usersModelMock.findOne).toHaveBeenCalledWith({
-      email: "john@example.com",
+    expect(usersModelMock.findUnique).toHaveBeenCalledWith({
+      where: { email: "john@example.com" },
     });
     expect(bcryptMock.compare).toHaveBeenCalledWith("wrong-password", "hashed");
     expect(done).toHaveBeenCalledWith(null, false, {
@@ -140,7 +147,7 @@ describe("passport config", () => {
     const done = vi.fn();
     const dbError = new Error("db down");
 
-    usersModelMock.findOne.mockRejectedValue(dbError);
+    usersModelMock.findUnique.mockRejectedValue(dbError);
 
     await localVerify("john@example.com", "any", done);
 
@@ -152,11 +159,13 @@ describe("passport config", () => {
     const done = vi.fn();
     const existingUser = { id: 10, githubId: "123" };
 
-    usersModelMock.findOne.mockResolvedValueOnce(existingUser);
+    usersModelMock.findUnique.mockResolvedValueOnce(existingUser);
 
-    await githubVerify("token", "refresh", { id: 123 }, done);
+    await githubVerify("token", "refresh", { id: "123" }, done);
 
-    expect(usersModelMock.findOne).toHaveBeenCalledWith({ githubId: "123" });
+    expect(usersModelMock.findUnique).toHaveBeenCalledWith({
+      where: { githubId: "123" },
+    });
     expect(done).toHaveBeenCalledWith(null, existingUser);
     expect(usersModelMock.update).not.toHaveBeenCalled();
     expect(usersModelMock.create).not.toHaveBeenCalled();
@@ -166,7 +175,7 @@ describe("passport config", () => {
     const { githubVerify } = await loadStrategies();
     const done = vi.fn();
 
-    usersModelMock.findOne.mockResolvedValueOnce(null);
+    usersModelMock.findUnique.mockResolvedValueOnce(null);
 
     await githubVerify("token", "refresh", { id: 123, emails: [] }, done);
 
@@ -185,7 +194,7 @@ describe("passport config", () => {
       githubId: "123",
     };
 
-    usersModelMock.findOne
+    usersModelMock.findUnique
       .mockResolvedValueOnce(null)
       .mockResolvedValueOnce(userByEmail);
     usersModelMock.update.mockResolvedValue(linkedUser);
@@ -193,20 +202,20 @@ describe("passport config", () => {
     await githubVerify(
       "token",
       "refresh",
-      { id: 123, emails: [{ value: "github-user@example.com" }] },
+      { id: "123", emails: [{ value: "github-user@example.com" }] },
       done,
     );
 
-    expect(usersModelMock.findOne).toHaveBeenNthCalledWith(1, {
-      githubId: "123",
+    expect(usersModelMock.findUnique).toHaveBeenNthCalledWith(1, {
+      where: { githubId: "123" },
     });
-    expect(usersModelMock.findOne).toHaveBeenNthCalledWith(2, {
-      email: "github-user@example.com",
+    expect(usersModelMock.findUnique).toHaveBeenNthCalledWith(2, {
+      where: { email: "github-user@example.com" },
     });
-    expect(usersModelMock.update).toHaveBeenCalledWith(
-      { id: 7 },
-      { githubId: "123" },
-    );
+    expect(usersModelMock.update).toHaveBeenCalledWith({
+      where: { id: 7 },
+      data: { githubId: "123" },
+    });
     expect(done).toHaveBeenCalledWith(null, linkedUser);
   });
 
@@ -219,7 +228,7 @@ describe("passport config", () => {
       githubId: "555",
     };
 
-    usersModelMock.findOne
+    usersModelMock.findUnique
       .mockResolvedValueOnce(null)
       .mockResolvedValueOnce(null);
     usersModelMock.create.mockResolvedValue(createdUser);
@@ -227,13 +236,15 @@ describe("passport config", () => {
     await githubVerify(
       "token",
       "refresh",
-      { id: 555, emails: [{ value: "new-github@example.com" }] },
+      { id: "555", emails: [{ value: "new-github@example.com" }] },
       done,
     );
 
     expect(usersModelMock.create).toHaveBeenCalledWith({
-      email: "new-github@example.com",
-      githubId: "555",
+      data: {
+        email: "new-github@example.com",
+        githubId: "555",
+      },
     });
     expect(done).toHaveBeenCalledWith(null, createdUser);
   });
@@ -243,7 +254,7 @@ describe("passport config", () => {
     const done = vi.fn();
     const githubError = new Error("github failure");
 
-    usersModelMock.findOne.mockRejectedValue(githubError);
+    usersModelMock.findUnique.mockRejectedValue(githubError);
 
     await githubVerify("token", "refresh", { id: 1000 }, done);
 
@@ -282,11 +293,13 @@ describe("passport config", () => {
     const done = vi.fn();
     const user = { id: 2, email: "u@example.com" };
 
-    usersModelMock.findOne.mockResolvedValue(user);
+    usersModelMock.findUnique.mockResolvedValue(user);
 
     await deserializeUser(2, done);
 
-    expect(usersModelMock.findOne).toHaveBeenCalledWith({ id: 2 });
+    expect(usersModelMock.findUnique).toHaveBeenCalledWith({
+      where: { id: 2 },
+    });
     expect(done).toHaveBeenCalledWith(null, user);
   });
 
@@ -295,7 +308,7 @@ describe("passport config", () => {
     const done = vi.fn();
     const dbError = new Error("db read failed");
 
-    usersModelMock.findOne.mockRejectedValue(dbError);
+    usersModelMock.findUnique.mockRejectedValue(dbError);
 
     await deserializeUser(2, done);
 
