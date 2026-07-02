@@ -14,7 +14,6 @@ For more info on how to connect your app to the REST API, visit <https://uniatla
 
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
 - [API Overview](#api-overview)
 - [Running the Tests](#running-the-tests)
 - [Deployment](#deployment)
@@ -146,42 +145,6 @@ npm run dev:frontend
 ```
 
 You should now be able to access the API at `http://localhost:3000` and the web interface at `http://localhost:5173`.
-
-## Available Scripts
-
-Run these from the repository root.
-
-### Installation
-
-- `npm run install:all`: install root, backend, and frontend dependencies
-
-### Database
-
-- `npm run db:deploy_generate`: apply development migrations and generate Prisma client
-- `npm run db:generate`: generate Prisma client only
-- `npm run db:seed`: seed the development database
-- `npm run db:test:deploy_generate`: create/apply migrations for the test database and generate Prisma client in test mode
-- `npm run db:test:seed`: seed the test database
-- `npm run prisma_studio`: open Prisma Studio from the backend directory
-
-### Development
-
-- `npm run dev:all`: run backend and frontend together
-- `npm run dev:backend`: run the Express backend with file watching
-- `npm run dev:frontend`: run the Vite frontend dev server
-
-### Testing
-
-- `npm run test:all`: run backend and frontend tests together
-- `npm run test:backend`: run backend tests
-- `npm run test:frontend`: run frontend tests
-- `npm run test:coverage:all`: run coverage for both apps
-- `npm run test:coverage:backend`: backend coverage only
-- `npm run test:coverage:frontend`: frontend coverage only
-
-### Maintenance
-
-- `npm run remove_merged`: delete local branches already merged into `main` or `master`
 
 ## API Overview
 
@@ -316,7 +279,7 @@ The public REST API (`/api/v1/...`) is served directly from the backend with ope
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [React Router](https://reactrouter.com/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/react)
 
 ## Contributing
