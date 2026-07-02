@@ -156,7 +156,7 @@ describe("ContributionForm component rendering", () => {
 
   test("shows an error notification when pending changes fail to load", async () => {
     setupFetchMock({
-      error: "Pending changes failed to load.",
+      error: "Error fetching pending changes.",
     });
     render(<Wrapper initialUser={{ email: "some@email.com", role: "USER" }} />);
 
@@ -165,7 +165,7 @@ describe("ContributionForm component rendering", () => {
 
     const alert = await screen.findByRole("alert");
 
-    expect(alert).toHaveTextContent(/Pending changes failed to load\./i);
+    expect(alert).toHaveTextContent(/Error fetching pending changes\./i);
     expect(screen.getByText(/no pending changes/i)).toBeInTheDocument();
   });
 
