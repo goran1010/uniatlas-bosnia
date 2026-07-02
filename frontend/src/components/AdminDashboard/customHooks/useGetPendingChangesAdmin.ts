@@ -2,10 +2,6 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
-import {
-  isExpectedFetchError,
-  readErrorMessage,
-} from "../../../utils/fetchErrorHandling";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -17,6 +13,19 @@ interface StatusSuccessResponse {
 
 async function parseJson<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
+}
+
+async function readErrorMessage(response: Response) {
+  try {
+    const result = (await response.json()) as {
+      error?: { message?: string };
+      message?: string;
+    };
+
+    return result.error?.message ?? result.message ?? null;
+  } catch {
+    return null;
+  }
 }
 
 function useGetPendingChangesAdmin(
@@ -65,7 +74,7 @@ function useGetPendingChangesAdmin(
           message,
         });
       } catch (error) {
-        if (isExpectedFetchError(error)) {
+        if (error instanceof Error && error.message === "Server is not ready") {
           return;
         }
 

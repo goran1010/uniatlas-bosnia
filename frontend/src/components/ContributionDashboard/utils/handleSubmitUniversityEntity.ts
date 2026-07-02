@@ -1,7 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
-import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
@@ -35,6 +34,19 @@ interface StatusSuccessResponse {
 
 async function parseJson<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
+}
+
+async function readErrorMessage(response: Response) {
+  try {
+    const result = (await response.json()) as {
+      error?: { message?: string };
+      message?: string;
+    };
+
+    return result.error?.message ?? result.message ?? null;
+  } catch {
+    return null;
+  }
 }
 
 async function handleSubmitUniversityEntity({

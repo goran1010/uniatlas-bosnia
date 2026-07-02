@@ -4,7 +4,7 @@ import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 
 function Home() {
-  const { t } = use(RootContext);
+  const { t, userData } = use(RootContext);
   const pageTitle = `${t("home.title")} | ${t("title.app")}`;
 
   return (
@@ -59,34 +59,21 @@ function Home() {
             <li>{t("home.improveStep3")}</li>
           </ol>
           <div className="flex flex-wrap gap-3 justify-center items-center">
-            <Link
-              to="/improve-data"
-              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
-            >
-              {t("home.improveContribute")}
-            </Link>
-            <Link
-              to="/signup"
-              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
-            >
-              {t("home.improveSignUp")}
-            </Link>
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold text-center">
-            {t("home.whyHeading")}
-          </h2>
-          <p>{t("home.whyDescription1")}</p>
-          <p>{t("home.whyDescription2")}</p>
-          <div className="flex flex-wrap gap-3 justify-center items-center">
-            <Link
-              to="/login"
-              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
-            >
-              {t("home.whyLogin")}
-            </Link>
+            {userData ? (
+              <Link
+                to="/improve-data"
+                className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+              >
+                {t("home.improveContribute")}
+              </Link>
+            ) : (
+              <Link
+                to="/signup"
+                className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+              >
+                {t("home.improveSignUp")}
+              </Link>
+            )}
           </div>
         </section>
 
