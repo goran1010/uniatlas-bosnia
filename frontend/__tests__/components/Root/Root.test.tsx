@@ -74,7 +74,7 @@ describe("Root component", () => {
   test("renders Home heading if server is live", async () => {
     renderRoot();
     const homeHeading = await screen.findByRole("heading", {
-      name: /UniAtlas Bosnia/i,
+      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
     });
     expect(homeHeading).toBeInTheDocument();
   });
@@ -146,7 +146,7 @@ describe("Root component", () => {
     renderRoot();
 
     const screenLink = await screen.findAllByRole("link", { name: /Log In/i });
-    expect(screenLink.length).toBe(2);
+    expect(screenLink.length).toBe(1);
   });
 });
 

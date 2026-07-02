@@ -51,7 +51,7 @@ describe("ErrorPage navigation", () => {
     await user.click(goHomeLink);
 
     const homePageHeading = await screen.findByRole("heading", {
-      name: /UniAtlas Bosnia/i,
+      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
     });
     expect(homePageHeading).toBeInTheDocument();
     vi.restoreAllMocks();

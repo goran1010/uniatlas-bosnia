@@ -1,10 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 import { BACKEND_URL } from "../utils/envConfig";
-import {
-  isExpectedFetchError,
-  readErrorMessage,
-} from "../utils/fetchErrorHandling";
 
 import type { Notification } from "../types/notification";
 import type { ServerStatus } from "../utils/serverStatus";
@@ -61,9 +57,7 @@ function useStatusCheck(
         );
 
         if (!response.ok) {
-          const message =
-            (await readErrorMessage(response)) ??
-            tRef.current("loginStatus.error");
+          const message = tRef.current("loginStatus.error");
 
           if (isCancelled) {
             return;
@@ -91,10 +85,6 @@ function useStatusCheck(
         setUserData(result.data);
       } catch (err) {
         if (isCancelled) {
-          return;
-        }
-
-        if (isExpectedFetchError(err)) {
           return;
         }
 

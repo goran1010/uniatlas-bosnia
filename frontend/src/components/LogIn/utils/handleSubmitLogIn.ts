@@ -1,7 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
-import { readErrorMessage } from "../../../utils/fetchErrorHandling";
 import type { SubmitEvent } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { AddNotification } from "../../../types/notification";
@@ -30,6 +29,19 @@ interface StatusSuccessResponse {
 
 async function parseJson<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
+}
+
+async function readErrorMessage(response: Response) {
+  try {
+    const result = (await response.json()) as {
+      error?: { message?: string };
+      message?: string;
+    };
+
+    return result.error?.message ?? result.message ?? null;
+  } catch {
+    return null;
+  }
 }
 
 const handleSubmitLogIn: HandleLogInSubmit = async function (
