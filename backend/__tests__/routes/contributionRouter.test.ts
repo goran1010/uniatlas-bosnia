@@ -1,6 +1,6 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
+import { prisma } from "../../src/db/prisma.js";
 import { app } from "../../src/app.js";
 
 import type { User } from "../../src/generated/prisma/client.js";
@@ -115,7 +115,7 @@ describe("POST /users/contribution/universities", () => {
         ownership: "JAVNA",
       },
     };
-    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
+    vi.spyOn(prisma.pendingChange, "create").mockResolvedValue(mockResult);
 
     mockedUser = {
       id: "1",
@@ -146,16 +146,23 @@ describe("POST /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
-    expect(pendingChangesModel.create).toHaveBeenCalledWith(
+    expect(prisma.pendingChange.create).toHaveBeenCalledWith(
       expect.objectContaining({
-        entityType: "UNIVERSITY",
-        parentId: null,
-        typeOfChange: "CREATE",
         data: {
-          name: "TestCity University",
-          city: "TestCity",
-          entity: "FBIH",
-          ownership: "JAVNA",
+          user: {
+            connect: {
+              id: "1",
+            },
+          },
+          entityType: "UNIVERSITY",
+          parentId: null,
+          typeOfChange: "CREATE",
+          data: {
+            name: "TestCity University",
+            city: "TestCity",
+            entity: "FBIH",
+            ownership: "JAVNA",
+          },
         },
       }),
     );
@@ -245,7 +252,7 @@ describe("PUT /users/contribution/universities", () => {
         githubId: null,
       },
     };
-    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
+    vi.spyOn(prisma.pendingChange, "create").mockResolvedValue(mockResult);
 
     mockedUser = {
       id: "1",
@@ -272,13 +279,20 @@ describe("PUT /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
-    expect(pendingChangesModel.create).toHaveBeenCalledWith(
+    expect(prisma.pendingChange.create).toHaveBeenCalledWith(
       expect.objectContaining({
-        entityType: "UNIVERSITY",
-        targetId: 1,
-        typeOfChange: "UPDATE",
         data: {
-          name: "Updated Name",
+          user: {
+            connect: {
+              id: "1",
+            },
+          },
+          entityType: "UNIVERSITY",
+          targetId: 1,
+          typeOfChange: "UPDATE",
+          data: {
+            name: "Updated Name",
+          },
         },
       }),
     );
@@ -344,7 +358,7 @@ describe("DELETE /users/contribution/universities", () => {
         githubId: null,
       },
     };
-    vi.spyOn(pendingChangesModel, "create").mockResolvedValue(mockResult);
+    vi.spyOn(prisma.pendingChange, "create").mockResolvedValue(mockResult);
 
     const agent = request.agent(app);
     mockedUser = {
@@ -411,7 +425,9 @@ describe("GET /users/contribution/pending-changes/universities", () => {
       },
     ];
 
-    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValue(pendingChanges);
+    vi.spyOn(prisma.pendingChange, "findMany").mockResolvedValue(
+      pendingChanges,
+    );
 
     mockedUser = {
       id: "1",
@@ -478,10 +494,10 @@ describe("DELETE /users/contribution/pending-changes/universities", () => {
       },
     };
 
-    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValue([
+    vi.spyOn(prisma.pendingChange, "findMany").mockResolvedValue([
       pendingChange,
     ]);
-    vi.spyOn(pendingChangesModel, "delete").mockResolvedValue(pendingChange);
+    vi.spyOn(prisma.pendingChange, "delete").mockResolvedValue(pendingChange);
 
     mockedUser = {
       id: "4e7d6077-6b57-48d1-a113-686731b5137e",

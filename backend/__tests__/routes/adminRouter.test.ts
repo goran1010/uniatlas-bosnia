@@ -1,7 +1,7 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { app } from "../../src/app.js";
-import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
+import { prisma } from "../../src/db/prisma.js";
 import { transactionModel } from "../../src/models/transactionModel.js";
 
 import type {
@@ -48,7 +48,7 @@ beforeEach(() => {
 
 function mockTransactionWrapper(result = true) {
   return vi
-    .spyOn(transactionModel, "approveUniversityPendingChange")
+    .spyOn(transactionModel, "approvePendingChange")
     .mockResolvedValue(result);
 }
 
@@ -107,7 +107,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
         },
       },
     ];
-    vi.spyOn(pendingChangesModel, "findMany").mockResolvedValueOnce(
+    vi.spyOn(prisma.pendingChange, "findMany").mockResolvedValueOnce(
       mockPendingChanges,
     );
 
@@ -194,7 +194,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
         githubId: null,
       },
     };
-    vi.spyOn(pendingChangesModel, "delete").mockResolvedValueOnce(
+    vi.spyOn(prisma.pendingChange, "delete").mockResolvedValueOnce(
       mockPendingChanges,
     );
 
@@ -310,9 +310,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
-    expect(
-      transactionModel.approveUniversityPendingChange,
-    ).toHaveBeenCalledWith({
+    expect(transactionModel.approvePendingChange).toHaveBeenCalledWith({
       id: "a1b2c3d4-e5f6-4789-abcd-000000000001",
     });
   });

@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../../src/app.js";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { universitiesModel } from "../../src/models/universitiesModel.js";
+import { prisma } from "../../src/db/prisma.js";
 
 import type { University } from "../../src/generated/prisma/client.js";
 
@@ -45,28 +45,41 @@ const dummyData: { data: University[] } = {
   ],
 };
 
-vi.spyOn(universitiesModel, "getAll").mockResolvedValue(dummyData.data);
-vi.spyOn(universitiesModel, "getById").mockImplementation((id) => {
-  return vi
-    .fn()
-    .mockResolvedValue(
-      dummyData.data.find((university) => university.id === id) ?? null,
-    )();
-});
-vi.spyOn(universitiesModel, "searchUniversities").mockImplementation((term) => {
-  const lower = term.toLowerCase();
+vi.spyOn(prisma.university, "findUnique").mockImplementation(
+  ({ where: { id } }) => {
+    return vi
+      .fn()
+      .mockResolvedValue(
+        dummyData.data.find((university) => university.id === id) ?? null,
+      )();
+  },
+);
 
-  return vi
-    .fn()
-    .mockResolvedValue(
-      dummyData.data.filter(
-        (u) =>
-          u.name.toLowerCase().includes(lower) ||
-          u.city.toLowerCase().includes(lower) ||
-          (u.acronym && u.acronym.toLowerCase().includes(lower)),
-      ),
-    )();
-});
+function mockUniversitySearch(
+  args?: Parameters<typeof prisma.university.findMany>[0],
+): ReturnType<typeof prisma.university.findMany> {
+  const normalizedTerm =
+    (
+      args?.where as
+        | {
+            OR?: {
+              name?: { contains?: string };
+              city?: { contains?: string };
+              acronym?: { contains?: string };
+            }[];
+          }
+        | undefined
+    )?.OR?.[0]?.name?.contains?.toLowerCase() ?? "";
+
+  return Promise.resolve(
+    dummyData.data.filter(
+      (u) =>
+        u.name.toLowerCase().includes(normalizedTerm) ||
+        u.city.toLowerCase().includes(normalizedTerm) ||
+        (u.acronym && u.acronym.toLowerCase().includes(normalizedTerm)),
+    ),
+  ) as ReturnType<typeof prisma.university.findMany>;
+}
 
 describe("GET /", () => {
   test("responds with status 200 when LIVE", async () => {
@@ -86,6 +99,8 @@ describe("GET /", () => {
 });
 
 describe("GET /api/v1/universities", () => {
+  vi.spyOn(prisma.university, "findMany").mockResolvedValue(dummyData.data);
+
   test("responds with status 200 and an array with dummy data", async () => {
     const response = await request(app).get("/api/v1/universities");
     const expectedResponse = {
@@ -102,6 +117,9 @@ describe("GET /api/v1/universities", () => {
 
 describe("GET /api/v1/universities/search", () => {
   test("responds with status 200 and universities for searchTerm=Sarajevo", async () => {
+    vi.spyOn(prisma.university, "findMany").mockImplementation(
+      mockUniversitySearch,
+    );
     const response = await request(app).get(
       "/api/v1/universities/search?searchTerm=Sarajevo",
     );

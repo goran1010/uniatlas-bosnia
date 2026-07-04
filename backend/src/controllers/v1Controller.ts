@@ -34,10 +34,26 @@ class V1Controller {
     const { searchTerm } = matchedData<SearchInput>(req);
     const result = await prisma.university.findMany({
       where: {
-        name: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
+        OR: [
+          {
+            name: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+          {
+            city: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+          {
+            acronym: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+        ],
       },
     });
 

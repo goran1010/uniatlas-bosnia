@@ -41,11 +41,10 @@ vi.mock("../../src/config/sessionMiddleware.js", () => ({
 import { app } from "../../src/app.js";
 import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
-import { usersModel } from "../../src/models/usersModel.js";
+import { prisma } from "../../src/db/prisma.js";
 import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
-import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
 
 const isAuthenticatedMock = vi.fn();
 
@@ -118,16 +117,16 @@ describe("POST /auth/signup", () => {
   test("successfully create a user and returns status 201 and message", async () => {
     const newUser = createNewUserInput();
 
-    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(null);
-    vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([]);
-    vi.spyOn(pendingUserModel, "create").mockResolvedValueOnce({
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce(null);
+    vi.spyOn(prisma.pendingUser, "findMany").mockResolvedValueOnce([]);
+    vi.spyOn(prisma.pendingUser, "create").mockResolvedValueOnce({
       id: "mock-pending-user-id",
       email: newUser.email,
       password: "hashed-password",
       token: "mock-token",
       expiresAt: new Date(Date.now() + 60 * 60 * 1000),
     });
-    vi.spyOn(usersModel, "create").mockResolvedValueOnce(newUser);
+    vi.spyOn(prisma.user, "create").mockResolvedValueOnce(newUser);
 
     const response = await request(app).post("/auth/signup").send(newUser);
     const expectedResponse = {
@@ -146,7 +145,7 @@ describe("POST /auth/signup", () => {
 
   test("responds with generic 400 error if given email exists", async () => {
     const newUser = createNewUserInput();
-    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce({
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce({
       id: "existing-user-id",
       email: newUser.email,
       password: "hashed-password",
@@ -191,7 +190,7 @@ describe("GET /auth/confirm/:token", () => {
 
   test("responds with status 400 and message for invalid token", async () => {
     vi.spyOn(console, "error").mockImplementation(() => vi.fn());
-    vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([]);
+    vi.spyOn(prisma.pendingUser, "findMany").mockResolvedValueOnce([]);
 
     const response = await request(app).get("/auth/confirm/12345");
     const expectedResponse = {
@@ -208,7 +207,7 @@ describe("GET /auth/confirm/:token", () => {
   });
 
   test("responds with status 200 and HTML for valid token", async () => {
-    vi.spyOn(pendingUserModel, "findMany").mockResolvedValueOnce([
+    vi.spyOn(prisma.pendingUser, "findMany").mockResolvedValueOnce([
       {
         id: "mock-pending-user-id",
         email: "test_user@example.com",
@@ -218,8 +217,14 @@ describe("GET /auth/confirm/:token", () => {
       },
     ]);
 
-    vi.spyOn(pendingUserModel, "delete").mockResolvedValueOnce({ count: 1 });
-    vi.spyOn(usersModel, "create").mockResolvedValueOnce({
+    vi.spyOn(prisma.pendingUser, "delete").mockResolvedValueOnce({
+      id: "mock-pending-user-id",
+      email: "test_user@example.com",
+      expiresAt: new Date(Date.now() + 60 * 60 * 1000),
+      password: "hashed-password",
+      token: "mock-token",
+    });
+    vi.spyOn(prisma.user, "create").mockResolvedValueOnce({
       id: "mock-user-id",
       email: "test_user@example.com",
       password: "hashed-password",
@@ -229,14 +234,14 @@ describe("GET /auth/confirm/:token", () => {
 
     const token = crypto.randomBytes(32).toString("hex");
 
-    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce({
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce({
       id: "existing-user-id",
       email: "test_user@example.com",
       password: "hashed-password",
       role: "USER",
       githubId: null,
     });
-    vi.spyOn(usersModel, "update").mockResolvedValueOnce({
+    vi.spyOn(prisma.user, "update").mockResolvedValueOnce({
       id: "existing-user-id",
       email: "test_user@example.com",
       password: "hashed-password",
@@ -257,7 +262,7 @@ describe("GET /auth/confirm/:token", () => {
 describe("POST /auth/login", () => {
   test("responds with Incorrect email for wrong input", async () => {
     const newUser = createNewUserInput();
-    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(null);
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce(null);
 
     const responseData = {
       error: {
@@ -281,7 +286,7 @@ describe("POST /auth/login", () => {
   test("responds with User test_user logged in successfully for correct input", async () => {
     const newUser = createNewUserInput();
 
-    vi.spyOn(usersModel, "findOne").mockResolvedValueOnce(newUser);
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce(newUser);
     vi.spyOn(bcrypt, "compare").mockImplementationOnce(async () => true);
 
     const response = await request(app).post("/auth/login").send(newUser);
