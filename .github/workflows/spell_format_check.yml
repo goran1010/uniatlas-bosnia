@@ -38,7 +38,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: streetsidesoftware/cspell-action@v1
+      - uses: streetsidesoftware/cspell-action@v8
         with:
-          files: "**/*.{js,ts,jsx,tsx,md}"
-          config: ".cspellrc.json"
+          config: ".cspell.json"

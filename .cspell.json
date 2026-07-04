@@ -12,7 +12,7 @@
     "LICENSE.md"
   ],
 
-  "ignore": [
+  "ignorePaths": [
     "**/node_modules/**",
     "**/dist/**",
     "**/coverage/**",
