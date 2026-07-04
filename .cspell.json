@@ -19,6 +19,17 @@
     "**/src/generated/**"
   ],
 
+  "userWords": [
+    "JAVNA",
+    "FBIH",
+    "ects",
+    "Banja",
+    "Luka",
+    "Srpska",
+    "Republika",
+    "UNIBL"
+  ],
+
   "ignoreWords": [],
   "import": ["@cspell/cspell-bundled-dicts"]
 }
