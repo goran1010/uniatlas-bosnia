@@ -153,14 +153,14 @@ export function buildPendingChangeData(
         safeValue["ownership"],
         UNIVERSITY_OWNERSHIP,
       );
-      return data as SanitizedPendingChangeData;
+      return data;
     }
 
     case "FACULTY": {
       const data: JsonRecord = {};
       withOptionalString(data, "name", safeValue["name"]);
       withOptionalString(data, "city", safeValue["city"]);
-      return data as SanitizedPendingChangeData;
+      return data;
     }
 
     case "STUDY_PROGRAM": {
@@ -169,7 +169,7 @@ export function buildPendingChangeData(
       withOptionalEnum(data, "cycle", safeValue["cycle"], STUDY_CYCLES);
       withOptionalInteger(data, "durationYears", safeValue["durationYears"]);
       withOptionalInteger(data, "ects", safeValue["ects"]);
-      return data as SanitizedPendingChangeData;
+      return data;
     }
 
     case "SUBJECT": {
@@ -178,7 +178,7 @@ export function buildPendingChangeData(
       withOptionalInteger(data, "semester", safeValue["semester"]);
       withOptionalInteger(data, "ects", safeValue["ects"]);
       withOptionalEnum(data, "type", safeValue["type"], SUBJECT_TYPES);
-      return data as SanitizedPendingChangeData;
+      return data;
     }
   }
 }

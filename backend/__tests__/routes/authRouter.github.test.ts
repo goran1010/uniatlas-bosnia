@@ -22,12 +22,13 @@ type GitHubAuthCallback = (
 ) => void;
 
 const authenticateMock = vi.fn<AuthenticateMock>(
-  () => (_req: Request, _res: Response, next: NextFunction) => next(),
+  () => (_req: Request, _res: Response, next: NextFunction) => {
+    next();
+  },
 );
 
 vi.mock("../../src/config/passport.js", async (importOriginal) => {
-  const actual =
-    (await importOriginal()) as typeof import("../../src/config/passport.js");
+  const actual = await importOriginal();
   actual.passport.authenticate =
     authenticateMock as typeof actual.passport.authenticate;
 

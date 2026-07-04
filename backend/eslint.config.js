@@ -4,20 +4,31 @@ import tseslint from "typescript-eslint";
 import globals from "globals";
 
 export default defineConfig([
-  globalIgnores(["dist/", "node_modules/", "coverage/", "src/generated/"]),
+  globalIgnores([
+    "dist/",
+    "node_modules/",
+    "coverage/",
+    "src/generated/",
+    "eslint.config.js",
+  ]),
 
   {
-    files: ["**/*.{js,ts}"],
+    files: ["**/*.ts"],
     extends: [
       js.configs.recommended,
       tseslint.configs.strict,
       tseslint.configs.stylistic,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
     ],
     rules: {
       "no-console": ["warn", { allow: ["error", "warn"] }],
     },
     languageOptions: {
       globals: globals.node,
+      parserOptions: {
+        project: ["./tsconfig.json"],
+      },
     },
   },
 ]);

@@ -14,18 +14,23 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user || !user.password)
-          return done(null, false, { message: "Incorrect email or password" });
+        if (!user?.password) {
+          done(null, false, { message: "Incorrect email or password" });
+          return;
+        }
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-          return done(null, false, { message: "Incorrect email or password" });
+          done(null, false, { message: "Incorrect email or password" });
+          return;
         }
 
         const safeUser = sanitizeUser(user);
-        return done(null, safeUser);
+        done(null, safeUser);
+        return;
       } catch (err) {
-        return done(err);
+        done(err);
+        return;
       }
     },
   ),
@@ -56,12 +61,14 @@ passport.use(
         });
         if (user) {
           const safeUser = sanitizeUser(user);
-          return done(null, safeUser);
+          done(null, safeUser);
+          return;
         }
 
         const primaryEmail = profile.emails?.[0]?.value;
         if (!primaryEmail) {
-          return done(null, false);
+          done(null, false);
+          return;
         }
 
         if (primaryEmail) {
@@ -74,7 +81,8 @@ passport.use(
               data: { githubId: profile.id },
             });
             const safeUser = sanitizeUser(user);
-            return done(null, safeUser);
+            done(null, safeUser);
+            return;
           }
         }
 
@@ -86,9 +94,11 @@ passport.use(
         });
         const safeUser = sanitizeUser(user);
 
-        return done(null, safeUser);
+        done(null, safeUser);
+        return;
       } catch (err) {
-        return done(err);
+        done(err);
+        return;
       }
     },
   ),
@@ -96,7 +106,7 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   try {
-    done(null, user["id"]);
+    done(null, user.id);
   } catch (err) {
     done(err);
   }

@@ -150,7 +150,10 @@ class AuthController {
         user: Express.User | false | null,
         info: { message?: string } | undefined,
       ) => {
-        if (err) return next(err);
+        if (err) {
+          next(err);
+          return;
+        }
         if (!user) {
           const loginReason = info?.message || "Invalid email or password";
           return sendError(res, {
@@ -162,7 +165,8 @@ class AuthController {
         const continueWithLogin = () => {
           req.logIn(user, (loginError) => {
             if (loginError) {
-              return next(loginError);
+              next(loginError);
+              return;
             }
 
             return sendSuccess(res, {
@@ -173,15 +177,17 @@ class AuthController {
         };
 
         if (!req.session?.regenerate) {
-          return continueWithLogin();
+          continueWithLogin();
+          return;
         }
 
         req.session.regenerate((regenerateError) => {
           if (regenerateError) {
-            return next(regenerateError);
+            next(regenerateError);
+            return;
           }
 
-          return continueWithLogin();
+          continueWithLogin();
         });
       },
     )(req, res, next);
@@ -195,28 +201,42 @@ class AuthController {
     passport.authenticate(
       "github",
       (err: unknown, user: Express.User | false | null) => {
-        if (err) return next(err);
+        if (err) {
+          next(err);
+          return;
+        }
         if (!user) {
-          return res.redirect(`${env.FRONTEND_URL}/login?error=github`);
+          res.redirect(`${env.FRONTEND_URL}/login?error=github`);
+          return;
         }
 
         const continueWithLogin = () => {
           req.logIn(user, (loginError) => {
-            if (loginError) return next(loginError);
+            if (loginError) {
+              next(loginError);
+              return;
+            }
             req.session.save((saveError) => {
-              if (saveError) return next(saveError);
-              return res.redirect(env.FRONTEND_URL);
+              if (saveError) {
+                next(saveError);
+                return;
+              }
+              res.redirect(env.FRONTEND_URL);
             });
           });
         };
 
         if (!req.session?.regenerate) {
-          return continueWithLogin();
+          continueWithLogin();
+          return;
         }
 
         req.session.regenerate((regenerateError) => {
-          if (regenerateError) return next(regenerateError);
-          return continueWithLogin();
+          if (regenerateError) {
+            next(regenerateError);
+            return;
+          }
+          continueWithLogin();
         });
       },
     )(req, res, next);

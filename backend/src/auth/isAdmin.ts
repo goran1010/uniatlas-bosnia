@@ -10,7 +10,10 @@ function isAdmin(req: Request, res: Response, next: NextFunction) {
         message: "Unauthorized: user not authenticated.",
       });
     }
-    if (req?.user["role"] === "ADMIN") return next();
+    if (req?.user.role === "ADMIN") {
+      next();
+      return;
+    }
 
     return sendError(res, {
       status: 403,

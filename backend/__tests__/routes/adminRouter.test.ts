@@ -31,7 +31,10 @@ vi.mock("../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
       req.user = mockedUser;
-      if (req.user) return next();
+      if (req.user) {
+        next();
+        return;
+      }
 
       res.status(401).json({
         error: "You are not logged in.",
