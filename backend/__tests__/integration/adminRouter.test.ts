@@ -3,9 +3,7 @@ import { describe, test, expect } from "vitest";
 import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
-import { usersModel } from "../../src/models/usersModel.js";
-import { pendingChangesModel } from "../../src/models/pendingChangesModel.js";
-import { universitiesModel } from "../../src/models/universitiesModel.js";
+import { prisma } from "../../src/db/prisma.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
@@ -14,22 +12,26 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
     const { ["confirm-password"]: confirmPassword, ...userRequested } =
       userInput;
 
-    const userInDb = await usersModel.create(userRequested);
+    const userInDb = await prisma.user.create({
+      data: userRequested,
+    });
 
-    const pendingChange = await pendingChangesModel.create({
-      entityType: "UNIVERSITY",
-      typeOfChange: "CREATE",
-      targetId: 1,
-      parentId: null,
+    const pendingChange = await prisma.pendingChange.create({
       data: {
-        name: "Test Admin GET University",
-        city: "Test City",
-        entity: "FBIH",
-        ownership: "JAVNA",
+        entityType: "UNIVERSITY",
+        typeOfChange: "CREATE",
+        targetId: 1,
+        parentId: null,
+        data: {
+          name: "Test Admin GET University",
+          city: "Test City",
+          entity: "FBIH",
+          ownership: "JAVNA",
+        },
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
       },
-      createdAt: new Date("2024-01-01T00:00:00.000Z"),
-      reviewedAt: null,
-      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);
@@ -45,8 +47,8 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
 
-    await pendingChangesModel.delete({ id: pendingChange.id });
-    await usersModel.deleteUser({ id: userInDb.id });
+    await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
+    await prisma.user.delete({ where: { id: userInDb.id } });
   });
 });
 
@@ -57,22 +59,26 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
     const { ["confirm-password"]: confirmPassword, ...userRequested } =
       userInput;
 
-    const userInDb = await usersModel.create(userRequested);
+    const userInDb = await prisma.user.create({
+      data: userRequested,
+    });
 
-    const pendingChange = await pendingChangesModel.create({
-      entityType: "UNIVERSITY",
-      typeOfChange: "CREATE",
-      targetId: 1,
-      parentId: null,
+    const pendingChange = await prisma.pendingChange.create({
       data: {
-        name: "Test Decline University",
-        city: "Test City",
-        entity: "FBIH",
-        ownership: "JAVNA",
+        entityType: "UNIVERSITY",
+        typeOfChange: "CREATE",
+        targetId: 1,
+        parentId: null,
+        data: {
+          name: "Test Decline University",
+          city: "Test City",
+          entity: "FBIH",
+          ownership: "JAVNA",
+        },
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
       },
-      createdAt: new Date("2024-01-01T00:00:00.000Z"),
-      reviewedAt: null,
-      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);
@@ -92,7 +98,7 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
 
-    await usersModel.deleteUser({ id: userInDb.id });
+    await prisma.user.delete({ where: { id: userInDb.id } });
   });
 });
 
@@ -103,29 +109,35 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
     const { ["confirm-password"]: confirmPassword, ...userRequested } =
       userInput;
 
-    const userInDb = await usersModel.create(userRequested);
-
-    const university = await universitiesModel.createUniversity({
-      name: "Test Approve University",
-      city: "Test City",
-      entity: "FBIH",
-      ownership: "JAVNA",
+    const userInDb = await prisma.user.create({
+      data: userRequested,
     });
 
-    const pendingChange = await pendingChangesModel.create({
-      entityType: "UNIVERSITY",
-      typeOfChange: "DELETE",
-      targetId: university.id,
-      parentId: null,
+    const university = await prisma.university.create({
       data: {
         name: "Test Approve University",
         city: "Test City",
         entity: "FBIH",
         ownership: "JAVNA",
       },
-      createdAt: new Date("2024-01-01T00:00:00.000Z"),
-      reviewedAt: null,
-      user: { connect: { id: userInDb.id } },
+    });
+
+    const pendingChange = await prisma.pendingChange.create({
+      data: {
+        entityType: "UNIVERSITY",
+        typeOfChange: "DELETE",
+        targetId: university.id,
+        parentId: null,
+        data: {
+          name: "Test Approve University",
+          city: "Test City",
+          entity: "FBIH",
+          ownership: "JAVNA",
+        },
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
+      },
     });
 
     const agent = request.agent(app);
@@ -146,7 +158,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
 
-    await usersModel.deleteUser({ id: userInDb.id });
+    await prisma.user.delete({ where: { id: userInDb.id } });
   });
 
   test("Responds with status 404 if stored pending change data is invalid for its entity type", async () => {
@@ -155,19 +167,23 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
     const { ["confirm-password"]: confirmPassword, ...userRequested } =
       userInput;
 
-    const userInDb = await usersModel.create(userRequested);
+    const userInDb = await prisma.user.create({
+      data: userRequested,
+    });
 
-    const pendingChange = await pendingChangesModel.create({
-      entityType: "UNIVERSITY",
-      typeOfChange: "CREATE",
-      targetId: null,
-      parentId: null,
+    const pendingChange = await prisma.pendingChange.create({
       data: {
-        name: "Malformed University",
+        entityType: "UNIVERSITY",
+        typeOfChange: "CREATE",
+        targetId: null,
+        parentId: null,
+        data: {
+          name: "Malformed University",
+        },
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
       },
-      createdAt: new Date("2024-01-01T00:00:00.000Z"),
-      reviewedAt: null,
-      user: { connect: { id: userInDb.id } },
     });
 
     const agent = request.agent(app);
@@ -181,7 +197,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
 
     expect(response.status).toBe(404);
 
-    await pendingChangesModel.delete({ id: pendingChange.id });
-    await usersModel.deleteUser({ id: userInDb.id });
+    await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
+    await prisma.user.delete({ where: { id: userInDb.id } });
   });
 });

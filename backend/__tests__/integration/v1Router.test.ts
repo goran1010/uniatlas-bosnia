@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../../src/app.js";
 import { describe, test, expect } from "vitest";
-import { universitiesModel } from "../../src/models/universitiesModel.js";
+import { prisma } from "../../src/db/prisma.js";
 
 describe("GET /", () => {
   test("responds with status 200 when LIVE", async () => {
@@ -23,17 +23,20 @@ describe("GET /", () => {
 describe("GET /api/v1/universities", () => {
   test("responds with status 200 and universities", async () => {
     const testUniversityName = "Test Integration University GET All";
-    const existing =
-      await universitiesModel.searchUniversities(testUniversityName);
+    const existing = await prisma.university.findMany({
+      where: { name: testUniversityName },
+    });
     for (const u of existing) {
-      await universitiesModel.deleteUniversity(u.id);
+      await prisma.university.delete({ where: { id: u.id } });
     }
 
-    const uniInDb = await universitiesModel.createUniversity({
-      name: testUniversityName,
-      city: "Sarajevo",
-      entity: "FBIH",
-      ownership: "JAVNA",
+    const uniInDb = await prisma.university.create({
+      data: {
+        name: testUniversityName,
+        city: "Sarajevo",
+        entity: "FBIH",
+        ownership: "JAVNA",
+      },
     });
 
     const response = await request(app).get("/api/v1/universities");
@@ -51,24 +54,27 @@ describe("GET /api/v1/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
-    await universitiesModel.deleteUniversity(uniInDb.id);
+    await prisma.university.delete({ where: { id: uniInDb.id } });
   });
 });
 
 describe("GET /api/v1/universities/search", () => {
   test("responds with status 200 and universities for searchTerm=TestSearchCity", async () => {
     const testUniversityName = "Test Integration University Search";
-    const existing =
-      await universitiesModel.searchUniversities(testUniversityName);
+    const existing = await prisma.university.findMany({
+      where: { name: testUniversityName },
+    });
     for (const u of existing) {
-      await universitiesModel.deleteUniversity(u.id);
+      await prisma.university.delete({ where: { id: u.id } });
     }
 
-    const uniInDb = await universitiesModel.createUniversity({
-      name: testUniversityName,
-      city: "TestSearchCity",
-      entity: "FBIH",
-      ownership: "JAVNA",
+    const uniInDb = await prisma.university.create({
+      data: {
+        name: testUniversityName,
+        city: "TestSearchCity",
+        entity: "FBIH",
+        ownership: "JAVNA",
+      },
     });
 
     const response = await request(app).get(
@@ -87,17 +93,19 @@ describe("GET /api/v1/universities/search", () => {
     };
     expect(response).toEqual(expect.objectContaining(expectedResponse));
 
-    await universitiesModel.deleteUniversity(uniInDb.id);
+    await prisma.university.delete({ where: { id: uniInDb.id } });
   });
 });
 
 describe("GET /api/v1/universities/:id", () => {
   test("responds with status 200 and a university by id", async () => {
-    const uniInDb = await universitiesModel.createUniversity({
-      name: "Test Integration University By ID",
-      city: "Sarajevo",
-      entity: "FBIH",
-      ownership: "JAVNA",
+    const uniInDb = await prisma.university.create({
+      data: {
+        name: "Test Integration University By ID",
+        city: "Sarajevo",
+        entity: "FBIH",
+        ownership: "JAVNA",
+      },
     });
 
     const response = await request(app).get(
@@ -115,7 +123,7 @@ describe("GET /api/v1/universities/:id", () => {
       }),
     );
 
-    await universitiesModel.deleteUniversity(uniInDb.id);
+    await prisma.university.delete({ where: { id: uniInDb.id } });
   });
 
   test("responds with status 400 for invalid university id", async () => {

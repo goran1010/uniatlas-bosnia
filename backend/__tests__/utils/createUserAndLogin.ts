@@ -1,6 +1,5 @@
 import { createNewUserInput } from "./createNewUserInput.js";
-import { usersModel } from "../../src/models/usersModel.js";
-import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
+import { prisma } from "../../src/db/prisma.js";
 
 interface CreateNewUserInputOptions {
   id?: string;
@@ -23,8 +22,8 @@ async function createAndLoginUser(
 
   await agent.post("/auth/signup").send(userData);
 
-  const users = await pendingUserModel.findMany({
-    email: userData.email,
+  const users = await prisma.pendingUser.findMany({
+    where: { email: userData.email },
   });
   if (!users[0]) {
     throw new Error("Pending user not found after signup.");
@@ -34,7 +33,10 @@ async function createAndLoginUser(
   await agent.get(`/auth/confirm/${token}`);
 
   if (userData.role !== "USER") {
-    await usersModel.update({ email: userData.email }, { role: userData.role });
+    await prisma.user.update({
+      where: { email: userData.email },
+      data: { role: userData.role },
+    });
   }
 
   const response = await agent.post("/auth/login").send({
