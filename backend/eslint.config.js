@@ -9,7 +9,7 @@ export default defineConfig([
     "node_modules/",
     "coverage/",
     "src/generated/",
-    "eslint.config.js",
+    "./*.ts",
   ]),
 
   {
