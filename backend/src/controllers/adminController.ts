@@ -1,4 +1,4 @@
-import { pendingChangesModel } from "../models/pendingChangesModel.js";
+import { prisma } from "../db/prisma.js";
 import { transactionModel } from "../models/transactionModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { matchedData } from "express-validator";
@@ -7,7 +7,7 @@ import type { Request, Response } from "express";
 
 class AdminController {
   async getPendingChanges(_req: Request, res: Response) {
-    const pendingChanges = await pendingChangesModel.findMany();
+    const pendingChanges = await prisma.pendingChange.findMany();
 
     return sendSuccess(res, {
       data: pendingChanges,
@@ -18,7 +18,7 @@ class AdminController {
   async declinePendingChange(req: Request, res: Response) {
     const { id } = matchedData(req);
 
-    await pendingChangesModel.delete({ id });
+    await prisma.pendingChange.delete({ where: { id } });
 
     return sendSuccess(res, {
       message: "Pending change declined successfully.",
@@ -28,7 +28,7 @@ class AdminController {
   async approvePendingChange(req: Request, res: Response) {
     const { id } = matchedData(req);
 
-    const wasApplied = await transactionModel.approveUniversityPendingChange({
+    const wasApplied = await transactionModel.approvePendingChange({
       id,
     });
 

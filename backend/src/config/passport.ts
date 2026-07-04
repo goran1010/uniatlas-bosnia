@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import bcrypt from "bcryptjs";
-import { usersModel } from "../models/usersModel.js";
+import { prisma } from "../db/prisma.js";
 import { env } from "./env.js";
 import { sanitizeUser } from "../utils/sanitizeUser.js";
 
@@ -13,7 +13,7 @@ passport.use(
     { usernameField: "email" },
     async (email, password, done) => {
       try {
-        const user = await usersModel.findOne({ email });
+        const user = await prisma.user.findUnique({ where: { email } });
         if (!user || !user.password)
           return done(null, false, { message: "Incorrect email or password" });
 
@@ -51,8 +51,8 @@ passport.use(
       done: DoneCallback,
     ) => {
       try {
-        let user = await usersModel.findOne({
-          githubId: profile.id.toString(),
+        let user = await prisma.user.findUnique({
+          where: { githubId: profile.id },
         });
         if (user) {
           const safeUser = sanitizeUser(user);
@@ -65,20 +65,24 @@ passport.use(
         }
 
         if (primaryEmail) {
-          user = await usersModel.findOne({ email: primaryEmail });
+          user = await prisma.user.findUnique({
+            where: { email: primaryEmail },
+          });
           if (user) {
-            user = await usersModel.update(
-              { id: user.id },
-              { githubId: profile.id.toString() },
-            );
+            user = await prisma.user.update({
+              where: { id: user.id },
+              data: { githubId: profile.id },
+            });
             const safeUser = sanitizeUser(user);
             return done(null, safeUser);
           }
         }
 
-        user = await usersModel.create({
-          email: primaryEmail,
-          githubId: profile.id.toString(),
+        user = await prisma.user.create({
+          data: {
+            email: primaryEmail,
+            githubId: profile.id,
+          },
         });
         const safeUser = sanitizeUser(user);
 
@@ -100,7 +104,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id: string, done) => {
   try {
-    const user = await usersModel.findOne({ id });
+    const user = await prisma.user.findUnique({ where: { id } });
     const safeUser = user ? sanitizeUser(user) : null;
     done(null, safeUser);
   } catch (err) {

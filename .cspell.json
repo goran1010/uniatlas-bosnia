@@ -1,0 +1,36 @@
+{
+  "version": "0.2",
+  "language": "en",
+
+  "files": [
+    "frontend/src/**/*.{ts,tsx,md}",
+    "frontend/__tests__/**/*.{ts,tsx,md}",
+    "backend/src/**/*.{ts,md}",
+    "backend/__tests__/**/*.{ts,md}",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE.md"
+  ],
+
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/src/generated/**"
+  ],
+
+  "userWords": [
+    "JAVNA",
+    "FBIH",
+    "ects",
+    "Banja",
+    "Luka",
+    "Srpska",
+    "Republika",
+    "UNIBL",
+    "UNSA"
+  ],
+
+  "ignoreWords": [],
+  "import": ["@cspell/cspell-bundled-dicts"]
+}

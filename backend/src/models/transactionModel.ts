@@ -7,12 +7,10 @@ import {
   isCompleteUniversityPendingChangeData,
 } from "../utils/pendingChangeData.js";
 
+const VALID_CHANGE_TYPES = ["CREATE", "UPDATE", "DELETE"] as const;
+
 class TransactionModel {
-  async approveUniversityPendingChange({
-    id,
-  }: {
-    id: string;
-  }): Promise<boolean> {
+  async approvePendingChange({ id }: { id: string }): Promise<boolean> {
     return prisma.$transaction(async (tx) => {
       const pendingChange = await tx.pendingChange.findUnique({
         where: { id },
@@ -22,63 +20,55 @@ class TransactionModel {
         return false;
       }
 
-      const parentId = pendingChange.parentId;
-      const targetId = pendingChange.targetId;
-      const { entityType, typeOfChange } = pendingChange;
+      const { entityType, typeOfChange, targetId, parentId } = pendingChange;
+
+      if (!VALID_CHANGE_TYPES.includes(typeOfChange)) {
+        return false;
+      }
+
+      const deletePendingChange = async () => {
+        await tx.pendingChange.delete({ where: { id } });
+        return true;
+      };
 
       if (entityType === "UNIVERSITY") {
         if (typeOfChange === "DELETE") {
-          if (targetId === null) {
-            return false;
-          }
+          if (targetId === null) return false;
 
           await tx.university.delete({ where: { id: targetId } });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
+          return deletePendingChange();
         }
 
         const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) {
-          return false;
-        }
+        if (!data) return false;
 
         if (typeOfChange === "CREATE") {
-          if (!isCompleteUniversityPendingChangeData(data)) {
-            return false;
-          }
+          if (!isCompleteUniversityPendingChangeData(data)) return false;
 
           await tx.university.create({ data });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
+          return deletePendingChange();
         }
 
-        if (targetId === null) {
-          return false;
-        }
+        if (targetId === null) return false;
 
-        if (typeOfChange === "UPDATE") {
-          await tx.university.update({ where: { id: targetId }, data });
-        }
+        await tx.university.update({
+          where: { id: targetId },
+          data,
+        });
 
-        await tx.pendingChange.delete({ where: { id } });
-        return true;
+        return deletePendingChange();
       }
 
       if (entityType === "FACULTY") {
         if (typeOfChange === "DELETE") {
-          if (targetId === null) {
-            return false;
-          }
+          if (targetId === null) return false;
 
           await tx.faculty.delete({ where: { id: targetId } });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
+          return deletePendingChange();
         }
 
         const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) {
-          return false;
-        }
+        if (!data) return false;
 
         if (typeOfChange === "CREATE") {
           if (parentId === null || !isCompleteFacultyPendingChangeData(data)) {
@@ -88,34 +78,30 @@ class TransactionModel {
           await tx.faculty.create({
             data: { ...data, universityId: parentId },
           });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
-        }
-        if (targetId === null) {
-          return false;
+
+          return deletePendingChange();
         }
 
-        if (typeOfChange === "UPDATE") {
-          await tx.faculty.update({ where: { id: targetId }, data });
-        }
+        if (targetId === null) return false;
 
-        await tx.pendingChange.delete({ where: { id } });
-        return true;
-      } else if (entityType === "STUDY_PROGRAM") {
+        await tx.faculty.update({
+          where: { id: targetId },
+          data,
+        });
+
+        return deletePendingChange();
+      }
+
+      if (entityType === "STUDY_PROGRAM") {
         if (typeOfChange === "DELETE") {
-          if (targetId === null) {
-            return false;
-          }
+          if (targetId === null) return false;
 
           await tx.studyProgram.delete({ where: { id: targetId } });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
+          return deletePendingChange();
         }
 
         const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) {
-          return false;
-        }
+        if (!data) return false;
 
         if (typeOfChange === "CREATE") {
           if (
@@ -128,31 +114,30 @@ class TransactionModel {
           await tx.studyProgram.create({
             data: { ...data, facultyId: parentId },
           });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
-        }
-        if (targetId === null) {
-          return false;
+
+          return deletePendingChange();
         }
 
-        if (typeOfChange === "UPDATE") {
-          await tx.studyProgram.update({ where: { id: targetId }, data });
-        }
-      } else if (entityType === "SUBJECT") {
+        if (targetId === null) return false;
+
+        await tx.studyProgram.update({
+          where: { id: targetId },
+          data,
+        });
+
+        return deletePendingChange();
+      }
+
+      if (entityType === "SUBJECT") {
         if (typeOfChange === "DELETE") {
-          if (targetId === null) {
-            return false;
-          }
+          if (targetId === null) return false;
 
           await tx.subject.delete({ where: { id: targetId } });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
+          return deletePendingChange();
         }
 
         const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) {
-          return false;
-        }
+        if (!data) return false;
 
         if (typeOfChange === "CREATE") {
           if (parentId === null || !isCompleteSubjectPendingChangeData(data)) {
@@ -162,20 +147,21 @@ class TransactionModel {
           await tx.subject.create({
             data: { ...data, studyProgramId: parentId },
           });
-          await tx.pendingChange.delete({ where: { id } });
-          return true;
-        }
-        if (targetId === null) {
-          return false;
+
+          return deletePendingChange();
         }
 
-        if (typeOfChange === "UPDATE") {
-          await tx.subject.update({ where: { id: targetId }, data });
-        }
+        if (targetId === null) return false;
+
+        await tx.subject.update({
+          where: { id: targetId },
+          data,
+        });
+
+        return deletePendingChange();
       }
 
-      await tx.pendingChange.delete({ where: { id } });
-      return true;
+      return false;
     });
   }
 }

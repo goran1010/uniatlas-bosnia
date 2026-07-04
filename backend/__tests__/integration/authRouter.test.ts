@@ -3,7 +3,7 @@ import { describe, test, expect } from "vitest";
 import { app } from "../../src/app.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
-import { pendingUserModel } from "../../src/models/pendingUsersModel.js";
+import { prisma } from "../../src/db/prisma.js";
 
 describe("Auth Router - POST /auth/signup", () => {
   test("responds with status 201 and Registration successful! Check your email message if user created successfully", async () => {
@@ -28,8 +28,8 @@ describe("Auth Router - GET /auth/confirm/:token", () => {
     const newUser = createNewUserInput();
     await agent.post("/auth/signup").send(newUser);
 
-    const users = await pendingUserModel.findMany({
-      email: newUser.email,
+    const users = await prisma.pendingUser.findMany({
+      where: { email: newUser.email },
     });
     if (!users[0] || users.length === 0) {
       throw new Error("No pending user found for the provided email.");
@@ -52,8 +52,8 @@ describe("Auth Router - POST /auth/login", () => {
     const newUser = createNewUserInput();
     await agent.post("/auth/signup").send(newUser);
 
-    const users = await pendingUserModel.findMany({
-      email: newUser.email,
+    const users = await prisma.pendingUser.findMany({
+      where: { email: newUser.email },
     });
     if (!users[0] || users.length === 0) {
       throw new Error("No pending user found for the provided email.");
