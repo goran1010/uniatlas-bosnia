@@ -22,7 +22,7 @@ function sendSuccess(
 
 function sendError(
   res: Response,
-  { status = 400, message = "Request failed." }: ErrorOptions = {},
+  { status = 500, message = "Request failed." }: ErrorOptions = {},
 ) {
   return res.status(status).json({
     error: {
