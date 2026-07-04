@@ -6,7 +6,7 @@
   "license": "AGPL-3.0-only",
   "type": "module",
   "scripts": {
-    "build": "npm run db:deploy_generate && tsc --build",
+    "build": "npm run db:deploy_generate && tsc --build tsconfig.build.json",
     "db:migrate_dev": "npx prisma migrate dev --name",
     "db:reset": "npx prisma migrate reset",
     "db:deploy_generate": "npx prisma migrate deploy && npx prisma generate",
@@ -21,7 +21,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -3,7 +3,6 @@
   "compilerOptions": {
     // File Layout
     "outDir": "./dist",
-    "rootDir": "./src",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -11,7 +10,7 @@
     "target": "esnext",
     // For nodejs:
     "lib": ["esnext"],
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
     // and npm install -D @types/node
 
     // Other Outputs
@@ -43,5 +42,5 @@
     //Custom Options
     "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": ["src", "__tests__"]
 }
