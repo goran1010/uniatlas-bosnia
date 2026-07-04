@@ -128,40 +128,36 @@ class TransactionModel {
         return deletePendingChange();
       }
 
-      if (entityType === "SUBJECT") {
-        if (typeOfChange === "DELETE") {
-          if (targetId === null) return false;
-
-          await tx.subject.delete({ where: { id: targetId } });
-          return deletePendingChange();
-        }
-
-        const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) return false;
-
-        if (typeOfChange === "CREATE") {
-          if (parentId === null || !isCompleteSubjectPendingChangeData(data)) {
-            return false;
-          }
-
-          await tx.subject.create({
-            data: { ...data, studyProgramId: parentId },
-          });
-
-          return deletePendingChange();
-        }
-
+      if (typeOfChange === "DELETE") {
         if (targetId === null) return false;
 
-        await tx.subject.update({
-          where: { id: targetId },
-          data,
+        await tx.subject.delete({ where: { id: targetId } });
+        return deletePendingChange();
+      }
+
+      const data = buildPendingChangeData(entityType, pendingChange.data);
+      if (!data) return false;
+
+      if (typeOfChange === "CREATE") {
+        if (parentId === null || !isCompleteSubjectPendingChangeData(data)) {
+          return false;
+        }
+
+        await tx.subject.create({
+          data: { ...data, studyProgramId: parentId },
         });
 
         return deletePendingChange();
       }
 
-      return false;
+      if (targetId === null) return false;
+
+      await tx.subject.update({
+        where: { id: targetId },
+        data,
+      });
+
+      return deletePendingChange();
     });
   }
 }

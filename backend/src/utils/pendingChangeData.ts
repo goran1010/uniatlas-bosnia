@@ -108,11 +108,11 @@ function withOptionalInteger(target: JsonRecord, key: string, value: unknown) {
   }
 }
 
-function withOptionalEnum<T extends string>(
+function withOptionalEnum(
   target: JsonRecord,
   key: string,
   value: unknown,
-  allowedValues: readonly T[],
+  allowedValues: readonly string[],
 ) {
   if (isOneOf(value, allowedValues)) {
     target[key] = value;
