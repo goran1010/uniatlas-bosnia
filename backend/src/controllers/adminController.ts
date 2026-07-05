@@ -16,7 +16,7 @@ class AdminController {
   };
 
   declinePendingChange = async (req: Request, res: Response) => {
-    const { id } = matchedData(req);
+    const { id } = matchedData<{ id: string }>(req);
 
     await prisma.pendingChange.delete({ where: { id } });
 
@@ -26,7 +26,7 @@ class AdminController {
   };
 
   approvePendingChange = async (req: Request, res: Response) => {
-    const { id } = matchedData(req);
+    const { id } = matchedData<{ id: string }>(req);
 
     const wasApplied = await transactionModel.approvePendingChange({
       id,

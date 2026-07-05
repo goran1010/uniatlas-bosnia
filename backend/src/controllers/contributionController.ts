@@ -46,7 +46,7 @@ class ContributionController {
           },
           entityType,
           typeOfChange: "CREATE",
-          parentId: parentId ? Number(parentId) : null,
+          parentId: parentId ?? null,
           data,
         },
       });
@@ -185,13 +185,13 @@ class ContributionController {
       });
     }
     const { id } = req.user;
-    const { id: pendingChangeId } = matchedData(req);
+    const { id: pendingChangeId } = matchedData<{ id: string }>(req);
 
     const pendingChange = await prisma.pendingChange.findMany({
       where: { userId: id, id: pendingChangeId },
     });
 
-    if (!pendingChange || pendingChange.length === 0) {
+    if (pendingChange.length === 0) {
       return sendError(res, {
         status: 404,
         message: "Pending change not found.",

@@ -10,10 +10,40 @@ import { prisma } from "../db/prisma.js";
 
 import type { Request, Response, NextFunction } from "express";
 
+type AuthenticateCallback = (
+  err: unknown,
+  user: Express.User | false | null,
+  info?: { message?: string },
+) => void;
+
+interface AuthenticateOptions {
+  scope?: string[];
+}
+
+type AuthenticateHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => void;
+
+type Authenticate = (
+  strategy: string,
+  callbackOrOptions?: AuthenticateCallback | AuthenticateOptions,
+) => AuthenticateHandler;
+
+interface PassportAuthenticator {
+  authenticate: Authenticate;
+}
+
+const typedPassport = passport as unknown as PassportAuthenticator;
+
 class AuthController {
   signup = async (req: Request, res: Response) => {
     try {
-      const { email, password } = matchedData(req);
+      const { email, password } = matchedData<{
+        email: string;
+        password: string;
+      }>(req);
 
       const existingUser = await prisma.user.findUnique({ where: { email } });
       if (existingUser) {
@@ -79,7 +109,7 @@ class AuthController {
 
   confirmEmail = async (req: Request, res: Response) => {
     try {
-      const { token } = matchedData(req);
+      const { token } = matchedData<{ token: string }>(req);
       if (!token || typeof token !== "string") {
         sendError(res, {
           status: 400,
@@ -113,7 +143,7 @@ class AuthController {
         return;
       }
 
-      const user = await prisma.user.create({
+      await prisma.user.create({
         data: {
           email: pendingUser.email,
           password: pendingUser.password,
@@ -121,14 +151,6 @@ class AuthController {
       });
 
       await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
-
-      if (!user) {
-        sendError(res, {
-          status: 500,
-          message: "Email confirmation failed: account couldn't be created.",
-        });
-        return;
-      }
 
       res.send(emailConfirmHTML());
     } catch (err) {
@@ -142,8 +164,8 @@ class AuthController {
     }
   };
 
-  login = async (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate(
+  login = (req: Request, res: Response, next: NextFunction) => {
+    typedPassport.authenticate(
       "local",
       (
         err: unknown,
@@ -155,11 +177,12 @@ class AuthController {
           return;
         }
         if (!user) {
-          const loginReason = info?.message || "Invalid email or password";
-          return sendError(res, {
+          const loginReason = info?.message ?? "Invalid email or password";
+          sendError(res, {
             status: 401,
             message: `Login failed: ${loginReason}. Check your credentials and try again.`,
           });
+          return;
         }
 
         const continueWithLogin = () => {
@@ -169,17 +192,13 @@ class AuthController {
               return;
             }
 
-            return sendSuccess(res, {
+            sendSuccess(res, {
               message: "Logged in successfully",
               data: user,
             });
+            return;
           });
         };
-
-        if (!req.session?.regenerate) {
-          continueWithLogin();
-          return;
-        }
 
         req.session.regenerate((regenerateError) => {
           if (regenerateError) {
@@ -194,11 +213,15 @@ class AuthController {
   };
 
   githubLogin = (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate("github", { scope: ["user:email"] })(req, res, next);
+    typedPassport.authenticate("github", { scope: ["user:email"] })(
+      req,
+      res,
+      next,
+    );
   };
 
   githubCallback = (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate(
+    typedPassport.authenticate(
       "github",
       (err: unknown, user: Express.User | false | null) => {
         if (err) {
@@ -225,11 +248,6 @@ class AuthController {
             });
           });
         };
-
-        if (!req.session?.regenerate) {
-          continueWithLogin();
-          return;
-        }
 
         req.session.regenerate((regenerateError) => {
           if (regenerateError) {

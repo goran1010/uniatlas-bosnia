@@ -3,6 +3,7 @@ import path from "node:path";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client.js";
 import { env } from "../config/env.js";
+import type { UniversityCreateManyInput } from "../generated/prisma/models.js";
 
 const __dirname = import.meta.dirname;
 
@@ -18,57 +19,26 @@ const prisma = new PrismaClient({ adapter });
 
 const filePath = path.resolve(__dirname, "../../JSON_files/universities.json");
 const JSONdata = fs.readFileSync(filePath, "utf-8");
-const universities = JSON.parse(JSONdata);
-
-const toDateTime = (val: string | null) =>
-  val ? new Date(val).toISOString() : null;
-
-interface University {
-  name: string;
-  acronym: string;
-  city: string;
-  entity: string;
-  ownership: "Javna" | "Privatna";
-  foundedYear: number;
-  website: string;
-  accreditationFrom: string | null;
-  accreditationTo: string | null;
-  authority: string;
-  sourceUrl: string;
-  lastChecked: string;
-}
 
 async function main() {
-  // eslint-disable-next-line no-console
-  console.log("Seeding universities...");
+  try {
+    // eslint-disable-next-line no-console
+    console.log("Seeding universities...");
 
-  const result = await prisma.university.createMany({
-    data: universities.map((u: University) => ({
-      name: u.name,
-      acronym: u.acronym,
-      city: u.city,
-      entity: u.entity,
-      ownership: u.ownership === "Javna" ? "JAVNA" : "PRIVATNA",
-      foundedYear: u.foundedYear,
-      website: u.website,
-      accreditationFrom: toDateTime(u.accreditationFrom),
-      accreditationTo: toDateTime(u.accreditationTo),
-      authority: u.authority,
-      sourceUrl: u.sourceUrl,
-      lastChecked: toDateTime(u.lastChecked),
-    })),
-    skipDuplicates: true,
-  });
+    const universities = JSON.parse(JSONdata) as UniversityCreateManyInput[];
 
-  // eslint-disable-next-line no-console
-  console.log(`Inserted ${result.count} new universities.`);
-}
+    const result = await prisma.university.createMany({
+      data: universities,
+      skipDuplicates: true,
+    });
 
-main()
-  .catch((error) => {
+    // eslint-disable-next-line no-console
+    console.log(`Inserted ${result.count.toString()} new universities.`);
+  } catch (error: unknown) {
     console.error("Error seeding universities:", error);
     process.exit(1);
-  })
-  .finally(async () => {
+  } finally {
     await prisma.$disconnect();
-  });
+  }
+}
+await main();

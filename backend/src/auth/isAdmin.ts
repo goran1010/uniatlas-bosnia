@@ -4,18 +4,19 @@ import type { Request, Response, NextFunction } from "express";
 
 function isAdmin(req: Request, res: Response, next: NextFunction) {
   try {
-    if (!req?.user) {
-      return sendError(res, {
+    if (!req.user) {
+      sendError(res, {
         status: 401,
         message: "Unauthorized: user not authenticated.",
       });
+      return;
     }
-    if (req?.user.role === "ADMIN") {
+    if (req.user.role === "ADMIN") {
       next();
       return;
     }
 
-    return sendError(res, {
+    sendError(res, {
       status: 403,
       message: "Access denied: admin role is required.",
     });
