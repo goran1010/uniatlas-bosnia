@@ -8,11 +8,13 @@ on:
   pull_request:
     branches:
       - main
-
+env:
+  DATABASE_URL: postgresql://test_user:test_password@localhost:5432/postgres_db
 jobs:
   lint:
     runs-on: ubuntu-latest
     name: Run lint check
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -38,9 +40,6 @@ jobs:
   type_check:
     runs-on: ubuntu-latest
     name: Run type-check
-
-    env:
-      DATABASE_URL: postgresql://test_user:test_password@localhost:5432/postgres_db
 
     steps:
       - name: Checkout
