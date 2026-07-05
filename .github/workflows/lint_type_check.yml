@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm run install:all
 
+      - name: Generate Prisma client
+        run: npm run db:generate
+
       - name: Lint frontend
         run: npm run lint:frontend
 
