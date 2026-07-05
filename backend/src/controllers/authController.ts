@@ -11,7 +11,7 @@ import { prisma } from "../db/prisma.js";
 import type { Request, Response, NextFunction } from "express";
 
 class AuthController {
-  async signup(req: Request, res: Response) {
+  signup = async (req: Request, res: Response) => {
     try {
       const { email, password } = matchedData(req);
 
@@ -75,9 +75,9 @@ class AuthController {
         message: "Signup failed: check your input and try again.",
       });
     }
-  }
+  };
 
-  async confirmEmail(req: Request, res: Response) {
+  confirmEmail = async (req: Request, res: Response) => {
     try {
       const { token } = matchedData(req);
       if (!token || typeof token !== "string") {
@@ -140,9 +140,9 @@ class AuthController {
           "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
       });
     }
-  }
+  };
 
-  async login(req: Request, res: Response, next: NextFunction) {
+  login = async (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate(
       "local",
       (
@@ -191,13 +191,13 @@ class AuthController {
         });
       },
     )(req, res, next);
-  }
+  };
 
-  githubLogin(req: Request, res: Response, next: NextFunction) {
+  githubLogin = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate("github", { scope: ["user:email"] })(req, res, next);
-  }
+  };
 
-  githubCallback(req: Request, res: Response, next: NextFunction) {
+  githubCallback = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate(
       "github",
       (err: unknown, user: Express.User | false | null) => {
@@ -240,7 +240,7 @@ class AuthController {
         });
       },
     )(req, res, next);
-  }
+  };
 }
 
 const authController = new AuthController();

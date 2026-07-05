@@ -7,7 +7,7 @@ const IS_PRODUCTION = env.NODE_ENV === "production";
 const NUMBER_OF_DAYS = 30;
 
 class UsersController {
-  async me(req: Request, res: Response) {
+  me = (req: Request, res: Response) => {
     if (!req.user) {
       return sendSuccess(res, {
         message: "No user logged in",
@@ -19,9 +19,9 @@ class UsersController {
       message: "User info retrieved",
       data: req.user,
     });
-  }
+  };
 
-  logout(req: Request, res: Response) {
+  logout = (req: Request, res: Response) => {
     req.logout((err) => {
       if (err) {
         console.error(err);
@@ -56,7 +56,7 @@ class UsersController {
         });
       });
     });
-  }
+  };
 }
 
 const usersController = new UsersController();

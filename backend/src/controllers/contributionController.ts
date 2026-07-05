@@ -16,7 +16,7 @@ interface ContributionRequestData {
 }
 
 class ContributionController {
-  async createEntity(req: Request, res: Response) {
+  createEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
         return sendError(res, {
@@ -63,9 +63,9 @@ class ContributionController {
         message: "An error occurred while submitting the suggestion.",
       });
     }
-  }
+  };
 
-  async editEntity(req: Request, res: Response) {
+  editEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
         return sendError(res, {
@@ -113,9 +113,9 @@ class ContributionController {
         message: "An error occurred while submitting the edit suggestion.",
       });
     }
-  }
+  };
 
-  async deleteEntity(req: Request, res: Response) {
+  deleteEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
         return sendError(res, {
@@ -157,9 +157,9 @@ class ContributionController {
         message: "An error occurred while submitting the deletion suggestion.",
       });
     }
-  }
+  };
 
-  async getPendingChanges(req: Request, res: Response) {
+  getPendingChanges = async (req: Request, res: Response) => {
     if (!req.user) {
       return sendError(res, {
         status: 401,
@@ -175,9 +175,9 @@ class ContributionController {
       data: pendingChanges,
       message: "Pending changes retrieved successfully.",
     });
-  }
+  };
 
-  async deletePendingChange(req: Request, res: Response) {
+  deletePendingChange = async (req: Request, res: Response) => {
     if (!req.user) {
       return sendError(res, {
         status: 401,
@@ -205,7 +205,7 @@ class ContributionController {
     return sendSuccess(res, {
       message: "Pending change deleted successfully.",
     });
-  }
+  };
 }
 
 const contributionController = new ContributionController();
