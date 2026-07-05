@@ -11,6 +11,13 @@ import type {
 } from "../../src/generated/prisma/client.js";
 import type { JsonValue } from "@prisma/client/runtime/client";
 
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
+}
+
 let mockedUser: Omit<User, "password"> | undefined;
 
 interface MockedResult {
@@ -89,16 +96,12 @@ describe("POST /users/contribution/universities", () => {
 
     const expectedResponse = "Entity type is required";
     const response = await agent.post("/users/contribution/universities");
-    const expectedResponseData = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(expectedResponse),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponseData));
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(expectedResponse);
   });
 
   test("Valid request responds with status 201 and Suggestion submitted", async () => {
@@ -118,7 +121,9 @@ describe("POST /users/contribution/universities", () => {
         ownership: "JAVNA",
       },
     };
-    vi.spyOn(prisma.pendingChange, "create").mockResolvedValue(mockResult);
+    const createPendingChangeSpy = vi
+      .spyOn(prisma.pendingChange, "create")
+      .mockResolvedValue(mockResult);
 
     mockedUser = {
       id: "1",
@@ -149,7 +154,7 @@ describe("POST /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
-    expect(prisma.pendingChange.create).toHaveBeenCalledWith(
+    expect(createPendingChangeSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         data: {
           user: {
@@ -192,7 +197,11 @@ describe("POST /users/contribution/universities", () => {
     });
 
     expect(response.status).toBe(400);
-    expect(response.body.error.message).toContain(
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(
       "Data contains unsupported fields for this entity type",
     );
   });
@@ -225,16 +234,12 @@ describe("PUT /users/contribution/universities", () => {
 
     const expectedResponse = "Entity type is required";
     const responseCode = await agent.put("/users/contribution/universities");
-    const expectedResponseData = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(expectedResponse),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(responseCode.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(responseCode).toEqual(expect.objectContaining(expectedResponseData));
+    expect(responseCode.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(expectedResponse);
   });
 
   test("Valid request responds with status 201 and Edit suggestion submitted", async () => {
@@ -255,7 +260,9 @@ describe("PUT /users/contribution/universities", () => {
         githubId: null,
       },
     };
-    vi.spyOn(prisma.pendingChange, "create").mockResolvedValue(mockResult);
+    const createPendingChangeSpy = vi
+      .spyOn(prisma.pendingChange, "create")
+      .mockResolvedValue(mockResult);
 
     mockedUser = {
       id: "1",
@@ -282,7 +289,7 @@ describe("PUT /users/contribution/universities", () => {
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponseData));
-    expect(prisma.pendingChange.create).toHaveBeenCalledWith(
+    expect(createPendingChangeSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         data: {
           user: {
@@ -331,16 +338,12 @@ describe("DELETE /users/contribution/universities", () => {
 
     const expectedResponse = "Entity type is required";
     const responseCode = await agent.delete("/users/contribution/universities");
-    const expectedResponseData = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(expectedResponse),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(responseCode.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(responseCode).toEqual(expect.objectContaining(expectedResponseData));
+    expect(responseCode.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(expectedResponse);
   });
 
   test("Valid request responds with status 201 and Deletion suggestion submitted", async () => {

@@ -24,6 +24,12 @@ type SerializeUserHandler = (
 
 type DeserializeUserHandler = (id: string | number, done: SessionDone) => void;
 
+async function flushMicrotasks(iterations = 5): Promise<void> {
+  for (let index = 0; index < iterations; index += 1) {
+    await Promise.resolve();
+  }
+}
+
 class MockLocalStrategy {
   name = "local";
   options: IStrategyOptions;
@@ -145,6 +151,7 @@ describe("passport config", () => {
     bcryptMock.compare.mockResolvedValue(false);
 
     localVerify("john@example.com", "wrong-password", done);
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenCalledWith({
       where: { email: "john@example.com" },
@@ -163,6 +170,7 @@ describe("passport config", () => {
     usersModelMock.findUnique.mockRejectedValue(dbError);
 
     localVerify("john@example.com", "any", done);
+    await flushMicrotasks();
 
     expect(done).toHaveBeenCalledWith(dbError);
   });
@@ -218,6 +226,7 @@ describe("passport config", () => {
       { id: "123", emails: [{ value: "github-user@example.com" }] },
       done,
     );
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenNthCalledWith(1, {
       where: { githubId: "123" },
@@ -252,6 +261,7 @@ describe("passport config", () => {
       { id: "555", emails: [{ value: "new-github@example.com" }] },
       done,
     );
+    await flushMicrotasks();
 
     expect(usersModelMock.create).toHaveBeenCalledWith({
       data: {
@@ -309,6 +319,7 @@ describe("passport config", () => {
     usersModelMock.findUnique.mockResolvedValue(user);
 
     deserializeUser(2, done);
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenCalledWith({
       where: { id: 2 },
@@ -324,6 +335,7 @@ describe("passport config", () => {
     usersModelMock.findUnique.mockRejectedValue(dbError);
 
     deserializeUser(2, done);
+    await flushMicrotasks();
 
     expect(done).toHaveBeenCalledWith(dbError);
   });

@@ -12,6 +12,13 @@ import type {
 import type { Request, Response, NextFunction } from "express";
 import type { JsonValue } from "@prisma/client/runtime/client";
 
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
+}
+
 let mockedUser: Omit<User, "password"> | undefined;
 
 interface MockedResult {
@@ -277,16 +284,12 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       .send({
         id: "a1b2c3d4-e5f6-4789-abcd-000000000999",
       });
-    const expectedResponse = {
-      status: 404,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining("Pending change not found"),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(404);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Pending change not found");
   });
 
   test("Responds with status 200 and message if pending change approved successfully", async () => {

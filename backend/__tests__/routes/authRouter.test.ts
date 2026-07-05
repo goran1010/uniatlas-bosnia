@@ -46,11 +46,25 @@ import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 
-const isAuthenticatedMock = vi.fn();
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
+}
+
+type AuthGuardHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => void;
+
+const isAuthenticatedMock = vi.fn<AuthGuardHandler>();
 
 vi.mock("../../src/auth/isAuthenticated.js", () => ({
-  isAuthenticated: (req: Request, res: Response, next: NextFunction) =>
-    isAuthenticatedMock(req, res, next),
+  isAuthenticated: (req: Request, res: Response, next: NextFunction): void => {
+    isAuthenticatedMock(req, res, next);
+  },
 }));
 
 beforeEach(() => {
@@ -58,7 +72,11 @@ beforeEach(() => {
   vi.restoreAllMocks();
   // Set default behavior
   isAuthenticatedMock.mockImplementation((req, res, next) => {
-    if (req.user) return next();
+    if (req.user) {
+      next();
+      return;
+    }
+
     res.status(403).json({ error: "You need to be logged in." });
   });
 });
@@ -78,16 +96,12 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const expectedResponse = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(responseData.error.message),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(responseData.error.message);
   });
 
   test("responds with status 400 and message for incorrect confirm-password input", async () => {
@@ -102,16 +116,12 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const expectedResponse = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(responseData.error.message),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(responseData.error.message);
   });
 
   test("successfully create a user and returns status 201 and message", async () => {
@@ -129,18 +139,15 @@ describe("POST /auth/signup", () => {
     vi.spyOn(prisma.user, "create").mockResolvedValueOnce(newUser);
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const expectedResponse = {
-      status: 201,
-      body: {
-        data: expect.objectContaining({
-          email: newUser.email,
-        }),
-        message: "Registration successful! Check your email.",
-      },
-    };
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
 
     expect(sendConfirmationEmail).toHaveBeenCalled();
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(201);
+    expect(responseBody["message"]).toBe(
+      "Registration successful! Check your email.",
+    );
+    expect(data["email"]).toBe(newUser.email);
   });
 
   test("responds with generic 400 error if given email exists", async () => {
@@ -160,16 +167,12 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const expectedResponse = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(responseData.error.message),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(responseData.error.message);
   });
 });
 
@@ -271,32 +274,27 @@ describe("POST /auth/login", () => {
     };
 
     const response = await request(app).post("/auth/login").send(newUser);
-    const expectedResponse = {
-      status: 401,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining(responseData.error.message),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(401);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(responseData.error.message);
   });
 
   test("responds with User test_user logged in successfully for correct input", async () => {
     const newUser = createNewUserInput();
+    const hashedPassword = await bcrypt.hash(newUser.password, 10);
 
-    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce(newUser);
-    vi.spyOn(bcrypt, "compare").mockImplementationOnce(async () => true);
+    vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce({
+      ...newUser,
+      password: hashedPassword,
+    });
 
     const response = await request(app).post("/auth/login").send(newUser);
+    const responseBody = getResponseObject(response.body);
 
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
-        message: "Logged in successfully",
-      }),
-    };
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(200);
+    expect(responseBody["message"]).toBe("Logged in successfully");
   });
 });

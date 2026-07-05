@@ -21,6 +21,8 @@ type GitHubAuthCallback = (
   user: Express.User | false | null,
 ) => void;
 
+type PassportModule = typeof import("../../src/config/passport.js");
+
 const authenticateMock = vi.fn<AuthenticateMock>(
   () => (_req: Request, _res: Response, next: NextFunction) => {
     next();
@@ -28,7 +30,7 @@ const authenticateMock = vi.fn<AuthenticateMock>(
 );
 
 vi.mock("../../src/config/passport.js", async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = await importOriginal<PassportModule>();
   actual.passport.authenticate =
     authenticateMock as typeof actual.passport.authenticate;
 
