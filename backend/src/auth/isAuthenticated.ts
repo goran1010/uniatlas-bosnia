@@ -4,7 +4,10 @@ import type { Request, Response, NextFunction } from "express";
 
 function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   try {
-    if (req.user) return next();
+    if (req.user) {
+      next();
+      return;
+    }
 
     sendError(res, {
       status: 401,

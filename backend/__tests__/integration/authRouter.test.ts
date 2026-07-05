@@ -5,20 +5,24 @@ import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
 import { prisma } from "../../src/db/prisma.js";
 
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
+}
+
 describe("Auth Router - POST /auth/signup", () => {
   test("responds with status 201 and Registration successful! Check your email message if user created successfully", async () => {
     const newUser = createNewUserInput();
-
-    const expectedResponse = {
-      status: 201,
-      body: {
-        data: expect.any(Object),
-        message: "Registration successful! Check your email.",
-      },
-    };
     const response = await request(app).post("/auth/signup").send(newUser);
+    const responseBody = getResponseObject(response.body);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(201);
+    expect(responseBody["message"]).toBe(
+      "Registration successful! Check your email.",
+    );
+    expect(responseBody["data"]).toBeTypeOf("object");
   });
 });
 
@@ -66,13 +70,11 @@ describe("Auth Router - POST /auth/login", () => {
       email: newUser.email,
       password: newUser.password,
     });
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
         message: "Logged in successfully",
       }),
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    );
   });
 });

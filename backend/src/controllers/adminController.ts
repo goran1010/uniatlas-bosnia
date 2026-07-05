@@ -6,27 +6,27 @@ import { matchedData } from "express-validator";
 import type { Request, Response } from "express";
 
 class AdminController {
-  async getPendingChanges(_req: Request, res: Response) {
+  getPendingChanges = async (_req: Request, res: Response) => {
     const pendingChanges = await prisma.pendingChange.findMany();
 
     return sendSuccess(res, {
       data: pendingChanges,
       message: "Pending changes retrieved successfully.",
     });
-  }
+  };
 
-  async declinePendingChange(req: Request, res: Response) {
-    const { id } = matchedData(req);
+  declinePendingChange = async (req: Request, res: Response) => {
+    const { id } = matchedData<{ id: string }>(req);
 
     await prisma.pendingChange.delete({ where: { id } });
 
     return sendSuccess(res, {
       message: "Pending change declined successfully.",
     });
-  }
+  };
 
-  async approvePendingChange(req: Request, res: Response) {
-    const { id } = matchedData(req);
+  approvePendingChange = async (req: Request, res: Response) => {
+    const { id } = matchedData<{ id: string }>(req);
 
     const wasApplied = await transactionModel.approvePendingChange({
       id,
@@ -42,7 +42,7 @@ class AdminController {
     return sendSuccess(res, {
       message: "Pending change approved successfully.",
     });
-  }
+  };
 }
 
 const adminController = new AdminController();

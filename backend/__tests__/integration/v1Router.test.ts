@@ -3,6 +3,19 @@ import { app } from "../../src/app.js";
 import { describe, test, expect } from "vitest";
 import { prisma } from "../../src/db/prisma.js";
 
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
+}
+
+function getResponseArray(value: unknown): Record<string, unknown>[] {
+  expect(Array.isArray(value)).toBe(true);
+
+  return value as Record<string, unknown>[];
+}
+
 describe("GET /", () => {
   test("responds with status 200 when LIVE", async () => {
     const response = await request(app).get("/api/v1/");
@@ -40,20 +53,20 @@ describe("GET /api/v1/universities", () => {
     });
 
     const response = await request(app).get("/api/v1/universities");
-    const expectedResponse = {
-      status: 200,
-      body: {
-        message: "Universities retrieved successfully.",
-        data: expect.arrayContaining([
-          expect.objectContaining({
-            name: uniInDb.name,
-            city: uniInDb.city,
-          }),
-        ]),
-      },
-    };
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseArray(responseBody["data"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(200);
+    expect(responseBody["message"]).toBe(
+      "Universities retrieved successfully.",
+    );
+    expect(
+      data.some(
+        (university) =>
+          university["name"] === uniInDb.name &&
+          university["city"] === uniInDb.city,
+      ),
+    ).toBe(true);
     await prisma.university.delete({ where: { id: uniInDb.id } });
   });
 });
@@ -80,18 +93,17 @@ describe("GET /api/v1/universities/search", () => {
     const response = await request(app).get(
       "/api/v1/universities/search?searchTerm=TestSearchCity",
     );
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
-        data: expect.arrayContaining([
-          expect.objectContaining({
-            name: uniInDb.name,
-            city: uniInDb.city,
-          }),
-        ]),
-      }),
-    };
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseArray(responseBody["data"]);
+
+    expect(response.status).toBe(200);
+    expect(
+      data.some(
+        (university) =>
+          university["name"] === uniInDb.name &&
+          university["city"] === uniInDb.city,
+      ),
+    ).toBe(true);
 
     await prisma.university.delete({ where: { id: uniInDb.id } });
   });
@@ -109,19 +121,15 @@ describe("GET /api/v1/universities/:id", () => {
     });
 
     const response = await request(app).get(
-      `/api/v1/universities/${uniInDb.id}`,
+      `/api/v1/universities/${String(uniInDb.id)}`,
     );
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        message: "University retrieved successfully.",
-        data: expect.objectContaining({
-          id: uniInDb.id,
-          name: uniInDb.name,
-        }),
-      }),
-    );
+    expect(responseBody["message"]).toBe("University retrieved successfully.");
+    expect(data["id"]).toBe(uniInDb.id);
+    expect(data["name"]).toBe(uniInDb.name);
 
     await prisma.university.delete({ where: { id: uniInDb.id } });
   });
@@ -130,14 +138,11 @@ describe("GET /api/v1/universities/:id", () => {
     const response = await request(app).get(
       "/api/v1/universities/not-a-number",
     );
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining("Invalid university ID."),
-        }),
-      }),
-    );
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Invalid university ID.");
   });
 });

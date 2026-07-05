@@ -10,10 +10,40 @@ import { prisma } from "../db/prisma.js";
 
 import type { Request, Response, NextFunction } from "express";
 
+type AuthenticateCallback = (
+  err: unknown,
+  user: Express.User | false | null,
+  info?: { message?: string },
+) => void;
+
+interface AuthenticateOptions {
+  scope?: string[];
+}
+
+type AuthenticateHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => void;
+
+type Authenticate = (
+  strategy: string,
+  callbackOrOptions?: AuthenticateCallback | AuthenticateOptions,
+) => AuthenticateHandler;
+
+interface PassportAuthenticator {
+  authenticate: Authenticate;
+}
+
+const typedPassport = passport as unknown as PassportAuthenticator;
+
 class AuthController {
-  async signup(req: Request, res: Response) {
+  signup = async (req: Request, res: Response) => {
     try {
-      const { email, password } = matchedData(req);
+      const { email, password } = matchedData<{
+        email: string;
+        password: string;
+      }>(req);
 
       const existingUser = await prisma.user.findUnique({ where: { email } });
       if (existingUser) {
@@ -75,11 +105,11 @@ class AuthController {
         message: "Signup failed: check your input and try again.",
       });
     }
-  }
+  };
 
-  async confirmEmail(req: Request, res: Response) {
+  confirmEmail = async (req: Request, res: Response) => {
     try {
-      const { token } = matchedData(req);
+      const { token } = matchedData<{ token: string }>(req);
       if (!token || typeof token !== "string") {
         sendError(res, {
           status: 400,
@@ -113,7 +143,7 @@ class AuthController {
         return;
       }
 
-      const user = await prisma.user.create({
+      await prisma.user.create({
         data: {
           email: pendingUser.email,
           password: pendingUser.password,
@@ -121,14 +151,6 @@ class AuthController {
       });
 
       await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
-
-      if (!user) {
-        sendError(res, {
-          status: 500,
-          message: "Email confirmation failed: account couldn't be created.",
-        });
-        return;
-      }
 
       res.send(emailConfirmHTML());
     } catch (err) {
@@ -140,87 +162,103 @@ class AuthController {
           "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
       });
     }
-  }
+  };
 
-  async login(req: Request, res: Response, next: NextFunction) {
-    passport.authenticate(
+  login = (req: Request, res: Response, next: NextFunction) => {
+    typedPassport.authenticate(
       "local",
       (
         err: unknown,
         user: Express.User | false | null,
         info: { message?: string } | undefined,
       ) => {
-        if (err) return next(err);
+        if (err) {
+          next(err);
+          return;
+        }
         if (!user) {
-          const loginReason = info?.message || "Invalid email or password";
-          return sendError(res, {
+          const loginReason = info?.message ?? "Invalid email or password";
+          sendError(res, {
             status: 401,
             message: `Login failed: ${loginReason}. Check your credentials and try again.`,
           });
+          return;
         }
 
         const continueWithLogin = () => {
           req.logIn(user, (loginError) => {
             if (loginError) {
-              return next(loginError);
+              next(loginError);
+              return;
             }
 
-            return sendSuccess(res, {
+            sendSuccess(res, {
               message: "Logged in successfully",
               data: user,
             });
+            return;
           });
         };
 
-        if (!req.session?.regenerate) {
-          return continueWithLogin();
-        }
-
         req.session.regenerate((regenerateError) => {
           if (regenerateError) {
-            return next(regenerateError);
+            next(regenerateError);
+            return;
           }
 
-          return continueWithLogin();
+          continueWithLogin();
         });
       },
     )(req, res, next);
-  }
+  };
 
-  githubLogin(req: Request, res: Response, next: NextFunction) {
-    passport.authenticate("github", { scope: ["user:email"] })(req, res, next);
-  }
+  githubLogin = (req: Request, res: Response, next: NextFunction) => {
+    typedPassport.authenticate("github", { scope: ["user:email"] })(
+      req,
+      res,
+      next,
+    );
+  };
 
-  githubCallback(req: Request, res: Response, next: NextFunction) {
-    passport.authenticate(
+  githubCallback = (req: Request, res: Response, next: NextFunction) => {
+    typedPassport.authenticate(
       "github",
       (err: unknown, user: Express.User | false | null) => {
-        if (err) return next(err);
+        if (err) {
+          next(err);
+          return;
+        }
         if (!user) {
-          return res.redirect(`${env.FRONTEND_URL}/login?error=github`);
+          res.redirect(`${env.FRONTEND_URL}/login?error=github`);
+          return;
         }
 
         const continueWithLogin = () => {
           req.logIn(user, (loginError) => {
-            if (loginError) return next(loginError);
+            if (loginError) {
+              next(loginError);
+              return;
+            }
             req.session.save((saveError) => {
-              if (saveError) return next(saveError);
-              return res.redirect(env.FRONTEND_URL);
+              if (saveError) {
+                next(saveError);
+                return;
+              }
+              res.redirect(env.FRONTEND_URL);
             });
           });
         };
 
-        if (!req.session?.regenerate) {
-          return continueWithLogin();
-        }
-
         req.session.regenerate((regenerateError) => {
-          if (regenerateError) return next(regenerateError);
-          return continueWithLogin();
+          if (regenerateError) {
+            next(regenerateError);
+            return;
+          }
+          continueWithLogin();
         });
       },
     )(req, res, next);
-  }
+  };
 }
 
 const authController = new AuthController();

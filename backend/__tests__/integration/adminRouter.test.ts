@@ -38,14 +38,12 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
     await createAndLoginUser(agent, { role: "ADMIN" });
 
     const response = await agent.get("/users/admin/pending-changes");
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
         message: "Pending changes retrieved successfully.",
       }),
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    );
 
     await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
     await prisma.user.delete({ where: { id: userInDb.id } });
@@ -89,14 +87,12 @@ describe("Admin Router - DELETE /users/admin/decline-pending-change", () => {
       .send({
         id: pendingChange.id,
       });
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
         message: "Pending change declined successfully.",
       }),
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    );
 
     await prisma.user.delete({ where: { id: userInDb.id } });
   });

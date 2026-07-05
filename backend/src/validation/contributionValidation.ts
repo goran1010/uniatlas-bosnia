@@ -34,13 +34,16 @@ function validateContributionDataShape(value: unknown, entityType: unknown) {
 
 function getEntityTypeFromRequestBody(req: {
   body?: { entityType?: unknown };
-}) {
-  return req.body?.entityType;
+}): string {
+  if (!req.body || typeof req.body.entityType !== "string") {
+    return "";
+  }
+  return req.body.entityType;
 }
 
 class ContributionValidation {
   createEntity = [
-    body("entityType").customSanitizer((value) =>
+    body("entityType").customSanitizer((value: string) =>
       typeof value === "string" ? value.toUpperCase() : value,
     ),
 
@@ -66,7 +69,7 @@ class ContributionValidation {
         validateContributionDataShape(value, getEntityTypeFromRequestBody(req)),
       )
       .withMessage("Data contains unsupported fields for this entity type")
-      .customSanitizer((value, { req }) => {
+      .customSanitizer((value: string, { req }) => {
         if (
           getEntityTypeFromRequestBody(req) !== "UNIVERSITY" &&
           getEntityTypeFromRequestBody(req) !== "FACULTY" &&
@@ -144,7 +147,7 @@ class ContributionValidation {
   ];
 
   editEntity = [
-    body("entityType").customSanitizer((value) =>
+    body("entityType").customSanitizer((value: string) =>
       typeof value === "string" ? value.toUpperCase() : value,
     ),
 
@@ -169,12 +172,11 @@ class ContributionValidation {
         validateContributionDataShape(value, getEntityTypeFromRequestBody(req)),
       )
       .withMessage("Data contains unsupported fields for this entity type")
-      .customSanitizer((value, { req }) => {
+      .customSanitizer((value: string, { req }) => {
         if (
-          getEntityTypeFromRequestBody(req) !== "UNIVERSITY" &&
-          getEntityTypeFromRequestBody(req) !== "FACULTY" &&
-          getEntityTypeFromRequestBody(req) !== "STUDY_PROGRAM" &&
-          getEntityTypeFromRequestBody(req) !== "SUBJECT"
+          !["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"].includes(
+            getEntityTypeFromRequestBody(req),
+          )
         ) {
           return value;
         }
@@ -236,7 +238,7 @@ class ContributionValidation {
   ];
 
   deleteEntity = [
-    body("entityType").customSanitizer((value) =>
+    body("entityType").customSanitizer((value: unknown) =>
       typeof value === "string" ? value.toUpperCase() : value,
     ),
 

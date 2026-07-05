@@ -13,24 +13,24 @@ interface UniversityIdInput {
 }
 
 class V1Controller {
-  status(_req: Request, res: Response) {
+  status = (_req: Request, res: Response) => {
     return sendSuccess(res, {
       data: {
         status: "ok",
       },
       message: "API v1 server is running",
     });
-  }
+  };
 
-  async getUniversities(_req: Request, res: Response) {
+  getUniversities = async (_req: Request, res: Response) => {
     const universities = await prisma.university.findMany();
     return sendSuccess(res, {
       message: "Universities retrieved successfully.",
       data: universities,
     });
-  }
+  };
 
-  async searchUniversities(req: Request, res: Response) {
+  searchUniversities = async (req: Request, res: Response) => {
     const { searchTerm } = matchedData<SearchInput>(req);
     const result = await prisma.university.findMany({
       where: {
@@ -68,9 +68,9 @@ class V1Controller {
       status: 404,
       message: "No universities found matching your search.",
     });
-  }
+  };
 
-  async getUniversityById(req: Request, res: Response) {
+  getUniversityById = async (req: Request, res: Response) => {
     const { id } = matchedData<UniversityIdInput>(req);
 
     const university = await prisma.university.findUnique({
@@ -88,9 +88,9 @@ class V1Controller {
       message: "University retrieved successfully.",
       data: university,
     });
-  }
+  };
 
-  async searchStudyPrograms(req: Request, res: Response) {
+  searchStudyPrograms = async (req: Request, res: Response) => {
     const { searchTerm } = matchedData<SearchInput>(req);
     const result = await prisma.studyProgram.findMany({
       where: {
@@ -112,7 +112,7 @@ class V1Controller {
       status: 404,
       message: "No study programs found matching your search.",
     });
-  }
+  };
 }
 
 const v1Controller = new V1Controller();

@@ -16,7 +16,7 @@ export default async function () {
   const adminUrl = new URL(env.TEST_DATABASE_URL);
   adminUrl.pathname = "/postgres";
 
-  const templateDbName = `test_template_${Date.now()}`;
+  const templateDbName = `test_template_${Date.now().toString()}`;
   const templateUrl = new URL(env.TEST_DATABASE_URL);
   templateUrl.pathname = `/${templateDbName}`;
 

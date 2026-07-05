@@ -15,6 +15,21 @@ type GitHubVerifyFunction = (
   done: DoneCallback,
 ) => void | Promise<void>;
 
+type SessionDone = (err: unknown, value?: unknown) => void;
+
+type SerializeUserHandler = (
+  user: { id: string | number },
+  done: SessionDone,
+) => void;
+
+type DeserializeUserHandler = (id: string | number, done: SessionDone) => void;
+
+async function flushMicrotasks(iterations = 5): Promise<void> {
+  for (let index = 0; index < iterations; index += 1) {
+    await Promise.resolve();
+  }
+}
+
 class MockLocalStrategy {
   name = "local";
   options: IStrategyOptions;
@@ -74,8 +89,8 @@ vi.mock("bcryptjs", () => ({
   default: bcryptMock,
 }));
 
-vi.mock("../src/db/prisma.js", (originalModule) => ({
-  ...originalModule,
+vi.mock("../src/db/prisma.js", async (originalModule) => ({
+  ...(await originalModule()),
   prisma: prismaMock,
 }));
 
@@ -95,20 +110,24 @@ async function loadStrategies() {
     );
   }
 
-  const serializeUser = passportMock.serializeUser.mock.calls[0]?.[0];
-  const deserializeUser = passportMock.deserializeUser.mock.calls[0]?.[0];
+  const serializeUserCandidate: unknown =
+    passportMock.serializeUser.mock.calls[0]?.[0];
+  const deserializeUserCandidate: unknown =
+    passportMock.deserializeUser.mock.calls[0]?.[0];
 
-  if (!serializeUser || !deserializeUser) {
-    throw new Error(
-      "Passport serializers were not registered during test setup.",
-    );
+  if (typeof serializeUserCandidate !== "function") {
+    throw new Error("Passport serializeUser was not registered.");
+  }
+
+  if (typeof deserializeUserCandidate !== "function") {
+    throw new Error("Passport deserializeUser was not registered.");
   }
 
   return {
     localVerify: localStrategy._verify,
     githubVerify: githubStrategy._verify,
-    serializeUser,
-    deserializeUser,
+    serializeUser: serializeUserCandidate as SerializeUserHandler,
+    deserializeUser: deserializeUserCandidate as DeserializeUserHandler,
   };
 }
 
@@ -131,7 +150,8 @@ describe("passport config", () => {
     usersModelMock.findUnique.mockResolvedValue({ id: 1, password: "hashed" });
     bcryptMock.compare.mockResolvedValue(false);
 
-    await localVerify("john@example.com", "wrong-password", done);
+    localVerify("john@example.com", "wrong-password", done);
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenCalledWith({
       where: { email: "john@example.com" },
@@ -149,7 +169,8 @@ describe("passport config", () => {
 
     usersModelMock.findUnique.mockRejectedValue(dbError);
 
-    await localVerify("john@example.com", "any", done);
+    localVerify("john@example.com", "any", done);
+    await flushMicrotasks();
 
     expect(done).toHaveBeenCalledWith(dbError);
   });
@@ -205,6 +226,7 @@ describe("passport config", () => {
       { id: "123", emails: [{ value: "github-user@example.com" }] },
       done,
     );
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenNthCalledWith(1, {
       where: { githubId: "123" },
@@ -239,6 +261,7 @@ describe("passport config", () => {
       { id: "555", emails: [{ value: "new-github@example.com" }] },
       done,
     );
+    await flushMicrotasks();
 
     expect(usersModelMock.create).toHaveBeenCalledWith({
       data: {
@@ -282,7 +305,7 @@ describe("passport config", () => {
     serializeUser({ id: 42 }, done);
 
     expect(done).toHaveBeenCalledTimes(2);
-    const secondCallError = done.mock.calls[1]?.[0];
+    const secondCallError: unknown = done.mock.calls[1]?.[0];
 
     expect(secondCallError).toBeInstanceOf(Error);
     expect((secondCallError as Error).message).toBe("done explode");
@@ -295,7 +318,8 @@ describe("passport config", () => {
 
     usersModelMock.findUnique.mockResolvedValue(user);
 
-    await deserializeUser(2, done);
+    deserializeUser(2, done);
+    await flushMicrotasks();
 
     expect(usersModelMock.findUnique).toHaveBeenCalledWith({
       where: { id: 2 },
@@ -310,7 +334,8 @@ describe("passport config", () => {
 
     usersModelMock.findUnique.mockRejectedValue(dbError);
 
-    await deserializeUser(2, done);
+    deserializeUser(2, done);
+    await flushMicrotasks();
 
     expect(done).toHaveBeenCalledWith(dbError);
   });

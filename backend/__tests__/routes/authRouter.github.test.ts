@@ -21,13 +21,16 @@ type GitHubAuthCallback = (
   user: Express.User | false | null,
 ) => void;
 
+type PassportModule = typeof import("../../src/config/passport.js");
+
 const authenticateMock = vi.fn<AuthenticateMock>(
-  () => (_req: Request, _res: Response, next: NextFunction) => next(),
+  () => (_req: Request, _res: Response, next: NextFunction) => {
+    next();
+  },
 );
 
 vi.mock("../../src/config/passport.js", async (importOriginal) => {
-  const actual =
-    (await importOriginal()) as typeof import("../../src/config/passport.js");
+  const actual = await importOriginal<PassportModule>();
   actual.passport.authenticate =
     authenticateMock as typeof actual.passport.authenticate;
 
@@ -103,7 +106,7 @@ describe("Auth Router - GET /auth/github/callback", () => {
           req.logIn = ((_user, optionsOrDone, maybeDone) => {
             const done =
               typeof optionsOrDone === "function" ? optionsOrDone : maybeDone;
-            done?.(null);
+            done(null);
           }) as Request["logIn"];
 
           req.session.regenerate = ((done) => {

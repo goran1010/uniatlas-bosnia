@@ -32,7 +32,7 @@ app.use(rateLimiter.global);
 
 // Log every request made to the server
 app.use((req, _res, next) => {
-  logger.info(`${req.method} ${req.originalUrl} ${req.ip}`);
+  logger.info(`${req.method} ${req.originalUrl} ${req.ip ?? "unknown IP"}`);
   next();
 });
 
@@ -79,7 +79,7 @@ app.use(
     logger.error(err);
 
     return sendError(res, {
-      status: err?.status || 500,
+      status: err.status ?? 500,
       message: "Server error: please try again later.",
     });
   },

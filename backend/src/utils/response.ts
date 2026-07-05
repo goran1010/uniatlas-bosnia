@@ -4,12 +4,12 @@ interface Options {
   status?: number;
 }
 
-interface SuccessOptions extends Options {
+export interface SuccessOptions extends Options {
   data?: unknown;
   message?: string | null;
 }
 
-interface ErrorOptions extends Options {
+export interface ErrorOptions extends Options {
   message?: string;
 }
 
@@ -22,7 +22,7 @@ function sendSuccess(
 
 function sendError(
   res: Response,
-  { status = 400, message = "Request failed." }: ErrorOptions = {},
+  { status = 500, message = "Request failed." }: ErrorOptions = {},
 ) {
   return res.status(status).json({
     error: {

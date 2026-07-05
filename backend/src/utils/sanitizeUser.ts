@@ -1,9 +1,6 @@
 import type { User as PrismaUser } from "../generated/prisma/client.js";
 
 function sanitizeUser(user: PrismaUser): Omit<PrismaUser, "password"> {
-  if (!user) {
-    return user;
-  }
   const { id, role, email, githubId } = user;
   return { id, role, email, githubId };
 }

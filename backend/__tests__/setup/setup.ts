@@ -6,10 +6,13 @@ import type { Request, Response, NextFunction } from "express";
 import { env } from "../../src/config/env.js";
 
 const { Client } = pg;
-const dbName = `test_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+const dbName = `test_${Date.now().toString()}_${Math.random().toString(36).slice(2, 8)}`;
 
 if (!env.TEST_DATABASE_URL) {
   throw new Error("TEST_DATABASE_URL not found in environment variables.");
+}
+if (!process.env["TEST_DB_TEMPLATE"]) {
+  throw new Error("TEST_DB_TEMPLATE not found in environment variables.");
 }
 
 const _adminUrl = new URL(env.TEST_DATABASE_URL);
@@ -38,7 +41,7 @@ afterAll(async () => {
 });
 
 vi.mock("../../src/email/confirmationEmail.js", () => ({
-  sendConfirmationEmail: vi.fn(async () => {
+  sendConfirmationEmail: vi.fn(() => {
     return { success: true };
   }),
 }));
@@ -52,8 +55,8 @@ vi.mock("pino", () => {
   };
 });
 
-vi.mock("csrf-sync", () => {
-  const originalModule = vi.importActual("csrf-sync");
+vi.mock("csrf-sync", async () => {
+  const originalModule = await vi.importActual("csrf-sync");
   return {
     ...originalModule,
     csrfSync: () => {
