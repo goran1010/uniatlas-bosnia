@@ -4,6 +4,10 @@ import { describe, test, expect, vi, beforeEach } from "vitest";
 import { prisma } from "../../src/db/prisma.js";
 
 import type { University } from "../../src/generated/prisma/client.js";
+import type {
+  UniversityFindManyArgs,
+  UniversityFindUniqueArgs,
+} from "../../src/generated/prisma/models.js";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -45,18 +49,25 @@ const dummyData: { data: University[] } = {
   ],
 };
 
+type FindUniqueUniversityImplementation = (
+  args: UniversityFindUniqueArgs,
+) => ReturnType<typeof prisma.university.findUnique>;
+
+const mockFindUniqueUniversity: FindUniqueUniversityImplementation = ({
+  where: { id },
+}) => {
+  const university = dummyData.data.find((u) => u.id === id);
+  return Promise.resolve(university ?? null) as ReturnType<
+    typeof prisma.university.findUnique
+  >;
+};
+
 vi.spyOn(prisma.university, "findUnique").mockImplementation(
-  ({ where: { id } }) => {
-    return vi
-      .fn()
-      .mockResolvedValue(
-        dummyData.data.find((university) => university.id === id) ?? null,
-      )();
-  },
+  mockFindUniqueUniversity,
 );
 
 function mockUniversitySearch(
-  args?: Parameters<typeof prisma.university.findMany>[0],
+  args?: UniversityFindManyArgs,
 ): ReturnType<typeof prisma.university.findMany> {
   const normalizedTerm =
     (
@@ -76,9 +87,16 @@ function mockUniversitySearch(
       (u) =>
         u.name.toLowerCase().includes(normalizedTerm) ||
         u.city.toLowerCase().includes(normalizedTerm) ||
-        (u.acronym && u.acronym.toLowerCase().includes(normalizedTerm)),
+        u.acronym?.toLowerCase().includes(normalizedTerm),
     ),
   ) as ReturnType<typeof prisma.university.findMany>;
+}
+
+function getResponseObject(body: unknown): Record<string, unknown> {
+  expect(body).toBeTypeOf("object");
+  expect(body).not.toBeNull();
+
+  return body as Record<string, unknown>;
 }
 
 describe("GET /", () => {
@@ -127,14 +145,12 @@ describe("GET /api/v1/universities/search", () => {
     const dummyDataFiltered = dummyData.data.filter(
       (u) => u.city === "Sarajevo",
     );
-    const expectedResponse = {
-      status: 200,
-      body: expect.objectContaining({
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
         data: dummyDataFiltered,
       }),
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    );
   });
 
   test("responds with status 404 for searchTerm=non-existent-university", async () => {
@@ -155,47 +171,36 @@ describe("GET /api/v1/universities/search", () => {
 
   test("responds with status 400 for missing searchTerm", async () => {
     const response = await request(app).get("/api/v1/universities/search");
-    const expectedResponse = {
-      status: 400,
-      body: expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining("Search term is required"),
-        }),
-      }),
-    };
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Search term is required");
   });
 });
 
 describe("GET /api/v1/universities/:id", () => {
   test("responds with status 200 and the requested university", async () => {
     const response = await request(app).get("/api/v1/universities/1");
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        message: "University retrieved successfully.",
-        data: expect.objectContaining({
-          id: 1,
-          name: "University of Sarajevo",
-        }),
-      }),
-    );
+    expect(responseBody["message"]).toBe("University retrieved successfully.");
+    expect(data["id"]).toBe(1);
+    expect(data["name"]).toBe("University of Sarajevo");
   });
 
   test("responds with status 400 for invalid university id", async () => {
     const response = await request(app).get(
       "/api/v1/universities/not-a-number",
     );
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        error: expect.objectContaining({
-          message: expect.stringContaining("Invalid university ID."),
-        }),
-      }),
-    );
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Invalid university ID.");
   });
 });

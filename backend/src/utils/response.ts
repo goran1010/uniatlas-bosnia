@@ -4,12 +4,12 @@ interface Options {
   status?: number;
 }
 
-interface SuccessOptions extends Options {
+export interface SuccessOptions extends Options {
   data?: unknown;
   message?: string | null;
 }
 
-interface ErrorOptions extends Options {
+export interface ErrorOptions extends Options {
   message?: string;
 }
 

@@ -18,8 +18,6 @@ async function createAndLoginUser(
 ) {
   const userData = createNewUserInput(newUser);
 
-  if (!agent) throw new Error("Agent is required to create and login user.");
-
   await agent.post("/auth/signup").send(userData);
 
   const users = await prisma.pendingUser.findMany({

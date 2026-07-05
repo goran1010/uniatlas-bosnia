@@ -104,7 +104,7 @@ describe("Auth Router - GET /auth/github/callback", () => {
           req.logIn = ((_user, optionsOrDone, maybeDone) => {
             const done =
               typeof optionsOrDone === "function" ? optionsOrDone : maybeDone;
-            done?.(null);
+            done(null);
           }) as Request["logIn"];
 
           req.session.regenerate = ((done) => {

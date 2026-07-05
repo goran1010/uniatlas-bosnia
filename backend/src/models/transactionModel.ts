@@ -10,7 +10,7 @@ import {
 const VALID_CHANGE_TYPES = ["CREATE", "UPDATE", "DELETE"] as const;
 
 class TransactionModel {
-  async approvePendingChange({ id }: { id: string }): Promise<boolean> {
+  approvePendingChange = async ({ id }: { id: string }): Promise<boolean> => {
     return prisma.$transaction(async (tx) => {
       const pendingChange = await tx.pendingChange.findUnique({
         where: { id },
@@ -159,7 +159,7 @@ class TransactionModel {
 
       return deletePendingChange();
     });
-  }
+  };
 }
 
 const transactionModel = new TransactionModel();
