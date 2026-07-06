@@ -7,8 +7,6 @@ import {
   isCompleteUniversityPendingChangeData,
 } from "../utils/pendingChangeData.js";
 
-const VALID_CHANGE_TYPES = ["CREATE", "UPDATE", "DELETE"] as const;
-
 class TransactionModel {
   approvePendingChange = async ({ id }: { id: string }): Promise<boolean> => {
     return prisma.$transaction(async (tx) => {
@@ -21,10 +19,6 @@ class TransactionModel {
       }
 
       const { entityType, typeOfChange, targetId, parentId } = pendingChange;
-
-      if (!VALID_CHANGE_TYPES.includes(typeOfChange)) {
-        return false;
-      }
 
       const deletePendingChange = async () => {
         await tx.pendingChange.delete({ where: { id } });
