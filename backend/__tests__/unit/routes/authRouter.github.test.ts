@@ -1,6 +1,6 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { env } from "../../src/config/env.js";
+import { env } from "../../../src/config/env.js";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -21,7 +21,7 @@ type GitHubAuthCallback = (
   user: Express.User | false | null,
 ) => void;
 
-type PassportModule = typeof import("../../src/config/passport.js");
+type PassportModule = typeof import("../../../src/config/passport.js");
 
 const authenticateMock = vi.fn<AuthenticateMock>(
   () => (_req: Request, _res: Response, next: NextFunction) => {
@@ -29,7 +29,7 @@ const authenticateMock = vi.fn<AuthenticateMock>(
   },
 );
 
-vi.mock("../../src/config/passport.js", async (importOriginal) => {
+vi.mock("../../../src/config/passport.js", async (importOriginal) => {
   const actual = await importOriginal<PassportModule>();
   actual.passport.authenticate =
     authenticateMock as typeof actual.passport.authenticate;
@@ -40,7 +40,7 @@ vi.mock("../../src/config/passport.js", async (importOriginal) => {
   };
 });
 
-const { app } = await import("../../src/app.js");
+const { app } = await import("../../../src/app.js");
 
 beforeEach(() => {
   vi.clearAllMocks();

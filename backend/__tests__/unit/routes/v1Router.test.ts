@@ -1,13 +1,13 @@
 import request from "supertest";
-import { app } from "../../src/app.js";
+import { app } from "../../../src/app.js";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { prisma } from "../../src/db/prisma.js";
+import { prisma } from "../../../src/db/prisma.js";
 
-import type { University } from "../../src/generated/prisma/client.js";
+import type { University } from "../../../src/generated/prisma/client.js";
 import type {
   UniversityFindManyArgs,
   UniversityFindUniqueArgs,
-} from "../../src/generated/prisma/models.js";
+} from "../../../src/generated/prisma/models.js";
 
 beforeEach(() => {
   vi.clearAllMocks();

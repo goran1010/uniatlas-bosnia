@@ -7,7 +7,7 @@ describe("process.env variable missing or undefined", () => {
     delete process.env["DATABASE_URL"];
     vi.resetModules();
 
-    await expect(import("../src/config/env.js")).rejects.toThrow(
+    await expect(import("../../src/config/env.js")).rejects.toThrow(
       "Missing environment variable: DATABASE_URL",
     );
 

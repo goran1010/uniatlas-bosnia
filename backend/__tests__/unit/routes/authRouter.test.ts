@@ -38,11 +38,11 @@ vi.mock("../../src/config/sessionMiddleware.js", () => ({
   },
 }));
 
-import { app } from "../../src/app.js";
-import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
-import { createNewUserInput } from "../utils/createNewUserInput.js";
-import { prisma } from "../../src/db/prisma.js";
-import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
+import { app } from "../../../src/app.js";
+import { emailConfirmHTML } from "../../../src/utils/emailConfirmHTML.js";
+import { createNewUserInput } from "../../utils/createNewUserInput.js";
+import { prisma } from "../../../src/db/prisma.js";
+import { sendConfirmationEmail } from "../../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 

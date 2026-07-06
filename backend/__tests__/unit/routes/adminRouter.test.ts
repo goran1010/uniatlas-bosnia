@@ -1,14 +1,14 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { app } from "../../src/app.js";
-import { prisma } from "../../src/db/prisma.js";
-import { transactionModel } from "../../src/models/transactionModel.js";
+import { app } from "../../../src/app.js";
+import { prisma } from "../../../src/db/prisma.js";
+import { transactionModel } from "../../../src/models/transactionModel.js";
 
 import type {
   User,
   entityType,
   typeOfChange,
-} from "../../src/generated/prisma/client.js";
+} from "../../../src/generated/prisma/client.js";
 import type { Request, Response, NextFunction } from "express";
 import type { JsonValue } from "@prisma/client/runtime/client";
 
@@ -34,7 +34,7 @@ interface MockedResult {
   user: Omit<User, "password">;
 }
 
-vi.mock("../../src/auth/isAuthenticated.js", () => {
+vi.mock("../../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
       req.user = mockedUser;

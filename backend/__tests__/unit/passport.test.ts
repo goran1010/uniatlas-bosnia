@@ -89,13 +89,13 @@ vi.mock("bcryptjs", () => ({
   default: bcryptMock,
 }));
 
-vi.mock("../src/db/prisma.js", async (originalModule) => ({
+vi.mock("../../src/db/prisma.js", async (originalModule) => ({
   ...(await originalModule()),
   prisma: prismaMock,
 }));
 
 async function loadStrategies() {
-  await import("../src/config/passport.js");
+  await import("../../src/config/passport.js");
 
   const localStrategy = passportMock.use.mock.calls[0]?.[0] as
     | MockLocalStrategy

@@ -10,10 +10,7 @@ class AuthValidation {
 
     body("password")
       .trim()
-      .custom((value: unknown) => {
-        if (typeof value !== "string") {
-          throw new Error("Password must be a string");
-        }
+      .custom((value: string) => {
         if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
           throw new Error(
             "Password can only contain letters, numbers, dashes or underscores",
@@ -34,11 +31,7 @@ class AuthValidation {
 
     body("confirm-password")
       .trim()
-      .custom((value: unknown, { req }) => {
-        if (typeof value !== "string") {
-          throw new Error("Confirm password must be a string");
-        }
-
+      .custom((value: string, { req }) => {
         const body: unknown = req.body;
 
         if (
