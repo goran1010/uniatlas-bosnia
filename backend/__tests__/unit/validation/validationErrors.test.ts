@@ -14,15 +14,17 @@ vi.mock("express-validator", () => ({
 describe("validationError", () => {
   test("should show an error for unexpected validation error type", () => {
     const req = {} as Request;
+    const statusMock = vi.fn().mockReturnThis();
+    const jsonMock = vi.fn();
     const res = {
-      status: vi.fn().mockReturnThis(),
-      json: vi.fn(),
+      status: statusMock,
+      json: jsonMock,
     } as unknown as Response;
     const next = vi.fn() as NextFunction;
 
     validationError(req, res, next);
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({
+    expect(statusMock).toHaveBeenCalledWith(400);
+    expect(jsonMock).toHaveBeenCalledWith({
       error: {
         message: "Validation failed: Invalid input.",
       },
