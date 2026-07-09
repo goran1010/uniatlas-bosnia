@@ -32,7 +32,9 @@ app.use(rateLimiter.global);
 
 // Log every request made to the server
 app.use((req, _res, next) => {
-  logger.info(`${req.method} ${req.originalUrl} ${req.ip ?? "unknown IP"}`);
+  logger.info(
+    `${req.method} method to ${req.originalUrl} from ${String(req.ip)}`,
+  );
   next();
 });
 
