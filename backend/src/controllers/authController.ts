@@ -47,10 +47,11 @@ class AuthController {
 
       const existingUser = await prisma.user.findUnique({ where: { email } });
       if (existingUser) {
-        return sendError(res, {
+        sendError(res, {
           status: 400,
           message: "Signup failed: check your input and try again.",
         });
+        return;
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -85,14 +86,15 @@ class AuthController {
       const result = await sendConfirmationEmail(email, confirmationLink);
 
       if (result.success) {
-        return sendSuccess(res, {
+        sendSuccess(res, {
           status: 201,
           data: { email },
           message: "Registration successful! Check your email.",
         });
+        return;
       }
       await prisma.pendingUser.deleteMany({ where: { email } });
-      return sendError(res, {
+      sendError(res, {
         status: 500,
         message:
           "Signup failed: confirmation email was not sent. Check your email address and try again.",
@@ -100,7 +102,7 @@ class AuthController {
     } catch (err) {
       console.error(err);
 
-      return sendError(res, {
+      sendError(res, {
         status: 400,
         message: "Signup failed: check your input and try again.",
       });

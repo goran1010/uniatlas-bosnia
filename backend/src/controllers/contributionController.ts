@@ -19,10 +19,11 @@ class ContributionController {
   createEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
-        return sendError(res, {
+        sendError(res, {
           status: 401,
           message: "Authentication required: log in and try again.",
         });
+        return;
       }
       const userId = req.user.id;
       const { entityType, parentId, data } =
@@ -31,10 +32,11 @@ class ContributionController {
         });
 
       if (!data) {
-        return sendError(res, {
+        sendError(res, {
           status: 400,
           message: "Invalid contribution data.",
         });
+        return;
       }
 
       const result = await prisma.pendingChange.create({
@@ -51,14 +53,15 @@ class ContributionController {
         },
       });
 
-      return sendSuccess(res, {
+      sendSuccess(res, {
         status: 201,
         message: "Suggestion submitted. An admin will review it.",
         data: result,
       });
+      return;
     } catch (err) {
       logger.error(err);
-      return sendError(res, {
+      sendError(res, {
         status: 500,
         message: "An error occurred while submitting the suggestion.",
       });
@@ -68,10 +71,11 @@ class ContributionController {
   editEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
-        return sendError(res, {
+        sendError(res, {
           status: 401,
           message: "Authentication required: log in and try again.",
         });
+        return;
       }
       const userId = req.user.id;
       const { entityType, targetId, data } =
@@ -80,10 +84,11 @@ class ContributionController {
         });
 
       if (!data) {
-        return sendError(res, {
+        sendError(res, {
           status: 400,
           message: "Invalid contribution data.",
         });
+        return;
       }
 
       const result = await prisma.pendingChange.create({
@@ -101,14 +106,14 @@ class ContributionController {
         },
       });
 
-      return sendSuccess(res, {
+      sendSuccess(res, {
         status: 201,
         message: "Edit suggestion submitted. An admin will review it.",
         data: result,
       });
     } catch (err) {
       logger.error(err);
-      return sendError(res, {
+      sendError(res, {
         status: 500,
         message: "An error occurred while submitting the edit suggestion.",
       });
@@ -118,10 +123,11 @@ class ContributionController {
   deleteEntity = async (req: Request, res: Response) => {
     try {
       if (!req.user) {
-        return sendError(res, {
+        sendError(res, {
           status: 401,
           message: "Authentication required: log in and try again.",
         });
+        return;
       }
       const userId = req.user.id;
       const { entityType, targetId } = matchedData<ContributionRequestData>(
@@ -145,14 +151,14 @@ class ContributionController {
         },
       });
 
-      return sendSuccess(res, {
+      sendSuccess(res, {
         status: 201,
         message: "Deletion suggestion submitted. An admin will review it.",
         data: result,
       });
     } catch (err) {
       logger.error(err);
-      return sendError(res, {
+      sendError(res, {
         status: 500,
         message: "An error occurred while submitting the deletion suggestion.",
       });
@@ -161,17 +167,18 @@ class ContributionController {
 
   getPendingChanges = async (req: Request, res: Response) => {
     if (!req.user) {
-      return sendError(res, {
+      sendError(res, {
         status: 401,
         message: "Authentication required: log in and try again.",
       });
+      return;
     }
     const { id } = req.user;
     const pendingChanges = await prisma.pendingChange.findMany({
       where: { userId: id },
     });
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       data: pendingChanges,
       message: "Pending changes retrieved successfully.",
     });
@@ -179,10 +186,11 @@ class ContributionController {
 
   deletePendingChange = async (req: Request, res: Response) => {
     if (!req.user) {
-      return sendError(res, {
+      sendError(res, {
         status: 401,
         message: "Authentication required: log in and try again.",
       });
+      return;
     }
     const { id } = req.user;
     const { id: pendingChangeId } = matchedData<{ id: string }>(req);
@@ -192,17 +200,18 @@ class ContributionController {
     });
 
     if (pendingChange.length === 0) {
-      return sendError(res, {
+      sendError(res, {
         status: 404,
         message: "Pending change not found.",
       });
+      return;
     }
 
     await prisma.pendingChange.delete({
       where: { id: pendingChangeId },
     });
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "Pending change deleted successfully.",
     });
   };

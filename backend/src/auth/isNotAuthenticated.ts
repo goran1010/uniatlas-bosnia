@@ -8,7 +8,7 @@ function isNotAuthenticated(req: Request, res: Response, next: NextFunction) {
     return;
   }
 
-  return sendError(res, {
+  sendError(res, {
     status: 403,
     message: "Already logged in: log out first.",
   });

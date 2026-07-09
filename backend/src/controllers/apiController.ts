@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 
 class APIController {
   status = (_req: Request, res: Response) => {
-    return sendSuccess(res, {
+    sendSuccess(res, {
       data: {
         status: "ok",
       },

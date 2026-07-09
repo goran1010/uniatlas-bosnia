@@ -6,7 +6,7 @@ const { generateToken } = csrfSync();
 const csrfRouter = express.Router();
 
 csrfRouter.get("/csrf-token", (req, res) => {
-  return sendSuccess(res, {
+  sendSuccess(res, {
     message: "CSRF token generated successfully",
     data: generateToken(req),
   });

@@ -17,14 +17,14 @@ function sendSuccess(
   res: Response,
   { status = 200, data = null, message = null }: SuccessOptions = {},
 ) {
-  return res.status(status).json({ data, message });
+  res.status(status).json({ data, message });
 }
 
 function sendError(
   res: Response,
   { status = 500, message = "Request failed." }: ErrorOptions = {},
 ) {
-  return res.status(status).json({
+  res.status(status).json({
     error: {
       message,
     },
