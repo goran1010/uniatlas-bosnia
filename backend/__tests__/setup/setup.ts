@@ -75,3 +75,24 @@ vi.mock("csrf-sync", async () => {
     },
   };
 });
+
+vi.mock("../../src/utils/rateLimiter.js", async () => {
+  const originalModule = await vi.importActual(
+    "../../src/utils/rateLimiter.js",
+  );
+  return {
+    ...originalModule,
+    global: (_req: Request, _res: Response, next: NextFunction) => {
+      next();
+    },
+    auth: (_req: Request, _res: Response, next: NextFunction) => {
+      next();
+    },
+    api: (_req: Request, _res: Response, next: NextFunction) => {
+      next();
+    },
+    users: (_req: Request, _res: Response, next: NextFunction) => {
+      next();
+    },
+  };
+});
