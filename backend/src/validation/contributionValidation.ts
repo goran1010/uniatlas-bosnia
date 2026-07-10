@@ -12,10 +12,6 @@ const ENTITIES = ["FBIH", "RS", "BD"];
 const OWNERSHIP = ["JAVNA", "PRIVATNA"];
 
 function validateContributionDataShape(value: unknown, entityType: unknown) {
-  if (typeof entityType !== "string") {
-    return true;
-  }
-
   if (
     entityType !== "UNIVERSITY" &&
     entityType !== "FACULTY" &&
@@ -43,12 +39,10 @@ function getEntityTypeFromRequestBody(req: {
 
 class ContributionValidation {
   createEntity = [
-    body("entityType").customSanitizer((value: string) =>
-      typeof value === "string" ? value.toUpperCase() : value,
-    ),
-
     body("entityType")
       .trim()
+      .isAlphanumeric()
+      .withMessage("Entity type must be alphanumeric")
       .notEmpty()
       .withMessage("Entity type is required")
       .bail()
@@ -147,12 +141,10 @@ class ContributionValidation {
   ];
 
   editEntity = [
-    body("entityType").customSanitizer((value: string) =>
-      typeof value === "string" ? value.toUpperCase() : value,
-    ),
-
     body("entityType")
       .trim()
+      .isAlphanumeric()
+      .withMessage("Entity type must be alphanumeric")
       .notEmpty()
       .withMessage("Entity type is required")
       .bail()
@@ -181,15 +173,13 @@ class ContributionValidation {
           return value;
         }
 
-        return (
-          buildPendingChangeData(
-            getEntityTypeFromRequestBody(req) as
-              | "UNIVERSITY"
-              | "FACULTY"
-              | "STUDY_PROGRAM"
-              | "SUBJECT",
-            value,
-          ) ?? value
+        return buildPendingChangeData(
+          getEntityTypeFromRequestBody(req) as
+            | "UNIVERSITY"
+            | "FACULTY"
+            | "STUDY_PROGRAM"
+            | "SUBJECT",
+          value,
         );
       }),
 
@@ -238,14 +228,12 @@ class ContributionValidation {
   ];
 
   deleteEntity = [
-    body("entityType").customSanitizer((value: unknown) =>
-      typeof value === "string" ? value.toUpperCase() : value,
-    ),
-
     body("entityType")
       .trim()
       .notEmpty()
       .withMessage("Entity type is required")
+      .isAlphanumeric()
+      .withMessage("Entity type must be alphanumeric")
       .bail()
       .isIn(ENTITY_TYPES)
       .withMessage("Invalid entity type"),

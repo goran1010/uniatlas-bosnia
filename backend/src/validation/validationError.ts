@@ -22,7 +22,6 @@ function validationError(req: Request, res: Response, next: NextFunction) {
     return;
   }
   next();
-  return;
 }
 
 export { validationError };

@@ -8,12 +8,12 @@ beforeEach(() => {
 
 describe("app", () => {
   test("app should be defined", async () => {
-    const { app } = await import("../src/app.js");
+    const { app } = await import("../../src/app.js");
     expect(app).toBeDefined();
   });
 
   test("app responds with status 500 if an unexpected error occurs", async () => {
-    vi.doMock("../src/utils/rateLimiter.js", () => ({
+    vi.doMock("../../src/utils/rateLimiter.js", () => ({
       global: vi.fn((_req: Request, _res: Response, next: NextFunction) => {
         next();
       }),
@@ -23,7 +23,7 @@ describe("app", () => {
       auth: vi.fn(),
       users: vi.fn(),
     }));
-    const { app } = await import("../src/app.js");
+    const { app } = await import("../../src/app.js");
 
     const response = await request(app).get("/api");
     const expectedResponse = {
@@ -39,7 +39,7 @@ describe("app", () => {
   });
 
   test("app responds with status 404 for unknown routes", async () => {
-    const { app } = await import("../src/app.js");
+    const { app } = await import("../../src/app.js");
 
     const response = await request(app).get("/unknown-route");
     const expectedResponse = {

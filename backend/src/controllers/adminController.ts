@@ -9,7 +9,7 @@ class AdminController {
   getPendingChanges = async (_req: Request, res: Response) => {
     const pendingChanges = await prisma.pendingChange.findMany();
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       data: pendingChanges,
       message: "Pending changes retrieved successfully.",
     });
@@ -20,7 +20,7 @@ class AdminController {
 
     await prisma.pendingChange.delete({ where: { id } });
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "Pending change declined successfully.",
     });
   };
@@ -33,13 +33,14 @@ class AdminController {
     });
 
     if (!wasApplied) {
-      return sendError(res, {
+      sendError(res, {
         status: 404,
         message: "Pending change not found.",
       });
+      return;
     }
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "Pending change approved successfully.",
     });
   };

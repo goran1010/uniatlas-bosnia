@@ -14,7 +14,7 @@ interface UniversityIdInput {
 
 class V1Controller {
   status = (_req: Request, res: Response) => {
-    return sendSuccess(res, {
+    sendSuccess(res, {
       data: {
         status: "ok",
       },
@@ -24,7 +24,7 @@ class V1Controller {
 
   getUniversities = async (_req: Request, res: Response) => {
     const universities = await prisma.university.findMany();
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "Universities retrieved successfully.",
       data: universities,
     });
@@ -58,13 +58,14 @@ class V1Controller {
     });
 
     if (result.length > 0) {
-      return sendSuccess(res, {
+      sendSuccess(res, {
         message: "Universities retrieved successfully.",
         data: result,
       });
+      return;
     }
 
-    return sendError(res, {
+    sendError(res, {
       status: 404,
       message: "No universities found matching your search.",
     });
@@ -78,13 +79,14 @@ class V1Controller {
     });
 
     if (!university) {
-      return sendError(res, {
+      sendError(res, {
         status: 404,
         message: "University not found.",
       });
+      return;
     }
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "University retrieved successfully.",
       data: university,
     });
@@ -102,13 +104,14 @@ class V1Controller {
     });
 
     if (result.length > 0) {
-      return sendSuccess(res, {
+      sendSuccess(res, {
         message: "Study programs retrieved successfully.",
         data: result,
       });
+      return;
     }
 
-    return sendError(res, {
+    sendError(res, {
       status: 404,
       message: "No study programs found matching your search.",
     });

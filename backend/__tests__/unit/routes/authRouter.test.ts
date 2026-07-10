@@ -38,11 +38,11 @@ vi.mock("../../src/config/sessionMiddleware.js", () => ({
   },
 }));
 
-import { app } from "../../src/app.js";
-import { emailConfirmHTML } from "../../src/utils/emailConfirmHTML.js";
-import { createNewUserInput } from "../utils/createNewUserInput.js";
-import { prisma } from "../../src/db/prisma.js";
-import { sendConfirmationEmail } from "../../src/email/confirmationEmail.js";
+import { app } from "../../../src/app.js";
+import { emailConfirmHTML } from "../../../src/utils/emailConfirmHTML.js";
+import { createNewUserInput } from "../../utils/createNewUserInput.js";
+import { prisma } from "../../../src/db/prisma.js";
+import { sendConfirmationEmail } from "../../../src/email/confirmationEmail.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 
@@ -82,7 +82,7 @@ beforeEach(() => {
 });
 
 describe("POST /auth/signup", () => {
-  test("responds with status 400 and message for incorrect password input", async () => {
+  test("responds with status 400 and message for too few characters in password input", async () => {
     const newUser = createNewUserInput({
       password: "123",
       "confirm-password": "123",
@@ -92,6 +92,28 @@ describe("POST /auth/signup", () => {
       error: {
         message:
           "Password must be at least 6 characters long and contain at least one number",
+      },
+    };
+
+    const response = await request(app).post("/auth/signup").send(newUser);
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain(responseData.error.message);
+  });
+
+  test("responds with status 400 and message for invalid characters in password input", async () => {
+    const newUser = createNewUserInput({
+      password: "invalid@password",
+      "confirm-password": "invalid@password",
+    });
+
+    const responseData = {
+      error: {
+        message:
+          "Password can only contain letters, numbers, dashes or underscores",
       },
     };
 

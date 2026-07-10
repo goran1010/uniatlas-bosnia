@@ -32,7 +32,9 @@ app.use(rateLimiter.global);
 
 // Log every request made to the server
 app.use((req, _res, next) => {
-  logger.info(`${req.method} ${req.originalUrl} ${req.ip ?? "unknown IP"}`);
+  logger.info(
+    `${req.method} method to ${req.originalUrl} from ${String(req.ip)}`,
+  );
   next();
 });
 
@@ -62,7 +64,7 @@ app.use("/auth", rateLimiter.auth, authRouter);
 app.use("/users", rateLimiter.users, csrfSynchronisedProtection, usersRouter);
 
 app.use((_req, res) => {
-  return sendError(res, {
+  sendError(res, {
     status: 404,
     message: "Route not found: check the URL and HTTP method.",
   });
@@ -78,7 +80,7 @@ app.use(
   ) => {
     logger.error(err);
 
-    return sendError(res, {
+    sendError(res, {
       status: err.status ?? 500,
       message: "Server error: please try again later.",
     });

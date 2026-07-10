@@ -1,14 +1,14 @@
 import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { prisma } from "../../src/db/prisma.js";
-import { app } from "../../src/app.js";
+import { prisma } from "../../../src/db/prisma.js";
+import { app } from "../../../src/app.js";
 
-import type { User } from "../../src/generated/prisma/client.js";
+import type { User } from "../../../src/generated/prisma/client.js";
 import type { Request, Response, NextFunction } from "express";
 import type {
   entityType,
   typeOfChange,
-} from "../../src/generated/prisma/client.js";
+} from "../../../src/generated/prisma/client.js";
 import type { JsonValue } from "@prisma/client/runtime/client";
 
 function getResponseObject(body: unknown): Record<string, unknown> {
@@ -45,7 +45,7 @@ interface MockPendingChanges {
   user: Omit<User, "password">;
 }
 
-vi.mock("../../src/auth/isAuthenticated.js", () => {
+vi.mock("../../../src/auth/isAuthenticated.js", () => {
   return {
     isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
       req.user = mockedUser;

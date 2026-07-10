@@ -9,13 +9,14 @@ const NUMBER_OF_DAYS = 30;
 class UsersController {
   me = (req: Request, res: Response) => {
     if (!req.user) {
-      return sendSuccess(res, {
+      sendSuccess(res, {
         message: "No user logged in",
         data: null,
       });
+      return;
     }
 
-    return sendSuccess(res, {
+    sendSuccess(res, {
       message: "User info retrieved",
       data: req.user,
     });
