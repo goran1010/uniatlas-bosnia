@@ -203,4 +203,28 @@ describe("GET /api/v1/universities/:id", () => {
     expect(error["message"]).toBeTypeOf("string");
     expect(error["message"]).toContain("Invalid university ID.");
   });
+
+  test("responds with status 404 for non-existent university id", async () => {
+    const response = await request(app).get("/api/v1/universities/999");
+    const expectedResponse = {
+      status: 404,
+      body: {
+        error: {
+          message: "University not found.",
+        },
+      },
+    };
+
+    expect(response).toEqual(expect.objectContaining(expectedResponse));
+  });
+
+  test("responds with status 400 for emoji in university id", async () => {
+    const response = await request(app).get("/api/v1/universities/😊");
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Invalid university ID.");
+  });
 });
