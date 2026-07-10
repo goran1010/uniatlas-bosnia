@@ -49,6 +49,28 @@ const dummyData: { data: University[] } = {
   ],
 };
 
+vi.spyOn(prisma.studyProgram, "findMany").mockImplementation((args) => {
+  const normalizedTerm =
+    (
+      args?.where as
+        | {
+            name?: { contains?: string };
+          }
+        | undefined
+    )?.name?.contains?.toLowerCase() ?? "";
+
+  const dummyStudyPrograms = [
+    { id: 1, name: "Computer Science" },
+    { id: 2, name: "Computer Engineering" },
+  ];
+
+  return Promise.resolve(
+    dummyStudyPrograms.filter((sp) =>
+      sp.name.toLowerCase().includes(normalizedTerm),
+    ),
+  ) as ReturnType<typeof prisma.studyProgram.findMany>;
+});
+
 type FindUniqueUniversityImplementation = (
   args: UniversityFindUniqueArgs,
 ) => ReturnType<typeof prisma.university.findUnique>;
@@ -97,6 +119,12 @@ function getResponseObject(body: unknown): Record<string, unknown> {
   expect(body).not.toBeNull();
 
   return body as Record<string, unknown>;
+}
+
+function getNamedItems(value: unknown): { name: string }[] {
+  expect(Array.isArray(value)).toBe(true);
+
+  return value as { name: string }[];
 }
 
 describe("GET /", () => {
@@ -226,5 +254,51 @@ describe("GET /api/v1/universities/:id", () => {
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
     expect(error["message"]).toContain("Invalid university ID.");
+  });
+});
+
+describe("GET /api/v1/study-programs/search", () => {
+  test("responds with status 200 and study programs for searchTerm=Computer", async () => {
+    const response = await request(app).get(
+      "/api/v1/study-programs/search?searchTerm=Computer",
+    );
+    const responseBody = getResponseObject(response.body);
+    const data = getNamedItems(responseBody["data"]);
+
+    expect(response.status).toBe(200);
+    expect(responseBody["message"]).toBe(
+      "Study programs retrieved successfully.",
+    );
+    expect(data).toHaveLength(2);
+    expect(data.map((studyProgram) => studyProgram.name)).toEqual([
+      "Computer Science",
+      "Computer Engineering",
+    ]);
+  });
+
+  test("responds with status 404 for searchTerm=non-existent-study-program", async () => {
+    const response = await request(app).get(
+      "/api/v1/study-programs/search?searchTerm=non-existent-study-program",
+    );
+    const expectedResponse = {
+      status: 404,
+      body: {
+        error: {
+          message: "No study programs found matching your search.",
+        },
+      },
+    };
+
+    expect(response).toEqual(expect.objectContaining(expectedResponse));
+  });
+
+  test("responds with status 400 for missing searchTerm", async () => {
+    const response = await request(app).get("/api/v1/study-programs/search");
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expect(error["message"]).toBeTypeOf("string");
+    expect(error["message"]).toContain("Search term is required");
   });
 });
