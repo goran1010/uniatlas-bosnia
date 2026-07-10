@@ -6,47 +6,30 @@ import type { Request, Response, NextFunction } from "express";
 
 type ExpressUser = Omit<User, "password">;
 
-vi.mock("../../src/config/sessionMiddleware.js", () => ({
-  sessionMiddleware: (req: Request, _res: Response, next: NextFunction) => {
-    req.session = {
-      cookie: {
-        originalMaxAge: 1000 * 60 * 60 * 24,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-        secure: false,
-        httpOnly: true,
-      },
-      id: "test-session-id",
-      destroy: vi.fn(),
-      regenerate: vi.fn(),
-      save: vi.fn(),
-      reload: vi.fn(),
-      resetMaxAge: vi.fn(),
-      touch: vi.fn(),
-    };
-    next();
-  },
-}));
-
-import { app } from "../../../src/app.js";
-
 let mockedUser: ExpressUser | undefined = undefined;
 
-vi.mock("../../src/auth/isAuthenticated.js", () => {
-  return {
-    isAuthenticated: (req: Request, res: Response, next: NextFunction) => {
-      req.user = mockedUser;
-      if (req.user) {
-        next();
-        return;
-      }
+type ImportOriginalMock = Record<string, unknown>;
+type ImportOriginal = () => Promise<ImportOriginalMock>;
 
-      res.status(401).json({
-        error: "You are not logged in.",
-        details: [{ msg: null }],
-      });
-    },
-  };
-});
+vi.mock(
+  "../../../src/config/passport.js",
+  async (importOriginal: ImportOriginal) => {
+    const actual = await importOriginal();
+    return {
+      ...actual,
+      passport: {
+        session: () => {
+          return (req: Request, _res: Response, next: NextFunction) => {
+            req.user = mockedUser;
+            next();
+          };
+        },
+      },
+    };
+  },
+);
+
+import { app } from "../../../src/app.js";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -64,6 +47,26 @@ describe("GET /me", () => {
     const expectedResponse = {
       status: 200,
       body: notLoggedInResponse,
+    };
+
+    expect(response).toEqual(expect.objectContaining(expectedResponse));
+  });
+
+  test("responds with status 200 and user info if logged in", async () => {
+    mockedUser = {
+      id: "1",
+      email: "test@example.com",
+      role: "USER",
+      githubId: null,
+    };
+
+    const response = await request(app).get("/users/me");
+    const expectedResponse = {
+      status: 200,
+      body: {
+        data: mockedUser,
+        message: "User info retrieved",
+      },
     };
 
     expect(response).toEqual(expect.objectContaining(expectedResponse));
