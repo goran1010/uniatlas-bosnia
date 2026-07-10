@@ -5,6 +5,7 @@ import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { prisma } from "../../src/db/prisma.js";
 import type { entityType } from "../../src/generated/prisma/enums.js";
+import { Prisma } from "../../src/generated/prisma/client.js";
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
@@ -148,6 +149,44 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
         data: {
           name: "Malformed University",
         },
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
+      },
+    });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-pending-change")
+      .send({
+        id: pendingChange.id,
+      });
+
+    expect(response.status).toBe(404);
+
+    await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
+    await prisma.user.delete({ where: { id: userInDb.id } });
+  });
+
+  test("Responds with status 404 if stored pending change data is not a record", async () => {
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
+
+    const userInDb = await prisma.user.create({
+      data: userRequested,
+    });
+
+    const pendingChange = await prisma.pendingChange.create({
+      data: {
+        entityType: "UNIVERSITY",
+        typeOfChange: "CREATE",
+        targetId: null,
+        parentId: null,
+        data: "invalid string data",
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
         user: { connect: { id: userInDb.id } },
@@ -840,6 +879,8 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
         data: {
           name: "Test Approve Study Program Updated",
           cycle: "SECOND",
+          durationYears: 4,
+          ects: "240",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -1078,6 +1119,9 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
         parentId: studyProgram.id,
         data: {
           name: "Test Approve Subject Updated",
+          semester: 3,
+          ects: "6",
+          type: "MANDATORY",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -1107,6 +1151,40 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
     await prisma.studyProgram.deleteMany();
     await prisma.faculty.deleteMany();
     await prisma.university.deleteMany();
+    await prisma.user.delete({ where: { id: userInDb.id } });
+  });
+
+  test("Responds with status 404 if stored pending change data is not a record", async () => {
+    const userInput = createNewUserInput({ role: "ADMIN" });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: confirmPassword, ...userRequested } =
+      userInput;
+
+    const userInDb = await prisma.user.create({ data: userRequested });
+
+    const pendingChange = await prisma.pendingChange.create({
+      data: {
+        entityType: "UNIVERSITY",
+        typeOfChange: "CREATE",
+        targetId: null,
+        parentId: null,
+        data: Prisma.JsonNull,
+        createdAt: new Date("2024-01-01T00:00:00.000Z"),
+        reviewedAt: null,
+        user: { connect: { id: userInDb.id } },
+      },
+    });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-pending-change")
+      .send({ id: pendingChange.id });
+
+    expect(response.status).toBe(404);
+
+    await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
     await prisma.user.delete({ where: { id: userInDb.id } });
   });
 });
