@@ -53,7 +53,6 @@ class UsersController {
         });
         sendSuccess(res, {
           message: "User logged out successfully",
-          data: { success: true },
         });
       });
     });

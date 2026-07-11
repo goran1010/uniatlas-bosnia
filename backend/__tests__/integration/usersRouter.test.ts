@@ -47,9 +47,7 @@ describe("usersRouter", () => {
     const expectedResponse = {
       status: 200,
       body: {
-        data: {
-          success: true,
-        },
+        data: null,
         message: "User logged out successfully",
       },
     };
