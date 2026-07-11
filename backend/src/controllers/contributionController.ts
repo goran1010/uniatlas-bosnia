@@ -18,14 +18,8 @@ interface ContributionRequestData {
 class ContributionController {
   createEntity = async (req: Request, res: Response) => {
     try {
-      if (!req.user) {
-        sendError(res, {
-          status: 401,
-          message: "Authentication required: log in and try again.",
-        });
-        return;
-      }
-      const userId = req.user.id;
+      const user = req.user as { id: string };
+      const userId = user.id;
       const { entityType, parentId, data } =
         matchedData<ContributionRequestData>(req, {
           includeOptionals: true,
