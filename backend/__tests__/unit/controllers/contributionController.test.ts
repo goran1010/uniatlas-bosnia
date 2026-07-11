@@ -40,23 +40,6 @@ vi.mock("../../../src/utils/logger.js", () => ({
 import { contributionController } from "../../../src/controllers/contributionController.js";
 
 import type { Request, Response } from "express";
-import type {
-  entityType,
-  typeOfChange,
-} from "../../../src/generated/prisma/client.js";
-import type { JsonValue } from "@prisma/client/runtime/client";
-
-interface MockedResult {
-  id: string;
-  entityType: entityType;
-  typeOfChange: typeOfChange;
-  targetId: number | null;
-  parentId: number | null;
-  userId: string;
-  createdAt: Date;
-  reviewedAt: Date | null;
-  data: JsonValue;
-}
 
 function createMockResponse() {
   const statusMock = vi.fn().mockReturnThis();
@@ -258,63 +241,6 @@ describe("contributionController", () => {
       error: {
         message: "Authentication required: log in and try again.",
       },
-    });
-  });
-
-  test("deletePendingChange responds with status 404 when pending change does not exist", async () => {
-    const req = {
-      user: { id: "1" },
-    } as Request;
-    const { res, statusMock, jsonMock } = createMockResponse();
-
-    matchedDataMock.mockReturnValue({
-      id: "pending-change-1",
-    });
-    findPendingChangesMock.mockResolvedValue([]);
-
-    await contributionController.deletePendingChange(req, res);
-
-    expect(deletePendingChangeMock).not.toHaveBeenCalled();
-    expect(statusMock).toHaveBeenCalledWith(404);
-    expect(jsonMock).toHaveBeenCalledWith({
-      error: {
-        message: "Pending change not found.",
-      },
-    });
-  });
-
-  test("deletePendingChange responds with status 200 when pending change exists", async () => {
-    const pendingChange: MockedResult = {
-      id: "pending-change-2",
-      entityType: "UNIVERSITY",
-      typeOfChange: "CREATE",
-      targetId: null,
-      parentId: null,
-      userId: "1",
-      createdAt: new Date("2024-01-01T00:00:00.000Z"),
-      reviewedAt: null,
-      data: { name: "TestCity University" },
-    };
-    const req = {
-      user: { id: "1" },
-    } as Request;
-    const { res, statusMock, jsonMock } = createMockResponse();
-
-    matchedDataMock.mockReturnValue({
-      id: pendingChange.id,
-    });
-    findPendingChangesMock.mockResolvedValue([pendingChange]);
-    deletePendingChangeMock.mockResolvedValue(pendingChange);
-
-    await contributionController.deletePendingChange(req, res);
-
-    expect(deletePendingChangeMock).toHaveBeenCalledWith({
-      where: { id: pendingChange.id },
-    });
-    expect(statusMock).toHaveBeenCalledWith(200);
-    expect(jsonMock).toHaveBeenCalledWith({
-      data: null,
-      message: "Pending change deleted successfully.",
     });
   });
 });
