@@ -27,7 +27,7 @@ function Spinner() {
           100% { transform: rotate(360deg); }
         }
       `}</style>
-      <div style={spinnerStyle}>
+      <div style={spinnerStyle} className="spinner" aria-label="spinner">
         <div style={spinnerImgStyle}></div>
       </div>
     </>
