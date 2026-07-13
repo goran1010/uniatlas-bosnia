@@ -79,4 +79,43 @@ describe("useTheme", () => {
     expect(localStorage.getItem("theme")).toBeNull();
     expect(screen.getByTestId("theme-value")).toHaveTextContent("system");
   });
+
+  test("removes the system theme media-query listener on unmount", () => {
+    let changeListener: ((event: Event) => void) | undefined;
+    const addEventListener = vi.fn(
+      (event: string, listener: EventListenerOrEventListenerObject | null) => {
+        if (event === "change" && typeof listener === "function") {
+          changeListener = listener;
+        }
+      },
+    );
+    const removeEventListener = vi.fn();
+    const media = {
+      matches: false,
+      addEventListener,
+      removeEventListener,
+    };
+    vi.spyOn(window, "matchMedia").mockReturnValue(
+      media as unknown as MediaQueryList,
+    );
+
+    const { unmount } = render(<ThemeProbe />);
+
+    expect(addEventListener).toHaveBeenCalledWith(
+      "change",
+      expect.any(Function),
+    );
+
+    media.matches = true;
+    changeListener?.(new Event("change"));
+
+    expect(document.documentElement).toHaveClass("dark");
+
+    unmount();
+
+    expect(removeEventListener).toHaveBeenCalledWith(
+      "change",
+      expect.any(Function),
+    );
+  });
 });
