@@ -16,6 +16,7 @@ const mockedResponse = new Response(
 
 beforeEach(() => {
   vi.spyOn(globalThis, "fetch").mockResolvedValue(mockedResponse);
+  vi.spyOn(console, "error").mockImplementation(() => undefined);
 });
 
 afterEach(() => {
