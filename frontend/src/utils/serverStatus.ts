@@ -2,7 +2,7 @@ const SERVER_STATUS = {
   WAKING: "waking",
   LIVE: "live",
   DOWN: "down",
-};
+} as const;
 
 export type ServerStatus = "waking" | "live" | "down";
 
