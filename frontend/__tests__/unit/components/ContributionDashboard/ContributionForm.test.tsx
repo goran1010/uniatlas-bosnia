@@ -170,6 +170,10 @@ describe("ContributionForm component rendering", () => {
   });
 
   test("does not fetch pending changes when the server is waking up", async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
     render(
       <WrapperWithRootValue
         initialUser={{ email: "some@email.com", role: "USER" }}
@@ -188,5 +192,7 @@ describe("ContributionForm component rendering", () => {
       ),
     ).toBe(true);
     expect(fetchMock).not.toHaveBeenCalled();
+
+    consoleErrorSpy.mockRestore();
   });
 });

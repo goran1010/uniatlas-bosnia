@@ -183,6 +183,10 @@ describe("PendingChanges Component", () => {
   });
 
   test("shows an error notification when loading pending changes fails", async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
     fetchMock.mockImplementation((url) => {
       const requestUrl = String(url);
 
@@ -207,6 +211,8 @@ describe("PendingChanges Component", () => {
     expect(
       screen.getByText(/There are no pending changes at the moment\./i),
     ).toBeInTheDocument();
+
+    consoleErrorSpy.mockRestore();
   });
 
   test("shows the no pending changes state when the server is waking up", async () => {
