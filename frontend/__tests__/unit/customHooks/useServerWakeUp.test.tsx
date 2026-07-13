@@ -1,4 +1,3 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, render } from "@testing-library/react";
 import { useServerWakeUp } from "../../../src/customHooks/useServerWakeUp";
 

@@ -1,4 +1,3 @@
-import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { setSystemLanguage } from "../../../src/utils/setInitialLanguage";
 
 let originalNavigatorLanguage: string;

@@ -1,4 +1,3 @@
-import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import type { ServerStatus } from "../../../../src/utils/serverStatus";
 
 beforeEach(() => {

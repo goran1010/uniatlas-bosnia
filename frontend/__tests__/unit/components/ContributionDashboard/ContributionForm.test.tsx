@@ -1,4 +1,3 @@
-import { describe, test, expect, beforeEach, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ContributionDashboard } from "../../../../src/components/ContributionDashboard/ContributionDashboard";

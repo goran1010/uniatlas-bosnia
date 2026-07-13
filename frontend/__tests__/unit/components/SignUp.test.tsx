@@ -1,4 +1,3 @@
-import { test, describe, expect, beforeEach, afterEach, vi } from "vitest";
 import { SignUp } from "../../../src/components/SignUp/SignUp";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
