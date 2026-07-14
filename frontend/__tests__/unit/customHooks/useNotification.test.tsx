@@ -64,6 +64,20 @@ function NotificationProbe() {
       </button>
       <button
         type="button"
+        onClick={() =>
+          addNotification({
+            id: "server-status",
+            type: "error",
+            message: "Server is unreachable",
+            duration: null,
+            persistent: true,
+          })
+        }
+      >
+        Update Persistent
+      </button>
+      <button
+        type="button"
         onClick={() => {
           addNotification({
             type: "info",
@@ -221,6 +235,28 @@ describe("useNotification", () => {
       "Server waking up",
     );
     expect(screen.getByTestId("last-message")).toHaveTextContent("N5");
+    expect(screen.getByTestId("first-persistent")).toHaveTextContent("true");
+  });
+
+  test("replaces an existing notification when its id is reused", async () => {
+    render(<NotificationProbe />);
+
+    const addPersistentButton = screen.getByRole("button", {
+      name: /Add Persistent/i,
+    });
+    const updatePersistentButton = screen.getByRole("button", {
+      name: /Update Persistent/i,
+    });
+
+    await userEvent.click(addPersistentButton);
+    await userEvent.click(updatePersistentButton);
+
+    expect(screen.getByTestId("count")).toHaveTextContent("1");
+    expect(screen.getByTestId("first-message")).toHaveTextContent(
+      "Server is unreachable",
+    );
+    expect(screen.getByTestId("first-type")).toHaveTextContent("error");
+    expect(screen.getByTestId("first-duration")).toHaveTextContent("none");
     expect(screen.getByTestId("first-persistent")).toHaveTextContent("true");
   });
 
