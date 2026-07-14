@@ -231,6 +231,19 @@ describe("Navbar switchers", () => {
     expect(localStorage.getItem("language")).toBe("sr");
     expect(languageSelect.value).toBe("");
   });
+
+  test("closes opened menus when Escape is pressed", async () => {
+    render(<NavbarWrapper />);
+
+    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
+      name: /Toggle language/i,
+    });
+
+    await userEvent.selectOptions(languageSelect, "sr");
+    await userEvent.keyboard("{Escape}");
+    expect(localStorage.getItem("language")).toBe("sr");
+    expect(languageSelect.value).toBe("");
+  });
 });
 
 describe("render Menu based on viewport size", () => {
