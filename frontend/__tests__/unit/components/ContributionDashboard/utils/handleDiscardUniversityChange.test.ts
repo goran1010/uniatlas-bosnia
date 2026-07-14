@@ -1,4 +1,3 @@
-
 const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
 const guardedFetchMock =
   vi.fn<
