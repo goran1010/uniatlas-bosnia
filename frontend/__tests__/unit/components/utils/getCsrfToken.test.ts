@@ -6,6 +6,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
 });
 
 const serverStatus: ServerStatus = "live";
@@ -89,5 +90,36 @@ describe("getCsrfToken", () => {
       "Error fetching CSRF token:",
       networkError,
     );
+  });
+});
+
+describe("clearCsrfToken", () => {
+  test("clears the cached CSRF token", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    fetchSpy.mockImplementation(() =>
+      Promise.resolve(
+        new Response(JSON.stringify({ data: "test-csrf-token" }), {
+          status: 200,
+        }),
+      ),
+    );
+    const { getCsrfToken, clearCsrfToken } =
+      await import("../../../../src/components/utils/getCsrfToken");
+
+    await getCsrfToken({
+      serverStatus,
+      addNotification: () => vi.fn(),
+      t: (key) => key,
+    });
+
+    clearCsrfToken();
+
+    await getCsrfToken({
+      serverStatus,
+      addNotification: () => vi.fn(),
+      t: (key) => key,
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
   });
 });

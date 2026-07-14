@@ -25,9 +25,6 @@ async function getCsrfToken({
   addNotification: AddNotification;
   t: TFunction;
 }): Promise<string> {
-  if (!BACKEND_URL) {
-    throw new Error("VITE_BACKEND_URL is not defined");
-  }
   try {
     if (cachedToken) {
       return cachedToken;

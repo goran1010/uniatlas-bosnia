@@ -147,8 +147,8 @@ describe("LogIn form validation on input", () => {
   test("shows validation messages for invalid email", async () => {
     const { emailField } = createFormElements();
 
-    await user.type(emailField, "notanemail");
-    expect(emailField).toHaveValue("notanemail");
+    await user.type(emailField, "not_an_email");
+    expect(emailField).toHaveValue("not_an_email");
     expect(emailField.validationMessage).toMatch(/valid email/i);
     await user.clear(emailField);
     await user.type(emailField, "test@mail.com");
@@ -171,10 +171,10 @@ describe("LogIn for validation on button click", () => {
   test("shows validation messages for invalid email input", async () => {
     const { logInButton, emailField } = createFormElements();
 
-    await user.type(emailField, "notanemail");
+    await user.type(emailField, "not_an_email");
     await user.click(logInButton);
 
-    expect(emailField).toHaveValue("notanemail");
+    expect(emailField).toHaveValue("not_an_email");
     expect(emailField.validationMessage).toMatch(/valid email/i);
 
     await user.clear(emailField);
