@@ -31,7 +31,7 @@ function RootContextProvider({
     removeNotification,
     userData,
     setUserData,
-    serverStatus: SERVER_STATUS.LIVE as RootContextType["serverStatus"],
+    serverStatus: SERVER_STATUS.LIVE,
     ...rootValue,
   };
 
