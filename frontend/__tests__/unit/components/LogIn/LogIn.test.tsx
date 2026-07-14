@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { LogIn } from "../../../../src/components/LogIn/LogIn";
@@ -128,6 +128,42 @@ describe("Render LogIn Component", () => {
 
     expect(alreadyLoggedIn).toBeInTheDocument();
     expect(homePageText).toBeInTheDocument();
+  });
+});
+
+describe("GitHub login", () => {
+  test("starts loading when the GitHub login link is clicked", async () => {
+    const githubLoginLink = screen.getByRole("link", {
+      name: "Continue with GitHub",
+    });
+    githubLoginLink.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+
+    await user.click(githubLoginLink);
+
+    expect(githubLoginLink).toHaveAttribute("aria-disabled", "true");
+    expect(
+      within(githubLoginLink).getByLabelText("spinner"),
+    ).toBeInTheDocument();
+  });
+
+  test("prevents a repeated GitHub login click while loading", async () => {
+    const githubLoginLink = screen.getByRole("link", {
+      name: "Continue with GitHub",
+    });
+    githubLoginLink.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+      },
+      { once: true },
+    );
+    await user.click(githubLoginLink);
+
+    const wasPrevented = !fireEvent.click(githubLoginLink);
+
+    expect(wasPrevented).toBe(true);
   });
 });
 
