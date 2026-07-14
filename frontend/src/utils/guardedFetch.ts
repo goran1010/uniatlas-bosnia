@@ -20,7 +20,7 @@ export type GuardedFetch = (
 
 interface NotifyServerNotReadyParams {
   serverStatus?: ServerStatus;
-  addNotification?: AddNotification;
+  addNotification: AddNotification;
   t: TFunction;
 }
 
@@ -29,10 +29,6 @@ function notifyServerNotReady({
   addNotification,
   t,
 }: NotifyServerNotReadyParams) {
-  if (typeof addNotification !== "function") {
-    return;
-  }
-
   const isDown = serverStatus === SERVER_STATUS.DOWN;
 
   addNotification({

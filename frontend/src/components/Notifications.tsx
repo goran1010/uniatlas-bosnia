@@ -25,49 +25,69 @@ function getNotificationRole(type: TypeNotification) {
 
 function Notifications() {
   const { notifications, removeNotification, t } = use(RootContext);
-  const timerMapRef = useRef<Map<string, number>>(new Map());
+  const timerMapRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(
+    new Map(),
+  );
 
   useEffect(() => {
-    const newTimerRef = timerMapRef.current;
+    const timers = timerMapRef.current;
+    const currentNotificationIds = new Set<string>();
 
-    // Set timers for new notifications only
     notifications.forEach((notification) => {
       const notificationId = notification.id;
-      if (!notificationId) return;
+
+      if (!notificationId) {
+        return;
+      }
+
+      currentNotificationIds.add(notificationId);
 
       const shouldAutoDismiss =
         !notification.persistent &&
         typeof notification.duration === "number" &&
         notification.duration > 0;
 
-      if (!shouldAutoDismiss && newTimerRef.has(notificationId)) {
-        clearTimeout(newTimerRef.get(notificationId));
-        newTimerRef.delete(notificationId);
+      if (!shouldAutoDismiss) {
+        const existingTimer = timers.get(notificationId);
+
+        if (existingTimer !== undefined) {
+          clearTimeout(existingTimer);
+          timers.delete(notificationId);
+        }
+
+        return;
       }
 
-      if (shouldAutoDismiss && !newTimerRef.has(notificationId)) {
+      if (!timers.has(notificationId)) {
         const timer = setTimeout(() => {
           removeNotification(notificationId);
-          newTimerRef.delete(notificationId);
-        }, notification.duration ?? 0);
+          timers.delete(notificationId);
+        }, notification.duration ?? undefined);
 
-        newTimerRef.set(notificationId, timer);
+        timers.set(notificationId, timer);
       }
     });
 
-    // Clean up timers for notifications that were removed
-    return () => {
-      newTimerRef.forEach((timer, id) => {
-        const stillExists = notifications.some(
-          (notification) => notification.id === id,
-        );
-        if (!stillExists) {
-          clearTimeout(timer);
-          newTimerRef.delete(id);
-        }
-      });
-    };
+    // Uses notifications from the current render.
+    timers.forEach((timer, id) => {
+      if (!currentNotificationIds.has(id)) {
+        clearTimeout(timer);
+        timers.delete(id);
+      }
+    });
   }, [notifications, removeNotification]);
+
+  useEffect(() => {
+    const timers = timerMapRef.current;
+
+    return () => {
+      timers.forEach((timer) => {
+        clearTimeout(timer);
+      });
+
+      timers.clear();
+    };
+  }, []);
 
   if (!notifications.length) return null;
 

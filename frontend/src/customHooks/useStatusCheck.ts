@@ -27,9 +27,6 @@ function useStatusCheck(
 ) {
   const [userData, setUserData] = useState<UserData>(null);
   const tRef = useRef(t);
-  const checkLoginTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
 
   useEffect(() => {
     tRef.current = t;
@@ -97,7 +94,7 @@ function useStatusCheck(
       }
     }
 
-    checkLoginTimeoutId.current = setTimeout(() => {
+    const loginTimeoutId = setTimeout(() => {
       if (!isCancelled) {
         void checkLogin();
       }
@@ -107,8 +104,8 @@ function useStatusCheck(
       isCancelled = true;
       abortController.abort();
 
-      if (checkLoginTimeoutId.current !== null) {
-        clearTimeout(checkLoginTimeoutId.current);
+      if (loginTimeoutId) {
+        clearTimeout(loginTimeoutId);
       }
     };
   }, [addNotification, serverStatus]);
