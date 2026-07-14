@@ -86,6 +86,33 @@ describe("PendingChangesAdminRow", () => {
     expect(badge).toHaveClass("text-red-800");
   });
 
+  test("uses neutral styling for an unknown change type", () => {
+    const unknownChange = {
+      ...change,
+      typeOfChange: "UNKNOWN",
+    } as unknown as PendingChange;
+
+    render(
+      <Wrapper>
+        <PendingChangesAdminRow
+          data={unknownChange}
+          addNotification={vi.fn()}
+          setPendingChanges={vi.fn()}
+          index={0}
+        />
+      </Wrapper>,
+    );
+
+    const form = screen
+      .getByRole("button", { name: /Approve/i })
+      .closest("form");
+    const badge = screen.getByText("UNKNOWN");
+
+    expect(form).not.toHaveClass("border-l-4");
+    expect(badge).toHaveClass("bg-gray-100");
+    expect(badge).toHaveClass("text-gray-800");
+  });
+
   test("calls the confirm and decline handlers when action buttons are clicked", async () => {
     const addNotification = vi.fn();
     const setPendingChanges = vi.fn();

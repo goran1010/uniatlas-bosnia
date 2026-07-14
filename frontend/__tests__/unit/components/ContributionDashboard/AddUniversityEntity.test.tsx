@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { AddUniversityEntity } from "../../../../src/components/ContributionDashboard/AddUniversityEntity";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
@@ -173,6 +173,7 @@ describe("AddUniversityEntity", () => {
     await user.type(screen.getByLabelText(/City/i), "Sarajevo");
     await user.selectOptions(screen.getByLabelText(/^Entity$/i), "FBIH");
     await user.selectOptions(screen.getByLabelText(/Ownership/i), "JAVNA");
+    await user.type(screen.getByLabelText(/Website/i), "https://unsa.ba");
 
     await user.click(
       screen.getByRole("button", { name: /Submit Suggestion/i }),
@@ -189,6 +190,7 @@ describe("AddUniversityEntity", () => {
       city: "Sarajevo",
       entity: "FBIH",
       ownership: "JAVNA",
+      website: "https://unsa.ba",
     });
     expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
     expect(typeof submittedArgs.addNotification).toBe("function");
@@ -196,6 +198,20 @@ describe("AddUniversityEntity", () => {
     expect(typeof submittedArgs.setFormState).toBe("function");
     expect(typeof submittedArgs.t).toBe("function");
     expect(submittedArgs.serverStatus).toBe("live");
+
+    act(() => {
+      submittedArgs.setFormState({
+        entityType: "UNIVERSITY",
+        parentId: undefined,
+        targetId: undefined,
+        data: {},
+      });
+    });
+
+    expect(screen.getByLabelText(/Name/i)).toHaveValue("");
+    expect(screen.getByRole("combobox", { name: /Entity Type/i })).toHaveValue(
+      "UNIVERSITY",
+    );
   });
 
   test("submits subject data with numeric conversions on update", async () => {
@@ -244,5 +260,43 @@ describe("AddUniversityEntity", () => {
       type: "MANDATORY",
     });
     expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
+  });
+
+  test("submits study program data with numeric conversions", async () => {
+    render(
+      <Wrapper>
+        <AddUniversityEntity setPendingChanges={vi.fn()} />
+      </Wrapper>,
+    );
+
+    const user = userEvent.setup();
+
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: /Entity Type/i }),
+      "STUDY_PROGRAM",
+    );
+    await user.type(screen.getByLabelText(/Parent ID/i), "42");
+    await user.type(screen.getByLabelText(/Name/i), "Computer Science");
+    await user.selectOptions(screen.getByLabelText(/Cycle/i), "FIRST");
+    await user.type(screen.getByLabelText(/Duration/i), "3");
+    await user.type(screen.getByLabelText(/ECTS credits/i), "180");
+    await user.type(screen.getByLabelText(/Language/i), "Bosnian");
+
+    await user.click(
+      screen.getByRole("button", { name: /Submit Suggestion/i }),
+    );
+
+    const submittedArgs = expectSubmitArgs();
+
+    expect(submittedArgs.entityType).toBe("STUDY_PROGRAM");
+    expect(submittedArgs.parentId).toBe("42");
+    expect(submittedArgs.typeOfChange).toBe("CREATE");
+    expect(submittedArgs.data).toMatchObject({
+      name: "Computer Science",
+      cycle: "FIRST",
+      durationYears: 3,
+      ects: 180,
+      language: "Bosnian",
+    });
   });
 });
