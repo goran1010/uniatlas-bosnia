@@ -3,6 +3,8 @@ const app = express();
 import cors from "cors";
 import { env } from "./config/env.js";
 
+import { RequestValidationError } from "./errors/RequestValidationError.js";
+
 import type { Request, Response, NextFunction } from "express";
 
 import { sessionMiddleware } from "./config/sessionMiddleware.js";
@@ -70,21 +72,26 @@ app.use((_req, res) => {
   });
 });
 
-app.use(
-  (
-    err: Error & { status?: number },
-    _req: Request,
-    res: Response,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _next: NextFunction,
-  ) => {
-    logger.error(err);
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  if (error instanceof RequestValidationError) {
     sendError(res, {
-      status: err.status ?? 500,
-      message: "Server error: please try again later.",
+      status: error.status,
+      code: error.code,
+      message: error.message,
+      issues: error.issues,
     });
-  },
-);
+
+    return;
+  }
+
+  logger.error(error);
+
+  sendError(res, {
+    status: 500,
+    code: "INTERNAL_SERVER_ERROR",
+    message: "Server error: please try again later.",
+  });
+});
 
 export { app };

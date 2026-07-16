@@ -1,4 +1,12 @@
 import type { Response } from "express";
+import type { ApiValidationIssue } from "../errors/RequestValidationError.js";
+
+interface ErrorOptions {
+  status?: number;
+  message?: string;
+  code?: string;
+  issues?: ApiValidationIssue[];
+}
 
 interface Options {
   status?: number;
@@ -7,10 +15,6 @@ interface Options {
 export interface SuccessOptions extends Options {
   data?: unknown;
   message?: string | null;
-}
-
-export interface ErrorOptions extends Options {
-  message?: string;
 }
 
 function sendSuccess(
@@ -22,11 +26,18 @@ function sendSuccess(
 
 function sendError(
   res: Response,
-  { status = 500, message = "Request failed." }: ErrorOptions = {},
+  {
+    status = 500,
+    message = "Request failed.",
+    code,
+    issues,
+  }: ErrorOptions = {},
 ) {
-  res.status(status).json({
+  return res.status(status).json({
     error: {
+      ...(code !== undefined && { code }),
       message,
+      ...(issues !== undefined && { issues }),
     },
   });
 }
