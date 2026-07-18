@@ -10,29 +10,26 @@ interface SearchInput {
 }
 
 class V1Controller {
-  getUniversityById = universityValidation.getUniversityById(
-    async (_req, res, _next, { params: { id } }) => {
-      const university = await prisma.university.findUnique({
-        where: {
-          id,
-        },
+  getUniversityById = async (req: Request, res: Response) => {
+    const { id } = universityValidation.getUniversityById(req.params);
+
+    const university = await prisma.university.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!university) {
+      sendError(res, {
+        status: 404,
+        message: "University not found.",
       });
-
-      if (!university) {
-        sendError(res, {
-          status: 404,
-          message: "University not found.",
-        });
-
-        return;
-      }
-
-      sendSuccess(res, {
-        message: "University retrieved successfully.",
-        data: university,
-      });
-    },
-  );
+      return;
+    }
+    sendSuccess(res, {
+      message: "University retrieved successfully.",
+      data: university,
+    });
+  };
 
   status = (_req: Request, res: Response) => {
     sendSuccess(res, {
