@@ -1,8 +1,10 @@
 import type { ZodError } from "zod";
 
+type ZodIssueCode = ZodError["issues"][number]["code"];
+
 export interface ApiValidationIssue {
   path: string;
-  code: string;
+  code: ZodIssueCode;
   message: string;
 }
 
@@ -12,7 +14,9 @@ export class RequestValidationError extends Error {
   readonly issues: ApiValidationIssue[];
 
   constructor(error: ZodError) {
-    super("Request validation failed.");
+    super("Request validation failed.", {
+      cause: error,
+    });
 
     this.name = "RequestValidationError";
 

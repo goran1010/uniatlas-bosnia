@@ -1,120 +1,119 @@
 import { prisma } from "../db/prisma.js";
-import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 
 import type { Request, Response } from "express";
-import { universityValidation } from "../validation/universityValidation.js";
+import * as universityValidation from "../validation/universityValidation.js";
 
-interface SearchInput {
-  searchTerm: string;
+function status(_req: Request, res: Response) {
+  sendSuccess(res, {
+    data: {
+      status: "ok",
+    },
+    message: "API v1 server is running",
+  });
 }
 
-class V1Controller {
-  getUniversityById = async (req: Request, res: Response) => {
-    const { id } = universityValidation.getUniversityById(req.params);
+async function getUniversities(_req: Request, res: Response) {
+  const universities = await prisma.university.findMany();
+  sendSuccess(res, {
+    message: "Universities retrieved successfully.",
+    data: universities,
+  });
+}
 
-    const university = await prisma.university.findUnique({
-      where: {
-        id,
-      },
-    });
-    if (!university) {
-      sendError(res, {
-        status: 404,
-        message: "University not found.",
-      });
-      return;
-    }
-    sendSuccess(res, {
-      message: "University retrieved successfully.",
-      data: university,
-    });
-  };
+async function searchUniversities(req: Request, res: Response) {
+  const { searchTerm } = universityValidation.searchQuery(req.query);
 
-  status = (_req: Request, res: Response) => {
-    sendSuccess(res, {
-      data: {
-        status: "ok",
-      },
-      message: "API v1 server is running",
-    });
-  };
+  const result = await prisma.university.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        },
+        {
+          city: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        },
+        {
+          acronym: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
+  });
 
-  getUniversities = async (_req: Request, res: Response) => {
-    const universities = await prisma.university.findMany();
+  if (result.length > 0) {
     sendSuccess(res, {
       message: "Universities retrieved successfully.",
-      data: universities,
+      data: result,
     });
-  };
+    return;
+  }
 
-  searchUniversities = async (req: Request, res: Response) => {
-    const { searchTerm } = matchedData<SearchInput>(req);
-    const result = await prisma.university.findMany({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: searchTerm,
-              mode: "insensitive",
-            },
-          },
-          {
-            city: {
-              contains: searchTerm,
-              mode: "insensitive",
-            },
-          },
-          {
-            acronym: {
-              contains: searchTerm,
-              mode: "insensitive",
-            },
-          },
-        ],
-      },
-    });
-
-    if (result.length > 0) {
-      sendSuccess(res, {
-        message: "Universities retrieved successfully.",
-        data: result,
-      });
-      return;
-    }
-
-    sendError(res, {
-      status: 404,
-      message: "No universities found matching your search.",
-    });
-  };
-
-  searchStudyPrograms = async (req: Request, res: Response) => {
-    const { searchTerm } = matchedData<SearchInput>(req);
-    const result = await prisma.studyProgram.findMany({
-      where: {
-        name: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
-      },
-    });
-
-    if (result.length > 0) {
-      sendSuccess(res, {
-        message: "Study programs retrieved successfully.",
-        data: result,
-      });
-      return;
-    }
-
-    sendError(res, {
-      status: 404,
-      message: "No study programs found matching your search.",
-    });
-  };
+  sendError(res, {
+    status: 404,
+    message: "No universities found matching your search.",
+  });
 }
 
-const v1Controller = new V1Controller();
+async function getUniversityById(req: Request, res: Response) {
+  const { id } = universityValidation.getUniversityById(req.params);
 
-export { v1Controller };
+  const university = await prisma.university.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!university) {
+    sendError(res, {
+      status: 404,
+      message: "University not found.",
+    });
+    return;
+  }
+  sendSuccess(res, {
+    message: "University retrieved successfully.",
+    data: university,
+  });
+}
+
+async function searchStudyPrograms(req: Request, res: Response) {
+  const { searchTerm } = universityValidation.searchQuery(req.query);
+
+  const result = await prisma.studyProgram.findMany({
+    where: {
+      name: {
+        contains: searchTerm,
+        mode: "insensitive",
+      },
+    },
+  });
+
+  if (result.length > 0) {
+    sendSuccess(res, {
+      message: "Study programs retrieved successfully.",
+      data: result,
+    });
+    return;
+  }
+
+  sendError(res, {
+    status: 404,
+    message: "No study programs found matching your search.",
+  });
+}
+
+export {
+  status,
+  getUniversities,
+  searchUniversities,
+  getUniversityById,
+  searchStudyPrograms,
+};

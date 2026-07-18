@@ -1,8 +1,5 @@
-import { query } from "express-validator";
 import { z } from "zod";
-
 import { RequestValidationError } from "../errors/RequestValidationError.js";
-import { validationError } from "./validationError.js";
 
 const getUniversityByIdParamsSchema = z.strictObject({
   id: z
@@ -21,40 +18,30 @@ const getUniversityByIdParamsSchema = z.strictObject({
     ),
 });
 
-type GetUniversityByIdParams = z.output<typeof getUniversityByIdParamsSchema>;
+function getUniversityById(input: unknown) {
+  const result = getUniversityByIdParamsSchema.safeParse(input);
 
-class UniversityValidation {
-  getUniversityById(input: unknown): GetUniversityByIdParams {
-    const result = getUniversityByIdParamsSchema.safeParse(input);
-
-    if (!result.success) {
-      throw new RequestValidationError(result.error);
-    }
-
-    return result.data;
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
   }
 
-  searchUniversities = [
-    query("searchTerm")
-      .trim()
-      .notEmpty()
-      .withMessage("Search term is required")
-      .isLength({ min: 2 })
-      .withMessage("Search term must be at least 2 characters"),
-
-    validationError,
-  ];
-
-  searchStudyPrograms = [
-    query("searchTerm")
-      .trim()
-      .notEmpty()
-      .withMessage("Search term is required")
-      .isLength({ min: 2 })
-      .withMessage("Search term must be at least 2 characters"),
-
-    validationError,
-  ];
+  return result.data;
 }
 
-export const universityValidation = new UniversityValidation();
+const searchQuerySchema = z.strictObject({
+  searchTerm: z.string().trim().min(2, {
+    message: "Search term must be at least 2 characters.",
+  }),
+});
+
+function searchQuery(input: unknown) {
+  const result = searchQuerySchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+export { getUniversityById, searchQuery };
