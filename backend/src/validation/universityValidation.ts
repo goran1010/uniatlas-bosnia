@@ -1,7 +1,57 @@
-import { param, query } from "express-validator";
+import { query } from "express-validator";
+import { z } from "zod";
+
+import { RequestValidationError } from "../errors/RequestValidationError.js";
 import { validationError } from "./validationError.js";
 
+import type { NextFunction, Request, RequestHandler, Response } from "express";
+
+const getUniversityByIdRequestSchema = z.object({
+  params: z.strictObject({
+    id: z
+      .string()
+      .trim()
+      .transform(Number)
+      .pipe(
+        z
+          .number()
+          .int({
+            error: "University ID must be an integer.",
+          })
+          .positive({
+            error: "University ID must be positive.",
+          }),
+      ),
+  }),
+});
+
+type GetUniversityByIdController = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+  validated: z.output<typeof getUniversityByIdRequestSchema>,
+) => void | Promise<void>;
+
 class UniversityValidation {
+  getUniversityById(controller: GetUniversityByIdController): RequestHandler {
+    return async (req, res, next) => {
+      const result = await getUniversityByIdRequestSchema.safeParseAsync({
+        params: req.params,
+      });
+
+      if (!result.success) {
+        next(new RequestValidationError(result.error));
+        return;
+      }
+
+      try {
+        await controller(req, res, next, result.data);
+      } catch (error) {
+        next(error);
+      }
+    };
+  }
+
   searchUniversities = [
     query("searchTerm")
       .trim()
@@ -23,21 +73,6 @@ class UniversityValidation {
 
     validationError,
   ];
-
-  getUniversityById = [
-    param("id")
-      .trim()
-      .notEmpty()
-      .withMessage("University ID is required")
-      .bail()
-      .isInt({ min: 1 })
-      .withMessage("Invalid university ID.")
-      .toInt(),
-
-    validationError,
-  ];
 }
 
-const universityValidation = new UniversityValidation();
-
-export { universityValidation };
+export const universityValidation = new UniversityValidation();

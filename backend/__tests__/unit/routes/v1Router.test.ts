@@ -229,7 +229,7 @@ describe("GET /api/v1/universities/:id", () => {
 
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Invalid university ID.");
+    expect(error["message"]).toBe("Request validation failed.");
   });
 
   test("responds with status 404 for non-existent university id", async () => {
@@ -253,7 +253,7 @@ describe("GET /api/v1/universities/:id", () => {
 
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Invalid university ID.");
+    expect(error["message"]).toBe("Request validation failed.");
   });
 });
 

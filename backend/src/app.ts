@@ -81,7 +81,6 @@ app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
       message: error.message,
       issues: error.issues,
     });
-
     return;
   }
 
