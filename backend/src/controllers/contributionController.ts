@@ -1,165 +1,15 @@
 import { prisma } from "../db/prisma.js";
-import { matchedData } from "express-validator";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
-import {
-  type SanitizedPendingChangeData,
-  type ContributionEntityType,
-} from "../utils/pendingChangeData.js";
+import * as contributionValidation from "../validation/contributionValidation.js";
 import type { Request, Response } from "express";
 
-interface ContributionRequestData {
-  entityType: ContributionEntityType;
-  parentId?: number;
-  targetId?: number;
-  data?: SanitizedPendingChangeData;
-}
+async function createEntity(req: Request, res: Response) {
+  const contribution = contributionValidation.createEntity(req.body);
+  const { entityType, data } = contribution;
+  const parentId = "parentId" in contribution ? contribution.parentId : null;
 
-class ContributionController {
-  createEntity = async (req: Request, res: Response) => {
-    try {
-      const user = req.user as { id: string };
-      const userId = user.id;
-      const { entityType, parentId, data } =
-        matchedData<ContributionRequestData>(req, {
-          includeOptionals: true,
-        });
-
-      if (!data) {
-        sendError(res, {
-          status: 400,
-          message: "Invalid contribution data.",
-        });
-        return;
-      }
-
-      const result = await prisma.pendingChange.create({
-        data: {
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
-          entityType,
-          typeOfChange: "CREATE",
-          parentId: parentId ?? null,
-          data,
-        },
-      });
-
-      sendSuccess(res, {
-        status: 201,
-        message: "Suggestion submitted. An admin will review it.",
-        data: result,
-      });
-      return;
-    } catch (err) {
-      logger.error(err);
-      sendError(res, {
-        status: 500,
-        message: "An error occurred while submitting the suggestion.",
-      });
-    }
-  };
-
-  editEntity = async (req: Request, res: Response) => {
-    try {
-      if (!req.user) {
-        sendError(res, {
-          status: 401,
-          message: "Authentication required: log in and try again.",
-        });
-        return;
-      }
-      const userId = req.user.id;
-      const { entityType, targetId, data } =
-        matchedData<ContributionRequestData>(req, {
-          includeOptionals: true,
-        });
-
-      if (!data) {
-        sendError(res, {
-          status: 400,
-          message: "Invalid contribution data.",
-        });
-        return;
-      }
-
-      const result = await prisma.pendingChange.create({
-        data: {
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
-
-          entityType,
-          typeOfChange: "UPDATE",
-          targetId: Number(targetId),
-          data,
-        },
-      });
-
-      sendSuccess(res, {
-        status: 201,
-        message: "Edit suggestion submitted. An admin will review it.",
-        data: result,
-      });
-    } catch (err) {
-      logger.error(err);
-      sendError(res, {
-        status: 500,
-        message: "An error occurred while submitting the edit suggestion.",
-      });
-    }
-  };
-
-  deleteEntity = async (req: Request, res: Response) => {
-    try {
-      if (!req.user) {
-        sendError(res, {
-          status: 401,
-          message: "Authentication required: log in and try again.",
-        });
-        return;
-      }
-      const userId = req.user.id;
-      const { entityType, targetId } = matchedData<ContributionRequestData>(
-        req,
-        {
-          includeOptionals: true,
-        },
-      );
-
-      const result = await prisma.pendingChange.create({
-        data: {
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
-          entityType,
-          typeOfChange: "DELETE",
-          targetId: Number(targetId),
-          data: {},
-        },
-      });
-
-      sendSuccess(res, {
-        status: 201,
-        message: "Deletion suggestion submitted. An admin will review it.",
-        data: result,
-      });
-    } catch (err) {
-      logger.error(err);
-      sendError(res, {
-        status: 500,
-        message: "An error occurred while submitting the deletion suggestion.",
-      });
-    }
-  };
-
-  getPendingChanges = async (req: Request, res: Response) => {
+  try {
     if (!req.user) {
       sendError(res, {
         status: 401,
@@ -167,50 +17,182 @@ class ContributionController {
       });
       return;
     }
-    const { id } = req.user;
-    const pendingChanges = await prisma.pendingChange.findMany({
-      where: { userId: id },
+    const user = req.user;
+    const userId = user.id;
+
+    const result = await prisma.pendingChange.create({
+      data: {
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+        entityType,
+        typeOfChange: "CREATE",
+        parentId,
+        data,
+      },
     });
 
     sendSuccess(res, {
-      data: pendingChanges,
-      message: "Pending changes retrieved successfully.",
+      status: 201,
+      message: "Suggestion submitted. An admin will review it.",
+      data: result,
     });
-  };
-
-  deletePendingChange = async (req: Request, res: Response) => {
-    if (!req.user) {
-      sendError(res, {
-        status: 401,
-        message: "Authentication required: log in and try again.",
-      });
-      return;
-    }
-    const { id } = req.user;
-    const { id: pendingChangeId } = matchedData<{ id: string }>(req);
-
-    const pendingChange = await prisma.pendingChange.findMany({
-      where: { userId: id, id: pendingChangeId },
+    return;
+  } catch (err) {
+    logger.error(err);
+    sendError(res, {
+      status: 500,
+      message: "An error occurred while submitting the suggestion.",
     });
-
-    if (pendingChange.length === 0) {
-      sendError(res, {
-        status: 404,
-        message: "Pending change not found.",
-      });
-      return;
-    }
-
-    await prisma.pendingChange.delete({
-      where: { id: pendingChangeId },
-    });
-
-    sendSuccess(res, {
-      message: "Pending change deleted successfully.",
-    });
-  };
+  }
 }
 
-const contributionController = new ContributionController();
+async function editEntity(req: Request, res: Response) {
+  if (!req.user) {
+    sendError(res, {
+      status: 401,
+      message: "Authentication required: log in and try again.",
+    });
+    return;
+  }
+  const { entityType, targetId, data } = contributionValidation.editEntity(
+    req.body,
+  );
 
-export { contributionController };
+  try {
+    const userId = req.user.id;
+
+    const result = await prisma.pendingChange.create({
+      data: {
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+
+        entityType,
+        typeOfChange: "UPDATE",
+        targetId,
+        data,
+      },
+    });
+
+    sendSuccess(res, {
+      status: 201,
+      message: "Edit suggestion submitted. An admin will review it.",
+      data: result,
+    });
+  } catch (err) {
+    logger.error(err);
+    sendError(res, {
+      status: 500,
+      message: "An error occurred while submitting the edit suggestion.",
+    });
+  }
+}
+
+async function deleteEntity(req: Request, res: Response) {
+  if (!req.user) {
+    sendError(res, {
+      status: 401,
+      message: "Authentication required: log in and try again.",
+    });
+    return;
+  }
+  const { entityType, targetId } = contributionValidation.deleteEntity(
+    req.body,
+  );
+
+  try {
+    const userId = req.user.id;
+
+    const result = await prisma.pendingChange.create({
+      data: {
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+        entityType,
+        typeOfChange: "DELETE",
+        targetId,
+        data: {},
+      },
+    });
+
+    sendSuccess(res, {
+      status: 201,
+      message: "Deletion suggestion submitted. An admin will review it.",
+      data: result,
+    });
+  } catch (err) {
+    logger.error(err);
+    sendError(res, {
+      status: 500,
+      message: "An error occurred while submitting the deletion suggestion.",
+    });
+  }
+}
+
+async function getPendingChanges(req: Request, res: Response) {
+  if (!req.user) {
+    sendError(res, {
+      status: 401,
+      message: "Authentication required: log in and try again.",
+    });
+    return;
+  }
+  const { id } = req.user;
+  const pendingChanges = await prisma.pendingChange.findMany({
+    where: { userId: id },
+  });
+
+  sendSuccess(res, {
+    data: pendingChanges,
+    message: "Pending changes retrieved successfully.",
+  });
+}
+
+async function deletePendingChange(req: Request, res: Response) {
+  if (!req.user) {
+    sendError(res, {
+      status: 401,
+      message: "Authentication required: log in and try again.",
+    });
+    return;
+  }
+  const { id } = req.user;
+  const { id: pendingChangeId } = contributionValidation.deletePendingChange(
+    req.body,
+  );
+
+  const pendingChange = await prisma.pendingChange.findMany({
+    where: { userId: id, id: pendingChangeId },
+  });
+
+  if (pendingChange.length === 0) {
+    sendError(res, {
+      status: 404,
+      message: "Pending change not found.",
+    });
+    return;
+  }
+
+  await prisma.pendingChange.delete({
+    where: { id: pendingChangeId },
+  });
+
+  sendSuccess(res, {
+    message: "Pending change deleted successfully.",
+  });
+}
+
+export {
+  createEntity,
+  editEntity,
+  deleteEntity,
+  getPendingChanges,
+  deletePendingChange,
+};

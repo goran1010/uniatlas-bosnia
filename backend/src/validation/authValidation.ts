@@ -41,8 +41,8 @@ const loginSchema = z.object({
   password: z.string().trim().min(1, { error: "Password is required" }),
 });
 
-function parse<T>(schema: z.ZodType<T>, input: unknown) {
-  const result = schema.safeParse(input);
+function signup(input: unknown) {
+  const result = signupSchema.safeParse(input);
 
   if (!result.success) {
     throw new RequestValidationError(result.error);
@@ -51,16 +51,24 @@ function parse<T>(schema: z.ZodType<T>, input: unknown) {
   return result.data;
 }
 
-function signup(input: unknown) {
-  return parse(signupSchema, input);
-}
-
 function confirmToken(input: unknown) {
-  return parse(confirmTokenSchema, input);
+  const result = confirmTokenSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
 }
 
 function login(input: unknown) {
-  return parse(loginSchema, input);
+  const result = loginSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
 }
 
 export { signup, confirmToken, login };

@@ -5,7 +5,7 @@ const pendingChangeSchema = z.strictObject({
   id: z.uuid({ message: "Pending change ID must be a valid UUID" }),
 });
 
-function parsePendingChange(input: unknown) {
+function declinePendingChange(input: unknown) {
   const result = pendingChangeSchema.safeParse(input);
 
   if (!result.success) {
@@ -15,12 +15,14 @@ function parsePendingChange(input: unknown) {
   return result.data;
 }
 
-function declinePendingChange(input: unknown) {
-  return parsePendingChange(input);
-}
-
 function approvePendingChange(input: unknown) {
-  return parsePendingChange(input);
+  const result = pendingChangeSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
 }
 
 export { declinePendingChange, approvePendingChange };

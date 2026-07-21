@@ -12,6 +12,17 @@ function getResponseObject(body: unknown): Record<string, unknown> {
   return body as Record<string, unknown>;
 }
 
+function expectValidationIssue(
+  error: Record<string, unknown>,
+  message: string,
+) {
+  expect(error["code"]).toBe("VALIDATION_ERROR");
+  expect(error["message"]).toBe("Request validation failed.");
+  expect(error["issues"]).toEqual(
+    expect.arrayContaining([expect.objectContaining({ message })]),
+  );
+}
+
 async function createLoggedInAgent() {
   const agent = request.agent(app);
   const loginResponse = await createAndLoginUser(agent, {});
@@ -23,7 +34,7 @@ async function createLoggedInAgent() {
     }),
   );
 
-  const loginResponseBody = getResponseObject(loginResponse.body);
+  const loginResponseBody = getResponseObject(loginResponse.body as unknown);
   const user = getResponseObject(loginResponseBody["data"]) as {
     id: string;
     email: string;
@@ -53,8 +64,7 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, "Entity type is required");
   });
 
   test("responds with status 400 for unsupported data fields", async () => {
@@ -74,8 +84,8 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(
+    expectValidationIssue(
+      error,
       "Data contains unsupported fields for this entity type",
     );
   });
@@ -145,8 +155,7 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, "Entity type is required");
   });
 
   test("responds with status 201 and stores an edit suggestion", async () => {
@@ -206,8 +215,7 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, "Entity type is required");
   });
 
   test("responds with status 201 and stores a deletion suggestion", async () => {
