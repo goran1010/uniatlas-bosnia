@@ -5,10 +5,6 @@ import * as contributionValidation from "../validation/contributionValidation.js
 import type { Request, Response } from "express";
 
 async function createEntity(req: Request, res: Response) {
-  const contribution = contributionValidation.createEntity(req.body);
-  const { entityType, data } = contribution;
-  const parentId = "parentId" in contribution ? contribution.parentId : null;
-
   try {
     if (!req.user) {
       sendError(res, {
@@ -17,8 +13,13 @@ async function createEntity(req: Request, res: Response) {
       });
       return;
     }
+
     const user = req.user;
     const userId = user.id;
+
+    const contribution = contributionValidation.createEntity(req.body);
+    const { entityType, data } = contribution;
+    const parentId = "parentId" in contribution ? contribution.parentId : null;
 
     const result = await prisma.pendingChange.create({
       data: {
