@@ -1,15 +1,8 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 
-const { matchedDataMock, authenticateMock, disconnectMock } = vi.hoisted(
-  () => ({
-    matchedDataMock: vi.fn(),
-    authenticateMock: vi.fn(),
-    disconnectMock: vi.fn(),
-  }),
-);
-
-vi.mock("express-validator", () => ({
-  matchedData: matchedDataMock,
+const { authenticateMock, disconnectMock } = vi.hoisted(() => ({
+  authenticateMock: vi.fn(),
+  disconnectMock: vi.fn(),
 }));
 
 vi.mock("../../../src/config/passport.js", () => ({
@@ -31,8 +24,13 @@ vi.mock("../../../src/db/prisma.js", () => ({
   },
 }));
 
-import { authController } from "../../../src/controllers/authController.js";
+import {
+  confirmEmail,
+  githubCallback,
+  login,
+} from "../../../src/controllers/authController.js";
 import { env } from "../../../src/config/env.js";
+import { RequestValidationError } from "../../../src/errors/RequestValidationError.js";
 
 import type { Request, Response } from "express";
 
@@ -73,26 +71,22 @@ describe("authController", () => {
     vi.restoreAllMocks();
   });
 
-  test("confirmEmail responds with status 400 when token is missing", async () => {
+  test("confirmEmail throws a validation error when token is missing", async () => {
     const req = {} as Request;
-    const { res, statusMock, jsonMock } = createMockResponse();
+    const { res } = createMockResponse();
 
-    matchedDataMock.mockReturnValue({});
-
-    await authController.confirmEmail(req, res);
-
-    expect(statusMock).toHaveBeenCalledWith(400);
-    expect(jsonMock).toHaveBeenCalledWith({
-      error: {
-        message:
-          "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
-      },
-    });
+    await expect(confirmEmail(req, res)).rejects.toBeInstanceOf(
+      RequestValidationError,
+    );
   });
 
   test("login passes passport authentication errors to next", () => {
     const authError = new Error("auth failed");
     const req = {
+      body: {
+        email: "user@example.com",
+        password: "password123",
+      },
       session: {
         regenerate: vi.fn(),
       },
@@ -109,7 +103,7 @@ describe("authController", () => {
       },
     );
 
-    authController.login(req, res, next);
+    login(req, res, next);
 
     expect(next).toHaveBeenCalledWith(authError);
   });
@@ -118,6 +112,10 @@ describe("authController", () => {
     const loginError = new Error("login failed");
     const user = { id: "1", email: "user@example.com" } as Express.User;
     const req = {
+      body: {
+        email: "user@example.com",
+        password: "password123",
+      },
       session: {
         regenerate: vi.fn((callback: (err: Error | null) => void) => {
           callback(null);
@@ -140,7 +138,7 @@ describe("authController", () => {
       },
     );
 
-    authController.login(req, res, next);
+    login(req, res, next);
 
     expect(next).toHaveBeenCalledWith(loginError);
   });
@@ -149,6 +147,10 @@ describe("authController", () => {
     const regenerateError = new Error("regenerate failed");
     const user = { id: "1", email: "user@example.com" } as Express.User;
     const req = {
+      body: {
+        email: "user@example.com",
+        password: "password123",
+      },
       session: {
         regenerate: vi.fn((callback: (err: Error | null) => void) => {
           callback(regenerateError);
@@ -167,7 +169,7 @@ describe("authController", () => {
       },
     );
 
-    authController.login(req, res, next);
+    login(req, res, next);
 
     expect(next).toHaveBeenCalledWith(regenerateError);
   });
@@ -192,7 +194,7 @@ describe("authController", () => {
       },
     );
 
-    authController.githubCallback(req, res, next);
+    githubCallback(req, res, next);
 
     expect(next).toHaveBeenCalledWith(authError);
   });
@@ -216,7 +218,7 @@ describe("authController", () => {
       },
     );
 
-    authController.githubCallback(req, res, next);
+    githubCallback(req, res, next);
 
     expect(redirectMock).toHaveBeenCalledWith(
       `${env.FRONTEND_URL}/login?error=github`,
@@ -251,7 +253,7 @@ describe("authController", () => {
       },
     );
 
-    authController.githubCallback(req, res, next);
+    githubCallback(req, res, next);
 
     expect(next).toHaveBeenCalledWith(loginError);
   });
@@ -285,7 +287,7 @@ describe("authController", () => {
       },
     );
 
-    authController.githubCallback(req, res, next);
+    githubCallback(req, res, next);
 
     expect(next).toHaveBeenCalledWith(saveError);
   });
@@ -313,7 +315,7 @@ describe("authController", () => {
       },
     );
 
-    authController.githubCallback(req, res, next);
+    githubCallback(req, res, next);
 
     expect(next).toHaveBeenCalledWith(regenerateError);
   });

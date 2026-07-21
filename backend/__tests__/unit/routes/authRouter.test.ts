@@ -100,8 +100,15 @@ describe("POST /auth/signup", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expect(error).toEqual(
+      expect.objectContaining({
+        code: "VALIDATION_ERROR",
+        message: "Request validation failed.",
+        issues: expect.arrayContaining([
+          expect.objectContaining({ message: responseData.error.message }),
+        ]),
+      }),
+    );
   });
 
   test("responds with status 400 and message for invalid characters in password input", async () => {
@@ -122,8 +129,15 @@ describe("POST /auth/signup", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expect(error).toEqual(
+      expect.objectContaining({
+        code: "VALIDATION_ERROR",
+        message: "Request validation failed.",
+        issues: expect.arrayContaining([
+          expect.objectContaining({ message: responseData.error.message }),
+        ]),
+      }),
+    );
   });
 
   test("responds with status 400 and message for incorrect confirm-password input", async () => {
@@ -142,8 +156,15 @@ describe("POST /auth/signup", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expect(error).toEqual(
+      expect.objectContaining({
+        code: "VALIDATION_ERROR",
+        message: "Request validation failed.",
+        issues: expect.arrayContaining([
+          expect.objectContaining({ message: responseData.error.message }),
+        ]),
+      }),
+    );
   });
 
   test("successfully create a user and returns status 201 and message", async () => {
