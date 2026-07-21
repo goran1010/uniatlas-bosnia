@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 
-import { usersController } from "../../../src/controllers/usersController.js";
+import * as usersController from "../../../src/controllers/usersController.js";
 
 import type { Request, Response } from "express";
 

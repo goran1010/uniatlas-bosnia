@@ -6,24 +6,33 @@ import type { Request, Response } from "express";
 const IS_PRODUCTION = env.NODE_ENV === "production";
 const NUMBER_OF_DAYS = 30;
 
-class UsersController {
-  me = (req: Request, res: Response) => {
-    if (!req.user) {
-      sendSuccess(res, {
-        message: "No user logged in",
-        data: null,
+function me(req: Request, res: Response) {
+  if (!req.user) {
+    sendSuccess(res, {
+      message: "No user logged in",
+      data: null,
+    });
+    return;
+  }
+
+  sendSuccess(res, {
+    message: "User info retrieved",
+    data: req.user,
+  });
+}
+
+function logout(req: Request, res: Response) {
+  req.logout((err) => {
+    if (err) {
+      console.error(err);
+      sendError(res, {
+        status: 500,
+        message: "Logout failed: try again.",
       });
       return;
     }
 
-    sendSuccess(res, {
-      message: "User info retrieved",
-      data: req.user,
-    });
-  };
-
-  logout = (req: Request, res: Response) => {
-    req.logout((err) => {
+    req.session.destroy((err) => {
       if (err) {
         console.error(err);
         sendError(res, {
@@ -33,32 +42,19 @@ class UsersController {
         return;
       }
 
-      req.session.destroy((err) => {
-        if (err) {
-          console.error(err);
-          sendError(res, {
-            status: 500,
-            message: "Logout failed: try again.",
-          });
-          return;
-        }
-
-        res.clearCookie("sessionId", {
-          // Must set clearCookie options to match cookie set options, otherwise browser will not clear cookies
-          maxAge: NUMBER_OF_DAYS * 24 * 60 * 60 * 1000,
-          sameSite: IS_PRODUCTION ? "none" : "lax",
-          secure: IS_PRODUCTION,
-          httpOnly: true,
-          path: "/",
-        });
-        sendSuccess(res, {
-          message: "User logged out successfully",
-        });
+      res.clearCookie("sessionId", {
+        // Must set clearCookie options to match cookie set options, otherwise browser will not clear cookies
+        maxAge: NUMBER_OF_DAYS * 24 * 60 * 60 * 1000,
+        sameSite: IS_PRODUCTION ? "none" : "lax",
+        secure: IS_PRODUCTION,
+        httpOnly: true,
+        path: "/",
+      });
+      sendSuccess(res, {
+        message: "User logged out successfully",
       });
     });
-  };
+  });
 }
 
-const usersController = new UsersController();
-
-export { usersController };
+export { logout, me };
