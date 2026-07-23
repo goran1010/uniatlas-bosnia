@@ -5,22 +5,21 @@ import * as contributionValidation from "../validation/contributionValidation.js
 import type { Request, Response } from "express";
 
 async function createEntity(req: Request, res: Response) {
+  if (!req.user) {
+    sendError(res, {
+      status: 401,
+      message: "Authentication required: log in and try again.",
+    });
+    return;
+  }
+
+  const userId = req.user.id;
+
+  const contribution = contributionValidation.createEntity(req.body);
+  const { entityType, data } = contribution;
+  const parentId = "parentId" in contribution ? contribution.parentId : null;
+
   try {
-    if (!req.user) {
-      sendError(res, {
-        status: 401,
-        message: "Authentication required: log in and try again.",
-      });
-      return;
-    }
-
-    const user = req.user;
-    const userId = user.id;
-
-    const contribution = contributionValidation.createEntity(req.body);
-    const { entityType, data } = contribution;
-    const parentId = "parentId" in contribution ? contribution.parentId : null;
-
     const result = await prisma.pendingChange.create({
       data: {
         user: {

@@ -1,5 +1,5 @@
 import { prisma } from "../db/prisma.js";
-import { transactionModel } from "../models/transactionModel.js";
+import * as transactionModel from "../models/transactionModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import * as adminValidation from "../validation/adminValidation.js";
 

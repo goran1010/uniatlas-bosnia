@@ -1,144 +1,180 @@
 import { prisma } from "../db/prisma.js";
 import {
-  buildPendingChangeData,
-  isCompleteFacultyPendingChangeData,
-  isCompleteStudyProgramPendingChangeData,
-  isCompleteSubjectPendingChangeData,
-  isCompleteUniversityPendingChangeData,
-} from "../utils/pendingChangeData.js";
+  facultyCreateDataSchema,
+  facultyEditDataSchema,
+  studyProgramCreateDataSchema,
+  studyProgramEditDataSchema,
+  subjectCreateDataSchema,
+  subjectEditDataSchema,
+  universityCreateDataSchema,
+  universityEditDataSchema,
+} from "../validation/contributionValidation.js";
 
-class TransactionModel {
-  approvePendingChange = async ({ id }: { id: string }): Promise<boolean> => {
-    return prisma.$transaction(async (tx) => {
-      const pendingChange = await tx.pendingChange.findUnique({
-        where: { id },
-      });
+import type { Prisma } from "../generated/prisma/client.js";
+import type {
+  FacultyCreateData,
+  FacultyEditData,
+  StudyProgramCreateData,
+  StudyProgramEditData,
+  SubjectCreateData,
+  SubjectEditData,
+  UniversityCreateData,
+  UniversityEditData,
+} from "../validation/contributionValidation.js";
 
-      if (!pendingChange) {
-        return false;
-      }
+function toUniversityCreateInput(
+  data: UniversityCreateData,
+): Prisma.UniversityCreateInput {
+  return data;
+}
 
-      const { entityType, typeOfChange, targetId, parentId } = pendingChange;
+function toUniversityUpdateInput(
+  data: UniversityEditData,
+): Prisma.UniversityUpdateInput {
+  return {
+    ...(data.name !== undefined && { name: data.name }),
+    ...(data.city !== undefined && { city: data.city }),
+    ...(data.entity !== undefined && { entity: data.entity }),
+    ...(data.ownership !== undefined && { ownership: data.ownership }),
+  };
+}
 
-      const deletePendingChange = async () => {
-        await tx.pendingChange.delete({ where: { id } });
-        return true;
-      };
+function toFacultyCreateInput(
+  data: FacultyCreateData,
+  universityId: number,
+): Prisma.FacultyUncheckedCreateInput {
+  return {
+    name: data.name,
+    universityId,
+    ...(data.city !== undefined && { city: data.city }),
+  };
+}
 
-      if (entityType === "UNIVERSITY") {
-        if (typeOfChange === "DELETE") {
-          if (targetId === null) return false;
+function toFacultyUpdateInput(
+  data: FacultyEditData,
+): Prisma.FacultyUpdateInput {
+  return {
+    ...(data.name !== undefined && { name: data.name }),
+    ...(data.city !== undefined && { city: data.city }),
+  };
+}
 
-          await tx.university.delete({ where: { id: targetId } });
-          return deletePendingChange();
-        }
+function toStudyProgramCreateInput(
+  data: StudyProgramCreateData,
+  facultyId: number,
+): Prisma.StudyProgramUncheckedCreateInput {
+  return {
+    name: data.name,
+    cycle: data.cycle,
+    facultyId,
+    ...(data.durationYears !== undefined && {
+      durationYears: data.durationYears,
+    }),
+    ...(data.ects !== undefined && { ects: data.ects }),
+  };
+}
 
-        const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) return false;
+function toStudyProgramUpdateInput(
+  data: StudyProgramEditData,
+): Prisma.StudyProgramUpdateInput {
+  return {
+    ...(data.name !== undefined && { name: data.name }),
+    ...(data.cycle !== undefined && { cycle: data.cycle }),
+    ...(data.durationYears !== undefined && {
+      durationYears: data.durationYears,
+    }),
+    ...(data.ects !== undefined && { ects: data.ects }),
+  };
+}
 
-        if (typeOfChange === "CREATE") {
-          if (!isCompleteUniversityPendingChangeData(data)) return false;
+function toSubjectCreateInput(
+  data: SubjectCreateData,
+  studyProgramId: number,
+): Prisma.SubjectUncheckedCreateInput {
+  return {
+    name: data.name,
+    studyProgramId,
+    ...(data.semester !== undefined && { semester: data.semester }),
+    ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.type !== undefined && { type: data.type }),
+  };
+}
 
-          await tx.university.create({ data });
-          return deletePendingChange();
-        }
+function toSubjectUpdateInput(
+  data: SubjectEditData,
+): Prisma.SubjectUpdateInput {
+  return {
+    ...(data.name !== undefined && { name: data.name }),
+    ...(data.semester !== undefined && { semester: data.semester }),
+    ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.type !== undefined && { type: data.type }),
+  };
+}
 
-        if (targetId === null) return false;
+async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
+  return prisma.$transaction(async (tx) => {
+    const pendingChange = await tx.pendingChange.findUnique({
+      where: { id },
+    });
 
-        await tx.university.update({
-          where: { id: targetId },
-          data,
-        });
+    if (!pendingChange) {
+      return false;
+    }
 
-        return deletePendingChange();
-      }
+    const { entityType, typeOfChange, targetId, parentId } = pendingChange;
 
-      if (entityType === "FACULTY") {
-        if (typeOfChange === "DELETE") {
-          if (targetId === null) return false;
+    const deletePendingChange = async () => {
+      await tx.pendingChange.delete({ where: { id } });
+      return true;
+    };
 
-          await tx.faculty.delete({ where: { id: targetId } });
-          return deletePendingChange();
-        }
-
-        const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) return false;
-
-        if (typeOfChange === "CREATE") {
-          if (parentId === null || !isCompleteFacultyPendingChangeData(data)) {
-            return false;
-          }
-
-          await tx.faculty.create({
-            data: { ...data, universityId: parentId },
-          });
-
-          return deletePendingChange();
-        }
-
-        if (targetId === null) return false;
-
-        await tx.faculty.update({
-          where: { id: targetId },
-          data,
-        });
-
-        return deletePendingChange();
-      }
-
-      if (entityType === "STUDY_PROGRAM") {
-        if (typeOfChange === "DELETE") {
-          if (targetId === null) return false;
-
-          await tx.studyProgram.delete({ where: { id: targetId } });
-          return deletePendingChange();
-        }
-
-        const data = buildPendingChangeData(entityType, pendingChange.data);
-        if (!data) return false;
-
-        if (typeOfChange === "CREATE") {
-          if (
-            parentId === null ||
-            !isCompleteStudyProgramPendingChangeData(data)
-          ) {
-            return false;
-          }
-
-          await tx.studyProgram.create({
-            data: { ...data, facultyId: parentId },
-          });
-
-          return deletePendingChange();
-        }
-
-        if (targetId === null) return false;
-
-        await tx.studyProgram.update({
-          where: { id: targetId },
-          data,
-        });
-
-        return deletePendingChange();
-      }
-
+    if (entityType === "UNIVERSITY") {
       if (typeOfChange === "DELETE") {
         if (targetId === null) return false;
 
-        await tx.subject.delete({ where: { id: targetId } });
+        await tx.university.delete({ where: { id: targetId } });
         return deletePendingChange();
       }
 
-      const data = buildPendingChangeData(entityType, pendingChange.data);
-      if (!data) return false;
+      if (typeOfChange === "CREATE") {
+        const data = universityCreateDataSchema.safeParse(pendingChange.data);
+        if (!data.success) return false;
+
+        await tx.university.create({
+          data: toUniversityCreateInput(data.data),
+        });
+        return deletePendingChange();
+      }
+
+      if (targetId === null) return false;
+
+      const data = universityEditDataSchema.safeParse(pendingChange.data);
+      if (!data.success) return false;
+
+      await tx.university.update({
+        where: { id: targetId },
+        data: toUniversityUpdateInput(data.data),
+      });
+
+      return deletePendingChange();
+    }
+
+    if (entityType === "FACULTY") {
+      if (typeOfChange === "DELETE") {
+        if (targetId === null) return false;
+
+        await tx.faculty.delete({ where: { id: targetId } });
+        return deletePendingChange();
+      }
 
       if (typeOfChange === "CREATE") {
-        if (parentId === null || !isCompleteSubjectPendingChangeData(data)) {
-          return false;
-        }
+        if (parentId === null) return false;
 
-        await tx.subject.create({
-          data: { ...data, studyProgramId: parentId },
+        const data = facultyCreateDataSchema.safeParse(pendingChange.data);
+        if (!data.success) return false;
+
+        await tx.faculty.create({
+          data: toFacultyCreateInput(data.data, parentId),
         });
 
         return deletePendingChange();
@@ -146,16 +182,83 @@ class TransactionModel {
 
       if (targetId === null) return false;
 
-      await tx.subject.update({
+      const data = facultyEditDataSchema.safeParse(pendingChange.data);
+      if (!data.success) return false;
+
+      await tx.faculty.update({
         where: { id: targetId },
-        data,
+        data: toFacultyUpdateInput(data.data),
       });
 
       return deletePendingChange();
+    }
+
+    if (entityType === "STUDY_PROGRAM") {
+      if (typeOfChange === "DELETE") {
+        if (targetId === null) return false;
+
+        await tx.studyProgram.delete({ where: { id: targetId } });
+        return deletePendingChange();
+      }
+
+      if (typeOfChange === "CREATE") {
+        if (parentId === null) return false;
+
+        const data = studyProgramCreateDataSchema.safeParse(pendingChange.data);
+        if (!data.success) return false;
+
+        await tx.studyProgram.create({
+          data: toStudyProgramCreateInput(data.data, parentId),
+        });
+
+        return deletePendingChange();
+      }
+
+      if (targetId === null) return false;
+
+      const data = studyProgramEditDataSchema.safeParse(pendingChange.data);
+      if (!data.success) return false;
+
+      await tx.studyProgram.update({
+        where: { id: targetId },
+        data: toStudyProgramUpdateInput(data.data),
+      });
+
+      return deletePendingChange();
+    }
+
+    if (typeOfChange === "DELETE") {
+      if (targetId === null) return false;
+
+      await tx.subject.delete({ where: { id: targetId } });
+      return deletePendingChange();
+    }
+
+    if (typeOfChange === "CREATE") {
+      if (parentId === null) return false;
+
+      const data = subjectCreateDataSchema.safeParse(pendingChange.data);
+      if (!data.success) return false;
+
+      await tx.subject.create({
+        data: toSubjectCreateInput(data.data, parentId),
+      });
+
+      return deletePendingChange();
+    }
+
+    if (targetId === null) return false;
+
+    const data = subjectEditDataSchema.safeParse(pendingChange.data);
+    if (!data.success) return false;
+
+    await tx.subject.update({
+      where: { id: targetId },
+      data: toSubjectUpdateInput(data.data),
     });
-  };
+
+    return deletePendingChange();
+  });
 }
 
-const transactionModel = new TransactionModel();
-
-export { transactionModel };
+export { approvePendingChange };

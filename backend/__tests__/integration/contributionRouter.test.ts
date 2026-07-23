@@ -14,12 +14,12 @@ function getResponseObject(body: unknown): Record<string, unknown> {
 
 function expectValidationIssue(
   error: Record<string, unknown>,
-  message: string,
+  issue: { path: string; code: string },
 ) {
   expect(error["code"]).toBe("VALIDATION_ERROR");
   expect(error["message"]).toBe("Request validation failed.");
   expect(error["issues"]).toEqual(
-    expect.arrayContaining([expect.objectContaining({ message })]),
+    expect.arrayContaining([expect.objectContaining(issue)]),
   );
 }
 
@@ -64,7 +64,7 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expectValidationIssue(error, "Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
   });
 
   test("responds with status 400 for unsupported data fields", async () => {
@@ -84,10 +84,7 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expectValidationIssue(
-      error,
-      "Data contains unsupported fields for this entity type",
-    );
+    expectValidationIssue(error, { path: "data", code: "unrecognized_keys" });
   });
 
   test("responds with status 201 and stores a create suggestion", async () => {
@@ -155,7 +152,78 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expectValidationIssue(error, "Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
+  });
+
+  test("responds with status 400 when an edit has no changes", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 1,
+      data: {},
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "data", code: "custom" });
+  });
+
+  test("responds with status 400 for a blank optional city update", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 1,
+      data: { city: "   " },
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "data.city", code: "too_small" });
+  });
+
+  test("responds with status 400 when an ID is a numeric string", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: "1",
+      data: { name: "Updated Name" },
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "targetId", code: "invalid_type" });
+  });
+
+  test("allows null to clear an optional faculty city", async () => {
+    const { agent, user } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      targetId: 1,
+      data: { city: null },
+    });
+
+    expect(response.status).toBe(201);
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
+    const pendingChange = await prisma.pendingChange.findUnique({
+      where: { id: data["id"] as string },
+    });
+
+    expect(pendingChange).toEqual(
+      expect.objectContaining({
+        userId: user.id,
+        entityType: "FACULTY",
+        targetId: 1,
+        data: { city: null },
+      }),
+    );
   });
 
   test("responds with status 201 and stores an edit suggestion", async () => {
@@ -215,7 +283,7 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expectValidationIssue(error, "Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
   });
 
   test("responds with status 201 and stores a deletion suggestion", async () => {

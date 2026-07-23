@@ -203,8 +203,11 @@ describe("GET /api/v1/universities/search", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Search term is required");
+    expect(error["code"]).toBe("VALIDATION_ERROR");
+    expect(error["message"]).toBe("Request validation failed.");
+    expect(error["issues"]).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
+    );
   });
 });
 
@@ -298,7 +301,10 @@ describe("GET /api/v1/study-programs/search", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Search term is required");
+    expect(error["code"]).toBe("VALIDATION_ERROR");
+    expect(error["message"]).toBe("Request validation failed.");
+    expect(error["issues"]).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
+    );
   });
 });
