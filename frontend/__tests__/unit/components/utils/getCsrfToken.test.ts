@@ -15,7 +15,10 @@ describe("getCsrfToken", () => {
   test("returns the CSRF token when response is ok", async () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch");
     const mockResponse = new Response(
-      JSON.stringify({ data: "test-csrf-token" }),
+      JSON.stringify({
+        message: "CSRF token generated successfully",
+        data: "test-csrf-token",
+      }),
       { status: 200 },
     );
     fetchSpy.mockResolvedValue(mockResponse);
@@ -33,7 +36,10 @@ describe("getCsrfToken", () => {
   test("calls fetch with cors mode and credentials included", async () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch");
     const mockResponse = new Response(
-      JSON.stringify({ data: "test-csrf-token" }),
+      JSON.stringify({
+        message: "CSRF token generated successfully",
+        data: "test-csrf-token",
+      }),
       { status: 200 },
     );
     fetchSpy.mockResolvedValue(mockResponse);
@@ -91,6 +97,25 @@ describe("getCsrfToken", () => {
       networkError,
     );
   });
+
+  test("throws when a successful response has an invalid payload", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ data: "test-csrf-token" }), {
+        status: 200,
+      }),
+    );
+    vi.spyOn(console, "error").mockImplementation(() => vi.fn());
+    const { getCsrfToken } =
+      await import("../../../../src/components/utils/getCsrfToken");
+
+    await expect(
+      getCsrfToken({
+        serverStatus,
+        addNotification: () => vi.fn(),
+        t: (key) => key,
+      }),
+    ).rejects.toThrow("Failed to fetch CSRF token");
+  });
 });
 
 describe("clearCsrfToken", () => {
@@ -98,9 +123,13 @@ describe("clearCsrfToken", () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch");
     fetchSpy.mockImplementation(() =>
       Promise.resolve(
-        new Response(JSON.stringify({ data: "test-csrf-token" }), {
-          status: 200,
-        }),
+        new Response(
+          JSON.stringify({
+            message: "CSRF token generated successfully",
+            data: "test-csrf-token",
+          }),
+          { status: 200 },
+        ),
       ),
     );
     const { getCsrfToken, clearCsrfToken } =

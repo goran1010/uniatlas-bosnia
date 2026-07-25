@@ -1,4 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import { readErrorMessage } from "../../../schemas/api";
+import { signupResponseSchema } from "../../../schemas/auth";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
@@ -21,25 +23,9 @@ type HandleSignUpSubmit = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
-interface StatusSuccessResponse {
-  message: string;
-  data: {
-    email: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -93,7 +79,7 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
 
     if (!response.ok) {
       const message =
-        (await readErrorMessage(response)) ??
+        (await getErrorMessage(response)) ??
         t("messages.auth.registrationError");
       addNotification({
         type: "error",
@@ -101,7 +87,7 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
       });
       return;
     }
-    const result = await parseJson<StatusSuccessResponse>(response);
+    const result = signupResponseSchema.parse(await response.json());
     addNotification({
       type: "success",
       message: result.message,

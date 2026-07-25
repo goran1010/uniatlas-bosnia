@@ -269,6 +269,7 @@ describe("LogIn Form Submit", () => {
   test("Redirects to Home on successful form submit", async () => {
     const mockedResponse = new Response(
       JSON.stringify({
+        message: "Logged in successfully",
         data: { email: "new@user.com", role: "USER" },
       }),
       {

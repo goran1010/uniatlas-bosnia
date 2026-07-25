@@ -276,7 +276,10 @@ describe("SignUp Form Submit", () => {
 
   test("Redirects to LogIn on successful form submit", async () => {
     const mockResponse = new Response(
-      JSON.stringify({ message: "Registration successful! Check your email." }),
+      JSON.stringify({
+        message: "Registration successful! Check your email.",
+        data: { email: "newemail@mail.com" },
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
