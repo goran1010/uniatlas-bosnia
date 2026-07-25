@@ -123,6 +123,38 @@ describe("handleConfirm", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
+  test("does not remove a change when a successful response is malformed", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+
+    const { handleConfirm } =
+      await import("../../../../../src/components/AdminDashboard/utils/handleConfirm");
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    await handleConfirm(
+      change,
+      setPendingChanges,
+      addNotification,
+      vi.fn(),
+      t,
+      "live",
+    );
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.admin.approveError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("shows a translated error when approval fails", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({

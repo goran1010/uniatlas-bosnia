@@ -1,4 +1,4 @@
-import type { UserData } from "../../types/auth";
+import type { PendingChange } from "../../schemas/pendingChange";
 
 export type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
 export type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
@@ -28,14 +28,4 @@ export interface ContributionFormState {
   data: ContributionFormData;
 }
 
-export interface PendingChange {
-  id: string;
-  entityType: EntityType;
-  typeOfChange: TypeOfChange;
-  targetId: number | null;
-  parentId: number | null;
-  data: UserData;
-  userId: string;
-  user: UserData;
-  createdAt: Date;
-}
+export type { PendingChange };

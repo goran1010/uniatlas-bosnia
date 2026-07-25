@@ -1,4 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import { readErrorMessage } from "../../../schemas/api";
+import { pendingChangeResponseSchema } from "../../../schemas/pendingChange";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -27,23 +29,9 @@ export interface HandleSubmitUniversityEntityParams {
   serverStatus: ServerStatus;
 }
 
-interface StatusSuccessResponse {
-  message: string;
-  data: PendingChange;
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -107,7 +95,7 @@ async function handleSubmitUniversityEntity({
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      const result = pendingChangeResponseSchema.parse(await response.json());
       setPendingChanges((prev) => [result.data, ...prev]);
       addNotification({
         type: "success",
@@ -116,7 +104,7 @@ async function handleSubmitUniversityEntity({
       setFormState({ entityType: "", parentId: "", targetId: "", data: {} });
       return;
     }
-    const serverMessage = await readErrorMessage(response);
+    const serverMessage = await getErrorMessage(response);
     if (serverMessage) {
       console.warn("Failed to submit university change:", serverMessage);
     }

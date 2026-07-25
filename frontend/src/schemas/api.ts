@@ -6,9 +6,18 @@ const apiErrorResponseSchema = z.object({
   }),
 });
 
+const actionSuccessResponseSchema = z.object({
+  message: z.string(),
+  data: z.unknown().optional(),
+});
+
 function readErrorMessage(payload: unknown): string | null {
   const result = apiErrorResponseSchema.safeParse(payload);
   return result.success ? result.data.error.message : null;
 }
 
-export { apiErrorResponseSchema, readErrorMessage };
+export {
+  actionSuccessResponseSchema,
+  apiErrorResponseSchema,
+  readErrorMessage,
+};

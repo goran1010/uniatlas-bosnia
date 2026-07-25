@@ -16,7 +16,7 @@ interface MockChange {
   parentId: number | null;
   data: { name: string };
   createdAt: string;
-  user: { email: string };
+  user: { email: string; role: "ADMIN" | "USER" };
   userId: string;
 }
 
@@ -29,7 +29,7 @@ const mockChanges: MockChange[] = [
     parentId: 1,
     data: { name: "Faculty of Engineering" },
     createdAt: "2026-05-06T07:34:01.967Z",
-    user: { email: "johndoe@examplemail.com" },
+    user: { email: "johndoe@examplemail.com", role: "USER" },
     userId: "058d1adc-58e4-4f31-8021-64e37e7d0dd0",
   },
 ];
@@ -143,7 +143,7 @@ describe("PendingChanges Component", () => {
         parentId: null,
         data: { name: "New University" },
         createdAt: "2026-05-07T10:20:30.000Z",
-        user: { email: "janedoe@examplemail.com" },
+        user: { email: "janedoe@examplemail.com", role: "USER" },
         userId: "12345678-90ab-cdef-1234-567890abcdef",
       },
     ];

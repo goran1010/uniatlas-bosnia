@@ -1,4 +1,8 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import {
+  actionSuccessResponseSchema,
+  readErrorMessage,
+} from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -15,21 +19,6 @@ interface HandleDiscardUniversityChangeParams {
   setLoading: (loading: boolean) => void;
   t: TFunction;
   serverStatus: ServerStatus;
-}
-
-interface StatusSuccessResponse {
-  message: string;
-  data: PendingChange;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
 }
 
 async function handleDiscardUniversityChange({
@@ -68,7 +57,7 @@ async function handleDiscardUniversityChange({
     );
 
     if (response.ok) {
-      await parseJson<StatusSuccessResponse>(response);
+      actionSuccessResponseSchema.parse(await response.json());
       setPendingChanges((prev) => prev.filter((c) => c.id !== changeId));
       addNotification({
         type: "success",
@@ -76,8 +65,10 @@ async function handleDiscardUniversityChange({
       });
       return;
     }
-    const result = await parseJson<StatusErrorResponse>(response);
-    console.warn("Failed to discard pending change:", result.error.message);
+    const serverMessage = readErrorMessage(await response.json());
+    if (serverMessage) {
+      console.warn("Failed to discard pending change:", serverMessage);
+    }
     addNotification({
       type: "error",
       message: t("messages.universities.deleteError"),

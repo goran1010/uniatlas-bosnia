@@ -1,4 +1,8 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import {
+  actionSuccessResponseSchema,
+  readErrorMessage,
+} from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -17,25 +21,9 @@ type HandleConfirm = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
-interface StatusSuccessResponse {
-  message: string;
-  data: {
-    email: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -83,7 +71,7 @@ const handleConfirm: HandleConfirm = async function (
     );
 
     if (response.ok) {
-      await parseJson<StatusSuccessResponse>(response);
+      actionSuccessResponseSchema.parse(await response.json());
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
@@ -93,7 +81,7 @@ const handleConfirm: HandleConfirm = async function (
       });
       return;
     }
-    const serverMessage = await readErrorMessage(response);
+    const serverMessage = await getErrorMessage(response);
     if (serverMessage) {
       console.warn("Failed to approve pending change:", serverMessage);
     }

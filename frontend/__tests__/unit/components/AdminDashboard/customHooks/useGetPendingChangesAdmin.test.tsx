@@ -48,6 +48,64 @@ afterEach(() => {
 });
 
 describe("useGetPendingChangesAdmin", () => {
+  test("stores validated pending changes from a successful response", async () => {
+    const addNotification = vi.fn();
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "Pending changes retrieved successfully.",
+          data: [
+            {
+              id: "pending-change-1",
+              entityType: "UNIVERSITY",
+              typeOfChange: "CREATE",
+              targetId: null,
+              parentId: null,
+              data: { name: "University of Sarajevo" },
+              userId: "user-1",
+              user: { email: "user@example.com", role: "USER" },
+              createdAt: "2026-07-25T10:00:00.000Z",
+            },
+          ],
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(<Wrapper addNotification={addNotification} setLoading={vi.fn()} />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("pending-count")).toHaveTextContent("1");
+    });
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "success",
+      message: "messages.pendingChanges.loadSuccess",
+    });
+  });
+
+  test("reports an error when a successful response has an invalid pending change", async () => {
+    const addNotification = vi.fn();
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "Pending changes retrieved successfully.",
+          data: [{ id: "pending-change-1" }],
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(<Wrapper addNotification={addNotification} setLoading={vi.fn()} />);
+
+    await waitFor(() => {
+      expect(addNotification).toHaveBeenCalledWith({
+        type: "error",
+        message: "messages.pendingChanges.fetchError",
+      });
+    });
+    expect(screen.getByTestId("pending-count")).toHaveTextContent("0");
+  });
+
   test("uses a translated error message when pending changes cannot be fetched", async () => {
     const addNotification = vi.fn();
     const setLoading = vi.fn();

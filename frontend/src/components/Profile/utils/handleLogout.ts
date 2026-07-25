@@ -1,4 +1,8 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import {
+  actionSuccessResponseSchema,
+  readErrorMessage,
+} from "../../../schemas/api";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -16,20 +20,6 @@ type HandleLogout = (
   t: TFunction,
   serverStatus: ServerStatus,
 ) => Promise<void>;
-
-interface StatusSuccessResponse {
-  message: string;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
 
 const handleLogout: HandleLogout = async function (
   addNotification,
@@ -69,7 +59,7 @@ const handleLogout: HandleLogout = async function (
     );
 
     if (response.ok) {
-      await parseJson<StatusSuccessResponse>(response);
+      actionSuccessResponseSchema.parse(await response.json());
       addNotification({
         type: "success",
         message: t("messages.auth.logoutSuccess"),
@@ -79,8 +69,10 @@ const handleLogout: HandleLogout = async function (
       void navigate("/");
       return;
     }
-    const result = await parseJson<StatusErrorResponse>(response);
-    console.warn("Logout request failed:", result.error.message);
+    const serverMessage = readErrorMessage(await response.json());
+    if (serverMessage) {
+      console.warn("Logout request failed:", serverMessage);
+    }
     addNotification({
       type: "error",
       message: t("messages.auth.logoutFailed"),

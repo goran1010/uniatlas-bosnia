@@ -293,6 +293,39 @@ describe("handleSubmitUniversityEntity", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
+  test("does not add a change when a successful response has invalid data", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          message: "Suggestion submitted.",
+          data: { id: "pending-change-1" },
+        }),
+    } as Response);
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      setPendingChanges,
+      addNotification,
+    });
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.addError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("falls back to the generic add error when the backend error payload is missing", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue(createErrorResponse({}));
