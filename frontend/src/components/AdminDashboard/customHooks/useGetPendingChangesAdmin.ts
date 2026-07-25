@@ -62,16 +62,17 @@ function useGetPendingChangesAdmin(
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: result.message,
+            message: t("messages.pendingChanges.loadSuccess"),
           });
           return;
         }
-        const message =
-          (await readErrorMessage(response)) ??
-          t("messages.pendingChanges.fetchError");
+        const serverMessage = await readErrorMessage(response);
+        if (serverMessage) {
+          console.warn("Failed to fetch pending changes:", serverMessage);
+        }
         addNotification({
           type: "error",
-          message,
+          message: t("messages.pendingChanges.fetchError"),
         });
       } catch (error) {
         if (error instanceof Error && error.message === "Server is not ready") {

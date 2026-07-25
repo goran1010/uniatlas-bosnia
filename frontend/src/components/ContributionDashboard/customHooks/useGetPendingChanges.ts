@@ -51,7 +51,7 @@ function useGetPendingChanges(
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: result.message,
+            message: t("messages.pendingChanges.loadSuccess"),
           });
           return;
         }

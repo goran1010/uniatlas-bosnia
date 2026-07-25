@@ -58,7 +58,7 @@ describe("handleDiscardUniversityChange", () => {
     );
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change deleted successfully.",
+      message: "messages.universities.deleteSuccess",
     });
 
     const updatePendingChanges = setPendingChanges.mock.calls[0]?.[0] as (
@@ -94,7 +94,7 @@ describe("handleDiscardUniversityChange", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
-  test("shows the backend error when discarding fails", async () => {
+  test("shows a translated error when discarding fails", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: false,
@@ -121,7 +121,7 @@ describe("handleDiscardUniversityChange", () => {
     expect(setPendingChanges).not.toHaveBeenCalled();
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "Discard failed on the server.",
+      message: "messages.universities.deleteError",
     });
   });
 

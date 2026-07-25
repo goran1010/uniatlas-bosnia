@@ -107,7 +107,7 @@ describe("SearchUniversities", () => {
     expect(noResultsMessage).toBeInTheDocument();
   });
 
-  test("shows API error message on non-404 non-ok response", async () => {
+  test("shows translated error on non-404 non-ok response", async () => {
     const mockErrorResponse = new Response(
       JSON.stringify({ error: { message: "Search exploded." } }),
       {
@@ -126,7 +126,7 @@ describe("SearchUniversities", () => {
     await user.type(searchInput, "sarajevo");
     await user.click(searchButton);
 
-    const apiErrorMessage = await screen.findByText(/Search exploded\./i);
+    const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();

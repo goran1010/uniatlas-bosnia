@@ -39,13 +39,20 @@ function SearchUniversities() {
       } else if (res.status === 404) {
         setResults([]);
       } else {
+        const serverMessage = readErrorMessage(await res.json());
+        if (serverMessage) {
+          console.warn("University search failed:", serverMessage);
+        }
         addNotification({
           type: "error",
-          message: readErrorMessage(await res.json()) ?? "Search failed.",
+          message: t("messages.universities.searchError"),
         });
       }
     } catch {
-      addNotification({ type: "error", message: "Search failed." });
+      addNotification({
+        type: "error",
+        message: t("messages.universities.searchError"),
+      });
     } finally {
       setLoading(false);
     }

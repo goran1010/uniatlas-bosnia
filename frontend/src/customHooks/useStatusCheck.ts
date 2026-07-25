@@ -68,7 +68,7 @@ function useStatusCheck(
 
         addNotification({
           type: "success",
-          message: result.message ?? tRef.current("loginStatus.success"),
+          message: tRef.current("messages.loginStatus.success"),
         });
 
         setUserData(result.data);
@@ -79,7 +79,7 @@ function useStatusCheck(
 
         addNotification({
           type: "error",
-          message: tRef.current("loginStatus.error"),
+          message: tRef.current("messages.loginStatus.error"),
         });
 
         console.error("Error checking login status:", err);

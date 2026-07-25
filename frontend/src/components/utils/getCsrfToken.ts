@@ -43,7 +43,7 @@ async function getCsrfToken({
   } catch (error) {
     addNotification({
       type: "error",
-      message: "Error fetching CSRF token",
+      message: t("messages.csrfTokenFailed"),
     });
     console.error("Error fetching CSRF token:", error);
     throw new Error("Failed to fetch CSRF token", { cause: error });

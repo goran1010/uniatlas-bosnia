@@ -90,7 +90,7 @@ describe("handleConfirm", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change approved successfully.",
+      message: "messages.admin.approveSuccess",
     });
 
     expect(updatePendingChanges?.([change, { ...change, id: "2" }])).toEqual([
@@ -123,7 +123,7 @@ describe("handleConfirm", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
-  test("shows the backend error when approval fails", async () => {
+  test("shows a translated error when approval fails", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: false,
@@ -150,7 +150,7 @@ describe("handleConfirm", () => {
     expect(setPendingChanges).not.toHaveBeenCalled();
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "Approval failed on the server.",
+      message: "messages.admin.approveError",
     });
   });
 
@@ -170,7 +170,7 @@ describe("handleConfirm", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.approveError johndoe@examplemail.com",
+      message: "messages.admin.approveError",
     });
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       `Error approving pending change for ${change.user?.email ?? ""}:`,

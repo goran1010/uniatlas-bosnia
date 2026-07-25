@@ -81,27 +81,28 @@ const handleDecline: HandleDecline = async function (
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
       addNotification({
         type: "success",
-        message: result.message,
+        message: t("messages.admin.declineSuccess"),
       });
       return;
     }
-    const message =
-      (await readErrorMessage(response)) ??
-      `${t("messages.admin.declineError")} ${change.user?.email ?? ""}`;
+    const serverMessage = await readErrorMessage(response);
+    if (serverMessage) {
+      console.warn("Failed to decline pending change:", serverMessage);
+    }
     addNotification({
       type: "error",
-      message,
+      message: t("messages.admin.declineError"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: `${t("messages.admin.declineError")} ${change.user?.email ?? ""}`,
+      message: t("messages.admin.declineError"),
     });
     console.error(
       `Error declining ${change.user?.email ?? ""}'s request:`,

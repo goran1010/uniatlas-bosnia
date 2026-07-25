@@ -79,18 +79,20 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     );
 
     if (!response.ok) {
-      const message =
-        (await getErrorMessage(response)) ?? t("messages.auth.loginError");
+      const serverMessage = await getErrorMessage(response);
+      if (serverMessage) {
+        console.warn("Login request failed:", serverMessage);
+      }
       addNotification({
         type: "error",
-        message,
+        message: t("messages.auth.loginFailed"),
       });
       return;
     }
     const result = loginResponseSchema.parse(await response.json());
     addNotification({
       type: "success",
-      message: result.message,
+      message: t("messages.auth.loginSuccess"),
     });
     setUserData(result.data);
 

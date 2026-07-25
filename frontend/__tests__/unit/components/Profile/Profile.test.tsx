@@ -143,9 +143,7 @@ describe("Profile Component handle logout", () => {
 
     await clickLogout();
 
-    const notificationElement = await screen.findByText(
-      "An error occurred while logging out.",
-    );
+    const notificationElement = await screen.findByText("Logout failed.");
     expect(notificationElement).toBeInTheDocument();
   });
 
@@ -190,7 +188,7 @@ describe("Profile Component handle logout", () => {
     const logoutButton = await clickLogout();
 
     const notificationElement = await screen.findByText(
-      /User logged out successfully/i,
+      /Successfully logged out/i,
     );
     expect(notificationElement).toBeInTheDocument();
 

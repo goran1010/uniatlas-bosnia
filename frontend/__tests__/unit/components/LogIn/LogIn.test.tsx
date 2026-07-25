@@ -239,7 +239,7 @@ describe("LogIn for validation on button click", () => {
 });
 
 describe("LogIn Form Submit", () => {
-  test("Shows error message after clicking Create when fetching with wrong email/password", async () => {
+  test("shows a translated error after submitting wrong email or password", async () => {
     const mockErrorResponse = new Response(
       JSON.stringify({
         error: {
@@ -260,7 +260,7 @@ describe("LogIn Form Submit", () => {
       password: "Password123!",
     });
 
-    const errorMessage = await screen.findByText(/Invalid email or password/i);
+    const errorMessage = await screen.findByText(/^Login failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(errorMessage).toBeInTheDocument();
@@ -323,9 +323,7 @@ describe("LogIn Form Submit", () => {
       password: "Password123!",
     });
 
-    const fallbackError = await screen.findByText(
-      /^An error occurred while logging in\.$/i,
-    );
+    const fallbackError = await screen.findByText(/^Login failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackError).toBeInTheDocument();

@@ -248,7 +248,7 @@ describe("SignUp Form Validation on Create button click", () => {
 });
 
 describe("SignUp Form Submit", () => {
-  test("Shows error message after clicking Create when fetching with existing email", async () => {
+  test("shows a translated error after clicking Create with an existing email", async () => {
     const mockResponse = new Response(
       JSON.stringify({
         error: {
@@ -270,8 +270,10 @@ describe("SignUp Form Submit", () => {
 
     expect(fetch).toHaveBeenCalledTimes(1);
 
-    const emailInUseMessage = await screen.findByText(/Email already in use/i);
-    expect(emailInUseMessage).toBeInTheDocument();
+    const registrationFailedMessage = await screen.findByText(
+      /Registration failed\./i,
+    );
+    expect(registrationFailedMessage).toBeInTheDocument();
   });
 
   test("Redirects to LogIn on successful form submit", async () => {
@@ -338,9 +340,7 @@ describe("SignUp Form Submit", () => {
       confirmPassword: "Password123!",
     });
 
-    const fallbackError = await screen.findByText(
-      "An error occurred during registration.",
-    );
+    const fallbackError = await screen.findByText("Registration failed.");
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackError).toBeInTheDocument();

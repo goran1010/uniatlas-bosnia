@@ -78,19 +78,20 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
     );
 
     if (!response.ok) {
-      const message =
-        (await getErrorMessage(response)) ??
-        t("messages.auth.registrationError");
+      const serverMessage = await getErrorMessage(response);
+      if (serverMessage) {
+        console.warn("Signup request failed:", serverMessage);
+      }
       addNotification({
         type: "error",
-        message,
+        message: t("messages.auth.registrationFailed"),
       });
       return;
     }
-    const result = signupResponseSchema.parse(await response.json());
+    signupResponseSchema.parse(await response.json());
     addNotification({
       type: "success",
-      message: result.message,
+      message: t("messages.auth.registrationSuccess"),
     });
     void navigate("/login");
   } catch (err) {

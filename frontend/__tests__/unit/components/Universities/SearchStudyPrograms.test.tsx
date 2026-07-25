@@ -146,7 +146,7 @@ describe("SearchStudyPrograms", () => {
     await user.type(searchInput, "program");
     await user.click(searchButton);
 
-    const apiErrorMessage = await screen.findByText(/Study search exploded\./i);
+    const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();

@@ -89,13 +89,17 @@ function SearchStudyPrograms() {
         setResults([]);
       } else {
         const result = await parseJson<StatusErrorResponse>(res);
+        console.warn("Study program search failed:", result.error.message);
         addNotification({
           type: "error",
-          message: result.error.message,
+          message: t("messages.universities.searchError"),
         });
       }
     } catch {
-      addNotification({ type: "error", message: "Search failed." });
+      addNotification({
+        type: "error",
+        message: t("messages.universities.searchError"),
+      });
     } finally {
       setLoading(false);
     }

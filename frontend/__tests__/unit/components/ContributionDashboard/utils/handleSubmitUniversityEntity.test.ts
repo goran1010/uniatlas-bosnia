@@ -161,7 +161,7 @@ describe("handleSubmitUniversityEntity", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change created successfully.",
+      message: "messages.universities.addSuccess",
     });
     expect(setFormState).toHaveBeenCalledWith({
       entityType: "",

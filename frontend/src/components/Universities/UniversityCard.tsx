@@ -164,15 +164,19 @@ function UniversityCard({ university }: { university: University }) {
         setExpanded(true);
       } else {
         const result = await parseJson<StatusErrorResponse>(res);
+        console.warn(
+          "Failed to load university details:",
+          result.error.message,
+        );
         addNotification({
           type: "error",
-          message: result.error.message,
+          message: t("messages.universities.detailsError"),
         });
       }
     } catch {
       addNotification({
         type: "error",
-        message: "Failed to load university details.",
+        message: t("messages.universities.detailsError"),
       });
     } finally {
       setLoadingDetail(false);

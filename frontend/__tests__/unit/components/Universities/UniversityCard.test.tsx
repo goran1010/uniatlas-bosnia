@@ -193,7 +193,9 @@ describe("UniversityCard", () => {
     });
     await user.click(viewDetailsButton);
 
-    const apiErrorMessage = await screen.findByText(/Failed from API\./i);
+    const apiErrorMessage = await screen.findByText(
+      /Failed to load university details\./i,
+    );
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();

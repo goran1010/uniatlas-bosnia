@@ -68,15 +68,19 @@ async function handleDiscardUniversityChange({
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) => prev.filter((c) => c.id !== changeId));
-      addNotification({ type: "success", message: result.message });
+      addNotification({
+        type: "success",
+        message: t("messages.universities.deleteSuccess"),
+      });
       return;
     }
     const result = await parseJson<StatusErrorResponse>(response);
+    console.warn("Failed to discard pending change:", result.error.message);
     addNotification({
       type: "error",
-      message: result.error.message,
+      message: t("messages.universities.deleteError"),
     });
   } catch (err) {
     addNotification({

@@ -88,7 +88,7 @@ describe("handleDecline", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change declined successfully.",
+      message: "messages.admin.declineSuccess",
     });
 
     expect(updatePendingChanges?.([change, { ...change, id: "2" }])).toEqual([
@@ -145,7 +145,7 @@ describe("handleDecline", () => {
     expect(setPendingChanges).not.toHaveBeenCalled();
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.declineError johndoe@examplemail.com",
+      message: "messages.admin.declineError",
     });
   });
 
@@ -165,7 +165,7 @@ describe("handleDecline", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.declineError johndoe@examplemail.com",
+      message: "messages.admin.declineError",
     });
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       `Error declining ${change.user?.email ?? ""}'s request:`,

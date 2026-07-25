@@ -83,27 +83,28 @@ const handleConfirm: HandleConfirm = async function (
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
       addNotification({
         type: "success",
-        message: result.message,
+        message: t("messages.admin.approveSuccess"),
       });
       return;
     }
-    const message =
-      (await readErrorMessage(response)) ??
-      `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`;
+    const serverMessage = await readErrorMessage(response);
+    if (serverMessage) {
+      console.warn("Failed to approve pending change:", serverMessage);
+    }
     addNotification({
       type: "error",
-      message,
+      message: t("messages.admin.approveError"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`,
+      message: t("messages.admin.approveError"),
     });
     console.error(
       `Error approving pending change for ${change.user?.email ?? ""}:`,

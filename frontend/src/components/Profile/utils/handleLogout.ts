@@ -69,10 +69,10 @@ const handleLogout: HandleLogout = async function (
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      await parseJson<StatusSuccessResponse>(response);
       addNotification({
         type: "success",
-        message: result.message,
+        message: t("messages.auth.logoutSuccess"),
       });
       setUserData(null);
       clearCsrfToken();
@@ -80,9 +80,10 @@ const handleLogout: HandleLogout = async function (
       return;
     }
     const result = await parseJson<StatusErrorResponse>(response);
+    console.warn("Logout request failed:", result.error.message);
     addNotification({
       type: "error",
-      message: result.error.message,
+      message: t("messages.auth.logoutFailed"),
     });
   } catch (err) {
     addNotification({

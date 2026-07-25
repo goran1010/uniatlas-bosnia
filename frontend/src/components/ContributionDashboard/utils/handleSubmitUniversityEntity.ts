@@ -109,15 +109,20 @@ async function handleSubmitUniversityEntity({
     if (response.ok) {
       const result = await parseJson<StatusSuccessResponse>(response);
       setPendingChanges((prev) => [result.data, ...prev]);
-      addNotification({ type: "success", message: result.message });
+      addNotification({
+        type: "success",
+        message: t("messages.universities.addSuccess"),
+      });
       setFormState({ entityType: "", parentId: "", targetId: "", data: {} });
       return;
     }
-    const message =
-      (await readErrorMessage(response)) ?? t("messages.universities.addError");
+    const serverMessage = await readErrorMessage(response);
+    if (serverMessage) {
+      console.warn("Failed to submit university change:", serverMessage);
+    }
     addNotification({
       type: "error",
-      message,
+      message: t("messages.universities.addError"),
     });
   } catch (err) {
     addNotification({

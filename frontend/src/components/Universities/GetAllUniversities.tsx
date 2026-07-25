@@ -76,24 +76,26 @@ function GetAllUniversities() {
           const result = universityListResponseSchema.parse(await res.json());
           setUniversities(result.data);
         } else {
+          const serverMessage = readErrorMessage(await res.json());
+          if (serverMessage) {
+            console.warn("Failed to load universities:", serverMessage);
+          }
           addNotification({
             type: "error",
-            message:
-              readErrorMessage(await res.json()) ??
-              "Failed to load universities.",
+            message: t("messages.universities.loadError"),
           });
         }
       } catch {
         addNotification({
           type: "error",
-          message: "Failed to load universities.",
+          message: t("messages.universities.loadError"),
         });
       } finally {
         setLoading(false);
       }
     }
     void fetchUniversities();
-  }, [addNotification]);
+  }, [addNotification, t]);
 
   if (loading) return <Spinner />;
 

@@ -48,7 +48,7 @@ afterEach(() => {
 });
 
 describe("useGetPendingChangesAdmin", () => {
-  test("uses the API error message when pending changes cannot be fetched", async () => {
+  test("uses a translated error message when pending changes cannot be fetched", async () => {
     const addNotification = vi.fn();
     const setLoading = vi.fn();
     mockedGuardedFetch.mockResolvedValue(
@@ -64,7 +64,7 @@ describe("useGetPendingChangesAdmin", () => {
     await waitFor(() => {
       expect(addNotification).toHaveBeenCalledWith({
         type: "error",
-        message: "Access denied",
+        message: "messages.pendingChanges.fetchError",
       });
     });
 
