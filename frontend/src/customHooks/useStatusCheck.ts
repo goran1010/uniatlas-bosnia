@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 import { BACKEND_URL } from "../utils/envConfig";
+import { currentUserResponseSchema } from "../schemas/auth";
 
 import type { Notification } from "../types/notification";
 import type { ServerStatus } from "../utils/serverStatus";
@@ -10,15 +11,6 @@ type AddNotificationFunction = (notification: Notification) => string;
 
 export type { UserData } from "../types/auth";
 export type Message = string | null;
-
-interface StatusSuccessResponse {
-  message: Message;
-  data: UserData;
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
 
 function useStatusCheck(
   addNotification: AddNotificationFunction,
@@ -68,7 +60,7 @@ function useStatusCheck(
           return;
         }
 
-        const result = await parseJson<StatusSuccessResponse>(response);
+        const result = currentUserResponseSchema.parse(await response.json());
 
         if (isCancelled) {
           return;

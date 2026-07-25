@@ -5,23 +5,10 @@ import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 import { BACKEND_URL } from "../../utils/envConfig";
+import { readErrorMessage } from "../../schemas/api";
+import { universityListResponseSchema } from "../../schemas/university";
 
 import type { University } from "./GetAllUniversities";
-
-interface StatusSuccessResponse {
-  message: string;
-  data: University[];
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
 
 function SearchUniversities() {
   const { t, addNotification } = use(RootContext);
@@ -47,15 +34,14 @@ function SearchUniversities() {
       );
 
       if (res.ok) {
-        const result = await parseJson<StatusSuccessResponse>(res);
+        const result = universityListResponseSchema.parse(await res.json());
         setResults(result.data);
       } else if (res.status === 404) {
         setResults([]);
       } else {
-        const result = await parseJson<StatusErrorResponse>(res);
         addNotification({
           type: "error",
-          message: result.error.message,
+          message: readErrorMessage(await res.json()) ?? "Search failed.",
         });
       }
     } catch {

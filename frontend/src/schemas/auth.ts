@@ -15,9 +15,24 @@ const loginResponseSchema = z.object({
   }),
 });
 
+const currentUserResponseSchema = z.object({
+  message: z.string().nullable(),
+  data: z
+    .object({
+      email: z.email(),
+      role: z.enum(["ADMIN", "USER"]),
+    })
+    .nullable(),
+});
+
 const csrfTokenResponseSchema = z.object({
   message: z.string(),
   data: z.string().min(1),
 });
 
-export { signupResponseSchema, loginResponseSchema, csrfTokenResponseSchema };
+export {
+  signupResponseSchema,
+  loginResponseSchema,
+  currentUserResponseSchema,
+  csrfTokenResponseSchema,
+};

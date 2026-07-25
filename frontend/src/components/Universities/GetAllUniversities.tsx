@@ -3,9 +3,10 @@ import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 import { BACKEND_URL } from "../../utils/envConfig";
+import { readErrorMessage } from "../../schemas/api";
+import { universityListResponseSchema } from "../../schemas/university";
 
-export type Entity = "RS" | "FBiH" | "BD";
-
+export type Entity = "RS" | "FBIH" | "BD";
 export type Ownership = "JAVNA" | "PRIVATNA";
 
 export interface University {
@@ -57,21 +58,6 @@ export interface Subject {
   sourceUrl?: string;
 }
 
-interface StatusSuccessResponse {
-  message: string;
-  data: University[];
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
 function GetAllUniversities() {
   const { t, addNotification } = use(RootContext);
   const [universities, setUniversities] = useState<University[]>([]);
@@ -87,13 +73,14 @@ function GetAllUniversities() {
         });
 
         if (res.ok) {
-          const result = await parseJson<StatusSuccessResponse>(res);
+          const result = universityListResponseSchema.parse(await res.json());
           setUniversities(result.data);
         } else {
-          const result = await parseJson<StatusErrorResponse>(res);
           addNotification({
             type: "error",
-            message: result.error.message,
+            message:
+              readErrorMessage(await res.json()) ??
+              "Failed to load universities.",
           });
         }
       } catch {

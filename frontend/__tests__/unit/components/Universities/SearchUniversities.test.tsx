@@ -19,6 +19,7 @@ function Wrapper() {
 describe("SearchUniversities", () => {
   const mockResponse = new Response(
     JSON.stringify({
+      message: "Universities retrieved successfully.",
       data: [
         {
           id: 5,
@@ -27,7 +28,7 @@ describe("SearchUniversities", () => {
           city: "Mostar",
           entity: "FBIH",
           ownership: "PRIVATNA",
-          foundedYear: 1977,
+          foundedYear: "1977",
           website: "https://sum.ba",
         },
       ],
@@ -146,6 +147,31 @@ describe("SearchUniversities", () => {
     const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows fallback message when a successful response has an invalid payload", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({ message: "Universities retrieved successfully." }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "mostar",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
+
     expect(fallbackMessage).toBeInTheDocument();
   });
 });

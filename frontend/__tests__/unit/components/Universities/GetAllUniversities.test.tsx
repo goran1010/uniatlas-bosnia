@@ -16,12 +16,19 @@ function Wrapper() {
 }
 
 describe("GetAllUniversities", () => {
-  const mockResponse = new Response(JSON.stringify({ data: [] }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
   beforeEach(() => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "Universities retrieved successfully.",
+          data: [],
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
   });
 
   afterEach(() => {
@@ -40,6 +47,7 @@ describe("GetAllUniversities", () => {
   test("renders universities list when API call succeeds", async () => {
     const mockResponse = new Response(
       JSON.stringify({
+        message: "Universities retrieved successfully.",
         data: [
           {
             id: 1,
@@ -48,7 +56,7 @@ describe("GetAllUniversities", () => {
             city: "Sarajevo",
             entity: "FBIH",
             ownership: "JAVNA",
-            foundedYear: 1949,
+            foundedYear: "1949",
             website: "https://unsa.ba",
           },
         ],
@@ -102,6 +110,26 @@ describe("GetAllUniversities", () => {
     );
 
     expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows fallback notification when a successful response has an invalid payload", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({ message: "Universities retrieved successfully." }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+
+    const fallbackMessage = await screen.findByText(
+      /Failed to load universities\./i,
+    );
+
     expect(fallbackMessage).toBeInTheDocument();
   });
 });
