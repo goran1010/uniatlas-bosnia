@@ -70,6 +70,17 @@ async function getUniversityById(req: Request, res: Response) {
     where: {
       id,
     },
+    include: {
+      faculties: {
+        include: {
+          studyPrograms: {
+            include: {
+              subjects: true,
+            },
+          },
+        },
+      },
+    },
   });
   if (!university) {
     sendError(res, {

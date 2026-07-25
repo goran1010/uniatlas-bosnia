@@ -12,7 +12,7 @@ const baseUniversity: University = {
   name: "University of Sarajevo",
   acronym: "UNSA",
   city: "Sarajevo",
-  entity: "FBiH",
+  entity: "FBIH",
   ownership: "JAVNA",
   foundedYear: "1949",
   website: "https://unsa.ba",

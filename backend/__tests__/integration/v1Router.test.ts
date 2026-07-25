@@ -117,6 +117,23 @@ describe("GET /api/v1/universities/:id", () => {
         city: "Sarajevo",
         entity: "FBIH",
         ownership: "JAVNA",
+        faculties: {
+          create: {
+            name: "Test Integration Faculty By ID",
+            studyPrograms: {
+              create: {
+                name: "Test Integration Study Program By ID",
+                cycle: "FIRST",
+                subjects: {
+                  create: {
+                    name: "Test Integration Subject By ID",
+                    type: "MANDATORY",
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
 
@@ -130,7 +147,29 @@ describe("GET /api/v1/universities/:id", () => {
     expect(responseBody["message"]).toBe("University retrieved successfully.");
     expect(data["id"]).toBe(uniInDb.id);
     expect(data["name"]).toBe(uniInDb.name);
+    const faculties = getResponseArray(data["faculties"]);
+    const studyPrograms = getResponseArray(faculties[0]?.["studyPrograms"]);
+    const subjects = getResponseArray(studyPrograms[0]?.["subjects"]);
 
+    expect(faculties[0]?.["name"]).toBe("Test Integration Faculty By ID");
+    expect(studyPrograms[0]?.["name"]).toBe(
+      "Test Integration Study Program By ID",
+    );
+    expect(subjects[0]?.["name"]).toBe("Test Integration Subject By ID");
+
+    await prisma.subject.deleteMany({
+      where: {
+        studyProgram: {
+          faculty: {
+            universityId: uniInDb.id,
+          },
+        },
+      },
+    });
+    await prisma.studyProgram.deleteMany({
+      where: { faculty: { universityId: uniInDb.id } },
+    });
+    await prisma.faculty.deleteMany({ where: { universityId: uniInDb.id } });
     await prisma.university.delete({ where: { id: uniInDb.id } });
   });
 
