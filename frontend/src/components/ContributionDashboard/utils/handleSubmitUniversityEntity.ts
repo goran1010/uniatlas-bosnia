@@ -1,5 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
 import { readErrorMessage } from "../../../schemas/api";
+import { contributionSubmissionSchema } from "../../../schemas/contribution";
 import { pendingChangeResponseSchema } from "../../../schemas/pendingChange";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
@@ -52,6 +53,17 @@ async function handleSubmitUniversityEntity({
 }: HandleSubmitUniversityEntityParams) {
   try {
     setLoading(true);
+
+    const submissionInput =
+      typeOfChange === "CREATE" && entityType === "UNIVERSITY"
+        ? { entityType, typeOfChange, data }
+        : typeOfChange === "CREATE"
+          ? { entityType, typeOfChange, parentId, data }
+          : typeOfChange === "UPDATE"
+            ? { entityType, typeOfChange, targetId, data }
+            : { entityType, typeOfChange, targetId };
+    const submission = contributionSubmissionSchema.parse(submissionInput);
+
     const csrfToken = await getCsrfToken({ serverStatus, addNotification, t });
 
     if (!csrfToken) {
@@ -63,21 +75,30 @@ async function handleSubmitUniversityEntity({
     }
 
     const method =
-      typeOfChange === "CREATE"
+      submission.typeOfChange === "CREATE"
         ? "POST"
-        : typeOfChange === "UPDATE"
+        : submission.typeOfChange === "UPDATE"
           ? "PUT"
           : "DELETE";
     const body =
-      typeOfChange === "CREATE"
-        ? {
-            entityType,
-            parentId: parentId ? Number(parentId) : undefined,
-            data,
-          }
-        : typeOfChange === "UPDATE"
-          ? { entityType, targetId: Number(targetId), data }
-          : { entityType, targetId: Number(targetId) };
+      submission.typeOfChange === "CREATE"
+        ? "parentId" in submission
+          ? {
+              entityType: submission.entityType,
+              parentId: submission.parentId,
+              data: submission.data,
+            }
+          : { entityType: submission.entityType, data: submission.data }
+        : submission.typeOfChange === "UPDATE"
+          ? {
+              entityType: submission.entityType,
+              targetId: submission.targetId,
+              data: submission.data,
+            }
+          : {
+              entityType: submission.entityType,
+              targetId: submission.targetId,
+            };
 
     const response = await guardedFetch(
       `${BACKEND_URL}/users/contribution/universities`,

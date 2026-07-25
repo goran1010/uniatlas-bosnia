@@ -83,7 +83,7 @@ describe("Root component", () => {
       JSON.stringify({
         message: "User retrieved successfully.",
         data: {
-          role: "user",
+          role: "USER",
           email: "testuser@example.com",
         },
       }),
@@ -136,7 +136,7 @@ describe("Root component", () => {
     renderRoot();
 
     await expectNotificationAndLink({
-      notificationText: /User retrieved successfully./i,
+      notificationText: /Successfully logged in./i,
       linkName: /Profile/i,
     });
   });

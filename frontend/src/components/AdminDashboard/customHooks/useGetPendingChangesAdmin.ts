@@ -3,7 +3,7 @@ import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import { readErrorMessage } from "../../../schemas/api";
-import { pendingChangesResponseSchema } from "../../../schemas/pendingChange";
+import { adminPendingChangesResponseSchema } from "../../../schemas/pendingChange";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -38,7 +38,7 @@ function useGetPendingChangesAdmin(
         );
 
         if (response.ok) {
-          const result = pendingChangesResponseSchema.parse(
+          const result = adminPendingChangesResponseSchema.parse(
             await response.json(),
           );
           setPendingChanges(result.data);

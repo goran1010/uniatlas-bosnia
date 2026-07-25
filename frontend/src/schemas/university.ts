@@ -71,10 +71,7 @@ const facultySchema = z.object({
   studyPrograms: z.array(studyProgramSchema),
 });
 
-const universityListItemSchema = universitySchema.transform((university) => ({
-  ...university,
-  faculties: [],
-}));
+const universityListItemSchema = universitySchema;
 
 const universityDetailSchema = universitySchema.extend({
   faculties: z.array(facultySchema),
@@ -90,10 +87,45 @@ const universityDetailResponseSchema = z.object({
   data: universityDetailSchema,
 });
 
+const studyProgramSearchResultSchema = z.object({
+  id: z.number().int().positive(),
+  name: z.string().min(1),
+  facultyId: z.number().int().positive(),
+  cycle: z.enum(["FIRST", "SECOND", "THIRD"]),
+  ects: z
+    .number()
+    .int()
+    .nullish()
+    .transform((value) => value ?? undefined),
+  faculty: z.object({
+    id: z.number().int().positive(),
+    name: z.string().min(1),
+    universityId: z.number().int().positive(),
+    university: z.object({
+      id: z.number().int().positive(),
+      name: z.string().min(1),
+      acronym: optionalTextSchema,
+    }),
+  }),
+});
+
+const studyProgramSearchResponseSchema = z.object({
+  message: z.string(),
+  data: z.array(studyProgramSearchResultSchema),
+});
+
 export type UniversityDetail = z.infer<typeof universityDetailSchema>;
+export type UniversityListItem = z.infer<typeof universityListItemSchema>;
 export type UniversityDetailFaculty = UniversityDetail["faculties"][number];
 export type UniversityDetailStudyProgram =
   UniversityDetailFaculty["studyPrograms"][number];
 export type UniversityDetailSubject =
   UniversityDetailStudyProgram["subjects"][number];
-export { universityDetailResponseSchema, universityListResponseSchema };
+export type StudyProgramSearchResult = z.infer<
+  typeof studyProgramSearchResultSchema
+>;
+export {
+  studyProgramSearchResponseSchema,
+  universityDetailResponseSchema,
+  universityListResponseSchema,
+};

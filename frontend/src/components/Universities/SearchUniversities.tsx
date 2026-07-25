@@ -8,11 +8,11 @@ import { BACKEND_URL } from "../../utils/envConfig";
 import { readErrorMessage } from "../../schemas/api";
 import { universityListResponseSchema } from "../../schemas/university";
 
-import type { University } from "./GetAllUniversities";
+import type { UniversityListItem } from "../../schemas/university";
 
 function SearchUniversities() {
   const { t, addNotification } = use(RootContext);
-  const [results, setResults] = useState<University[]>([]);
+  const [results, setResults] = useState<UniversityListItem[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 

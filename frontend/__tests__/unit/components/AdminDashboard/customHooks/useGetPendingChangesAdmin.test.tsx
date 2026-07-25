@@ -61,7 +61,12 @@ describe("useGetPendingChangesAdmin", () => {
               typeOfChange: "CREATE",
               targetId: null,
               parentId: null,
-              data: { name: "University of Sarajevo" },
+              data: {
+                name: "University of Sarajevo",
+                city: "Sarajevo",
+                entity: "FBIH",
+                ownership: "JAVNA",
+              },
               userId: "user-1",
               user: { email: "user@example.com", role: "USER" },
               createdAt: "2026-07-25T10:00:00.000Z",
@@ -83,13 +88,25 @@ describe("useGetPendingChangesAdmin", () => {
     });
   });
 
-  test("reports an error when a successful response has an invalid pending change", async () => {
+  test("rejects legacy pending data that contains account fields", async () => {
     const addNotification = vi.fn();
     mockedGuardedFetch.mockResolvedValue(
       new Response(
         JSON.stringify({
           message: "Pending changes retrieved successfully.",
-          data: [{ id: "pending-change-1" }],
+          data: [
+            {
+              id: "pending-change-1",
+              entityType: "UNIVERSITY",
+              typeOfChange: "CREATE",
+              targetId: null,
+              parentId: null,
+              data: { email: "user@example.com", role: "USER" },
+              userId: "user-1",
+              user: { email: "user@example.com", role: "USER" },
+              createdAt: "2026-07-25T10:00:00.000Z",
+            },
+          ],
         }),
         { headers: { "Content-Type": "application/json" } },
       ),

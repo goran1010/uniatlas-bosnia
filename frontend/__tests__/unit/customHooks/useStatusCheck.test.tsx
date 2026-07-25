@@ -68,7 +68,7 @@ describe("useStatusCheck", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "loginStatus.success",
+      message: "messages.loginStatus.success",
     });
     expect(screen.getByTestId("user-email")).toHaveTextContent(
       "user@example.com",
@@ -168,7 +168,7 @@ describe("useStatusCheck", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "loginStatus.error",
+      message: "messages.loginStatus.error",
     });
     expect(screen.getByTestId("user-email")).toHaveTextContent("none");
   });

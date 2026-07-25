@@ -105,6 +105,13 @@ async function searchStudyPrograms(req: Request, res: Response) {
         mode: "insensitive",
       },
     },
+    include: {
+      faculty: {
+        include: {
+          university: true,
+        },
+      },
+    },
   });
 
   if (result.length > 0) {

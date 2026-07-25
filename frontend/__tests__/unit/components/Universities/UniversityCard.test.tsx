@@ -5,9 +5,9 @@ import { UniversityCard } from "../../../../src/components/Universities/Universi
 import { Notifications } from "../../../../src/components/Notifications";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
-import type { University } from "../../../../src/components/Universities/GetAllUniversities";
+import type { UniversityListItem } from "../../../../src/schemas/university";
 
-const baseUniversity: University = {
+const baseUniversity: UniversityListItem = {
   id: 1,
   name: "University of Sarajevo",
   acronym: "UNSA",
@@ -16,7 +16,6 @@ const baseUniversity: University = {
   ownership: "JAVNA",
   foundedYear: "1949",
   website: "https://unsa.ba",
-  faculties: [],
 };
 
 function Wrapper({ university = baseUniversity }) {

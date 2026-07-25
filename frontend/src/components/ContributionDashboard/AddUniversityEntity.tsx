@@ -81,11 +81,16 @@ function AddUniversityEntity({
 
   function setDataField(
     field: keyof ContributionFormData,
-    value: string | number,
+    value: string | number | undefined,
   ) {
     setFormState((prev) => ({
       ...prev,
-      data: { ...prev.data, [field]: value },
+      data:
+        value === undefined
+          ? Object.fromEntries(
+              Object.entries(prev.data).filter(([key]) => key !== field),
+            )
+          : { ...prev.data, [field]: value },
     }));
   }
 
@@ -251,15 +256,6 @@ function AddUniversityEntity({
                   </Select>
                 </div>
               </div>
-              <DataField
-                label={t("contribution.dataFields.website")}
-                id="dataWebsite"
-                type="url"
-                value={data.website ?? ""}
-                onChange={(e) => {
-                  setDataField("website", e.target.value);
-                }}
-              />
             </>
           )}
 
@@ -293,7 +289,10 @@ function AddUniversityEntity({
                 max={10}
                 value={data.durationYears ?? ""}
                 onChange={(e) => {
-                  setDataField("durationYears", Number(e.target.value));
+                  setDataField(
+                    "durationYears",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
                 }}
               />
               <DataField
@@ -303,16 +302,10 @@ function AddUniversityEntity({
                 min={1}
                 value={data.ects ?? ""}
                 onChange={(e) => {
-                  setDataField("ects", Number(e.target.value));
-                }}
-              />
-              <DataField
-                label={t("contribution.dataFields.language")}
-                id="dataLanguage"
-                type="text"
-                value={data.language ?? ""}
-                onChange={(e) => {
-                  setDataField("language", e.target.value);
+                  setDataField(
+                    "ects",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
                 }}
               />
             </>
@@ -328,7 +321,10 @@ function AddUniversityEntity({
                 max={12}
                 value={data.semester ?? ""}
                 onChange={(e) => {
-                  setDataField("semester", Number(e.target.value));
+                  setDataField(
+                    "semester",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
                 }}
               />
               <DataField
@@ -338,7 +334,10 @@ function AddUniversityEntity({
                 min={1}
                 value={data.ects ?? ""}
                 onChange={(e) => {
-                  setDataField("ects", Number(e.target.value));
+                  setDataField(
+                    "ects",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
                 }}
               />
               <div className="flex flex-col gap-1">
@@ -364,7 +363,7 @@ function AddUniversityEntity({
           )}
         </fieldset>
       )}
-      <Button type="submit" loading={loading} className="max-w-xs">
+      <Button type="submit" loading={loading} className="max-w-xs self-center">
         {t("contribution.submitSuggestion")}
       </Button>
     </form>

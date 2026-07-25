@@ -6,7 +6,16 @@ import * as adminValidation from "../validation/adminValidation.js";
 import type { Request, Response } from "express";
 
 async function getPendingChanges(_req: Request, res: Response) {
-  const pendingChanges = await prisma.pendingChange.findMany();
+  const pendingChanges = await prisma.pendingChange.findMany({
+    include: {
+      user: {
+        select: {
+          email: true,
+          role: true,
+        },
+      },
+    },
+  });
 
   sendSuccess(res, {
     data: pendingChanges,

@@ -7,12 +7,12 @@ import { readErrorMessage } from "../../schemas/api";
 import { universityDetailResponseSchema } from "../../schemas/university";
 
 import type { TFunction } from "../../types/i18n";
-import type { University } from "./GetAllUniversities";
 import type {
   UniversityDetail,
   UniversityDetailFaculty,
   UniversityDetailStudyProgram,
   UniversityDetailSubject,
+  UniversityListItem,
 } from "../../schemas/university";
 
 function SubjectRow({
@@ -132,7 +132,7 @@ function FacultyRow({
   );
 }
 
-function UniversityCard({ university }: { university: University }) {
+function UniversityCard({ university }: { university: UniversityListItem }) {
   const { t, addNotification } = use(RootContext);
   const [expanded, setExpanded] = useState(false);
   const [detailData, setDetailData] = useState<UniversityDetail>();

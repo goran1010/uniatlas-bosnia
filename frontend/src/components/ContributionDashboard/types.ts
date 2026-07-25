@@ -11,11 +11,9 @@ export interface ContributionFormData {
   city?: string;
   entity?: Entity;
   ownership?: "JAVNA" | "PRIVATNA";
-  website?: string;
   cycle?: Cycle;
   durationYears?: number;
   ects?: number;
-  language?: string;
   semester?: number;
   type?: SubjectType;
 }

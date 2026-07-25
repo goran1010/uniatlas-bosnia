@@ -11,7 +11,11 @@ vi.mock(
   () => ({
     PendingUniversityChangesRow: (props: { change: PendingChange }) => {
       PendingUniversityChangesRowMock(props);
-      return <li>{props.change.data?.email ?? "Mock row"}</li>;
+      return (
+        <li>
+          {"name" in props.change.data ? props.change.data.name : "Mock row"}
+        </li>
+      );
     },
   }),
 );
@@ -29,8 +33,13 @@ const pendingChanges: PendingChange[] = [
     id: "1",
     entityType: "UNIVERSITY",
     typeOfChange: "CREATE",
-    data: { email: "University of Sarajevo", role: "ADMIN" },
-    targetId: 1,
+    data: {
+      name: "University of Sarajevo",
+      city: "Sarajevo",
+      entity: "FBIH",
+      ownership: "JAVNA",
+    },
+    targetId: null,
     parentId: null,
     userId: "user-123",
     createdAt: new Date(),
@@ -43,7 +52,7 @@ const pendingChanges: PendingChange[] = [
     id: "2",
     entityType: "FACULTY",
     typeOfChange: "UPDATE",
-    data: { email: "Faculty of Engineering", role: "ADMIN" },
+    data: { name: "Faculty of Engineering" },
     targetId: 2,
     parentId: null,
     userId: "user-456",

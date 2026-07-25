@@ -24,7 +24,12 @@ const baseArgs = {
   parentId: "",
   targetId: "",
   typeOfChange: "CREATE" as const,
-  data: { name: "University of Sarajevo", city: "Sarajevo" },
+  data: {
+    name: "University of Sarajevo",
+    city: "Sarajevo",
+    entity: "FBIH",
+    ownership: "JAVNA",
+  },
   setPendingChanges: vi.fn(),
   addNotification: vi.fn(),
   setLoading: vi.fn(),
@@ -70,7 +75,7 @@ describe("handleSubmitUniversityEntity", () => {
           typeOfChange: "CREATE",
           targetId: null,
           parentId: 15,
-          data: { email: "", role: "USER" },
+          data: { name: "Faculty of Law" },
           createdAt: new Date(),
           user: { email: "user@email.com", role: "USER" },
           userId: "user-1",
@@ -110,7 +115,12 @@ describe("handleSubmitUniversityEntity", () => {
       typeOfChange: "CREATE",
       targetId: null,
       parentId: null,
-      data: { email: "University of Sarajevo", role: "USER" },
+      data: {
+        name: "University of Sarajevo",
+        city: "Sarajevo",
+        entity: "FBIH",
+        ownership: "JAVNA",
+      },
       createdAt: new Date(),
       user: { email: "submitter@email.com", role: "USER" },
       userId: "user-1",
@@ -193,8 +203,8 @@ describe("handleSubmitUniversityEntity", () => {
           entityType: "FACULTY",
           typeOfChange: "UPDATE",
           targetId: 7,
-          parentId: 1,
-          data: { email: "", role: "USER" },
+          parentId: null,
+          data: { name: "Updated Faculty" },
           createdAt: new Date(),
           user: { email: "user@email.com", role: "USER" },
           userId: "user-1",
@@ -237,8 +247,8 @@ describe("handleSubmitUniversityEntity", () => {
           entityType: "SUBJECT",
           typeOfChange: "DELETE",
           targetId: 42,
-          parentId: 7,
-          data: { email: "", role: "USER" },
+          parentId: null,
+          data: {},
           createdAt: new Date(),
           user: { email: "user@email.com", role: "USER" },
           userId: "user-1",
@@ -291,6 +301,29 @@ describe("handleSubmitUniversityEntity", () => {
       message: "messages.csrfTokenFailed",
     });
     expect(setLoading).toHaveBeenLastCalledWith(false);
+  });
+
+  test("does not request a CSRF token or submit an invalid target ID", async () => {
+    const addNotification = vi.fn();
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      entityType: "FACULTY",
+      targetId: "not-a-number",
+      typeOfChange: "UPDATE",
+      data: { name: "Updated Faculty" },
+      addNotification,
+    });
+
+    expect(getCsrfTokenMock).not.toHaveBeenCalled();
+    expect(guardedFetchMock).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.addError",
+    });
   });
 
   test("does not add a change when a successful response has invalid data", async () => {

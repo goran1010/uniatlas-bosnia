@@ -18,10 +18,16 @@ function Wrapper() {
 
 describe("SearchStudyPrograms", () => {
   beforeEach(() => {
-    const mockResponse = new Response(JSON.stringify({ data: [] }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    const mockResponse = new Response(
+      JSON.stringify({
+        message: "Study programs retrieved successfully.",
+        data: [],
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
@@ -52,15 +58,20 @@ describe("SearchStudyPrograms", () => {
   test("renders study program results when API returns matches", async () => {
     const mockResponse = new Response(
       JSON.stringify({
+        message: "Study programs retrieved successfully.",
         data: [
           {
             id: 7,
             name: "Computer Science",
+            facultyId: 3,
             cycle: "FIRST",
             ects: 180,
             faculty: {
+              id: 3,
               name: "Faculty of Electrical Engineering",
+              universityId: 1,
               university: {
+                id: 1,
                 name: "University of Sarajevo",
                 acronym: "UNSA",
               },
@@ -170,5 +181,31 @@ describe("SearchStudyPrograms", () => {
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows an error when a successful response has an invalid result", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "Study programs retrieved successfully.",
+          data: [{ id: 7, name: "Computer Science" }],
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Find Study Programs/i }),
+      "computer",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    expect(await screen.findByText(/^Search failed\.$/i)).toBeInTheDocument();
   });
 });

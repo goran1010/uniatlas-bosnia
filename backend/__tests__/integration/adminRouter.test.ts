@@ -7,6 +7,10 @@ import { prisma } from "../../src/db/prisma.js";
 import type { entityType } from "../../src/generated/prisma/enums.js";
 import { Prisma } from "../../src/generated/prisma/client.js";
 
+function asUnknown(value: unknown): unknown {
+  return value;
+}
+
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
     const userInput = createNewUserInput({ role: "ADMIN" });
@@ -41,10 +45,32 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
     const response = await agent.get("/users/admin/pending-changes");
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
+    const responseBody = asUnknown(response.body);
+    expect(responseBody).toEqual(
       expect.objectContaining({
         message: "Pending changes retrieved successfully.",
       }),
+    );
+
+    if (
+      typeof responseBody !== "object" ||
+      responseBody === null ||
+      !("data" in responseBody) ||
+      !Array.isArray(responseBody.data)
+    ) {
+      throw new Error("Expected pending changes response data to be an array");
+    }
+
+    expect(responseBody.data).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: pendingChange.id,
+          user: {
+            email: userInDb.email,
+            role: userInDb.role,
+          },
+        }),
+      ]),
     );
 
     await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
