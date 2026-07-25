@@ -2,7 +2,7 @@ import request from "supertest";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { app } from "../../../src/app.js";
 import { prisma } from "../../../src/db/prisma.js";
-import { transactionModel } from "../../../src/models/transactionModel.js";
+import * as transactionModel from "../../../src/models/transactionModel.js";
 
 import type {
   User,
