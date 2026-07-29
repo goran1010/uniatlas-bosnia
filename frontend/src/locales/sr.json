@@ -179,6 +179,7 @@
     }
   },
   "endpoint": {
+    "requestBody": "Tijelo zahtjeva",
     "queryParameters": "Parametri upita",
     "name": "Naziv",
     "required": "Obavezno",

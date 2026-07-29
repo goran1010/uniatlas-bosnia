@@ -117,6 +117,26 @@ function Api() {
                       <p className="text-sm mt-1 text-gray-700 dark:text-gray-300">
                         {t(endpoint.descriptionKey)}
                       </p>
+                      {endpoint.requestExample && (
+                        <div className="mt-3">
+                          <p className="text-sm font-semibold mb-1">
+                            {t("endpoint.requestBody")}
+                          </p>
+                          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+                            {endpoint.requestExample}
+                          </pre>
+                        </div>
+                      )}
+                      {endpoint.successExample && (
+                        <div className="mt-3">
+                          <p className="text-sm font-semibold mb-1">
+                            {t("endpoint.successResponse")}
+                          </p>
+                          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+                            {endpoint.successExample}
+                          </pre>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>

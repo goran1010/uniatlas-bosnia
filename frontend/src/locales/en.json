@@ -185,6 +185,7 @@
     }
   },
   "endpoint": {
+    "requestBody": "Request body",
     "queryParameters": "Query parameters",
     "name": "Name",
     "required": "Required",

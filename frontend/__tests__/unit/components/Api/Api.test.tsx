@@ -93,6 +93,13 @@ describe("Api component", () => {
     expect(within(authSection).getAllByText("POST").length).toBeGreaterThan(0);
   });
 
+  test("renders authenticated request body examples", () => {
+    renderApi();
+
+    expect(screen.getAllByText("Request body").length).toBeGreaterThan(0);
+    expect(screen.getByText(/"confirm-password"/)).toBeInTheDocument();
+  });
+
   test("renders session credentials note", () => {
     renderApi();
     expect(screen.getByText(/credentials: include/i)).toBeInTheDocument();
