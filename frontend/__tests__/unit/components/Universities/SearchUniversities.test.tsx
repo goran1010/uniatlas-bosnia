@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { SearchUniversities } from "../../../../src/components/Universities/SearchUniversities";
@@ -62,6 +62,21 @@ describe("SearchUniversities", () => {
 
     expect(fetch).toHaveBeenCalledTimes(0);
     expect(validationMessage).toBeInTheDocument();
+  });
+
+  test("shows validation message and skips fetch for an over-limit search term", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole("searchbox", { name: /Search/i });
+    const searchButton = screen.getByRole("button", { name: /^Search$/i });
+    fireEvent.change(searchInput, { target: { value: "a".repeat(101) } });
+    await user.click(searchButton);
+
+    expect(
+      await screen.findByText(/Search must not exceed 100 characters/i),
+    ).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   test("renders search results when API returns matches", async () => {

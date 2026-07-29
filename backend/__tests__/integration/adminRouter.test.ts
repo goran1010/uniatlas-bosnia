@@ -4,6 +4,7 @@ import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { prisma } from "../../src/db/prisma.js";
+import { logger } from "../../src/utils/logger.js";
 import type { entityType } from "../../src/generated/prisma/enums.js";
 import { Prisma } from "../../src/generated/prisma/client.js";
 
@@ -191,6 +192,12 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       });
 
     expect(response.status).toBe(404);
+    expect(logger.warn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        pendingChangeId: pendingChange.id,
+      }),
+      "Pending change data failed validation during approval.",
+    );
 
     await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
     await prisma.user.delete({ where: { id: userInDb.id } });

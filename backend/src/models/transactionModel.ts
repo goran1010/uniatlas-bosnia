@@ -1,4 +1,5 @@
 import { prisma } from "../db/prisma.js";
+import { logger } from "../utils/logger.js";
 import {
   facultyCreateDataSchema,
   facultyEditDataSchema,
@@ -10,6 +11,7 @@ import {
   universityEditDataSchema,
 } from "../validation/contributionValidation.js";
 
+import { z } from "zod";
 import type { Prisma } from "../generated/prisma/client.js";
 import type {
   FacultyCreateData,
@@ -111,6 +113,26 @@ function toSubjectUpdateInput(
   };
 }
 
+function parsePendingChangeData<T>(
+  schema: z.ZodType<T>,
+  data: unknown,
+  pendingChangeId: string,
+): T | null {
+  const result = schema.safeParse(data);
+  if (result.success) {
+    return result.data;
+  }
+
+  logger.warn(
+    {
+      pendingChangeId,
+      issues: result.error.issues,
+    },
+    "Pending change data failed validation during approval.",
+  );
+  return null;
+}
+
 async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
   return prisma.$transaction(async (tx) => {
     const pendingChange = await tx.pendingChange.findUnique({
@@ -137,23 +159,31 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
       }
 
       if (typeOfChange === "CREATE") {
-        const data = universityCreateDataSchema.safeParse(pendingChange.data);
-        if (!data.success) return false;
+        const data = parsePendingChangeData(
+          universityCreateDataSchema,
+          pendingChange.data,
+          id,
+        );
+        if (!data) return false;
 
         await tx.university.create({
-          data: toUniversityCreateInput(data.data),
+          data: toUniversityCreateInput(data),
         });
         return deletePendingChange();
       }
 
       if (targetId === null) return false;
 
-      const data = universityEditDataSchema.safeParse(pendingChange.data);
-      if (!data.success) return false;
+      const data = parsePendingChangeData(
+        universityEditDataSchema,
+        pendingChange.data,
+        id,
+      );
+      if (!data) return false;
 
       await tx.university.update({
         where: { id: targetId },
-        data: toUniversityUpdateInput(data.data),
+        data: toUniversityUpdateInput(data),
       });
 
       return deletePendingChange();
@@ -170,11 +200,15 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
       if (typeOfChange === "CREATE") {
         if (parentId === null) return false;
 
-        const data = facultyCreateDataSchema.safeParse(pendingChange.data);
-        if (!data.success) return false;
+        const data = parsePendingChangeData(
+          facultyCreateDataSchema,
+          pendingChange.data,
+          id,
+        );
+        if (!data) return false;
 
         await tx.faculty.create({
-          data: toFacultyCreateInput(data.data, parentId),
+          data: toFacultyCreateInput(data, parentId),
         });
 
         return deletePendingChange();
@@ -182,12 +216,16 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
 
       if (targetId === null) return false;
 
-      const data = facultyEditDataSchema.safeParse(pendingChange.data);
-      if (!data.success) return false;
+      const data = parsePendingChangeData(
+        facultyEditDataSchema,
+        pendingChange.data,
+        id,
+      );
+      if (!data) return false;
 
       await tx.faculty.update({
         where: { id: targetId },
-        data: toFacultyUpdateInput(data.data),
+        data: toFacultyUpdateInput(data),
       });
 
       return deletePendingChange();
@@ -204,11 +242,15 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
       if (typeOfChange === "CREATE") {
         if (parentId === null) return false;
 
-        const data = studyProgramCreateDataSchema.safeParse(pendingChange.data);
-        if (!data.success) return false;
+        const data = parsePendingChangeData(
+          studyProgramCreateDataSchema,
+          pendingChange.data,
+          id,
+        );
+        if (!data) return false;
 
         await tx.studyProgram.create({
-          data: toStudyProgramCreateInput(data.data, parentId),
+          data: toStudyProgramCreateInput(data, parentId),
         });
 
         return deletePendingChange();
@@ -216,12 +258,16 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
 
       if (targetId === null) return false;
 
-      const data = studyProgramEditDataSchema.safeParse(pendingChange.data);
-      if (!data.success) return false;
+      const data = parsePendingChangeData(
+        studyProgramEditDataSchema,
+        pendingChange.data,
+        id,
+      );
+      if (!data) return false;
 
       await tx.studyProgram.update({
         where: { id: targetId },
-        data: toStudyProgramUpdateInput(data.data),
+        data: toStudyProgramUpdateInput(data),
       });
 
       return deletePendingChange();
@@ -237,11 +283,15 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
     if (typeOfChange === "CREATE") {
       if (parentId === null) return false;
 
-      const data = subjectCreateDataSchema.safeParse(pendingChange.data);
-      if (!data.success) return false;
+      const data = parsePendingChangeData(
+        subjectCreateDataSchema,
+        pendingChange.data,
+        id,
+      );
+      if (!data) return false;
 
       await tx.subject.create({
-        data: toSubjectCreateInput(data.data, parentId),
+        data: toSubjectCreateInput(data, parentId),
       });
 
       return deletePendingChange();
@@ -249,12 +299,16 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
 
     if (targetId === null) return false;
 
-    const data = subjectEditDataSchema.safeParse(pendingChange.data);
-    if (!data.success) return false;
+    const data = parsePendingChangeData(
+      subjectEditDataSchema,
+      pendingChange.data,
+      id,
+    );
+    if (!data) return false;
 
     await tx.subject.update({
       where: { id: targetId },
-      data: toSubjectUpdateInput(data.data),
+      data: toSubjectUpdateInput(data),
     });
 
     return deletePendingChange();

@@ -209,6 +209,27 @@ describe("GET /api/v1/universities/search", () => {
       expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
     );
   });
+
+  test.each(["/api/v1/universities/search", "/api/v1/study-programs/search"])(
+    "responds with status 400 when searchTerm exceeds 100 characters: %s",
+    async (path) => {
+      const response = await request(app).get(
+        `${path}?searchTerm=${"a".repeat(101)}`,
+      );
+      const responseBody = getResponseObject(response.body);
+      const error = getResponseObject(responseBody["error"]);
+
+      expect(response.status).toBe(400);
+      expect(error["issues"]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            path: "searchTerm",
+            message: "Search term must not exceed 100 characters.",
+          }),
+        ]),
+      );
+    },
+  );
 });
 
 describe("GET /api/v1/universities/:id", () => {

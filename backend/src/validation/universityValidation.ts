@@ -29,9 +29,15 @@ function getUniversityById(input: unknown) {
 }
 
 const searchQuerySchema = z.strictObject({
-  searchTerm: z.string().trim().min(2, {
-    message: "Search term must be at least 2 characters.",
-  }),
+  searchTerm: z
+    .string()
+    .trim()
+    .min(2, {
+      message: "Search term must be at least 2 characters.",
+    })
+    .max(100, {
+      message: "Search term must not exceed 100 characters.",
+    }),
 });
 
 function searchQuery(input: unknown) {

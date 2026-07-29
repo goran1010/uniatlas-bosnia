@@ -6,6 +6,7 @@ import { Spinner } from "../../utils/Spinner";
 import { BACKEND_URL } from "../../utils/envConfig";
 import { readErrorMessage } from "../../schemas/api";
 import { studyProgramSearchResponseSchema } from "../../schemas/university";
+import { searchTermSchema } from "../../schemas/domain";
 
 import type { TFunction } from "../../types/i18n";
 import type { StudyProgramSearchResult } from "../../schemas/university";
@@ -50,14 +51,19 @@ function SearchStudyPrograms() {
 
   async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
-    const term = inputRef.current?.value.trim();
-    if (!term || term.length < 2) {
+    const searchTerm = searchTermSchema.safeParse(
+      inputRef.current?.value ?? "",
+    );
+    if (!searchTerm.success) {
       addNotification({
         type: "error",
-        message: t("validation.search.minLength"),
+        message: t(
+          searchTerm.error.issues[0]?.message ?? "validation.search.minLength",
+        ),
       });
       return;
     }
+    const term = searchTerm.data;
     try {
       setLoading(true);
       const res = await fetch(
@@ -101,6 +107,7 @@ function SearchStudyPrograms() {
           type="search"
           placeholder={t("universitiesPage.studyProgramsPlaceholder")}
           minLength={2}
+          maxLength={100}
           className="flex-1"
           aria-label={t("universitiesPage.findPrograms")}
         />

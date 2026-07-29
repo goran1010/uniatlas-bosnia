@@ -288,7 +288,8 @@
       "mustMatch": "Lozinka i potvrda lozinke moraju biti iste"
     },
     "search": {
-      "minLength": "Pretraga mora imati najmanje 2 karaktera"
+      "minLength": "Pretraga mora imati najmanje 2 karaktera",
+      "maxLength": "Pretraga ne smije imati više od 100 karaktera"
     }
   },
   "messages": {

@@ -294,7 +294,8 @@
       "mustMatch": "Password and confirm password fields must match"
     },
     "search": {
-      "minLength": "Search must have at least 2 characters"
+      "minLength": "Search must have at least 2 characters",
+      "maxLength": "Search must not exceed 100 characters"
     }
   },
   "messages": {
