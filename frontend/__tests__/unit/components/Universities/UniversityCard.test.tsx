@@ -5,18 +5,22 @@ import { UniversityCard } from "../../../../src/components/Universities/Universi
 import { Notifications } from "../../../../src/components/Notifications";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
-import type { University } from "../../../../src/components/Universities/GetAllUniversities";
+import type { UniversityListItem } from "../../../../src/schemas/university";
 
-const baseUniversity: University = {
+const baseUniversity: UniversityListItem = {
   id: 1,
   name: "University of Sarajevo",
   acronym: "UNSA",
   city: "Sarajevo",
-  entity: "FBiH",
+  entity: "FBIH",
   ownership: "JAVNA",
   foundedYear: "1949",
   website: "https://unsa.ba",
-  faculties: [],
+  accreditationFrom: undefined,
+  accreditationTo: undefined,
+  authority: undefined,
+  sourceUrl: undefined,
+  lastChecked: undefined,
 };
 
 function Wrapper({ university = baseUniversity }) {
@@ -35,7 +39,10 @@ function Wrapper({ university = baseUniversity }) {
 describe("UniversityCard", () => {
   beforeEach(() => {
     const mockResponse = new Response(
-      JSON.stringify({ data: { faculties: [] } }),
+      JSON.stringify({
+        message: "University retrieved successfully.",
+        data: { ...baseUniversity, faculties: [] },
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
@@ -53,7 +60,7 @@ describe("UniversityCard", () => {
 
     const universityName = screen.getByText(/University of Sarajevo/i);
     const cityText = screen.getByText(/^📍\s*Sarajevo$/i);
-    const entityText = screen.getByText(/FBiH/i);
+    const entityText = screen.getByText(/Federation of B&H/i);
     const foundedText = screen.getByText(/Founded: 1949/i);
     const websiteLink = screen.getByRole("link", {
       name: /https:\/\/unsa\.ba/i,
@@ -68,7 +75,10 @@ describe("UniversityCard", () => {
 
   test("loads details, can hide details, and reopens cached details without refetch", async () => {
     const mockResponse = new Response(
-      JSON.stringify({ data: { faculties: [] } }),
+      JSON.stringify({
+        message: "University retrieved successfully.",
+        data: { ...baseUniversity, faculties: [] },
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
@@ -110,24 +120,29 @@ describe("UniversityCard", () => {
   test("expands nested faculty, study program and subject rows", async () => {
     const mockResponse = new Response(
       JSON.stringify({
+        message: "University retrieved successfully.",
         data: {
+          ...baseUniversity,
           faculties: [
             {
               id: 11,
               name: "Faculty of Electrical Engineering",
+              universityId: 1,
               studyPrograms: [
                 {
                   id: 21,
                   name: "Computer Science",
+                  facultyId: 11,
                   cycle: "FIRST",
                   ects: 180,
                   subjects: [
                     {
                       id: 31,
                       name: "Algorithms",
+                      studyProgramId: 21,
                       semester: 3,
                       ects: 6,
-                      type: "OBAVEZNI",
+                      type: "MANDATORY",
                     },
                   ],
                 },
@@ -167,7 +182,7 @@ describe("UniversityCard", () => {
     const subjectName = await screen.findByText(/Algorithms/i);
     const semesterText = screen.getByText(/Semester 3/i);
     const ectsText = screen.getByText(/6 ECTS/i);
-    const subjectType = screen.getByText(/OBAVEZNI/i);
+    const subjectType = screen.getByText(/Mandatory/i);
 
     expect(subjectName).toBeInTheDocument();
     expect(semesterText).toBeInTheDocument();
@@ -193,10 +208,88 @@ describe("UniversityCard", () => {
     });
     await user.click(viewDetailsButton);
 
-    const apiErrorMessage = await screen.findByText(/Failed from API\./i);
+    const apiErrorMessage = await screen.findByText(
+      /Failed to load university details\./i,
+    );
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();
+  });
+
+  test("shows an error notification when a successful details response is malformed", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "University retrieved successfully.",
+          data: { id: 1, name: "University of Sarajevo" },
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: /View details/i }));
+
+    const errorMessage = await screen.findByText(
+      /Failed to load university details\./i,
+    );
+
+    expect(errorMessage).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /View details/i })).toBeVisible();
+  });
+
+  test("rejects an out-of-range academic value in a successful details response", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "University retrieved successfully.",
+          data: {
+            ...baseUniversity,
+            faculties: [
+              {
+                id: 11,
+                name: "Faculty of Electrical Engineering",
+                universityId: 1,
+                studyPrograms: [
+                  {
+                    id: 21,
+                    name: "Computer Science",
+                    facultyId: 11,
+                    cycle: "FIRST",
+                    subjects: [
+                      {
+                        id: 31,
+                        name: "Algorithms",
+                        studyProgramId: 21,
+                        semester: 0,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: /View details/i }));
+
+    expect(
+      await screen.findByText(/Failed to load university details\./i),
+    ).toBeInTheDocument();
   });
 
   test("shows fallback notification when details request throws", async () => {

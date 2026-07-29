@@ -61,7 +61,9 @@ function PendingUniversityChangesRow({
           <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
             {t("endpoint.name")}
           </span>
-          <span className="text-sm truncate">{change.data?.email ?? "—"}</span>
+          <span className="text-sm truncate">
+            {"name" in change.data ? change.data.name : "—"}
+          </span>
         </div>
 
         <div className="flex justify-end items-center">

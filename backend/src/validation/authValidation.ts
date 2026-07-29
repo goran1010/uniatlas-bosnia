@@ -1,64 +1,74 @@
-import { body, param } from "express-validator";
-import { validationError } from "./validationError.js";
+import { z } from "zod";
+import { RequestValidationError } from "../errors/RequestValidationError.js";
 
-class AuthValidation {
-  signupValidationRules = [
-    body("email")
-      .normalizeEmail()
-      .isEmail()
-      .withMessage("Invalid email address"),
+const emailSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .pipe(z.email({ error: "Invalid email address" }));
 
-    body("password")
+const signupSchema = z
+  .object({
+    email: emailSchema,
+    password: z
+      .string()
       .trim()
-      .custom((value: string) => {
-        if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
-          throw new Error(
-            "Password can only contain letters, numbers, dashes or underscores",
-          );
-        }
-        return true;
+      .regex(/^[a-zA-Z0-9_-]+$/, {
+        error:
+          "Password can only contain letters, numbers, dashes or underscores",
       })
-      .isStrongPassword({
-        minLength: 6,
-        minLowercase: 0,
-        minUppercase: 0,
-        minNumbers: 1,
-        minSymbols: 0,
+      .min(6, {
+        error:
+          "Password must be at least 6 characters long and contain at least one number",
       })
-      .withMessage(
-        "Password must be at least 6 characters long and contain at least one number",
-      ),
-
-    body("confirm-password")
-      .trim()
-      .custom((value: string, { req }) => {
-        const body = req.body as { password: string };
-
-        if (value !== body.password) {
-          throw new Error("Passwords do not match");
-        }
-
-        return true;
+      .regex(/\d/, {
+        error:
+          "Password must be at least 6 characters long and contain at least one number",
       }),
+    "confirm-password": z.string().trim(),
+  })
+  .refine((data) => data.password === data["confirm-password"], {
+    path: ["confirm-password"],
+    error: "Passwords do not match",
+  });
 
-    validationError,
-  ];
+const confirmTokenSchema = z.object({
+  token: z.string().trim().min(1, { error: "Token is required" }),
+});
 
-  confirmTokenValidationRules = [
-    param("token").trim().notEmpty().withMessage("Token is required"),
-    validationError,
-  ];
+const loginSchema = z.object({
+  email: emailSchema,
+  password: z.string().trim().min(1, { error: "Password is required" }),
+});
 
-  loginValidationRules = [
-    body("email")
-      .normalizeEmail()
-      .isEmail()
-      .withMessage("Invalid email address"),
-    body("password").trim().notEmpty().withMessage("Password is required"),
-    validationError,
-  ];
+function signup(input: unknown) {
+  const result = signupSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
 }
 
-const authValidation = new AuthValidation();
+function confirmToken(input: unknown) {
+  const result = confirmTokenSchema.safeParse(input);
 
-export { authValidation };
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+function login(input: unknown) {
+  const result = loginSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+export { signup, confirmToken, login };

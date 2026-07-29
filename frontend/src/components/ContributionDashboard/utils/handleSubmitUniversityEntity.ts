@@ -1,11 +1,14 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import { readErrorMessage } from "../../../schemas/api";
+import { contributionSubmissionSchema } from "../../../schemas/contribution";
+import { pendingChangeResponseSchema } from "../../../schemas/pendingChange";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
 import type { AddNotification } from "../../../types/notification";
-import type { ContributionFormData, PendingChange } from "../types";
+import type { ContributionFormDraft, PendingChange } from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 export interface HandleSubmitUniversityEntityParams {
@@ -13,7 +16,7 @@ export interface HandleSubmitUniversityEntityParams {
   parentId?: string;
   targetId?: string;
   typeOfChange: "CREATE" | "UPDATE" | "DELETE";
-  data: ContributionFormData;
+  data: ContributionFormDraft;
   setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
   addNotification: AddNotification;
   setLoading: (loading: boolean) => void;
@@ -21,29 +24,15 @@ export interface HandleSubmitUniversityEntityParams {
     entityType: string;
     parentId?: string;
     targetId?: string;
-    data: ContributionFormData;
+    data: ContributionFormDraft;
   }) => void;
   t: TFunction;
   serverStatus: ServerStatus;
 }
 
-interface StatusSuccessResponse {
-  message: string;
-  data: PendingChange;
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -64,6 +53,17 @@ async function handleSubmitUniversityEntity({
 }: HandleSubmitUniversityEntityParams) {
   try {
     setLoading(true);
+
+    const submissionInput =
+      typeOfChange === "CREATE" && entityType === "UNIVERSITY"
+        ? { entityType, typeOfChange, data }
+        : typeOfChange === "CREATE"
+          ? { entityType, typeOfChange, parentId, data }
+          : typeOfChange === "UPDATE"
+            ? { entityType, typeOfChange, targetId, data }
+            : { entityType, typeOfChange, targetId };
+    const submission = contributionSubmissionSchema.parse(submissionInput);
+
     const csrfToken = await getCsrfToken({ serverStatus, addNotification, t });
 
     if (!csrfToken) {
@@ -75,21 +75,30 @@ async function handleSubmitUniversityEntity({
     }
 
     const method =
-      typeOfChange === "CREATE"
+      submission.typeOfChange === "CREATE"
         ? "POST"
-        : typeOfChange === "UPDATE"
+        : submission.typeOfChange === "UPDATE"
           ? "PUT"
           : "DELETE";
     const body =
-      typeOfChange === "CREATE"
-        ? {
-            entityType,
-            parentId: parentId ? Number(parentId) : undefined,
-            data,
-          }
-        : typeOfChange === "UPDATE"
-          ? { entityType, targetId: Number(targetId), data }
-          : { entityType, targetId: Number(targetId) };
+      submission.typeOfChange === "CREATE"
+        ? "parentId" in submission
+          ? {
+              entityType: submission.entityType,
+              parentId: submission.parentId,
+              data: submission.data,
+            }
+          : { entityType: submission.entityType, data: submission.data }
+        : submission.typeOfChange === "UPDATE"
+          ? {
+              entityType: submission.entityType,
+              targetId: submission.targetId,
+              data: submission.data,
+            }
+          : {
+              entityType: submission.entityType,
+              targetId: submission.targetId,
+            };
 
     const response = await guardedFetch(
       `${BACKEND_URL}/users/contribution/universities`,
@@ -107,17 +116,22 @@ async function handleSubmitUniversityEntity({
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      const result = pendingChangeResponseSchema.parse(await response.json());
       setPendingChanges((prev) => [result.data, ...prev]);
-      addNotification({ type: "success", message: result.message });
+      addNotification({
+        type: "success",
+        message: t("messages.universities.addSuccess"),
+      });
       setFormState({ entityType: "", parentId: "", targetId: "", data: {} });
       return;
     }
-    const message =
-      (await readErrorMessage(response)) ?? t("messages.universities.addError");
+    const serverMessage = await getErrorMessage(response);
+    if (serverMessage) {
+      console.warn("Failed to submit university change:", serverMessage);
+    }
     addNotification({
       type: "error",
-      message,
+      message: t("messages.universities.addError"),
     });
   } catch (err) {
     addNotification({

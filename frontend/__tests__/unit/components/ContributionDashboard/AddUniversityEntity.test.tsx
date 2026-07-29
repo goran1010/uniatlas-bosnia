@@ -59,7 +59,6 @@ describe("AddUniversityEntity", () => {
     expect(screen.getByLabelText(/City/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/^Entity$/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Ownership/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Website/i)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /Submit Suggestion/i }),
     ).toBeInTheDocument();
@@ -106,7 +105,6 @@ describe("AddUniversityEntity", () => {
     expect(screen.getByLabelText(/Cycle/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Duration/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/ECTS credits/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Language/i)).toBeInTheDocument();
   });
 
   test("renders subject specific fields for create changes", async () => {
@@ -173,7 +171,6 @@ describe("AddUniversityEntity", () => {
     await user.type(screen.getByLabelText(/City/i), "Sarajevo");
     await user.selectOptions(screen.getByLabelText(/^Entity$/i), "FBIH");
     await user.selectOptions(screen.getByLabelText(/Ownership/i), "JAVNA");
-    await user.type(screen.getByLabelText(/Website/i), "https://unsa.ba");
 
     await user.click(
       screen.getByRole("button", { name: /Submit Suggestion/i }),
@@ -190,7 +187,6 @@ describe("AddUniversityEntity", () => {
       city: "Sarajevo",
       entity: "FBIH",
       ownership: "JAVNA",
-      website: "https://unsa.ba",
     });
     expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
     expect(typeof submittedArgs.addNotification).toBe("function");
@@ -280,7 +276,6 @@ describe("AddUniversityEntity", () => {
     await user.selectOptions(screen.getByLabelText(/Cycle/i), "FIRST");
     await user.type(screen.getByLabelText(/Duration/i), "3");
     await user.type(screen.getByLabelText(/ECTS credits/i), "180");
-    await user.type(screen.getByLabelText(/Language/i), "Bosnian");
 
     await user.click(
       screen.getByRole("button", { name: /Submit Suggestion/i }),
@@ -296,7 +291,6 @@ describe("AddUniversityEntity", () => {
       cycle: "FIRST",
       durationYears: 3,
       ects: 180,
-      language: "Bosnian",
     });
   });
 });

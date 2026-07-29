@@ -26,16 +26,13 @@ describe("app", () => {
     const { app } = await import("../../src/app.js");
 
     const response = await request(app).get("/api");
-    const expectedResponse = {
-      status: 500,
-      body: {
-        error: {
-          message: "Server error: please try again later.",
-        },
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      error: {
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Server error: please try again later.",
       },
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
+    });
   });
 
   test("app responds with status 404 for unknown routes", async () => {

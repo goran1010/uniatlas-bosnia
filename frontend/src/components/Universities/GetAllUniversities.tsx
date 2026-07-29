@@ -3,78 +3,13 @@ import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 import { BACKEND_URL } from "../../utils/envConfig";
-
-export type Entity = "RS" | "FBiH" | "BD";
-
-export type Ownership = "JAVNA" | "PRIVATNA";
-
-export interface University {
-  id: number;
-  name: string;
-  acronym?: string;
-  city: string;
-  entity: Entity;
-  ownership: Ownership;
-  foundedYear?: string;
-  website?: string;
-  accreditationFrom?: string;
-  accreditationTo?: string;
-  authority?: string;
-  sourceUrl?: string;
-  lastChecked?: string;
-  faculties: Faculty[];
-}
-
-export interface Faculty {
-  id: number;
-  name: string;
-  universityId: number;
-  university: University;
-  city?: string;
-  website?: string;
-  studyPrograms: StudyProgram[];
-}
-
-export interface StudyProgram {
-  id: number;
-  name: string;
-  facultyId: number;
-  cycle: "BACHELOR" | "MASTER" | "DOCTORATE";
-  durationYears?: number;
-  ects?: number;
-  language?: string;
-  sourceUrl?: string;
-  subjects: Subject[];
-}
-
-export interface Subject {
-  id: number;
-  name: string;
-  studyProgramId: number;
-  semester?: number;
-  ects?: number;
-  type?: "MANDATORY" | "ELECTIVE";
-  sourceUrl?: string;
-}
-
-interface StatusSuccessResponse {
-  message: string;
-  data: University[];
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
+import { readErrorMessage } from "../../schemas/api";
+import { universityListResponseSchema } from "../../schemas/university";
+import type { UniversityListItem } from "../../schemas/university";
 
 function GetAllUniversities() {
   const { t, addNotification } = use(RootContext);
-  const [universities, setUniversities] = useState<University[]>([]);
+  const [universities, setUniversities] = useState<UniversityListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -87,26 +22,29 @@ function GetAllUniversities() {
         });
 
         if (res.ok) {
-          const result = await parseJson<StatusSuccessResponse>(res);
+          const result = universityListResponseSchema.parse(await res.json());
           setUniversities(result.data);
         } else {
-          const result = await parseJson<StatusErrorResponse>(res);
+          const serverMessage = readErrorMessage(await res.json());
+          if (serverMessage) {
+            console.warn("Failed to load universities:", serverMessage);
+          }
           addNotification({
             type: "error",
-            message: result.error.message,
+            message: t("messages.universities.loadError"),
           });
         }
       } catch {
         addNotification({
           type: "error",
-          message: "Failed to load universities.",
+          message: t("messages.universities.loadError"),
         });
       } finally {
         setLoading(false);
       }
     }
     void fetchUniversities();
-  }, [addNotification]);
+  }, [addNotification, t]);
 
   if (loading) return <Spinner />;
 

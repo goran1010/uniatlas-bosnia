@@ -1,43 +1,53 @@
-import { param, query } from "express-validator";
-import { validationError } from "./validationError.js";
+import { z } from "zod";
+import { RequestValidationError } from "../errors/RequestValidationError.js";
 
-class UniversityValidation {
-  searchUniversities = [
-    query("searchTerm")
-      .trim()
-      .notEmpty()
-      .withMessage("Search term is required")
-      .isLength({ min: 2 })
-      .withMessage("Search term must be at least 2 characters"),
+const getUniversityByIdParamsSchema = z.strictObject({
+  id: z
+    .string()
+    .trim()
+    .transform(Number)
+    .pipe(
+      z
+        .number()
+        .int({
+          error: "University ID must be an integer.",
+        })
+        .positive({
+          error: "University ID must be positive.",
+        }),
+    ),
+});
 
-    validationError,
-  ];
+function getUniversityById(input: unknown) {
+  const result = getUniversityByIdParamsSchema.safeParse(input);
 
-  searchStudyPrograms = [
-    query("searchTerm")
-      .trim()
-      .notEmpty()
-      .withMessage("Search term is required")
-      .isLength({ min: 2 })
-      .withMessage("Search term must be at least 2 characters"),
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
 
-    validationError,
-  ];
-
-  getUniversityById = [
-    param("id")
-      .trim()
-      .notEmpty()
-      .withMessage("University ID is required")
-      .bail()
-      .isInt({ min: 1 })
-      .withMessage("Invalid university ID.")
-      .toInt(),
-
-    validationError,
-  ];
+  return result.data;
 }
 
-const universityValidation = new UniversityValidation();
+const searchQuerySchema = z.strictObject({
+  searchTerm: z
+    .string()
+    .trim()
+    .min(2, {
+      message: "Search term must be at least 2 characters.",
+    })
+    .max(100, {
+      message: "Search term must not exceed 100 characters.",
+    }),
+});
 
-export { universityValidation };
+function searchQuery(input: unknown) {
+  const result = searchQuerySchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+export { getUniversityById, searchQuery };

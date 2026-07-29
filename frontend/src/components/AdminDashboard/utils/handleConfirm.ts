@@ -1,4 +1,8 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import {
+  actionSuccessResponseSchema,
+  readErrorMessage,
+} from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 
@@ -17,25 +21,9 @@ type HandleConfirm = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
-interface StatusSuccessResponse {
-  message: string;
-  data: {
-    email: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -83,27 +71,28 @@ const handleConfirm: HandleConfirm = async function (
     );
 
     if (response.ok) {
-      const result = await parseJson<StatusSuccessResponse>(response);
+      actionSuccessResponseSchema.parse(await response.json());
       setPendingChanges((prev) =>
         prev.filter((request) => request.id !== change.id),
       );
       addNotification({
         type: "success",
-        message: result.message,
+        message: t("messages.admin.approveSuccess"),
       });
       return;
     }
-    const message =
-      (await readErrorMessage(response)) ??
-      `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`;
+    const serverMessage = await getErrorMessage(response);
+    if (serverMessage) {
+      console.warn("Failed to approve pending change:", serverMessage);
+    }
     addNotification({
       type: "error",
-      message,
+      message: t("messages.admin.approveError"),
     });
   } catch (error) {
     addNotification({
       type: "error",
-      message: `${t("messages.admin.approveError")} ${change.user?.email ?? ""}`,
+      message: t("messages.admin.approveError"),
     });
     console.error(
       `Error approving pending change for ${change.user?.email ?? ""}:`,

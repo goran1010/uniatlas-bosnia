@@ -1,4 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import { readErrorMessage } from "../../../schemas/api";
+import { signupResponseSchema } from "../../../schemas/auth";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
@@ -21,25 +23,9 @@ type HandleSignUpSubmit = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
-interface StatusSuccessResponse {
-  message: string;
-  data: {
-    email: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -55,8 +41,9 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
   serverStatus,
 ) {
   try {
-    setLoading(true);
     event.preventDefault();
+
+    setLoading(true);
 
     const csrfToken = await getCsrfToken({
       serverStatus,
@@ -92,19 +79,20 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
     );
 
     if (!response.ok) {
-      const message =
-        (await readErrorMessage(response)) ??
-        t("messages.auth.registrationError");
+      const serverMessage = await getErrorMessage(response);
+      if (serverMessage) {
+        console.warn("Signup request failed:", serverMessage);
+      }
       addNotification({
         type: "error",
-        message,
+        message: t("messages.auth.registrationFailed"),
       });
       return;
     }
-    const result = await parseJson<StatusSuccessResponse>(response);
+    signupResponseSchema.parse(await response.json());
     addNotification({
       type: "success",
-      message: result.message,
+      message: t("messages.auth.registrationSuccess"),
     });
     void navigate("/login");
   } catch (err) {

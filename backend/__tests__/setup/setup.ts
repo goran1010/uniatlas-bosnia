@@ -50,6 +50,7 @@ vi.mock("pino", () => {
   return {
     default: () => ({
       info: vi.fn(),
+      warn: vi.fn(),
       error: vi.fn(),
     }),
   };

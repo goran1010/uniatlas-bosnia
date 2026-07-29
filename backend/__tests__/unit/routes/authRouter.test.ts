@@ -81,6 +81,17 @@ beforeEach(() => {
   });
 });
 
+function expectValidationIssue(
+  error: Record<string, unknown>,
+  message: string,
+) {
+  expect(error["code"]).toBe("VALIDATION_ERROR");
+  expect(error["message"]).toBe("Request validation failed.");
+  expect(error["issues"]).toEqual(
+    expect.arrayContaining([expect.objectContaining({ message })]),
+  );
+}
+
 describe("POST /auth/signup", () => {
   test("responds with status 400 and message for too few characters in password input", async () => {
     const newUser = createNewUserInput({
@@ -96,12 +107,11 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const responseBody = getResponseObject(response.body);
+    const responseBody = getResponseObject(response.body as unknown);
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expectValidationIssue(error, responseData.error.message);
   });
 
   test("responds with status 400 and message for invalid characters in password input", async () => {
@@ -118,12 +128,11 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const responseBody = getResponseObject(response.body);
+    const responseBody = getResponseObject(response.body as unknown);
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expectValidationIssue(error, responseData.error.message);
   });
 
   test("responds with status 400 and message for incorrect confirm-password input", async () => {
@@ -138,12 +147,11 @@ describe("POST /auth/signup", () => {
     };
 
     const response = await request(app).post("/auth/signup").send(newUser);
-    const responseBody = getResponseObject(response.body);
+    const responseBody = getResponseObject(response.body as unknown);
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(responseData.error.message);
+    expectValidationIssue(error, responseData.error.message);
   });
 
   test("successfully create a user and returns status 201 and message", async () => {

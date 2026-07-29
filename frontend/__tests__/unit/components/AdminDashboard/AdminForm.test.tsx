@@ -6,13 +6,14 @@ import type { UserData } from "../../../../src/customHooks/useStatusCheck";
 
 const mockChanges = [
   {
-    city: "Divičani",
-    code: 70204,
     createdAt: "2026-05-06T07:34:01.967Z",
     id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
-    post: "HP_MOSTAR",
+    entityType: "UNIVERSITY",
     typeOfChange: "UPDATE",
-    user: { email: "johndoe@examplemail.com" },
+    targetId: 1,
+    parentId: null,
+    data: { name: "University of Divičani", city: "Divičani" },
+    user: { email: "johndoe@examplemail.com", role: "USER" },
     userId: "058d1adc-58e4-4f31-8021-64e37e7d0dd0",
   },
 ];

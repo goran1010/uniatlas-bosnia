@@ -4,8 +4,13 @@ import { app } from "../../src/app.js";
 import { createAndLoginUser } from "../utils/createUserAndLogin.js";
 import { createNewUserInput } from "../utils/createNewUserInput.js";
 import { prisma } from "../../src/db/prisma.js";
+import { logger } from "../../src/utils/logger.js";
 import type { entityType } from "../../src/generated/prisma/enums.js";
 import { Prisma } from "../../src/generated/prisma/client.js";
+
+function asUnknown(value: unknown): unknown {
+  return value;
+}
 
 describe("Admin Router - GET /users/admin/pending-changes", () => {
   test("Responds with status 200 and all pending changes if role ADMIN", async () => {
@@ -41,10 +46,32 @@ describe("Admin Router - GET /users/admin/pending-changes", () => {
 
     const response = await agent.get("/users/admin/pending-changes");
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
+    const responseBody = asUnknown(response.body);
+    expect(responseBody).toEqual(
       expect.objectContaining({
         message: "Pending changes retrieved successfully.",
       }),
+    );
+
+    if (
+      typeof responseBody !== "object" ||
+      responseBody === null ||
+      !("data" in responseBody) ||
+      !Array.isArray(responseBody.data)
+    ) {
+      throw new Error("Expected pending changes response data to be an array");
+    }
+
+    expect(responseBody.data).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: pendingChange.id,
+          user: {
+            email: userInDb.email,
+            role: userInDb.role,
+          },
+        }),
+      ]),
     );
 
     await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
@@ -165,6 +192,12 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       });
 
     expect(response.status).toBe(404);
+    expect(logger.warn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        pendingChangeId: pendingChange.id,
+      }),
+      "Pending change data failed validation during approval.",
+    );
 
     await prisma.pendingChange.delete({ where: { id: pendingChange.id } });
     await prisma.user.delete({ where: { id: userInDb.id } });
@@ -533,8 +566,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change for FACULTY", 
         data: {
           name: "Test Create Faculty",
           city: "Test City",
-          entity: "FBIH",
-          ownership: "JAVNA",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -880,7 +911,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
           name: "Test Approve Study Program Updated",
           cycle: "SECOND",
           durationYears: 4,
-          ects: "240",
+          ects: 240,
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -1037,7 +1068,6 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
         parentId: studyProgram.id,
         data: {
           name: "Test Create Subject",
-          code: "TCS101",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -1120,7 +1150,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
         data: {
           name: "Test Approve Subject Updated",
           semester: 3,
-          ects: "6",
+          ects: 6,
           type: "MANDATORY",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),

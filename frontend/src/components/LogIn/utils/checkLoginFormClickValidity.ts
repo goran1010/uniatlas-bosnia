@@ -1,3 +1,5 @@
+import { emailSchema, loginPasswordSchema } from "../../../schemas/auth";
+
 type CheckLoginFormClickValidity = (
   passwordInput: HTMLInputElement | null,
   emailInput: HTMLInputElement | null,
@@ -11,14 +13,13 @@ const checkLoginFormClickValidity: CheckLoginFormClickValidity = function (
 ) {
   if (passwordInput === null || emailInput === null) return;
 
-  const emailValue = emailInput.value.trim();
-  if (!emailValue.includes("@") || emailValue.length < 3) {
+  if (!emailSchema.safeParse(emailInput.value).success) {
     emailInput.setCustomValidity(t("validation.email.invalid"));
     emailInput.reportValidity();
   } else emailInput.setCustomValidity("");
 
-  if (passwordInput.value.trim().length < 6) {
-    passwordInput.setCustomValidity(t("validation.password.minLength"));
+  if (!loginPasswordSchema.safeParse(passwordInput.value).success) {
+    passwordInput.setCustomValidity(t("validation.password.required"));
     passwordInput.reportValidity();
   } else passwordInput.setCustomValidity("");
 };

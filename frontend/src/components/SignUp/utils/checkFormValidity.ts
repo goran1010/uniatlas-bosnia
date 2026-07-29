@@ -1,3 +1,8 @@
+import {
+  emailSchema,
+  getSignupPasswordValidationKey,
+} from "../../../schemas/auth";
+
 type CheckFormValidity = (
   currentInput: string,
   passwordInput: HTMLInputElement | null,
@@ -20,19 +25,8 @@ const checkFormValidity: CheckFormValidity = function (
   )
     return;
   if (currentInput === "email") {
-    const emailValue = emailInput.value.trim();
-    if (emailValue.length < 3) {
-      emailInput.setCustomValidity(t("validation.email.minLength"));
-      emailInput.reportValidity();
-    } else if (!emailValue.includes("@")) {
-      emailInput.setCustomValidity(
-        `${t("validation.email.missingAt")} ${emailValue}`,
-      );
-      emailInput.reportValidity();
-    } else if (emailValue.split("@")[1]?.length === 0) {
-      emailInput.setCustomValidity(
-        `${t("validation.email.missingDomain")} ${emailValue}`,
-      );
+    if (!emailSchema.safeParse(emailInput.value).success) {
+      emailInput.setCustomValidity(t("validation.email.invalid"));
       emailInput.reportValidity();
     } else {
       emailInput.setCustomValidity("");
@@ -40,8 +34,9 @@ const checkFormValidity: CheckFormValidity = function (
   }
 
   if (currentInput === "password") {
-    if (passwordInput.value.trim().length < 6) {
-      passwordInput.setCustomValidity(t("validation.password.minLength"));
+    const validationKey = getSignupPasswordValidationKey(passwordInput.value);
+    if (validationKey) {
+      passwordInput.setCustomValidity(t(validationKey));
       passwordInput.reportValidity();
     } else passwordInput.setCustomValidity("");
   }

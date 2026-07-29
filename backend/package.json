@@ -61,13 +61,13 @@
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.2",
     "express-session": "^1.19.0",
-    "express-validator": "^7.3.2",
     "helmet": "^8.2.0",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-local": "^1.0.0",
     "pg": "^8.21.0",
     "pino": "^10.3.1",
-    "resend": "^6.12.4"
+    "resend": "^6.12.4",
+    "zod": "^4.4.3"
   }
 }

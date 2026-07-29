@@ -1,26 +1,13 @@
 import { Router } from "express";
 const contributionRouter = Router();
 
-import { contributionController } from "../controllers/contributionController.js";
-import { contributionValidation } from "../validation/contributionValidation.js";
+import * as contributionController from "../controllers/contributionController.js";
 
-contributionRouter.post(
-  "/universities",
-  contributionValidation.createEntity,
-  contributionController.createEntity,
-);
+contributionRouter.post("/universities", contributionController.createEntity);
 
-contributionRouter.put(
-  "/universities",
-  contributionValidation.editEntity,
-  contributionController.editEntity,
-);
+contributionRouter.put("/universities", contributionController.editEntity);
 
-contributionRouter.delete(
-  "/universities",
-  contributionValidation.deleteEntity,
-  contributionController.deleteEntity,
-);
+contributionRouter.delete("/universities", contributionController.deleteEntity);
 
 contributionRouter.get(
   "/pending-changes/universities",
@@ -29,7 +16,6 @@ contributionRouter.get(
 
 contributionRouter.delete(
   "/pending-changes/universities",
-  contributionValidation.deletePendingChange,
   contributionController.deletePendingChange,
 );
 

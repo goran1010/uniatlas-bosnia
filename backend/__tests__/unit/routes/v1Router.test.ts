@@ -203,9 +203,33 @@ describe("GET /api/v1/universities/search", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Search term is required");
+    expect(error["code"]).toBe("VALIDATION_ERROR");
+    expect(error["message"]).toBe("Request validation failed.");
+    expect(error["issues"]).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
+    );
   });
+
+  test.each(["/api/v1/universities/search", "/api/v1/study-programs/search"])(
+    "responds with status 400 when searchTerm exceeds 100 characters: %s",
+    async (path) => {
+      const response = await request(app).get(
+        `${path}?searchTerm=${"a".repeat(101)}`,
+      );
+      const responseBody = getResponseObject(response.body);
+      const error = getResponseObject(responseBody["error"]);
+
+      expect(response.status).toBe(400);
+      expect(error["issues"]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            path: "searchTerm",
+            message: "Search term must not exceed 100 characters.",
+          }),
+        ]),
+      );
+    },
+  );
 });
 
 describe("GET /api/v1/universities/:id", () => {
@@ -229,7 +253,7 @@ describe("GET /api/v1/universities/:id", () => {
 
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Invalid university ID.");
+    expect(error["message"]).toBe("Request validation failed.");
   });
 
   test("responds with status 404 for non-existent university id", async () => {
@@ -253,7 +277,7 @@ describe("GET /api/v1/universities/:id", () => {
 
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Invalid university ID.");
+    expect(error["message"]).toBe("Request validation failed.");
   });
 });
 
@@ -298,7 +322,10 @@ describe("GET /api/v1/study-programs/search", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Search term is required");
+    expect(error["code"]).toBe("VALIDATION_ERROR");
+    expect(error["message"]).toBe("Request validation failed.");
+    expect(error["issues"]).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
+    );
   });
 });

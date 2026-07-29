@@ -58,7 +58,7 @@ describe("handleDiscardUniversityChange", () => {
     );
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change deleted successfully.",
+      message: "messages.universities.deleteSuccess",
     });
 
     const updatePendingChanges = setPendingChanges.mock.calls[0]?.[0] as (
@@ -94,7 +94,7 @@ describe("handleDiscardUniversityChange", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 
-  test("shows the backend error when discarding fails", async () => {
+  test("shows a translated error when discarding fails", async () => {
     getCsrfTokenMock.mockResolvedValue("csrf-token");
     guardedFetchMock.mockResolvedValue({
       ok: false,
@@ -121,8 +121,39 @@ describe("handleDiscardUniversityChange", () => {
     expect(setPendingChanges).not.toHaveBeenCalled();
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "Discard failed on the server.",
+      message: "messages.universities.deleteError",
     });
+  });
+
+  test("does not remove a change when a successful response is malformed", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+
+    const { handleDiscardUniversityChange } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
+    await handleDiscardUniversityChange({
+      changeId: "1",
+      setPendingChanges,
+      addNotification,
+      setLoading: vi.fn(),
+      t,
+      serverStatus: "live",
+    });
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.deleteError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
   });
 
   test("shows the fallback error when the request throws", async () => {

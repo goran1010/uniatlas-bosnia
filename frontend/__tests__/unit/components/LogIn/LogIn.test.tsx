@@ -172,10 +172,10 @@ describe("User typing in input fields in LogIn Component", () => {
     const { passwordField, emailField } = createFormElements();
 
     await user.type(emailField, "testuser@example.com");
-    await user.type(passwordField, "Password123!");
+    await user.type(passwordField, "Password123");
 
     expect(emailField).toHaveValue("testuser@example.com");
-    expect(passwordField).toHaveValue("Password123!");
+    expect(passwordField).toHaveValue("Password123");
   });
 });
 
@@ -196,10 +196,9 @@ describe("LogIn form validation on input", () => {
 
     await user.type(passwordField, "pass");
     expect(passwordField).toHaveValue("pass");
-    expect(passwordField.validationMessage).toMatch(/at least 6 characters/i);
-    await user.type(passwordField, "word");
-    expect(passwordField).toHaveValue("password");
     expect(passwordField.validationMessage).toBe("");
+    await user.clear(passwordField);
+    expect(passwordField.validationMessage).toMatch(/password is required/i);
   });
 });
 
@@ -228,18 +227,16 @@ describe("LogIn for validation on button click", () => {
     await user.click(logInButton);
 
     expect(passwordField).toHaveValue("pass");
-    expect(passwordField.validationMessage).toMatch(/at least 6 characters/i);
-
-    await user.type(passwordField, "word");
-    await user.click(logInButton);
-
-    expect(passwordField).toHaveValue("password");
     expect(passwordField.validationMessage).toBe("");
+
+    await user.clear(passwordField);
+    await user.click(logInButton);
+    expect(passwordField.validationMessage).toMatch(/password is required/i);
   });
 });
 
 describe("LogIn Form Submit", () => {
-  test("Shows error message after clicking Create when fetching with wrong email/password", async () => {
+  test("shows a translated error after submitting wrong email or password", async () => {
     const mockErrorResponse = new Response(
       JSON.stringify({
         error: {
@@ -257,10 +254,10 @@ describe("LogIn Form Submit", () => {
 
     await submitLogInForm({
       email: "existing@user.com",
-      password: "Password123!",
+      password: "Password123",
     });
 
-    const errorMessage = await screen.findByText(/Invalid email or password/i);
+    const errorMessage = await screen.findByText(/^Login failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(errorMessage).toBeInTheDocument();
@@ -269,6 +266,7 @@ describe("LogIn Form Submit", () => {
   test("Redirects to Home on successful form submit", async () => {
     const mockedResponse = new Response(
       JSON.stringify({
+        message: "Logged in successfully",
         data: { email: "new@user.com", role: "USER" },
       }),
       {
@@ -279,12 +277,37 @@ describe("LogIn Form Submit", () => {
 
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockedResponse);
 
-    await submitLogInForm({ email: "new@user.com", password: "Password123!" });
+    await submitLogInForm({ email: "new@user.com", password: "Password123" });
 
     const homePageText = await screen.findByText(
       /Universities and Academic Programs in Bosnia and Herzegovina/i,
     );
     expect(homePageText).toBeInTheDocument();
+  });
+
+  test("shows a translated error when a successful response is malformed", async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(JSON.stringify({ message: "Logged in successfully" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    await submitLogInForm({
+      email: "new@user.com",
+      password: "Password123",
+    });
+
+    expect(
+      await screen.findByText(/^An error occurred while logging in\.$/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Universities and Academic Programs/i),
+    ).not.toBeInTheDocument();
+    expect(consoleErrorSpy).toHaveBeenCalled();
   });
 
   test("shows error message when network request throws", async () => {
@@ -298,7 +321,7 @@ describe("LogIn Form Submit", () => {
 
     await submitLogInForm({
       email: "existing@user.com",
-      password: "Password123!",
+      password: "Password123",
     });
 
     const networkErrorMessage = await screen.findByText(
@@ -319,12 +342,10 @@ describe("LogIn Form Submit", () => {
 
     await submitLogInForm({
       email: "existing@user.com",
-      password: "Password123!",
+      password: "Password123",
     });
 
-    const fallbackError = await screen.findByText(
-      /^An error occurred while logging in\.$/i,
-    );
+    const fallbackError = await screen.findByText(/^Login failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackError).toBeInTheDocument();

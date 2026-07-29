@@ -68,7 +68,7 @@ describe("useStatusCheck", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "loginStatus.success",
+      message: "messages.loginStatus.success",
     });
     expect(screen.getByTestId("user-email")).toHaveTextContent(
       "user@example.com",
@@ -141,5 +141,35 @@ describe("useStatusCheck", () => {
 
     expect(addNotification).not.toHaveBeenCalled();
     expect(console.error).not.toHaveBeenCalled();
+  });
+
+  test("reports an error when a successful response contains invalid user data", async () => {
+    const addNotification = vi.fn(() => "notification-id");
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "User info retrieved",
+          data: { email: "user@example.com", role: "CONTRIBUTOR" },
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.LIVE}
+      />,
+    );
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.loginStatus.error",
+    });
+    expect(screen.getByTestId("user-email")).toHaveTextContent("none");
   });
 });

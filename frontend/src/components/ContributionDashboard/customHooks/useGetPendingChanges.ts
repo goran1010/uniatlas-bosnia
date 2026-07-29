@@ -2,18 +2,10 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { pendingChangesResponseSchema } from "../../../schemas/pendingChange";
 
 import type { TFunction } from "../../../types/i18n";
 import type { PendingChange } from "../types";
-
-interface StatusSuccessResponse {
-  message: string;
-  data: PendingChange[];
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
 
 function useGetPendingChanges(
   setLoading: (loading: boolean) => void,
@@ -47,11 +39,13 @@ function useGetPendingChanges(
         );
 
         if (response.ok) {
-          const result = await parseJson<StatusSuccessResponse>(response);
+          const result = pendingChangesResponseSchema.parse(
+            await response.json(),
+          );
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: result.message,
+            message: t("messages.pendingChanges.loadSuccess"),
           });
           return;
         }

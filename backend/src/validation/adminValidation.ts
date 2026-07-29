@@ -1,31 +1,28 @@
-import { body } from "express-validator";
-import { validationError } from "./validationError.js";
+import { z } from "zod";
+import { RequestValidationError } from "../errors/RequestValidationError.js";
 
-class AdminValidation {
-  declinePendingChange = [
-    body("id")
-      .trim()
-      .notEmpty()
-      .withMessage("Pending change ID is required")
-      .bail()
-      .isUUID()
-      .withMessage("Pending change ID must be a valid UUID"),
+const pendingChangeSchema = z.strictObject({
+  id: z.uuid({ message: "Pending change ID must be a valid UUID" }),
+});
 
-    validationError,
-  ];
+function declinePendingChange(input: unknown) {
+  const result = pendingChangeSchema.safeParse(input);
 
-  approvePendingChange = [
-    body("id")
-      .trim()
-      .notEmpty()
-      .withMessage("Pending change ID is required")
-      .bail()
-      .isUUID()
-      .withMessage("Pending change ID must be a valid UUID"),
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
 
-    validationError,
-  ];
+  return result.data;
 }
 
-const adminValidation = new AdminValidation();
-export { adminValidation };
+function approvePendingChange(input: unknown) {
+  const result = pendingChangeSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+export { declinePendingChange, approvePendingChange };

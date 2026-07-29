@@ -12,6 +12,17 @@ function getResponseObject(body: unknown): Record<string, unknown> {
   return body as Record<string, unknown>;
 }
 
+function expectValidationIssue(
+  error: Record<string, unknown>,
+  issue: { path: string; code: string },
+) {
+  expect(error["code"]).toBe("VALIDATION_ERROR");
+  expect(error["message"]).toBe("Request validation failed.");
+  expect(error["issues"]).toEqual(
+    expect.arrayContaining([expect.objectContaining(issue)]),
+  );
+}
+
 async function createLoggedInAgent() {
   const agent = request.agent(app);
   const loginResponse = await createAndLoginUser(agent, {});
@@ -23,12 +34,39 @@ async function createLoggedInAgent() {
     }),
   );
 
-  const loginResponseBody = getResponseObject(loginResponse.body);
+  const loginResponseBody = getResponseObject(loginResponse.body as unknown);
   const user = getResponseObject(loginResponseBody["data"]) as {
     id: string;
     email: string;
   };
   return { agent, user };
+}
+
+let entitySequence = 0;
+
+async function createUniversity() {
+  entitySequence++;
+
+  return prisma.university.create({
+    data: {
+      name: `Test University ${entitySequence.toString()}`,
+      city: "Test City",
+      entity: "FBIH",
+      ownership: "JAVNA",
+    },
+  });
+}
+
+async function createFaculty() {
+  const university = await createUniversity();
+  entitySequence++;
+
+  return prisma.faculty.create({
+    data: {
+      name: `Test Faculty ${entitySequence.toString()}`,
+      universityId: university.id,
+    },
+  });
 }
 
 describe("Contribution Router - POST /users/contribution/universities", () => {
@@ -53,8 +91,7 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
   });
 
   test("responds with status 400 for unsupported data fields", async () => {
@@ -74,10 +111,7 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain(
-      "Data contains unsupported fields for this entity type",
-    );
+    expectValidationIssue(error, { path: "data", code: "unrecognized_keys" });
   });
 
   test("responds with status 201 and stores a create suggestion", async () => {
@@ -123,6 +157,34 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
       }),
     );
   });
+
+  test("responds with status 404 when a child create parent does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.post("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      parentId: 999999,
+      data: { name: "Faculty without university" },
+    });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Parent entity not found." },
+    });
+  });
+
+  test("responds with status 201 when a child create parent exists", async () => {
+    const { agent } = await createLoggedInAgent();
+    const university = await createUniversity();
+
+    const response = await agent.post("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      parentId: university.id,
+      data: { name: "Faculty with university" },
+    });
+
+    expect(response.status).toBe(201);
+  });
 });
 
 describe("Contribution Router - PUT /users/contribution/universities", () => {
@@ -145,16 +207,88 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
   });
 
-  test("responds with status 201 and stores an edit suggestion", async () => {
-    const { agent, user } = await createLoggedInAgent();
+  test("responds with status 400 when an edit has no changes", async () => {
+    const { agent } = await createLoggedInAgent();
 
     const response = await agent.put("/users/contribution/universities").send({
       entityType: "UNIVERSITY",
       targetId: 1,
+      data: {},
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "data", code: "custom" });
+  });
+
+  test("responds with status 400 for a blank optional city update", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 1,
+      data: { city: "   " },
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "data.city", code: "too_small" });
+  });
+
+  test("responds with status 400 when an ID is a numeric string", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: "1",
+      data: { name: "Updated Name" },
+    });
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
+
+    expect(response.status).toBe(400);
+    expectValidationIssue(error, { path: "targetId", code: "invalid_type" });
+  });
+
+  test("allows null to clear an optional faculty city", async () => {
+    const { agent, user } = await createLoggedInAgent();
+    const faculty = await createFaculty();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      targetId: faculty.id,
+      data: { city: null },
+    });
+
+    expect(response.status).toBe(201);
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
+    const pendingChange = await prisma.pendingChange.findUnique({
+      where: { id: data["id"] as string },
+    });
+
+    expect(pendingChange).toEqual(
+      expect.objectContaining({
+        userId: user.id,
+        entityType: "FACULTY",
+        targetId: faculty.id,
+        data: { city: null },
+      }),
+    );
+  });
+
+  test("responds with status 201 and stores an edit suggestion", async () => {
+    const { agent, user } = await createLoggedInAgent();
+    const university = await createUniversity();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: university.id,
       data: { name: "Updated Name" },
     });
 
@@ -177,10 +311,25 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
         userId: user.id,
         entityType: "UNIVERSITY",
         typeOfChange: "UPDATE",
-        targetId: 1,
+        targetId: university.id,
         data: { name: "Updated Name" },
       }),
     );
+  });
+
+  test("responds with status 404 when an edit target does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 999999,
+      data: { name: "Updated Name" },
+    });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Target entity not found." },
+    });
   });
 });
 
@@ -206,16 +355,16 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
     const error = getResponseObject(responseBody["error"]);
 
     expect(response.status).toBe(400);
-    expect(error["message"]).toBeTypeOf("string");
-    expect(error["message"]).toContain("Entity type is required");
+    expectValidationIssue(error, { path: "request", code: "invalid_type" });
   });
 
   test("responds with status 201 and stores a deletion suggestion", async () => {
     const { agent, user } = await createLoggedInAgent();
+    const university = await createUniversity();
 
     const response = await agent
       .delete("/users/contribution/universities")
-      .send({ entityType: "UNIVERSITY", targetId: 1 });
+      .send({ entityType: "UNIVERSITY", targetId: university.id });
 
     expect(response.status).toBe(201);
     expect(response.body).toEqual(
@@ -236,10 +385,23 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
         userId: user.id,
         entityType: "UNIVERSITY",
         typeOfChange: "DELETE",
-        targetId: 1,
+        targetId: university.id,
         data: {},
       }),
     );
+  });
+
+  test("responds with status 404 when a deletion target does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent
+      .delete("/users/contribution/universities")
+      .send({ entityType: "UNIVERSITY", targetId: 999999 });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Target entity not found." },
+    });
   });
 });
 

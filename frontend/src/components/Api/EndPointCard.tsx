@@ -59,14 +59,27 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
         </div>
       )}
 
-      <div>
-        <p className="text-sm font-semibold mb-1">
-          {t("endpoint.successResponse")}
-        </p>
-        <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
-          {endpoint.successExample}
-        </pre>
-      </div>
+      {endpoint.requestExample && (
+        <div>
+          <p className="text-sm font-semibold mb-1">
+            {t("endpoint.requestBody")}
+          </p>
+          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+            {endpoint.requestExample}
+          </pre>
+        </div>
+      )}
+
+      {endpoint.successExample && (
+        <div>
+          <p className="text-sm font-semibold mb-1">
+            {t("endpoint.successResponse")}
+          </p>
+          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+            {endpoint.successExample}
+          </pre>
+        </div>
+      )}
 
       {endpoint.errorExample && (
         <div>

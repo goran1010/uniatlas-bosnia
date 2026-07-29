@@ -5,40 +5,33 @@ import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 import { BACKEND_URL } from "../../utils/envConfig";
+import { readErrorMessage } from "../../schemas/api";
+import { universityListResponseSchema } from "../../schemas/university";
+import { searchTermSchema } from "../../schemas/domain";
 
-import type { University } from "./GetAllUniversities";
-
-interface StatusSuccessResponse {
-  message: string;
-  data: University[];
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
+import type { UniversityListItem } from "../../schemas/university";
 
 function SearchUniversities() {
   const { t, addNotification } = use(RootContext);
-  const [results, setResults] = useState<University[]>([]);
+  const [results, setResults] = useState<UniversityListItem[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
-    const term = inputRef.current?.value.trim();
-    if (!term || term.length < 2) {
+    const searchTerm = searchTermSchema.safeParse(
+      inputRef.current?.value ?? "",
+    );
+    if (!searchTerm.success) {
       addNotification({
         type: "error",
-        message: t("validation.search.minLength"),
+        message: t(
+          searchTerm.error.issues[0]?.message ?? "validation.search.minLength",
+        ),
       });
       return;
     }
+    const term = searchTerm.data;
     try {
       setLoading(true);
       const res = await fetch(
@@ -47,19 +40,25 @@ function SearchUniversities() {
       );
 
       if (res.ok) {
-        const result = await parseJson<StatusSuccessResponse>(res);
+        const result = universityListResponseSchema.parse(await res.json());
         setResults(result.data);
       } else if (res.status === 404) {
         setResults([]);
       } else {
-        const result = await parseJson<StatusErrorResponse>(res);
+        const serverMessage = readErrorMessage(await res.json());
+        if (serverMessage) {
+          console.warn("University search failed:", serverMessage);
+        }
         addNotification({
           type: "error",
-          message: result.error.message,
+          message: t("messages.universities.searchError"),
         });
       }
     } catch {
-      addNotification({ type: "error", message: "Search failed." });
+      addNotification({
+        type: "error",
+        message: t("messages.universities.searchError"),
+      });
     } finally {
       setLoading(false);
     }
@@ -76,6 +75,7 @@ function SearchUniversities() {
           type="search"
           placeholder={t("universitiesPage.searchPlaceholder")}
           minLength={2}
+          maxLength={100}
           className="flex-1"
           aria-label={t("universitiesPage.search")}
         />

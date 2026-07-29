@@ -179,6 +179,7 @@
     }
   },
   "endpoint": {
+    "requestBody": "Tijelo zahtjeva",
     "queryParameters": "Parametri upita",
     "name": "Naziv",
     "required": "Obavezno",
@@ -281,35 +282,54 @@
     },
     "password": {
       "minLength": "Lozinka mora imati najmanje 6 karaktera",
+      "required": "Lozinka je obavezna",
+      "allowedCharacters": "Lozinka može sadržavati samo slova, brojeve, crtice ili donje crte",
+      "requiresNumber": "Lozinka mora sadržavati najmanje jedan broj",
       "mustMatch": "Lozinka i potvrda lozinke moraju biti iste"
     },
     "search": {
-      "minLength": "Pretraga mora imati najmanje 2 karaktera"
+      "minLength": "Pretraga mora imati najmanje 2 karaktera",
+      "maxLength": "Pretraga ne smije imati više od 100 karaktera"
     }
   },
   "messages": {
     "csrfTokenFailed": "Neuspjelo preuzimanje CSRF tokena.",
     "pendingChanges": {
+      "loadSuccess": "Izmjene na čekanju su učitane.",
       "loadFailed": "Neuspjelo učitavanje izmjena na čekanju.",
       "fetchError": "Greška pri preuzimanju izmjena na čekanju."
+    },
+    "loginStatus": {
+      "success": "Uspješno ste prijavljeni.",
+      "error": "Došlo je do greške tokom prijave."
     },
     "auth": {
       "loginFailed": "Prijava nije uspjela.",
       "loginError": "Došlo je do greške tokom prijave.",
+      "loginSuccess": "Uspješno ste prijavljeni.",
       "registrationFailed": "Registracija nije uspjela.",
       "registrationError": "Došlo je do greške tokom registracije.",
+      "registrationSuccess": "Registracija je uspješna. Provjerite email.",
       "logoutFailed": "Odjava nije uspjela.",
-      "logoutError": "Došlo je do greške tokom odjave."
+      "logoutError": "Došlo je do greške tokom odjave.",
+      "logoutSuccess": "Uspješno ste odjavljeni."
     },
     "admin": {
+      "approveSuccess": "Izmjena na čekanju je odobrena.",
       "approveFailed": "Neuspjelo odobravanje izmjene na čekanju.",
       "approveError": "Greška pri odobravanju izmjene na čekanju za {{email}}.",
+      "declineSuccess": "Zahtjev je odbijen.",
       "declineFailed": "Neuspjelo odbijanje zahtjeva.",
       "declineError": "Greška pri odbijanju zahtjeva korisnika {{email}}."
     },
     "universities": {
+      "loadError": "Neuspjelo učitavanje univerziteta.",
+      "searchError": "Pretraga nije uspjela.",
+      "detailsError": "Neuspjelo učitavanje detalja univerziteta.",
+      "addSuccess": "Prijedlog je poslan.",
       "addFailed": "Slanje prijedloga nije uspjelo.",
       "addError": "Greška pri slanju prijedloga.",
+      "deleteSuccess": "Izmjena na čekanju je odbačena.",
       "deleteFailed": "Brisanje prijedloga nije uspjelo.",
       "deleteError": "Greška pri brisanju prijedloga."
     }

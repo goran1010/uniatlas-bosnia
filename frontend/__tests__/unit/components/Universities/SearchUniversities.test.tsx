@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { SearchUniversities } from "../../../../src/components/Universities/SearchUniversities";
@@ -19,6 +19,7 @@ function Wrapper() {
 describe("SearchUniversities", () => {
   const mockResponse = new Response(
     JSON.stringify({
+      message: "Universities retrieved successfully.",
       data: [
         {
           id: 5,
@@ -27,7 +28,7 @@ describe("SearchUniversities", () => {
           city: "Mostar",
           entity: "FBIH",
           ownership: "PRIVATNA",
-          foundedYear: 1977,
+          foundedYear: "1977",
           website: "https://sum.ba",
         },
       ],
@@ -61,6 +62,21 @@ describe("SearchUniversities", () => {
 
     expect(fetch).toHaveBeenCalledTimes(0);
     expect(validationMessage).toBeInTheDocument();
+  });
+
+  test("shows validation message and skips fetch for an over-limit search term", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole("searchbox", { name: /Search/i });
+    const searchButton = screen.getByRole("button", { name: /^Search$/i });
+    fireEvent.change(searchInput, { target: { value: "a".repeat(101) } });
+    await user.click(searchButton);
+
+    expect(
+      await screen.findByText(/Search must not exceed 100 characters/i),
+    ).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   test("renders search results when API returns matches", async () => {
@@ -106,7 +122,7 @@ describe("SearchUniversities", () => {
     expect(noResultsMessage).toBeInTheDocument();
   });
 
-  test("shows API error message on non-404 non-ok response", async () => {
+  test("shows translated error on non-404 non-ok response", async () => {
     const mockErrorResponse = new Response(
       JSON.stringify({ error: { message: "Search exploded." } }),
       {
@@ -125,7 +141,7 @@ describe("SearchUniversities", () => {
     await user.type(searchInput, "sarajevo");
     await user.click(searchButton);
 
-    const apiErrorMessage = await screen.findByText(/Search exploded\./i);
+    const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();
@@ -146,6 +162,31 @@ describe("SearchUniversities", () => {
     const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows fallback message when a successful response has an invalid payload", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({ message: "Universities retrieved successfully." }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "mostar",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
+
     expect(fallbackMessage).toBeInTheDocument();
   });
 });

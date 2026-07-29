@@ -48,7 +48,82 @@ afterEach(() => {
 });
 
 describe("useGetPendingChangesAdmin", () => {
-  test("uses the API error message when pending changes cannot be fetched", async () => {
+  test("stores validated pending changes from a successful response", async () => {
+    const addNotification = vi.fn();
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "Pending changes retrieved successfully.",
+          data: [
+            {
+              id: "pending-change-1",
+              entityType: "UNIVERSITY",
+              typeOfChange: "CREATE",
+              targetId: null,
+              parentId: null,
+              data: {
+                name: "University of Sarajevo",
+                city: "Sarajevo",
+                entity: "FBIH",
+                ownership: "JAVNA",
+              },
+              userId: "user-1",
+              user: { email: "user@example.com", role: "USER" },
+              createdAt: "2026-07-25T10:00:00.000Z",
+            },
+          ],
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(<Wrapper addNotification={addNotification} setLoading={vi.fn()} />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("pending-count")).toHaveTextContent("1");
+    });
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "success",
+      message: "messages.pendingChanges.loadSuccess",
+    });
+  });
+
+  test("rejects legacy pending data that contains account fields", async () => {
+    const addNotification = vi.fn();
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "Pending changes retrieved successfully.",
+          data: [
+            {
+              id: "pending-change-1",
+              entityType: "UNIVERSITY",
+              typeOfChange: "CREATE",
+              targetId: null,
+              parentId: null,
+              data: { email: "user@example.com", role: "USER" },
+              userId: "user-1",
+              user: { email: "user@example.com", role: "USER" },
+              createdAt: "2026-07-25T10:00:00.000Z",
+            },
+          ],
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(<Wrapper addNotification={addNotification} setLoading={vi.fn()} />);
+
+    await waitFor(() => {
+      expect(addNotification).toHaveBeenCalledWith({
+        type: "error",
+        message: "messages.pendingChanges.fetchError",
+      });
+    });
+    expect(screen.getByTestId("pending-count")).toHaveTextContent("0");
+  });
+
+  test("uses a translated error message when pending changes cannot be fetched", async () => {
     const addNotification = vi.fn();
     const setLoading = vi.fn();
     mockedGuardedFetch.mockResolvedValue(
@@ -64,7 +139,7 @@ describe("useGetPendingChangesAdmin", () => {
     await waitFor(() => {
       expect(addNotification).toHaveBeenCalledWith({
         type: "error",
-        message: "Access denied",
+        message: "messages.pendingChanges.fetchError",
       });
     });
 

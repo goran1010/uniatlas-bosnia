@@ -50,6 +50,7 @@ Public consumers can browse and query that data through unauthenticated endpoint
 - Per-user pending-change listing and deletion
 - Admin moderation endpoints for approving or declining pending changes
 - CSRF protection for protected auth and user routes
+- Zod request validation and frontend API-response validation
 - Netlify proxy support for first-party session cookies in production
 
 ## Getting started
@@ -295,10 +296,10 @@ npm run format:check:all
 - Express
 - Prisma
 - PostgreSQL
+- Zod
 - PassportJS
 - express-session
 - csrf-sync
-- express-validator
 - Helmet
 - Pino
 - Resend

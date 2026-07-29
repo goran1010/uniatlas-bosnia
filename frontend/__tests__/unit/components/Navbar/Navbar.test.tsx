@@ -18,18 +18,28 @@ function createUser(role: Role = "ADMIN"): UserData {
 
 beforeEach(() => {
   localStorage.setItem("language", "en");
-  const mockResponse = new Response(
-    JSON.stringify({
-      data: [{ id: 1, code: "mocked code" }],
-      message: "mocked message",
-    }),
-    {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    },
-  );
+  vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+    const requestUrl = getRequestUrl(url);
 
-  vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
+    if (requestUrl.endsWith("/api")) {
+      return Promise.resolve(
+        new Response(JSON.stringify({ message: "Server is live." }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+    }
+
+    return Promise.resolve(
+      new Response(
+        JSON.stringify({ message: "User not authenticated.", data: null }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+  });
 });
 
 afterEach(() => {
@@ -98,6 +108,32 @@ describe("Render Navbar on root route", () => {
   });
 
   test("user logged in", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+      const requestUrl = getRequestUrl(url);
+
+      if (requestUrl.endsWith("/api")) {
+        return Promise.resolve(
+          new Response(JSON.stringify({ message: "Server is live." }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+      }
+
+      return Promise.resolve(
+        new Response(
+          JSON.stringify({
+            message: "User retrieved successfully.",
+            data: { email: "test@example.com", role: "USER" },
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        ),
+      );
+    });
+
     render(
       <Wrapper initialUser={{ email: "test@example.com", role: "USER" }} />,
     );
@@ -134,6 +170,18 @@ function NavbarWrapper({
 
 type Role = "ADMIN" | "USER";
 const roles: Role[] = ["ADMIN", "USER"];
+
+function getRequestUrl(url: RequestInfo | URL) {
+  if (typeof url === "string") {
+    return url;
+  }
+
+  if (url instanceof URL) {
+    return url.toString();
+  }
+
+  return url.url;
+}
 
 describe("render Navbar mobile menu", () => {
   test.each(roles)("opens mobile menu for %s role", async (role) => {

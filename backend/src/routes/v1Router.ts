@@ -1,26 +1,19 @@
 import { Router } from "express";
 const v1Router = Router();
 
-import { v1Controller } from "../controllers/v1Controller.js";
-import { universityValidation } from "../validation/universityValidation.js";
+import * as universityController from "../controllers/v1Controller.js";
 
-v1Router.get("/", v1Controller.status);
+v1Router.get("/", universityController.status);
 
-v1Router.get("/universities", v1Controller.getUniversities);
-v1Router.get(
-  "/universities/search",
-  universityValidation.searchUniversities,
-  v1Controller.searchUniversities,
-);
-v1Router.get(
-  "/universities/:id",
-  universityValidation.getUniversityById,
-  v1Controller.getUniversityById,
-);
+v1Router.get("/universities", universityController.getUniversities);
+
+v1Router.get("/universities/search", universityController.searchUniversities);
+
+v1Router.get("/universities/:id", universityController.getUniversityById);
+
 v1Router.get(
   "/study-programs/search",
-  universityValidation.searchStudyPrograms,
-  v1Controller.searchStudyPrograms,
+  universityController.searchStudyPrograms,
 );
 
 export { v1Router };

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { SearchStudyPrograms } from "../../../../src/components/Universities/SearchStudyPrograms";
@@ -18,10 +18,16 @@ function Wrapper() {
 
 describe("SearchStudyPrograms", () => {
   beforeEach(() => {
-    const mockResponse = new Response(JSON.stringify({ data: [] }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    const mockResponse = new Response(
+      JSON.stringify({
+        message: "Study programs retrieved successfully.",
+        data: [],
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockResponse);
   });
 
@@ -49,18 +55,40 @@ describe("SearchStudyPrograms", () => {
     expect(validationMessage).toBeInTheDocument();
   });
 
+  test("shows validation message and skips fetch for an over-limit search term", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole("searchbox", {
+      name: /Find Study Programs/i,
+    });
+    const searchButton = screen.getByRole("button", { name: /^Search$/i });
+    fireEvent.change(searchInput, { target: { value: "a".repeat(101) } });
+    await user.click(searchButton);
+
+    expect(
+      await screen.findByText(/Search must not exceed 100 characters/i),
+    ).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
   test("renders study program results when API returns matches", async () => {
     const mockResponse = new Response(
       JSON.stringify({
+        message: "Study programs retrieved successfully.",
         data: [
           {
             id: 7,
             name: "Computer Science",
+            facultyId: 3,
             cycle: "FIRST",
             ects: 180,
             faculty: {
+              id: 3,
               name: "Faculty of Electrical Engineering",
+              universityId: 1,
               university: {
+                id: 1,
                 name: "University of Sarajevo",
                 acronym: "UNSA",
               },
@@ -146,7 +174,7 @@ describe("SearchStudyPrograms", () => {
     await user.type(searchInput, "program");
     await user.click(searchButton);
 
-    const apiErrorMessage = await screen.findByText(/Study search exploded\./i);
+    const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();
@@ -170,5 +198,31 @@ describe("SearchStudyPrograms", () => {
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows an error when a successful response has an invalid result", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "Study programs retrieved successfully.",
+          data: [{ id: 7, name: "Computer Science" }],
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Find Study Programs/i }),
+      "computer",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    expect(await screen.findByText(/^Search failed\.$/i)).toBeInTheDocument();
   });
 });

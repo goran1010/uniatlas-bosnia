@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../../utils/envConfig";
+import { csrfTokenResponseSchema } from "../../schemas/auth";
 import { guardedFetch } from "../../utils/guardedFetch";
 
 import type { ServerStatus } from "../../utils/serverStatus";
@@ -6,15 +7,6 @@ import type { AddNotification } from "../../types/notification";
 import type { TFunction } from "../../types/i18n";
 
 let cachedToken: string | null = null;
-
-interface StatusSuccessResponse {
-  message: string;
-  data: string;
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
 
 async function getCsrfToken({
   serverStatus,
@@ -42,15 +34,16 @@ async function getCsrfToken({
         t,
       },
     );
-    const { data: csrfToken } =
-      await parseJson<StatusSuccessResponse>(csrfResponse);
+    const { data: csrfToken } = csrfTokenResponseSchema.parse(
+      await csrfResponse.json(),
+    );
     cachedToken = csrfToken;
 
     return csrfToken;
   } catch (error) {
     addNotification({
       type: "error",
-      message: "Error fetching CSRF token",
+      message: t("messages.csrfTokenFailed"),
     });
     console.error("Error fetching CSRF token:", error);
     throw new Error("Failed to fetch CSRF token", { cause: error });

@@ -2,31 +2,11 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { readErrorMessage } from "../../../schemas/api";
+import { adminPendingChangesResponseSchema } from "../../../schemas/pendingChange";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
-
-interface StatusSuccessResponse {
-  message: string;
-  data: PendingChange[];
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
-  try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
-  } catch {
-    return null;
-  }
-}
 
 function useGetPendingChangesAdmin(
   setLoading: (loading: boolean) => void,
@@ -58,20 +38,23 @@ function useGetPendingChangesAdmin(
         );
 
         if (response.ok) {
-          const result = await parseJson<StatusSuccessResponse>(response);
+          const result = adminPendingChangesResponseSchema.parse(
+            await response.json(),
+          );
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: result.message,
+            message: t("messages.pendingChanges.loadSuccess"),
           });
           return;
         }
-        const message =
-          (await readErrorMessage(response)) ??
-          t("messages.pendingChanges.fetchError");
+        const serverMessage = readErrorMessage(await response.json());
+        if (serverMessage) {
+          console.warn("Failed to fetch pending changes:", serverMessage);
+        }
         addNotification({
           type: "error",
-          message,
+          message: t("messages.pendingChanges.fetchError"),
         });
       } catch (error) {
         if (error instanceof Error && error.message === "Server is not ready") {

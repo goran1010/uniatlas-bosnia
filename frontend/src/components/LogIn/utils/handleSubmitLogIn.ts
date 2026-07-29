@@ -1,4 +1,6 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
+import { readErrorMessage } from "../../../schemas/api";
+import { loginResponseSchema } from "../../../schemas/auth";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import type { SubmitEvent } from "react";
@@ -22,23 +24,9 @@ type HandleLogInSubmit = (
   serverStatus: ServerStatus,
 ) => Promise<void>;
 
-interface StatusSuccessResponse {
-  message: string;
-  data: UserData;
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-async function readErrorMessage(response: Response) {
+async function getErrorMessage(response: Response) {
   try {
-    const result = (await response.json()) as {
-      error?: { message?: string };
-      message?: string;
-    };
-
-    return result.error?.message ?? result.message ?? null;
+    return readErrorMessage(await response.json());
   } catch {
     return null;
   }
@@ -55,8 +43,9 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
   serverStatus,
 ) {
   try {
-    setLoading(true);
     e.preventDefault();
+
+    setLoading(true);
 
     const csrfToken = await getCsrfToken({
       serverStatus,
@@ -91,18 +80,20 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     );
 
     if (!response.ok) {
-      const message =
-        (await readErrorMessage(response)) ?? t("messages.auth.loginError");
+      const serverMessage = await getErrorMessage(response);
+      if (serverMessage) {
+        console.warn("Login request failed:", serverMessage);
+      }
       addNotification({
         type: "error",
-        message,
+        message: t("messages.auth.loginFailed"),
       });
       return;
     }
-    const result = await parseJson<StatusSuccessResponse>(response);
+    const result = loginResponseSchema.parse(await response.json());
     addNotification({
       type: "success",
-      message: result.message,
+      message: t("messages.auth.loginSuccess"),
     });
     setUserData(result.data);
 

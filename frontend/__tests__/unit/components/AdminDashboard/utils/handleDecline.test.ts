@@ -21,8 +21,8 @@ const change: PendingChange = {
   entityType: "FACULTY",
   typeOfChange: "UPDATE",
   targetId: 1,
-  parentId: 1,
-  data: { email: "", role: "USER" },
+  parentId: null,
+  data: { name: "Updated faculty" },
   userId: "user-1",
   user: { email: "johndoe@examplemail.com", role: "USER" },
   createdAt: new Date(),
@@ -88,7 +88,7 @@ describe("handleDecline", () => {
     expect(setLoading).toHaveBeenLastCalledWith(false);
     expect(addNotification).toHaveBeenCalledWith({
       type: "success",
-      message: "Pending change declined successfully.",
+      message: "messages.admin.declineSuccess",
     });
 
     expect(updatePendingChanges?.([change, { ...change, id: "2" }])).toEqual([
@@ -145,8 +145,39 @@ describe("handleDecline", () => {
     expect(setPendingChanges).not.toHaveBeenCalled();
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.declineError johndoe@examplemail.com",
+      message: "messages.admin.declineError",
     });
+  });
+
+  test("does not remove a change when a successful response is malformed", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+
+    const { handleDecline } =
+      await import("../../../../../src/components/AdminDashboard/utils/handleDecline");
+    await handleDecline(
+      change,
+      setPendingChanges,
+      addNotification,
+      vi.fn(),
+      t,
+      "live",
+    );
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.admin.declineError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
   });
 
   test("shows the fallback decline error when the request throws", async () => {
@@ -165,7 +196,7 @@ describe("handleDecline", () => {
 
     expect(addNotification).toHaveBeenCalledWith({
       type: "error",
-      message: "messages.admin.declineError johndoe@examplemail.com",
+      message: "messages.admin.declineError",
     });
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       `Error declining ${change.user?.email ?? ""}'s request:`,

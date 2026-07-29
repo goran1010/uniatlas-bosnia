@@ -25,14 +25,16 @@ function StandardMenu({ setIsMenuOpen, userData }: StandardMenuProps) {
             {t("nav.home")}
           </Link>
         </li>
-        <li>
-          <Link className={menuLinkClass} to="/api-docs">
-            {t("nav.apiDocs")}
-          </Link>
-        </li>
+
         <li>
           <Link className={menuLinkClass} to="/universities">
             {t("nav.universities")}
+          </Link>
+        </li>
+
+        <li>
+          <Link className={menuLinkClass} to="/api-docs">
+            {t("nav.apiDocs")}
           </Link>
         </li>
 

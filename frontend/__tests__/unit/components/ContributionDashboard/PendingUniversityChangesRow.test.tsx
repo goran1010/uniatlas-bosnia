@@ -9,12 +9,9 @@ const change: PendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "UNIVERSITY",
   typeOfChange: "DELETE",
-  targetId: null,
+  targetId: 1,
   parentId: null,
-  data: {
-    email: "",
-    role: "ADMIN",
-  },
+  data: {},
   userId: "",
   user: {
     email: "",
@@ -52,5 +49,30 @@ describe("PendingUniversityChangesRow", () => {
     expect(screen.getByText(/University/i)).toBeInTheDocument();
     expect(badge).toHaveClass("bg-red-100");
     expect(screen.getByRole("button", { name: /Delete/i })).toBeInTheDocument();
+  });
+
+  test("renders the contribution name when the change contains one", () => {
+    render(
+      <Wrapper>
+        <PendingUniversityChangesRow
+          change={{
+            ...change,
+            entityType: "UNIVERSITY",
+            typeOfChange: "CREATE",
+            targetId: null,
+            data: {
+              name: "University of Sarajevo",
+              city: "Sarajevo",
+              entity: "FBIH",
+              ownership: "JAVNA",
+            },
+          }}
+          index={0}
+          setPendingChanges={vi.fn()}
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText("University of Sarajevo")).toBeInTheDocument();
   });
 });

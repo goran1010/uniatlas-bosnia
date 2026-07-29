@@ -3,17 +3,25 @@ import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { BACKEND_URL } from "../../utils/envConfig";
+import { readErrorMessage } from "../../schemas/api";
+import { universityDetailResponseSchema } from "../../schemas/university";
 
 import type { TFunction } from "../../types/i18n";
-
 import type {
-  University,
-  Faculty,
-  StudyProgram,
-  Subject,
-} from "./GetAllUniversities";
+  UniversityDetail,
+  UniversityDetailFaculty,
+  UniversityDetailStudyProgram,
+  UniversityDetailSubject,
+  UniversityListItem,
+} from "../../schemas/university";
 
-function SubjectRow({ subject, t }: { subject: Subject; t: TFunction }) {
+function SubjectRow({
+  subject,
+  t,
+}: {
+  subject: UniversityDetailSubject;
+  t: TFunction;
+}) {
   return (
     <li className="flex flex-wrap gap-2 text-sm py-1 border-b border-gray-100 dark:border-gray-700 last:border-0">
       <span className="font-medium flex-1">{subject.name}</span>
@@ -48,7 +56,7 @@ function StudyProgramRow({
   program,
   t,
 }: {
-  program: StudyProgram;
+  program: UniversityDetailStudyProgram;
   t: TFunction;
 }) {
   const [open, setOpen] = useState(false);
@@ -85,7 +93,13 @@ function StudyProgramRow({
   );
 }
 
-function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
+function FacultyRow({
+  faculty,
+  t,
+}: {
+  faculty: UniversityDetailFaculty;
+  t: TFunction;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <li className="text-sm">
@@ -118,25 +132,10 @@ function FacultyRow({ faculty, t }: { faculty: Faculty; t: TFunction }) {
   );
 }
 
-interface StatusSuccessResponse {
-  message: string;
-  data: University;
-}
-
-interface StatusErrorResponse {
-  error: {
-    message: string;
-  };
-}
-
-async function parseJson<T>(response: Response): Promise<T> {
-  return response.json() as Promise<T>;
-}
-
-function UniversityCard({ university }: { university: University }) {
+function UniversityCard({ university }: { university: UniversityListItem }) {
   const { t, addNotification } = use(RootContext);
   const [expanded, setExpanded] = useState(false);
-  const [detailData, setDetailData] = useState<University>();
+  const [detailData, setDetailData] = useState<UniversityDetail>();
   const [loadingDetail, setLoadingDetail] = useState(false);
 
   async function handleExpand() {
@@ -159,20 +158,23 @@ function UniversityCard({ university }: { university: University }) {
       );
 
       if (res.ok) {
-        const result = await parseJson<StatusSuccessResponse>(res);
+        const result = universityDetailResponseSchema.parse(await res.json());
         setDetailData(result.data);
         setExpanded(true);
       } else {
-        const result = await parseJson<StatusErrorResponse>(res);
+        const serverMessage = readErrorMessage(await res.json());
+        if (serverMessage) {
+          console.warn("Failed to load university details:", serverMessage);
+        }
         addNotification({
           type: "error",
-          message: result.error.message,
+          message: t("messages.universities.detailsError"),
         });
       }
     } catch {
       addNotification({
         type: "error",
-        message: "Failed to load university details.",
+        message: t("messages.universities.detailsError"),
       });
     } finally {
       setLoadingDetail(false);

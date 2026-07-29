@@ -185,6 +185,7 @@
     }
   },
   "endpoint": {
+    "requestBody": "Request body",
     "queryParameters": "Query parameters",
     "name": "Name",
     "required": "Required",
@@ -287,35 +288,54 @@
     },
     "password": {
       "minLength": "Password must have at least 6 characters",
+      "required": "Password is required",
+      "allowedCharacters": "Password can only contain letters, numbers, dashes, or underscores",
+      "requiresNumber": "Password must contain at least one number",
       "mustMatch": "Password and confirm password fields must match"
     },
     "search": {
-      "minLength": "Search must have at least 2 characters"
+      "minLength": "Search must have at least 2 characters",
+      "maxLength": "Search must not exceed 100 characters"
     }
   },
   "messages": {
     "csrfTokenFailed": "Failed to retrieve CSRF token.",
     "pendingChanges": {
+      "loadSuccess": "Pending changes loaded.",
       "loadFailed": "Failed to load pending changes.",
       "fetchError": "Error fetching pending changes."
+    },
+    "loginStatus": {
+      "success": "Successfully logged in.",
+      "error": "An error occurred while logging in."
     },
     "auth": {
       "loginFailed": "Login failed.",
       "loginError": "An error occurred while logging in.",
+      "loginSuccess": "Successfully logged in.",
       "registrationFailed": "Registration failed.",
       "registrationError": "An error occurred during registration.",
+      "registrationSuccess": "Registration successful! Check your email.",
       "logoutFailed": "Logout failed.",
-      "logoutError": "An error occurred while logging out."
+      "logoutError": "An error occurred while logging out.",
+      "logoutSuccess": "Successfully logged out."
     },
     "admin": {
+      "approveSuccess": "Pending change approved.",
       "approveFailed": "Failed to approve pending change.",
       "approveError": "Error approving pending change.",
+      "declineSuccess": "Pending change declined.",
       "declineFailed": "Failed to decline request.",
       "declineError": "Error declining request."
     },
     "universities": {
+      "loadError": "Failed to load universities.",
+      "searchError": "Search failed.",
+      "detailsError": "Failed to load university details.",
+      "addSuccess": "Suggestion submitted.",
       "addFailed": "Failed to submit suggestion.",
       "addError": "Error submitting suggestion.",
+      "deleteSuccess": "Pending change discarded.",
       "deleteFailed": "Failed to delete pending change.",
       "deleteError": "Error deleting pending change."
     }

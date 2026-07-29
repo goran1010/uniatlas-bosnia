@@ -1,185 +1,216 @@
-import crypto from "crypto";
-import { emailConfirmHTML } from "../utils/emailConfirmHTML.js";
-import { passport } from "../config/passport.js";
-import { sendConfirmationEmail } from "../email/confirmationEmail.js";
+import crypto from "node:crypto";
 import bcrypt from "bcryptjs";
-import { matchedData } from "express-validator";
-import { sendError, sendSuccess } from "../utils/response.js";
+
+import { passport } from "../config/passport.js";
 import { env } from "../config/env.js";
 import { prisma } from "../db/prisma.js";
+import { sendConfirmationEmail } from "../email/confirmationEmail.js";
+import { emailConfirmHTML } from "../utils/emailConfirmHTML.js";
+import { sendError, sendSuccess } from "../utils/response.js";
+import * as authValidation from "../validation/authValidation.js";
 
-import type { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 
-type AuthenticateCallback = (
-  err: unknown,
-  user: Express.User | false | null,
-  info?: { message?: string },
-) => void;
-
-interface AuthenticateOptions {
-  scope?: string[];
-}
-
-type AuthenticateHandler = (
+type PassportMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => void;
 
-type Authenticate = (
-  strategy: string,
-  callbackOrOptions?: AuthenticateCallback | AuthenticateOptions,
-) => AuthenticateHandler;
-
-interface PassportAuthenticator {
-  authenticate: Authenticate;
+function isPassportMiddleware(value: unknown): value is PassportMiddleware {
+  return typeof value === "function";
 }
 
-const typedPassport = passport as unknown as PassportAuthenticator;
+function getPassportMiddleware(value: unknown): PassportMiddleware {
+  if (!isPassportMiddleware(value)) {
+    throw new TypeError("Passport authenticate() did not return middleware.");
+  }
 
-class AuthController {
-  signup = async (req: Request, res: Response) => {
-    try {
-      const { email, password } = matchedData<{
-        email: string;
-        password: string;
-      }>(req);
+  return value;
+}
 
-      const existingUser = await prisma.user.findUnique({ where: { email } });
-      if (existingUser) {
-        sendError(res, {
-          status: 400,
-          message: "Signup failed: check your input and try again.",
-        });
-        return;
-      }
+function getAuthenticationMessage(info: unknown): string {
+  if (typeof info === "string") {
+    return info;
+  }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+  if (
+    typeof info === "object" &&
+    info !== null &&
+    "message" in info &&
+    typeof info.message === "string"
+  ) {
+    return info.message;
+  }
 
-      const confirmationToken = crypto.randomBytes(32).toString("hex");
-      const confirmationLink = `${env.BACKEND_URL}/auth/confirm/${confirmationToken}`;
+  return "Invalid email or password";
+}
 
-      const existingPending = await prisma.pendingUser.findMany({
-        where: { email },
-      });
+async function signup(req: Request, res: Response) {
+  const { email, password } = authValidation.signup(req.body);
 
-      if (existingPending.length > 0) {
-        await prisma.pendingUser.updateMany({
-          where: { email },
-          data: {
-            password: hashedPassword,
-            token: confirmationToken,
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          },
-        });
-      } else {
-        await prisma.pendingUser.create({
-          data: {
-            email,
-            password: hashedPassword,
-            token: confirmationToken,
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          },
-        });
-      }
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-      const result = await sendConfirmationEmail(email, confirmationLink);
-
-      if (result.success) {
-        sendSuccess(res, {
-          status: 201,
-          data: { email },
-          message: "Registration successful! Check your email.",
-        });
-        return;
-      }
-      await prisma.pendingUser.deleteMany({ where: { email } });
-      sendError(res, {
-        status: 500,
-        message:
-          "Signup failed: confirmation email was not sent. Check your email address and try again.",
-      });
-    } catch (err) {
-      console.error(err);
-
+    if (existingUser) {
       sendError(res, {
         status: 400,
         message: "Signup failed: check your input and try again.",
       });
+      return;
     }
-  };
 
-  confirmEmail = async (req: Request, res: Response) => {
-    try {
-      const { token } = matchedData<{ token: string }>(req);
-      if (!token || typeof token !== "string") {
-        sendError(res, {
-          status: 400,
-          message:
-            "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
-        });
-        return;
-      }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-      const pendingUsers = await prisma.pendingUser.findMany({
-        where: { token },
-      });
-      const pendingUser = pendingUsers[0];
+    const confirmationToken = crypto.randomBytes(32).toString("hex");
 
-      if (!pendingUser) {
-        sendError(res, {
-          status: 400,
-          message:
-            "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
-        });
-        return;
-      }
+    const confirmationLink = `${env.BACKEND_URL}/auth/confirm/${confirmationToken}`;
 
-      if (pendingUser.expiresAt < new Date()) {
-        await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
+    const existingPending = await prisma.pendingUser.findMany({
+      where: {
+        email,
+      },
+    });
 
-        sendError(res, {
-          status: 400,
-          message: "Token expired. Please sign up again.",
-        });
-        return;
-      }
-
-      await prisma.user.create({
+    if (existingPending.length > 0) {
+      await prisma.pendingUser.updateMany({
+        where: {
+          email,
+        },
         data: {
-          email: pendingUser.email,
-          password: pendingUser.password,
+          password: hashedPassword,
+          token: confirmationToken,
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
         },
       });
+    } else {
+      await prisma.pendingUser.create({
+        data: {
+          email,
+          password: hashedPassword,
+          token: confirmationToken,
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        },
+      });
+    }
 
-      await prisma.pendingUser.delete({ where: { id: pendingUser.id } });
+    const result = await sendConfirmationEmail(email, confirmationLink);
 
-      res.send(emailConfirmHTML());
-    } catch (err) {
-      console.error(err);
+    if (result.success) {
+      sendSuccess(res, {
+        status: 201,
+        data: {
+          email,
+        },
+        message: "Registration successful! Check your email.",
+      });
+      return;
+    }
 
+    await prisma.pendingUser.deleteMany({
+      where: {
+        email,
+      },
+    });
+
+    sendError(res, {
+      status: 500,
+      message:
+        "Signup failed: confirmation email was not sent. Check your email address and try again.",
+    });
+  } catch (error: unknown) {
+    console.error(error);
+
+    sendError(res, {
+      status: 400,
+      message: "Signup failed: check your input and try again.",
+    });
+  }
+}
+
+async function confirmEmail(req: Request, res: Response) {
+  const { token } = authValidation.confirmToken(req.params);
+
+  try {
+    const pendingUsers = await prisma.pendingUser.findMany({
+      where: {
+        token,
+      },
+    });
+
+    const pendingUser = pendingUsers[0];
+
+    if (!pendingUser) {
       sendError(res, {
-        status: 500,
+        status: 400,
         message:
           "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
       });
+      return;
     }
-  };
 
-  login = (req: Request, res: Response, next: NextFunction) => {
-    typedPassport.authenticate(
+    if (pendingUser.expiresAt < new Date()) {
+      await prisma.pendingUser.delete({
+        where: {
+          id: pendingUser.id,
+        },
+      });
+
+      sendError(res, {
+        status: 400,
+        message: "Token expired. Please sign up again.",
+      });
+      return;
+    }
+
+    await prisma.user.create({
+      data: {
+        email: pendingUser.email,
+        password: pendingUser.password,
+      },
+    });
+
+    await prisma.pendingUser.delete({
+      where: {
+        id: pendingUser.id,
+      },
+    });
+
+    res.send(emailConfirmHTML());
+  } catch (error: unknown) {
+    console.error(error);
+
+    sendError(res, {
+      status: 500,
+      message:
+        "Email confirmation failed: token is invalid or expired. Request a new confirmation email.",
+    });
+  }
+}
+
+function login(req: Request, res: Response, next: NextFunction) {
+  authValidation.login(req.body);
+
+  getPassportMiddleware(
+    passport.authenticate(
       "local",
       (
-        err: unknown,
-        user: Express.User | false | null,
-        info: { message?: string } | undefined,
+        error: unknown,
+        user: Express.User | false | null | undefined,
+        info: unknown,
       ) => {
-        if (err) {
-          next(err);
+        if (error) {
+          next(error);
           return;
         }
+
         if (!user) {
-          const loginReason = info?.message ?? "Invalid email or password";
+          const loginReason = getAuthenticationMessage(info);
+
           sendError(res, {
             status: 401,
             message: `Login failed: ${loginReason}. Check your credentials and try again.`,
@@ -187,7 +218,12 @@ class AuthController {
           return;
         }
 
-        const continueWithLogin = () => {
+        req.session.regenerate((regenerateError) => {
+          if (regenerateError) {
+            next(regenerateError);
+            return;
+          }
+
           req.logIn(user, (loginError) => {
             if (loginError) {
               next(loginError);
@@ -198,71 +234,61 @@ class AuthController {
               message: "Logged in successfully",
               data: user,
             });
-            return;
           });
-        };
-
-        req.session.regenerate((regenerateError) => {
-          if (regenerateError) {
-            next(regenerateError);
-            return;
-          }
-
-          continueWithLogin();
         });
       },
-    )(req, res, next);
-  };
+    ),
+  )(req, res, next);
+}
 
-  githubLogin = (req: Request, res: Response, next: NextFunction) => {
-    typedPassport.authenticate("github", { scope: ["user:email"] })(
-      req,
-      res,
-      next,
-    );
-  };
+function githubLogin(req: Request, res: Response, next: NextFunction) {
+  getPassportMiddleware(
+    passport.authenticate("github", {
+      scope: ["user:email"],
+    }),
+  )(req, res, next);
+}
 
-  githubCallback = (req: Request, res: Response, next: NextFunction) => {
-    typedPassport.authenticate(
+function githubCallback(req: Request, res: Response, next: NextFunction) {
+  getPassportMiddleware(
+    passport.authenticate(
       "github",
-      (err: unknown, user: Express.User | false | null) => {
-        if (err) {
-          next(err);
+      (error: unknown, user: Express.User | false | null | undefined) => {
+        if (error) {
+          next(error);
           return;
         }
+
         if (!user) {
           res.redirect(`${env.FRONTEND_URL}/login?error=github`);
           return;
         }
 
-        const continueWithLogin = () => {
-          req.logIn(user, (loginError) => {
-            if (loginError) {
-              next(loginError);
-              return;
-            }
-            req.session.save((saveError) => {
-              if (saveError) {
-                next(saveError);
-                return;
-              }
-              res.redirect(env.FRONTEND_URL);
-            });
-          });
-        };
-
         req.session.regenerate((regenerateError) => {
           if (regenerateError) {
             next(regenerateError);
             return;
           }
-          continueWithLogin();
+
+          req.logIn(user, (loginError) => {
+            if (loginError) {
+              next(loginError);
+              return;
+            }
+
+            req.session.save((saveError) => {
+              if (saveError) {
+                next(saveError);
+                return;
+              }
+
+              res.redirect(env.FRONTEND_URL);
+            });
+          });
         });
       },
-    )(req, res, next);
-  };
+    ),
+  )(req, res, next);
 }
 
-const authController = new AuthController();
-
-export { authController };
+export { signup, confirmEmail, login, githubLogin, githubCallback };

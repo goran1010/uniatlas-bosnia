@@ -15,8 +15,8 @@ const mockPendingChanges: PendingChange[] = [
     entityType: "FACULTY",
     typeOfChange: "UPDATE",
     targetId: 1,
-    parentId: 1,
-    data: { email: "Faculty of Engineering", role: "USER" },
+    parentId: null,
+    data: { name: "Faculty of Engineering" },
     createdAt: new Date(),
     user: { email: "johndoe@examplemail.com", role: "USER" },
     userId: "058d1adc-58e4-4f31-8021-64e37e7d0dd0",
@@ -38,9 +38,11 @@ const fetchMock = vi.fn();
 
 function setupFetchMock({
   pendingChanges = [],
+  pendingData,
   error = null,
 }: {
   pendingChanges?: PendingChange[];
+  pendingData?: unknown;
   error?: string | null;
 } = {}) {
   fetchMock.mockReset();
@@ -56,7 +58,7 @@ function setupFetchMock({
 
       return Promise.resolve(
         createFetchResponse({
-          data: pendingChanges,
+          data: pendingData ?? pendingChanges,
           message: "Pending requests fetched successfully.",
         }),
       );
@@ -165,6 +167,20 @@ describe("ContributionForm component rendering", () => {
     const alert = await screen.findByRole("alert");
 
     expect(alert).toHaveTextContent(/Error fetching pending changes\./i);
+    expect(screen.getByText(/no pending changes/i)).toBeInTheDocument();
+  });
+
+  test("rejects a malformed successful pending changes response", async () => {
+    setupFetchMock({ pendingData: [{ id: "invalid-pending-change" }] });
+    render(<Wrapper initialUser={{ email: "some@email.com", role: "USER" }} />);
+
+    await user.click(
+      await screen.findByRole("button", { name: /Pending changes/i }),
+    );
+
+    expect(
+      await screen.findByText(/^Error fetching pending changes\.$/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/no pending changes/i)).toBeInTheDocument();
   });
 
