@@ -143,9 +143,6 @@ describe("PendingChanges Component", () => {
         parentId: null,
         data: {
           name: "New University",
-          city: "Sarajevo",
-          entity: "FBIH",
-          ownership: "JAVNA",
         },
         createdAt: "2026-05-07T10:20:30.000Z",
         user: { email: "janedoe@examplemail.com", role: "USER" },

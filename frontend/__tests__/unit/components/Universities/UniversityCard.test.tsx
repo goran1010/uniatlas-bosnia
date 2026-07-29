@@ -16,6 +16,11 @@ const baseUniversity: UniversityListItem = {
   ownership: "JAVNA",
   foundedYear: "1949",
   website: "https://unsa.ba",
+  accreditationFrom: undefined,
+  accreditationTo: undefined,
+  authority: undefined,
+  sourceUrl: undefined,
+  lastChecked: undefined,
 };
 
 function Wrapper({ university = baseUniversity }) {
