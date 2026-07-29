@@ -6,7 +6,7 @@ export type Cycle = "FIRST" | "SECOND" | "THIRD";
 export type SubjectType = "MANDATORY" | "ELECTIVE";
 export type Entity = "FBIH" | "RS" | "BD";
 
-export interface ContributionFormData {
+export interface ContributionFormDraft {
   name?: string;
   city?: string;
   entity?: Entity;
@@ -23,7 +23,7 @@ export interface ContributionFormState {
   typeOfChange: TypeOfChange;
   parentId: string;
   targetId: string;
-  data: ContributionFormData;
+  data: ContributionFormDraft;
 }
 
 export type { PendingChange };

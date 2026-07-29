@@ -7,7 +7,7 @@ import { Button } from "../sharedComponents/Button";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
 import type {
-  ContributionFormData,
+  ContributionFormDraft,
   ContributionFormState,
   Cycle,
   Entity,
@@ -80,7 +80,7 @@ function AddUniversityEntity({
   }
 
   function setDataField(
-    field: keyof ContributionFormData,
+    field: keyof ContributionFormDraft,
     value: string | number | undefined,
   ) {
     setFormState((prev) => ({

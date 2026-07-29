@@ -8,7 +8,7 @@ import { guardedFetch } from "../../../utils/guardedFetch";
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
 import type { AddNotification } from "../../../types/notification";
-import type { ContributionFormData, PendingChange } from "../types";
+import type { ContributionFormDraft, PendingChange } from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 export interface HandleSubmitUniversityEntityParams {
@@ -16,7 +16,7 @@ export interface HandleSubmitUniversityEntityParams {
   parentId?: string;
   targetId?: string;
   typeOfChange: "CREATE" | "UPDATE" | "DELETE";
-  data: ContributionFormData;
+  data: ContributionFormDraft;
   setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
   addNotification: AddNotification;
   setLoading: (loading: boolean) => void;
@@ -24,7 +24,7 @@ export interface HandleSubmitUniversityEntityParams {
     entityType: string;
     parentId?: string;
     targetId?: string;
-    data: ContributionFormData;
+    data: ContributionFormDraft;
   }) => void;
   t: TFunction;
   serverStatus: ServerStatus;
