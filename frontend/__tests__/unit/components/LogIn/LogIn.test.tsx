@@ -288,6 +288,31 @@ describe("LogIn Form Submit", () => {
     expect(homePageText).toBeInTheDocument();
   });
 
+  test("shows a translated error when a successful response is malformed", async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(JSON.stringify({ message: "Logged in successfully" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    await submitLogInForm({
+      email: "new@user.com",
+      password: "Password123!",
+    });
+
+    expect(
+      await screen.findByText(/^An error occurred while logging in\.$/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Universities and Academic Programs/i),
+    ).not.toBeInTheDocument();
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("shows error message when network request throws", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")

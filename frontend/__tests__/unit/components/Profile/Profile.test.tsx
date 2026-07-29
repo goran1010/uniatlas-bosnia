@@ -197,4 +197,26 @@ describe("Profile Component handle logout", () => {
     expect(logIn).toBeInTheDocument();
     expect(logoutButton).not.toBeInTheDocument();
   });
+
+  test("keeps the user logged in when a successful logout response is malformed", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(JSON.stringify({}), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
+
+    await clickLogout();
+
+    expect(
+      await screen.findByText(/^An error occurred while logging out\.$/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /My Profile/i }),
+    ).toBeInTheDocument();
+  });
 });

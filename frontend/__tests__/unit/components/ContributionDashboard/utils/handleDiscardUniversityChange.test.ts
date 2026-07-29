@@ -125,6 +125,37 @@ describe("handleDiscardUniversityChange", () => {
     });
   });
 
+  test("does not remove a change when a successful response is malformed", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+
+    const { handleDiscardUniversityChange } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
+    await handleDiscardUniversityChange({
+      changeId: "1",
+      setPendingChanges,
+      addNotification,
+      setLoading: vi.fn(),
+      t,
+      serverStatus: "live",
+    });
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.universities.deleteError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("shows the fallback error when the request throws", async () => {
     const requestError = new Error("Network failure");
     getCsrfTokenMock.mockResolvedValue("csrf-token");

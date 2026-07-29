@@ -38,9 +38,11 @@ const fetchMock = vi.fn();
 
 function setupFetchMock({
   pendingChanges = [],
+  pendingData,
   error = null,
 }: {
   pendingChanges?: PendingChange[];
+  pendingData?: unknown;
   error?: string | null;
 } = {}) {
   fetchMock.mockReset();
@@ -56,7 +58,7 @@ function setupFetchMock({
 
       return Promise.resolve(
         createFetchResponse({
-          data: pendingChanges,
+          data: pendingData ?? pendingChanges,
           message: "Pending requests fetched successfully.",
         }),
       );
@@ -165,6 +167,20 @@ describe("ContributionForm component rendering", () => {
     const alert = await screen.findByRole("alert");
 
     expect(alert).toHaveTextContent(/Error fetching pending changes\./i);
+    expect(screen.getByText(/no pending changes/i)).toBeInTheDocument();
+  });
+
+  test("rejects a malformed successful pending changes response", async () => {
+    setupFetchMock({ pendingData: [{ id: "invalid-pending-change" }] });
+    render(<Wrapper initialUser={{ email: "some@email.com", role: "USER" }} />);
+
+    await user.click(
+      await screen.findByRole("button", { name: /Pending changes/i }),
+    );
+
+    expect(
+      await screen.findByText(/^Error fetching pending changes\.$/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/no pending changes/i)).toBeInTheDocument();
   });
 

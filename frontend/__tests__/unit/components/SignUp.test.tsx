@@ -304,6 +304,32 @@ describe("SignUp Form Submit", () => {
     expect(successMessage).toBeInTheDocument();
   });
 
+  test("shows a translated error when a successful response is malformed", async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(JSON.stringify({ message: "Registration successful." }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    await submitSignUpForm({
+      email: "newemail@mail.com",
+      password: "Password123!",
+      confirmPassword: "Password123!",
+    });
+
+    expect(
+      await screen.findByText(/^An error occurred during registration\.$/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /Log In/i }),
+    ).not.toBeInTheDocument();
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("shows error message when network request throws", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")

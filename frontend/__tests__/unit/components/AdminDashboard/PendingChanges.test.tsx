@@ -14,7 +14,12 @@ interface MockChange {
   typeOfChange: "CREATE" | "UPDATE" | "DELETE";
   targetId: number | null;
   parentId: number | null;
-  data: { name: string };
+  data: {
+    name: string;
+    city?: string;
+    entity?: "FBIH" | "RS" | "BD";
+    ownership?: "JAVNA" | "PRIVATNA";
+  };
   createdAt: string;
   user: { email: string; role: "ADMIN" | "USER" };
   userId: string;
@@ -143,6 +148,9 @@ describe("PendingChanges Component", () => {
         parentId: null,
         data: {
           name: "New University",
+          city: "Sarajevo",
+          entity: "FBIH",
+          ownership: "JAVNA",
         },
         createdAt: "2026-05-07T10:20:30.000Z",
         user: { email: "janedoe@examplemail.com", role: "USER" },

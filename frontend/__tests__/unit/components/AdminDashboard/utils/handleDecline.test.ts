@@ -149,6 +149,37 @@ describe("handleDecline", () => {
     });
   });
 
+  test("does not remove a change when a successful response is malformed", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    const setPendingChanges = vi.fn();
+    const addNotification = vi.fn();
+
+    const { handleDecline } =
+      await import("../../../../../src/components/AdminDashboard/utils/handleDecline");
+    await handleDecline(
+      change,
+      setPendingChanges,
+      addNotification,
+      vi.fn(),
+      t,
+      "live",
+    );
+
+    expect(setPendingChanges).not.toHaveBeenCalled();
+    expect(addNotification).toHaveBeenCalledWith({
+      type: "error",
+      message: "messages.admin.declineError",
+    });
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
+
   test("shows the fallback decline error when the request throws", async () => {
     const requestError = new Error("Network failure");
     getCsrfTokenMock.mockResolvedValue("csrf-token");
