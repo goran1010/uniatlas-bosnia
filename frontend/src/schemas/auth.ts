@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { userRoleSchema } from "./domain";
+
 const signupResponseSchema = z.object({
   message: z.string(),
   data: z.object({
@@ -11,7 +13,7 @@ const loginResponseSchema = z.object({
   message: z.string(),
   data: z.object({
     email: z.email(),
-    role: z.enum(["ADMIN", "USER"]),
+    role: userRoleSchema,
   }),
 });
 
@@ -20,7 +22,7 @@ const currentUserResponseSchema = z.object({
   data: z
     .object({
       email: z.email(),
-      role: z.enum(["ADMIN", "USER"]),
+      role: userRoleSchema,
     })
     .nullable(),
 });

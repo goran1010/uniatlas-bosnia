@@ -1,20 +1,16 @@
 import { z } from "zod";
 
-const entityTypeSchema = z.enum([
-  "UNIVERSITY",
-  "FACULTY",
-  "STUDY_PROGRAM",
-  "SUBJECT",
-]);
-
-const entitySchema = z.enum(["FBIH", "RS", "BD"]);
-const ownershipSchema = z.enum(["JAVNA", "PRIVATNA"]);
-const cycleSchema = z.enum(["FIRST", "SECOND", "THIRD"]);
-const subjectTypeSchema = z.enum(["MANDATORY", "ELECTIVE"]);
-
-const durationYearsSchema = z.number().int().min(1).max(10);
-const ectsSchema = z.number().int().positive();
-const semesterSchema = z.number().int().min(1).max(12);
+import {
+  durationYearsSchema,
+  ectsSchema,
+  entitySchema,
+  entityTypeSchema,
+  ownershipSchema,
+  positiveIntegerSchema,
+  semesterSchema,
+  studyCycleSchema,
+  subjectTypeSchema,
+} from "./domain";
 
 const requiredNameSchema = z.string().trim().min(1);
 const optionalNameSchema = requiredNameSchema.optional();
@@ -33,7 +29,7 @@ const facultyCreateDataSchema = z.strictObject({
 
 const studyProgramCreateDataSchema = z.strictObject({
   name: requiredNameSchema,
-  cycle: cycleSchema,
+  cycle: studyCycleSchema,
   durationYears: durationYearsSchema.optional(),
   ects: ectsSchema.optional(),
 });
@@ -63,7 +59,7 @@ const facultyEditDataSchema = nonEmptyObject({
 
 const studyProgramEditDataSchema = nonEmptyObject({
   name: optionalNameSchema,
-  cycle: cycleSchema.optional(),
+  cycle: studyCycleSchema.optional(),
   durationYears: durationYearsSchema.nullable().optional(),
   ects: ectsSchema.nullable().optional(),
 });
@@ -80,7 +76,7 @@ const positiveIdSchema = z
   .trim()
   .regex(/^[1-9]\d*$/)
   .transform(Number)
-  .pipe(z.number().int().positive());
+  .pipe(positiveIntegerSchema);
 
 const contributionSubmissionSchema = z.union([
   z.object({

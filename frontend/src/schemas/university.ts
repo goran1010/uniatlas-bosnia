@@ -1,17 +1,26 @@
 import { z } from "zod";
 
+import {
+  entitySchema,
+  integerSchema,
+  ownershipSchema,
+  positiveIntegerSchema,
+  studyCycleSchema,
+  subjectTypeSchema,
+} from "./domain";
+
 const optionalTextSchema = z
   .string()
   .nullish()
   .transform((value) => value ?? undefined);
 
 const universitySchema = z.object({
-  id: z.number().int().positive(),
+  id: positiveIntegerSchema,
   name: z.string().min(1),
   acronym: optionalTextSchema,
   city: z.string().min(1),
-  entity: z.enum(["FBIH", "RS", "BD"]),
-  ownership: z.enum(["JAVNA", "PRIVATNA"]),
+  entity: entitySchema,
+  ownership: ownershipSchema,
   foundedYear: optionalTextSchema,
   website: optionalTextSchema,
   accreditationFrom: optionalTextSchema,
@@ -22,50 +31,33 @@ const universitySchema = z.object({
 });
 
 const subjectSchema = z.object({
-  id: z.number().int().positive(),
+  id: positiveIntegerSchema,
   name: z.string().min(1),
-  studyProgramId: z.number().int().positive(),
-  semester: z
-    .number()
-    .int()
-    .nullish()
-    .transform((value) => value ?? undefined),
-  ects: z
-    .number()
-    .int()
-    .nullish()
-    .transform((value) => value ?? undefined),
-  type: z
-    .enum(["MANDATORY", "ELECTIVE"])
-    .nullish()
-    .transform((value) => value ?? undefined),
+  studyProgramId: positiveIntegerSchema,
+  semester: integerSchema.nullish().transform((value) => value ?? undefined),
+  ects: integerSchema.nullish().transform((value) => value ?? undefined),
+  type: subjectTypeSchema.nullish().transform((value) => value ?? undefined),
   sourceUrl: optionalTextSchema,
 });
 
 const studyProgramSchema = z.object({
-  id: z.number().int().positive(),
+  id: positiveIntegerSchema,
   name: z.string().min(1),
-  facultyId: z.number().int().positive(),
-  cycle: z.enum(["FIRST", "SECOND", "THIRD"]),
-  durationYears: z
-    .number()
-    .int()
+  facultyId: positiveIntegerSchema,
+  cycle: studyCycleSchema,
+  durationYears: integerSchema
     .nullish()
     .transform((value) => value ?? undefined),
-  ects: z
-    .number()
-    .int()
-    .nullish()
-    .transform((value) => value ?? undefined),
+  ects: integerSchema.nullish().transform((value) => value ?? undefined),
   language: optionalTextSchema,
   sourceUrl: optionalTextSchema,
   subjects: z.array(subjectSchema),
 });
 
 const facultySchema = z.object({
-  id: z.number().int().positive(),
+  id: positiveIntegerSchema,
   name: z.string().min(1),
-  universityId: z.number().int().positive(),
+  universityId: positiveIntegerSchema,
   city: optionalTextSchema,
   website: optionalTextSchema,
   studyPrograms: z.array(studyProgramSchema),
@@ -88,21 +80,17 @@ const universityDetailResponseSchema = z.object({
 });
 
 const studyProgramSearchResultSchema = z.object({
-  id: z.number().int().positive(),
+  id: positiveIntegerSchema,
   name: z.string().min(1),
-  facultyId: z.number().int().positive(),
-  cycle: z.enum(["FIRST", "SECOND", "THIRD"]),
-  ects: z
-    .number()
-    .int()
-    .nullish()
-    .transform((value) => value ?? undefined),
+  facultyId: positiveIntegerSchema,
+  cycle: studyCycleSchema,
+  ects: integerSchema.nullish().transform((value) => value ?? undefined),
   faculty: z.object({
-    id: z.number().int().positive(),
+    id: positiveIntegerSchema,
     name: z.string().min(1),
-    universityId: z.number().int().positive(),
+    universityId: positiveIntegerSchema,
     university: z.object({
-      id: z.number().int().positive(),
+      id: positiveIntegerSchema,
       name: z.string().min(1),
       acronym: optionalTextSchema,
     }),
