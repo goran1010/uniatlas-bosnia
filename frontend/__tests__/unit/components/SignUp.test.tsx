@@ -126,12 +126,12 @@ describe("User typing in input fields in SignUp Component", () => {
       createFormElements();
 
     await user.type(emailField, "testuser@example.com");
-    await user.type(passwordField, "Password123!");
-    await user.type(confirmPasswordField, "Password123!");
+    await user.type(passwordField, "Password123");
+    await user.type(confirmPasswordField, "Password123");
 
     expect(emailField).toHaveValue("testuser@example.com");
-    expect(passwordField).toHaveValue("Password123!");
-    expect(confirmPasswordField).toHaveValue("Password123!");
+    expect(passwordField).toHaveValue("Password123");
+    expect(confirmPasswordField).toHaveValue("Password123");
   });
 });
 
@@ -142,21 +142,15 @@ describe("SignUp Form Validation on input", () => {
 
     await user.type(emailField, "te");
     expect(emailField).toHaveValue("te");
-    expect(emailField.validationMessage).toMatch(
-      /Email must have at least 3 characters/i,
-    );
+    expect(emailField.validationMessage).toMatch(/valid email/i);
     await user.type(emailField, "st");
     expect(emailField).toHaveValue("test");
-    expect(emailField.validationMessage).toMatch(
-      /Please include an '@' in the email address./i,
-    );
+    expect(emailField.validationMessage).toMatch(/valid email/i);
     await user.type(emailField, "@");
     expect(emailField).toHaveValue("test@");
-    expect(emailField.validationMessage).toMatch(
-      /Please enter a part following '@'./i,
-    );
-    await user.type(emailField, "mail");
-    expect(emailField).toHaveValue("test@mail");
+    expect(emailField.validationMessage).toMatch(/valid email/i);
+    await user.type(emailField, "mail.com");
+    expect(emailField).toHaveValue("test@mail.com");
     expect(emailField.validationMessage).toBe("");
   });
 
@@ -168,7 +162,13 @@ describe("SignUp Form Validation on input", () => {
     expect(passwordField.validationMessage).toMatch(/at least 6 characters/i);
     await user.type(passwordField, "word");
     expect(passwordField).toHaveValue("password");
+    expect(passwordField.validationMessage).toMatch(/at least one number/i);
+    await user.type(passwordField, "1");
     expect(passwordField.validationMessage).toBe("");
+
+    await user.clear(passwordField);
+    await user.type(passwordField, "Password!");
+    expect(passwordField.validationMessage).toMatch(/only contain/i);
   });
 
   test("shows validation messages for confirm password input", async () => {
@@ -194,23 +194,17 @@ describe("SignUp Form Validation on Create button click", () => {
     await user.type(emailField, "te");
     expect(emailField).toHaveValue("te");
     await user.click(signUpButton);
-    expect(emailField.validationMessage).toMatch(
-      /Email must have at least 3 characters/i,
-    );
+    expect(emailField.validationMessage).toMatch(/valid email/i);
     await user.type(emailField, "st");
     expect(emailField).toHaveValue("test");
     await user.click(signUpButton);
-    expect(emailField.validationMessage).toMatch(
-      /Please include an '@' in the email address./i,
-    );
+    expect(emailField.validationMessage).toMatch(/valid email/i);
     await user.type(emailField, "@");
     expect(emailField).toHaveValue("test@");
     await user.click(signUpButton);
-    expect(emailField.validationMessage).toMatch(
-      /Please enter a part following '@'./i,
-    );
-    await user.type(emailField, "mail");
-    expect(emailField).toHaveValue("test@mail");
+    expect(emailField.validationMessage).toMatch(/valid email/i);
+    await user.type(emailField, "mail.com");
+    expect(emailField).toHaveValue("test@mail.com");
     await user.click(signUpButton);
     expect(emailField.validationMessage).toBe("");
   });
@@ -224,6 +218,9 @@ describe("SignUp Form Validation on Create button click", () => {
     expect(passwordField.validationMessage).toMatch(/at least 6 characters/i);
     await user.type(passwordField, "word");
     expect(passwordField).toHaveValue("password");
+    await user.click(signUpButton);
+    expect(passwordField.validationMessage).toMatch(/at least one number/i);
+    await user.type(passwordField, "1");
     await user.click(signUpButton);
     expect(passwordField.validationMessage).toBe("");
   });
@@ -264,8 +261,8 @@ describe("SignUp Form Submit", () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(mockResponse);
     await submitSignUpForm({
       email: "newemail@mail.com",
-      password: "Password123!",
-      confirmPassword: "Password123!",
+      password: "Password123",
+      confirmPassword: "Password123",
     });
 
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -291,8 +288,8 @@ describe("SignUp Form Submit", () => {
 
     await submitSignUpForm({
       email: "newemail@mail.com",
-      password: "Password123!",
-      confirmPassword: "Password123!",
+      password: "Password123",
+      confirmPassword: "Password123",
     });
 
     const logInButton = await screen.findByRole("button", { name: /Log In/i });
@@ -317,8 +314,8 @@ describe("SignUp Form Submit", () => {
 
     await submitSignUpForm({
       email: "newemail@mail.com",
-      password: "Password123!",
-      confirmPassword: "Password123!",
+      password: "Password123",
+      confirmPassword: "Password123",
     });
 
     expect(
@@ -341,8 +338,8 @@ describe("SignUp Form Submit", () => {
 
     await submitSignUpForm({
       email: "newemail@mail.com",
-      password: "Password123!",
-      confirmPassword: "Password123!",
+      password: "Password123",
+      confirmPassword: "Password123",
     });
 
     const networkErrorMessage = await screen.findByText(
@@ -362,8 +359,8 @@ describe("SignUp Form Submit", () => {
 
     await submitSignUpForm({
       email: "newemail@mail.com",
-      password: "Password123!",
-      confirmPassword: "Password123!",
+      password: "Password123",
+      confirmPassword: "Password123",
     });
 
     const fallbackError = await screen.findByText("Registration failed.");

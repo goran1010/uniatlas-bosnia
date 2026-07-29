@@ -287,6 +287,9 @@
     },
     "password": {
       "minLength": "Password must have at least 6 characters",
+      "required": "Password is required",
+      "allowedCharacters": "Password can only contain letters, numbers, dashes, or underscores",
+      "requiresNumber": "Password must contain at least one number",
       "mustMatch": "Password and confirm password fields must match"
     },
     "search": {

@@ -243,6 +243,55 @@ describe("UniversityCard", () => {
     expect(screen.getByRole("button", { name: /View details/i })).toBeVisible();
   });
 
+  test("rejects an out-of-range academic value in a successful details response", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "University retrieved successfully.",
+          data: {
+            ...baseUniversity,
+            faculties: [
+              {
+                id: 11,
+                name: "Faculty of Electrical Engineering",
+                universityId: 1,
+                studyPrograms: [
+                  {
+                    id: 21,
+                    name: "Computer Science",
+                    facultyId: 11,
+                    cycle: "FIRST",
+                    subjects: [
+                      {
+                        id: 31,
+                        name: "Algorithms",
+                        studyProgramId: 21,
+                        semester: 0,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        },
+      ),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: /View details/i }));
+
+    expect(
+      await screen.findByText(/Failed to load university details\./i),
+    ).toBeInTheDocument();
+  });
+
   test("shows fallback notification when details request throws", async () => {
     vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new Error("network"));
 

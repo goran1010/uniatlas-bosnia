@@ -3,6 +3,33 @@ import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 import * as contributionValidation from "../validation/contributionValidation.js";
 import type { Request, Response } from "express";
+import type { entityType } from "../generated/prisma/enums.js";
+
+async function entityExists(entityType: entityType, id: number) {
+  switch (entityType) {
+    case "UNIVERSITY":
+      return (await prisma.university.findUnique({ where: { id } })) !== null;
+    case "FACULTY":
+      return (await prisma.faculty.findUnique({ where: { id } })) !== null;
+    case "STUDY_PROGRAM":
+      return (await prisma.studyProgram.findUnique({ where: { id } })) !== null;
+    case "SUBJECT":
+      return (await prisma.subject.findUnique({ where: { id } })) !== null;
+  }
+}
+
+async function parentEntityExists(entityType: entityType, parentId: number) {
+  switch (entityType) {
+    case "FACULTY":
+      return entityExists("UNIVERSITY", parentId);
+    case "STUDY_PROGRAM":
+      return entityExists("FACULTY", parentId);
+    case "SUBJECT":
+      return entityExists("STUDY_PROGRAM", parentId);
+    case "UNIVERSITY":
+      return true;
+  }
+}
 
 async function createEntity(req: Request, res: Response) {
   if (!req.user) {
@@ -13,18 +40,27 @@ async function createEntity(req: Request, res: Response) {
     return;
   }
 
-  const userId = req.user.id;
-
   const contribution = contributionValidation.createEntity(req.body);
   const { entityType, data } = contribution;
   const parentId = "parentId" in contribution ? contribution.parentId : null;
 
   try {
+    if (
+      parentId !== null &&
+      !(await parentEntityExists(entityType, parentId))
+    ) {
+      sendError(res, {
+        status: 404,
+        message: "Parent entity not found.",
+      });
+      return;
+    }
+
     const result = await prisma.pendingChange.create({
       data: {
         user: {
           connect: {
-            id: userId,
+            id: req.user.id,
           },
         },
         entityType,
@@ -62,13 +98,19 @@ async function editEntity(req: Request, res: Response) {
   );
 
   try {
-    const userId = req.user.id;
+    if (!(await entityExists(entityType, targetId))) {
+      sendError(res, {
+        status: 404,
+        message: "Target entity not found.",
+      });
+      return;
+    }
 
     const result = await prisma.pendingChange.create({
       data: {
         user: {
           connect: {
-            id: userId,
+            id: req.user.id,
           },
         },
 
@@ -106,13 +148,19 @@ async function deleteEntity(req: Request, res: Response) {
   );
 
   try {
-    const userId = req.user.id;
+    if (!(await entityExists(entityType, targetId))) {
+      sendError(res, {
+        status: 404,
+        message: "Target entity not found.",
+      });
+      return;
+    }
 
     const result = await prisma.pendingChange.create({
       data: {
         user: {
           connect: {
-            id: userId,
+            id: req.user.id,
           },
         },
         entityType,

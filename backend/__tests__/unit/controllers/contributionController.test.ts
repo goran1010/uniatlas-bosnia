@@ -4,12 +4,14 @@ const {
   createPendingChangeMock,
   findPendingChangesMock,
   deletePendingChangeMock,
+  findUniversityMock,
   disconnectMock,
   loggerErrorMock,
 } = vi.hoisted(() => ({
   createPendingChangeMock: vi.fn(),
   findPendingChangesMock: vi.fn(),
   deletePendingChangeMock: vi.fn(),
+  findUniversityMock: vi.fn(),
   disconnectMock: vi.fn(),
   loggerErrorMock: vi.fn(),
 }));
@@ -21,6 +23,9 @@ vi.mock("../../../src/db/prisma.js", () => ({
       create: createPendingChangeMock,
       findMany: findPendingChangesMock,
       delete: deletePendingChangeMock,
+    },
+    university: {
+      findUnique: findUniversityMock,
     },
   },
 }));
@@ -58,6 +63,7 @@ describe("contributionController", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     disconnectMock.mockResolvedValue(undefined);
+    findUniversityMock.mockResolvedValue({ id: 1 });
   });
 
   afterEach(() => {

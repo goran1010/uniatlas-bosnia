@@ -43,8 +43,9 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
   serverStatus,
 ) {
   try {
-    setLoading(true);
     e.preventDefault();
+
+    setLoading(true);
 
     const csrfToken = await getCsrfToken({
       serverStatus,

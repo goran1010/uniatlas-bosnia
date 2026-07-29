@@ -1,10 +1,12 @@
 import { z } from "zod";
 
 import {
+  durationYearsSchema,
+  ectsSchema,
   entitySchema,
-  integerSchema,
   ownershipSchema,
   positiveIntegerSchema,
+  semesterSchema,
   studyCycleSchema,
   subjectTypeSchema,
 } from "./domain";
@@ -34,8 +36,8 @@ const subjectSchema = z.object({
   id: positiveIntegerSchema,
   name: z.string().min(1),
   studyProgramId: positiveIntegerSchema,
-  semester: integerSchema.nullish().transform((value) => value ?? undefined),
-  ects: integerSchema.nullish().transform((value) => value ?? undefined),
+  semester: semesterSchema.nullish().transform((value) => value ?? undefined),
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
   type: subjectTypeSchema.nullish().transform((value) => value ?? undefined),
   sourceUrl: optionalTextSchema,
 });
@@ -45,10 +47,10 @@ const studyProgramSchema = z.object({
   name: z.string().min(1),
   facultyId: positiveIntegerSchema,
   cycle: studyCycleSchema,
-  durationYears: integerSchema
+  durationYears: durationYearsSchema
     .nullish()
     .transform((value) => value ?? undefined),
-  ects: integerSchema.nullish().transform((value) => value ?? undefined),
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
   language: optionalTextSchema,
   sourceUrl: optionalTextSchema,
   subjects: z.array(subjectSchema),
@@ -84,7 +86,7 @@ const studyProgramSearchResultSchema = z.object({
   name: z.string().min(1),
   facultyId: positiveIntegerSchema,
   cycle: studyCycleSchema,
-  ects: integerSchema.nullish().transform((value) => value ?? undefined),
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
   faculty: z.object({
     id: positiveIntegerSchema,
     name: z.string().min(1),

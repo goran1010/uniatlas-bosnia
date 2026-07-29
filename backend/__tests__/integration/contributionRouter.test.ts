@@ -42,6 +42,33 @@ async function createLoggedInAgent() {
   return { agent, user };
 }
 
+let entitySequence = 0;
+
+async function createUniversity() {
+  entitySequence++;
+
+  return prisma.university.create({
+    data: {
+      name: `Test University ${entitySequence.toString()}`,
+      city: "Test City",
+      entity: "FBIH",
+      ownership: "JAVNA",
+    },
+  });
+}
+
+async function createFaculty() {
+  const university = await createUniversity();
+  entitySequence++;
+
+  return prisma.faculty.create({
+    data: {
+      name: `Test Faculty ${entitySequence.toString()}`,
+      universityId: university.id,
+    },
+  });
+}
+
 describe("Contribution Router - POST /users/contribution/universities", () => {
   test("responds with status 401 when not logged in", async () => {
     const response = await request(app).post(
@@ -130,6 +157,34 @@ describe("Contribution Router - POST /users/contribution/universities", () => {
       }),
     );
   });
+
+  test("responds with status 404 when a child create parent does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.post("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      parentId: 999999,
+      data: { name: "Faculty without university" },
+    });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Parent entity not found." },
+    });
+  });
+
+  test("responds with status 201 when a child create parent exists", async () => {
+    const { agent } = await createLoggedInAgent();
+    const university = await createUniversity();
+
+    const response = await agent.post("/users/contribution/universities").send({
+      entityType: "FACULTY",
+      parentId: university.id,
+      data: { name: "Faculty with university" },
+    });
+
+    expect(response.status).toBe(201);
+  });
 });
 
 describe("Contribution Router - PUT /users/contribution/universities", () => {
@@ -202,10 +257,11 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
 
   test("allows null to clear an optional faculty city", async () => {
     const { agent, user } = await createLoggedInAgent();
+    const faculty = await createFaculty();
 
     const response = await agent.put("/users/contribution/universities").send({
       entityType: "FACULTY",
-      targetId: 1,
+      targetId: faculty.id,
       data: { city: null },
     });
 
@@ -220,7 +276,7 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
       expect.objectContaining({
         userId: user.id,
         entityType: "FACULTY",
-        targetId: 1,
+        targetId: faculty.id,
         data: { city: null },
       }),
     );
@@ -228,10 +284,11 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
 
   test("responds with status 201 and stores an edit suggestion", async () => {
     const { agent, user } = await createLoggedInAgent();
+    const university = await createUniversity();
 
     const response = await agent.put("/users/contribution/universities").send({
       entityType: "UNIVERSITY",
-      targetId: 1,
+      targetId: university.id,
       data: { name: "Updated Name" },
     });
 
@@ -254,10 +311,25 @@ describe("Contribution Router - PUT /users/contribution/universities", () => {
         userId: user.id,
         entityType: "UNIVERSITY",
         typeOfChange: "UPDATE",
-        targetId: 1,
+        targetId: university.id,
         data: { name: "Updated Name" },
       }),
     );
+  });
+
+  test("responds with status 404 when an edit target does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent.put("/users/contribution/universities").send({
+      entityType: "UNIVERSITY",
+      targetId: 999999,
+      data: { name: "Updated Name" },
+    });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Target entity not found." },
+    });
   });
 });
 
@@ -288,10 +360,11 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
 
   test("responds with status 201 and stores a deletion suggestion", async () => {
     const { agent, user } = await createLoggedInAgent();
+    const university = await createUniversity();
 
     const response = await agent
       .delete("/users/contribution/universities")
-      .send({ entityType: "UNIVERSITY", targetId: 1 });
+      .send({ entityType: "UNIVERSITY", targetId: university.id });
 
     expect(response.status).toBe(201);
     expect(response.body).toEqual(
@@ -312,10 +385,23 @@ describe("Contribution Router - DELETE /users/contribution/universities", () => 
         userId: user.id,
         entityType: "UNIVERSITY",
         typeOfChange: "DELETE",
-        targetId: 1,
+        targetId: university.id,
         data: {},
       }),
     );
+  });
+
+  test("responds with status 404 when a deletion target does not exist", async () => {
+    const { agent } = await createLoggedInAgent();
+
+    const response = await agent
+      .delete("/users/contribution/universities")
+      .send({ entityType: "UNIVERSITY", targetId: 999999 });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      error: { message: "Target entity not found." },
+    });
   });
 });
 
