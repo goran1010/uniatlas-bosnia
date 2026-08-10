@@ -2,6 +2,10 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import {
+  SERVER_STATUS,
+  isServerNotReadyError,
+} from "../../../utils/serverStatus";
 import { readErrorMessage } from "../../../schemas/api";
 import { adminPendingChangesResponseSchema } from "../../../schemas/pendingChange";
 
@@ -16,6 +20,10 @@ function useGetPendingChangesAdmin(
   const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
 
   useEffect(() => {
+    if (serverStatus !== SERVER_STATUS.LIVE) {
+      setLoading(false);
+      return;
+    }
     const fetchPendingChanges = async () => {
       try {
         setLoading(true);
@@ -30,11 +38,7 @@ function useGetPendingChangesAdmin(
             },
             credentials: "include",
           },
-          {
-            serverStatus,
-            addNotification,
-            t,
-          },
+          { serverStatus },
         );
 
         if (response.ok) {
@@ -57,7 +61,7 @@ function useGetPendingChangesAdmin(
           message: t("messages.pendingChanges.fetchError"),
         });
       } catch (error) {
-        if (error instanceof Error && error.message === "Server is not ready") {
+        if (isServerNotReadyError(error)) {
           return;
         }
 

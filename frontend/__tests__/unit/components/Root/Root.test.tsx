@@ -12,7 +12,7 @@ beforeEach(() => {
     if (typeof url !== "string") {
       return Promise.reject(new Error("Invalid URL"));
     }
-    if (url.endsWith("/api")) {
+    if (url.endsWith("/health")) {
       return Promise.resolve(
         new Response(
           JSON.stringify({
@@ -101,7 +101,7 @@ describe("Root component", () => {
             ? url.toString()
             : url.url;
 
-      if (requestUrl.endsWith("/api")) {
+      if (requestUrl.endsWith("/health")) {
         return Promise.resolve(
           new Response(
             JSON.stringify({

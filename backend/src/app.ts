@@ -26,6 +26,7 @@ import { sendError } from "./utils/response.js";
 import { apiRouter } from "./routes/apiRouter.js";
 import { authRouter } from "./routes/authRouter.js";
 import { usersRouter } from "./routes/usersRouter.js";
+import { healthRouter } from "./routes/healthRouter.js";
 
 // Trust first proxy (required for Koyeb)
 app.set("trust proxy", 1);
@@ -43,7 +44,8 @@ app.use((req, _res, next) => {
 app.use(helmet());
 app.use(compression());
 
-// Public API routes
+// Public routes
+app.use("/health", cors(), healthRouter);
 app.use("/api", cors(), rateLimiter.api, apiRouter);
 // -----------------
 

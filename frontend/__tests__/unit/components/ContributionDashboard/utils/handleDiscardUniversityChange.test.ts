@@ -1,3 +1,5 @@
+import { ServerNotReadyError } from "../../../../../src/utils/serverStatus";
+
 const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
 const guardedFetchMock =
   vi.fn<
@@ -185,5 +187,31 @@ describe("handleDiscardUniversityChange", () => {
       "Error discarding pending change:",
       requestError,
     );
+  });
+
+  test("does not notify when the server is not ready", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockRejectedValue(new ServerNotReadyError("waking"));
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    const { handleDiscardUniversityChange } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleDiscardUniversityChange");
+    const addNotification = vi.fn();
+    const setLoading = vi.fn();
+
+    await handleDiscardUniversityChange({
+      changeId: "1",
+      setPendingChanges: vi.fn(),
+      addNotification,
+      setLoading,
+      t,
+      serverStatus: "live",
+    });
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 });

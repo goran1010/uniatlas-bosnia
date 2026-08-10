@@ -199,13 +199,7 @@ describe("ContributionForm component rendering", () => {
     const tab = await screen.findByRole("button", { name: /Pending changes/i });
     await user.click(tab);
 
-    const alerts = await screen.findAllByRole("alert");
-
-    expect(
-      alerts.some((alert) =>
-        /server might be waking up/i.test(alert.textContent),
-      ),
-    ).toBe(true);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     expect(fetchMock).not.toHaveBeenCalled();
 
     consoleErrorSpy.mockRestore();

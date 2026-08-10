@@ -1,4 +1,7 @@
-import { SERVER_STATUS } from "../../../../../src/utils/serverStatus";
+import {
+  SERVER_STATUS,
+  ServerNotReadyError,
+} from "../../../../../src/utils/serverStatus";
 import type { ServerStatus } from "../../../../../src/utils/serverStatus";
 import type { SetStateAction } from "react";
 import type { PendingChange } from "../../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
@@ -403,5 +406,30 @@ describe("handleSubmitUniversityEntity", () => {
       "Error submitting university entity:",
       requestError,
     );
+  });
+
+  test("does not notify when the server is not ready", async () => {
+    getCsrfTokenMock.mockResolvedValue("csrf-token");
+    guardedFetchMock.mockRejectedValue(
+      new ServerNotReadyError(SERVER_STATUS.WAKING),
+    );
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    const { handleSubmitUniversityEntity } =
+      await import("../../../../../src/components/ContributionDashboard/utils/handleSubmitUniversityEntity");
+    const addNotification = vi.fn();
+    const setLoading = vi.fn();
+
+    await handleSubmitUniversityEntity({
+      ...baseArgs,
+      addNotification,
+      setLoading,
+    });
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(setLoading).toHaveBeenLastCalledWith(false);
   });
 });

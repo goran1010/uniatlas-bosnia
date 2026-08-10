@@ -1,0 +1,55 @@
+import { ServerNotReadyError } from "../../../../../src/utils/serverStatus";
+
+const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
+const guardedFetchMock =
+  vi.fn<
+    (url: unknown, options: unknown, context: unknown) => Promise<Response>
+  >();
+
+vi.mock("../../../../../src/components/utils/getCsrfToken", () => ({
+  getCsrfToken: (args: unknown) => getCsrfTokenMock(args),
+  clearCsrfToken: vi.fn(),
+}));
+
+vi.mock("../../../../../src/utils/guardedFetch", () => ({
+  guardedFetch: (url: unknown, options: unknown, context: unknown) =>
+    guardedFetchMock(url, options, context),
+}));
+
+const t = (key: string) => key;
+
+beforeEach(() => {
+  getCsrfTokenMock.mockReset();
+  guardedFetchMock.mockReset();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
+describe("handleLogout", () => {
+  test("does not notify when the server is not ready", async () => {
+    getCsrfTokenMock.mockRejectedValue(new ServerNotReadyError("waking"));
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+
+    const { handleLogout } =
+      await import("../../../../../src/components/Profile/utils/handleLogout");
+    const addNotification = vi.fn();
+    const setLoading = vi.fn();
+
+    await handleLogout(
+      addNotification,
+      vi.fn(),
+      vi.fn(),
+      setLoading,
+      t,
+      "live",
+    );
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(setLoading).toHaveBeenLastCalledWith(false);
+  });
+});

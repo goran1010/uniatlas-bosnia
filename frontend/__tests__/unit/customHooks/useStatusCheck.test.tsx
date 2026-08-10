@@ -1,7 +1,10 @@
 import { act, render, screen } from "@testing-library/react";
 import { useStatusCheck } from "../../../src/customHooks/useStatusCheck";
 import { guardedFetch } from "../../../src/utils/guardedFetch";
-import { SERVER_STATUS } from "../../../src/utils/serverStatus";
+import {
+  SERVER_STATUS,
+  ServerNotReadyError,
+} from "../../../src/utils/serverStatus";
 
 import type { Notification } from "../../../src/types/notification";
 import type { ServerStatus } from "../../../src/utils/serverStatus";
@@ -171,5 +174,112 @@ describe("useStatusCheck", () => {
       message: "messages.loginStatus.error",
     });
     expect(screen.getByTestId("user-email")).toHaveTextContent("none");
+  });
+
+  test("does not notify when no user is logged in", async () => {
+    const addNotification = vi.fn(() => "notification-id");
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "No user logged in",
+          data: null,
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.LIVE}
+      />,
+    );
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(screen.getByTestId("user-email")).toHaveTextContent("none");
+  });
+
+  test.each([[SERVER_STATUS.WAKING], [SERVER_STATUS.DOWN]])(
+    "does not check login status while the server is %s",
+    async (serverStatus) => {
+      const addNotification = vi.fn(() => "notification-id");
+
+      render(
+        <StatusCheckProbe
+          addNotification={addNotification}
+          serverStatus={serverStatus}
+        />,
+      );
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(100);
+      });
+
+      expect(mockedGuardedFetch).not.toHaveBeenCalled();
+      expect(addNotification).not.toHaveBeenCalled();
+    },
+  );
+
+  test("checks login status once the server becomes live", async () => {
+    const addNotification = vi.fn(() => "notification-id");
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: null,
+          data: { email: "user@example.com", role: "USER" },
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    const { rerender } = render(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.WAKING}
+      />,
+    );
+
+    expect(mockedGuardedFetch).not.toHaveBeenCalled();
+
+    rerender(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.LIVE}
+      />,
+    );
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+
+    expect(mockedGuardedFetch).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("user-email")).toHaveTextContent(
+      "user@example.com",
+    );
+  });
+
+  test("does not notify when the request is blocked by the server guard", async () => {
+    const addNotification = vi.fn(() => "notification-id");
+    mockedGuardedFetch.mockRejectedValue(
+      new ServerNotReadyError(SERVER_STATUS.WAKING),
+    );
+
+    render(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.LIVE}
+      />,
+    );
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(console.error).not.toHaveBeenCalled();
   });
 });

@@ -3,6 +3,7 @@ import { readErrorMessage } from "../../../schemas/api";
 import { loginResponseSchema } from "../../../schemas/auth";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 import type { SubmitEvent } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { AddNotification } from "../../../types/notification";
@@ -76,7 +77,7 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
           password: inputFields.password,
         }),
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (!response.ok) {
@@ -100,6 +101,9 @@ const handleSubmitLogIn: HandleLogInSubmit = async function (
     clearCsrfToken();
     void navigate("/");
   } catch (err) {
+    if (isServerNotReadyError(err)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.auth.loginError"),

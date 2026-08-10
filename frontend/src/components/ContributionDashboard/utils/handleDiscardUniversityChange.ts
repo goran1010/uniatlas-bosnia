@@ -5,6 +5,7 @@ import {
 } from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
@@ -53,7 +54,7 @@ async function handleDiscardUniversityChange({
         body: JSON.stringify({ id: changeId }),
         credentials: "include",
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (response.ok) {
@@ -74,6 +75,9 @@ async function handleDiscardUniversityChange({
       message: t("messages.universities.deleteError"),
     });
   } catch (err) {
+    if (isServerNotReadyError(err)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.universities.deleteError"),

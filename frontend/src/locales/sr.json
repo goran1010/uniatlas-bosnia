@@ -9,9 +9,7 @@
     "profile": "Moj profil",
     "login": "Prijava",
     "signup": "Registracija",
-    "notFound": "Stranica nije pronađena",
-    "serverDown": "Server nije dostupan",
-    "wakingUp": "Budi se..."
+    "notFound": "Stranica nije pronađena"
   },
   "meta": {
     "home": "Istražite univerzitete, fakultete, studijske programe i predmete u Bosni i Hercegovini kroz besplatan javni skup podataka, pretraživo web sučelje i REST API.",

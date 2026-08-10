@@ -3,6 +3,7 @@ import { readErrorMessage } from "../../../schemas/api";
 import { signupResponseSchema } from "../../../schemas/auth";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 import type { SubmitEvent } from "react";
 import type { AddNotification } from "../../../types/notification";
 import type { TFunction } from "../../../types/i18n";
@@ -75,7 +76,7 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
           "confirm-password": inputFields["confirm-password"],
         }),
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (!response.ok) {
@@ -96,6 +97,9 @@ const handleSignUpSubmit: HandleSignUpSubmit = async function (
     });
     void navigate("/login");
   } catch (err) {
+    if (isServerNotReadyError(err)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.auth.registrationError"),
