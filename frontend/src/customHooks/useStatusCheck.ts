@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { guardedFetch } from "../utils/guardedFetch";
 import { BACKEND_URL } from "../utils/envConfig";
 import { currentUserResponseSchema } from "../schemas/auth";
+import { SERVER_STATUS, isServerNotReadyError } from "../utils/serverStatus";
 
 import type { AddNotification } from "../types/notification";
 import type { ServerStatus } from "../utils/serverStatus";
@@ -23,6 +24,10 @@ function useStatusCheck(
   }, [t]);
 
   useEffect(() => {
+    if (serverStatus !== SERVER_STATUS.LIVE) {
+      return;
+    }
+
     let isCancelled = false;
     const abortController = new AbortController();
 
@@ -36,15 +41,11 @@ function useStatusCheck(
             credentials: "include",
             signal: abortController.signal,
           },
-          {
-            serverStatus,
-            addNotification,
-            t: tRef.current,
-          },
+          { serverStatus },
         );
 
         if (!response.ok) {
-          const message = tRef.current("loginStatus.error");
+          const message = tRef.current("messages.loginStatus.error");
 
           if (isCancelled) {
             return;
@@ -71,7 +72,7 @@ function useStatusCheck(
 
         setUserData(result.data);
       } catch (err) {
-        if (isCancelled) {
+        if (isCancelled || isServerNotReadyError(err)) {
           return;
         }
 
@@ -84,19 +85,11 @@ function useStatusCheck(
       }
     }
 
-    const loginTimeoutId = setTimeout(() => {
-      if (!isCancelled) {
-        void checkLogin();
-      }
-    }, 100);
+    void checkLogin();
 
     return () => {
       isCancelled = true;
       abortController.abort();
-
-      if (loginTimeoutId) {
-        clearTimeout(loginTimeoutId);
-      }
     };
   }, [addNotification, serverStatus]);
 

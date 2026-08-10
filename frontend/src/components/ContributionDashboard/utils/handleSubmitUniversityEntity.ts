@@ -4,6 +4,7 @@ import { contributionSubmissionSchema } from "../../../schemas/contribution";
 import { pendingChangeResponseSchema } from "../../../schemas/pendingChange";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { TFunction } from "../../../types/i18n";
@@ -112,7 +113,7 @@ async function handleSubmitUniversityEntity({
         body: JSON.stringify(body),
         credentials: "include",
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (response.ok) {
@@ -134,6 +135,9 @@ async function handleSubmitUniversityEntity({
       message: t("messages.universities.addError"),
     });
   } catch (err) {
+    if (isServerNotReadyError(err)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.universities.addError"),

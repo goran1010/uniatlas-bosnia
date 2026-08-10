@@ -2,6 +2,7 @@ import { BACKEND_URL } from "../../../utils/envConfig";
 import { use, useEffect, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { SERVER_STATUS, isServerNotReadyError } from "../../../utils/serverStatus";
 import { pendingChangesResponseSchema } from "../../../schemas/pendingChange";
 
 import type { TFunction } from "../../../types/i18n";
@@ -17,6 +18,7 @@ function useGetPendingChanges(
 
   useEffect(() => {
     if (!enabled) return;
+    if (serverStatus !== SERVER_STATUS.LIVE) return;
     const fetchPendingChanges = async () => {
       try {
         setLoading(true);
@@ -31,11 +33,7 @@ function useGetPendingChanges(
             },
             credentials: "include",
           },
-          {
-            serverStatus,
-            addNotification,
-            t,
-          },
+          { serverStatus },
         );
 
         if (response.ok) {
@@ -55,6 +53,9 @@ function useGetPendingChanges(
           message,
         });
       } catch (error) {
+        if (isServerNotReadyError(error)) {
+          return;
+        }
         console.error("Error fetching pending changes:", error);
         addNotification({
           type: "error",

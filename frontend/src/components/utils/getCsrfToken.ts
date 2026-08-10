@@ -1,6 +1,7 @@
 import { BACKEND_URL } from "../../utils/envConfig";
 import { csrfTokenResponseSchema } from "../../schemas/auth";
 import { guardedFetch } from "../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../utils/serverStatus";
 
 import type { ServerStatus } from "../../utils/serverStatus";
 import type { AddNotification } from "../../types/notification";
@@ -28,11 +29,7 @@ async function getCsrfToken({
         mode: "cors",
         credentials: "include",
       },
-      {
-        serverStatus,
-        addNotification,
-        t,
-      },
+      { serverStatus },
     );
     const { data: csrfToken } = csrfTokenResponseSchema.parse(
       await csrfResponse.json(),
@@ -41,6 +38,9 @@ async function getCsrfToken({
 
     return csrfToken;
   } catch (error) {
+    if (isServerNotReadyError(error)) {
+      throw error;
+    }
     addNotification({
       type: "error",
       message: t("messages.csrfTokenFailed"),

@@ -5,6 +5,7 @@ import {
 } from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -67,7 +68,7 @@ const handleConfirm: HandleConfirm = async function (
         }),
         credentials: "include",
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (response.ok) {
@@ -90,6 +91,9 @@ const handleConfirm: HandleConfirm = async function (
       message: t("messages.admin.approveError"),
     });
   } catch (error) {
+    if (isServerNotReadyError(error)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.admin.approveError"),

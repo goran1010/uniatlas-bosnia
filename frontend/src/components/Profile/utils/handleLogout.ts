@@ -5,6 +5,7 @@ import {
 } from "../../../schemas/api";
 import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 
 import type { AddNotification } from "../../../types/notification";
 import type { UserData } from "../../../types/auth";
@@ -55,7 +56,7 @@ const handleLogout: HandleLogout = async function (
           "x-csrf-token": csrfToken,
         },
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (response.ok) {
@@ -78,6 +79,9 @@ const handleLogout: HandleLogout = async function (
       message: t("messages.auth.logoutFailed"),
     });
   } catch (err) {
+    if (isServerNotReadyError(err)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.auth.logoutError"),

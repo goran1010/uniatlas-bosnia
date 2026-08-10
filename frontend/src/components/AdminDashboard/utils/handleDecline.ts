@@ -5,6 +5,7 @@ import {
 } from "../../../schemas/api";
 import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
+import { isServerNotReadyError } from "../../../utils/serverStatus";
 
 import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
 import type { TFunction } from "../../../types/i18n";
@@ -65,7 +66,7 @@ const handleDecline: HandleDecline = async function (
         body: JSON.stringify({ id: change.id }),
         credentials: "include",
       },
-      { serverStatus, addNotification, t },
+      { serverStatus },
     );
 
     if (response.ok) {
@@ -88,6 +89,9 @@ const handleDecline: HandleDecline = async function (
       message: t("messages.admin.declineError"),
     });
   } catch (error) {
+    if (isServerNotReadyError(error)) {
+      return;
+    }
     addNotification({
       type: "error",
       message: t("messages.admin.declineError"),
