@@ -98,6 +98,27 @@ describe("getCsrfToken", () => {
     );
   });
 
+  test("rethrows the original error without notifying when the server is not ready", async () => {
+    const addNotification = vi.fn();
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => vi.fn());
+    const { getCsrfToken } =
+      await import("../../../../src/components/utils/getCsrfToken");
+    const { ServerNotReadyError } =
+      await import("../../../../src/utils/serverStatus");
+
+    const notReadyError = await getCsrfToken({
+      serverStatus: "waking",
+      addNotification,
+      t: (key) => key,
+    }).catch((error: unknown) => error);
+
+    expect(notReadyError).toBeInstanceOf(ServerNotReadyError);
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+  });
+
   test("throws when a successful response has an invalid payload", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({ data: "test-csrf-token" }), {
