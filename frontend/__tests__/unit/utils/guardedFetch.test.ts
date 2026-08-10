@@ -1,7 +1,7 @@
 import { guardedFetch } from "../../../src/utils/guardedFetch";
 import {
   SERVER_STATUS,
-  SERVER_STATUS_NOTIFICATION_ID,
+  ServerNotReadyError,
 } from "../../../src/utils/serverStatus";
 
 import type { Guard } from "../../../src/utils/guardedFetch";
@@ -9,18 +9,12 @@ import type { Guard } from "../../../src/utils/guardedFetch";
 function createGuard(serverStatus: Guard["serverStatus"]): Guard {
   return {
     serverStatus,
-    addNotification: vi.fn(),
-    t: vi.fn((key: string) => key),
   };
 }
 
-const blockedServerStatuses: readonly (readonly [
-  Guard["serverStatus"],
-  "warning" | "error",
-  string,
-])[] = [
-  [SERVER_STATUS.WAKING, "warning", "longWait.wakingUp"],
-  [SERVER_STATUS.DOWN, "error", "longWait.unreachable"],
+const blockedServerStatuses: readonly (readonly [Guard["serverStatus"]])[] = [
+  [SERVER_STATUS.WAKING],
+  [SERVER_STATUS.DOWN],
 ];
 
 beforeEach(() => {
@@ -39,28 +33,24 @@ describe("guardedFetch", () => {
     ).resolves.toBe(response);
 
     expect(fetchMock).toHaveBeenCalledWith("/api/universities", options);
-    expect(guard.addNotification).not.toHaveBeenCalled();
   });
 
   test.each(blockedServerStatuses)(
-    "blocks requests and notifies when the server is WAKING or DOWN",
-    (serverStatus, type, message) => {
+    "blocks requests with a ServerNotReadyError when the server is %s",
+    (serverStatus) => {
       const fetchMock = vi.spyOn(globalThis, "fetch");
       const guard = createGuard(serverStatus);
 
-      expect(() => guardedFetch("/api/universities", {}, guard)).toThrow(
-        "Server is not ready",
-      );
+      let thrown: unknown;
+      try {
+        void guardedFetch("/api/universities", {}, guard);
+      } catch (error) {
+        thrown = error;
+      }
 
+      expect(thrown).toBeInstanceOf(ServerNotReadyError);
+      expect((thrown as ServerNotReadyError).serverStatus).toBe(serverStatus);
       expect(fetchMock).not.toHaveBeenCalled();
-      expect(guard.t).toHaveBeenCalledWith(message);
-      expect(guard.addNotification).toHaveBeenCalledWith({
-        id: SERVER_STATUS_NOTIFICATION_ID,
-        type,
-        message,
-        duration: null,
-        persistent: true,
-      });
     },
   );
 });

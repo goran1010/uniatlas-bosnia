@@ -7,7 +7,7 @@ describe("App", () => {
     vi.spyOn(globalThis, "fetch").mockImplementation((input) => {
       const url = input instanceof Request ? input.url : input.toString();
 
-      if (url.endsWith("/api")) {
+      if (url.endsWith("/health")) {
         return Promise.resolve(new Response(null, { status: 200 }));
       }
 
@@ -36,7 +36,7 @@ describe("App", () => {
     render(<RouterProvider router={router} />);
 
     const errorNotification = await screen.findByText(
-      "An error occurred while logging in. Please try again later.",
+      "An error occurred while logging in.",
     );
 
     expect(globalThis.fetch).toHaveBeenCalledWith(

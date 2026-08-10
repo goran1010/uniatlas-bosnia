@@ -18,7 +18,10 @@ function useGetPendingChanges(
 
   useEffect(() => {
     if (!enabled) return;
-    if (serverStatus !== SERVER_STATUS.LIVE) return;
+    if (serverStatus !== SERVER_STATUS.LIVE) {
+      setLoading(false);
+      return;
+    }
     const fetchPendingChanges = async () => {
       try {
         setLoading(true);

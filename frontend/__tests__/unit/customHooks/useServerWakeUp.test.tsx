@@ -1,4 +1,4 @@
-import { act, render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { useServerWakeUp } from "../../../src/customHooks/useServerWakeUp";
 
 import type { Notification } from "../../../src/customHooks/useNotification";
@@ -31,13 +31,13 @@ function ServerWakeUpProbe({
   setLongWait,
   setServerIsDown,
 }: ServerWakeUpProbeProps) {
-  useServerWakeUp({
+  const serverStatus = useServerWakeUp({
     addNotification: setLongWait,
     removeNotification: setServerIsDown,
     t: identityTranslate,
   });
 
-  return <div data-testid="server-wake-up-probe">Probe</div>;
+  return <div data-testid="server-wake-up-probe">{serverStatus}</div>;
 }
 
 const mockedResponse = new Response(
@@ -51,7 +51,35 @@ const mockedResponse = new Response(
 );
 
 describe("useServerWakeUp", () => {
-  test("clears long wait when server responds ok", async () => {
+  test("starts in the waking state and pings the health endpoint", async () => {
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(mockedResponse);
+    const setLongWait = vi.fn();
+    const setServerIsDown = vi.fn();
+
+    render(
+      <ServerWakeUpProbe
+        setLongWait={setLongWait}
+        setServerIsDown={setServerIsDown}
+      />,
+    );
+
+    expect(screen.getByTestId("server-wake-up-probe")).toHaveTextContent(
+      "waking",
+    );
+
+    await act(async () => {
+      await flushMicrotasks();
+    });
+
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.stringMatching(/\/health$/),
+      expect.objectContaining({ method: "GET" }),
+    );
+  });
+
+  test("clears long wait and never shows the banner when server responds ok", async () => {
     const fetchSpy = vi
       .spyOn(globalThis, "fetch")
       .mockResolvedValue(mockedResponse);
@@ -73,6 +101,9 @@ describe("useServerWakeUp", () => {
     expect(setLongWait).not.toHaveBeenCalled();
 
     expect(setServerIsDown).toHaveBeenCalledWith("server-status");
+    expect(screen.getByTestId("server-wake-up-probe")).toHaveTextContent(
+      "live",
+    );
   });
 
   test("retries when response is not ok and then succeeds", async () => {
@@ -115,6 +146,45 @@ describe("useServerWakeUp", () => {
       persistent: true,
     });
     expect(setServerIsDown).toHaveBeenCalledWith("server-status");
+    expect(screen.getByTestId("server-wake-up-probe")).toHaveTextContent(
+      "live",
+    );
+  });
+
+  test("shows the waking banner when the ping fails with a network error", async () => {
+    vi.spyOn(globalThis, "fetch")
+      .mockRejectedValueOnce(new Error("Network error"))
+      .mockResolvedValueOnce(mockedResponse);
+    const setLongWait = vi.fn();
+    const setServerIsDown = vi.fn();
+
+    render(
+      <ServerWakeUpProbe
+        setLongWait={setLongWait}
+        setServerIsDown={setServerIsDown}
+      />,
+    );
+
+    await act(async () => {
+      await flushMicrotasks();
+    });
+
+    expect(setLongWait).toHaveBeenCalledWith({
+      id: "server-status",
+      type: "warning",
+      message: "longWait.wakingUp",
+      duration: null,
+      persistent: true,
+    });
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2000);
+      await flushMicrotasks();
+    });
+
+    expect(screen.getByTestId("server-wake-up-probe")).toHaveTextContent(
+      "live",
+    );
   });
 
   test("sets server down after max attempts on repeated fetch errors", async () => {
@@ -144,5 +214,8 @@ describe("useServerWakeUp", () => {
     });
     expect(setServerIsDown).not.toHaveBeenCalled();
     expect(console.error).toHaveBeenCalled();
+    expect(screen.getByTestId("server-wake-up-probe")).toHaveTextContent(
+      "down",
+    );
   });
 });

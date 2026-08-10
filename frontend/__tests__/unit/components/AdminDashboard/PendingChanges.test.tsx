@@ -232,16 +232,10 @@ describe("PendingChanges Component", () => {
       />,
     );
 
-    const alerts = await screen.findAllByRole("alert");
-
     expect(
-      alerts.some((alert) =>
-        /server might be waking up/i.test(alert.textContent),
-      ),
-    ).toBe(true);
-    expect(
-      screen.getByText(/There are no pending changes at the moment\./i),
+      await screen.findByText(/There are no pending changes at the moment\./i),
     ).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     expect(fetchMock).not.toHaveBeenCalled();
   });
 });

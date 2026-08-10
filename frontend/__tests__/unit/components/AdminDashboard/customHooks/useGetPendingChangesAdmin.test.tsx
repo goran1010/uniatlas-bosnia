@@ -2,6 +2,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { useGetPendingChangesAdmin } from "../../../../../src/components/AdminDashboard/customHooks/useGetPendingChangesAdmin";
 import { RootContextProvider } from "../../../../utils/rootContextProvider";
 import { guardedFetch } from "../../../../../src/utils/guardedFetch";
+import {
+  SERVER_STATUS,
+  ServerNotReadyError,
+} from "../../../../../src/utils/serverStatus";
 
 import type { RootContextType } from "../../../../../src/contextData/RootContext";
 
@@ -28,12 +32,14 @@ function HookProbe({ setLoading }: HookProbeProps) {
 function Wrapper({
   addNotification,
   setLoading,
+  serverStatus = SERVER_STATUS.LIVE,
 }: {
   addNotification: RootContextType["addNotification"];
   setLoading: (loading: boolean) => void;
+  serverStatus?: RootContextType["serverStatus"];
 }) {
   return (
-    <RootContextProvider rootValue={{ addNotification }}>
+    <RootContextProvider rootValue={{ addNotification, serverStatus }}>
       <HookProbe setLoading={setLoading} />
     </RootContextProvider>
   );
@@ -169,7 +175,9 @@ describe("useGetPendingChangesAdmin", () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
-    mockedGuardedFetch.mockRejectedValue(new Error("Server is not ready"));
+    mockedGuardedFetch.mockRejectedValue(
+      new ServerNotReadyError(SERVER_STATUS.WAKING),
+    );
 
     render(
       <Wrapper addNotification={addNotification} setLoading={setLoading} />,
@@ -181,5 +189,20 @@ describe("useGetPendingChangesAdmin", () => {
 
     expect(addNotification).not.toHaveBeenCalled();
     expect(consoleErrorSpy).not.toHaveBeenCalled();
+  });
+
+  test("does not fetch until the server is live", () => {
+    const addNotification = vi.fn();
+
+    render(
+      <Wrapper
+        addNotification={addNotification}
+        setLoading={vi.fn()}
+        serverStatus={SERVER_STATUS.WAKING}
+      />,
+    );
+
+    expect(mockedGuardedFetch).not.toHaveBeenCalled();
+    expect(addNotification).not.toHaveBeenCalled();
   });
 });
