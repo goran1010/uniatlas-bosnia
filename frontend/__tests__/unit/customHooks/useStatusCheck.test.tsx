@@ -176,6 +176,33 @@ describe("useStatusCheck", () => {
     expect(screen.getByTestId("user-email")).toHaveTextContent("none");
   });
 
+  test("does not notify when no user is logged in", async () => {
+    const addNotification = vi.fn(() => "notification-id");
+    mockedGuardedFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "No user logged in",
+          data: null,
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(
+      <StatusCheckProbe
+        addNotification={addNotification}
+        serverStatus={SERVER_STATUS.LIVE}
+      />,
+    );
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(100);
+    });
+
+    expect(addNotification).not.toHaveBeenCalled();
+    expect(screen.getByTestId("user-email")).toHaveTextContent("none");
+  });
+
   test.each([[SERVER_STATUS.WAKING], [SERVER_STATUS.DOWN]])(
     "does not check login status while the server is %s",
     async (serverStatus) => {

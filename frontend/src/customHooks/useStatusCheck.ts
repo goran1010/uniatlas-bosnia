@@ -61,7 +61,7 @@ function useStatusCheck(
 
         const result = currentUserResponseSchema.parse(await response.json());
 
-        if (isCancelled) {
+        if (isCancelled || !result.data) {
           return;
         }
 
