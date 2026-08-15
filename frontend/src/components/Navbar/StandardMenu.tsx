@@ -27,8 +27,8 @@ function StandardMenu({ setIsMenuOpen, userData }: StandardMenuProps) {
         </li>
 
         <li>
-          <Link className={menuLinkClass} to="/universities">
-            {t("nav.universities")}
+          <Link className={menuLinkClass} to="/about">
+            {t("nav.about")}
           </Link>
         </li>
 

@@ -20,8 +20,8 @@
   },
   "nav": {
     "home": "Početna",
+    "about": "O projektu",
     "apiDocs": "API Dokumentacija",
-    "universities": "Univerziteti",
     "improveData": "Poboljšaj podatke",
     "admin": "Admin",
     "profile": "Profil",

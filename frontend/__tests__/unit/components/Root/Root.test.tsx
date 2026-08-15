@@ -70,10 +70,10 @@ async function expectNotificationAndLink({
 }
 
 describe("Root component", () => {
-  test("renders Home heading if server is live", async () => {
+  test("renders home page heading if server is live", async () => {
     renderRoot();
     const homeHeading = await screen.findByRole("heading", {
-      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      name: /Find programs and universities/i,
     });
     expect(homeHeading).toBeInTheDocument();
   });

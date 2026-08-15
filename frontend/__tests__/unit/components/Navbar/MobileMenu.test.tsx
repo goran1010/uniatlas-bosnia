@@ -32,9 +32,7 @@ describe("MobileMenu", () => {
 
     expect(screen.getByRole("link", { name: /Home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /API Docs/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /Universities/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /About/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^Log In$/i })).toBeInTheDocument();
 
     expect(

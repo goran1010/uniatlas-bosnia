@@ -89,6 +89,7 @@ function UnifiedSearch() {
       >
         <Input
           ref={inputRef}
+          autoFocus
           type="search"
           placeholder={t("universitiesPage.searchAllPlaceholder")}
           minLength={2}

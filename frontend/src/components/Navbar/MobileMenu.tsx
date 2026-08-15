@@ -48,12 +48,12 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
         <li className="w-full">
           <Link
             className={menuItemClass}
-            to="/universities"
+            to="/about"
             onClick={() => {
               setIsMenuOpen(false);
             }}
           >
-            {t("nav.universities")}
+            {t("nav.about")}
           </Link>
         </li>
 

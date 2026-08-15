@@ -2,7 +2,7 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { LogIn } from "../../../../src/components/LogIn/LogIn";
-import { Home } from "../../../../src/components/Home/Home";
+import { About } from "../../../../src/components/About/About";
 import { Notifications } from "../../../../src/components/Notifications";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
@@ -48,8 +48,8 @@ beforeEach(() => {
         <MemoryRouter initialEntries={["/login"]}>
           <Notifications />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<About />} />
+            <Route path="/home" element={<About />} />
             <Route path="/login" element={<LogIn />} />
           </Routes>
         </MemoryRouter>
@@ -86,7 +86,7 @@ describe("Render LogIn Component", () => {
           <MemoryRouter initialEntries={["/login?error=github"]}>
             <Notifications />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<About />} />
               <Route path="/login" element={<LogIn />} />
             </Routes>
           </MemoryRouter>
@@ -110,8 +110,8 @@ describe("Render LogIn Component", () => {
           <MemoryRouter initialEntries={["/login"]}>
             <Notifications />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<About />} />
+              <Route path="/home" element={<About />} />
               <Route path="/login" element={<LogIn />} />
             </Routes>
           </MemoryRouter>

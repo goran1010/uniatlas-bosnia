@@ -20,8 +20,8 @@
   },
   "nav": {
     "home": "Home",
+    "about": "About",
     "apiDocs": "API Docs",
-    "universities": "Universities",
     "improveData": "Improve Data",
     "admin": "Admin",
     "profile": "Profile",

@@ -50,7 +50,7 @@ describe("ErrorPage navigation", () => {
     await user.click(goHomeLink);
 
     const homePageHeading = await screen.findByRole("heading", {
-      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      name: /Find programs and universities/i,
     });
     expect(homePageHeading).toBeInTheDocument();
     vi.restoreAllMocks();

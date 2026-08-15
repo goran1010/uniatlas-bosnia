@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Home } from "../../../../src/components/Home/Home";
+import { About } from "../../../../src/components/About/About";
 import { MemoryRouter } from "react-router";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 import type { ReactElement } from "react";
@@ -8,12 +8,12 @@ function Wrapper({ children }: { children: ReactElement }) {
   return <RootContextProvider>{children}</RootContextProvider>;
 }
 
-describe("Home component", () => {
+describe("About component", () => {
   test("render component", async () => {
     render(
       <MemoryRouter>
         <Wrapper>
-          <Home />
+          <About />
         </Wrapper>
       </MemoryRouter>,
     );
@@ -28,7 +28,7 @@ describe("Home component", () => {
     render(
       <MemoryRouter>
         <Wrapper>
-          <Home />
+          <About />
         </Wrapper>
       </MemoryRouter>,
     );
@@ -43,7 +43,7 @@ describe("Home component", () => {
     render(
       <MemoryRouter>
         <Wrapper>
-          <Home />
+          <About />
         </Wrapper>
       </MemoryRouter>,
     );
@@ -58,7 +58,7 @@ describe("Home component", () => {
     render(
       <MemoryRouter>
         <Wrapper>
-          <Home />
+          <About />
         </Wrapper>
       </MemoryRouter>,
     );
@@ -73,7 +73,7 @@ describe("Home component", () => {
     render(
       <MemoryRouter>
         <Wrapper>
-          <Home />
+          <About />
         </Wrapper>
       </MemoryRouter>,
     );

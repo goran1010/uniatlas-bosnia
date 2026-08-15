@@ -45,48 +45,56 @@ describe("Loading components when visiting an address", () => {
     consoleSpy.mockRestore();
   });
 
-  test("visit universities page", async () => {
-    renderRoute("/universities");
-
-    const linkElements = await screen.findAllByText(/Universities/i);
-    expect(linkElements[0]).not.toBeNull();
-  });
-
-  test("visit home page", async () => {
+  test("visit home page renders the universities page", async () => {
     renderRoute("/");
 
-    const linkElement = await screen.findByRole("heading", {
-      name: /Bosnia and Herzegovina/i,
+    const heading = await screen.findByRole("heading", {
+      name: /Find programs and universities/i,
       level: 1,
     });
-    expect(linkElement).not.toBeNull();
+    expect(heading).not.toBeNull();
   });
 
-  test.each(["/", "/universities"])(
-    "render Footer on every page",
+  test.each(["/universities", "/home"])(
+    "redirects %s to the home page",
     async (route) => {
       renderRoute(route);
 
-      const footerEmail = await screen.findByText(/goran1010jovic@gmail.com/i);
-      const footerAuthor = await screen.findByText(/Goran Jović/i);
-      expect(footerEmail).not.toBeNull();
-      expect(footerAuthor).not.toBeNull();
-    },
-  );
-
-  test.each(["/", "/universities"])(
-    "render Navbar on every page",
-    async (route) => {
-      renderRoute(route);
-
-      const nav = await screen.findByRole("navigation");
-      const homeLink = within(nav).getByRole("link", { name: /Home/i });
-      const universitiesLink = within(nav).getByRole("link", {
-        name: /Universities/i,
+      const heading = await screen.findByRole("heading", {
+        name: /Find programs and universities/i,
+        level: 1,
       });
-
-      expect(homeLink).not.toBeNull();
-      expect(universitiesLink).not.toBeNull();
+      expect(heading).not.toBeNull();
     },
   );
+
+  test("visit about page", async () => {
+    renderRoute("/about");
+
+    const heading = await screen.findByRole("heading", {
+      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      level: 1,
+    });
+    expect(heading).not.toBeNull();
+  });
+
+  test.each(["/", "/about"])("render Footer on every page", async (route) => {
+    renderRoute(route);
+
+    const footerEmail = await screen.findByText(/goran1010jovic@gmail.com/i);
+    const footerAuthor = await screen.findByText(/Goran Jović/i);
+    expect(footerEmail).not.toBeNull();
+    expect(footerAuthor).not.toBeNull();
+  });
+
+  test.each(["/", "/about"])("render Navbar on every page", async (route) => {
+    renderRoute(route);
+
+    const nav = await screen.findByRole("navigation");
+    const homeLink = within(nav).getByRole("link", { name: /Home/i });
+    const aboutLink = within(nav).getByRole("link", { name: /About/i });
+
+    expect(homeLink).not.toBeNull();
+    expect(aboutLink).not.toBeNull();
+  });
 });
