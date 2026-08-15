@@ -293,9 +293,9 @@ describe("AddUniversityEntity", () => {
     );
     await pickUniversity(user);
 
-    expect(
-      screen.getByRole("combobox", { name: /^University$/i }),
-    ).toHaveValue("1");
+    expect(screen.getByRole("combobox", { name: /^University$/i })).toHaveValue(
+      "1",
+    );
 
     await user.selectOptions(
       screen.getByRole("combobox", { name: /Entity Type/i }),

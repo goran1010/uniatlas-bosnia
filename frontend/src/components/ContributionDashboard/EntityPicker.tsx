@@ -193,9 +193,7 @@ function EntityPicker({
 
   let pickedEntity: PickedEntity | undefined;
   if (depth === 1 && selUniversity) {
-    const university = universities.find(
-      (u) => String(u.id) === selUniversity,
-    );
+    const university = universities.find((u) => String(u.id) === selUniversity);
     if (university) pickedEntity = { type: "UNIVERSITY", data: university };
   } else if (depth === 2 && selFaculty) {
     const faculty = faculties.find((f) => String(f.id) === selFaculty);
