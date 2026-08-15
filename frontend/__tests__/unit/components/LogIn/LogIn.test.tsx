@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { LogIn } from "../../../../src/components/LogIn/LogIn";
 import { Home } from "../../../../src/components/Home/Home";

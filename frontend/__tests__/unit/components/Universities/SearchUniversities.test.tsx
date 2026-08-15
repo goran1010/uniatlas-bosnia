@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { SearchUniversities } from "../../../../src/components/Universities/SearchUniversities";
 import { Notifications } from "../../../../src/components/Notifications";

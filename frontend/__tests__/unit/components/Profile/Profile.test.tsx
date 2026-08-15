@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Notifications } from "../../../../src/components/Notifications";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router";
 import { Profile } from "../../../../src/components/Profile/Profile";
 import { LogIn } from "../../../../src/components/LogIn/LogIn";
 import userEvent from "@testing-library/user-event";

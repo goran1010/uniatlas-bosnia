@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Home } from "../../../../src/components/Home/Home";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 import type { ReactElement } from "react";
 

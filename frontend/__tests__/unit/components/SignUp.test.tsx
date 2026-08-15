@@ -1,6 +1,6 @@
 import { SignUp } from "../../../src/components/SignUp/SignUp";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { LogIn } from "../../../src/components/LogIn/LogIn";
 import { Notifications } from "../../../src/components/Notifications";

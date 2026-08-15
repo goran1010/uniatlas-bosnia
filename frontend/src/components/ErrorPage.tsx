@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useLanguage } from "../customHooks/useLanguage";
 import { Helmet } from "react-helmet-async";
 

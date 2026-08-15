@@ -1,5 +1,5 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router";
 import { App } from "../../../../src/App";
 import { Notifications } from "../../../../src/components/Notifications";
 import { Navbar } from "../../../../src/components/Navbar/Navbar";

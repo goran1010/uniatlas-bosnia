@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { createMemoryRouter } from "react-router-dom";
+import { createMemoryRouter } from "react-router";
 import { routes } from "../../../../src/routes";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 import userEvent from "@testing-library/user-event";
 
 beforeEach(() => {

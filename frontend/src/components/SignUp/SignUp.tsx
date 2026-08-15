@@ -1,7 +1,7 @@
 import { useState, useEffect, use } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { RootContext } from "../../contextData/RootContext";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { SignUpForm } from "./SignUpForm";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink";
 import { DividerOr } from "../sharedComponents/DividerOr";

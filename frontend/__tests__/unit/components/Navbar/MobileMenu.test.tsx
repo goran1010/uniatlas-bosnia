@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { MobileMenu } from "../../../../src/components/Navbar/MobileMenu";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 

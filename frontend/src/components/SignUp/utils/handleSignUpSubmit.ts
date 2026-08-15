@@ -8,7 +8,7 @@ import type { SubmitEvent } from "react";
 import type { AddNotification } from "../../../types/notification";
 import type { TFunction } from "../../../types/i18n";
 import type { ServerStatus } from "../../../utils/serverStatus";
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router";
 
 type HandleSignUpSubmit = (
   event: SubmitEvent<HTMLFormElement>,
