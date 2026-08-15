@@ -212,11 +212,16 @@
       "STUDY_PROGRAM": "Study Program",
       "SUBJECT": "Subject"
     },
-    "parentId": "Parent ID",
-    "parentIdHelp": {
-      "FACULTY": "University ID",
-      "STUDY_PROGRAM": "Faculty ID",
-      "SUBJECT": "Study Program ID"
+    "picker": {
+      "parent": "Where should the new item be added?",
+      "target": "Which item do you want to change?",
+      "placeholder": "— select —",
+      "currentData": "Current data",
+      "noChildren": {
+        "FACULTY": "No faculties available",
+        "STUDY_PROGRAM": "No study programs available",
+        "SUBJECT": "No subjects available"
+      }
     },
     "dataFields": {
       "name": "Name",

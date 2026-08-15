@@ -212,11 +212,16 @@
       "STUDY_PROGRAM": "Studijski program",
       "SUBJECT": "Predmet"
     },
-    "parentId": "ID roditelja",
-    "parentIdHelp": {
-      "FACULTY": "ID univerziteta",
-      "STUDY_PROGRAM": "ID fakulteta",
-      "SUBJECT": "ID studijskog programa"
+    "picker": {
+      "parent": "Gdje treba dodati novu stavku?",
+      "target": "Koju stavku želite izmijeniti?",
+      "placeholder": "— izaberite —",
+      "currentData": "Trenutni podaci",
+      "noChildren": {
+        "FACULTY": "Nema dostupnih fakulteta",
+        "STUDY_PROGRAM": "Nema dostupnih studijskih programa",
+        "SUBJECT": "Nema dostupnih predmeta"
+      }
     },
     "dataFields": {
       "name": "Naziv",
