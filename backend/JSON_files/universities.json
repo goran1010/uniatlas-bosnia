@@ -11,7 +11,133 @@
     "accreditationTo": "2029-08-25",
     "authority": "Ministarstvo za nauku, visoko obrazovanje i mlade Kantona Sarajevo",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-05-26",
+    "faculties": [
+      {
+        "name": "Elektrotehnički fakultet",
+        "city": "Sarajevo",
+        "website": "https://www.etf.unsa.ba",
+        "studyPrograms": [
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "FIRST",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Programiranje 1",
+                "semester": 1,
+                "ects": 6,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Matematika 1",
+                "semester": 1,
+                "ects": 7,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Algoritmi i strukture podataka",
+                "semester": 3,
+                "ects": 6,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Web tehnologije",
+                "semester": 5,
+                "ects": 5,
+                "type": "ELECTIVE"
+              }
+            ]
+          },
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "SECOND",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Mašinsko učenje",
+                "semester": 1,
+                "ects": 6,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Distribuirani sistemi",
+                "semester": 2,
+                "ects": 6,
+                "type": "ELECTIVE"
+              }
+            ]
+          },
+          {
+            "name": "Automatika i elektronika",
+            "cycle": "FIRST",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Osnove elektrotehnike",
+                "semester": 1,
+                "ects": 7,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Digitalna elektronika",
+                "semester": 4,
+                "ects": 6,
+                "type": "MANDATORY"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Prirodno-matematički fakultet",
+        "city": "Sarajevo",
+        "website": "https://www.pmf.unsa.ba",
+        "studyPrograms": [
+          {
+            "name": "Matematika",
+            "cycle": "FIRST",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Analiza 1",
+                "semester": 1,
+                "ects": 8,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Linearna algebra",
+                "semester": 1,
+                "ects": 7,
+                "type": "MANDATORY"
+              }
+            ]
+          },
+          {
+            "name": "Fizika",
+            "cycle": "FIRST",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Bosanski",
+            "subjects": []
+          }
+        ]
+      },
+      {
+        "name": "Filozofski fakultet",
+        "city": "Sarajevo",
+        "website": "https://www.ff.unsa.ba",
+        "studyPrograms": []
+      }
+    ]
   },
   {
     "name": "Univerzitet u Banjoj Luci",
@@ -25,7 +151,86 @@
     "accreditationTo": "2029-07-22",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-05-26",
+    "faculties": [
+      {
+        "name": "Elektrotehnički fakultet",
+        "city": "Banja Luka",
+        "website": "https://www.etf.unibl.org",
+        "studyPrograms": [
+          {
+            "name": "Elektroenergetika i automatika",
+            "cycle": "FIRST",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "Srpski",
+            "subjects": [
+              {
+                "name": "Osnovi elektrotehnike 1",
+                "semester": 1,
+                "ects": 8,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Električne mašine",
+                "semester": 5,
+                "ects": 6,
+                "type": "MANDATORY"
+              }
+            ]
+          },
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "FIRST",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "Srpski",
+            "subjects": [
+              {
+                "name": "Osnove programiranja",
+                "semester": 1,
+                "ects": 7,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Baze podataka",
+                "semester": 5,
+                "ects": 6,
+                "type": "MANDATORY"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Medicinski fakultet",
+        "city": "Banja Luka",
+        "website": "https://med.unibl.org",
+        "studyPrograms": [
+          {
+            "name": "Medicina",
+            "cycle": "FIRST",
+            "durationYears": 6,
+            "ects": 360,
+            "language": "Srpski",
+            "subjects": [
+              {
+                "name": "Anatomija",
+                "semester": 1,
+                "ects": 10,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Biohemija",
+                "semester": 2,
+                "ects": 8,
+                "type": "MANDATORY"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Univerzitet u Tuzli",
@@ -39,7 +244,71 @@
     "accreditationTo": "2033-03-19",
     "authority": "Ministarstvo obrazovanja i nauke Tuzlanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-05-26",
+    "faculties": [
+      {
+        "name": "Fakultet elektrotehnike",
+        "city": "Tuzla",
+        "website": "https://www.fe.untz.ba",
+        "studyPrograms": [
+          {
+            "name": "Softversko inženjerstvo",
+            "cycle": "FIRST",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Uvod u programiranje",
+                "semester": 1,
+                "ects": 6,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Operativni sistemi",
+                "semester": 4,
+                "ects": 6,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Razvoj mobilnih aplikacija",
+                "semester": 7,
+                "ects": 5,
+                "type": "ELECTIVE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Ekonomski fakultet",
+        "city": "Tuzla",
+        "website": "https://www.ef.untz.ba",
+        "studyPrograms": [
+          {
+            "name": "Ekonomija",
+            "cycle": "FIRST",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "Bosanski",
+            "subjects": [
+              {
+                "name": "Mikroekonomija",
+                "semester": 1,
+                "ects": 7,
+                "type": "MANDATORY"
+              },
+              {
+                "name": "Makroekonomija",
+                "semester": 2,
+                "ects": 7,
+                "type": "MANDATORY"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "Univerzitet Džemal Bijedić",
