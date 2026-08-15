@@ -53,29 +53,6 @@ const apiEndpoints: Endpoint[] = [
   },
   {
     method: "GET",
-    path: "/api/v1/universities/search",
-    descriptionKey: "api.endpointsData.searchUniversities",
-    params: [
-      {
-        name: "searchTerm",
-        required: true,
-        descriptionKey: "api.endpointsData.searchTermParam",
-      },
-    ],
-    successExample: `{
-  "message": "Universities retrieved successfully",
-  "data": [
-    { "id": 1, "name": "University of Sarajevo", "acronym": "UNSA", "city": "Sarajevo" }
-  ]
-}`,
-    errorExample: `// 404 - no match found
-{ "error": { "message": "No universities found for the given search term." } }
-
-// 400 - invalid searchTerm
-{ "error": { "message": "Validation failed: Search term must have at least 2 characters." } }`,
-  },
-  {
-    method: "GET",
     path: "/api/v1/universities/:id",
     descriptionKey: "api.endpointsData.getUniversityById",
     params: null,
@@ -94,8 +71,8 @@ const apiEndpoints: Endpoint[] = [
   },
   {
     method: "GET",
-    path: "/api/v1/study-programs/search",
-    descriptionKey: "api.endpointsData.searchStudyPrograms",
+    path: "/api/v1/search",
+    descriptionKey: "api.endpointsData.search",
     params: [
       {
         name: "searchTerm",
@@ -104,18 +81,39 @@ const apiEndpoints: Endpoint[] = [
       },
     ],
     successExample: `{
-  "message": "Study programs retrieved successfully",
-  "data": [
-    {
-      "id": 1, "name": "Software Engineering", "cycle": "FIRST",
-      "faculty": { "id": 1, "name": "Faculty of Electrical Engineering",
+  "message": "Search results retrieved successfully.",
+  "data": {
+    "universities": [
+      { "id": 1, "name": "University of Sarajevo", "acronym": "UNSA", "city": "Sarajevo" }
+    ],
+    "faculties": [
+      { "id": 1, "name": "Faculty of Electrical Engineering", "city": "Sarajevo",
         "university": { "id": 1, "name": "University of Sarajevo" }
       }
-    }
-  ]
+    ],
+    "studyPrograms": [
+      { "id": 1, "name": "Software Engineering", "cycle": "FIRST",
+        "faculty": { "id": 1, "name": "Faculty of Electrical Engineering",
+          "university": { "id": 1, "name": "University of Sarajevo" }
+        }
+      }
+    ],
+    "subjects": [
+      { "id": 1, "name": "Computer Networks", "semester": 4, "ects": 6,
+        "studyProgram": { "id": 1, "name": "Software Engineering",
+          "faculty": { "id": 1, "name": "Faculty of Electrical Engineering",
+            "university": { "id": 1, "name": "University of Sarajevo" }
+          }
+        }
+      }
+    ]
+  }
 }`,
     errorExample: `// 404 - no match found
-{ "error": { "message": "No study programs found for the given search term." } }`,
+{ "error": { "message": "No results found matching your search." } }
+
+// 400 - invalid searchTerm
+{ "error": { "message": "Request validation failed." } }`,
   },
 ];
 

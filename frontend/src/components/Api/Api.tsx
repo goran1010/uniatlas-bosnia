@@ -93,7 +93,7 @@ function Api() {
             {t("api.authFlowTitle")}
           </h2>
           <p>{t("api.authFlowBody")}</p>
-          <div className="grid gap-4">
+          <div className="flex flex-col gap-4">
             {authenticatedGroupsEndpoints.map((group) => (
               <div
                 key={group.titleKey}

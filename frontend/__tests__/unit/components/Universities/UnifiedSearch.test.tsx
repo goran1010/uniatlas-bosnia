@@ -16,87 +16,107 @@ function Wrapper() {
   );
 }
 
-function universitiesResponse() {
+const universityResult = {
+  id: 5,
+  name: "University of Mostar",
+  acronym: "SUM",
+  city: "Mostar",
+  entity: "FBIH",
+  ownership: "PRIVATNA",
+  foundedYear: "1977",
+  website: "https://sum.ba",
+};
+
+const facultyResult = {
+  id: 3,
+  name: "Faculty of Electrical Engineering",
+  universityId: 1,
+  city: "Sarajevo",
+  university: {
+    id: 1,
+    name: "University of Sarajevo",
+    acronym: "UNSA",
+    city: "Sarajevo",
+  },
+};
+
+const studyProgramResult = {
+  id: 7,
+  name: "Computer Science",
+  facultyId: 3,
+  cycle: "FIRST",
+  ects: 180,
+  faculty: {
+    id: 3,
+    name: "Faculty of Electrical Engineering",
+    universityId: 1,
+    university: {
+      id: 1,
+      name: "University of Sarajevo",
+      acronym: "UNSA",
+      city: "Sarajevo",
+    },
+  },
+};
+
+const subjectResult = {
+  id: 11,
+  name: "Computer Networks",
+  studyProgramId: 7,
+  semester: 4,
+  ects: 6,
+  type: "MANDATORY",
+  studyProgram: {
+    id: 7,
+    name: "Computer Science",
+    cycle: "FIRST",
+    faculty: {
+      id: 3,
+      name: "Faculty of Electrical Engineering",
+      universityId: 1,
+      university: {
+        id: 1,
+        name: "University of Sarajevo",
+        acronym: "UNSA",
+        city: "Sarajevo",
+      },
+    },
+  },
+};
+
+function searchResponse(
+  data: Partial<{
+    universities: unknown[];
+    faculties: unknown[];
+    studyPrograms: unknown[];
+    subjects: unknown[];
+  }> = {},
+) {
   return new Response(
     JSON.stringify({
-      message: "Universities retrieved successfully.",
-      data: [
-        {
-          id: 5,
-          name: "University of Mostar",
-          acronym: "SUM",
-          city: "Mostar",
-          entity: "FBIH",
-          ownership: "PRIVATNA",
-          foundedYear: "1977",
-          website: "https://sum.ba",
-        },
-      ],
+      message: "Search results retrieved successfully.",
+      data: {
+        universities: [],
+        faculties: [],
+        studyPrograms: [],
+        subjects: [],
+        ...data,
+      },
     }),
     { status: 200, headers: { "Content-Type": "application/json" } },
   );
-}
-
-function studyProgramsResponse() {
-  return new Response(
-    JSON.stringify({
-      message: "Study programs retrieved successfully.",
-      data: [
-        {
-          id: 7,
-          name: "Computer Science",
-          facultyId: 3,
-          cycle: "FIRST",
-          ects: 180,
-          faculty: {
-            id: 3,
-            name: "Faculty of Electrical Engineering",
-            universityId: 1,
-            university: {
-              id: 1,
-              name: "University of Sarajevo",
-              acronym: "UNSA",
-            },
-          },
-        },
-      ],
-    }),
-    { status: 200, headers: { "Content-Type": "application/json" } },
-  );
-}
-
-function notFoundResponse() {
-  return new Response(JSON.stringify({ error: { message: "Not found" } }), {
-    status: 404,
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
-function mockSearchFetch({
-  universities,
-  studyPrograms,
-}: {
-  universities: () => Response | Error;
-  studyPrograms: () => Response | Error;
-}) {
-  vi.spyOn(globalThis, "fetch").mockImplementation((input) => {
-    const url = input instanceof Request ? input.url : String(input);
-    const result = url.includes("/study-programs/search")
-      ? studyPrograms()
-      : universities();
-    if (result instanceof Error) {
-      return Promise.reject(result);
-    }
-    return Promise.resolve(result);
-  });
 }
 
 describe("UnifiedSearch", () => {
   beforeEach(() => {
-    mockSearchFetch({
-      universities: universitiesResponse,
-      studyPrograms: studyProgramsResponse,
-    });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      searchResponse({
+        universities: [universityResult],
+        faculties: [facultyResult],
+        studyPrograms: [studyProgramResult],
+        subjects: [subjectResult],
+      }),
+    );
   });
 
   afterEach(() => {
@@ -136,7 +156,17 @@ describe("UnifiedSearch", () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  test("queries both endpoints and renders grouped results", async () => {
+  test("explains which terms are searched", () => {
+    render(<Wrapper />);
+
+    expect(
+      screen.getByText(
+        /Search universities, faculties, study programs, and subjects by name/i,
+      ),
+    ).toBeInTheDocument();
+  });
+
+  test("fires a single request and renders all four grouped sections", async () => {
     render(<Wrapper />);
     const user = userEvent.setup();
 
@@ -147,24 +177,57 @@ describe("UnifiedSearch", () => {
     await user.click(screen.getByRole("button", { name: /^Search$/i }));
 
     const universityName = await screen.findByText(/University of Mostar/i);
-    const programName = screen.getByText(/Computer Science/i);
 
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    const firstCallUrl = vi.mocked(fetch).mock.calls[0]?.[0];
+    expect(firstCallUrl).toBeTypeOf("string");
+    expect(firstCallUrl).toContain("/api/v1/search?searchTerm=sarajevo");
     expect(
       screen.getByRole("heading", { name: /^Universities$/i }),
     ).toBeInTheDocument();
     expect(
+      screen.getByRole("heading", { name: /^Faculties$/i }),
+    ).toBeInTheDocument();
+    expect(
       screen.getByRole("heading", { name: /^Study programs$/i }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /^Subjects$/i }),
+    ).toBeInTheDocument();
     expect(universityName).toBeInTheDocument();
-    expect(programName).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Faculty of Electrical Engineering/i).length,
+    ).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Computer Science/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Computer Networks/i)).toBeInTheDocument();
   });
 
-  test("renders combined no results message when both endpoints return 404", async () => {
-    mockSearchFetch({
-      universities: notFoundResponse,
-      studyPrograms: notFoundResponse,
-    });
+  test("shows the faculty city in faculty results", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      searchResponse({ faculties: [facultyResult] }),
+    );
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "sarajevo",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    await screen.findByText(/Faculty of Electrical Engineering/i);
+
+    expect(screen.getByText(/City: Sarajevo/i)).toBeInTheDocument();
+  });
+
+  test("renders combined no results message on 404", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ error: { message: "Not found" } }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -172,19 +235,16 @@ describe("UnifiedSearch", () => {
     await user.type(screen.getByRole("searchbox", { name: /Search/i }), "xy");
     await user.click(screen.getByRole("button", { name: /^Search$/i }));
 
-    const noResultsMessage = await screen.findByText(
-      /No universities or study programs found\./i,
-    );
+    const noResultsMessage = await screen.findByText(/^No results found\.$/i);
 
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(1);
     expect(noResultsMessage).toBeInTheDocument();
   });
 
-  test("renders per-group empty message when only one group matches", async () => {
-    mockSearchFetch({
-      universities: notFoundResponse,
-      studyPrograms: studyProgramsResponse,
-    });
+  test("renders per-group empty messages when only some groups match", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      searchResponse({ studyPrograms: [studyProgramResult] }),
+    );
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -195,43 +255,38 @@ describe("UnifiedSearch", () => {
     );
     await user.click(screen.getByRole("button", { name: /^Search$/i }));
 
-    const programName = await screen.findByText(/Computer Science/i);
+    await screen.findByText(/Computer Science/i);
 
-    expect(programName).toBeInTheDocument();
     expect(screen.getByText(/^No universities found\.$/i)).toBeInTheDocument();
+    expect(screen.getByText(/^No faculties found\.$/i)).toBeInTheDocument();
+    expect(screen.getByText(/^No subjects found\.$/i)).toBeInTheDocument();
   });
 
-  test("shows error notification and surviving group when one endpoint fails", async () => {
-    mockSearchFetch({
-      universities: () =>
-        new Response(
-          JSON.stringify({ error: { message: "Search exploded." } }),
-          { status: 500, headers: { "Content-Type": "application/json" } },
-        ),
-      studyPrograms: studyProgramsResponse,
-    });
+  test("shows translated error on non-404 non-ok response", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ error: { message: "Search exploded." } }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
 
     render(<Wrapper />);
     const user = userEvent.setup();
 
     await user.type(
       screen.getByRole("searchbox", { name: /Search/i }),
-      "computer",
+      "sarajevo",
     );
     await user.click(screen.getByRole("button", { name: /^Search$/i }));
 
     const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
 
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(1);
     expect(apiErrorMessage).toBeInTheDocument();
-    expect(screen.getByText(/Computer Science/i)).toBeInTheDocument();
   });
 
   test("shows fallback message on thrown request", async () => {
-    mockSearchFetch({
-      universities: () => new Error("network"),
-      studyPrograms: () => new Error("network"),
-    });
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("network"));
 
     render(<Wrapper />);
     const user = userEvent.setup();
@@ -244,19 +299,17 @@ describe("UnifiedSearch", () => {
 
     const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
 
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(1);
     expect(fallbackMessage).toBeInTheDocument();
   });
 
   test("shows error notification when a successful response has an invalid payload", async () => {
-    mockSearchFetch({
-      universities: () =>
-        new Response(
-          JSON.stringify({ message: "Universities retrieved successfully." }),
-          { status: 200, headers: { "Content-Type": "application/json" } },
-        ),
-      studyPrograms: notFoundResponse,
-    });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({ message: "Search results retrieved successfully." }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      ),
+    );
 
     render(<Wrapper />);
     const user = userEvent.setup();

@@ -1,26 +1,45 @@
-import { useState, use, useRef, type SubmitEvent } from "react";
+import { useState, use, useRef, type ReactNode, type SubmitEvent } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
+import { FacultyResult } from "./FacultyResult";
 import { StudyProgramResult } from "./StudyProgramResult";
-import { searchStudyPrograms, searchUniversities } from "./utils/search";
+import { SubjectResult } from "./SubjectResult";
+import { searchAll } from "./utils/search";
 import { searchTermSchema } from "../../schemas/domain";
 
-import type {
-  StudyProgramSearchResult,
-  UniversityListItem,
-} from "../../schemas/university";
+import type { UnifiedSearchResults } from "../../schemas/university";
 
-interface SearchResults {
-  universities: UniversityListItem[];
-  studyPrograms: StudyProgramSearchResult[];
+function ResultSection({
+  heading,
+  emptyMessage,
+  isEmpty,
+  children,
+}: {
+  heading: string;
+  emptyMessage: string;
+  isEmpty: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <section className="w-full flex flex-col gap-2">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+        {heading}
+      </h2>
+      {isEmpty ? (
+        <p className="text-gray-500 dark:text-gray-400">{emptyMessage}</p>
+      ) : (
+        children
+      )}
+    </section>
+  );
 }
 
 function UnifiedSearch() {
   const { t, addNotification } = use(RootContext);
-  const [results, setResults] = useState<SearchResults | null>(null);
+  const [results, setResults] = useState<UnifiedSearchResults | null>(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,36 +58,31 @@ function UnifiedSearch() {
       return;
     }
     const term = searchTerm.data;
-    setLoading(true);
-    const [universities, studyPrograms] = await Promise.allSettled([
-      searchUniversities(term),
-      searchStudyPrograms(term),
-    ]);
-    if (
-      universities.status === "rejected" ||
-      studyPrograms.status === "rejected"
-    ) {
+    try {
+      setLoading(true);
+      setResults(await searchAll(term));
+    } catch {
       addNotification({
         type: "error",
         message: t("messages.universities.searchError"),
       });
+    } finally {
+      setLoading(false);
     }
-    setResults({
-      universities:
-        universities.status === "fulfilled" ? universities.value : [],
-      studyPrograms:
-        studyPrograms.status === "fulfilled" ? studyPrograms.value : [],
-    });
-    setLoading(false);
   }
 
   const noResultsAtAll =
     results !== null &&
     results.universities.length === 0 &&
-    results.studyPrograms.length === 0;
+    results.faculties.length === 0 &&
+    results.studyPrograms.length === 0 &&
+    results.subjects.length === 0;
 
   return (
     <div className="flex flex-col gap-4 w-full items-center justify-center">
+      <p className="text-sm text-center text-gray-600 dark:text-gray-300 max-w-lg">
+        {t("universitiesPage.searchHint")}
+      </p>
       <form
         onSubmit={(e) => void handleSearch(e)}
         className="flex gap-2 w-full max-w-lg"
@@ -97,38 +111,50 @@ function UnifiedSearch() {
           </p>
         ) : (
           <>
-            <section className="w-full flex flex-col gap-2">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {t("universitiesPage.universitiesSection")}
-              </h2>
-              {results.universities.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400">
-                  {t("universitiesPage.noResults")}
-                </p>
-              ) : (
-                <ul className="flex flex-col gap-3 w-full">
-                  {results.universities.map((u) => (
-                    <UniversityCard key={u.id} university={u} />
-                  ))}
-                </ul>
-              )}
-            </section>
-            <section className="w-full flex flex-col gap-2">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {t("universitiesPage.studyProgramsSection")}
-              </h2>
-              {results.studyPrograms.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400">
-                  {t("universitiesPage.noStudyProgramResults")}
-                </p>
-              ) : (
-                <ul className="flex flex-col gap-2 w-full">
-                  {results.studyPrograms.map((p) => (
-                    <StudyProgramResult key={p.id} program={p} t={t} />
-                  ))}
-                </ul>
-              )}
-            </section>
+            <ResultSection
+              heading={t("universitiesPage.universitiesSection")}
+              emptyMessage={t("universitiesPage.noResults")}
+              isEmpty={results.universities.length === 0}
+            >
+              <ul className="flex flex-col gap-3 w-full">
+                {results.universities.map((u) => (
+                  <UniversityCard key={u.id} university={u} />
+                ))}
+              </ul>
+            </ResultSection>
+            <ResultSection
+              heading={t("universitiesPage.facultiesSection")}
+              emptyMessage={t("universitiesPage.noFacultyResults")}
+              isEmpty={results.faculties.length === 0}
+            >
+              <ul className="flex flex-col gap-2 w-full">
+                {results.faculties.map((f) => (
+                  <FacultyResult key={f.id} faculty={f} t={t} />
+                ))}
+              </ul>
+            </ResultSection>
+            <ResultSection
+              heading={t("universitiesPage.studyProgramsSection")}
+              emptyMessage={t("universitiesPage.noStudyProgramResults")}
+              isEmpty={results.studyPrograms.length === 0}
+            >
+              <ul className="flex flex-col gap-2 w-full">
+                {results.studyPrograms.map((p) => (
+                  <StudyProgramResult key={p.id} program={p} t={t} />
+                ))}
+              </ul>
+            </ResultSection>
+            <ResultSection
+              heading={t("universitiesPage.subjectsSection")}
+              emptyMessage={t("universitiesPage.noSubjectResults")}
+              isEmpty={results.subjects.length === 0}
+            >
+              <ul className="flex flex-col gap-2 w-full">
+                {results.subjects.map((s) => (
+                  <SubjectResult key={s.id} subject={s} t={t} />
+                ))}
+              </ul>
+            </ResultSection>
           </>
         ))
       )}
