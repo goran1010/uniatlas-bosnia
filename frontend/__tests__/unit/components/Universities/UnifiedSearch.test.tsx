@@ -1,0 +1,272 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
+import userEvent from "@testing-library/user-event";
+import { UnifiedSearch } from "../../../../src/components/Universities/UnifiedSearch";
+import { Notifications } from "../../../../src/components/Notifications";
+import { RootContextProvider } from "../../../utils/rootContextProvider";
+
+function Wrapper() {
+  return (
+    <RootContextProvider>
+      <MemoryRouter>
+        <Notifications />
+        <UnifiedSearch />
+      </MemoryRouter>
+    </RootContextProvider>
+  );
+}
+
+function universitiesResponse() {
+  return new Response(
+    JSON.stringify({
+      message: "Universities retrieved successfully.",
+      data: [
+        {
+          id: 5,
+          name: "University of Mostar",
+          acronym: "SUM",
+          city: "Mostar",
+          entity: "FBIH",
+          ownership: "PRIVATNA",
+          foundedYear: "1977",
+          website: "https://sum.ba",
+        },
+      ],
+    }),
+    { status: 200, headers: { "Content-Type": "application/json" } },
+  );
+}
+
+function studyProgramsResponse() {
+  return new Response(
+    JSON.stringify({
+      message: "Study programs retrieved successfully.",
+      data: [
+        {
+          id: 7,
+          name: "Computer Science",
+          facultyId: 3,
+          cycle: "FIRST",
+          ects: 180,
+          faculty: {
+            id: 3,
+            name: "Faculty of Electrical Engineering",
+            universityId: 1,
+            university: {
+              id: 1,
+              name: "University of Sarajevo",
+              acronym: "UNSA",
+            },
+          },
+        },
+      ],
+    }),
+    { status: 200, headers: { "Content-Type": "application/json" } },
+  );
+}
+
+function notFoundResponse() {
+  return new Response(JSON.stringify({ error: { message: "Not found" } }), {
+    status: 404,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+function mockSearchFetch({
+  universities,
+  studyPrograms,
+}: {
+  universities: () => Response | Error;
+  studyPrograms: () => Response | Error;
+}) {
+  vi.spyOn(globalThis, "fetch").mockImplementation((input) => {
+    const url = input instanceof Request ? input.url : String(input);
+    const result = url.includes("/study-programs/search")
+      ? studyPrograms()
+      : universities();
+    if (result instanceof Error) {
+      return Promise.reject(result);
+    }
+    return Promise.resolve(result);
+  });
+}
+
+describe("UnifiedSearch", () => {
+  beforeEach(() => {
+    mockSearchFetch({
+      universities: universitiesResponse,
+      studyPrograms: studyProgramsResponse,
+    });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  test("shows validation message and skips fetch for short search term", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole("searchbox", { name: /Search/i });
+    const searchButton = screen.getByRole("button", { name: /^Search$/i });
+
+    await user.type(searchInput, "a");
+    await user.click(searchButton);
+
+    const validationMessage = await screen.findByText(
+      /Search must have at least 2 characters/i,
+    );
+
+    expect(fetch).toHaveBeenCalledTimes(0);
+    expect(validationMessage).toBeInTheDocument();
+  });
+
+  test("shows validation message and skips fetch for an over-limit search term", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    const searchInput = screen.getByRole("searchbox", { name: /Search/i });
+    const searchButton = screen.getByRole("button", { name: /^Search$/i });
+    fireEvent.change(searchInput, { target: { value: "a".repeat(101) } });
+    await user.click(searchButton);
+
+    expect(
+      await screen.findByText(/Search must not exceed 100 characters/i),
+    ).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test("queries both endpoints and renders grouped results", async () => {
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "sarajevo",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const universityName = await screen.findByText(/University of Mostar/i);
+    const programName = screen.getByText(/Computer Science/i);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(
+      screen.getByRole("heading", { name: /^Universities$/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /^Study programs$/i }),
+    ).toBeInTheDocument();
+    expect(universityName).toBeInTheDocument();
+    expect(programName).toBeInTheDocument();
+  });
+
+  test("renders combined no results message when both endpoints return 404", async () => {
+    mockSearchFetch({
+      universities: notFoundResponse,
+      studyPrograms: notFoundResponse,
+    });
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(screen.getByRole("searchbox", { name: /Search/i }), "xy");
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const noResultsMessage = await screen.findByText(
+      /No universities or study programs found\./i,
+    );
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(noResultsMessage).toBeInTheDocument();
+  });
+
+  test("renders per-group empty message when only one group matches", async () => {
+    mockSearchFetch({
+      universities: notFoundResponse,
+      studyPrograms: studyProgramsResponse,
+    });
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "computer",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const programName = await screen.findByText(/Computer Science/i);
+
+    expect(programName).toBeInTheDocument();
+    expect(screen.getByText(/^No universities found\.$/i)).toBeInTheDocument();
+  });
+
+  test("shows error notification and surviving group when one endpoint fails", async () => {
+    mockSearchFetch({
+      universities: () =>
+        new Response(
+          JSON.stringify({ error: { message: "Search exploded." } }),
+          { status: 500, headers: { "Content-Type": "application/json" } },
+        ),
+      studyPrograms: studyProgramsResponse,
+    });
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "computer",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const apiErrorMessage = await screen.findByText(/^Search failed\.$/i);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(apiErrorMessage).toBeInTheDocument();
+    expect(screen.getByText(/Computer Science/i)).toBeInTheDocument();
+  });
+
+  test("shows fallback message on thrown request", async () => {
+    mockSearchFetch({
+      universities: () => new Error("network"),
+      studyPrograms: () => new Error("network"),
+    });
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "sarajevo",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    const fallbackMessage = await screen.findByText(/^Search failed\.$/i);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fallbackMessage).toBeInTheDocument();
+  });
+
+  test("shows error notification when a successful response has an invalid payload", async () => {
+    mockSearchFetch({
+      universities: () =>
+        new Response(
+          JSON.stringify({ message: "Universities retrieved successfully." }),
+          { status: 200, headers: { "Content-Type": "application/json" } },
+        ),
+      studyPrograms: notFoundResponse,
+    });
+
+    render(<Wrapper />);
+    const user = userEvent.setup();
+
+    await user.type(
+      screen.getByRole("searchbox", { name: /Search/i }),
+      "mostar",
+    );
+    await user.click(screen.getByRole("button", { name: /^Search$/i }));
+
+    expect(await screen.findByText(/^Search failed\.$/i)).toBeInTheDocument();
+  });
+});

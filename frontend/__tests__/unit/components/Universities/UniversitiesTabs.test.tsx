@@ -39,8 +39,8 @@ describe("Universities page tabs", () => {
       screen.getAllByRole("button", { name: /Search/i })[0],
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /Find Study Programs/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole("button", { name: /Find Study Programs/i }),
+    ).not.toBeInTheDocument();
   });
 
   test("switches tabs and renders tab content", async () => {
@@ -48,16 +48,6 @@ describe("Universities page tabs", () => {
 
     const searchInput = screen.getByRole("searchbox", { name: /Search/i });
     expect(searchInput).toBeInTheDocument();
-
-    const findProgramsTab = screen.getByRole("button", {
-      name: /Find Study Programs/i,
-    });
-    await user.click(findProgramsTab);
-
-    const findProgramsInput = await screen.findByRole("searchbox", {
-      name: /Find Study Programs/i,
-    });
-    expect(findProgramsInput).toBeInTheDocument();
 
     const browseAllTab = screen.getByRole("button", { name: /Browse All/i });
     await user.click(browseAllTab);
