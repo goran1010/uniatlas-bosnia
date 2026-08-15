@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { createMemoryRouter } from "react-router-dom";
+import { createMemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { routes } from "../../../src/routes";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 
 const user = userEvent.setup();
 
@@ -50,7 +50,7 @@ describe("ErrorPage navigation", () => {
     await user.click(goHomeLink);
 
     const homePageHeading = await screen.findByRole("heading", {
-      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      name: /Find programs and universities/i,
     });
     expect(homePageHeading).toBeInTheDocument();
     vi.restoreAllMocks();

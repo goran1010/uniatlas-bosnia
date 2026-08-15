@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Status } from "./Status";
 import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
@@ -48,12 +48,12 @@ function MobileMenu({ setIsMenuOpen, userData }: MobileMenuProps) {
         <li className="w-full">
           <Link
             className={menuItemClass}
-            to="/universities"
+            to="/about"
             onClick={() => {
               setIsMenuOpen(false);
             }}
           >
-            {t("nav.universities")}
+            {t("nav.about")}
           </Link>
         </li>
 

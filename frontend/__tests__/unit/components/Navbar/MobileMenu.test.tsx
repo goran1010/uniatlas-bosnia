@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { MobileMenu } from "../../../../src/components/Navbar/MobileMenu";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
@@ -32,9 +32,7 @@ describe("MobileMenu", () => {
 
     expect(screen.getByRole("link", { name: /Home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /API Docs/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /Universities/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /About/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^Log In$/i })).toBeInTheDocument();
 
     expect(

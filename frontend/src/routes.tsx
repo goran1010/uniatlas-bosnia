@@ -1,6 +1,7 @@
+import { Navigate } from "react-router";
 import { App } from "./App";
 import { ErrorPage } from "./components/ErrorPage";
-import { Home } from "./components/Home/Home";
+import { About } from "./components/About/About";
 import { Universities } from "./components/Universities/Universities";
 import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
@@ -16,20 +17,24 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        element: <Home />,
+        element: <Universities />,
         index: true,
       },
       {
-        element: <Home />,
+        element: <Navigate to="/" replace />,
         path: "/home",
+      },
+      {
+        element: <Navigate to="/" replace />,
+        path: "universities",
+      },
+      {
+        element: <About />,
+        path: "about",
       },
       {
         element: <Api />,
         path: "api-docs",
-      },
-      {
-        element: <Universities />,
-        path: "universities",
       },
       {
         element: <ContributionDashboard />,

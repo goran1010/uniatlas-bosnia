@@ -1,6 +1,6 @@
 import { RootContext } from "../../contextData/RootContext";
 import { use, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { handleLogout } from "./utils/handleLogout";
 import { Button } from "../sharedComponents/Button";
 import { Helmet } from "react-helmet-async";

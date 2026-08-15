@@ -20,8 +20,8 @@
   },
   "nav": {
     "home": "Početna",
+    "about": "O projektu",
     "apiDocs": "API Dokumentacija",
-    "universities": "Univerziteti",
     "improveData": "Poboljšaj podatke",
     "admin": "Admin",
     "profile": "Profil",
@@ -148,9 +148,8 @@
       "apiStatus": "Provjera statusa API-ja.",
       "apiV1Status": "Provjera statusa API v1.",
       "getAllUniversities": "Preuzimanje svih univerziteta, sortiranih po nazivu.",
-      "searchUniversities": "Pretraga univerziteta po nazivu, gradu ili akronimu (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
       "getUniversityById": "Preuzimanje univerziteta po ID-u s potpunim ugniježđenim detaljima (fakulteti, studijski programi, predmeti).",
-      "searchStudyPrograms": "Pretraga studijskih programa po nazivu širom svih univerziteta (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
+      "search": "Pretraga univerziteta (naziv, grad, akronim), fakulteta (naziv, grad), studijskih programa i predmeta (naziv) u jednom zahtjevu (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
       "searchTermParam": "Pojam za pretragu (najmanje 2 karaktera).",
       "csrfIssue": "Izdavanje CSRF tokena koji se koristi u x-csrf-token headeru za zahtjeve koji mijenjaju podatke.",
       "authSignup": "Registracija naloga na čekanju i slanje emaila za potvrdu.",
@@ -213,11 +212,16 @@
       "STUDY_PROGRAM": "Studijski program",
       "SUBJECT": "Predmet"
     },
-    "parentId": "ID roditelja",
-    "parentIdHelp": {
-      "FACULTY": "ID univerziteta",
-      "STUDY_PROGRAM": "ID fakulteta",
-      "SUBJECT": "ID studijskog programa"
+    "picker": {
+      "parent": "Gdje treba dodati novu stavku?",
+      "target": "Koju stavku želite izmijeniti?",
+      "placeholder": "— izaberite —",
+      "currentData": "Trenutni podaci",
+      "noChildren": {
+        "FACULTY": "Nema dostupnih fakulteta",
+        "STUDY_PROGRAM": "Nema dostupnih studijskih programa",
+        "SUBJECT": "Nema dostupnih predmeta"
+      }
     },
     "dataFields": {
       "name": "Naziv",
@@ -336,11 +340,17 @@
     "title": "Nađite programe i univerzitete",
     "browseAll": "Pregledaj sve",
     "search": "Pretraži",
-    "findPrograms": "Pronađi studijske programe",
-    "searchPlaceholder": "Pretraži po nazivu, gradu ili akronimu…",
-    "studyProgramsPlaceholder": "Pretraži po nazivu studijskog programa…",
+    "searchHint": "Pretražite univerzitete, fakultete, studijske programe i predmete po nazivu - pretraga uključuje i gradove i akronime univerziteta.",
+    "searchAllPlaceholder": "Pretraži po nazivu, gradu ili akronimu…",
+    "universitiesSection": "Univerziteti",
+    "facultiesSection": "Fakulteti",
+    "studyProgramsSection": "Studijski programi",
+    "subjectsSection": "Predmeti",
     "noResults": "Nisu pronađeni univerziteti.",
+    "noFacultyResults": "Nisu pronađeni fakulteti.",
     "noStudyProgramResults": "Nisu pronađeni studijski programi.",
+    "noSubjectResults": "Nisu pronađeni predmeti.",
+    "noResultsAtAll": "Nema rezultata pretrage.",
     "city": "Grad",
     "entity": "Entitet",
     "entities": {

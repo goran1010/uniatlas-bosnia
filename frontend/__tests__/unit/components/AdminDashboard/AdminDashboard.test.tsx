@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { AdminDashboard } from "../../../../src/components/AdminDashboard/AdminDashboard";
 import { Notifications } from "../../../../src/components/Notifications";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
 import type { UserData } from "../../../../src/customHooks/useStatusCheck";

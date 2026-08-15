@@ -11,7 +11,7 @@ import type { AddNotification } from "../../../types/notification";
 import type { UserData } from "../../../types/auth";
 import type { TFunction } from "../../../types/i18n";
 import type { ServerStatus } from "../../../utils/serverStatus";
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router";
 
 type HandleLogout = (
   addNotification: AddNotification,

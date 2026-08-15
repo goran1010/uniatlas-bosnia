@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { createMemoryRouter, RouterProvider } from "react-router";
 import { routes } from "../../../src/routes";
 
 const mockValue = new Response(JSON.stringify({ universities: [] }), {
@@ -22,19 +22,18 @@ function Wrapper() {
 }
 
 describe("Universities page", () => {
-  test("renders tab buttons: Browse All, Search, Find Study Programs", async () => {
+  test("renders tab buttons: Search, Browse All", async () => {
     Wrapper();
 
     const BrowseAllButton = await screen.findByRole("button", {
       name: /Browse All/i,
     });
     const SearchButton = screen.getAllByRole("button", { name: /Search/i })[0];
-    const FindStudyProgramsButton = screen.getByRole("button", {
-      name: /Find Study Programs/i,
-    });
 
     expect(BrowseAllButton).toBeInTheDocument();
     expect(SearchButton).toBeInTheDocument();
-    expect(FindStudyProgramsButton).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /Find Study Programs/i }),
+    ).not.toBeInTheDocument();
   });
 });

@@ -71,8 +71,8 @@ describe("GET /api/v1/universities", () => {
   });
 });
 
-describe("GET /api/v1/universities/search", () => {
-  test("responds with status 200 and universities for searchTerm=TestSearchCity", async () => {
+describe("GET /api/v1/search", () => {
+  test("responds with status 200 and universities matched by city", async () => {
     const testUniversityName = "Test Integration University Search";
     const existing = await prisma.university.findMany({
       where: { name: testUniversityName },
@@ -91,14 +91,18 @@ describe("GET /api/v1/universities/search", () => {
     });
 
     const response = await request(app).get(
-      "/api/v1/universities/search?searchTerm=TestSearchCity",
+      "/api/v1/search?searchTerm=TestSearchCity",
     );
     const responseBody = getResponseObject(response.body);
-    const data = getResponseArray(responseBody["data"]);
+    const data = getResponseObject(responseBody["data"]);
+    const universities = getResponseArray(data["universities"]);
 
     expect(response.status).toBe(200);
+    expect(responseBody["message"]).toBe(
+      "Search results retrieved successfully.",
+    );
     expect(
-      data.some(
+      universities.some(
         (university) =>
           university["name"] === uniInDb.name &&
           university["city"] === uniInDb.city,
@@ -106,6 +110,22 @@ describe("GET /api/v1/universities/search", () => {
     ).toBe(true);
 
     await prisma.university.delete({ where: { id: uniInDb.id } });
+  });
+
+  test("responds with status 404 when nothing matches", async () => {
+    const response = await request(app).get(
+      "/api/v1/search?searchTerm=completely-nonexistent-term-xyz",
+    );
+    const expectedResponse = {
+      status: 404,
+      body: {
+        error: {
+          message: "No results found matching your search.",
+        },
+      },
+    };
+
+    expect(response).toEqual(expect.objectContaining(expectedResponse));
   });
 });
 
@@ -186,51 +206,75 @@ describe("GET /api/v1/universities/:id", () => {
   });
 });
 
-describe("GET /api/v1/study-programs/search", () => {
-  test("responds with related faculty and university data", async () => {
+describe("GET /api/v1/search — related entities", () => {
+  test("responds with grouped faculties, study programs, and subjects including parent data", async () => {
     const university = await prisma.university.create({
       data: {
-        name: "Test Integration Study Search University",
+        name: "Test Integration Unified Search University",
         city: "Sarajevo",
         entity: "FBIH",
         ownership: "JAVNA",
         faculties: {
           create: {
-            name: "Test Integration Study Search Faculty",
+            name: "Test Integration Unified Search Faculty",
             studyPrograms: {
               create: {
-                name: "Test Integration Study Search Program",
+                name: "Test Integration Unified Search Program",
                 cycle: "FIRST",
+                subjects: {
+                  create: {
+                    name: "Test Integration Unified Search Subject",
+                    type: "MANDATORY",
+                  },
+                },
               },
             },
-          },
-        },
-      },
-      include: {
-        faculties: {
-          include: {
-            studyPrograms: true,
           },
         },
       },
     });
 
     const response = await request(app).get(
-      "/api/v1/study-programs/search?searchTerm=Test%20Integration%20Study%20Search%20Program",
+      "/api/v1/search?searchTerm=Test%20Integration%20Unified%20Search",
     );
     const responseBody = getResponseObject(response.body);
-    const data = getResponseArray(responseBody["data"]);
-    const program = data.find(
-      (item) => item["name"] === "Test Integration Study Search Program",
-    );
-    const faculty = getResponseObject(program?.["faculty"]);
-    const relatedUniversity = getResponseObject(faculty["university"]);
+    const data = getResponseObject(responseBody["data"]);
+
+    const universities = getResponseArray(data["universities"]);
+    const faculties = getResponseArray(data["faculties"]);
+    const studyPrograms = getResponseArray(data["studyPrograms"]);
+    const subjects = getResponseArray(data["subjects"]);
 
     expect(response.status).toBe(200);
-    expect(program?.["cycle"]).toBe("FIRST");
-    expect(faculty["name"]).toBe("Test Integration Study Search Faculty");
-    expect(relatedUniversity["id"]).toBe(university.id);
+    expect(universities.some((u) => u["name"] === university.name)).toBe(true);
 
+    const faculty = faculties.find(
+      (f) => f["name"] === "Test Integration Unified Search Faculty",
+    );
+    const facultyUniversity = getResponseObject(faculty?.["university"]);
+    expect(facultyUniversity["id"]).toBe(university.id);
+
+    const program = studyPrograms.find(
+      (sp) => sp["name"] === "Test Integration Unified Search Program",
+    );
+    expect(program?.["cycle"]).toBe("FIRST");
+    const programFaculty = getResponseObject(program?.["faculty"]);
+    const programUniversity = getResponseObject(programFaculty["university"]);
+    expect(programUniversity["id"]).toBe(university.id);
+
+    const subject = subjects.find(
+      (s) => s["name"] === "Test Integration Unified Search Subject",
+    );
+    const subjectProgram = getResponseObject(subject?.["studyProgram"]);
+    const subjectFaculty = getResponseObject(subjectProgram["faculty"]);
+    const subjectUniversity = getResponseObject(subjectFaculty["university"]);
+    expect(subjectUniversity["id"]).toBe(university.id);
+
+    await prisma.subject.deleteMany({
+      where: {
+        studyProgram: { faculty: { universityId: university.id } },
+      },
+    });
     await prisma.studyProgram.deleteMany({
       where: { faculty: { universityId: university.id } },
     });

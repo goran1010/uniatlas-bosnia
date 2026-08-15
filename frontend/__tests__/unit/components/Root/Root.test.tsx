@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { createMemoryRouter } from "react-router-dom";
+import { createMemoryRouter } from "react-router";
 import { routes } from "../../../../src/routes";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 import userEvent from "@testing-library/user-event";
 
 beforeEach(() => {
@@ -70,10 +70,10 @@ async function expectNotificationAndLink({
 }
 
 describe("Root component", () => {
-  test("renders Home heading if server is live", async () => {
+  test("renders home page heading if server is live", async () => {
     renderRoot();
     const homeHeading = await screen.findByRole("heading", {
-      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      name: /Find programs and universities/i,
     });
     expect(homeHeading).toBeInTheDocument();
   });

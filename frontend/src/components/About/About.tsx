@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 
-function Home() {
+function About() {
   const { t, userData } = use(RootContext);
   const pageTitle = `${t("home.title")} | ${t("title.app")}`;
 
@@ -13,10 +13,13 @@ function Home() {
         <title>{pageTitle}</title>
         <meta name="description" content={t("meta.home")} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/" />
+        <link
+          rel="canonical"
+          href="https://uniatlas-bosnia.netlify.app/about"
+        />
         <meta
           property="og:url"
-          content="https://uniatlas-bosnia.netlify.app/"
+          content="https://uniatlas-bosnia.netlify.app/about"
         />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={t("meta.home")} />
@@ -40,7 +43,7 @@ function Home() {
           <p>{t("home.exploreDescription")}</p>
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <Link
-              to="/universities"
+              to="/"
               className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
             >
               {t("home.card.universities.title")}
@@ -97,4 +100,4 @@ function Home() {
   );
 }
 
-export { Home };
+export { About };

@@ -71,6 +71,53 @@ vi.spyOn(prisma.studyProgram, "findMany").mockImplementation((args) => {
   ) as ReturnType<typeof prisma.studyProgram.findMany>;
 });
 
+vi.spyOn(prisma.faculty, "findMany").mockImplementation((args) => {
+  const normalizedTerm =
+    (
+      args?.where as
+        | {
+            OR?: {
+              name?: { contains?: string };
+              city?: { contains?: string };
+            }[];
+          }
+        | undefined
+    )?.OR?.[0]?.name?.contains?.toLowerCase() ?? "";
+
+  const dummyFaculties = [
+    { id: 1, name: "Faculty of Electrical Engineering", city: "Sarajevo" },
+    { id: 2, name: "Faculty of Medicine", city: "Banja Luka" },
+  ];
+
+  return Promise.resolve(
+    dummyFaculties.filter(
+      (f) =>
+        f.name.toLowerCase().includes(normalizedTerm) ||
+        f.city.toLowerCase().includes(normalizedTerm),
+    ),
+  ) as ReturnType<typeof prisma.faculty.findMany>;
+});
+
+vi.spyOn(prisma.subject, "findMany").mockImplementation((args) => {
+  const normalizedTerm =
+    (
+      args?.where as
+        | {
+            name?: { contains?: string };
+          }
+        | undefined
+    )?.name?.contains?.toLowerCase() ?? "";
+
+  const dummySubjects = [
+    { id: 1, name: "Computer Networks" },
+    { id: 2, name: "Mathematics 1" },
+  ];
+
+  return Promise.resolve(
+    dummySubjects.filter((s) => s.name.toLowerCase().includes(normalizedTerm)),
+  ) as ReturnType<typeof prisma.subject.findMany>;
+});
+
 type FindUniqueUniversityImplementation = (
   args: UniversityFindUniqueArgs,
 ) => ReturnType<typeof prisma.university.findUnique>;
@@ -161,35 +208,68 @@ describe("GET /api/v1/universities", () => {
   });
 });
 
-describe("GET /api/v1/universities/search", () => {
-  test("responds with status 200 and universities for searchTerm=Sarajevo", async () => {
+describe("GET /api/v1/search", () => {
+  test("responds with status 200 and grouped results for searchTerm=Sarajevo", async () => {
     vi.spyOn(prisma.university, "findMany").mockImplementation(
       mockUniversitySearch,
     );
     const response = await request(app).get(
-      "/api/v1/universities/search?searchTerm=Sarajevo",
+      "/api/v1/search?searchTerm=Sarajevo",
     );
 
     const dummyDataFiltered = dummyData.data.filter(
       (u) => u.city === "Sarajevo",
     );
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
+
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        data: dummyDataFiltered,
-      }),
+    expect(responseBody["message"]).toBe(
+      "Search results retrieved successfully.",
     );
+    expect(data["universities"]).toEqual(dummyDataFiltered);
+    const faculties = getNamedItems(data["faculties"]);
+    expect(faculties.map((f) => f.name)).toEqual([
+      "Faculty of Electrical Engineering",
+    ]);
+    expect(data["studyPrograms"]).toEqual([]);
+    expect(data["subjects"]).toEqual([]);
   });
 
-  test("responds with status 404 for searchTerm=non-existent-university", async () => {
+  test("responds with status 200 and study programs and subjects for searchTerm=Computer", async () => {
+    vi.spyOn(prisma.university, "findMany").mockImplementation(
+      mockUniversitySearch,
+    );
     const response = await request(app).get(
-      "/api/v1/universities/search?searchTerm=non-existent-university",
+      "/api/v1/search?searchTerm=Computer",
+    );
+    const responseBody = getResponseObject(response.body);
+    const data = getResponseObject(responseBody["data"]);
+    const studyPrograms = getNamedItems(data["studyPrograms"]);
+    const subjects = getNamedItems(data["subjects"]);
+
+    expect(response.status).toBe(200);
+    expect(data["universities"]).toEqual([]);
+    expect(data["faculties"]).toEqual([]);
+    expect(studyPrograms.map((sp) => sp.name)).toEqual([
+      "Computer Science",
+      "Computer Engineering",
+    ]);
+    expect(subjects.map((s) => s.name)).toEqual(["Computer Networks"]);
+  });
+
+  test("responds with status 404 for searchTerm=non-existent-anything", async () => {
+    vi.spyOn(prisma.university, "findMany").mockImplementation(
+      mockUniversitySearch,
+    );
+    const response = await request(app).get(
+      "/api/v1/search?searchTerm=non-existent-anything",
     );
     const expectedResponse = {
       status: 404,
       body: {
         error: {
-          message: "No universities found matching your search.",
+          message: "No results found matching your search.",
         },
       },
     };
@@ -198,7 +278,7 @@ describe("GET /api/v1/universities/search", () => {
   });
 
   test("responds with status 400 for missing searchTerm", async () => {
-    const response = await request(app).get("/api/v1/universities/search");
+    const response = await request(app).get("/api/v1/search");
     const responseBody = getResponseObject(response.body);
     const error = getResponseObject(responseBody["error"]);
 
@@ -210,26 +290,23 @@ describe("GET /api/v1/universities/search", () => {
     );
   });
 
-  test.each(["/api/v1/universities/search", "/api/v1/study-programs/search"])(
-    "responds with status 400 when searchTerm exceeds 100 characters: %s",
-    async (path) => {
-      const response = await request(app).get(
-        `${path}?searchTerm=${"a".repeat(101)}`,
-      );
-      const responseBody = getResponseObject(response.body);
-      const error = getResponseObject(responseBody["error"]);
+  test("responds with status 400 when searchTerm exceeds 100 characters", async () => {
+    const response = await request(app).get(
+      `/api/v1/search?searchTerm=${"a".repeat(101)}`,
+    );
+    const responseBody = getResponseObject(response.body);
+    const error = getResponseObject(responseBody["error"]);
 
-      expect(response.status).toBe(400);
-      expect(error["issues"]).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            path: "searchTerm",
-            message: "Search term must not exceed 100 characters.",
-          }),
-        ]),
-      );
-    },
-  );
+    expect(response.status).toBe(400);
+    expect(error["issues"]).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: "searchTerm",
+          message: "Search term must not exceed 100 characters.",
+        }),
+      ]),
+    );
+  });
 });
 
 describe("GET /api/v1/universities/:id", () => {
@@ -278,54 +355,5 @@ describe("GET /api/v1/universities/:id", () => {
     expect(response.status).toBe(400);
     expect(error["message"]).toBeTypeOf("string");
     expect(error["message"]).toBe("Request validation failed.");
-  });
-});
-
-describe("GET /api/v1/study-programs/search", () => {
-  test("responds with status 200 and study programs for searchTerm=Computer", async () => {
-    const response = await request(app).get(
-      "/api/v1/study-programs/search?searchTerm=Computer",
-    );
-    const responseBody = getResponseObject(response.body);
-    const data = getNamedItems(responseBody["data"]);
-
-    expect(response.status).toBe(200);
-    expect(responseBody["message"]).toBe(
-      "Study programs retrieved successfully.",
-    );
-    expect(data).toHaveLength(2);
-    expect(data.map((studyProgram) => studyProgram.name)).toEqual([
-      "Computer Science",
-      "Computer Engineering",
-    ]);
-  });
-
-  test("responds with status 404 for searchTerm=non-existent-study-program", async () => {
-    const response = await request(app).get(
-      "/api/v1/study-programs/search?searchTerm=non-existent-study-program",
-    );
-    const expectedResponse = {
-      status: 404,
-      body: {
-        error: {
-          message: "No study programs found matching your search.",
-        },
-      },
-    };
-
-    expect(response).toEqual(expect.objectContaining(expectedResponse));
-  });
-
-  test("responds with status 400 for missing searchTerm", async () => {
-    const response = await request(app).get("/api/v1/study-programs/search");
-    const responseBody = getResponseObject(response.body);
-    const error = getResponseObject(responseBody["error"]);
-
-    expect(response.status).toBe(400);
-    expect(error["code"]).toBe("VALIDATION_ERROR");
-    expect(error["message"]).toBe("Request validation failed.");
-    expect(error["issues"]).toEqual(
-      expect.arrayContaining([expect.objectContaining({ path: "searchTerm" })]),
-    );
   });
 });

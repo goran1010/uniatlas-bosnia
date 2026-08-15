@@ -4,6 +4,8 @@ import { Input } from "../sharedComponents/Input";
 import { Select } from "../sharedComponents/Select";
 import { Label } from "../sharedComponents/Label";
 import { Button } from "../sharedComponents/Button";
+import { EntityPicker } from "./EntityPicker";
+import { getPickerDepth } from "./utils/getPickerDepth";
 import { handleSubmitUniversityEntity } from "./utils/handleSubmitUniversityEntity";
 
 import type {
@@ -72,11 +74,21 @@ function AddUniversityEntity({
   const { t, addNotification, serverStatus } = use(RootContext);
   const [formState, setFormState] = useState(INIT_FORM);
   const [loading, setLoading] = useState(false);
+  const [pickerResetKey, setPickerResetKey] = useState(0);
 
   const { entityType, typeOfChange, parentId, targetId, data } = formState;
 
   function setField(field: keyof ContributionFormState, value: string) {
     setFormState((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function setSelector(field: "entityType" | "typeOfChange", value: string) {
+    setFormState((prev) => ({
+      ...prev,
+      [field]: value,
+      parentId: "",
+      targetId: "",
+    }));
   }
 
   function setDataField(
@@ -111,6 +123,7 @@ function AddUniversityEntity({
       setLoading,
       setFormState: () => {
         setFormState(INIT_FORM);
+        setPickerResetKey((prev) => prev + 1);
       },
       t,
       serverStatus,
@@ -129,7 +142,7 @@ function AddUniversityEntity({
           name="entityType"
           value={entityType}
           onChange={(e) => {
-            setField("entityType", e.target.value);
+            setSelector("entityType", e.target.value);
           }}
           required
         >
@@ -147,7 +160,7 @@ function AddUniversityEntity({
           name="typeOfChange"
           value={typeOfChange}
           onChange={(e) => {
-            setField("typeOfChange", e.target.value);
+            setSelector("typeOfChange", e.target.value);
           }}
           required
         >
@@ -158,29 +171,18 @@ function AddUniversityEntity({
           ))}
         </Select>
       </div>
-      {needsParent && (
-        <DataField
-          label={`${t("contribution.parentId")} — ${t(`contribution.parentIdHelp.${entityType}`)}`}
-          id="parentId"
-          type="number"
-          min={1}
-          required
-          value={parentId}
-          onChange={(e) => {
-            setField("parentId", e.target.value);
-          }}
-        />
-      )}
-      {needsTarget && (
-        <DataField
-          label={`ID`}
-          id="targetId"
-          type="number"
-          min={1}
-          required
-          value={targetId}
-          onChange={(e) => {
-            setField("targetId", e.target.value);
+      {(needsParent || needsTarget) && (
+        <EntityPicker
+          key={`${entityType}-${typeOfChange}-${String(pickerResetKey)}`}
+          depth={getPickerDepth(entityType, typeOfChange)}
+          legend={
+            needsParent
+              ? t("contribution.picker.parent")
+              : t("contribution.picker.target")
+          }
+          showSelectedDetails={typeOfChange !== "CREATE"}
+          onSelect={(id) => {
+            setField(needsParent ? "parentId" : "targetId", id);
           }}
         />
       )}

@@ -1,6 +1,6 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router";
 import { useState, use, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { LogInForm } from "./LogInForm";
 import { RootContext } from "../../contextData/RootContext";
 import { GitHubLoginLink } from "../sharedComponents/GitHubLoginLink";

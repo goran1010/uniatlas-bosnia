@@ -21,45 +21,75 @@ async function getUniversities(_req: Request, res: Response) {
   });
 }
 
-async function searchUniversities(req: Request, res: Response) {
+async function search(req: Request, res: Response) {
   const { searchTerm } = universityValidation.searchQuery(req.query);
 
-  const result = await prisma.university.findMany({
-    where: {
-      OR: [
-        {
-          name: {
-            contains: searchTerm,
-            mode: "insensitive",
-          },
-        },
-        {
-          city: {
-            contains: searchTerm,
-            mode: "insensitive",
-          },
-        },
-        {
-          acronym: {
-            contains: searchTerm,
-            mode: "insensitive",
-          },
-        },
-      ],
-    },
-  });
+  const contains = {
+    contains: searchTerm,
+    mode: "insensitive",
+  } as const;
 
-  if (result.length > 0) {
+  const [universities, faculties, studyPrograms, subjects] = await Promise.all([
+    prisma.university.findMany({
+      where: {
+        OR: [{ name: contains }, { city: contains }, { acronym: contains }],
+      },
+    }),
+    prisma.faculty.findMany({
+      where: {
+        OR: [{ name: contains }, { city: contains }],
+      },
+      include: {
+        university: true,
+      },
+    }),
+    prisma.studyProgram.findMany({
+      where: {
+        name: contains,
+      },
+      include: {
+        faculty: {
+          include: {
+            university: true,
+          },
+        },
+      },
+    }),
+    prisma.subject.findMany({
+      where: {
+        name: contains,
+      },
+      include: {
+        studyProgram: {
+          include: {
+            faculty: {
+              include: {
+                university: true,
+              },
+            },
+          },
+        },
+      },
+    }),
+  ]);
+
+  const totalResults =
+    universities.length +
+    faculties.length +
+    studyPrograms.length +
+    subjects.length;
+
+  if (totalResults > 0) {
     sendSuccess(res, {
-      message: "Universities retrieved successfully.",
-      data: result,
+      message: "Search results retrieved successfully.",
+      data: { universities, faculties, studyPrograms, subjects },
     });
     return;
   }
 
   sendError(res, {
     status: 404,
-    message: "No universities found matching your search.",
+    message: "No results found matching your search.",
   });
 }
 
@@ -95,43 +125,4 @@ async function getUniversityById(req: Request, res: Response) {
   });
 }
 
-async function searchStudyPrograms(req: Request, res: Response) {
-  const { searchTerm } = universityValidation.searchQuery(req.query);
-
-  const result = await prisma.studyProgram.findMany({
-    where: {
-      name: {
-        contains: searchTerm,
-        mode: "insensitive",
-      },
-    },
-    include: {
-      faculty: {
-        include: {
-          university: true,
-        },
-      },
-    },
-  });
-
-  if (result.length > 0) {
-    sendSuccess(res, {
-      message: "Study programs retrieved successfully.",
-      data: result,
-    });
-    return;
-  }
-
-  sendError(res, {
-    status: 404,
-    message: "No study programs found matching your search.",
-  });
-}
-
-export {
-  status,
-  getUniversities,
-  searchUniversities,
-  getUniversityById,
-  searchStudyPrograms,
-};
+export { status, getUniversities, search, getUniversityById };

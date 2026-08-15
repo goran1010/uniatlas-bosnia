@@ -2,10 +2,9 @@ import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Helmet } from "react-helmet-async";
 import { GetAllUniversities } from "./GetAllUniversities";
-import { SearchUniversities } from "./SearchUniversities";
-import { SearchStudyPrograms } from "./SearchStudyPrograms";
+import { UnifiedSearch } from "./UnifiedSearch";
 
-const TABS = ["search", "findPrograms", "browseAll"];
+const TABS = ["search", "browseAll"];
 
 function Universities() {
   const { t } = use(RootContext);
@@ -17,13 +16,10 @@ function Universities() {
         <title>{`${t("title.universities")} | ${t("title.app")}`}</title>
         <meta name="description" content={t("meta.universities")} />
         <meta name="robots" content="index, follow" />
-        <link
-          rel="canonical"
-          href="https://uniatlas-bosnia.netlify.app/universities"
-        />
+        <link rel="canonical" href="https://uniatlas-bosnia.netlify.app/" />
         <meta
           property="og:url"
-          content="https://uniatlas-bosnia.netlify.app/universities"
+          content="https://uniatlas-bosnia.netlify.app/"
         />
         <meta
           property="og:title"
@@ -62,8 +58,7 @@ function Universities() {
 
         <div className="w-full">
           {activeTab === "browseAll" && <GetAllUniversities />}
-          {activeTab === "search" && <SearchUniversities />}
-          {activeTab === "findPrograms" && <SearchStudyPrograms />}
+          {activeTab === "search" && <UnifiedSearch />}
         </div>
       </div>
     </>

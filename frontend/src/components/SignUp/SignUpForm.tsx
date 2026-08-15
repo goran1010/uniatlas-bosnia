@@ -2,7 +2,7 @@ import { checkFormValidity } from "./utils/checkFormValidity";
 import { checkFormValidityClick } from "./utils/checkFormValidityClick";
 import { handleSignUpSubmit } from "./utils/handleSignUpSubmit";
 import { useState, useRef, use } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { Input } from "../sharedComponents/Input";

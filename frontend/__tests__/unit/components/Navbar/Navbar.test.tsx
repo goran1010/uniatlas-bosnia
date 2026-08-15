@@ -1,5 +1,5 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router";
 import { App } from "../../../../src/App";
 import { Notifications } from "../../../../src/components/Notifications";
 import { Navbar } from "../../../../src/components/Navbar/Navbar";
@@ -78,7 +78,7 @@ async function openMobileMenu() {
 
 function expectSharedNavbarLinks() {
   expect(screen.getByText(/Home/i)).toBeInTheDocument();
-  expect(screen.getByText(/Universities/i)).toBeInTheDocument();
+  expect(screen.getByText(/About/i)).toBeInTheDocument();
 }
 
 describe("Render Navbar on root route", () => {
@@ -299,12 +299,10 @@ describe("render Menu based on viewport size", () => {
     render(<NavbarWrapper />);
 
     const homeLink = await screen.findByRole("link", { name: /Home/i });
-    const universitiesLink = screen.getByRole("link", {
-      name: /Universities/i,
-    });
+    const aboutLink = screen.getByRole("link", { name: /About/i });
 
     expect(homeLink).toBeInTheDocument();
-    expect(universitiesLink).toBeInTheDocument();
+    expect(aboutLink).toBeInTheDocument();
 
     const menuButton = screen.getByRole("button", {
       name: /Toggle navigation menu/i,

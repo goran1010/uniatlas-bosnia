@@ -81,6 +81,13 @@ const universityDetailResponseSchema = z.object({
   data: universityDetailSchema,
 });
 
+const searchResultUniversitySchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  acronym: optionalTextSchema,
+  city: z.string().min(1),
+});
+
 const studyProgramSearchResultSchema = z.object({
   id: positiveIntegerSchema,
   name: z.string().min(1),
@@ -91,17 +98,47 @@ const studyProgramSearchResultSchema = z.object({
     id: positiveIntegerSchema,
     name: z.string().min(1),
     universityId: positiveIntegerSchema,
-    university: z.object({
+    university: searchResultUniversitySchema,
+  }),
+});
+
+const facultySearchResultSchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  universityId: positiveIntegerSchema,
+  city: optionalTextSchema,
+  website: optionalTextSchema,
+  university: searchResultUniversitySchema,
+});
+
+const subjectSearchResultSchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  studyProgramId: positiveIntegerSchema,
+  semester: semesterSchema.nullish().transform((value) => value ?? undefined),
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
+  type: subjectTypeSchema.nullish().transform((value) => value ?? undefined),
+  studyProgram: z.object({
+    id: positiveIntegerSchema,
+    name: z.string().min(1),
+    cycle: studyCycleSchema,
+    faculty: z.object({
       id: positiveIntegerSchema,
       name: z.string().min(1),
-      acronym: optionalTextSchema,
+      universityId: positiveIntegerSchema,
+      university: searchResultUniversitySchema,
     }),
   }),
 });
 
-const studyProgramSearchResponseSchema = z.object({
+const unifiedSearchResponseSchema = z.object({
   message: z.string(),
-  data: z.array(studyProgramSearchResultSchema),
+  data: z.object({
+    universities: z.array(universityListItemSchema),
+    faculties: z.array(facultySearchResultSchema),
+    studyPrograms: z.array(studyProgramSearchResultSchema),
+    subjects: z.array(subjectSearchResultSchema),
+  }),
 });
 
 export type UniversityDetail = z.infer<typeof universityDetailSchema>;
@@ -114,8 +151,13 @@ export type UniversityDetailSubject =
 export type StudyProgramSearchResult = z.infer<
   typeof studyProgramSearchResultSchema
 >;
+export type FacultySearchResult = z.infer<typeof facultySearchResultSchema>;
+export type SubjectSearchResult = z.infer<typeof subjectSearchResultSchema>;
+export type UnifiedSearchResults = z.infer<
+  typeof unifiedSearchResponseSchema
+>["data"];
 export {
-  studyProgramSearchResponseSchema,
+  unifiedSearchResponseSchema,
   universityDetailResponseSchema,
   universityListResponseSchema,
 };

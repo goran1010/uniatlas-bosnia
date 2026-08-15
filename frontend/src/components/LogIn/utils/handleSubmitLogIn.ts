@@ -5,7 +5,7 @@ import { getCsrfToken, clearCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import { isServerNotReadyError } from "../../../utils/serverStatus";
 import type { SubmitEvent } from "react";
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router";
 import type { AddNotification } from "../../../types/notification";
 import type { TFunction } from "../../../types/i18n";
 import type { ServerStatus } from "../../../utils/serverStatus";
