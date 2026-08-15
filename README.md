@@ -40,9 +40,8 @@ Public consumers can browse and query that data through unauthenticated endpoint
 ## Current features
 
 - Public REST API under `/api` and `/api/v1`
-- University listing and search by name, city, or acronym
-- University detail responses with nested faculties, study programs, and subjects
-- Study-program search across all universities
+- University listing with detail responses containing nested faculties, study programs, and subjects
+- Unified search across universities (name, acronym, city), faculties (name, city), study programs, and subjects (name)
 - Email/password signup with email confirmation before account creation
 - Session-based login/logout with Passport
 - Optional GitHub OAuth login
@@ -232,9 +231,8 @@ https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app
 - `GET /api`
 - `GET /api/v1`
 - `GET /api/v1/universities`
-- `GET /api/v1/universities/search?searchTerm=...`
 - `GET /api/v1/universities/:id`
-- `GET /api/v1/study-programs/search?searchTerm=...`
+- `GET /api/v1/search?searchTerm=`
 
 ### Contribution workflow
 
