@@ -1,4 +1,11 @@
-import { useState, use, useRef, type ReactNode, type SubmitEvent } from "react";
+import {
+  useState,
+  use,
+  useEffect,
+  useRef,
+  type ReactNode,
+  type SubmitEvent,
+} from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Input } from "../sharedComponents/Input";
 import { Button } from "../sharedComponents/Button";
@@ -42,6 +49,14 @@ function UnifiedSearch() {
   const [results, setResults] = useState<UnifiedSearchResults | null>(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-focus the search input only on devices with a precise pointer
+  // (mouse/trackpad) so mobile users don't get the keyboard popping up.
+  useEffect(() => {
+    if (window.matchMedia("(pointer: fine)").matches) {
+      inputRef.current?.focus();
+    }
+  }, []);
 
   async function handleSearch(e: SubmitEvent) {
     e.preventDefault();
@@ -89,7 +104,6 @@ function UnifiedSearch() {
       >
         <Input
           ref={inputRef}
-          autoFocus
           type="search"
           placeholder={t("universitiesPage.searchAllPlaceholder")}
           minLength={2}

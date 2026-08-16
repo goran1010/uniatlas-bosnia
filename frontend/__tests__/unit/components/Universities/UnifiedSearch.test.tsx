@@ -322,4 +322,35 @@ describe("UnifiedSearch", () => {
 
     expect(await screen.findByText(/^Search failed\.$/i)).toBeInTheDocument();
   });
+
+  function mediaQueryList(matches: boolean): MediaQueryList {
+    return {
+      matches,
+      media: "(pointer: fine)",
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: () => true,
+    };
+  }
+
+  test("autofocuses the search input on fine-pointer devices", () => {
+    vi.spyOn(window, "matchMedia").mockReturnValueOnce(mediaQueryList(true));
+
+    render(<Wrapper />);
+
+    expect(screen.getByRole("searchbox", { name: /Search/i })).toHaveFocus();
+  });
+
+  test("does not autofocus the search input without a fine pointer", () => {
+    vi.spyOn(window, "matchMedia").mockReturnValueOnce(mediaQueryList(false));
+
+    render(<Wrapper />);
+
+    expect(
+      screen.getByRole("searchbox", { name: /Search/i }),
+    ).not.toHaveFocus();
+  });
 });
