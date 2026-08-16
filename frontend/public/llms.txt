@@ -11,5 +11,5 @@ UniAtlas Bosnia is a free, open-source directory of universities, faculties, stu
 ## API access
 
 - [All universities endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities)
-- [Search universities endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities/search?term=sarajevo)
-- [Search study programs endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities/search-study-programs?term=engineering)
+- [University by id endpoint](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/universities/1)
+- [Unified search endpoint (universities, faculties, study programs, subjects)](https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api/v1/search?searchTerm=sarajevo)

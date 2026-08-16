@@ -1,10 +1,8 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Api } from "../../../../src/components/Api/Api";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
-import {
-  apiEndpoints,
-  authenticatedGroupsEndpoints,
-} from "../../../../src/components/Api/utils/endpoints";
+import { apiEndpoints } from "../../../../src/components/Api/utils/endpoints";
+import { PUBLIC_API_URL } from "../../../../src/utils/envConfig";
 
 function MockLanguageProvider({ children }: { children: React.ReactNode }) {
   return <RootContextProvider>{children}</RootContextProvider>;
@@ -26,6 +24,11 @@ describe("Api component", () => {
       level: 1,
     });
     expect(heading).toBeInTheDocument();
+  });
+
+  test("renders the public API base URL", () => {
+    renderApi();
+    expect(screen.getByText(PUBLIC_API_URL)).toBeInTheDocument();
   });
 
   test("renders the data object section heading", () => {
@@ -55,58 +58,16 @@ describe("Api component", () => {
     }
   });
 
-  test("renders the authenticated data contribution flow section heading", () => {
+  test("does not render authenticated endpoint docs", () => {
     renderApi();
     expect(
-      screen.getByRole("heading", {
+      screen.queryByRole("heading", {
         name: /Authenticated Data Contribution Flow/i,
-        level: 2,
       }),
-    ).toBeInTheDocument();
-  });
-
-  test("renders all authenticated group titles", () => {
-    renderApi();
-    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(
-      authenticatedGroupsEndpoints.length,
-    );
-  });
-
-  test("renders all authenticated endpoint paths", () => {
-    renderApi();
-    for (const group of authenticatedGroupsEndpoints) {
-      for (const ep of group.endpoints) {
-        expect(screen.getAllByText(ep.path).length).toBeGreaterThan(0);
-      }
-    }
-  });
-
-  test("renders method tags for authenticated endpoints", () => {
-    renderApi();
-    const authSection = screen
-      .getByRole("heading", { name: /Authenticated Data Contribution Flow/i })
-      .closest("section");
-    if (!authSection) {
-      throw new Error("Authenticated section not found");
-    }
-    expect(within(authSection).getAllByText("GET").length).toBeGreaterThan(0);
-    expect(within(authSection).getAllByText("POST").length).toBeGreaterThan(0);
-  });
-
-  test("renders authenticated request body examples", () => {
-    renderApi();
-
-    expect(screen.getAllByText("Request body").length).toBeGreaterThan(0);
-    expect(screen.getByText(/"confirm-password"/)).toBeInTheDocument();
-  });
-
-  test("renders session credentials note", () => {
-    renderApi();
-    expect(screen.getByText(/credentials: include/i)).toBeInTheDocument();
-  });
-
-  test("renders CSRF protection note", () => {
-    renderApi();
-    expect(screen.getByText(/CSRF protection/i)).toBeInTheDocument();
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText("/auth/login")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("/users/admin/pending-changes"),
+    ).not.toBeInTheDocument();
   });
 });
