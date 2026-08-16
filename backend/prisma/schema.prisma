@@ -30,12 +30,13 @@ enum role {
 }
 
 model User {
-  id             String          @id @default(uuid())
-  email          String          @unique
-  password       String?
-  githubId       String?         @unique
-  role           role            @default(USER)
-  pendingChanges PendingChange[]
+  id               String          @id @default(uuid())
+  email            String          @unique
+  password         String?
+  githubId         String?         @unique
+  role             role            @default(USER)
+  adminRequestedAt DateTime?
+  pendingChanges   PendingChange[]
 
   @@map("users")
 }

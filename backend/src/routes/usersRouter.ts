@@ -12,6 +12,10 @@ usersRouter.use(isAuthenticated);
 
 usersRouter.post("/logout", usersController.logout);
 
+usersRouter.post("/request-admin", usersController.requestAdmin);
+
+usersRouter.delete("/request-admin", usersController.cancelAdminRequest);
+
 usersRouter.use("/admin", isAdmin, adminRouter);
 
 usersRouter.use("/contribution", contributionRouter);

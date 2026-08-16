@@ -15,4 +15,13 @@ adminRouter.post(
   adminController.approvePendingChange,
 );
 
+adminRouter.get("/admin-requests", adminController.getAdminRequests);
+
+adminRouter.post("/approve-admin-request", adminController.approveAdminRequest);
+
+adminRouter.delete(
+  "/decline-admin-request",
+  adminController.declineAdminRequest,
+);
+
 export { adminRouter };

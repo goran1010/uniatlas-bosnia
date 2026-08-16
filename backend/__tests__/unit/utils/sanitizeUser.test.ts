@@ -14,11 +14,13 @@ describe("sanitizeUser", () => {
       password: "secret",
       email: "testuser@example.com",
       githubId: "123456",
+      adminRequestedAt: null,
     };
     const sanitizedUser = sanitizeUser(user);
 
     expect(sanitizedUser).not.toHaveProperty("password");
     expect(sanitizedUser).toHaveProperty("email", "testuser@example.com");
+    expect(sanitizedUser).toHaveProperty("adminRequestedAt", null);
   });
 });
 
@@ -35,6 +37,7 @@ describe("sanitizeUsers", () => {
         email: "user1@example.com",
         githubId: "123456",
         role: "USER",
+        adminRequestedAt: null,
       },
       {
         id: "2",
@@ -42,6 +45,7 @@ describe("sanitizeUsers", () => {
         email: "user2@example.com",
         githubId: "654321",
         role: "ADMIN",
+        adminRequestedAt: null,
       },
     ];
     const sanitizedUsers = sanitizeUsers(users);

@@ -58,6 +58,7 @@ describe("GET /me", () => {
       email: "test@example.com",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app).get("/users/me");

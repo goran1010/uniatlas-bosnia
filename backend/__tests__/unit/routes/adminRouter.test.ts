@@ -82,6 +82,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
       email: "user1@example.com",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app).get("/users/admin//pending-changes");
@@ -114,6 +115,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
           email: "admin1@example.com",
           role: "ADMIN",
           githubId: null,
+          adminRequestedAt: null,
         },
       },
     ];
@@ -126,6 +128,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
       email: "admin1@example.com",
       role: "ADMIN",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app).get("/users/admin/pending-changes");
@@ -169,6 +172,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
       email: "user1@example.com",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app).delete(
@@ -202,6 +206,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
         email: "admin1@example.com",
         role: "ADMIN",
         githubId: null,
+        adminRequestedAt: null,
       },
     };
     vi.spyOn(prisma.pendingChange, "delete").mockResolvedValueOnce(
@@ -213,6 +218,7 @@ describe("Admin Router - DELETE /decline-pending-change", () => {
       email: "admin1@example.com",
       role: "ADMIN",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app)
@@ -252,6 +258,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       email: "user1@example.com",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app).post(
@@ -275,6 +282,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       email: "user1@example.com",
       role: "ADMIN",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     mockTransactionWrapper(false);
@@ -300,6 +308,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change", () => {
       email: "user1@example.com",
       role: "ADMIN",
       githubId: null,
+      adminRequestedAt: null,
     };
 
     const response = await request(app)
