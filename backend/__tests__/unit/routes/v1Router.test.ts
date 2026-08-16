@@ -54,10 +54,12 @@ vi.spyOn(prisma.studyProgram, "findMany").mockImplementation((args) => {
     (
       args?.where as
         | {
-            name?: { contains?: string };
+            OR?: {
+              name?: { contains?: string };
+            }[];
           }
         | undefined
-    )?.name?.contains?.toLowerCase() ?? "";
+    )?.OR?.[0]?.name?.contains?.toLowerCase() ?? "";
 
   const dummyStudyPrograms = [
     { id: 1, name: "Computer Science" },
@@ -103,10 +105,12 @@ vi.spyOn(prisma.subject, "findMany").mockImplementation((args) => {
     (
       args?.where as
         | {
-            name?: { contains?: string };
+            OR?: {
+              name?: { contains?: string };
+            }[];
           }
         | undefined
-    )?.name?.contains?.toLowerCase() ?? "";
+    )?.OR?.[0]?.name?.contains?.toLowerCase() ?? "";
 
   const dummySubjects = [
     { id: 1, name: "Computer Networks" },
