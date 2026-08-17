@@ -32,8 +32,10 @@
     "close": "Close",
     "menu": "Menu",
     "toggleThemeAria": "Toggle theme menu",
-    "toggleMenuAria": "Toggle navigation menu"
+    "toggleMenuAria": "Toggle navigation menu",
+    "skipToContent": "Skip to content"
   },
+  "loading": "Loading…",
   "notifications": {
     "title": "Notifications",
     "dismiss": "Dismiss notification"

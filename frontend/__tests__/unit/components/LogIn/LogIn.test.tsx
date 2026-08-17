@@ -144,7 +144,7 @@ describe("GitHub login", () => {
 
     expect(githubLoginLink).toHaveAttribute("aria-disabled", "true");
     expect(
-      within(githubLoginLink).getByLabelText("spinner"),
+      within(githubLoginLink).getByRole("status", { name: /Loading/i }),
     ).toBeInTheDocument();
   });
 

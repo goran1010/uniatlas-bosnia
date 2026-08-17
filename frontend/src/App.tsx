@@ -10,6 +10,7 @@ import { useCloseMenu } from "./customHooks/useCloseMenu";
 import { useLanguage } from "./customHooks/useLanguage";
 import { HelmetProvider } from "react-helmet-async";
 import { RootContext } from "./contextData/RootContext";
+import { SkipNavbarLink } from "./components/utils/SkipNavbarLink";
 
 function App() {
   const closeMenu = useCloseMenu();
@@ -46,9 +47,13 @@ function App() {
       <HelmetProvider>
         <>
           <ScrollToTop />
+          <SkipNavbarLink t={t} />
           <Navbar closeMenu={closeMenu} />
           <Notifications />
-          <main className="flex-1 flex flex-col items-center p-2 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative bg-(--app-bg) text-(--text-primary)">
+          <main
+            id="main-content"
+            className="flex-1 flex flex-col items-center p-2 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative bg-(--app-bg) text-(--text-primary)"
+          >
             <Outlet />
           </main>
           <Footer />

@@ -32,8 +32,10 @@
     "close": "Zatvori",
     "menu": "Meni",
     "toggleThemeAria": "Prikaži meni za temu",
-    "toggleMenuAria": "Prikaži navigacioni meni"
+    "toggleMenuAria": "Prikaži navigacioni meni",
+    "skipToContent": "Preskoči na sadržaj"
   },
+  "loading": "Učitavanje…",
   "notifications": {
     "title": "Obavijesti",
     "dismiss": "Zatvori obavijest"
