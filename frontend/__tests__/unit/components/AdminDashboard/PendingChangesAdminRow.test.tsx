@@ -109,8 +109,8 @@ describe("PendingChangesAdminRow", () => {
     const badge = screen.getByText("UNKNOWN");
 
     expect(form).not.toHaveClass("border-l-4");
-    expect(badge).toHaveClass("bg-gray-100");
-    expect(badge).toHaveClass("text-gray-800");
+    expect(badge).toHaveClass("bg-(--surface-alt)");
+    expect(badge).toHaveClass("text-(--text-secondary)");
   });
 
   test("calls the confirm and decline handlers when action buttons are clicked", async () => {
@@ -151,6 +151,6 @@ describe("PendingChangesAdminRow", () => {
       expect.any(Function),
       SERVER_STATUS.LIVE,
     );
-    expect(approveButton.closest("form")).toHaveClass("bg-gray-100");
+    expect(approveButton.closest("form")).toHaveClass("bg-(--surface-alt)");
   });
 });

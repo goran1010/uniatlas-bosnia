@@ -50,18 +50,18 @@ const PendingChangesAdminRow = memo(
         case "delete":
           return "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300";
         default:
-          return "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300";
+          return "bg-(--surface-alt) text-(--text-secondary)";
       }
     };
 
     return (
       <form
-        className={`rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/60 ${getChangeTypeStyles(
+        className={`rounded-md transition-colors hover:bg-(--hover-surface) ${getChangeTypeStyles(
           data.typeOfChange,
         )} ${
           index % 2 === 0
-            ? "bg-white dark:bg-gray-800"
-            : "bg-gray-100 dark:bg-gray-800/60"
+            ? "bg-(--surface-2)"
+            : "bg-(--surface-alt)"
         }`}
       >
         <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,2fr)]">
@@ -81,7 +81,7 @@ const PendingChangesAdminRow = memo(
             <span className="sm:hidden font-semibold">
               {t("contribution.entityType")}
             </span>
-            <span className="font-mono font-medium text-gray-800 dark:text-gray-100 text-xs">
+            <span className="font-mono font-medium text-(--text-primary) text-xs">
               {data.entityType}
             </span>
           </div>

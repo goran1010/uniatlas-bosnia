@@ -254,8 +254,8 @@ function EntityPicker({
   }
 
   return (
-    <fieldset className="flex flex-col gap-3 border border-gray-200 dark:border-gray-600 rounded-lg p-3">
-      <legend className="text-xs font-semibold px-1 text-gray-600 dark:text-gray-300">
+    <fieldset className="flex flex-col gap-3 border border-(--border-color) rounded-lg p-3">
+      <legend className="text-xs font-semibold px-1 text-(--text-secondary)">
         {legend}
       </legend>
       {loadingList ? (

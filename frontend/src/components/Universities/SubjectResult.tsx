@@ -9,9 +9,9 @@ function SubjectResult({
   t: TFunction;
 }) {
   return (
-    <li className="border border-gray-200 dark:border-gray-600 rounded-lg p-3 bg-white dark:bg-gray-800">
-      <p className="font-bold text-gray-900 dark:text-white">{subject.name}</p>
-      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-gray-600 dark:text-gray-300">
+    <li className="border border-(--border-color) rounded-lg p-3 bg-(--surface-2)">
+      <p className="font-bold text-(--text-primary)">{subject.name}</p>
+      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-(--text-secondary)">
         {subject.semester != null && (
           <span>
             {t("universitiesPage.semester")} {subject.semester}
@@ -26,9 +26,9 @@ function SubjectResult({
           <span>{t(`universitiesPage.subjectTypes.${subject.type}`)}</span>
         )}
       </div>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      <p className="text-sm text-(--text-muted) mt-1">
         {subject.studyProgram.name}
-        <span className="text-gray-400 dark:text-gray-500">
+        <span className="text-(--text-muted)">
           {" — "}
           {subject.studyProgram.faculty.name}
           {", "}

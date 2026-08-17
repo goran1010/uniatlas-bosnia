@@ -32,11 +32,11 @@ function ResultSection({
 }) {
   return (
     <section className="w-full flex flex-col gap-2">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <h2 className="text-lg font-semibold text-(--text-primary)">
         {heading}
       </h2>
       {isEmpty ? (
-        <p className="text-gray-500 dark:text-gray-400">{emptyMessage}</p>
+        <p className="text-(--text-muted)">{emptyMessage}</p>
       ) : (
         children
       )}
@@ -95,7 +95,7 @@ function UnifiedSearch() {
 
   return (
     <div className="flex flex-col gap-4 w-full items-center justify-center">
-      <p className="text-sm text-center text-gray-600 dark:text-gray-300 max-w-lg">
+      <p className="text-sm text-center text-(--text-secondary) max-w-lg">
         {t("universitiesPage.searchHint")}
       </p>
       <form
@@ -121,7 +121,7 @@ function UnifiedSearch() {
       ) : (
         results !== null &&
         (noResultsAtAll ? (
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-(--text-muted)">
             {t("universitiesPage.noResultsAtAll")}
           </p>
         ) : (

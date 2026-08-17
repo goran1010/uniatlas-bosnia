@@ -50,7 +50,7 @@ function GetAllUniversities() {
 
   if (!universities.length) {
     return (
-      <p className="text-center text-gray-500 dark:text-gray-400 py-8">
+      <p className="text-center text-(--text-muted) py-8">
         {t("universitiesPage.noResults")}
       </p>
     );

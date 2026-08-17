@@ -9,9 +9,9 @@ function StudyProgramResult({
   t: TFunction;
 }) {
   return (
-    <li className="border border-gray-200 dark:border-gray-600 rounded-lg p-3 bg-white dark:bg-gray-800">
-      <p className="font-bold text-gray-900 dark:text-white">{program.name}</p>
-      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-gray-600 dark:text-gray-300">
+    <li className="border border-(--border-color) rounded-lg p-3 bg-(--surface-2)">
+      <p className="font-bold text-(--text-primary)">{program.name}</p>
+      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-(--text-secondary)">
         <span>{t(`universitiesPage.cycles.${program.cycle}`)}</span>
         {program.ects != null && (
           <span>
@@ -19,10 +19,10 @@ function StudyProgramResult({
           </span>
         )}
       </div>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      <p className="text-sm text-(--text-muted) mt-1">
         {program.faculty.name}
 
-        <span className="text-gray-400 dark:text-gray-500">
+        <span className="text-(--text-muted)">
           {" — "}
           {program.faculty.university.name}
           {program.faculty.university.acronym &&

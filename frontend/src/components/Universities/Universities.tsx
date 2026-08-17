@@ -37,7 +37,7 @@ function Universities() {
         <h1 className="text-center text-(--text-secondary)">
           {t("universitiesPage.title")}
         </h1>
-        <div className="flex gap-1 justify-center border-b border-gray-200 dark:border-gray-700">
+        <div className="flex gap-1 justify-center border-b border-(--border-color)">
           {TABS.map((tab) => (
             <button
               key={tab}
@@ -45,10 +45,10 @@ function Universities() {
               onClick={() => {
                 setActiveTab(tab);
               }}
-              className={`px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
+              className={`px-3 py-2 text-sm font-medium rounded-t-md transition-colors cursor-pointer ${
                 activeTab === tab
                   ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                  : "text-(--text-secondary) hover:text-(--text-primary)"
               }`}
             >
               {t(`universitiesPage.${tab}`)}

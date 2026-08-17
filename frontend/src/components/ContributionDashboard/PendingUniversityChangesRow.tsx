@@ -34,11 +34,11 @@ function PendingUniversityChangesRow({
 
   return (
     <li
-      className={`rounded-md p-2 sm:p-3 ${isEven ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-800/60"}`}
+      className={`rounded-md p-2 sm:p-3 ${isEven ? "bg-(--surface-2)" : "bg-(--surface-alt)"}`}
     >
       <div className="grid gap-2 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_auto]">
         <div className="flex justify-between sm:justify-start items-center gap-2">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
+          <span className="sm:hidden text-xs font-semibold text-(--text-muted)">
             {t("contribution.change")}
           </span>
           <span
@@ -49,16 +49,16 @@ function PendingUniversityChangesRow({
         </div>
 
         <div className="flex justify-between sm:justify-start items-center gap-2">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
+          <span className="sm:hidden text-xs font-semibold text-(--text-muted)">
             {t("contribution.entityType")}
           </span>
-          <span className="text-xs font-mono text-gray-700 dark:text-gray-200">
+          <span className="text-xs font-mono text-(--text-secondary)">
             {t(`contribution.entityTypes.${change.entityType}`)}
           </span>
         </div>
 
         <div className="flex justify-between sm:justify-start items-center gap-2 min-w-0">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
+          <span className="sm:hidden text-xs font-semibold text-(--text-muted)">
             {t("endpoint.name")}
           </span>
           <span className="text-sm truncate">
