@@ -87,6 +87,18 @@ const PendingChangesAdminRow = memo(
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
             <span className="sm:hidden font-semibold">
+              {t("endpoint.name")}
+            </span>
+            <span className="break-all">
+              {"name" in data.data &&
+              typeof data.data.name === "string" &&
+              data.data.name
+                ? data.data.name
+                : "—"}
+            </span>
+          </div>
+          <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
+            <span className="sm:hidden font-semibold">
               {t("contribution.user")}
             </span>
             <span className="break-all">{data.user?.email ?? "-"}</span>
