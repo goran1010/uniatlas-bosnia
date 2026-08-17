@@ -1223,18 +1223,14 @@ describe("Admin Router - GET /users/admin/admin-requests", () => {
   test("Responds with status 200 and only users with an active request", async () => {
     const requestingInput = createNewUserInput();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {
-      ["confirm-password"]: _cp1,
-      id: _id1,
-      ...requestingData
-    } = requestingInput;
+    const { ["confirm-password"]: _cp1, ...requestingData } = requestingInput;
     const requestingUser = await prisma.user.create({
       data: { ...requestingData, adminRequestedAt: new Date() },
     });
 
     const silentInput = createNewUserInput();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { ["confirm-password"]: _cp2, id: _id2, ...silentData } = silentInput;
+    const { ["confirm-password"]: _cp2, ...silentData } = silentInput;
     const silentUser = await prisma.user.create({ data: silentData });
 
     const agent = request.agent(app);
@@ -1296,13 +1292,10 @@ describe("Admin Router - GET /users/admin/admin-requests", () => {
 
 describe("Admin Router - POST /users/admin/approve-admin-request", () => {
   test("Responds with status 200, promotes the user, and clears the request", async () => {
-    const requestingInput = createNewUserInput();
+    // The approve/decline endpoints validate the id as a UUID
+    const requestingInput = createNewUserInput({ id: crypto.randomUUID() });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {
-      ["confirm-password"]: _cp,
-      id: _id,
-      ...requestingData
-    } = requestingInput;
+    const { ["confirm-password"]: _cp, ...requestingData } = requestingInput;
     const requestingUser = await prisma.user.create({
       data: { ...requestingData, adminRequestedAt: new Date() },
     });
@@ -1360,13 +1353,10 @@ describe("Admin Router - POST /users/admin/approve-admin-request", () => {
 
 describe("Admin Router - DELETE /users/admin/decline-admin-request", () => {
   test("Responds with status 200, keeps the USER role, and clears the request", async () => {
-    const requestingInput = createNewUserInput();
+    // The approve/decline endpoints validate the id as a UUID
+    const requestingInput = createNewUserInput({ id: crypto.randomUUID() });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {
-      ["confirm-password"]: _cp,
-      id: _id,
-      ...requestingData
-    } = requestingInput;
+    const { ["confirm-password"]: _cp, ...requestingData } = requestingInput;
     const requestingUser = await prisma.user.create({
       data: { ...requestingData, adminRequestedAt: new Date() },
     });
