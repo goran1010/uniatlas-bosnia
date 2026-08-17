@@ -220,3 +220,138 @@ describe("Profile Component handle logout", () => {
     ).toBeInTheDocument();
   });
 });
+
+describe("Profile Component admin request", () => {
+  test("shows the request button for a USER without an active request", async () => {
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
+
+    expect(
+      await screen.findByRole("button", { name: /Request admin access/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Admin request pending/i),
+    ).not.toBeInTheDocument();
+  });
+
+  test("requests admin access and shows the pending state", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    fetchSpy.mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          message: "Admin access requested. An admin will review it.",
+          data: { adminRequestedAt: "2026-08-16T10:00:00.000Z" },
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
+
+    await user.click(
+      await screen.findByRole("button", { name: /Request admin access/i }),
+    );
+
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.stringContaining("/users/request-admin"),
+      expect.objectContaining({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-csrf-token": "mocked-csrf-token",
+        },
+      }),
+    );
+    expect(
+      await screen.findByText(/Admin request pending/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Cancel admin request/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /Request admin access/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  test("cancels a pending admin request", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    fetchSpy.mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({ message: "Admin request cancelled.", data: null }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    render(
+      <Wrapper
+        initialUser={{
+          email: "testuser@example.com",
+          role: "USER",
+          adminRequestedAt: "2026-08-16T10:00:00.000Z",
+        }}
+      />,
+    );
+
+    expect(
+      await screen.findByText(/Admin request pending/i),
+    ).toBeInTheDocument();
+
+    await user.click(
+      screen.getByRole("button", { name: /Cancel admin request/i }),
+    );
+
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.stringContaining("/users/request-admin"),
+      expect.objectContaining({ method: "DELETE" }),
+    );
+    expect(
+      await screen.findByRole("button", { name: /Request admin access/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Admin request pending/i),
+    ).not.toBeInTheDocument();
+  });
+
+  test("shows an error notification when the request fails", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({ error: { message: "Something went wrong." } }),
+        { status: 500, headers: { "Content-Type": "application/json" } },
+      ),
+    );
+    vi.spyOn(console, "warn").mockImplementation(() => vi.fn());
+
+    render(
+      <Wrapper initialUser={{ email: "testuser@example.com", role: "USER" }} />,
+    );
+
+    await user.click(
+      await screen.findByRole("button", { name: /Request admin access/i }),
+    );
+
+    expect(
+      await screen.findByText(/Error requesting admin access./i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Request admin access/i }),
+    ).toBeInTheDocument();
+  });
+
+  test("does not show admin request controls for an ADMIN", async () => {
+    render(
+      <Wrapper initialUser={{ email: "admin@example.com", role: "ADMIN" }} />,
+    );
+
+    await screen.findByRole("heading", { name: /My Profile/i });
+
+    expect(
+      screen.queryByRole("button", { name: /Request admin access/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Admin request pending/i),
+    ).not.toBeInTheDocument();
+  });
+});

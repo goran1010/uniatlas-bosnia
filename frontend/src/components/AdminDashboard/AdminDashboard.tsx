@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 function AdminDashboard() {
   const { userData, t } = use(RootContext);
 
-  if (!userData?.role) {
+  if (userData?.role !== "ADMIN") {
     return (
       <>
         <Helmet>

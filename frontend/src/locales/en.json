@@ -101,7 +101,10 @@
     "emailAddress": "Email Address",
     "currentRole": "Current Role",
     "needLogin": "You need to be logged in. Redirected to the login page.",
-    "logout": "Log out"
+    "logout": "Log out",
+    "requestAdmin": "Request admin access",
+    "adminRequestPending": "Admin request pending",
+    "cancelAdminRequest": "Cancel admin request"
   },
   "home": {
     "title": "Universities and Academic Programs in Bosnia and Herzegovina",
@@ -228,7 +231,11 @@
     "dashboardTitle": "Admin Dashboard",
     "pendingChangesCountAria": "pending changes count",
     "pendingChanges": "Pending Changes",
-    "noPendingChanges": "There are no pending changes at the moment."
+    "noPendingChanges": "There are no pending changes at the moment.",
+    "adminRequests": "Admin Requests",
+    "noAdminRequests": "There are no admin requests at the moment.",
+    "adminRequestsCountAria": "admin requests count",
+    "requestedAt": "Requested"
   },
   "error": {
     "notFound": "There is nothing here, sorry.",
@@ -302,6 +309,17 @@
       "deleteSuccess": "Pending change discarded.",
       "deleteFailed": "Failed to delete pending change.",
       "deleteError": "Error deleting pending change."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin access requested. An admin will review it.",
+      "requestError": "Error requesting admin access.",
+      "cancelSuccess": "Admin request cancelled.",
+      "cancelError": "Error cancelling admin request.",
+      "fetchError": "Error fetching admin requests.",
+      "approveSuccess": "Admin request approved.",
+      "approveError": "Error approving admin request.",
+      "declineSuccess": "Admin request declined.",
+      "declineError": "Error declining admin request."
     }
   },
   "universitiesPage": {

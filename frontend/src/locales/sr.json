@@ -101,7 +101,10 @@
     "emailAddress": "Email adresa",
     "currentRole": "Trenutna uloga",
     "needLogin": "Morate biti prijavljeni. Preusmereni ste na stranicu za prijavu.",
-    "logout": "Odjavi se"
+    "logout": "Odjavi se",
+    "requestAdmin": "Zatraži admin pristup",
+    "adminRequestPending": "Zahtjev za admin pristup je na čekanju",
+    "cancelAdminRequest": "Otkaži zahtjev za admin pristup"
   },
   "home": {
     "title": "Univerziteti i studijski programi u Bosni i Hercegovini",
@@ -228,7 +231,11 @@
     "dashboardTitle": "Admin kontrolna tabla",
     "pendingChangesCountAria": "broj izmjena na čekanju",
     "pendingChanges": "Izmjene na čekanju",
-    "noPendingChanges": "Trenutno nema izmjena na čekanju."
+    "noPendingChanges": "Trenutno nema izmjena na čekanju.",
+    "adminRequests": "Zahtjevi za admin pristup",
+    "noAdminRequests": "Trenutno nema zahtjeva za admin pristup.",
+    "adminRequestsCountAria": "broj zahtjeva za admin pristup",
+    "requestedAt": "Zatraženo"
   },
   "error": {
     "notFound": "Ovdje nema ničega, izvinite.",
@@ -302,6 +309,17 @@
       "deleteSuccess": "Izmjena na čekanju je odbačena.",
       "deleteFailed": "Brisanje prijedloga nije uspjelo.",
       "deleteError": "Greška pri brisanju prijedloga."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin pristup je zatražen. Admin će pregledati zahtjev.",
+      "requestError": "Greška pri traženju admin pristupa.",
+      "cancelSuccess": "Zahtjev za admin pristup je otkazan.",
+      "cancelError": "Greška pri otkazivanju zahtjeva za admin pristup.",
+      "fetchError": "Greška pri dohvatanju zahtjeva za admin pristup.",
+      "approveSuccess": "Zahtjev za admin pristup je odobren.",
+      "approveError": "Greška pri odobravanju zahtjeva za admin pristup.",
+      "declineSuccess": "Zahtjev za admin pristup je odbijen.",
+      "declineError": "Greška pri odbijanju zahtjeva za admin pristup."
     }
   },
   "universitiesPage": {

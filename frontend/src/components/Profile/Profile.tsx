@@ -2,6 +2,10 @@ import { RootContext } from "../../contextData/RootContext";
 import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { handleLogout } from "./utils/handleLogout";
+import {
+  handleRequestAdmin,
+  handleCancelAdminRequest,
+} from "./utils/handleAdminRequest";
 import { Button } from "../sharedComponents/Button";
 import { Helmet } from "react-helmet-async";
 
@@ -9,6 +13,7 @@ function Profile() {
   const { userData, setUserData, t, serverStatus, addNotification } =
     use(RootContext);
   const [loading, setLoading] = useState(false);
+  const [adminRequestLoading, setAdminRequestLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +64,52 @@ function Profile() {
               </dd>
             </div>
           </dl>
+          {userData?.role !== "ADMIN" && (
+            <div className="flex flex-col gap-2 w-full max-w-sm">
+              {userData?.adminRequestedAt ? (
+                <>
+                  <span className="px-4 py-2 rounded-full text-sm font-bold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                    {t("profile.adminRequestPending")}
+                  </span>
+                  <Button
+                    onClick={() =>
+                      void handleCancelAdminRequest(
+                        setUserData,
+                        addNotification,
+                        setAdminRequestLoading,
+                        t,
+                        serverStatus,
+                      )
+                    }
+                    variant="warning"
+                    className="px-6 py-3 font-semibold"
+                    type="button"
+                    loading={adminRequestLoading}
+                  >
+                    {t("profile.cancelAdminRequest")}
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  onClick={() =>
+                    void handleRequestAdmin(
+                      setUserData,
+                      addNotification,
+                      setAdminRequestLoading,
+                      t,
+                      serverStatus,
+                    )
+                  }
+                  variant="secondary"
+                  className="px-6 py-3 font-semibold"
+                  type="button"
+                  loading={adminRequestLoading}
+                >
+                  {t("profile.requestAdmin")}
+                </Button>
+              )}
+            </div>
+          )}
           <div className="flex flex-col gap-2 w-full max-w-sm">
             <Button
               onClick={() =>

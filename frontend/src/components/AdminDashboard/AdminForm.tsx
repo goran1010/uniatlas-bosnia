@@ -1,4 +1,5 @@
 import { PendingChangesAdmin } from "./PendingChangesAdmin";
+import { AdminRequests } from "./AdminRequests";
 import { use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
@@ -13,6 +14,8 @@ function AdminForm() {
         </h1>
 
         <PendingChangesAdmin />
+
+        <AdminRequests />
       </section>
     </div>
   );
