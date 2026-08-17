@@ -238,59 +238,42 @@ describe("render Navbar mobile menu", () => {
 });
 
 describe("Navbar switchers", () => {
-  test("opens language menu and closes theme menu", async () => {
+  test("theme button cycles through modes and updates localStorage", async () => {
     render(<NavbarWrapper />);
 
-    const themeSelect: HTMLSelectElement = screen.getByRole("combobox", {
+    const themeButton = screen.getByRole("button", {
       name: /Toggle theme/i,
     });
-    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
-      name: /Toggle language/i,
-    });
 
-    expect(themeSelect).toBeInTheDocument();
-    expect(languageSelect).toBeInTheDocument();
+    expect(themeButton).toBeInTheDocument();
 
-    await userEvent.selectOptions(themeSelect, "light");
+    await userEvent.click(themeButton);
     expect(localStorage.getItem("theme")).toBe("light");
-    expect(themeSelect.value).toBe("");
 
-    await userEvent.selectOptions(languageSelect, "sr");
-    expect(localStorage.getItem("language")).toBe("sr");
-    expect(languageSelect.value).toBe("");
+    await userEvent.click(themeButton);
+    expect(localStorage.getItem("theme")).toBe("dark");
+
+    await userEvent.click(themeButton);
+    expect(localStorage.getItem("theme")).toBeNull();
   });
 
-  test("closes open menus when navbar is clicked", async () => {
+  test("language button cycles through languages and updates localStorage", async () => {
     render(<NavbarWrapper />);
 
-    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
-      name: /Toggle language/i,
-    });
-    expect(languageSelect).toBeInTheDocument();
-
-    await userEvent.selectOptions(languageSelect, "sr");
-    expect(localStorage.getItem("language")).toBe("sr");
-    expect(languageSelect.value).toBe("");
-
-    const navigation = screen.getByRole("navigation");
-    expect(navigation).toBeInTheDocument();
-
-    await userEvent.click(navigation);
-    expect(localStorage.getItem("language")).toBe("sr");
-    expect(languageSelect.value).toBe("");
-  });
-
-  test("closes opened menus when Escape is pressed", async () => {
-    render(<NavbarWrapper />);
-
-    const languageSelect: HTMLSelectElement = screen.getByRole("combobox", {
+    const languageButton = screen.getByRole("button", {
       name: /Toggle language/i,
     });
 
-    await userEvent.selectOptions(languageSelect, "sr");
-    await userEvent.keyboard("{Escape}");
+    expect(languageButton).toBeInTheDocument();
+
+    await userEvent.click(languageButton);
     expect(localStorage.getItem("language")).toBe("sr");
-    expect(languageSelect.value).toBe("");
+
+    await userEvent.click(languageButton);
+    expect(localStorage.getItem("language")).toBe("system");
+
+    await userEvent.click(languageButton);
+    expect(localStorage.getItem("language")).toBe("en");
   });
 });
 
