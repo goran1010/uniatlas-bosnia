@@ -76,9 +76,9 @@ describe("PendingChangesAdminRow", () => {
     const form = screen
       .getByRole("button", { name: /Approve/i })
       .closest("form");
-    const badge = screen.getByText("DELETE");
+    const badge = screen.getByText("Delete");
 
-    expect(screen.getByText("SUBJECT")).toBeInTheDocument();
+    expect(screen.getByText("Subject")).toBeInTheDocument();
     expect(screen.getByText("johndoe@examplemail.com")).toBeInTheDocument();
     expect(form).toHaveClass("border-l-4");
     expect(form).toHaveClass("border-l-red-500");
@@ -106,7 +106,7 @@ describe("PendingChangesAdminRow", () => {
     const form = screen
       .getByRole("button", { name: /Approve/i })
       .closest("form");
-    const badge = screen.getByText("UNKNOWN");
+    const badge = screen.getByText("contribution.changeTypes.UNKNOWN");
 
     expect(form).not.toHaveClass("border-l-4");
     expect(badge).toHaveClass("bg-(--surface-alt)");

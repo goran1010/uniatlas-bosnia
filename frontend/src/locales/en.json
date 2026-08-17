@@ -185,6 +185,11 @@
       "STUDY_PROGRAM": "Study Program",
       "SUBJECT": "Subject"
     },
+    "changeTypes": {
+      "CREATE": "Create",
+      "UPDATE": "Update",
+      "DELETE": "Delete"
+    },
     "picker": {
       "parent": "Where should the new item be added?",
       "target": "Which item do you want to change?",
@@ -237,7 +242,11 @@
     "adminRequests": "Admin Requests",
     "noAdminRequests": "There are no admin requests at the moment.",
     "adminRequestsCountAria": "admin requests count",
-    "requestedAt": "Requested"
+    "requestedAt": "Requested",
+    "proposedData": "Proposed Data",
+    "currentData": "Current Data",
+    "proposedChanges": "Proposed Changes",
+    "entityDeleted": "Entity no longer exists"
   },
   "error": {
     "notFound": "There is nothing here, sorry.",

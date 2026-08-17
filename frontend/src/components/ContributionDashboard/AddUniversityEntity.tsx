@@ -166,7 +166,7 @@ function AddUniversityEntity({
         >
           {TYPE_OF_CHANGES.map((c) => (
             <option key={c} value={c}>
-              {c}
+              {t(`contribution.changeTypes.${c}`)}
             </option>
           ))}
         </Select>

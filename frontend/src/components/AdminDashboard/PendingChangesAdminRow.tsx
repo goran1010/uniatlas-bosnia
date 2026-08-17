@@ -74,7 +74,7 @@ const PendingChangesAdminRow = memo(
                 data.typeOfChange,
               )}`}
             >
-              {data.typeOfChange}
+              {t(`contribution.changeTypes.${data.typeOfChange}`)}
             </span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1">
@@ -82,7 +82,7 @@ const PendingChangesAdminRow = memo(
               {t("contribution.entityType")}
             </span>
             <span className="font-mono font-medium text-(--text-primary) text-xs">
-              {data.entityType}
+              {t(`contribution.entityTypes.${data.entityType}`)}
             </span>
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">

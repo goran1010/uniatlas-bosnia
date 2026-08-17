@@ -44,7 +44,7 @@ function PendingUniversityChangesRow({
           <span
             className={`px-2 py-0.5 rounded text-xs font-semibold ${BADGE[change.typeOfChange]}`}
           >
-            {change.typeOfChange}
+            {t(`contribution.changeTypes.${change.typeOfChange}`)}
           </span>
         </div>
 

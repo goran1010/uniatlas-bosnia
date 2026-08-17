@@ -44,7 +44,8 @@ describe("PendingUniversityChangesRow", () => {
       </Wrapper>,
     );
 
-    const badge = screen.getByText("DELETE");
+    const badges = screen.getAllByText("Delete");
+    const badge = badges.find((el) => el.tagName === "SPAN")!;
 
     expect(screen.getByText(/University/i)).toBeInTheDocument();
     expect(badge).toHaveClass("bg-red-100");

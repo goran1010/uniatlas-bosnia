@@ -30,7 +30,7 @@ function ContributionForm() {
             onClick={() => {
               setActiveTab(tab);
             }}
-            className={`relative px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
+            className={`relative px-3 py-2 text-sm font-medium rounded-t-md transition-colors cursor-pointer ${
               activeTab === tab
                 ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
                 : "text-(--text-secondary) hover:text-(--text-primary)"
