@@ -63,9 +63,9 @@ describe("LanguageSwitcher", () => {
       expectedMessage: "Switched to English",
     },
     {
-      languageButton: /Serbian/i,
+      languageButton: /Bosnian\/Croatian\/Serbian/i,
       expectedLanguage: "sr",
-      expectedMessage: "Switched to Serbian",
+      expectedMessage: "Switched to Bosnian/Croatian/Serbian",
     },
   ])(
     "switches language using $languageButton",

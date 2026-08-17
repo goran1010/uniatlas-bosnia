@@ -53,12 +53,12 @@
     "select": "Jezik",
     "system": "Sistemski",
     "english": "Engleski",
-    "serbian": "Srpski",
+    "bcs": "Bosanski/Hrvatski/Srpski",
     "switchAria": "Promijeni jezik",
     "switched": {
       "system": "Prebačeno na jezik sistema",
       "english": "Prebačeno na engleski",
-      "serbian": "Prebačeno na srpski"
+      "bcs": "Prebačeno na bosanski/hrvatski/srpski"
     }
   },
   "auth": {
