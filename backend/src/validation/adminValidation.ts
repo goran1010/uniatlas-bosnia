@@ -25,4 +25,33 @@ function approvePendingChange(input: unknown) {
   return result.data;
 }
 
-export { declinePendingChange, approvePendingChange };
+const adminRequestSchema = z.strictObject({
+  id: z.uuid({ message: "User ID must be a valid UUID" }),
+});
+
+function approveAdminRequest(input: unknown) {
+  const result = adminRequestSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+function declineAdminRequest(input: unknown) {
+  const result = adminRequestSchema.safeParse(input);
+
+  if (!result.success) {
+    throw new RequestValidationError(result.error);
+  }
+
+  return result.data;
+}
+
+export {
+  declinePendingChange,
+  approvePendingChange,
+  approveAdminRequest,
+  declineAdminRequest,
+};

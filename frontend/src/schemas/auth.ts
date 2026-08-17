@@ -62,6 +62,7 @@ const loginResponseSchema = z.object({
   data: z.object({
     email: z.email(),
     role: userRoleSchema,
+    adminRequestedAt: z.string().nullable().optional(),
   }),
 });
 
@@ -71,6 +72,7 @@ const currentUserResponseSchema = z.object({
     .object({
       email: z.email(),
       role: userRoleSchema,
+      adminRequestedAt: z.string().nullable().optional(),
     })
     .nullable(),
 });

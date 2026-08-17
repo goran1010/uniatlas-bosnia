@@ -53,12 +53,12 @@
     "select": "Language",
     "system": "System",
     "english": "English",
-    "serbian": "Serbian",
+    "bcs": "Bosnian/Croatian/Serbian",
     "switchAria": "Toggle language",
     "switched": {
       "system": "Switched to system language",
       "english": "Switched to English",
-      "serbian": "Switched to Serbian"
+      "bcs": "Switched to Bosnian/Croatian/Serbian"
     }
   },
   "auth": {
@@ -101,7 +101,10 @@
     "emailAddress": "Email Address",
     "currentRole": "Current Role",
     "needLogin": "You need to be logged in. Redirected to the login page.",
-    "logout": "Log out"
+    "logout": "Log out",
+    "requestAdmin": "Request admin access",
+    "adminRequestPending": "Admin request pending",
+    "cancelAdminRequest": "Cancel admin request"
   },
   "home": {
     "title": "Universities and Academic Programs in Bosnia and Herzegovina",
@@ -131,48 +134,16 @@
   "api": {
     "title": "REST API",
     "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
-    "authIntro": "Authenticated endpoints are separate from the public base URL and use session cookies plus CSRF tokens for write operations.",
     "dataObject": "University object",
     "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoints",
-    "authFlowTitle": "Authenticated Data Contribution Flow",
-    "authFlowBody": "These endpoints require an authenticated session (credentials: include) and use CSRF protection for mutating requests.",
-    "groups": {
-      "csrf": "CSRF",
-      "auth": "Auth",
-      "users": "Users (Authenticated)",
-      "contributions": "Contributions (Authenticated Users)",
-      "admin": "Admin (Authenticated Admin Users)"
-    },
     "endpointsData": {
       "apiStatus": "Check API status.",
       "apiV1Status": "Check API v1 status.",
       "getAllUniversities": "Retrieve all universities, ordered by name.",
       "getUniversityById": "Retrieve a university by ID with full nested detail (faculties, study programs, subjects).",
       "search": "Search universities (name, city, acronym), faculties (name, city), study programs, and subjects (name) in a single request (case-insensitive, minimum 2 characters).",
-      "searchTermParam": "A search term (minimum 2 characters).",
-      "csrfIssue": "Issue a CSRF token used in the x-csrf-token header for mutating requests.",
-      "authSignup": "Register a pending account and send a confirmation email.",
-      "authConfirm": "Confirm signup token and create the user account.",
-      "authLogin": "Log in with email/password.",
-      "authGithubStart": "Start GitHub OAuth login flow.",
-      "authGithubCallback": "Complete GitHub OAuth login flow.",
-      "usersMe": "Get current user profile.",
-      "usersLogout": "End session.",
-      "contributionCreate": "Suggest a new university entity (stored as pending change).",
-      "contributionUpdate": "Suggest an edit to a university entity (stored as pending change).",
-      "contributionDelete": "Suggest deletion of a university entity (stored as pending change).",
-      "contributionPendingList": "List your own pending suggestions.",
-      "contributionPendingDelete": "Remove one of your own pending suggestions.",
-      "adminPendingList": "List all pending suggestions.",
-      "adminApprove": "Approve a pending suggestion and apply it to the live dataset.",
-      "adminDecline": "Reject a pending suggestion."
-    },
-    "method": {
-      "get": "GET",
-      "post": "POST",
-      "put": "PUT",
-      "delete": "DELETE"
+      "searchTermParam": "A search term (minimum 2 characters)."
     }
   },
   "endpoint": {
@@ -260,7 +231,11 @@
     "dashboardTitle": "Admin Dashboard",
     "pendingChangesCountAria": "pending changes count",
     "pendingChanges": "Pending Changes",
-    "noPendingChanges": "There are no pending changes at the moment."
+    "noPendingChanges": "There are no pending changes at the moment.",
+    "adminRequests": "Admin Requests",
+    "noAdminRequests": "There are no admin requests at the moment.",
+    "adminRequestsCountAria": "admin requests count",
+    "requestedAt": "Requested"
   },
   "error": {
     "notFound": "There is nothing here, sorry.",
@@ -334,6 +309,17 @@
       "deleteSuccess": "Pending change discarded.",
       "deleteFailed": "Failed to delete pending change.",
       "deleteError": "Error deleting pending change."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin access requested. An admin will review it.",
+      "requestError": "Error requesting admin access.",
+      "cancelSuccess": "Admin request cancelled.",
+      "cancelError": "Error cancelling admin request.",
+      "fetchError": "Error fetching admin requests.",
+      "approveSuccess": "Admin request approved.",
+      "approveError": "Error approving admin request.",
+      "declineSuccess": "Admin request declined.",
+      "declineError": "Error declining admin request."
     }
   },
   "universitiesPage": {

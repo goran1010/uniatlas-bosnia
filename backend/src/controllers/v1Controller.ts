@@ -1,5 +1,6 @@
 import { prisma } from "../db/prisma.js";
 import { sendError, sendSuccess } from "../utils/response.js";
+import { expandSearchTerm } from "../utils/searchVariants.js";
 
 import type { Request, Response } from "express";
 import * as universityValidation from "../validation/universityValidation.js";
@@ -24,20 +25,26 @@ async function getUniversities(_req: Request, res: Response) {
 async function search(req: Request, res: Response) {
   const { searchTerm } = universityValidation.searchQuery(req.query);
 
-  const contains = {
-    contains: searchTerm,
-    mode: "insensitive",
-  } as const;
+  // Match any accent variant of the term (e.g. "dzemal" also finds "Džemal").
+  const variants = expandSearchTerm(searchTerm);
+  const fieldContains = (field: "name" | "city" | "acronym") =>
+    variants.map((variant) => ({
+      [field]: { contains: variant, mode: "insensitive" as const },
+    }));
 
   const [universities, faculties, studyPrograms, subjects] = await Promise.all([
     prisma.university.findMany({
       where: {
-        OR: [{ name: contains }, { city: contains }, { acronym: contains }],
+        OR: [
+          ...fieldContains("name"),
+          ...fieldContains("city"),
+          ...fieldContains("acronym"),
+        ],
       },
     }),
     prisma.faculty.findMany({
       where: {
-        OR: [{ name: contains }, { city: contains }],
+        OR: [...fieldContains("name"), ...fieldContains("city")],
       },
       include: {
         university: true,
@@ -45,7 +52,7 @@ async function search(req: Request, res: Response) {
     }),
     prisma.studyProgram.findMany({
       where: {
-        name: contains,
+        OR: fieldContains("name"),
       },
       include: {
         faculty: {
@@ -57,7 +64,7 @@ async function search(req: Request, res: Response) {
     }),
     prisma.subject.findMany({
       where: {
-        name: contains,
+        OR: fieldContains("name"),
       },
       include: {
         studyProgram: {

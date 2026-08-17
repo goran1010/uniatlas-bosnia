@@ -34,6 +34,45 @@
   font-display: swap;
 }
 
+/* Accented characters (č ć š ž đ, U+0100-024F) live in the latin-ext subset.
+   These blocks take priority for that unicode-range, so accented characters render in
+   Roboto instead of falling back to a system font. */
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-024F;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-latin-ext-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-024F;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-latin-ext-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-024F;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-latin-ext-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-024F;
+}
+
 :root {
   color-scheme: light;
   --app-bg: linear-gradient(180deg, #f2f7ff 0%, #f8fafc 40%, #eef4ff 100%);

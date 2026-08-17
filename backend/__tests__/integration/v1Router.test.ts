@@ -282,3 +282,95 @@ describe("GET /api/v1/search — related entities", () => {
     await prisma.university.delete({ where: { id: university.id } });
   });
 });
+
+describe("GET /api/v1/search — diacritic-insensitive matching", () => {
+  test("matches accented data from ASCII terms and vice versa", async () => {
+    const testUniversityName = "Test Diacritics Univerzitet Ćuprija";
+    const existing = await prisma.university.findMany({
+      where: { name: testUniversityName },
+    });
+    for (const u of existing) {
+      await prisma.subject.deleteMany({
+        where: { studyProgram: { faculty: { universityId: u.id } } },
+      });
+      await prisma.studyProgram.deleteMany({
+        where: { faculty: { universityId: u.id } },
+      });
+      await prisma.faculty.deleteMany({ where: { universityId: u.id } });
+      await prisma.university.delete({ where: { id: u.id } });
+    }
+
+    const university = await prisma.university.create({
+      data: {
+        name: testUniversityName,
+        city: "Sarajevo",
+        entity: "FBIH",
+        ownership: "JAVNA",
+        faculties: {
+          create: {
+            name: "Test Diacritics Džemal",
+            studyPrograms: {
+              create: {
+                name: "Test Diacritics Program",
+                cycle: "FIRST",
+                subjects: {
+                  create: {
+                    name: "Test Diacritics Racunari",
+                    type: "MANDATORY",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const universityResponse = await request(app).get(
+      "/api/v1/search?searchTerm=cuprija",
+    );
+    const universityBody = getResponseObject(universityResponse.body);
+    const universityData = getResponseObject(universityBody["data"]);
+    const universities = getResponseArray(universityData["universities"]);
+
+    expect(universityResponse.status).toBe(200);
+    expect(universities.some((u) => u["name"] === testUniversityName)).toBe(
+      true,
+    );
+
+    const facultyResponse = await request(app).get(
+      "/api/v1/search?searchTerm=dzemal",
+    );
+    const facultyBody = getResponseObject(facultyResponse.body);
+    const facultyData = getResponseObject(facultyBody["data"]);
+    const faculties = getResponseArray(facultyData["faculties"]);
+
+    expect(facultyResponse.status).toBe(200);
+    expect(faculties.some((f) => f["name"] === "Test Diacritics Džemal")).toBe(
+      true,
+    );
+
+    const subjectResponse = await request(app).get(
+      `/api/v1/search?searchTerm=${encodeURIComponent("računari")}`,
+    );
+    const subjectBody = getResponseObject(subjectResponse.body);
+    const subjectData = getResponseObject(subjectBody["data"]);
+    const subjects = getResponseArray(subjectData["subjects"]);
+
+    expect(subjectResponse.status).toBe(200);
+    expect(subjects.some((s) => s["name"] === "Test Diacritics Racunari")).toBe(
+      true,
+    );
+
+    await prisma.subject.deleteMany({
+      where: {
+        studyProgram: { faculty: { universityId: university.id } },
+      },
+    });
+    await prisma.studyProgram.deleteMany({
+      where: { faculty: { universityId: university.id } },
+    });
+    await prisma.faculty.deleteMany({ where: { universityId: university.id } });
+    await prisma.university.delete({ where: { id: university.id } });
+  });
+});

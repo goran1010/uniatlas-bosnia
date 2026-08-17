@@ -38,6 +38,14 @@ const setupFetchMock = ({
         createFetchResponse({ data: csrfToken, message: "Success" }),
       );
     }
+    if (requestUrl.includes("/users/admin/admin-requests")) {
+      return Promise.resolve(
+        createFetchResponse({
+          data: [],
+          message: "Admin requests retrieved successfully.",
+        }),
+      );
+    }
     if (requestUrl.includes("/users/admin/pending-changes")) {
       return Promise.resolve(
         createFetchResponse({
@@ -109,7 +117,8 @@ describe("AdminForm component rendering", () => {
 
     expect(heading).toBeInTheDocument();
 
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    // One fetch for pending changes, one for admin requests
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   test("renders pending changes list", async () => {

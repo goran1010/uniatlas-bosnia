@@ -24,7 +24,7 @@ function LanguageSwitcher({ setLanguage }: { setLanguage: SetLanguage }) {
           ? "language.switched.system"
           : nextLanguage === "en"
             ? "language.switched.english"
-            : "language.switched.serbian",
+            : "language.switched.bcs",
       ),
     });
   }
@@ -41,7 +41,7 @@ function LanguageSwitcher({ setLanguage }: { setLanguage: SetLanguage }) {
       </option>
       <option value="system">{t("language.system")}</option>
       <option value="en">{t("language.english")}</option>
-      <option value="sr">{t("language.serbian")}</option>
+      <option value="sr">{t("language.bcs")}</option>
     </Select>
   );
 }

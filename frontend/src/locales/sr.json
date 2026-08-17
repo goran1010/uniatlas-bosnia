@@ -53,12 +53,12 @@
     "select": "Jezik",
     "system": "Sistemski",
     "english": "Engleski",
-    "serbian": "Srpski",
+    "bcs": "Bosanski/Hrvatski/Srpski",
     "switchAria": "Promijeni jezik",
     "switched": {
       "system": "Prebačeno na jezik sistema",
       "english": "Prebačeno na engleski",
-      "serbian": "Prebačeno na srpski"
+      "bcs": "Prebačeno na bosanski/hrvatski/srpski"
     }
   },
   "auth": {
@@ -101,7 +101,10 @@
     "emailAddress": "Email adresa",
     "currentRole": "Trenutna uloga",
     "needLogin": "Morate biti prijavljeni. Preusmereni ste na stranicu za prijavu.",
-    "logout": "Odjavi se"
+    "logout": "Odjavi se",
+    "requestAdmin": "Zatraži admin pristup",
+    "adminRequestPending": "Zahtjev za admin pristup je na čekanju",
+    "cancelAdminRequest": "Otkaži zahtjev za admin pristup"
   },
   "home": {
     "title": "Univerziteti i studijski programi u Bosni i Hercegovini",
@@ -131,48 +134,16 @@
   "api": {
     "title": "REST API",
     "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
-    "authIntro": "Autentifikovani endpoint-i su odvojeni od javnog osnovnog URL-a i koriste sesijske kolačiće plus CSRF tokene za izmjene podataka.",
     "dataObject": "Objekat univerziteta",
     "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoint-i",
-    "authFlowTitle": "Autentifikovani tok za doprinos podacima",
-    "authFlowBody": "Ovi endpoint-i zahtijevaju autentifikovanu sesiju (credentials: include) i koriste CSRF zaštitu za zahtjeve koji mijenjaju podatke.",
-    "groups": {
-      "csrf": "CSRF",
-      "auth": "Autentifikacija",
-      "users": "Korisnici (autentifikovani)",
-      "contributions": "Doprinosi (autentifikovani korisnici)",
-      "admin": "Admin (autentifikovani admin korisnici)"
-    },
     "endpointsData": {
       "apiStatus": "Provjera statusa API-ja.",
       "apiV1Status": "Provjera statusa API v1.",
       "getAllUniversities": "Preuzimanje svih univerziteta, sortiranih po nazivu.",
       "getUniversityById": "Preuzimanje univerziteta po ID-u s potpunim ugniježđenim detaljima (fakulteti, studijski programi, predmeti).",
       "search": "Pretraga univerziteta (naziv, grad, akronim), fakulteta (naziv, grad), studijskih programa i predmeta (naziv) u jednom zahtjevu (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
-      "searchTermParam": "Pojam za pretragu (najmanje 2 karaktera).",
-      "csrfIssue": "Izdavanje CSRF tokena koji se koristi u x-csrf-token headeru za zahtjeve koji mijenjaju podatke.",
-      "authSignup": "Registracija naloga na čekanju i slanje emaila za potvrdu.",
-      "authConfirm": "Potvrda signup tokena i kreiranje korisničkog naloga.",
-      "authLogin": "Prijava putem emaila i lozinke.",
-      "authGithubStart": "Pokretanje GitHub OAuth toka prijave.",
-      "authGithubCallback": "Završetak GitHub OAuth toka prijave.",
-      "usersMe": "Dobavljanje profila trenutnog korisnika.",
-      "usersLogout": "Zatvaranje sesije.",
-      "contributionCreate": "Predlaganje novog entiteta univerziteta (čuva se kao izmjena na čekanju).",
-      "contributionUpdate": "Predlaganje izmjene entiteta univerziteta (čuva se kao izmjena na čekanju).",
-      "contributionDelete": "Predlaganje brisanja entiteta univerziteta (čuva se kao izmjena na čekanju).",
-      "contributionPendingList": "Prikaz vlastitih prijedloga na čekanju.",
-      "contributionPendingDelete": "Uklanjanje jednog vlastitog prijedloga na čekanju.",
-      "adminPendingList": "Prikaz svih prijedloga na čekanju.",
-      "adminApprove": "Odobravanje prijedloga na čekanju i primjena na aktivni skup podataka.",
-      "adminDecline": "Odbijanje prijedloga na čekanju."
-    },
-    "method": {
-      "get": "GET",
-      "post": "POST",
-      "put": "PUT",
-      "delete": "DELETE"
+      "searchTermParam": "Pojam za pretragu (najmanje 2 karaktera)."
     }
   },
   "endpoint": {
@@ -260,7 +231,11 @@
     "dashboardTitle": "Admin kontrolna tabla",
     "pendingChangesCountAria": "broj izmjena na čekanju",
     "pendingChanges": "Izmjene na čekanju",
-    "noPendingChanges": "Trenutno nema izmjena na čekanju."
+    "noPendingChanges": "Trenutno nema izmjena na čekanju.",
+    "adminRequests": "Zahtjevi za admin pristup",
+    "noAdminRequests": "Trenutno nema zahtjeva za admin pristup.",
+    "adminRequestsCountAria": "broj zahtjeva za admin pristup",
+    "requestedAt": "Zatraženo"
   },
   "error": {
     "notFound": "Ovdje nema ničega, izvinite.",
@@ -334,6 +309,17 @@
       "deleteSuccess": "Izmjena na čekanju je odbačena.",
       "deleteFailed": "Brisanje prijedloga nije uspjelo.",
       "deleteError": "Greška pri brisanju prijedloga."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin pristup je zatražen. Admin će pregledati zahtjev.",
+      "requestError": "Greška pri traženju admin pristupa.",
+      "cancelSuccess": "Zahtjev za admin pristup je otkazan.",
+      "cancelError": "Greška pri otkazivanju zahtjeva za admin pristup.",
+      "fetchError": "Greška pri dohvatanju zahtjeva za admin pristup.",
+      "approveSuccess": "Zahtjev za admin pristup je odobren.",
+      "approveError": "Greška pri odobravanju zahtjeva za admin pristup.",
+      "declineSuccess": "Zahtjev za admin pristup je odbijen.",
+      "declineError": "Greška pri odbijanju zahtjeva za admin pristup."
     }
   },
   "universitiesPage": {

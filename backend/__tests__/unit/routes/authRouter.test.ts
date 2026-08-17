@@ -166,7 +166,10 @@ describe("POST /auth/signup", () => {
       token: "mock-token",
       expiresAt: new Date(Date.now() + 60 * 60 * 1000),
     });
-    vi.spyOn(prisma.user, "create").mockResolvedValueOnce(newUser);
+    vi.spyOn(prisma.user, "create").mockResolvedValueOnce({
+      ...newUser,
+      adminRequestedAt: null,
+    });
 
     const response = await request(app).post("/auth/signup").send(newUser);
     const responseBody = getResponseObject(response.body);
@@ -188,6 +191,7 @@ describe("POST /auth/signup", () => {
       password: "hashed-password",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     });
 
     const responseData = {
@@ -263,6 +267,7 @@ describe("GET /auth/confirm/:token", () => {
       password: "hashed-password",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     });
 
     const token = crypto.randomBytes(32).toString("hex");
@@ -273,6 +278,7 @@ describe("GET /auth/confirm/:token", () => {
       password: "hashed-password",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     });
     vi.spyOn(prisma.user, "update").mockResolvedValueOnce({
       id: "existing-user-id",
@@ -280,6 +286,7 @@ describe("GET /auth/confirm/:token", () => {
       password: "hashed-password",
       role: "USER",
       githubId: null,
+      adminRequestedAt: null,
     });
 
     const response = await request(app).get(`/auth/confirm/${token}`);
@@ -319,6 +326,7 @@ describe("POST /auth/login", () => {
     vi.spyOn(prisma.user, "findUnique").mockResolvedValueOnce({
       ...newUser,
       password: hashedPassword,
+      adminRequestedAt: null,
     });
 
     const response = await request(app).post("/auth/login").send(newUser);

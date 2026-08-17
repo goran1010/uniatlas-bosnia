@@ -58,6 +58,14 @@ const setupFetchMock = ({
         createFetchResponse({ data: csrfToken, message: "Success" }),
       );
     }
+    if (requestUrl.includes("/admin-requests")) {
+      return Promise.resolve(
+        createFetchResponse({
+          data: [],
+          message: "Admin requests retrieved successfully.",
+        }),
+      );
+    }
     if (requestUrl.includes("/pending-changes")) {
       return Promise.resolve(
         createFetchResponse({

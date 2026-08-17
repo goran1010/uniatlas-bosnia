@@ -1218,3 +1218,175 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
     await prisma.user.delete({ where: { id: userInDb.id } });
   });
 });
+
+describe("Admin Router - GET /users/admin/admin-requests", () => {
+  test("Responds with status 200 and only users with an active request", async () => {
+    const requestingInput = createNewUserInput();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: _cp1, ...requestingData } = requestingInput;
+    const requestingUser = await prisma.user.create({
+      data: { ...requestingData, adminRequestedAt: new Date() },
+    });
+
+    const silentInput = createNewUserInput();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: _cp2, ...silentData } = silentInput;
+    const silentUser = await prisma.user.create({ data: silentData });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent.get("/users/admin/admin-requests");
+    const responseBody = asUnknown(response.body);
+
+    expect(response.status).toBe(200);
+    expect(responseBody).toEqual(
+      expect.objectContaining({
+        message: "Admin requests retrieved successfully.",
+      }),
+    );
+
+    if (
+      typeof responseBody !== "object" ||
+      responseBody === null ||
+      !("data" in responseBody) ||
+      !Array.isArray(responseBody.data)
+    ) {
+      throw new Error("Expected admin requests response data to be an array");
+    }
+
+    expect(responseBody.data).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: requestingUser.id,
+          email: requestingUser.email,
+        }),
+      ]),
+    );
+    expect(
+      responseBody.data.some(
+        (adminRequest: unknown) =>
+          typeof adminRequest === "object" &&
+          adminRequest !== null &&
+          "id" in adminRequest &&
+          adminRequest.id === silentUser.id,
+      ),
+    ).toBe(false);
+
+    await prisma.user.delete({ where: { id: requestingUser.id } });
+    await prisma.user.delete({ where: { id: silentUser.id } });
+  });
+
+  test("Responds with status 403 if role is not ADMIN", async () => {
+    const agent = request.agent(app);
+    const userData = createNewUserInput();
+    await createAndLoginUser(agent, userData);
+
+    const response = await agent.get("/users/admin/admin-requests");
+
+    expect(response.status).toBe(403);
+
+    await prisma.user.delete({ where: { email: userData.email } });
+  });
+});
+
+describe("Admin Router - POST /users/admin/approve-admin-request", () => {
+  test("Responds with status 200, promotes the user, and clears the request", async () => {
+    // The approve/decline endpoints validate the id as a UUID
+    const requestingInput = createNewUserInput({ id: crypto.randomUUID() });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: _cp, ...requestingData } = requestingInput;
+    const requestingUser = await prisma.user.create({
+      data: { ...requestingData, adminRequestedAt: new Date() },
+    });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-admin-request")
+      .send({ id: requestingUser.id });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        message: "Admin request approved successfully.",
+      }),
+    );
+
+    const userInDb = await prisma.user.findUnique({
+      where: { id: requestingUser.id },
+    });
+    expect(userInDb?.role).toBe("ADMIN");
+    expect(userInDb?.adminRequestedAt).toBeNull();
+
+    await prisma.user.delete({ where: { id: requestingUser.id } });
+  });
+
+  test("Responds with status 404 if the user has no active request", async () => {
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-admin-request")
+      .send({ id: "a7d3c8f1-4b9e-4f2a-8c3e-5d7f1b9a2c6e" });
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        error: { message: "Admin request not found." },
+      }),
+    );
+  });
+
+  test("Responds with status 400 for a malformed user id", async () => {
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .post("/users/admin/approve-admin-request")
+      .send({ id: "not-a-uuid" });
+
+    expect(response.status).toBe(400);
+  });
+});
+
+describe("Admin Router - DELETE /users/admin/decline-admin-request", () => {
+  test("Responds with status 200, keeps the USER role, and clears the request", async () => {
+    // The approve/decline endpoints validate the id as a UUID
+    const requestingInput = createNewUserInput({ id: crypto.randomUUID() });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { ["confirm-password"]: _cp, ...requestingData } = requestingInput;
+    const requestingUser = await prisma.user.create({
+      data: { ...requestingData, adminRequestedAt: new Date() },
+    });
+
+    const agent = request.agent(app);
+    await createAndLoginUser(agent, { role: "ADMIN" });
+
+    const response = await agent
+      .delete("/users/admin/decline-admin-request")
+      .send({ id: requestingUser.id });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        message: "Admin request declined successfully.",
+      }),
+    );
+
+    const userInDb = await prisma.user.findUnique({
+      where: { id: requestingUser.id },
+    });
+    expect(userInDb?.role).toBe("USER");
+    expect(userInDb?.adminRequestedAt).toBeNull();
+
+    // Declining again is a 404 because the request is no longer active
+    const repeatResponse = await agent
+      .delete("/users/admin/decline-admin-request")
+      .send({ id: requestingUser.id });
+    expect(repeatResponse.status).toBe(404);
+
+    await prisma.user.delete({ where: { id: requestingUser.id } });
+  });
+});

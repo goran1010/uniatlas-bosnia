@@ -53,4 +53,74 @@ async function approvePendingChange(req: Request, res: Response) {
   });
 }
 
-export { getPendingChanges, declinePendingChange, approvePendingChange };
+async function getAdminRequests(_req: Request, res: Response) {
+  const adminRequests = await prisma.user.findMany({
+    where: {
+      adminRequestedAt: { not: null },
+      role: "USER",
+    },
+    select: {
+      id: true,
+      email: true,
+      adminRequestedAt: true,
+    },
+    orderBy: { adminRequestedAt: "asc" },
+  });
+
+  sendSuccess(res, {
+    data: adminRequests,
+    message: "Admin requests retrieved successfully.",
+  });
+}
+
+async function approveAdminRequest(req: Request, res: Response) {
+  const { id } = adminValidation.approveAdminRequest(req.body);
+
+  // updateMany so a missing user or an already-handled request is a clean 404
+  const { count } = await prisma.user.updateMany({
+    where: { id, adminRequestedAt: { not: null } },
+    data: { role: "ADMIN", adminRequestedAt: null },
+  });
+
+  if (count === 0) {
+    sendError(res, {
+      status: 404,
+      message: "Admin request not found.",
+    });
+    return;
+  }
+
+  sendSuccess(res, {
+    message: "Admin request approved successfully.",
+  });
+}
+
+async function declineAdminRequest(req: Request, res: Response) {
+  const { id } = adminValidation.declineAdminRequest(req.body);
+
+  const { count } = await prisma.user.updateMany({
+    where: { id, adminRequestedAt: { not: null } },
+    data: { adminRequestedAt: null },
+  });
+
+  if (count === 0) {
+    sendError(res, {
+      status: 404,
+      message: "Admin request not found.",
+    });
+    return;
+  }
+
+  sendSuccess(res, {
+    message: "Admin request declined successfully.",
+  });
+}
+
+export {
+  getPendingChanges,
+  declinePendingChange,
+  approvePendingChange,
+  getAdminRequests,
+  approveAdminRequest,
+  declineAdminRequest,
+};
