@@ -1,4 +1,5 @@
 import { prisma } from "../db/prisma.js";
+import { enrichWithCurrentEntity } from "../models/pendingChangeModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import { logger } from "../utils/logger.js";
 import * as contributionValidation from "../validation/contributionValidation.js";
@@ -197,8 +198,10 @@ async function getPendingChanges(req: Request, res: Response) {
     where: { userId: id },
   });
 
+  const enriched = await enrichWithCurrentEntity(pendingChanges);
+
   sendSuccess(res, {
-    data: pendingChanges,
+    data: enriched,
     message: "Pending changes retrieved successfully.",
   });
 }

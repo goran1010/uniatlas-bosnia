@@ -107,9 +107,13 @@ const adminPendingChangeSchema = pendingChangeSchema.and(
   }),
 );
 
+const pendingChangeWithEntitySchema = pendingChangeSchema.and(
+  z.object({ currentEntity: currentEntitySchema }),
+);
+
 const pendingChangesResponseSchema = z.object({
   message: z.string(),
-  data: z.array(pendingChangeSchema),
+  data: z.array(pendingChangeWithEntitySchema),
 });
 
 const adminPendingChangesResponseSchema = z.object({
@@ -122,7 +126,7 @@ const pendingChangeResponseSchema = z.object({
   data: pendingChangeSchema,
 });
 
-export type PendingChange = z.infer<typeof pendingChangeSchema>;
+export type PendingChange = z.infer<typeof pendingChangeWithEntitySchema>;
 export type AdminPendingChange = z.infer<typeof adminPendingChangeSchema>;
 export {
   adminPendingChangesResponseSchema,

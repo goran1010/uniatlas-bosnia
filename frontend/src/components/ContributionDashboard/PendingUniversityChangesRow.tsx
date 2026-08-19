@@ -103,6 +103,13 @@ function PendingUniversityChangesRow({
           entityType={change.entityType}
           typeOfChange={change.typeOfChange}
           data={change.data}
+          currentEntity={
+            change.currentEntity != null &&
+            typeof change.currentEntity === "object" &&
+            !Array.isArray(change.currentEntity)
+              ? change.currentEntity
+              : null
+          }
         />
       )}
     </li>

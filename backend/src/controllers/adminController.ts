@@ -1,5 +1,6 @@
 import { prisma } from "../db/prisma.js";
 import * as transactionModel from "../models/transactionModel.js";
+import { enrichWithCurrentEntity } from "../models/pendingChangeModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import * as adminValidation from "../validation/adminValidation.js";
 
@@ -17,83 +18,7 @@ async function getPendingChanges(_req: Request, res: Response) {
     },
   });
 
-  // For UPDATE/DELETE changes, batch-fetch the current entity data so the
-  // admin can see what is being changed or removed.
-  const targetIds = {
-    UNIVERSITY: [] as number[],
-    FACULTY: [] as number[],
-    STUDY_PROGRAM: [] as number[],
-    SUBJECT: [] as number[],
-  };
-
-  for (const pc of pendingChanges) {
-    if (pc.targetId != null && pc.entityType in targetIds) {
-      targetIds[pc.entityType].push(pc.targetId);
-    }
-  }
-
-  const [universities, faculties, studyPrograms, subjects] = await Promise.all([
-    targetIds.UNIVERSITY.length > 0
-      ? prisma.university.findMany({
-          where: { id: { in: targetIds.UNIVERSITY } },
-          select: {
-            id: true,
-            name: true,
-            city: true,
-            entity: true,
-            ownership: true,
-            foundedYear: true,
-            website: true,
-          },
-        })
-      : [],
-    targetIds.FACULTY.length > 0
-      ? prisma.faculty.findMany({
-          where: { id: { in: targetIds.FACULTY } },
-          select: { id: true, name: true, city: true, website: true },
-        })
-      : [],
-    targetIds.STUDY_PROGRAM.length > 0
-      ? prisma.studyProgram.findMany({
-          where: { id: { in: targetIds.STUDY_PROGRAM } },
-          select: {
-            id: true,
-            name: true,
-            cycle: true,
-            durationYears: true,
-            ects: true,
-            language: true,
-          },
-        })
-      : [],
-    targetIds.SUBJECT.length > 0
-      ? prisma.subject.findMany({
-          where: { id: { in: targetIds.SUBJECT } },
-          select: {
-            id: true,
-            name: true,
-            semester: true,
-            ects: true,
-            type: true,
-          },
-        })
-      : [],
-  ]);
-
-  const entityMaps = {
-    UNIVERSITY: new Map(universities.map((e) => [e.id, e])),
-    FACULTY: new Map(faculties.map((e) => [e.id, e])),
-    STUDY_PROGRAM: new Map(studyPrograms.map((e) => [e.id, e])),
-    SUBJECT: new Map(subjects.map((e) => [e.id, e])),
-  };
-
-  const enriched = pendingChanges.map((pc) => ({
-    ...pc,
-    currentEntity:
-      pc.targetId != null && pc.entityType in entityMaps
-        ? (entityMaps[pc.entityType].get(pc.targetId) ?? null)
-        : null,
-  }));
+  const enriched = await enrichWithCurrentEntity(pendingChanges);
 
   sendSuccess(res, {
     data: enriched,
