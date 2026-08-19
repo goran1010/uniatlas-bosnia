@@ -29,12 +29,11 @@ function PendingUniversityChanges({
   }
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_auto] gap-1 px-2 py-1 text-xs font-semibold text-(--text-muted) uppercase tracking-wide border-b border-(--border-color)">
+    <div className="flex flex-col gap-1 w-full">
+      <div className="hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-1 px-2 py-1 text-xs font-semibold text-(--text-muted) uppercase tracking-wide border-b border-(--border-color)">
         <span>{t("contribution.change")}</span>
-        <span>{t("contribution.entityType")}</span>
-        <span>{t("endpoint.name")}</span>
-        <span></span>
+        <span className="text-center">{t("contribution.entityType")}</span>
+        <span className="text-end">{t("contribution.actions")}</span>
       </div>
 
       <ul className="flex flex-col gap-1">

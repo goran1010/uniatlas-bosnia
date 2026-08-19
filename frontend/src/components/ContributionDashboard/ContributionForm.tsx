@@ -14,7 +14,6 @@ function ContributionForm() {
   const { pendingChanges, setPendingChanges } = useGetPendingChanges(
     setLoading,
     t,
-    activeTab === "pendingChanges",
   );
 
   return (

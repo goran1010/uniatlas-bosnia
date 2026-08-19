@@ -1,11 +1,15 @@
-import { use } from "react";
+import { use, type ReactNode } from "react";
 import { RootContext } from "../../contextData/RootContext";
 
 import type { TFunction } from "../../types/i18n";
 
 interface DetailRow {
   label: string;
-  value: string | number;
+  value: ReactNode;
+}
+
+function isUrl(value: unknown): value is string {
+  return typeof value === "string" && /^https?:\/\//.test(value);
 }
 
 function buildEntityRows(
@@ -16,6 +20,25 @@ function buildEntityRows(
   const rows: DetailRow[] = [];
 
   function push(label: string, raw: unknown) {
+    if (raw === undefined || raw === null || raw === "") return;
+
+    if (isUrl(raw)) {
+      rows.push({
+        label,
+        value: (
+          <a
+            href={raw}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-(--accent) hover:text-(--accent-hover) hover:underline break-all"
+          >
+            {raw}
+          </a>
+        ),
+      });
+      return;
+    }
+
     if (typeof raw !== "string" && typeof raw !== "number") return;
     rows.push({ label, value: raw });
   }
@@ -74,18 +97,32 @@ function DataCard({ heading, rows }: { heading: string; rows: DetailRow[] }) {
   if (rows.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-1 rounded-lg border border-(--border-color) bg-(--surface-2) p-3">
-      <p className="text-xs font-semibold text-(--text-secondary)">{heading}</p>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-        {rows.map((row) => (
-          <div key={row.label} className="contents">
-            <dt className="font-medium text-(--text-secondary)">{row.label}</dt>
-            <dd className="text-(--text-primary) wrap-break-word">
-              {row.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
+    <div className="flex flex-col gap-1 rounded-lg border border-(--border-color) bg-(--surface-2) p-2 sm:p-3 w-full">
+      <p className="text-xs font-semibold text-(--text-secondary) mb-1">
+        {heading}
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <tbody>
+            {rows.map((row) => (
+              <tr
+                key={row.label}
+                className="border-b border-(--border-color) last:border-b-0"
+              >
+                <th
+                  scope="row"
+                  className="py-1.5 pr-3 text-left font-medium text-(--text-secondary) whitespace-nowrap align-top"
+                >
+                  {row.label}
+                </th>
+                <td className="py-1.5 text-(--text-primary) wrap-break-word">
+                  {row.value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -108,7 +145,7 @@ function PendingChangeDetail({
   const hasProposedFields = Object.keys(proposedData).length > 0;
 
   return (
-    <div className="flex flex-col gap-2 p-2 sm:p-3">
+    <div className="flex flex-col gap-2 pt-2 w-full">
       {typeOfChange === "CREATE" && hasProposedFields && (
         <DataCard
           heading={t("admin.proposedData")}

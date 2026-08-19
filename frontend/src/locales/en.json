@@ -164,6 +164,7 @@
     "needUser": "You need to be a registered user to propose changes to the content.",
     "chooseDataset": "Choose dataset:",
     "noDataset": "No dataset",
+    "actions": "Actions",
     "selectDatasetError": "You need to select a dataset.",
     "viewEditAllData": "View and edit all data:",
     "addNewData": "Add new data",

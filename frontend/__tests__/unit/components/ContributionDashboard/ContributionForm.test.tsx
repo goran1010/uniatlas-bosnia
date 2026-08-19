@@ -152,7 +152,6 @@ describe("ContributionForm component rendering", () => {
     const pendingCount = await screen.findByLabelText(/pending changes count/i);
 
     expect(pendingCount).toHaveTextContent("1");
-    expect(screen.getByText(/Faculty of Engineering/i)).toBeInTheDocument();
   });
 
   test("shows an error notification when pending changes fail to load", async () => {

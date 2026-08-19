@@ -171,6 +171,7 @@
     "noPendingChanges": "Nema izmjena na čekanju za prikaz.",
     "change": "Izmjena",
     "entityType": "Tip entiteta",
+    "actions": "Akcije",
     "pendingChangesCountAria": "broj izmjena na čekanju",
     "searchResultsCountAria": "broj rezultata pretrage",
     "searchResults": "Rezultati pretrage",

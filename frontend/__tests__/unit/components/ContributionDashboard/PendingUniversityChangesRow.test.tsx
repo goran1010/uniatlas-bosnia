@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { PendingUniversityChangesRow } from "../../../../src/components/ContributionDashboard/PendingUniversityChangesRow";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
@@ -52,7 +53,7 @@ describe("PendingUniversityChangesRow", () => {
     expect(screen.getByRole("button", { name: /Delete/i })).toBeInTheDocument();
   });
 
-  test("renders the contribution name when the change contains one", () => {
+  test("shows the contribution name in the expanded detail", async () => {
     render(
       <Wrapper>
         <PendingUniversityChangesRow
@@ -73,6 +74,11 @@ describe("PendingUniversityChangesRow", () => {
         />
       </Wrapper>,
     );
+
+    const detailButton = screen.getByRole("button", {
+      name: /View details/i,
+    });
+    await userEvent.click(detailButton);
 
     expect(screen.getByText("University of Sarajevo")).toBeInTheDocument();
   });
