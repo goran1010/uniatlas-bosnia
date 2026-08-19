@@ -100,15 +100,13 @@ function LanguageSwitcher({
       id="language-switcher"
       aria-label={`${t("language.switchAria")} — ${fullLabel}`}
       onClick={handleLanguageToggle}
-      className="min-w-20 relative inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-sm font-semibold transition transform hover:cursor-pointer
+      className="min-w-20 w-full relative inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-sm font-semibold transition transform hover:cursor-pointer
         bg-(--surface-1) text-(--text-primary) border border-(--border-color) shadow-(--card-shadow-soft)
         hover:bg-(--hover-surface) hover:shadow-(--card-shadow) active:scale-[0.98]
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring)"
     >
       <LanguageIcon language={language} />
-      {language === "system" && (
-        <span className="hidden sm:inline">{t("language.system")}</span>
-      )}
+      <span className="hidden sm:inline">{t("nav.language")}</span>
     </button>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState, use } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 import { Label } from "../sharedComponents/Label";
@@ -85,6 +85,12 @@ function EntityPicker({
   onSelect,
 }: EntityPickerProps) {
   const { t, addNotification } = use(RootContext);
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
+
   const [universities, setUniversities] = useState<UniversityListItem[]>([]);
   const [detail, setDetail] = useState<UniversityDetail | undefined>(undefined);
   const [selUniversity, setSelUniversity] = useState("");
@@ -113,20 +119,20 @@ function EntityPicker({
           }
           addNotification({
             type: "error",
-            message: t("messages.universities.loadError"),
+            message: tRef.current("messages.universities.loadError"),
           });
         }
       } catch {
         addNotification({
           type: "error",
-          message: t("messages.universities.loadError"),
+          message: tRef.current("messages.universities.loadError"),
         });
       } finally {
         setLoadingList(false);
       }
     }
     void fetchUniversities();
-  }, [addNotification, t]);
+  }, [addNotification]);
 
   async function handleUniversityChange(value: string) {
     setSelUniversity(value);

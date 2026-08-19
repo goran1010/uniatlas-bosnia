@@ -1,4 +1,4 @@
-import { useEffect, useState, use } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
@@ -11,6 +11,11 @@ function GetAllUniversities() {
   const { t, addNotification } = use(RootContext);
   const [universities, setUniversities] = useState<UniversityListItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
 
   useEffect(() => {
     async function fetchUniversities() {
@@ -31,20 +36,20 @@ function GetAllUniversities() {
           }
           addNotification({
             type: "error",
-            message: t("messages.universities.loadError"),
+            message: tRef.current("messages.universities.loadError"),
           });
         }
       } catch {
         addNotification({
           type: "error",
-          message: t("messages.universities.loadError"),
+          message: tRef.current("messages.universities.loadError"),
         });
       } finally {
         setLoading(false);
       }
     }
     void fetchUniversities();
-  }, [addNotification, t]);
+  }, [addNotification]);
 
   if (loading) return <Spinner />;
 
