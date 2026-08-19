@@ -4,17 +4,16 @@ import { useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { handleConfirm } from "./utils/handleConfirm";
 import { handleDecline } from "./utils/handleDecline";
+import { PendingChangeDetail } from "./PendingChangeDetail";
 
 import type { Notification } from "../../types/notification";
-import type {
-  PendingChange,
-  TypeOfChange,
-} from "../ContributionDashboard/types";
+import type { TypeOfChange } from "../ContributionDashboard/types";
+import type { AdminPendingChange } from "../../schemas/pendingChange";
 
 interface PendingChangesAdminRowProps {
-  data: PendingChange;
+  data: AdminPendingChange;
   addNotification: (notification: Notification) => void;
-  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>;
+  setPendingChanges: Dispatch<SetStateAction<AdminPendingChange[]>>;
   index: number;
 }
 
@@ -26,6 +25,7 @@ const PendingChangesAdminRow = memo(
     index,
   }: PendingChangesAdminRowProps) => {
     const [loading, setLoading] = useState(false);
+    const [expanded, setExpanded] = useState(false);
     const { t, serverStatus } = use(RootContext);
 
     const getChangeTypeStyles = (type: TypeOfChange) => {
@@ -54,18 +54,21 @@ const PendingChangesAdminRow = memo(
       }
     };
 
+    const currentEntity =
+      data.currentEntity != null &&
+      typeof data.currentEntity === "object" &&
+      !Array.isArray(data.currentEntity)
+        ? data.currentEntity
+        : null;
+
     return (
       <form
         className={`rounded-md transition-colors hover:bg-(--hover-surface) ${getChangeTypeStyles(
           data.typeOfChange,
-        )} ${
-          index % 2 === 0
-            ? "bg-(--surface-2)"
-            : "bg-(--surface-alt)"
-        }`}
+        )} ${index % 2 === 0 ? "bg-(--surface-2)" : "bg-(--surface-alt)"}`}
       >
-        <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,2fr)]">
-          <div className="flex justify-between sm:justify-center items-center ">
+        <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
+          <div className="flex justify-between sm:justify-center items-center">
             <span className="sm:hidden font-semibold">
               {t("contribution.change")}
             </span>
@@ -87,25 +90,26 @@ const PendingChangesAdminRow = memo(
           </div>
           <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
             <span className="sm:hidden font-semibold">
-              {t("endpoint.name")}
-            </span>
-            <span className="break-all">
-              {"name" in data.data &&
-              typeof data.data.name === "string" &&
-              data.data.name
-                ? data.data.name
-                : "—"}
-            </span>
-          </div>
-          <div className="flex justify-between sm:justify-center items-center flex-wrap gap-1 min-w-0">
-            <span className="sm:hidden font-semibold">
               {t("contribution.user")}
             </span>
-            <span className="break-all">{data.user?.email ?? "-"}</span>
+            <span className="break-all">{data.user.email}</span>
           </div>
         </div>
 
-        <div className="flex justify-center sm:flex-row gap-2 p-1">
+        <div className="flex justify-center items-center gap-2 p-1">
+          <Button
+            variant="secondary"
+            className="px-3 py-1.5 text-xs sm:max-w-30"
+            onClick={() => {
+              setExpanded((prev) => !prev);
+            }}
+            type="button"
+          >
+            {expanded ? "▲" : "▼"}{" "}
+            {expanded
+              ? t("universitiesPage.hideDetails")
+              : t("universitiesPage.viewDetails")}
+          </Button>
           <Button
             variant="success"
             className="px-3 py-2 text-sm sm:max-w-25"
@@ -143,6 +147,15 @@ const PendingChangesAdminRow = memo(
             {t("form.reject")}
           </Button>
         </div>
+
+        {expanded && (
+          <PendingChangeDetail
+            entityType={data.entityType}
+            typeOfChange={data.typeOfChange}
+            data={data.data}
+            currentEntity={currentEntity}
+          />
+        )}
       </form>
     );
   },

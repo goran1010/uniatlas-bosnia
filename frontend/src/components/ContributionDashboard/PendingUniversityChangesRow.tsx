@@ -2,6 +2,7 @@ import { useState, use, type Dispatch, type SetStateAction } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { handleDiscardUniversityChange } from "./utils/handleDiscardUniversityChange";
+import { PendingChangeDetail } from "../AdminDashboard/PendingChangeDetail";
 import type { PendingChange } from "./customHooks/useGetPendingChanges";
 
 interface BadgeStyles {
@@ -29,6 +30,7 @@ function PendingUniversityChangesRow({
 }: PendingUniversityChangesRowProps) {
   const { t, addNotification, serverStatus } = use(RootContext);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const isEven = index % 2 === 0;
 
@@ -66,7 +68,16 @@ function PendingUniversityChangesRow({
           </span>
         </div>
 
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center gap-2">
+          <Button
+            variant="secondary"
+            className="px-2 py-1 text-xs max-w-24"
+            onClick={() => {
+              setExpanded((prev) => !prev);
+            }}
+          >
+            {expanded ? "▲" : "▼"}
+          </Button>
           <Button
             variant="danger"
             className="px-2 py-1 text-xs max-w-24"
@@ -86,6 +97,14 @@ function PendingUniversityChangesRow({
           </Button>
         </div>
       </div>
+
+      {expanded && (
+        <PendingChangeDetail
+          entityType={change.entityType}
+          typeOfChange={change.typeOfChange}
+          data={change.data}
+        />
+      )}
     </li>
   );
 }

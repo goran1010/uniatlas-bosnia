@@ -7,15 +7,15 @@ import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import { isServerNotReadyError } from "../../../utils/serverStatus";
 
-import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { AdminPendingChange } from "../../../schemas/pendingChange";
 import type { TFunction } from "../../../types/i18n";
 import type { Notification } from "../../../types/notification";
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { Dispatch, SetStateAction } from "react";
 
 type HandleDecline = (
-  change: PendingChange,
-  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>,
+  change: AdminPendingChange,
+  setPendingChanges: Dispatch<SetStateAction<AdminPendingChange[]>>,
   addNotification: (notification: Notification) => void,
   setLoading: (loading: boolean) => void,
   t: TFunction,
@@ -97,7 +97,7 @@ const handleDecline: HandleDecline = async function (
       message: t("messages.admin.declineError"),
     });
     console.error(
-      `Error declining ${change.user?.email ?? ""}'s request:`,
+      `Error declining ${change.user.email}'s request:`,
       error,
     );
   } finally {

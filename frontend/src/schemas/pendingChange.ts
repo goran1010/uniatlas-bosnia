@@ -95,8 +95,16 @@ const pendingChangeSchema = z.union([
   }),
 ]);
 
+const currentEntitySchema = z
+  .record(z.string(), z.unknown())
+  .nullable()
+  .optional();
+
 const adminPendingChangeSchema = pendingChangeSchema.and(
-  z.object({ user: pendingChangeUserSchema }),
+  z.object({
+    user: pendingChangeUserSchema,
+    currentEntity: currentEntitySchema,
+  }),
 );
 
 const pendingChangesResponseSchema = z.object({
@@ -115,6 +123,7 @@ const pendingChangeResponseSchema = z.object({
 });
 
 export type PendingChange = z.infer<typeof pendingChangeSchema>;
+export type AdminPendingChange = z.infer<typeof adminPendingChangeSchema>;
 export {
   adminPendingChangesResponseSchema,
   pendingChangeSchema,

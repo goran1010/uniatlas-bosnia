@@ -7,15 +7,15 @@ import { getCsrfToken } from "../../utils/getCsrfToken";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import { isServerNotReadyError } from "../../../utils/serverStatus";
 
-import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import type { AdminPendingChange } from "../../../schemas/pendingChange";
 import type { TFunction } from "../../../types/i18n";
 import type { Notification } from "../../../types/notification";
 import type { ServerStatus } from "../../../utils/serverStatus";
 import type { Dispatch, SetStateAction } from "react";
 
 type HandleConfirm = (
-  change: PendingChange,
-  setPendingChanges: Dispatch<SetStateAction<PendingChange[]>>,
+  change: AdminPendingChange,
+  setPendingChanges: Dispatch<SetStateAction<AdminPendingChange[]>>,
   addNotification: (notification: Notification) => void,
   setLoading: (loading: boolean) => void,
   t: TFunction,
@@ -99,7 +99,7 @@ const handleConfirm: HandleConfirm = async function (
       message: t("messages.admin.approveError"),
     });
     console.error(
-      `Error approving pending change for ${change.user?.email ?? ""}:`,
+      `Error approving pending change for ${change.user.email}:`,
       error,
     );
   } finally {

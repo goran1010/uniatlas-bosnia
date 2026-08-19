@@ -7,9 +7,10 @@ import {
   isServerNotReadyError,
 } from "../../../utils/serverStatus";
 import { readErrorMessage } from "../../../schemas/api";
-import { adminPendingChangesResponseSchema } from "../../../schemas/pendingChange";
-
-import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import {
+  adminPendingChangesResponseSchema,
+  type AdminPendingChange,
+} from "../../../schemas/pendingChange";
 import type { TFunction } from "../../../types/i18n";
 
 function useGetPendingChangesAdmin(
@@ -17,7 +18,9 @@ function useGetPendingChangesAdmin(
   t: TFunction,
 ) {
   const { addNotification, serverStatus } = use(RootContext);
-  const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
+  const [pendingChanges, setPendingChanges] = useState<AdminPendingChange[]>(
+    [],
+  );
 
   const tRef = useRef(t);
   useEffect(() => {

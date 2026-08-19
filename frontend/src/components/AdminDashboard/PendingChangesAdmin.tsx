@@ -24,9 +24,7 @@ function PendingChangesAdmin() {
   if (!pendingChanges.length) {
     return (
       <section className="flex flex-col justify-center items-center p-1 w-full">
-        <p className="text-(--text-secondary)">
-          {t("admin.noPendingChanges")}
-        </p>
+        <p className="text-(--text-secondary)">{t("admin.noPendingChanges")}</p>
       </section>
     );
   }
@@ -45,10 +43,9 @@ function PendingChangesAdmin() {
 
       <section className="flex flex-col justify-center items-center p-1 w-full">
         <ul className="w-full max-w-4xl flex flex-col border border-(--border-strong) rounded-md p-2 bg-(--surface-2) gap-1">
-          <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-(--border-strong) rounded-md font-bold text-(--text-primary) bg-(--surface-3) sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,2fr)]">
+          <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-(--border-strong) rounded-md font-bold text-(--text-primary) bg-(--surface-3) sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
             <div>{t("contribution.change")}</div>
             <div>{t("contribution.entityType")}</div>
-            <div>{t("endpoint.name")}</div>
             <div>{t("contribution.user")}</div>
           </li>
           {pendingChanges.map((data, index) => {
