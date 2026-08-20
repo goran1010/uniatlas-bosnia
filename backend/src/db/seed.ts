@@ -20,9 +20,19 @@ if (!connectionString) {
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
-const filePath = path.resolve(__dirname, "../../JSON_files/universities.json");
+const universitiesFilePath = path.resolve(
+  __dirname,
+  "../../JSON_files/universities.json",
+);
 
-const jsonData = fs.readFileSync(filePath, "utf-8");
+const facultiesFilePath = path.resolve(
+  __dirname,
+  "../../JSON_files/faculties.json",
+);
+
+const universitiesJsonData = fs.readFileSync(universitiesFilePath, "utf-8");
+
+const facultiesJsonData = fs.readFileSync(facultiesFilePath, "utf-8");
 
 const optionalTextSchema = z.string().trim().min(1).nullish();
 
@@ -50,7 +60,24 @@ const universitySeedSchema = z.strictObject({
 
 const universitiesSeedSchema = z.array(universitySeedSchema);
 
-function toUniversityCreateManyInput(
+const facultySeedSchema = z.strictObject({
+  name: z.string().trim().min(1),
+  city: optionalTextSchema,
+  website: optionalTextSchema,
+});
+
+// sourceUrl and lastChecked document data provenance only — the Faculty
+// table has no such columns, so they are validated but not persisted.
+const facultyGroupSeedSchema = z.strictObject({
+  university: z.string().trim().min(1),
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalDateSchema,
+  faculties: z.array(facultySeedSchema).min(1),
+});
+
+const facultiesSeedSchema = z.array(facultyGroupSeedSchema);
+
+function toUniversityData(
   university: z.infer<typeof universitySeedSchema>,
 ): UniversityCreateManyInput {
   return {
@@ -74,21 +101,85 @@ async function main() {
     // eslint-disable-next-line no-console
     console.log("Seeding universities...");
 
-    const rawUniversities = JSON.parse(jsonData) as unknown;
+    const rawUniversities = JSON.parse(universitiesJsonData) as unknown;
 
     const universities = universitiesSeedSchema
       .parse(rawUniversities)
-      .map(toUniversityCreateManyInput);
+      .map(toUniversityData);
 
-    const result = await prisma.university.createMany({
-      data: universities,
-      skipDuplicates: true,
-    });
+    const upsertedUniversities = await prisma.$transaction(
+      universities.map((data) =>
+        prisma.university.upsert({
+          where: { name: data.name },
+          create: data,
+          update: data,
+        }),
+      ),
+    );
 
     // eslint-disable-next-line no-console
-    console.log(`Inserted ${result.count.toString()} new universities.`);
+    console.log(
+      `Upserted ${upsertedUniversities.length.toString()} universities.`,
+    );
+
+    // eslint-disable-next-line no-console
+    console.log("Seeding faculties...");
+
+    const rawFaculties = JSON.parse(facultiesJsonData) as unknown;
+
+    const facultyGroups = facultiesSeedSchema.parse(rawFaculties);
+
+    const universityIdByName = new Map(
+      upsertedUniversities.map((university) => [
+        university.name,
+        university.id,
+      ]),
+    );
+
+    const unknownUniversities = facultyGroups
+      .map((group) => group.university)
+      .filter((name) => !universityIdByName.has(name));
+
+    if (unknownUniversities.length > 0) {
+      throw new Error(
+        `Unknown universities in faculties.json: ${unknownUniversities.join(", ")}`,
+      );
+    }
+
+    const facultyUpserts = facultyGroups.flatMap((group) => {
+      const universityId = universityIdByName.get(group.university);
+
+      if (universityId === undefined) {
+        throw new Error(
+          `Unknown university in faculties.json: ${group.university}`,
+        );
+      }
+
+      return group.faculties.map((faculty) =>
+        prisma.faculty.upsert({
+          where: {
+            name_universityId: { name: faculty.name, universityId },
+          },
+          create: {
+            name: faculty.name,
+            universityId,
+            city: faculty.city ?? null,
+            website: faculty.website ?? null,
+          },
+          update: {
+            city: faculty.city ?? null,
+            website: faculty.website ?? null,
+          },
+        }),
+      );
+    });
+
+    const upsertedFaculties = await prisma.$transaction(facultyUpserts);
+
+    // eslint-disable-next-line no-console
+    console.log(`Upserted ${upsertedFaculties.length.toString()} faculties.`);
   } catch (error: unknown) {
-    console.error("Error seeding universities:", error);
+    console.error("Error seeding database:", error);
     process.exitCode = 1;
   } finally {
     await prisma.$disconnect();
