@@ -96,10 +96,7 @@ const handleDecline: HandleDecline = async function (
       type: "error",
       message: t("messages.admin.declineError"),
     });
-    console.error(
-      `Error declining ${change.user.email}'s request:`,
-      error,
-    );
+    console.error(`Error declining ${change.user.email}'s request:`, error);
   } finally {
     setLoading(false);
   }

@@ -52,7 +52,7 @@ function App() {
           <Notifications />
           <main
             id="main-content"
-            className="flex-1 flex flex-col items-center p-2 md:px-5 lg:px-10 xl:px-25 2xl:px-50 relative bg-(--app-bg) text-(--text-primary)"
+            className="flex-1 flex flex-col items-center w-full max-w-[95ch] mx-auto p-2 md:px-5 relative bg-(--app-bg) text-(--text-primary)"
           >
             <Outlet />
           </main>

@@ -33,9 +33,7 @@ function AdminRequestRow({
   return (
     <li
       className={`rounded-md transition-colors hover:bg-(--hover-surface) ${
-        index % 2 === 0
-          ? "bg-(--surface-2)"
-          : "bg-(--surface-alt)"
+        index % 2 === 0 ? "bg-(--surface-2)" : "bg-(--surface-alt)"
       }`}
     >
       <div className="grid gap-2 w-full p-1 sm:gap-1 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
@@ -113,9 +111,7 @@ function AdminRequests() {
   if (!adminRequests.length) {
     return (
       <section className="flex flex-col justify-center items-center p-1 w-full">
-        <p className="text-(--text-secondary)">
-          {t("admin.noAdminRequests")}
-        </p>
+        <p className="text-(--text-secondary)">{t("admin.noAdminRequests")}</p>
       </section>
     );
   }

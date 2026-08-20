@@ -32,7 +32,7 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
       </p>
 
       {endpoint.params && (
-        <div className="rounded-md border border-(--border-color) p-3">
+        <div className="rounded-md border border-(--border-color) p-3 overflow-x-auto">
           <p className="text-sm font-semibold mb-1">
             {t("endpoint.queryParameters")}
           </p>

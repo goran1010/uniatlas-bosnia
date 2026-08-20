@@ -33,7 +33,7 @@ function Api() {
         />
         <meta name="twitter:description" content={t("meta.api")} />
       </Helmet>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-8 py-8 text-(--text-primary)">
+      <div className="w-full px-2 sm:px-4 flex flex-col gap-8 py-8 text-(--text-primary)">
         <header>
           <h1 className="text-3xl font-bold mb-3 text-center">
             {t("api.title")}

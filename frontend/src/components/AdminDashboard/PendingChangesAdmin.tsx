@@ -42,7 +42,7 @@ function PendingChangesAdmin() {
       </h2>
 
       <section className="flex flex-col justify-center items-center p-1 w-full">
-        <ul className="w-full max-w-4xl flex flex-col border border-(--border-strong) rounded-md p-2 bg-(--surface-2) gap-1">
+        <ul className="w-full flex flex-col border border-(--border-strong) rounded-md p-2 bg-(--surface-2) gap-1">
           <li className="hidden sm:grid sm:gap-1 text-center w-full p-2 border border-(--border-strong) rounded-md font-bold text-(--text-primary) bg-(--surface-3) sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
             <div>{t("contribution.change")}</div>
             <div>{t("contribution.entityType")}</div>

@@ -77,9 +77,7 @@ function SelectedEntityDetails({ entity }: { entity: PickedEntity }) {
       <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
         {rows.map((row) => (
           <div key={row.label} className="contents">
-            <dt className="font-medium text-(--text-secondary)">
-              {row.label}
-            </dt>
+            <dt className="font-medium text-(--text-secondary)">{row.label}</dt>
             <dd className="text-(--text-primary) wrap-break-word">
               {row.value}
             </dd>

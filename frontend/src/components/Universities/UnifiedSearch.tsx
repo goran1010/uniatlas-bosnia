@@ -32,9 +32,7 @@ function ResultSection({
 }) {
   return (
     <section className="w-full flex flex-col gap-2">
-      <h2 className="text-lg font-semibold text-(--text-primary)">
-        {heading}
-      </h2>
+      <h2 className="text-lg font-semibold text-(--text-primary)">{heading}</h2>
       {isEmpty ? (
         <p className="text-(--text-muted)">{emptyMessage}</p>
       ) : (
