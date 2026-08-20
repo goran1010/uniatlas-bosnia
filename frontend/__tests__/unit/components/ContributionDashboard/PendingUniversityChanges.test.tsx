@@ -119,9 +119,6 @@ describe("PendingUniversityChanges", () => {
 
     expect(screen.getByText(/^Change$/)).toBeInTheDocument();
     expect(screen.getByText(/^Entity Type$/)).toBeInTheDocument();
-    expect(screen.getByText(/^Name$/)).toBeInTheDocument();
-    expect(screen.getByText("University of Sarajevo")).toBeInTheDocument();
-    expect(screen.getByText("Faculty of Engineering")).toBeInTheDocument();
     expect(screen.getByLabelText(/pending changes count/i)).toHaveTextContent(
       "2",
     );

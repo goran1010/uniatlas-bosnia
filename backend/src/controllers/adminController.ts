@@ -1,5 +1,6 @@
 import { prisma } from "../db/prisma.js";
 import * as transactionModel from "../models/transactionModel.js";
+import { enrichWithCurrentEntity } from "../models/pendingChangeModel.js";
 import { sendError, sendSuccess } from "../utils/response.js";
 import * as adminValidation from "../validation/adminValidation.js";
 
@@ -17,8 +18,10 @@ async function getPendingChanges(_req: Request, res: Response) {
     },
   });
 
+  const enriched = await enrichWithCurrentEntity(pendingChanges);
+
   sendSuccess(res, {
-    data: pendingChanges,
+    data: enriched,
     message: "Pending changes retrieved successfully.",
   });
 }

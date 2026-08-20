@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { PendingUniversityChangesRow } from "../../../../src/components/ContributionDashboard/PendingUniversityChangesRow";
 import { RootContextProvider } from "../../../utils/rootContextProvider";
 
@@ -44,14 +45,15 @@ describe("PendingUniversityChangesRow", () => {
       </Wrapper>,
     );
 
-    const badge = screen.getByText("DELETE");
+    const badges = screen.getAllByText("Delete");
+    const badge = badges.find((el) => el.tagName === "SPAN");
 
     expect(screen.getByText(/University/i)).toBeInTheDocument();
     expect(badge).toHaveClass("bg-red-100");
     expect(screen.getByRole("button", { name: /Delete/i })).toBeInTheDocument();
   });
 
-  test("renders the contribution name when the change contains one", () => {
+  test("shows the contribution name in the expanded detail", async () => {
     render(
       <Wrapper>
         <PendingUniversityChangesRow
@@ -72,6 +74,11 @@ describe("PendingUniversityChangesRow", () => {
         />
       </Wrapper>,
     );
+
+    const detailButton = screen.getByRole("button", {
+      name: /View details/i,
+    });
+    await userEvent.click(detailButton);
 
     expect(screen.getByText("University of Sarajevo")).toBeInTheDocument();
   });

@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import {
@@ -18,6 +18,11 @@ function useGetAdminRequests(
 ) {
   const { addNotification, serverStatus } = use(RootContext);
   const [adminRequests, setAdminRequests] = useState<AdminRequest[]>([]);
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
 
   useEffect(() => {
     if (serverStatus !== SERVER_STATUS.LIVE) {
@@ -54,7 +59,7 @@ function useGetAdminRequests(
         }
         addNotification({
           type: "error",
-          message: t("messages.adminRequest.fetchError"),
+          message: tRef.current("messages.adminRequest.fetchError"),
         });
       } catch (error) {
         if (isServerNotReadyError(error)) {
@@ -64,14 +69,14 @@ function useGetAdminRequests(
         console.error("Error fetching admin requests:", error);
         addNotification({
           type: "error",
-          message: t("messages.adminRequest.fetchError"),
+          message: tRef.current("messages.adminRequest.fetchError"),
         });
       } finally {
         setLoading(false);
       }
     };
     void fetchAdminRequests();
-  }, [addNotification, setLoading, serverStatus, t]);
+  }, [addNotification, setLoading, serverStatus]);
 
   return { adminRequests, setAdminRequests };
 }

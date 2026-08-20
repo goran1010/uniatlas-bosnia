@@ -33,13 +33,13 @@ function Api() {
         />
         <meta name="twitter:description" content={t("meta.api")} />
       </Helmet>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-8 py-8 dark:text-gray-100">
+      <div className="w-full px-2 sm:px-4 flex flex-col gap-8 py-8 text-(--text-primary)">
         <header>
           <h1 className="text-3xl font-bold mb-3 text-center">
             {t("api.title")}
           </h1>
           <p>{t("api.publicIntro")}</p>
-          <pre className="mt-3 bg-gray-100 dark:bg-gray-800 rounded p-3 text-sm font-mono overflow-x-auto">
+          <pre className="mt-3 bg-(--surface-alt) rounded p-3 text-sm font-mono overflow-x-auto border border-(--border-color)">
             {PUBLIC_API_URL}
           </pre>
         </header>
@@ -47,7 +47,7 @@ function Api() {
           <h2 className="text-xl font-bold text-center">
             {t("api.dataObject")}
           </h2>
-          <pre className="bg-gray-100 dark:bg-gray-800 rounded p-3 text-xs overflow-x-auto">
+          <pre className="bg-(--surface-alt) rounded p-3 text-xs overflow-x-auto border border-(--border-color)">
             {t("api.dataObjectExample")}
           </pre>
         </section>

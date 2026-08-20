@@ -5,6 +5,7 @@ import { RootContextProvider } from "../../../utils/rootContextProvider";
 
 import type { AddNotification } from "../../../../src/customHooks/useNotification";
 import type { SetLanguage } from "../../../../src/customHooks/useLanguage";
+import type { Language } from "../../../../src/types/i18n";
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -17,9 +18,10 @@ beforeEach(() => {
 interface WrapperProps {
   addNotification: AddNotification;
   setLanguage: SetLanguage;
+  language: Language;
 }
 
-function Wrapper({ addNotification, setLanguage }: WrapperProps) {
+function Wrapper({ addNotification, setLanguage, language }: WrapperProps) {
   return (
     <RootContextProvider
       rootValue={{
@@ -28,63 +30,54 @@ function Wrapper({ addNotification, setLanguage }: WrapperProps) {
         setLanguage,
       }}
     >
-      <LanguageSwitcher setLanguage={setLanguage} />
+      <LanguageSwitcher setLanguage={setLanguage} language={language} />
     </RootContextProvider>
   );
 }
 
 describe("LanguageSwitcher", () => {
-  test("switches to browser language", async () => {
-    const addNotification = vi.fn();
-    const setLanguage = vi.fn();
-
-    render(
-      <Wrapper addNotification={addNotification} setLanguage={setLanguage} />,
-    );
-
-    const languageSelect = screen.getByRole("combobox", {
-      name: /Toggle language/i,
-    });
-
-    expect(languageSelect).toBeInTheDocument();
-    await userEvent.selectOptions(languageSelect, "system");
-
-    expect(setLanguage).toHaveBeenCalledWith("system");
-    expect(addNotification).toHaveBeenCalledWith({
-      type: "info",
-      message: "Switched to system language",
-    });
-  });
-
-  test.each([
+  test.each<{
+    currentLanguage: Language;
+    expectedNextLanguage: string;
+    expectedMessage: string;
+  }>([
     {
-      languageButton: /English/i,
-      expectedLanguage: "en",
+      currentLanguage: "system",
+      expectedNextLanguage: "en",
       expectedMessage: "Switched to English",
     },
     {
-      languageButton: /Bosnian\/Croatian\/Serbian/i,
-      expectedLanguage: "sr",
+      currentLanguage: "en",
+      expectedNextLanguage: "sr",
       expectedMessage: "Switched to Bosnian/Croatian/Serbian",
     },
+    {
+      currentLanguage: "sr",
+      expectedNextLanguage: "system",
+      expectedMessage: "Switched to system language",
+    },
   ])(
-    "switches language using $languageButton",
-    async ({ expectedLanguage, expectedMessage }) => {
+    "cycles from $currentLanguage to $expectedNextLanguage on click",
+    async ({ currentLanguage, expectedNextLanguage, expectedMessage }) => {
       const addNotification = vi.fn();
       const setLanguage = vi.fn();
 
       render(
-        <Wrapper addNotification={addNotification} setLanguage={setLanguage} />,
+        <Wrapper
+          addNotification={addNotification}
+          setLanguage={setLanguage}
+          language={currentLanguage}
+        />,
       );
 
-      const languageSelect = screen.getByRole("combobox", {
+      const languageButton = screen.getByRole("button", {
         name: /Toggle language/i,
       });
 
-      expect(languageSelect).toBeInTheDocument();
-      await userEvent.selectOptions(languageSelect, expectedLanguage);
+      expect(languageButton).toBeInTheDocument();
+      await userEvent.click(languageButton);
 
-      expect(setLanguage).toHaveBeenCalledWith(expectedLanguage);
+      expect(setLanguage).toHaveBeenCalledWith(expectedNextLanguage);
       expect(addNotification).toHaveBeenCalledWith({
         type: "info",
         message: expectedMessage,

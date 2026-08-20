@@ -1,6 +1,6 @@
 import { ServerNotReadyError } from "../../../../../src/utils/serverStatus";
 
-import type { PendingChange } from "../../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { AdminPendingChange } from "../../../../../src/schemas/pendingChange";
 import type { Dispatch, SetStateAction } from "react";
 
 const getCsrfTokenMock = vi.fn<(args: unknown) => Promise<string | null>>();
@@ -18,7 +18,7 @@ vi.mock("../../../../../src/utils/guardedFetch", () => ({
     guardedFetchMock(url, options, context),
 }));
 
-const change: PendingChange = {
+const change: AdminPendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "FACULTY",
   typeOfChange: "UPDATE",
@@ -28,6 +28,7 @@ const change: PendingChange = {
   userId: "user-1",
   user: { email: "johndoe@examplemail.com", role: "USER" },
   createdAt: new Date(),
+  currentEntity: null,
 };
 
 const t = (key: string) => key;
@@ -53,9 +54,9 @@ describe("handleDecline", () => {
     const { handleDecline } =
       await import("../../../../../src/components/AdminDashboard/utils/handleDecline");
     let updatePendingChanges:
-      | ((prev: PendingChange[]) => PendingChange[])
+      | ((prev: AdminPendingChange[]) => AdminPendingChange[])
       | undefined;
-    const setPendingChanges: Dispatch<SetStateAction<PendingChange[]>> = (
+    const setPendingChanges: Dispatch<SetStateAction<AdminPendingChange[]>> = (
       value,
     ) => {
       if (typeof value === "function") {
@@ -201,7 +202,7 @@ describe("handleDecline", () => {
       message: "messages.admin.declineError",
     });
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      `Error declining ${change.user?.email ?? ""}'s request:`,
+      `Error declining ${change.user.email}'s request:`,
       requestError,
     );
   });

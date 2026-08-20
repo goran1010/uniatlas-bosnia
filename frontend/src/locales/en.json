@@ -32,8 +32,10 @@
     "close": "Close",
     "menu": "Menu",
     "toggleThemeAria": "Toggle theme menu",
-    "toggleMenuAria": "Toggle navigation menu"
+    "toggleMenuAria": "Toggle navigation menu",
+    "skipToContent": "Skip to content"
   },
+  "loading": "Loading…",
   "notifications": {
     "title": "Notifications",
     "dismiss": "Dismiss notification"
@@ -162,6 +164,7 @@
     "needUser": "You need to be a registered user to propose changes to the content.",
     "chooseDataset": "Choose dataset:",
     "noDataset": "No dataset",
+    "actions": "Actions",
     "selectDatasetError": "You need to select a dataset.",
     "viewEditAllData": "View and edit all data:",
     "addNewData": "Add new data",
@@ -182,6 +185,11 @@
       "FACULTY": "Faculty",
       "STUDY_PROGRAM": "Study Program",
       "SUBJECT": "Subject"
+    },
+    "changeTypes": {
+      "CREATE": "Create",
+      "UPDATE": "Update",
+      "DELETE": "Delete"
     },
     "picker": {
       "parent": "Where should the new item be added?",
@@ -235,7 +243,11 @@
     "adminRequests": "Admin Requests",
     "noAdminRequests": "There are no admin requests at the moment.",
     "adminRequestsCountAria": "admin requests count",
-    "requestedAt": "Requested"
+    "requestedAt": "Requested",
+    "proposedData": "Proposed Data",
+    "currentData": "Current Data",
+    "proposedChanges": "Proposed Changes",
+    "entityDeleted": "Entity no longer exists"
   },
   "error": {
     "notFound": "There is nothing here, sorry.",

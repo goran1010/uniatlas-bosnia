@@ -22,19 +22,18 @@ function PendingUniversityChanges({
 
   if (!pendingChanges.length) {
     return (
-      <p className="text-center text-gray-500 dark:text-gray-400 py-4">
+      <p className="text-center text-(--text-muted) py-4">
         {t("contribution.noPendingChanges")}
       </p>
     );
   }
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_auto] gap-1 px-2 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-200 dark:border-gray-600">
+    <div className="flex flex-col gap-1 w-full">
+      <div className="hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-1 px-2 py-1 text-xs font-semibold text-(--text-muted) uppercase tracking-wide border-b border-(--border-color)">
         <span>{t("contribution.change")}</span>
-        <span>{t("contribution.entityType")}</span>
-        <span>{t("endpoint.name")}</span>
-        <span></span>
+        <span className="text-center">{t("contribution.entityType")}</span>
+        <span className="text-end">{t("contribution.actions")}</span>
       </div>
 
       <ul className="flex flex-col gap-1">
@@ -48,7 +47,7 @@ function PendingUniversityChanges({
         ))}
       </ul>
 
-      <p className="text-xs text-gray-500 dark:text-gray-400 pt-2">
+      <p className="text-xs text-(--text-muted) pt-2">
         <span
           className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200 font-semibold mr-1"
           aria-label={t("contribution.pendingChangesCountAria")}

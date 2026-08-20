@@ -1,4 +1,4 @@
-import { useEffect, useState, use } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Select } from "../sharedComponents/Select";
 import { Label } from "../sharedComponents/Label";
@@ -85,6 +85,12 @@ function EntityPicker({
   onSelect,
 }: EntityPickerProps) {
   const { t, addNotification } = use(RootContext);
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
+
   const [universities, setUniversities] = useState<UniversityListItem[]>([]);
   const [detail, setDetail] = useState<UniversityDetail | undefined>(undefined);
   const [selUniversity, setSelUniversity] = useState("");
@@ -113,20 +119,20 @@ function EntityPicker({
           }
           addNotification({
             type: "error",
-            message: t("messages.universities.loadError"),
+            message: tRef.current("messages.universities.loadError"),
           });
         }
       } catch {
         addNotification({
           type: "error",
-          message: t("messages.universities.loadError"),
+          message: tRef.current("messages.universities.loadError"),
         });
       } finally {
         setLoadingList(false);
       }
     }
     void fetchUniversities();
-  }, [addNotification, t]);
+  }, [addNotification]);
 
   async function handleUniversityChange(value: string) {
     setSelUniversity(value);
@@ -254,8 +260,8 @@ function EntityPicker({
   }
 
   return (
-    <fieldset className="flex flex-col gap-3 border border-gray-200 dark:border-gray-600 rounded-lg p-3">
-      <legend className="text-xs font-semibold px-1 text-gray-600 dark:text-gray-300">
+    <fieldset className="flex flex-col gap-3 border border-(--border-color) rounded-lg p-3">
+      <legend className="text-xs font-semibold px-1 text-(--text-secondary)">
         {legend}
       </legend>
       {loadingList ? (

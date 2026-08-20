@@ -10,8 +10,8 @@ import { type UseCloseMenu } from "../../customHooks/useCloseMenu";
 
 function Navbar({ closeMenu }: { closeMenu: UseCloseMenu }) {
   const { navRef, isMenuOpen, setIsMenuOpen } = closeMenu;
-  const { setMode } = useTheme();
-  const { userData, setLanguage, t } = use(RootContext);
+  const { theme, setMode } = useTheme();
+  const { userData, language, setLanguage, t } = use(RootContext);
 
   return (
     <nav
@@ -19,7 +19,7 @@ function Navbar({ closeMenu }: { closeMenu: UseCloseMenu }) {
       onClick={() => {
         setIsMenuOpen(false);
       }}
-      className="z-40 w-full px-1 sm:px-2 py-2 font-bold flex md:justify-between items-center gap-1 sm:gap-2 md:gap-3 transition transform text-(--text-primary) 
+      className="z-40 w-full px-1 sm:px-2 py-2 font-bold flex md:justify-between items-center gap-1 sm:gap-2 md:gap-3 transition transform text-(--text-primary)
       border-b border-(--border-color) backdrop-blur sticky top-0 left-0 shadow-md"
     >
       <div className="flex md:hidden items-center">
@@ -53,9 +53,9 @@ function Navbar({ closeMenu }: { closeMenu: UseCloseMenu }) {
       )}
 
       <div className="flex items-center gap-1 sm:gap-2 flex-1 justify-center md:justify-between">
-        <ThemeSwitcher setMode={setMode} />
+        <ThemeSwitcher setMode={setMode} theme={theme} />
         <StandardMenu setIsMenuOpen={setIsMenuOpen} userData={userData} />
-        <LanguageSwitcher setLanguage={setLanguage} />
+        <LanguageSwitcher setLanguage={setLanguage} language={language} />
       </div>
     </nav>
   );

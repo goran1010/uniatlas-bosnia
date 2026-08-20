@@ -35,7 +35,8 @@ function useLanguage() {
 
   useEffect(() => {
     localStorage.setItem("language", language);
-  }, [language]);
+    document.documentElement.lang = resolvedLanguage;
+  }, [language, resolvedLanguage]);
 
   const t: TFunction = useCallback(
     (key: string): string => {

@@ -4,7 +4,7 @@ import { RootContextProvider } from "../../../utils/rootContextProvider";
 import { PendingChangesAdminRow } from "../../../../src/components/AdminDashboard/PendingChangesAdminRow";
 import { SERVER_STATUS } from "../../../../src/utils/serverStatus";
 import type { ReactElement } from "react";
-import type { PendingChange } from "../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { AdminPendingChange } from "../../../../src/schemas/pendingChange";
 import type { ServerStatus } from "../../../../src/utils/serverStatus";
 
 const handleConfirmMock = vi.fn<(...args: unknown[]) => undefined>();
@@ -28,7 +28,7 @@ vi.mock(
   }),
 );
 
-const change: PendingChange = {
+const change: AdminPendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "SUBJECT",
   typeOfChange: "DELETE",
@@ -38,6 +38,7 @@ const change: PendingChange = {
   userId: "user-1",
   user: { email: "johndoe@examplemail.com", role: "USER" },
   createdAt: new Date(),
+  currentEntity: null,
 };
 
 function Wrapper({ children }: { children: ReactElement }) {
@@ -76,9 +77,9 @@ describe("PendingChangesAdminRow", () => {
     const form = screen
       .getByRole("button", { name: /Approve/i })
       .closest("form");
-    const badge = screen.getByText("DELETE");
+    const badge = screen.getByText("Delete");
 
-    expect(screen.getByText("SUBJECT")).toBeInTheDocument();
+    expect(screen.getByText("Subject")).toBeInTheDocument();
     expect(screen.getByText("johndoe@examplemail.com")).toBeInTheDocument();
     expect(form).toHaveClass("border-l-4");
     expect(form).toHaveClass("border-l-red-500");
@@ -90,7 +91,7 @@ describe("PendingChangesAdminRow", () => {
     const unknownChange = {
       ...change,
       typeOfChange: "UNKNOWN",
-    } as unknown as PendingChange;
+    } as unknown as AdminPendingChange;
 
     render(
       <Wrapper>
@@ -106,11 +107,11 @@ describe("PendingChangesAdminRow", () => {
     const form = screen
       .getByRole("button", { name: /Approve/i })
       .closest("form");
-    const badge = screen.getByText("UNKNOWN");
+    const badge = screen.getByText("contribution.changeTypes.UNKNOWN");
 
     expect(form).not.toHaveClass("border-l-4");
-    expect(badge).toHaveClass("bg-gray-100");
-    expect(badge).toHaveClass("text-gray-800");
+    expect(badge).toHaveClass("bg-(--surface-alt)");
+    expect(badge).toHaveClass("text-(--text-secondary)");
   });
 
   test("calls the confirm and decline handlers when action buttons are clicked", async () => {
@@ -151,6 +152,6 @@ describe("PendingChangesAdminRow", () => {
       expect.any(Function),
       SERVER_STATUS.LIVE,
     );
-    expect(approveButton.closest("form")).toHaveClass("bg-gray-100");
+    expect(approveButton.closest("form")).toHaveClass("bg-(--surface-alt)");
   });
 });

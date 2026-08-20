@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import {
@@ -18,6 +18,11 @@ function useGetPendingChanges(
 ) {
   const { addNotification, serverStatus } = use(RootContext);
   const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
 
   useEffect(() => {
     if (!enabled) return;
@@ -49,14 +54,13 @@ function useGetPendingChanges(
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: t("messages.pendingChanges.loadSuccess"),
+            message: tRef.current("messages.pendingChanges.loadSuccess"),
           });
           return;
         }
-        const message = t("messages.pendingChanges.fetchError");
         addNotification({
           type: "error",
-          message,
+          message: tRef.current("messages.pendingChanges.fetchError"),
         });
       } catch (error) {
         if (isServerNotReadyError(error)) {
@@ -65,14 +69,14 @@ function useGetPendingChanges(
         console.error("Error fetching pending changes:", error);
         addNotification({
           type: "error",
-          message: t("messages.pendingChanges.fetchError"),
+          message: tRef.current("messages.pendingChanges.fetchError"),
         });
       } finally {
         setLoading(false);
       }
     };
     void fetchPendingChanges();
-  }, [addNotification, enabled, setLoading, serverStatus, t]);
+  }, [addNotification, enabled, setLoading, serverStatus]);
 
   return { pendingChanges, setPendingChanges };
 }

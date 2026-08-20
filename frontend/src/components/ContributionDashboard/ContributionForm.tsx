@@ -14,7 +14,6 @@ function ContributionForm() {
   const { pendingChanges, setPendingChanges } = useGetPendingChanges(
     setLoading,
     t,
-    activeTab === "pendingChanges",
   );
 
   return (
@@ -22,7 +21,7 @@ function ContributionForm() {
       <h1 className="text-center text-(--text-secondary)">
         {t("contribution.title")}
       </h1>
-      <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700 items-center justify-center">
+      <div className="flex gap-1 border-b border-(--border-color) items-center justify-center">
         {TABS.map((tab) => (
           <button
             key={tab}
@@ -30,10 +29,10 @@ function ContributionForm() {
             onClick={() => {
               setActiveTab(tab);
             }}
-            className={`relative px-3 py-2 text-sm font-medium rounded-t-md transition-colors ${
+            className={`relative px-3 py-2 text-sm font-medium rounded-t-md transition-colors cursor-pointer ${
               activeTab === tab
                 ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                : "text-(--text-secondary) hover:text-(--text-primary)"
             }`}
           >
             {t(`contribution.${tab}`)}

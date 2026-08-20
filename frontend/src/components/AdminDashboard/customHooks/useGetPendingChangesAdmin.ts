@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../../../utils/envConfig";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { RootContext } from "../../../contextData/RootContext";
 import { guardedFetch } from "../../../utils/guardedFetch";
 import {
@@ -7,9 +7,10 @@ import {
   isServerNotReadyError,
 } from "../../../utils/serverStatus";
 import { readErrorMessage } from "../../../schemas/api";
-import { adminPendingChangesResponseSchema } from "../../../schemas/pendingChange";
-
-import type { PendingChange } from "../../ContributionDashboard/customHooks/useGetPendingChanges";
+import {
+  adminPendingChangesResponseSchema,
+  type AdminPendingChange,
+} from "../../../schemas/pendingChange";
 import type { TFunction } from "../../../types/i18n";
 
 function useGetPendingChangesAdmin(
@@ -17,7 +18,14 @@ function useGetPendingChangesAdmin(
   t: TFunction,
 ) {
   const { addNotification, serverStatus } = use(RootContext);
-  const [pendingChanges, setPendingChanges] = useState<PendingChange[]>([]);
+  const [pendingChanges, setPendingChanges] = useState<AdminPendingChange[]>(
+    [],
+  );
+
+  const tRef = useRef(t);
+  useEffect(() => {
+    tRef.current = t;
+  });
 
   useEffect(() => {
     if (serverStatus !== SERVER_STATUS.LIVE) {
@@ -48,7 +56,7 @@ function useGetPendingChangesAdmin(
           setPendingChanges(result.data);
           addNotification({
             type: "success",
-            message: t("messages.pendingChanges.loadSuccess"),
+            message: tRef.current("messages.pendingChanges.loadSuccess"),
           });
           return;
         }
@@ -58,7 +66,7 @@ function useGetPendingChangesAdmin(
         }
         addNotification({
           type: "error",
-          message: t("messages.pendingChanges.fetchError"),
+          message: tRef.current("messages.pendingChanges.fetchError"),
         });
       } catch (error) {
         if (isServerNotReadyError(error)) {
@@ -68,14 +76,14 @@ function useGetPendingChangesAdmin(
         console.error("Error fetching pending changes:", error);
         addNotification({
           type: "error",
-          message: t("messages.pendingChanges.fetchError"),
+          message: tRef.current("messages.pendingChanges.fetchError"),
         });
       } finally {
         setLoading(false);
       }
     };
     void fetchPendingChanges();
-  }, [addNotification, setLoading, serverStatus, t]);
+  }, [addNotification, setLoading, serverStatus]);
 
   return { pendingChanges, setPendingChanges };
 }

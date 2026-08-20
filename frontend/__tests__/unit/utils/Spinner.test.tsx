@@ -1,10 +1,17 @@
 import { Spinner } from "../../../src/utils/Spinner";
 import { render, screen } from "@testing-library/react";
+import { RootContextProvider } from "../../utils/rootContextProvider";
 
 describe("Spinner component", () => {
   test("renders the spinner correctly", () => {
-    render(<Spinner />);
-    const spinnerElement = screen.getByLabelText("spinner");
+    render(
+      <RootContextProvider>
+        <Spinner />
+      </RootContextProvider>,
+    );
+    const spinnerElement = screen.getByRole("status", {
+      name: /Loading/i,
+    });
     expect(spinnerElement).toBeInTheDocument();
   });
 });

@@ -9,9 +9,10 @@ import type { SetMode } from "../../../../src/customHooks/useTheme";
 interface WrapperProps {
   addNotification: AddNotification;
   setMode: SetMode;
+  theme: string;
 }
 
-function Wrapper({ addNotification, setMode }: WrapperProps) {
+function Wrapper({ addNotification, setMode, theme }: WrapperProps) {
   return (
     <RootContextProvider
       rootValue={{
@@ -19,7 +20,7 @@ function Wrapper({ addNotification, setMode }: WrapperProps) {
         removeNotification: vi.fn(),
       }}
     >
-      <ThemeSwitcher setMode={setMode} />
+      <ThemeSwitcher setMode={setMode} theme={theme} />
     </RootContextProvider>
   );
 }
@@ -27,36 +28,42 @@ function Wrapper({ addNotification, setMode }: WrapperProps) {
 describe("ThemeSwitcher", () => {
   test.each([
     {
-      optionValue: "system",
-      expectedMode: "system",
-      expectedMessage: "Switched to system theme",
-    },
-    {
-      optionValue: "light",
-      expectedMode: "light",
+      currentTheme: "system",
+      expectedNextMode: "light",
       expectedMessage: "Switched to light theme",
     },
     {
-      optionValue: "dark",
-      expectedMode: "dark",
+      currentTheme: "light",
+      expectedNextMode: "dark",
       expectedMessage: "Switched to dark theme",
     },
+    {
+      currentTheme: "dark",
+      expectedNextMode: "system",
+      expectedMessage: "Switched to system theme",
+    },
   ])(
-    "changes mode using $optionValue",
-    async ({ optionValue, expectedMode, expectedMessage }) => {
+    "cycles from $currentTheme to $expectedNextMode on click",
+    async ({ currentTheme, expectedNextMode, expectedMessage }) => {
       const addNotification = vi.fn();
       const setMode = vi.fn();
 
-      render(<Wrapper addNotification={addNotification} setMode={setMode} />);
+      render(
+        <Wrapper
+          addNotification={addNotification}
+          setMode={setMode}
+          theme={currentTheme}
+        />,
+      );
 
-      const themeSelect = screen.getByRole("combobox", {
-        name: /Toggle theme menu/i,
+      const themeButton = screen.getByRole("button", {
+        name: /Toggle theme/i,
       });
 
-      expect(themeSelect).toBeInTheDocument();
-      await userEvent.selectOptions(themeSelect, optionValue);
+      expect(themeButton).toBeInTheDocument();
+      await userEvent.click(themeButton);
 
-      expect(setMode).toHaveBeenCalledWith(expectedMode);
+      expect(setMode).toHaveBeenCalledWith(expectedNextMode);
       expect(addNotification).toHaveBeenCalledWith({
         type: "info",
         message: expectedMessage,

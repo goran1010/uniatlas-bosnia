@@ -122,6 +122,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
     vi.spyOn(prisma.pendingChange, "findMany").mockResolvedValueOnce(
       mockPendingChanges,
     );
+    vi.spyOn(prisma.university, "findMany").mockResolvedValueOnce([]);
 
     mockedUser = {
       id: "1",
@@ -142,6 +143,7 @@ describe("Admin Router - GET /users/admin//pending-changes", () => {
           reviewedAt: change.reviewedAt
             ? change.reviewedAt.toISOString()
             : null,
+          currentEntity: null,
         })),
       },
     };

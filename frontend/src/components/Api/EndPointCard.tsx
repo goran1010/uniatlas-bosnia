@@ -15,30 +15,30 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
   const { t } = use(RootContext);
 
   return (
-    <article className="border border-gray-200 dark:border-gray-700 rounded-lg p-5 flex flex-col gap-4 bg-white dark:bg-gray-800/70">
+    <article className="border border-(--border-color) rounded-lg p-5 flex flex-col gap-4 bg-(--surface-2)/70">
       <div className="flex flex-wrap items-center gap-3">
         <span
           className={`inline-flex items-center rounded-md px-2 py-1 font-mono text-xs font-bold ${
             methodColor[endpoint.method] ||
-            "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
+            "bg-(--surface-alt) text-(--text-primary)"
           }`}
         >
           {endpoint.method}
         </span>
         <code className="font-mono text-sm break-all">{endpoint.path}</code>
       </div>
-      <p className="text-sm text-gray-700 dark:text-gray-300">
+      <p className="text-sm text-(--text-secondary)">
         {t(endpoint.descriptionKey)}
       </p>
 
       {endpoint.params && (
-        <div className="rounded-md border border-gray-200 dark:border-gray-700 p-3">
+        <div className="rounded-md border border-(--border-color) p-3 overflow-x-auto">
           <p className="text-sm font-semibold mb-1">
             {t("endpoint.queryParameters")}
           </p>
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="text-left border-b dark:border-gray-700">
+              <tr className="text-left border-b border-(--border-color)">
                 <th className="pb-1 pr-4">{t("endpoint.name")}</th>
                 <th className="pb-1 pr-4">{t("endpoint.required")}</th>
                 <th className="pb-1">{t("endpoint.description")}</th>
@@ -64,7 +64,7 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
           <p className="text-sm font-semibold mb-1">
             {t("endpoint.requestBody")}
           </p>
-          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+          <pre className="bg-(--surface-alt) rounded p-3 text-xs overflow-x-auto border border-(--border-color)">
             {endpoint.requestExample}
           </pre>
         </div>
@@ -75,7 +75,7 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
           <p className="text-sm font-semibold mb-1">
             {t("endpoint.successResponse")}
           </p>
-          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+          <pre className="bg-(--surface-alt) rounded p-3 text-xs overflow-x-auto border border-(--border-color)">
             {endpoint.successExample}
           </pre>
         </div>
@@ -86,7 +86,7 @@ function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
           <p className="text-sm font-semibold mb-1">
             {t("endpoint.errorResponses")}
           </p>
-          <pre className="bg-gray-100 dark:bg-gray-900/80 rounded p-3 text-xs overflow-x-auto border border-gray-200 dark:border-gray-700">
+          <pre className="bg-(--surface-alt) rounded p-3 text-xs overflow-x-auto border border-(--border-color)">
             {endpoint.errorExample}
           </pre>
         </div>

@@ -1,23 +1,8 @@
-function Spinner() {
-  const spinnerStyle = {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
+import { use } from "react";
+import { RootContext } from "../contextData/RootContext";
 
-  const spinnerImgStyle = {
-    maxWidth: "40px",
-    maxHeight: "40px",
-    minWidth: "20px",
-    minHeight: "20px",
-    border: "3px solid #ccc",
-    borderTop: "3px solid #3498db",
-    borderRadius: "50%",
-    animation: "spin 1s linear infinite",
-    margin: "50px auto",
-  };
+function Spinner() {
+  const { t } = use(RootContext);
 
   return (
     <>
@@ -27,8 +12,15 @@ function Spinner() {
           100% { transform: rotate(360deg); }
         }
       `}</style>
-      <div style={spinnerStyle} className="spinner" aria-label="spinner">
-        <div style={spinnerImgStyle}></div>
+      <div
+        role="status"
+        aria-label={t("loading")}
+        className="w-full h-full flex justify-center items-center"
+      >
+        <div
+          className="border-3 border-(--border-color) border-t-3 border-t-(--accent) rounded-full max-w-10 max-h-10 min-w-5 min-h-5 w-full h-full my-12 mx-auto"
+          style={{ animation: "spin 1s linear infinite" }}
+        />
       </div>
     </>
   );

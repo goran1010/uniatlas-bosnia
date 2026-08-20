@@ -27,7 +27,7 @@ function About() {
         <meta name="twitter:description" content={t("meta.home")} />
       </Helmet>
 
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col gap-12 py-10 dark:text-gray-100">
+      <div className="w-full mx-auto px-2 sm:px-4 flex flex-col gap-12 py-10 text-(--text-primary)">
         <header className="flex flex-col gap-3">
           <h1 className="text-3xl font-bold text-center">
             {t("home.heading")}
@@ -44,7 +44,9 @@ function About() {
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <Link
               to="/"
-              className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+              className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto
+              hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring)
+              focus-visible:bg-(--hover-surface)"
             >
               {t("home.card.universities.title")}
             </Link>
@@ -65,14 +67,14 @@ function About() {
             {userData ? (
               <Link
                 to="/improve-data"
-                className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+                className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
               >
                 {t("home.improveContribute")}
               </Link>
             ) : (
               <Link
                 to="/signup"
-                className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+                className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
               >
                 {t("home.improveSignUp")}
               </Link>
@@ -85,12 +87,10 @@ function About() {
             {t("home.forDevsHeading")}
           </h2>
           <p>{t("home.forDevsDescription")}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {t("home.forDevsNote")}
-          </p>
+          <p className="text-sm text-(--text-muted)">{t("home.forDevsNote")}</p>
           <Link
             to="/api-docs"
-            className="border rounded-lg px-4 py-2 dark:hover:bg-gray-800 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface) self-center"
+            className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface) self-center"
           >
             {t("home.forDevsCta")}
           </Link>

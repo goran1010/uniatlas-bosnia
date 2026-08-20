@@ -32,8 +32,10 @@
     "close": "Zatvori",
     "menu": "Meni",
     "toggleThemeAria": "Prikaži meni za temu",
-    "toggleMenuAria": "Prikaži navigacioni meni"
+    "toggleMenuAria": "Prikaži navigacioni meni",
+    "skipToContent": "Preskoči na sadržaj"
   },
+  "loading": "Učitavanje…",
   "notifications": {
     "title": "Obavijesti",
     "dismiss": "Zatvori obavijest"
@@ -169,6 +171,7 @@
     "noPendingChanges": "Nema izmjena na čekanju za prikaz.",
     "change": "Izmjena",
     "entityType": "Tip entiteta",
+    "actions": "Akcije",
     "pendingChangesCountAria": "broj izmjena na čekanju",
     "searchResultsCountAria": "broj rezultata pretrage",
     "searchResults": "Rezultati pretrage",
@@ -182,6 +185,11 @@
       "FACULTY": "Fakultet",
       "STUDY_PROGRAM": "Studijski program",
       "SUBJECT": "Predmet"
+    },
+    "changeTypes": {
+      "CREATE": "Kreiranje",
+      "UPDATE": "Ažuriranje",
+      "DELETE": "Brisanje"
     },
     "picker": {
       "parent": "Gdje treba dodati novu stavku?",
@@ -235,7 +243,11 @@
     "adminRequests": "Zahtjevi za admin pristup",
     "noAdminRequests": "Trenutno nema zahtjeva za admin pristup.",
     "adminRequestsCountAria": "broj zahtjeva za admin pristup",
-    "requestedAt": "Zatraženo"
+    "requestedAt": "Zatraženo",
+    "proposedData": "Predloženi podaci",
+    "currentData": "Trenutni podaci",
+    "proposedChanges": "Predložene izmjene",
+    "entityDeleted": "Entitet više ne postoji"
   },
   "error": {
     "notFound": "Ovdje nema ničega, izvinite.",

@@ -70,17 +70,15 @@ function SelectedEntityDetails({ entity }: { entity: PickedEntity }) {
   const rows = buildRows(entity, t);
 
   return (
-    <div className="flex flex-col gap-1 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 p-3">
-      <p className="text-xs font-semibold text-gray-600 dark:text-gray-300">
+    <div className="flex flex-col gap-1 rounded-lg border border-(--border-color) bg-(--surface-alt) p-3">
+      <p className="text-xs font-semibold text-(--text-secondary)">
         {t("contribution.picker.currentData")}
       </p>
       <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
         {rows.map((row) => (
           <div key={row.label} className="contents">
-            <dt className="font-medium text-gray-600 dark:text-gray-300">
-              {row.label}
-            </dt>
-            <dd className="text-gray-900 dark:text-white wrap-break-word">
+            <dt className="font-medium text-(--text-secondary)">{row.label}</dt>
+            <dd className="text-(--text-primary) wrap-break-word">
               {row.value}
             </dd>
           </div>

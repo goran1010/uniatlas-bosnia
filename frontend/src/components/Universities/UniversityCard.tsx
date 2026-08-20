@@ -23,9 +23,9 @@ function SubjectRow({
   t: TFunction;
 }) {
   return (
-    <li className="flex flex-wrap gap-2 text-sm py-1 border-b border-gray-100 dark:border-gray-700 last:border-0">
+    <li className="flex flex-wrap gap-2 text-sm py-1 border-b border-(--border-color) last:border-0">
       <span className="font-medium flex-1">{subject.name}</span>
-      <span className="flex gap-2 flex-wrap text-xs text-gray-500 dark:text-gray-400">
+      <span className="flex gap-2 flex-wrap text-xs text-(--text-muted)">
         {subject.semester != null && (
           <span>
             {t("universitiesPage.semester")} {subject.semester}
@@ -67,10 +67,10 @@ function StudyProgramRow({
         onClick={() => {
           setOpen((p) => !p);
         }}
-        className="w-full text-left flex justify-between items-center gap-2 py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="w-full text-left flex justify-between items-center gap-2 py-1 px-2 rounded hover:bg-(--hover-surface) transition-colors"
       >
         <span className="font-medium">{program.name}</span>
-        <span className="flex gap-2 items-center text-xs text-gray-500 dark:text-gray-400 shrink-0">
+        <span className="flex gap-2 items-center text-xs text-(--text-muted) shrink-0">
           <span className="hidden sm:inline">
             {t(`universitiesPage.cycles.${program.cycle}`)}
           </span>
@@ -83,7 +83,7 @@ function StudyProgramRow({
         </span>
       </button>
       {open && program.subjects.length > 0 && (
-        <ul className="ml-4 mt-1 mb-2 border-l-2 border-gray-200 dark:border-gray-600 pl-3">
+        <ul className="ml-4 mt-1 mb-2 border-l-2 border-(--border-color) pl-3">
           {program.subjects.map((s) => (
             <SubjectRow key={s.id} subject={s} t={t} />
           ))}
@@ -108,10 +108,10 @@ function FacultyRow({
         onClick={() => {
           setOpen((p) => !p);
         }}
-        className="w-full text-left flex justify-between items-center gap-2 py-1.5 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-semibold"
+        className="w-full text-left flex justify-between items-center gap-2 py-1.5 px-2 rounded hover:bg-(--hover-surface) transition-colors font-semibold"
       >
         <span>{faculty.name}</span>
-        <span className="flex gap-2 items-center text-xs text-gray-500 dark:text-gray-400 shrink-0">
+        <span className="flex gap-2 items-center text-xs text-(--text-muted) shrink-0">
           {faculty.studyPrograms.length > 0 && (
             <span>
               {faculty.studyPrograms.length}{" "}
@@ -184,26 +184,26 @@ function UniversityCard({ university }: { university: UniversityListItem }) {
   const entityLabel = t(`universitiesPage.entities.${university.entity}`);
 
   return (
-    <li className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden bg-white dark:bg-gray-800">
+    <li className="border border-(--border-color) rounded-lg overflow-hidden bg-(--surface-2)">
       <div className="p-3 sm:p-4">
         <div className="flex flex-wrap justify-between items-start gap-2">
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-base text-gray-900 dark:text-white leading-snug">
+            <h3 className="font-bold text-base text-(--text-primary) leading-snug">
               {university.name}
               {university.acronym && (
-                <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                <span className="ml-2 text-sm font-normal text-(--text-muted)">
                   ({university.acronym})
                 </span>
               )}
             </h3>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-gray-600 dark:text-gray-300">
+            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-sm text-(--text-secondary)">
               <span>📍 {university.city}</span>
               <span>{entityLabel}</span>
               <span
                 className={`px-1.5 py-0.5 rounded text-xs font-medium ${
                   university.ownership === "JAVNA"
                     ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200"
-                    : "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300"
+                    : "bg-(--surface-alt) text-(--text-secondary)"
                 }`}
               >
                 {university.ownership === "JAVNA"
@@ -242,10 +242,10 @@ function UniversityCard({ university }: { university: UniversityListItem }) {
         </div>
 
         {expanded && detailData && (
-          <div className="mt-3 border-t border-gray-200 dark:border-gray-600 pt-3">
+          <div className="mt-3 border-t border-(--border-color) pt-3">
             {detailData.faculties.length > 0 ? (
               <>
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-(--text-muted) mb-2">
                   {detailData.faculties.length}{" "}
                   {t("universitiesPage.faculties")}
                 </p>
@@ -256,7 +256,7 @@ function UniversityCard({ university }: { university: UniversityListItem }) {
                 </ul>
               </>
             ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              <p className="text-sm text-(--text-muted) italic">
                 {t("universitiesPage.faculties")}: —
               </p>
             )}

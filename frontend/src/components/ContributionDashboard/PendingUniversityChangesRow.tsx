@@ -2,6 +2,7 @@ import { useState, use, type Dispatch, type SetStateAction } from "react";
 import { RootContext } from "../../contextData/RootContext";
 import { Button } from "../sharedComponents/Button";
 import { handleDiscardUniversityChange } from "./utils/handleDiscardUniversityChange";
+import { PendingChangeDetail } from "../AdminDashboard/PendingChangeDetail";
 import type { PendingChange } from "./customHooks/useGetPendingChanges";
 
 interface BadgeStyles {
@@ -29,47 +30,51 @@ function PendingUniversityChangesRow({
 }: PendingUniversityChangesRowProps) {
   const { t, addNotification, serverStatus } = use(RootContext);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const isEven = index % 2 === 0;
 
   return (
     <li
-      className={`rounded-md p-2 sm:p-3 ${isEven ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-800/60"}`}
+      className={`rounded-md p-2 sm:p-3 ${isEven ? "bg-(--surface-2)" : "bg-(--surface-alt)"}`}
     >
-      <div className="grid gap-2 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_auto]">
+      <div className="grid gap-2 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <div className="flex justify-between sm:justify-start items-center gap-2">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
+          <span className="sm:hidden text-xs font-semibold text-(--text-muted)">
             {t("contribution.change")}
           </span>
           <span
             className={`px-2 py-0.5 rounded text-xs font-semibold ${BADGE[change.typeOfChange]}`}
           >
-            {change.typeOfChange}
+            {t(`contribution.changeTypes.${change.typeOfChange}`)}
           </span>
         </div>
 
-        <div className="flex justify-between sm:justify-start items-center gap-2">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
+        <div className="flex justify-between sm:justify-center items-center gap-2">
+          <span className="sm:hidden text-xs font-semibold text-(--text-muted)">
             {t("contribution.entityType")}
           </span>
-          <span className="text-xs font-mono text-gray-700 dark:text-gray-200">
+          <span className="text-xs font-mono text-(--text-secondary)">
             {t(`contribution.entityTypes.${change.entityType}`)}
           </span>
         </div>
 
-        <div className="flex justify-between sm:justify-start items-center gap-2 min-w-0">
-          <span className="sm:hidden text-xs font-semibold text-gray-500 dark:text-gray-400">
-            {t("endpoint.name")}
-          </span>
-          <span className="text-sm truncate">
-            {"name" in change.data ? change.data.name : "—"}
-          </span>
-        </div>
-
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center gap-2">
+          <Button
+            variant="secondary"
+            className="px-2 py-1 text-xs"
+            onClick={() => {
+              setExpanded((prev) => !prev);
+            }}
+          >
+            {expanded ? "▲" : "▼"}{" "}
+            {expanded
+              ? t("universitiesPage.hideDetails")
+              : t("universitiesPage.viewDetails")}
+          </Button>
           <Button
             variant="danger"
-            className="px-2 py-1 text-xs max-w-24"
+            className="px-2 py-1 text-xs"
             loading={loading}
             onClick={() =>
               void handleDiscardUniversityChange({
@@ -86,6 +91,21 @@ function PendingUniversityChangesRow({
           </Button>
         </div>
       </div>
+
+      {expanded && (
+        <PendingChangeDetail
+          entityType={change.entityType}
+          typeOfChange={change.typeOfChange}
+          data={change.data}
+          currentEntity={
+            change.currentEntity != null &&
+            typeof change.currentEntity === "object" &&
+            !Array.isArray(change.currentEntity)
+              ? change.currentEntity
+              : null
+          }
+        />
+      )}
     </li>
   );
 }
