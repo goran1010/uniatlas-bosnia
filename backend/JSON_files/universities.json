@@ -57,7 +57,7 @@
   },
   {
     "name": "Sveučilište u Mostaru",
-    "acronym": null,
+    "acronym": "SUM",
     "city": "Mostar",
     "entity": "FBIH",
     "ownership": "Javna",
@@ -67,7 +67,7 @@
     "accreditationTo": "2028-02-26",
     "authority": "Ministarstvo obrazovanja, nauke, kulture i sporta Hercegovačko-neretvanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Univerzitet u Istočnom Sarajevu",
@@ -76,12 +76,12 @@
     "entity": "RS",
     "ownership": "Javna",
     "foundedYear": "1993-12-29",
-    "website": null,
+    "website": "https://www.ues.rs.ba",
     "accreditationFrom": "2007-08-15",
     "accreditationTo": "2030-06-18",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Univerzitet u Bihaću",
@@ -155,45 +155,45 @@
   },
   {
     "name": "Univerzitet u Travniku",
-    "acronym": null,
+    "acronym": "UNT",
     "city": "Travnik",
     "entity": "FBIH",
     "ownership": "Privatna",
     "foundedYear": "2007-07-04",
-    "website": null,
+    "website": "https://www.unt.ba",
     "accreditationFrom": "2007-08-15",
     "accreditationTo": "2031-01-26",
     "authority": "Ministarstvo obrazovanja, znanosti, mladih, kulture i sporta Srednjobosanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Sveučilište/Univerzitet Vitez",
-    "acronym": null,
+    "acronym": "UNVI",
     "city": "Travnik",
     "entity": "FBIH",
     "ownership": "Privatna",
     "foundedYear": "2007-06-29",
-    "website": null,
+    "website": "https://unvi.edu.ba",
     "accreditationFrom": "2007-08-15",
     "accreditationTo": "2026-06-10",
     "authority": "Ministarstvo obrazovanja, znanosti, mladih, kulture i sporta Srednjobosanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Internacionalni univerzitet Travnik",
-    "acronym": null,
+    "acronym": "IUT",
     "city": "Travnik",
     "entity": "FBIH",
     "ownership": "Privatna",
     "foundedYear": "2010-03-05",
-    "website": null,
+    "website": "https://iu-travnik.com",
     "accreditationFrom": "2016-05-23",
     "accreditationTo": "2030-12-31",
     "authority": "Ministarstvo obrazovanja, znanosti, mladih, kulture i sporta Srednjobosanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Sveučilište Hercegovina",
@@ -202,12 +202,12 @@
     "entity": "FBIH",
     "ownership": "Privatna",
     "foundedYear": "2011-05-19",
-    "website": null,
+    "website": "https://hercegovina.edu.ba",
     "accreditationFrom": "2021-10-18",
     "accreditationTo": "2027-04-18",
     "authority": "Ministarstvo obrazovanja, nauke, kulture i sporta Hercegovačko-neretvanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Evropski univerzitet Kallos Tuzla",
@@ -216,12 +216,12 @@
     "entity": "FBIH",
     "ownership": "Privatna",
     "foundedYear": "2015-08-28",
-    "website": null,
+    "website": "https://eukallos.edu.ba",
     "accreditationFrom": "2022-08-16",
     "accreditationTo": "2027-08-16",
     "authority": "Ministarstvo obrazovanja i nauke Tuzlanskog kantona",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Panevropski univerzitet Apeiron Banja Luka",
@@ -230,81 +230,81 @@
     "entity": "RS",
     "ownership": "Privatna",
     "foundedYear": "2005-10-19",
-    "website": null,
+    "website": "https://apeiron-uni.eu",
     "accreditationFrom": "2007-08-15",
     "accreditationTo": "2028-11-23",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Slobomir P Univerzitet",
-    "acronym": null,
+    "acronym": "SPU",
     "city": "Slobomir, Bijeljina",
     "entity": "RS",
     "ownership": "Privatna",
     "foundedYear": "2004-12-27",
-    "website": null,
+    "website": "https://spu.ba",
     "accreditationFrom": "2022-07-05",
     "accreditationTo": "2027-07-04",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Univerzitet za poslovne studije Banja Luka",
-    "acronym": null,
+    "acronym": "UPS",
     "city": "Banja Luka",
     "entity": "RS",
     "ownership": "Privatna",
     "foundedYear": "2005-04-18",
-    "website": null,
+    "website": "https://univerzitetps.com",
     "accreditationFrom": "2007-08-15",
     "accreditationTo": "2026-06-20",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Univerzitet Bijeljina",
-    "acronym": null,
+    "acronym": "UBN",
     "city": "Bijeljina",
     "entity": "RS",
     "ownership": "Privatna",
     "foundedYear": "2012-10-05",
-    "website": null,
+    "website": "https://www.ubn.rs.ba",
     "accreditationFrom": "2021-07-28",
     "accreditationTo": "2026-07-28",
     "authority": "Ministarstvo za naučnotehnološki razvoj i visoko obrazovanje Republike Srpske/Agencija za visoko obrazovanje Republike Srpske",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Evropski univerzitet, Brčko distrikt BiH",
-    "acronym": null,
+    "acronym": "EUBD",
     "city": "Brčko",
     "entity": "BD",
     "ownership": "Privatna",
     "foundedYear": "2011-12-28",
-    "website": null,
+    "website": "https://eubd.edu.ba",
     "accreditationFrom": "2022-03-07",
     "accreditationTo": "2027-09-06",
     "authority": "Vlada Brčko distrikta BiH, Odjel za obrazovanje",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   },
   {
     "name": "Internacionalni univerzitet, Brčko distrikt BiH",
-    "acronym": null,
+    "acronym": "IUBD",
     "city": "Brčko",
     "entity": "BD",
     "ownership": "Privatna",
     "foundedYear": "2012-01-11",
-    "website": null,
+    "website": "http://iubd.edu.ba",
     "accreditationFrom": "2022-03-07",
     "accreditationTo": "2027-09-06",
     "authority": "Vlada Brčko distrikta BiH, Odjel za obrazovanje",
     "sourceUrl": "https://hea.gov.ba/",
-    "lastChecked": "2026-05-26"
+    "lastChecked": "2026-08-20"
   }
 ]
