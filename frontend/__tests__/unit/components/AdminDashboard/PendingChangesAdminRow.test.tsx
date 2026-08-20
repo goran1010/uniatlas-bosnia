@@ -4,7 +4,7 @@ import { RootContextProvider } from "../../../utils/rootContextProvider";
 import { PendingChangesAdminRow } from "../../../../src/components/AdminDashboard/PendingChangesAdminRow";
 import { SERVER_STATUS } from "../../../../src/utils/serverStatus";
 import type { ReactElement } from "react";
-import type { PendingChange } from "../../../../src/components/ContributionDashboard/customHooks/useGetPendingChanges";
+import type { AdminPendingChange } from "../../../../src/schemas/pendingChange";
 import type { ServerStatus } from "../../../../src/utils/serverStatus";
 
 const handleConfirmMock = vi.fn<(...args: unknown[]) => undefined>();
@@ -28,7 +28,7 @@ vi.mock(
   }),
 );
 
-const change: PendingChange = {
+const change: AdminPendingChange = {
   id: "8687b282-fcc6-4f69-8744-0f8e1585d991",
   entityType: "SUBJECT",
   typeOfChange: "DELETE",
@@ -38,6 +38,7 @@ const change: PendingChange = {
   userId: "user-1",
   user: { email: "johndoe@examplemail.com", role: "USER" },
   createdAt: new Date(),
+  currentEntity: null,
 };
 
 function Wrapper({ children }: { children: ReactElement }) {
@@ -90,7 +91,7 @@ describe("PendingChangesAdminRow", () => {
     const unknownChange = {
       ...change,
       typeOfChange: "UNKNOWN",
-    } as unknown as PendingChange;
+    } as unknown as AdminPendingChange;
 
     render(
       <Wrapper>

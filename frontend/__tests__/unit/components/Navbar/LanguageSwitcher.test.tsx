@@ -36,7 +36,11 @@ function Wrapper({ addNotification, setLanguage, language }: WrapperProps) {
 }
 
 describe("LanguageSwitcher", () => {
-  test.each([
+  test.each<{
+    currentLanguage: Language;
+    expectedNextLanguage: string;
+    expectedMessage: string;
+  }>([
     {
       currentLanguage: "system",
       expectedNextLanguage: "en",
