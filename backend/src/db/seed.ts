@@ -107,7 +107,7 @@ async function main() {
       .parse(rawUniversities)
       .map(toUniversityData);
 
-    const upsertedUniversities = await prisma.$transaction(
+    const upsertedUniversities = await Promise.all(
       universities.map((data) =>
         prisma.university.upsert({
           where: { name: data.name },
@@ -174,7 +174,7 @@ async function main() {
       );
     });
 
-    const upsertedFaculties = await prisma.$transaction(facultyUpserts);
+    const upsertedFaculties = await Promise.all(facultyUpserts);
 
     // eslint-disable-next-line no-console
     console.log(`Upserted ${upsertedFaculties.length.toString()} faculties.`);
