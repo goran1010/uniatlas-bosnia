@@ -18,7 +18,7 @@ function Spinner() {
         className="w-full h-full flex justify-center items-center"
       >
         <div
-          className="border-3 border-(--border-color) border-t-3 border-t-(--accent) rounded-full max-w-10 max-h-10 min-w-5 min-h-5 w-full h-full my-12 mx-auto"
+          className="border-3 border-(--border-color) border-t-3 border-t-(--accent) rounded-full h-12 aspect-square max-h-[70%] mx-auto"
           style={{ animation: "spin 1s linear infinite" }}
         />
       </div>

@@ -79,7 +79,12 @@ function StudyProgramRow({
               {program.ects} {t("universitiesPage.ects")}
             </span>
           )}
-          <span>{open ? "▲" : "▼"}</span>
+          <span>
+            {open ? "▲" : "▼"}{" "}
+            {open
+              ? t("universitiesPage.hideDetails")
+              : t("universitiesPage.viewDetails")}
+          </span>
         </span>
       </button>
       {open && program.subjects.length > 0 && (
@@ -118,7 +123,12 @@ function FacultyRow({
               {t("universitiesPage.studyPrograms")}
             </span>
           )}
-          <span>{open ? "▲" : "▼"}</span>
+          <span>
+            {open ? "▲" : "▼"}{" "}
+            {open
+              ? t("universitiesPage.hideDetails")
+              : t("universitiesPage.viewDetails")}
+          </span>
         </span>
       </button>
       {open && faculty.studyPrograms.length > 0 && (
@@ -235,6 +245,7 @@ function UniversityCard({ university }: { university: UniversityListItem }) {
             }}
             loading={loadingDetail}
           >
+            {expanded ? "▲" : "▼"}{" "}
             {expanded
               ? t("universitiesPage.hideDetails")
               : t("universitiesPage.viewDetails")}
