@@ -65,7 +65,10 @@
     "alloweddisabled",
     "cuprija",
     "ćuprija",
-    "Univerzitet"
+    "Univerzitet",
+    "upsert",
+    "upserted",
+    "upserts"
   ],
 
   "ignoreWords": [],
