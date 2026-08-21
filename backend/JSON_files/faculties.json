@@ -589,5 +589,518 @@
         "website": "https://prf.unze.ba"
       }
     ]
+  },
+  {
+    "university": "Internacionalni univerzitet u Sarajevu",
+    "sourceUrl": "https://www.ius.edu.ba/en/announcement/konkurs-za-upis-u-prvi-i-integrisani-ciklus-studija-u-2025-2026-studijskoj-godini",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Edukacijski fakultet",
+        "city": "Sarajevo",
+        "website": "https://fedu.ius.edu.ba"
+      },
+      {
+        "name": "Fakultet medicinskih nauka",
+        "city": "Sarajevo",
+        "website": "https://fms.ius.edu.ba"
+      },
+      {
+        "name": "Fakultet menadžmenta i javne uprave",
+        "city": "Sarajevo",
+        "website": "https://fba.ius.edu.ba"
+      },
+      {
+        "name": "Fakultet prirodnih i tehničkih nauka",
+        "city": "Sarajevo",
+        "website": "https://fens.ius.edu.ba"
+      },
+      {
+        "name": "Fakultet umjetnosti i društvenih nauka",
+        "city": "Sarajevo",
+        "website": "https://fass.ius.edu.ba"
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Sarajevo",
+        "website": "https://flw.ius.edu.ba"
+      }
+    ]
+  },
+  {
+    "university": "Internacionalni Burč univerzitet",
+    "sourceUrl": "https://www.ibu.edu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet za edukaciju i humanističke nauke",
+        "city": "Sarajevo",
+        "website": "https://www.ibu.edu.ba/faculty-of-education-and-humanities"
+      },
+      {
+        "name": "Fakultet za ekonomiju i društvene nauke",
+        "city": "Sarajevo",
+        "website": "https://www.ibu.edu.ba/faculty-of-economics-and-social-sciences"
+      },
+      {
+        "name": "Fakultet za inžinjering, prirodne i medicinske nauke",
+        "city": "Sarajevo",
+        "website": "https://www.ibu.edu.ba/faculty-of-engineering-natural-and-medical-sciences"
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet Sarajevo School of Science and Technology",
+    "sourceUrl": "https://www.ssst.edu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Computer Science",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Dentistry",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Economics and Business",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Foreign Languages",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Game Design and Development",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Health Studies",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Pharmaco-Economics",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Pharmacy",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Political Science and International Relations",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Sarajevo Film Academy",
+        "city": "Sarajevo",
+        "website": null
+      },
+      {
+        "name": "Sarajevo Medical School",
+        "city": "Sarajevo",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Travniku",
+    "sourceUrl": "https://www.unt.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Edukacijski fakultet",
+        "city": "Travnik",
+        "website": "https://www.eft.ba"
+      },
+      {
+        "name": "Fakultet za menadžment i poslovnu ekonomiju",
+        "city": "Kiseljak",
+        "website": "http://fmpe.edu.ba"
+      },
+      {
+        "name": "Fakultet za tehničke studije",
+        "city": "Travnik",
+        "website": "https://fts.ba"
+      },
+      {
+        "name": "Farmaceutsko-zdravstveni fakultet",
+        "city": "Travnik",
+        "website": "https://fzf.edu.ba"
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Kiseljak",
+        "website": "https://pfk.edu.ba"
+      }
+    ]
+  },
+  {
+    "university": "Sveučilište/Univerzitet Vitez",
+    "sourceUrl": "https://unvi.edu.ba/fakulteti/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet informacijskih tehnologija",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Fakultet poslovne ekonomije",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Fakultet zdravstvenih studija",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Travnik",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Internacionalni univerzitet Travnik",
+    "sourceUrl": "https://iu-travnik.com/faculties-institutes/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Ekološki fakultet",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Ekonomski fakultet",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Fakultet informacionih tehnologija",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Fakultet politehničkih nauka",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Fakultet za medije i komunikacije",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Travnik",
+        "website": null
+      },
+      {
+        "name": "Saobraćajni fakultet",
+        "city": "Travnik",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Sveučilište Hercegovina",
+    "sourceUrl": "https://hercegovina.edu.ba/hr/o-nama/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet društvenih znanosti dr. Milenka Brkića",
+        "city": "Međugorje",
+        "website": null
+      },
+      {
+        "name": "Fakultet međunarodnih odnosa i diplomacije",
+        "city": "Mostar",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Evropski univerzitet Kallos Tuzla",
+    "sourceUrl": "https://eukallos.edu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Ekonomski fakultet",
+        "city": "Tuzla",
+        "website": "https://ef.eukallos.edu.ba"
+      },
+      {
+        "name": "Fakultet političkih nauka",
+        "city": "Tuzla",
+        "website": "https://fpn.eukallos.edu.ba"
+      },
+      {
+        "name": "Fakultet zdravstvenih nauka",
+        "city": "Tuzla",
+        "website": "https://fzn.eukallos.edu.ba"
+      },
+      {
+        "name": "Medicinski fakultet",
+        "city": "Tuzla",
+        "website": "https://mf.eukallos.edu.ba"
+      },
+      {
+        "name": "Pedagoški fakultet",
+        "city": "Tuzla",
+        "website": "https://pdf.eukallos.edu.ba"
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Tuzla",
+        "website": "https://pf.eukallos.edu.ba"
+      },
+      {
+        "name": "Tehnički fakultet",
+        "city": "Tuzla",
+        "website": "https://tf.eukallos.edu.ba"
+      }
+    ]
+  },
+  {
+    "university": "Panevropski univerzitet Apeiron Banja Luka",
+    "sourceUrl": "https://apeiron-uni.eu/fakulteti-i-organizacione-jedinice/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet filoloških nauka",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet informacionih tehnologija",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet poslovne ekonomije",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet pravnih nauka",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet sportskih nauka",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet zdravstvenih nauka",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Saobraćajni fakultet",
+        "city": "Banja Luka",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Slobomir P Univerzitet",
+    "sourceUrl": "https://spu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Akademija umjetnosti",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Fakultet za bezbjednost i zaštitu",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Fakultet za ekonomiju i menadžment",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Fakultet za informacione tehnologije",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Filološki fakultet",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Poreska akademija",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Slobomir, Bijeljina",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet za poslovne studije Banja Luka",
+    "sourceUrl": "https://univerzitetps.com/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet pravnih nauka",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za ekologiju",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za informacione tehnologije i dizajn",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za novinarstvo i komunikologiju",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za poslovne i finansijske studije",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za primijenjenu ekonomiju",
+        "city": "Banja Luka",
+        "website": null
+      },
+      {
+        "name": "Fakultet za turizam i hotelijerstvo",
+        "city": "Banja Luka",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet Bijeljina",
+    "sourceUrl": "https://www.ubn.rs.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet za psihologiju",
+        "city": "Bijeljina",
+        "website": "https://fzp.ubn.rs.ba"
+      },
+      {
+        "name": "Fakultet zdravstvenih studija",
+        "city": "Bijeljina",
+        "website": "https://fzs.ubn.rs.ba"
+      },
+      {
+        "name": "Farmaceutski fakultet",
+        "city": "Bijeljina",
+        "website": "https://ff.ubn.rs.ba"
+      },
+      {
+        "name": "Poljoprivredni fakultet",
+        "city": "Bijeljina",
+        "website": "https://pf.ubn.rs.ba"
+      }
+    ]
+  },
+  {
+    "university": "Evropski univerzitet, Brčko distrikt BiH",
+    "sourceUrl": "https://eubd.edu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Ekonomski fakultet",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet političkih nauka",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet za medicinu, farmaciju i zdravstvo",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Pedagoški fakultet",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Tehnički fakultet",
+        "city": "Brčko",
+        "website": null
+      }
+    ]
+  },
+  {
+    "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+    "sourceUrl": "http://iubd.edu.ba/",
+    "lastChecked": "2026-08-21",
+    "faculties": [
+      {
+        "name": "Fakultet za informatiku",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet za menadžment",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet za poslovne komunikacije",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet za poslovno-civilnu bezbjednost",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Fakultet za saobraćajno inženjerstvo",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Pravni fakultet",
+        "city": "Brčko",
+        "website": null
+      },
+      {
+        "name": "Učiteljski fakultet",
+        "city": "Brčko",
+        "website": null
+      }
+    ]
   }
 ]
