@@ -27,7 +27,15 @@ import type {
 function toUniversityCreateInput(
   data: UniversityCreateData,
 ): Prisma.UniversityCreateInput {
-  return data;
+  return {
+    name: data.name,
+    city: data.city,
+    entity: data.entity,
+    ownership: data.ownership,
+    ...(data.acronym !== undefined && { acronym: data.acronym }),
+    ...(data.foundedYear !== undefined && { foundedYear: data.foundedYear }),
+    ...(data.website !== undefined && { website: data.website }),
+  };
 }
 
 function toUniversityUpdateInput(
@@ -38,6 +46,9 @@ function toUniversityUpdateInput(
     ...(data.city !== undefined && { city: data.city }),
     ...(data.entity !== undefined && { entity: data.entity }),
     ...(data.ownership !== undefined && { ownership: data.ownership }),
+    ...(data.acronym !== undefined && { acronym: data.acronym }),
+    ...(data.foundedYear !== undefined && { foundedYear: data.foundedYear }),
+    ...(data.website !== undefined && { website: data.website }),
   };
 }
 
@@ -49,6 +60,7 @@ function toFacultyCreateInput(
     name: data.name,
     universityId,
     ...(data.city !== undefined && { city: data.city }),
+    ...(data.website !== undefined && { website: data.website }),
   };
 }
 
@@ -58,6 +70,7 @@ function toFacultyUpdateInput(
   return {
     ...(data.name !== undefined && { name: data.name }),
     ...(data.city !== undefined && { city: data.city }),
+    ...(data.website !== undefined && { website: data.website }),
   };
 }
 
@@ -73,6 +86,7 @@ function toStudyProgramCreateInput(
       durationYears: data.durationYears,
     }),
     ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.language !== undefined && { language: data.language }),
   };
 }
 
@@ -86,6 +100,7 @@ function toStudyProgramUpdateInput(
       durationYears: data.durationYears,
     }),
     ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.language !== undefined && { language: data.language }),
   };
 }
 

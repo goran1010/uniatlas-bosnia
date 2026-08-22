@@ -212,6 +212,8 @@
       "language": "Jezik",
       "semester": "Semestar",
       "subjectType": "Tip predmeta",
+      "acronym": "Akronim",
+      "foundedYear": "Godina osnivanja",
       "website": "Web stranica",
       "sourceUrl": "URL izvora",
       "ownership": "Vlasništvo"

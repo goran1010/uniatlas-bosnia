@@ -212,6 +212,8 @@
       "language": "Language",
       "semester": "Semester",
       "subjectType": "Subject type",
+      "acronym": "Acronym",
+      "foundedYear": "Founded year",
       "website": "Website",
       "sourceUrl": "Source URL",
       "ownership": "Ownership"

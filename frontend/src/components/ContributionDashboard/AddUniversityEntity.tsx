@@ -206,6 +206,15 @@ function AddUniversityEntity({
           {entityType === "UNIVERSITY" && (
             <>
               <DataField
+                label={t("contribution.dataFields.acronym")}
+                id="dataAcronym"
+                type="text"
+                value={data.acronym ?? ""}
+                onChange={(e) => {
+                  setDataField("acronym", e.target.value || undefined);
+                }}
+              />
+              <DataField
                 label={t("contribution.dataFields.city")}
                 id="dataCity"
                 type="text"
@@ -258,6 +267,47 @@ function AddUniversityEntity({
                   </Select>
                 </div>
               </div>
+              <DataField
+                label={t("contribution.dataFields.foundedYear")}
+                id="dataFoundedYear"
+                type="text"
+                value={data.foundedYear ?? ""}
+                onChange={(e) => {
+                  setDataField("foundedYear", e.target.value || undefined);
+                }}
+              />
+              <DataField
+                label={t("contribution.dataFields.website")}
+                id="dataWebsite"
+                type="url"
+                value={data.website ?? ""}
+                onChange={(e) => {
+                  setDataField("website", e.target.value || undefined);
+                }}
+              />
+            </>
+          )}
+
+          {entityType === "FACULTY" && (
+            <>
+              <DataField
+                label={t("contribution.dataFields.city")}
+                id="dataFacultyCity"
+                type="text"
+                value={data.city ?? ""}
+                onChange={(e) => {
+                  setDataField("city", e.target.value || undefined);
+                }}
+              />
+              <DataField
+                label={t("contribution.dataFields.website")}
+                id="dataFacultyWebsite"
+                type="url"
+                value={data.website ?? ""}
+                onChange={(e) => {
+                  setDataField("website", e.target.value || undefined);
+                }}
+              />
             </>
           )}
 
@@ -308,6 +358,15 @@ function AddUniversityEntity({
                     "ects",
                     e.target.value === "" ? undefined : Number(e.target.value),
                   );
+                }}
+              />
+              <DataField
+                label={t("contribution.dataFields.language")}
+                id="dataLanguage"
+                type="text"
+                value={data.language ?? ""}
+                onChange={(e) => {
+                  setDataField("language", e.target.value || undefined);
                 }}
               />
             </>
