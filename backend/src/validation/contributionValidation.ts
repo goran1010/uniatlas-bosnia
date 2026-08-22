@@ -86,6 +86,12 @@ const universityCreateDataSchema = z.strictObject({
   ownership: z.enum(["JAVNA", "PRIVATNA"], {
     error: "Ownership must be JAVNA or PRIVATNA",
   }),
+
+  acronym: z.string().trim().min(1).optional(),
+
+  foundedYear: z.string().trim().min(1).optional(),
+
+  website: z.url({ error: "Invalid URL" }).optional(),
 });
 
 const facultyCreateDataSchema = z.strictObject({
@@ -94,6 +100,8 @@ const facultyCreateDataSchema = z.strictObject({
   }),
 
   city: z.string().trim().optional(),
+
+  website: z.url({ error: "Invalid URL" }).optional(),
 });
 
 const studyProgramCreateDataSchema = z.strictObject({
@@ -108,6 +116,8 @@ const studyProgramCreateDataSchema = z.strictObject({
   durationYears: durationYearsSchema.optional(),
 
   ects: ectsSchema.optional(),
+
+  language: z.string().trim().min(1).optional(),
 });
 
 const subjectCreateDataSchema = z.strictObject({
@@ -178,6 +188,12 @@ const universityEditDataSchema = z
         error: "Ownership must be JAVNA or PRIVATNA",
       })
       .optional(),
+
+    acronym: z.string().trim().min(1).nullable().optional(),
+
+    foundedYear: z.string().trim().min(1).nullable().optional(),
+
+    website: z.url({ error: "Invalid URL" }).nullable().optional(),
   })
   .refine((data) => Object.keys(data).length > 0, {
     error: "At least one field must be provided",
@@ -199,6 +215,8 @@ const facultyEditDataSchema = z
       .min(1, { error: "City cannot be empty if provided" })
       .nullable()
       .optional(),
+
+    website: z.url({ error: "Invalid URL" }).nullable().optional(),
   })
   .refine((data) => Object.keys(data).length > 0, {
     error: "At least one field must be provided",
@@ -223,6 +241,8 @@ const studyProgramEditDataSchema = z
     durationYears: durationYearsSchema.nullable().optional(),
 
     ects: ectsSchema.nullable().optional(),
+
+    language: z.string().trim().min(1).nullable().optional(),
   })
   .refine((data) => Object.keys(data).length > 0, {
     error: "At least one field must be provided",

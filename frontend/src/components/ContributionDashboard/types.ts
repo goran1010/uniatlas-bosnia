@@ -11,9 +11,13 @@ export interface ContributionFormDraft {
   city?: string;
   entity?: Entity;
   ownership?: "JAVNA" | "PRIVATNA";
+  acronym?: string;
+  foundedYear?: string;
+  website?: string;
   cycle?: Cycle;
   durationYears?: number;
   ects?: number;
+  language?: string;
   semester?: number;
   type?: SubjectType;
 }

@@ -20,11 +20,15 @@ const universityCreateDataSchema = z.strictObject({
   city: requiredNameSchema,
   entity: entitySchema,
   ownership: ownershipSchema,
+  acronym: requiredNameSchema.optional(),
+  foundedYear: requiredNameSchema.optional(),
+  website: z.url().optional(),
 });
 
 const facultyCreateDataSchema = z.strictObject({
   name: requiredNameSchema,
   city: requiredNameSchema.optional(),
+  website: z.url().optional(),
 });
 
 const studyProgramCreateDataSchema = z.strictObject({
@@ -32,6 +36,7 @@ const studyProgramCreateDataSchema = z.strictObject({
   cycle: studyCycleSchema,
   durationYears: durationYearsSchema.optional(),
   ects: ectsSchema.optional(),
+  language: requiredNameSchema.optional(),
 });
 
 const subjectCreateDataSchema = z.strictObject({
@@ -50,11 +55,15 @@ const universityEditDataSchema = nonEmptyObject({
   city: optionalNameSchema,
   entity: entitySchema.optional(),
   ownership: ownershipSchema.optional(),
+  acronym: requiredNameSchema.nullable().optional(),
+  foundedYear: requiredNameSchema.nullable().optional(),
+  website: z.url().nullable().optional(),
 });
 
 const facultyEditDataSchema = nonEmptyObject({
   name: optionalNameSchema,
   city: requiredNameSchema.nullable().optional(),
+  website: z.url().nullable().optional(),
 });
 
 const studyProgramEditDataSchema = nonEmptyObject({
@@ -62,6 +71,7 @@ const studyProgramEditDataSchema = nonEmptyObject({
   cycle: studyCycleSchema.optional(),
   durationYears: durationYearsSchema.nullable().optional(),
   ects: ectsSchema.nullable().optional(),
+  language: requiredNameSchema.nullable().optional(),
 });
 
 const subjectEditDataSchema = nonEmptyObject({
