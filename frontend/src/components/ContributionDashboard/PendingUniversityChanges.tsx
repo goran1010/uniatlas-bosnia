@@ -47,15 +47,6 @@ function PendingUniversityChanges({
         ))}
       </ul>
 
-      <p className="text-xs text-(--text-muted) pt-2">
-        <span
-          className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200 font-semibold mr-1"
-          aria-label={t("contribution.pendingChangesCountAria")}
-        >
-          {pendingChanges.length}
-        </span>
-        {t("contribution.pendingChanges")}
-      </p>
     </div>
   );
 }

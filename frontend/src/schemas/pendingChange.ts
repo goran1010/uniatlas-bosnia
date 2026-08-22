@@ -100,15 +100,21 @@ const currentEntitySchema = z
   .nullable()
   .optional();
 
+const parentContextSchema = z.string().nullable().optional();
+
 const adminPendingChangeSchema = pendingChangeSchema.and(
   z.object({
     user: pendingChangeUserSchema,
     currentEntity: currentEntitySchema,
+    parentContext: parentContextSchema,
   }),
 );
 
 const pendingChangeWithEntitySchema = pendingChangeSchema.and(
-  z.object({ currentEntity: currentEntitySchema }),
+  z.object({
+    currentEntity: currentEntitySchema,
+    parentContext: parentContextSchema,
+  }),
 );
 
 const pendingChangesResponseSchema = z.object({

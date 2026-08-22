@@ -38,6 +38,11 @@ function PendingUniversityChangesRow({
     <li
       className={`rounded-md p-2 sm:p-3 ${isEven ? "bg-(--surface-2)" : "bg-(--surface-alt)"}`}
     >
+      {change.parentContext && (
+        <p className="text-xs text-(--text-muted) px-2 py-1 truncate text-center">
+          {change.parentContext}
+        </p>
+      )}
       <div className="grid gap-2 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <div className="flex justify-between sm:justify-start items-center gap-2">
           <span className="sm:hidden text-xs font-semibold text-(--text-muted)">

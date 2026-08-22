@@ -67,6 +67,11 @@ const PendingChangesAdminRow = memo(
           data.typeOfChange,
         )} ${index % 2 === 0 ? "bg-(--surface-2)" : "bg-(--surface-alt)"}`}
       >
+        {data.parentContext && (
+          <p className="text-xs text-(--text-muted) px-2 py-1 text-center truncate">
+            {data.parentContext}
+          </p>
+        )}
         <div className="grid gap-2 w-full p-1 sm:p-1 sm:gap-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]">
           <div className="flex justify-between sm:justify-center items-center">
             <span className="sm:hidden font-semibold">
