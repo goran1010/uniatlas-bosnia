@@ -1,0 +1,393 @@
+{
+  "title": {
+    "app": "UniAtlas Bosnia",
+    "home": "Početna",
+    "api": "API dokumentacija za univerzitete u Bosni i Hercegovini",
+    "universities": "Univerziteti u Bosni i Hercegovini",
+    "contribute": "Poboljšaj podatke",
+    "admin": "Admin",
+    "profile": "Moj profil",
+    "login": "Prijava",
+    "signup": "Registracija",
+    "notFound": "Stranica nije pronađena"
+  },
+  "meta": {
+    "home": "Istražite univerzitete, fakultete, studijske programe i predmete u Bosni i Hercegovini kroz besplatan javni skup podataka, pretraživo web sučelje i REST API.",
+    "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
+    "api": "REST API dokumentacija za UniAtlas Bosnia. Pristupite podacima o univerzitetima i akademskim programima programski.",
+    "login": "Prijavite se na vaš UniAtlas Bosnia nalog kako biste doprinijeli podacima i pratili vaše prijave.",
+    "signup": "Napravite besplatan UniAtlas Bosnia nalog i počnite doprinositi podacima o univerzitetima."
+  },
+  "nav": {
+    "home": "Početna",
+    "about": "O projektu",
+    "apiDocs": "API Dokumentacija",
+    "improveData": "Poboljšaj podatke",
+    "admin": "Admin",
+    "profile": "Profil",
+    "login": "Prijava",
+    "language": "Jezik",
+    "theme": "Tema",
+    "choose": "Izaberi",
+    "close": "Zatvori",
+    "menu": "Meni",
+    "toggleThemeAria": "Prikaži meni za temu",
+    "toggleMenuAria": "Prikaži navigacioni meni",
+    "skipToContent": "Preskoči na sadržaj"
+  },
+  "loading": "Učitavanje…",
+  "notifications": {
+    "title": "Obavijesti",
+    "dismiss": "Zatvori obavijest"
+  },
+  "theme": {
+    "select": "Tema",
+    "system": "Sistemska",
+    "light": "Svijetla",
+    "dark": "Tamna",
+    "switched": {
+      "system": "Prebačeno na sistemsku temu",
+      "light": "Prebačeno na svijetlu temu",
+      "dark": "Prebačeno na tamnu temu"
+    }
+  },
+  "language": {
+    "select": "Jezik",
+    "system": "Sistemski",
+    "english": "Engleski",
+    "bcs": "Bosanski/Hrvatski/Srpski",
+    "switchAria": "Promijeni jezik",
+    "switched": {
+      "system": "Prebačeno na jezik sistema",
+      "english": "Prebačeno na engleski",
+      "bcs": "Prebačeno na bosanski/hrvatski/srpski"
+    }
+  },
+  "auth": {
+    "or": "ILI",
+    "pageSuffix": "stranicu.",
+    "continueWithGithub": "Nastavi preko GitHub-a",
+    "login": {
+      "linkText": "Prijava",
+      "noAccountPrefix": "Nemate nalog ? Idite na",
+      "heading": "Prijava",
+      "githubFailed": "GitHub prijava nije uspjela. Pokušajte ponovo.",
+      "alreadyLoggedIn": "Već ste prijavljeni. Preusmereni ste na početnu stranicu.",
+      "noAccount": "Nemate nalog ? Idite na stranicu Registracija."
+    },
+    "signup": {
+      "linkText": "Registracija",
+      "haveAccountPrefix": "Već imate nalog ? Vratite se na",
+      "heading": "Kreirajte svoj nalog",
+      "blockedWhileLoggedIn": "Ne možete se registrovati dok ste prijavljeni. Preusmereni ste na početnu stranicu.",
+      "haveAccount": "Već imate nalog ? Vratite se na stranicu Prijava."
+    }
+  },
+  "form": {
+    "email": "Email",
+    "password": "Lozinka",
+    "confirmPassword": "Potvrdi lozinku",
+    "create": "Kreiraj",
+    "search": "Pretraži",
+    "getAll": "Prikaži sve",
+    "update": "Ažuriraj",
+    "delete": "Obriši",
+    "discard": "Odbaci",
+    "approve": "Odobri",
+    "reject": "Odbij",
+    "addData": "Dodaj podatke",
+    "closeForm": "Zatvori formu"
+  },
+  "profile": {
+    "title": "Moj profil",
+    "emailAddress": "Email adresa",
+    "currentRole": "Trenutna uloga",
+    "needLogin": "Morate biti prijavljeni. Preusmereni ste na stranicu za prijavu.",
+    "logout": "Odjavi se",
+    "requestAdmin": "Zatraži admin pristup",
+    "adminRequestPending": "Zahtjev za admin pristup je na čekanju",
+    "cancelAdminRequest": "Otkaži zahtjev za admin pristup"
+  },
+  "home": {
+    "title": "Univerziteti i studijski programi u Bosni i Hercegovini",
+    "heading": "Univerziteti i studijski programi u Bosni i Hercegovini",
+    "intro": "Besplatan open-source projekat koji gradi strukturiranu, pretraživu bazu javnih podataka o Bosni i Hercegovini. Fokus je na univerzitetima - institucijama, fakultetima, studijskim programima i predmetima.",
+    "summary": "Koristite UniAtlas Bosnia za pregled profila univerziteta, poređenje akademske ponude i pristup strukturiranim javnim podacima kroz jednostavno sučelje ili direktno kroz API.",
+    "exploreHeading": "Istražite podatke",
+    "exploreDescription": "Pregledajte univerzitete širom Bosne i Hercegovine. Pogledajte fakultete, studijske programe i predmete. Pretražujte po nazivu, gradu ili akronimu.",
+    "card": {
+      "universities": {
+        "title": "Univerziteti",
+        "description": "Pregledajte univerzitete, fakultete, studijske programe i predmete širom Bosne i Hercegovine."
+      }
+    },
+    "improveHeading": "Unaprijedite podatke",
+    "improveDescription": "Znate nešto što nedostaje ili nije ispravno? Registrovani korisnici mogu predlagati izmjene - dodavanja, ispravke ili brisanja - koje admini pregledaju i primjenjuju.",
+    "improveStep1": "Napravite besplatan nalog i potvrdite email",
+    "improveStep2": "Idite na stranicu Poboljšaj podatke i pošaljite prijedlog",
+    "improveStep3": "Admini pregledaju prijedloge i primjenjuju odobrene izmjene na aktivni skup podataka",
+    "improveContribute": "Poboljšaj podatke",
+    "improveSignUp": "Kreirajte nalog",
+    "forDevsHeading": "Za programere",
+    "forDevsDescription": "UniAtlas Bosnia nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu, gradu ili akronimu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
+    "forDevsNote": "Autentifikacija nije potrebna za javne endpoint-e.",
+    "forDevsCta": "Pogledajte API dokumentaciju",
+    "forDevsGithub": "Pogledajte na GitHub-u",
+    "openSource": "Ovo je projekat otvorenog koda. Pregledajte izvorni kod, upute za postavljanje i doprinesite na",
+    "github": "GitHub"
+  },
+  "api": {
+    "title": "REST API",
+    "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
+    "fullDocs": "Za kompletnu projektnu dokumentaciju, lokalno postavljanje i smjernice za doprinos, pogledajte",
+    "dataObject": "Objekat univerziteta",
+    "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
+    "endpoints": "Endpoint-i",
+    "endpointsData": {
+      "apiStatus": "Provjera statusa API-ja.",
+      "apiV1Status": "Provjera statusa API v1.",
+      "getAllUniversities": "Preuzimanje svih univerziteta, sortiranih po nazivu.",
+      "getUniversityById": "Preuzimanje univerziteta po ID-u s potpunim ugniježđenim detaljima (fakulteti, studijski programi, predmeti).",
+      "search": "Pretraga univerziteta (naziv, grad, akronim), fakulteta (naziv, grad), studijskih programa i predmeta (naziv) u jednom zahtjevu (neosjetljivo na velika/mala slova, najmanje 2 karaktera).",
+      "searchTermParam": "Pojam za pretragu (najmanje 2 karaktera)."
+    }
+  },
+  "endpoint": {
+    "requestBody": "Tijelo zahtjeva",
+    "queryParameters": "Parametri upita",
+    "name": "Naziv",
+    "required": "Obavezno",
+    "description": "Opis",
+    "yes": "Da",
+    "no": "Ne",
+    "successResponse": "Uspješan odgovor",
+    "errorResponses": "Odgovori sa greškom"
+  },
+  "contribution": {
+    "title": "Poboljšajte podatke",
+    "needUser": "Morate biti registrovani korisnik da biste predložili izmjene sadržaja.",
+    "chooseDataset": "Izaberite skup podataka:",
+    "noDataset": "Nema skupa",
+    "selectDatasetError": "Morate izabrati skup podataka.",
+    "viewEditAllData": "Prikaži i uređuj sve podatke:",
+    "addNewData": "Dodaj nove podatke",
+    "pendingChanges": "Izmjene na čekanju",
+    "noPendingChanges": "Nema izmjena na čekanju za prikaz.",
+    "change": "Izmjena",
+    "entityType": "Tip entiteta",
+    "actions": "Akcije",
+    "pendingChangesCountAria": "broj izmjena na čekanju",
+    "searchResultsCountAria": "broj rezultata pretrage",
+    "searchResults": "Rezultati pretrage",
+    "user": "Korisnik",
+    "dataset": {
+      "universities": "Univerziteti",
+      "universitiesPlaceholder": "Univerziteti - uskoro"
+    },
+    "entityTypes": {
+      "UNIVERSITY": "Univerzitet",
+      "FACULTY": "Fakultet",
+      "STUDY_PROGRAM": "Studijski program",
+      "SUBJECT": "Predmet"
+    },
+    "changeTypes": {
+      "CREATE": "Kreiranje",
+      "UPDATE": "Ažuriranje",
+      "DELETE": "Brisanje"
+    },
+    "picker": {
+      "parent": "Gdje treba dodati novu stavku?",
+      "target": "Koju stavku želite izmijeniti?",
+      "placeholder": "— izaberite —",
+      "currentData": "Trenutni podaci",
+      "noChildren": {
+        "FACULTY": "Nema dostupnih fakulteta",
+        "STUDY_PROGRAM": "Nema dostupnih studijskih programa",
+        "SUBJECT": "Nema dostupnih predmeta"
+      }
+    },
+    "dataFields": {
+      "name": "Naziv",
+      "city": "Grad",
+      "entity": "Entitet",
+      "cycle": "Studijski ciklus",
+      "durationYears": "Trajanje (godine)",
+      "ects": "ECTS krediti",
+      "language": "Jezik",
+      "semester": "Semestar",
+      "subjectType": "Tip predmeta",
+      "acronym": "Akronim",
+      "foundedYear": "Godina osnivanja",
+      "website": "Web stranica",
+      "sourceUrl": "URL izvora",
+      "ownership": "Vlasništvo"
+    },
+    "cycles": {
+      "FIRST": "PRVI — Bachelor",
+      "SECOND": "DRUGI — Master",
+      "THIRD": "TREĆI — PhD"
+    },
+    "subjectTypes": {
+      "MANDATORY": "Obavezni",
+      "ELECTIVE": "Izborni"
+    },
+    "entities": {
+      "FBIH": "FBIH — Federacija BiH",
+      "RS": "RS — Republika Srpska",
+      "BD": "BD — Brčko Distrikt"
+    },
+    "submitSuggestion": "Pošalji prijedlog",
+    "deleteChange": "Obriši"
+  },
+  "admin": {
+    "needAdmin": "Morate biti admin da biste vidjeli admin kontrolnu tablu.",
+    "needLoginAndAdmin": "Morate biti prijavljeni i imati admin ulogu da biste vidjeli admin kontrolnu tablu.",
+    "dashboardTitle": "Admin kontrolna tabla",
+    "pendingChangesCountAria": "broj izmjena na čekanju",
+    "pendingChanges": "Izmjene na čekanju",
+    "noPendingChanges": "Trenutno nema izmjena na čekanju.",
+    "adminRequests": "Zahtjevi za admin pristup",
+    "noAdminRequests": "Trenutno nema zahtjeva za admin pristup.",
+    "adminRequestsCountAria": "broj zahtjeva za admin pristup",
+    "requestedAt": "Zatraženo",
+    "proposedData": "Predloženi podaci",
+    "currentData": "Trenutni podaci",
+    "proposedChanges": "Predložene izmjene",
+    "entityDeleted": "Entitet više ne postoji"
+  },
+  "error": {
+    "notFound": "Ovdje nema ničega, izvinite.",
+    "goHome": "Idi na početnu stranicu",
+    "pageTitle": "Stranica nije pronađena"
+  },
+  "longWait": {
+    "unreachable": "Server nije dostupan ni nakon više pokušaja. Pokušajte ponovo kasnije.",
+    "wakingUp": "Odgovor servera traje duže nego očekivano (server se možda pokreće). Sačekajte..."
+  },
+  "footer": {
+    "name": "Goran Jović",
+    "email": "goran1010jovic@gmail.com"
+  },
+  "validation": {
+    "email": {
+      "invalid": "Unesite ispravnu email adresu",
+      "minLength": "Email mora imati najmanje 3 karaktera",
+      "missingAt": "U email adresi mora postojati znak '@'. U '{{email}}' nedostaje '@'.",
+      "missingDomain": "Unesite dio adrese nakon '@'. {{email}} nije potpuna adresa."
+    },
+    "password": {
+      "minLength": "Lozinka mora imati najmanje 6 karaktera",
+      "required": "Lozinka je obavezna",
+      "allowedCharacters": "Lozinka može sadržavati samo slova, brojeve, crtice ili donje crte",
+      "requiresNumber": "Lozinka mora sadržavati najmanje jedan broj",
+      "mustMatch": "Lozinka i potvrda lozinke moraju biti iste"
+    },
+    "search": {
+      "minLength": "Pretraga mora imati najmanje 2 karaktera",
+      "maxLength": "Pretraga ne smije imati više od 100 karaktera"
+    }
+  },
+  "messages": {
+    "csrfTokenFailed": "Neuspjelo preuzimanje CSRF tokena.",
+    "pendingChanges": {
+      "loadSuccess": "Izmjene na čekanju su učitane.",
+      "loadFailed": "Neuspjelo učitavanje izmjena na čekanju.",
+      "fetchError": "Greška pri preuzimanju izmjena na čekanju."
+    },
+    "loginStatus": {
+      "success": "Uspješno ste prijavljeni.",
+      "error": "Došlo je do greške tokom prijave."
+    },
+    "auth": {
+      "loginFailed": "Prijava nije uspjela.",
+      "loginError": "Došlo je do greške tokom prijave.",
+      "loginSuccess": "Uspješno ste prijavljeni.",
+      "registrationFailed": "Registracija nije uspjela.",
+      "registrationError": "Došlo je do greške tokom registracije.",
+      "registrationSuccess": "Registracija je uspješna. Provjerite email.",
+      "logoutFailed": "Odjava nije uspjela.",
+      "logoutError": "Došlo je do greške tokom odjave.",
+      "logoutSuccess": "Uspješno ste odjavljeni."
+    },
+    "admin": {
+      "approveSuccess": "Izmjena na čekanju je odobrena.",
+      "approveFailed": "Neuspjelo odobravanje izmjene na čekanju.",
+      "approveError": "Greška pri odobravanju izmjene na čekanju za {{email}}.",
+      "declineSuccess": "Zahtjev je odbijen.",
+      "declineFailed": "Neuspjelo odbijanje zahtjeva.",
+      "declineError": "Greška pri odbijanju zahtjeva korisnika {{email}}."
+    },
+    "universities": {
+      "loadError": "Neuspjelo učitavanje univerziteta.",
+      "searchError": "Pretraga nije uspjela.",
+      "detailsError": "Neuspjelo učitavanje detalja univerziteta.",
+      "addSuccess": "Prijedlog je poslan.",
+      "addFailed": "Slanje prijedloga nije uspjelo.",
+      "addError": "Greška pri slanju prijedloga.",
+      "deleteSuccess": "Izmjena na čekanju je odbačena.",
+      "deleteFailed": "Brisanje prijedloga nije uspjelo.",
+      "deleteError": "Greška pri brisanju prijedloga."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin pristup je zatražen. Admin će pregledati zahtjev.",
+      "requestError": "Greška pri traženju admin pristupa.",
+      "cancelSuccess": "Zahtjev za admin pristup je otkazan.",
+      "cancelError": "Greška pri otkazivanju zahtjeva za admin pristup.",
+      "fetchError": "Greška pri dohvatanju zahtjeva za admin pristup.",
+      "approveSuccess": "Zahtjev za admin pristup je odobren.",
+      "approveError": "Greška pri odobravanju zahtjeva za admin pristup.",
+      "declineSuccess": "Zahtjev za admin pristup je odbijen.",
+      "declineError": "Greška pri odbijanju zahtjeva za admin pristup."
+    }
+  },
+  "universitiesPage": {
+    "title": "Nađite programe i univerzitete",
+    "browseAll": "Pregledaj sve",
+    "search": "Pretraži",
+    "searchHint": "Pretražite univerzitete, fakultete, studijske programe i predmete po nazivu - pretraga uključuje i gradove i akronime univerziteta.",
+    "searchAllPlaceholder": "Pretraži po nazivu, gradu ili akronimu…",
+    "universitiesSection": "Univerziteti",
+    "facultiesSection": "Fakulteti",
+    "studyProgramsSection": "Studijski programi",
+    "subjectsSection": "Predmeti",
+    "noResults": "Nisu pronađeni univerziteti.",
+    "noFacultyResults": "Nisu pronađeni fakulteti.",
+    "noStudyProgramResults": "Nisu pronađeni studijski programi.",
+    "noSubjectResults": "Nisu pronađeni predmeti.",
+    "noResultsAtAll": "Nema rezultata pretrage.",
+    "city": "Grad",
+    "entity": "Entitet",
+    "entities": {
+      "FBIH": "Federacija BiH",
+      "RS": "Republika Srpska",
+      "BD": "Brčko Distrikt"
+    },
+    "faculties": "Fakulteti",
+    "studyPrograms": "Studijski programi",
+    "subjects": "Predmeti",
+    "cycle": "Ciklus",
+    "cycles": {
+      "FIRST": "Prvi (Bachelor)",
+      "SECOND": "Drugi (Master)",
+      "THIRD": "Treći (PhD)"
+    },
+    "ects": "ECTS",
+    "durationYears": "godine",
+    "noStudyPrograms": "Nema dostupnih studijskih programa.",
+    "noSubjects": "Nema dostupnih predmeta.",
+    "semester": "Semestar",
+    "subjectType": "Tip",
+    "subjectTypes": {
+      "MANDATORY": "Obavezni",
+      "ELECTIVE": "Izborni"
+    },
+    "website": "Web stranica",
+    "foundedYear": "Osnovan",
+    "viewDetails": "Prikaži detalje",
+    "hideDetails": "Sakrij detalje",
+    "ownership": {
+      "JAVNA": "Javna",
+      "PRIVATNA": "Privatna"
+    }
+  }
+}

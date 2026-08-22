@@ -1,0 +1,17 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy-Report-Only = "require-trusted-types-for 'script'"
+
+[[redirects]]
+  from = "/server/*"
+  to = "https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200

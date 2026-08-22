@@ -1,0 +1,393 @@
+{
+  "title": {
+    "app": "UniAtlas Bosnia",
+    "home": "Home",
+    "api": "Bosnia and Herzegovina Universities API Docs",
+    "universities": "Universities in Bosnia and Herzegovina",
+    "contribute": "Improve Data",
+    "admin": "Admin Dashboard",
+    "profile": "My Profile",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "notFound": "Page Not Found"
+  },
+  "meta": {
+    "home": "Explore universities, faculties, study programs, and subjects in Bosnia and Herzegovina with a free public dataset, searchable web interface, and REST API.",
+    "universities": "Explore universities and academic programs in Bosnia and Herzegovina.",
+    "api": "REST API documentation for UniAtlas Bosnia. Access universities and academic programs data programmatically.",
+    "login": "Log in to your UniAtlas Bosnia account to contribute data and track your submissions.",
+    "signup": "Create a free UniAtlas Bosnia account to start contributing university data."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "apiDocs": "API Docs",
+    "improveData": "Improve Data",
+    "admin": "Admin",
+    "profile": "Profile",
+    "login": "Log In",
+    "language": "Language",
+    "theme": "Theme",
+    "choose": "Choose",
+    "close": "Close",
+    "menu": "Menu",
+    "toggleThemeAria": "Toggle theme menu",
+    "toggleMenuAria": "Toggle navigation menu",
+    "skipToContent": "Skip to content"
+  },
+  "loading": "Loading…",
+  "notifications": {
+    "title": "Notifications",
+    "dismiss": "Dismiss notification"
+  },
+  "theme": {
+    "select": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "switched": {
+      "system": "Switched to system theme",
+      "light": "Switched to light theme",
+      "dark": "Switched to dark theme"
+    }
+  },
+  "language": {
+    "select": "Language",
+    "system": "System",
+    "english": "English",
+    "bcs": "Bosnian/Croatian/Serbian",
+    "switchAria": "Toggle language",
+    "switched": {
+      "system": "Switched to system language",
+      "english": "Switched to English",
+      "bcs": "Switched to Bosnian/Croatian/Serbian"
+    }
+  },
+  "auth": {
+    "or": "OR",
+    "pageSuffix": "page.",
+    "continueWithGithub": "Continue with GitHub",
+    "login": {
+      "linkText": "Log In",
+      "noAccountPrefix": "Don't have an account ? Go to the",
+      "heading": "Log in",
+      "githubFailed": "GitHub login failed. Please try again.",
+      "alreadyLoggedIn": "You are already logged in. Redirected to the home page.",
+      "noAccount": "Don't have an account ? Go to the Sign Up page."
+    },
+    "signup": {
+      "linkText": "Sign Up",
+      "haveAccountPrefix": "Already have an account ? Go back to the",
+      "heading": "Create your account",
+      "blockedWhileLoggedIn": "You can't sign up while logged in. Redirected to the home page.",
+      "haveAccount": "Already have an account ? Go back to the Log In page."
+    }
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "create": "Create",
+    "search": "Search",
+    "getAll": "Get All",
+    "update": "Update",
+    "delete": "Delete",
+    "discard": "Discard",
+    "approve": "Approve",
+    "reject": "Reject",
+    "addData": "Add data",
+    "closeForm": "Close form"
+  },
+  "profile": {
+    "title": "My Profile",
+    "emailAddress": "Email Address",
+    "currentRole": "Current Role",
+    "needLogin": "You need to be logged in. Redirected to the login page.",
+    "logout": "Log out",
+    "requestAdmin": "Request admin access",
+    "adminRequestPending": "Admin request pending",
+    "cancelAdminRequest": "Cancel admin request"
+  },
+  "home": {
+    "title": "Universities and Academic Programs in Bosnia and Herzegovina",
+    "heading": "Universities and Academic Programs in Bosnia and Herzegovina",
+    "intro": "A free, open-source project building a structured, searchable database of public data about Bosnia and Herzegovina. Focused on universities - institutions, faculties, study programs, and subjects.",
+    "summary": "Use UniAtlas Bosnia to browse university profiles, compare academic offerings, and access structured public data through a simple interface or directly through the API.",
+    "exploreHeading": "Explore the Data",
+    "exploreDescription": "Browse universities across Bosnia and Herzegovina. View faculties, study programs, and subjects. Search by name, city, or acronym.",
+    "card": {
+      "universities": {
+        "title": "Universities",
+        "description": "Browse universities, faculties, study programs, and subjects across Bosnia and Herzegovina."
+      }
+    },
+    "improveHeading": "Improve the Data",
+    "improveDescription": "Know something that's missing or incorrect? Registered users can suggest changes - additions, edits, or deletions - which are reviewed and applied by admins.",
+    "improveStep1": "Create a free account and confirm your email",
+    "improveStep2": "Go to the Improve Data page and submit your suggestion",
+    "improveStep3": "Admins review submissions and apply approved changes to the live dataset",
+    "improveContribute": "Improve Data",
+    "improveSignUp": "Create an Account",
+    "forDevsHeading": "For Developers",
+    "forDevsDescription": "UniAtlas Bosnia exposes a free, unauthenticated REST API. Fetch all universities, search by name, city, or acronym, retrieve full detail for a single university, or search study programs across all institutions.",
+    "forDevsNote": "No authentication required for public endpoints.",
+    "forDevsCta": "View API Docs",
+    "forDevsGithub": "View on GitHub",
+    "openSource": "This is an open-source project. View the source code, setup instructions, and contribute on",
+    "github": "GitHub"
+  },
+  "api": {
+    "title": "REST API",
+    "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
+    "fullDocs": "For full project documentation, local setup, and contributing guidelines, see the",
+    "dataObject": "University object",
+    "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
+    "endpoints": "Endpoints",
+    "endpointsData": {
+      "apiStatus": "Check API status.",
+      "apiV1Status": "Check API v1 status.",
+      "getAllUniversities": "Retrieve all universities, ordered by name.",
+      "getUniversityById": "Retrieve a university by ID with full nested detail (faculties, study programs, subjects).",
+      "search": "Search universities (name, city, acronym), faculties (name, city), study programs, and subjects (name) in a single request (case-insensitive, minimum 2 characters).",
+      "searchTermParam": "A search term (minimum 2 characters)."
+    }
+  },
+  "endpoint": {
+    "requestBody": "Request body",
+    "queryParameters": "Query parameters",
+    "name": "Name",
+    "required": "Required",
+    "description": "Description",
+    "yes": "Yes",
+    "no": "No",
+    "successResponse": "Success response",
+    "errorResponses": "Error responses"
+  },
+  "contribution": {
+    "title": "Improve the Data",
+    "needUser": "You need to be a registered user to propose changes to the content.",
+    "chooseDataset": "Choose dataset:",
+    "noDataset": "No dataset",
+    "actions": "Actions",
+    "selectDatasetError": "You need to select a dataset.",
+    "viewEditAllData": "View and edit all data:",
+    "addNewData": "Add new data",
+    "pendingChanges": "Pending Changes",
+    "noPendingChanges": "No pending changes to display.",
+    "change": "Change",
+    "entityType": "Entity Type",
+    "pendingChangesCountAria": "pending changes count",
+    "searchResultsCountAria": "search result count",
+    "searchResults": "Search Results",
+    "user": "User",
+    "dataset": {
+      "universities": "Universities",
+      "universitiesPlaceholder": "Universities placeholder"
+    },
+    "entityTypes": {
+      "UNIVERSITY": "University",
+      "FACULTY": "Faculty",
+      "STUDY_PROGRAM": "Study Program",
+      "SUBJECT": "Subject"
+    },
+    "changeTypes": {
+      "CREATE": "Create",
+      "UPDATE": "Update",
+      "DELETE": "Delete"
+    },
+    "picker": {
+      "parent": "Where should the new item be added?",
+      "target": "Which item do you want to change?",
+      "placeholder": "— select —",
+      "currentData": "Current data",
+      "noChildren": {
+        "FACULTY": "No faculties available",
+        "STUDY_PROGRAM": "No study programs available",
+        "SUBJECT": "No subjects available"
+      }
+    },
+    "dataFields": {
+      "name": "Name",
+      "city": "City",
+      "entity": "Entity",
+      "cycle": "Study cycle",
+      "durationYears": "Duration (years)",
+      "ects": "ECTS credits",
+      "language": "Language",
+      "semester": "Semester",
+      "subjectType": "Subject type",
+      "acronym": "Acronym",
+      "foundedYear": "Founded year",
+      "website": "Website",
+      "sourceUrl": "Source URL",
+      "ownership": "Ownership"
+    },
+    "cycles": {
+      "FIRST": "FIRST — Bachelor",
+      "SECOND": "SECOND — Master",
+      "THIRD": "THIRD — PhD"
+    },
+    "subjectTypes": {
+      "MANDATORY": "Mandatory",
+      "ELECTIVE": "Elective"
+    },
+    "entities": {
+      "FBIH": "FBIH — Federation of B&H",
+      "RS": "RS — Republika Srpska",
+      "BD": "BD — Brčko District"
+    },
+    "submitSuggestion": "Submit Suggestion",
+    "deleteChange": "Delete"
+  },
+  "admin": {
+    "needAdmin": "You need to be an admin to see the admin dashboard.",
+    "needLoginAndAdmin": "You need to be logged in and an admin to see the admin dashboard.",
+    "dashboardTitle": "Admin Dashboard",
+    "pendingChangesCountAria": "pending changes count",
+    "pendingChanges": "Pending Changes",
+    "noPendingChanges": "There are no pending changes at the moment.",
+    "adminRequests": "Admin Requests",
+    "noAdminRequests": "There are no admin requests at the moment.",
+    "adminRequestsCountAria": "admin requests count",
+    "requestedAt": "Requested",
+    "proposedData": "Proposed Data",
+    "currentData": "Current Data",
+    "proposedChanges": "Proposed Changes",
+    "entityDeleted": "Entity no longer exists"
+  },
+  "error": {
+    "notFound": "There is nothing here, sorry.",
+    "goHome": "Go to Home Page",
+    "pageTitle": "Page Not Found"
+  },
+  "longWait": {
+    "unreachable": "Server can't be reached after multiple attempts. Please try again later.",
+    "wakingUp": "Getting response from the server is taking longer than expected (server might be waking up). Please wait..."
+  },
+  "footer": {
+    "name": "Goran Jović",
+    "email": "goran1010jovic@gmail.com"
+  },
+  "validation": {
+    "email": {
+      "invalid": "Please enter a valid email address",
+      "minLength": "Email must have at least 3 characters",
+      "missingAt": "Please include an '@' in the email address.",
+      "missingDomain": "Please enter a part following '@'."
+    },
+    "password": {
+      "minLength": "Password must have at least 6 characters",
+      "required": "Password is required",
+      "allowedCharacters": "Password can only contain letters, numbers, dashes, or underscores",
+      "requiresNumber": "Password must contain at least one number",
+      "mustMatch": "Password and confirm password fields must match"
+    },
+    "search": {
+      "minLength": "Search must have at least 2 characters",
+      "maxLength": "Search must not exceed 100 characters"
+    }
+  },
+  "messages": {
+    "csrfTokenFailed": "Failed to retrieve CSRF token.",
+    "pendingChanges": {
+      "loadSuccess": "Pending changes loaded.",
+      "loadFailed": "Failed to load pending changes.",
+      "fetchError": "Error fetching pending changes."
+    },
+    "loginStatus": {
+      "success": "Successfully logged in.",
+      "error": "An error occurred while logging in."
+    },
+    "auth": {
+      "loginFailed": "Login failed.",
+      "loginError": "An error occurred while logging in.",
+      "loginSuccess": "Successfully logged in.",
+      "registrationFailed": "Registration failed.",
+      "registrationError": "An error occurred during registration.",
+      "registrationSuccess": "Registration successful! Check your email.",
+      "logoutFailed": "Logout failed.",
+      "logoutError": "An error occurred while logging out.",
+      "logoutSuccess": "Successfully logged out."
+    },
+    "admin": {
+      "approveSuccess": "Pending change approved.",
+      "approveFailed": "Failed to approve pending change.",
+      "approveError": "Error approving pending change.",
+      "declineSuccess": "Pending change declined.",
+      "declineFailed": "Failed to decline request.",
+      "declineError": "Error declining request."
+    },
+    "universities": {
+      "loadError": "Failed to load universities.",
+      "searchError": "Search failed.",
+      "detailsError": "Failed to load university details.",
+      "addSuccess": "Suggestion submitted.",
+      "addFailed": "Failed to submit suggestion.",
+      "addError": "Error submitting suggestion.",
+      "deleteSuccess": "Pending change discarded.",
+      "deleteFailed": "Failed to delete pending change.",
+      "deleteError": "Error deleting pending change."
+    },
+    "adminRequest": {
+      "requestSuccess": "Admin access requested. An admin will review it.",
+      "requestError": "Error requesting admin access.",
+      "cancelSuccess": "Admin request cancelled.",
+      "cancelError": "Error cancelling admin request.",
+      "fetchError": "Error fetching admin requests.",
+      "approveSuccess": "Admin request approved.",
+      "approveError": "Error approving admin request.",
+      "declineSuccess": "Admin request declined.",
+      "declineError": "Error declining admin request."
+    }
+  },
+  "universitiesPage": {
+    "title": "Find programs and universities",
+    "browseAll": "Browse All",
+    "search": "Search",
+    "searchHint": "Search universities, faculties, study programs, and subjects by name - cities and university acronyms match too.",
+    "searchAllPlaceholder": "Search by name, city, or acronym…",
+    "universitiesSection": "Universities",
+    "facultiesSection": "Faculties",
+    "studyProgramsSection": "Study programs",
+    "subjectsSection": "Subjects",
+    "noResults": "No universities found.",
+    "noFacultyResults": "No faculties found.",
+    "noStudyProgramResults": "No study programs found.",
+    "noSubjectResults": "No subjects found.",
+    "noResultsAtAll": "No results found.",
+    "city": "City",
+    "entity": "Entity",
+    "entities": {
+      "FBIH": "Federation of B&H",
+      "RS": "Republika Srpska",
+      "BD": "Brčko District"
+    },
+    "faculties": "Faculties",
+    "studyPrograms": "Study Programs",
+    "subjects": "Subjects",
+    "cycle": "Cycle",
+    "cycles": {
+      "FIRST": "First (Bachelor)",
+      "SECOND": "Second (Master)",
+      "THIRD": "Third (PhD)"
+    },
+    "ects": "ECTS",
+    "durationYears": "years",
+    "noStudyPrograms": "No study programs available.",
+    "noSubjects": "No subjects available.",
+    "semester": "Semester",
+    "subjectType": "Type",
+    "subjectTypes": {
+      "MANDATORY": "Mandatory",
+      "ELECTIVE": "Elective"
+    },
+    "website": "Website",
+    "foundedYear": "Founded",
+    "viewDetails": "View details",
+    "hideDetails": "Hide details",
+    "ownership": {
+      "JAVNA": "Public",
+      "PRIVATNA": "Private"
+    }
+  }
+}

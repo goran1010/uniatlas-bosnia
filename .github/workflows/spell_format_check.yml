@@ -26,11 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm run install:all
 
-      - name: Check frontend formatting
-        run: npm run format:check:frontend
+      - name: Check webapp formatting
+        run: npm run format:check:webapp
 
-      - name: Check backend formatting
-        run: npm run format:check:backend
+      - name: Check server formatting
+        run: npm run format:check:server
 
   spell:
     runs-on: ubuntu-latest

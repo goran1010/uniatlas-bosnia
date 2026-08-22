@@ -3,10 +3,10 @@
   "language": "en",
 
   "files": [
-    "frontend/src/**/*.{ts,tsx,md}",
-    "frontend/__tests__/**/*.{ts,tsx,md}",
-    "backend/src/**/*.{ts,md}",
-    "backend/__tests__/**/*.{ts,md}",
+    "webapp/src/**/*.{ts,tsx,md}",
+    "webapp/__tests__/**/*.{ts,tsx,md}",
+    "server/src/**/*.{ts,md}",
+    "server/__tests__/**/*.{ts,md}",
     "README.md",
     "CONTRIBUTING.md",
     "LICENSE.md"
@@ -68,7 +68,8 @@
     "Univerzitet",
     "upsert",
     "upserted",
-    "upserts"
+    "upserts",
+    "quixo"
   ],
 
   "ignoreWords": [],

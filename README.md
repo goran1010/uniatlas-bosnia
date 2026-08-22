@@ -1,14 +1,14 @@
 # UniAtlas Bosnia
 
-An open-source monorepo for Bosnia and Herzegovina higher-education data. It combines a public REST API, an authenticated contribution workflow, and a React frontend for browsing universities and managing data suggestions.
+An open-source monorepo for Bosnia and Herzegovina higher-education data. It combines a public REST API, an authenticated contribution workflow, and a React webapp for browsing universities and managing data suggestions.
 
-Live frontend: <https://uniatlas-bosnia.netlify.app/>
+Live webapp: <https://uniatlas-bosnia.netlify.app/>
 
-Live backend REST API: <https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api>
+Live server REST API: <https://round-leann-goran-jovic-1010-ccad2ae8.koyeb.app/api>
 
 In-app API docs: <https://uniatlas-bosnia.netlify.app/api-docs>
 
-![UniAtlas Bosnia](./frontend/public/images/og-image-home.png)
+![UniAtlas Bosnia](./webapp/public/images/og-image-home.png)
 
 ## Table of contents
 
@@ -49,7 +49,7 @@ Public consumers can browse and query that data through unauthenticated endpoint
 - Per-user pending-change listing and deletion
 - Admin moderation endpoints for approving or declining pending changes
 - CSRF protection for protected auth and user routes
-- Zod request validation and frontend API-response validation
+- Zod request validation and webapp API-response validation
 - Netlify proxy support for first-party session cookies in production
 
 ## Getting started
@@ -86,7 +86,7 @@ git clone https://github.com/goran1010/uniatlas-bosnia.git
 cd uniatlas-bosnia
 ```
 
-Install root, backend, and frontend dependencies:
+Install root, server, and webapp dependencies:
 
 ```bash
 npm run install:all
@@ -95,24 +95,24 @@ npm run install:all
 Create local environment files:
 
 ```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
+cp server/.env.example server/.env
+cp webapp/.env.example webapp/.env
 ```
 
-Then fill in the backend values and adjust the frontend backend URL if needed.
+Then fill in the server values and adjust the webapp server URL if needed.
 
 ## Environment variables
 
-### Backend envs
+### Server envs
 
-The backend example file lives at `backend/.env.example`.
+The server example file lives at `server/.env.example`.
 
 - `DATABASE_URL`: PostgreSQL connection string for development
-- `TEST_DATABASE_URL`: separate PostgreSQL database for backend tests
+- `TEST_DATABASE_URL`: separate PostgreSQL database for server tests
 - `RESEND_API_KEY`: API key for confirmation emails
-- `FRONTEND_URL`: frontend origin allowed by credentialed CORS
-- `BACKEND_URL`: public backend base URL used in confirmation links
-- `PORT`: backend port, usually `3000`
+- `WEBAPP_URL`: webapp origin allowed by credentialed CORS
+- `SERVER_URL`: public server base URL used in confirmation links
+- `PORT`: server port, usually `3000`
 - `COOKIE_SECRET`: session secret
 - `NODE_ENV`: runtime mode, usually `development`
 - `GITHUB_CLIENT_ID`: optional GitHub OAuth client ID
@@ -128,14 +128,14 @@ http://localhost:3000/auth/github/callback
 Production callback example with the Netlify proxy:
 
 ```text
-https://yoursite.netlify.app/backend/auth/github/callback
+https://yoursite.netlify.app/server/auth/github/callback
 ```
 
-### Frontend envs
+### Webapp envs
 
-The frontend example file lives at `frontend/.env.example`.
+The webapp example file lives at `webapp/.env.example`.
 
-- `VITE_BACKEND_URL`: backend base URL used by the React app
+- `VITE_SERVER_URL`: server base URL used by the React app
 
 Typical local value:
 
@@ -146,7 +146,7 @@ http://localhost:3000
 Typical Netlify production value:
 
 ```text
-/backend
+/server
 ```
 
 ## Database setup
@@ -157,17 +157,10 @@ Run development migrations and generate the Prisma client:
 npm run db:deploy_generate
 ```
 
-If you plan to run backend tests locally, initialize the test database too:
-
-```bash
-npm run db:test:deploy_generate
-```
-
-Seed the databases if needed:
+Seed the database if needed:
 
 ```bash
 npm run db:seed
-npm run db:test:seed
 ```
 
 Start both services:
@@ -179,14 +172,14 @@ npm run dev:all
 Or start them separately:
 
 ```bash
-npm run dev:backend
-npm run dev:frontend
+npm run dev:server
+npm run dev:webapp
 ```
 
 Local defaults:
 
-- backend: `http://localhost:3000`
-- frontend: `http://localhost:5173`
+- server: `http://localhost:3000`
+- webapp: `http://localhost:5173`
 
 ## API overview
 
@@ -258,19 +251,19 @@ npm run test:all
 Run service-specific suites:
 
 ```bash
-npm run test:backend
-npm run test:frontend
+npm run test:server
+npm run test:webapp
 ```
 
 Run coverage:
 
 ```bash
 npm run test:coverage:all
-npm run test:coverage:backend
-npm run test:coverage:frontend
+npm run test:coverage:server
+npm run test:coverage:webapp
 ```
 
-Backend tests require `TEST_DATABASE_URL` to point to a separate PostgreSQL database.
+Server tests require `TEST_DATABASE_URL` to point to a separate PostgreSQL database. The test setup creates and manages its own template database automatically.
 
 ### Quality checks
 
@@ -282,14 +275,14 @@ npm run format:check:all
 
 ## Deployment notes
 
-- Backend: any Node.js host that can run Prisma migrations against PostgreSQL
-- Frontend: Netlify, using `frontend/netlify.toml` to proxy `/backend/*` to the backend service
-- Cookies: the proxy keeps frontend-auth requests first-party in production
-- Public API consumers can call the backend directly without the Netlify proxy
+- Server: any Node.js host that can run Prisma migrations against PostgreSQL
+- Webapp: Netlify, using `webapp/netlify.toml` to proxy `/server/*` to the server
+- Cookies: the proxy keeps auth requests first-party in production
+- Public API consumers can call the server directly without the Netlify proxy
 
 ## Built with
 
-### Backend
+### Server
 
 - Express
 - Prisma
@@ -304,7 +297,7 @@ npm run format:check:all
 - Vitest
 - Supertest
 
-### Frontend
+### Webapp
 
 - React
 - Vite
