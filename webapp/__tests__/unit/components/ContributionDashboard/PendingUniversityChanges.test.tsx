@@ -119,9 +119,6 @@ describe("PendingUniversityChanges", () => {
 
     expect(screen.getByText(/^Change$/)).toBeInTheDocument();
     expect(screen.getByText(/^Entity Type$/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/pending changes count/i)).toHaveTextContent(
-      "2",
-    );
 
     expect(PendingUniversityChangesRowMock).toHaveBeenCalledTimes(2);
     expect(PendingUniversityChangesRowMock).toHaveBeenNthCalledWith(

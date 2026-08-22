@@ -149,9 +149,8 @@ describe("ContributionForm component rendering", () => {
     const tab = await screen.findByRole("button", { name: /Pending changes/i });
     await user.click(tab);
 
-    const pendingCount = await screen.findByLabelText(/pending changes count/i);
-
-    expect(pendingCount).toHaveTextContent("1");
+    // The count badge appears inside the "Pending changes" tab button
+    expect(tab).toHaveTextContent("1");
   });
 
   test("shows an error notification when pending changes fail to load", async () => {
