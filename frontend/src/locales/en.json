@@ -131,11 +131,15 @@
     "forDevsHeading": "For Developers",
     "forDevsDescription": "UniAtlas Bosnia exposes a free, unauthenticated REST API. Fetch all universities, search by name, city, or acronym, retrieve full detail for a single university, or search study programs across all institutions.",
     "forDevsNote": "No authentication required for public endpoints.",
-    "forDevsCta": "View API Docs"
+    "forDevsCta": "View API Docs",
+    "forDevsGithub": "View on GitHub",
+    "openSource": "This is an open-source project. View the source code, setup instructions, and contribute on",
+    "github": "GitHub"
   },
   "api": {
     "title": "REST API",
     "publicIntro": "Public REST endpoints are available under the base URL below. These endpoints do not require authentication.",
+    "fullDocs": "For full project documentation, local setup, and contributing guidelines, see the",
     "dataObject": "University object",
     "dataObjectExample": "{\n  \"id\":          number   - unique identifier\n  \"name\":        string   - university name\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoints",

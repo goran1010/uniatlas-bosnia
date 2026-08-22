@@ -42,6 +42,17 @@ function Api() {
           <pre className="mt-3 bg-(--surface-alt) rounded p-3 text-sm font-mono overflow-x-auto border border-(--border-color)">
             {PUBLIC_API_URL}
           </pre>
+          <p className="mt-2 text-sm text-(--text-muted)">
+            {t("api.fullDocs")}{" "}
+            <a
+              href="https://github.com/goran1010/uniatlas-bosnia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub README
+            </a>
+            .
+          </p>
         </header>
         <section className="flex flex-col gap-4">
           <h2 className="text-xl font-bold text-center">

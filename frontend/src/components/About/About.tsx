@@ -32,8 +32,19 @@ function About() {
           <h1 className="text-3xl font-bold text-center">
             {t("home.heading")}
           </h1>
-          <p className="text-lg">{t("home.intro")}</p>
+          <p>{t("home.intro")}</p>
           <p>{t("home.summary")}</p>
+          <p className="text-sm text-(--text-muted)">
+            {t("home.openSource")}{" "}
+            <a
+              href="https://github.com/goran1010/uniatlas-bosnia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("home.github")}
+            </a>
+            .
+          </p>
         </header>
 
         <section className="flex flex-col gap-4">
@@ -88,12 +99,22 @@ function About() {
           </h2>
           <p>{t("home.forDevsDescription")}</p>
           <p className="text-sm text-(--text-muted)">{t("home.forDevsNote")}</p>
-          <Link
-            to="/api-docs"
-            className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface) self-center"
-          >
-            {t("home.forDevsCta")}
-          </Link>
+          <div className="flex flex-wrap gap-3 justify-center items-center">
+            <Link
+              to="/api-docs"
+              className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+            >
+              {t("home.forDevsCta")}
+            </Link>
+            <a
+              href="https://github.com/goran1010/uniatlas-bosnia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border rounded-lg px-4 py-2 transition-colors font-medium w-full text-center text-(--text-primary) sm:w-auto hover:bg-(--hover-surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:bg-(--hover-surface)"
+            >
+              {t("home.forDevsGithub")}
+            </a>
+          </div>
         </section>
       </div>
     </>

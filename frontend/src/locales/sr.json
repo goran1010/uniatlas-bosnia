@@ -131,11 +131,15 @@
     "forDevsHeading": "Za programere",
     "forDevsDescription": "UniAtlas Bosnia nudi besplatan, javni REST API bez autentifikacije. Preuzmite sve univerzitete, pretražujte po nazivu, gradu ili akronimu, dobijte potpune detalje za jedan univerzitet ili pretražujte studijske programe po svim institucijama.",
     "forDevsNote": "Autentifikacija nije potrebna za javne endpoint-e.",
-    "forDevsCta": "Pogledajte API dokumentaciju"
+    "forDevsCta": "Pogledajte API dokumentaciju",
+    "forDevsGithub": "Pogledajte na GitHub-u",
+    "openSource": "Ovo je projekat otvorenog koda. Pregledajte izvorni kod, upute za postavljanje i doprinesite na",
+    "github": "GitHub"
   },
   "api": {
     "title": "REST API",
     "publicIntro": "Javni REST endpoint-i su dostupni pod osnovnim URL-om ispod. Ovi endpoint-i ne zahtijevaju autentifikaciju.",
+    "fullDocs": "Za kompletnu projektnu dokumentaciju, lokalno postavljanje i smjernice za doprinos, pogledajte",
     "dataObject": "Objekat univerziteta",
     "dataObjectExample": "{\n  \"id\":          number   - jedinstveni identifikator\n  \"name\":        string   - naziv univerziteta\n  \"acronym\":     string | null\n  \"city\":        string\n  \"entity\":      \"FBIH\" | \"RS\" | \"BD\"\n  \"ownership\":   \"JAVNA\" | \"PRIVATNA\"\n  \"foundedYear\": string | null\n  \"website\":     string | null\n  \"faculties\":   Faculty[]\n}",
     "endpoints": "Endpoint-i",
