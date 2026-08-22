@@ -372,6 +372,9 @@
       "THIRD": "Third (PhD)"
     },
     "ects": "ECTS",
+    "durationYears": "years",
+    "noStudyPrograms": "No study programs available.",
+    "noSubjects": "No subjects available.",
     "semester": "Semester",
     "subjectType": "Type",
     "subjectTypes": {

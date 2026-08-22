@@ -87,12 +87,38 @@ function StudyProgramRow({
           </span>
         </span>
       </button>
-      {open && program.subjects.length > 0 && (
-        <ul className="ml-4 mt-1 mb-2 border-l-2 border-(--border-color) pl-3">
-          {program.subjects.map((s) => (
-            <SubjectRow key={s.id} subject={s} t={t} />
-          ))}
-        </ul>
+      {open && (
+        <div className="ml-4 mt-1 mb-2 border-l-2 border-(--border-color) pl-3">
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-(--text-muted) py-1">
+            <span>{t(`universitiesPage.cycles.${program.cycle}`)}</span>
+            {program.durationYears != null && (
+              <span>
+                {program.durationYears} {t("universitiesPage.durationYears")}
+              </span>
+            )}
+            {program.ects != null && (
+              <span>
+                {program.ects} {t("universitiesPage.ects")}
+              </span>
+            )}
+            {program.language && (
+              <span>
+                {t("contribution.dataFields.language")}: {program.language}
+              </span>
+            )}
+          </div>
+          {program.subjects.length > 0 ? (
+            <ul>
+              {program.subjects.map((s) => (
+                <SubjectRow key={s.id} subject={s} t={t} />
+              ))}
+            </ul>
+          ) : (
+            <p className="text-xs text-(--text-muted) italic py-1">
+              {t("universitiesPage.noSubjects")}
+            </p>
+          )}
+        </div>
       )}
     </li>
   );
@@ -131,12 +157,35 @@ function FacultyRow({
           </span>
         </span>
       </button>
-      {open && faculty.studyPrograms.length > 0 && (
-        <ul className="ml-4 mt-1 border-l-2 border-indigo-200 dark:border-indigo-700 pl-3 space-y-0.5">
-          {faculty.studyPrograms.map((sp) => (
-            <StudyProgramRow key={sp.id} program={sp} t={t} />
-          ))}
-        </ul>
+      {open && (
+        <div className="ml-4 mt-1 border-l-2 border-indigo-200 dark:border-indigo-700 pl-3">
+          {(faculty.city ?? faculty.website) && (
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-(--text-muted) py-1">
+              {faculty.city && <span>📍 {faculty.city}</span>}
+              {faculty.website && (
+                <a
+                  href={faculty.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:underline truncate max-w-xs"
+                >
+                  {faculty.website}
+                </a>
+              )}
+            </div>
+          )}
+          {faculty.studyPrograms.length > 0 ? (
+            <ul className="space-y-0.5">
+              {faculty.studyPrograms.map((sp) => (
+                <StudyProgramRow key={sp.id} program={sp} t={t} />
+              ))}
+            </ul>
+          ) : (
+            <p className="text-xs text-(--text-muted) italic py-1">
+              {t("universitiesPage.noStudyPrograms")}
+            </p>
+          )}
+        </div>
       )}
     </li>
   );

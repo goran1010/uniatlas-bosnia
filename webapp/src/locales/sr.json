@@ -372,6 +372,9 @@
       "THIRD": "Treći (PhD)"
     },
     "ects": "ECTS",
+    "durationYears": "godine",
+    "noStudyPrograms": "Nema dostupnih studijskih programa.",
+    "noSubjects": "Nema dostupnih predmeta.",
     "semester": "Semestar",
     "subjectType": "Tip",
     "subjectTypes": {
