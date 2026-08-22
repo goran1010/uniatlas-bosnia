@@ -31,11 +31,11 @@ jobs:
       - name: Generate Prisma client
         run: npm run db:generate
 
-      - name: Lint frontend
-        run: npm run lint:frontend
+      - name: Lint webapp
+        run: npm run lint:webapp
 
-      - name: Lint backend
-        run: npm run lint:backend
+      - name: Lint server
+        run: npm run lint:server
 
   type_check:
     runs-on: ubuntu-latest
@@ -57,8 +57,8 @@ jobs:
       - name: Generate Prisma client
         run: npm run db:generate
 
-      - name: Type check frontend
-        run: npm run typecheck:frontend
+      - name: Type check webapp
+        run: npm run typecheck:webapp
 
-      - name: Type check backend
-        run: npm run typecheck:backend
+      - name: Type check server
+        run: npm run typecheck:server

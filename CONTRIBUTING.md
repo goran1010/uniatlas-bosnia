@@ -7,8 +7,8 @@ Contributions of any kind are welcome - bug fixes, new features, data, documenta
 1. Fork the repository and create your branch from `main`
 2. Run `npm run install:all` to install dependencies
 3. Set up your local environment:
-   - Copy `backend/.env.example` to `backend/.env` and fill in your database, email service, and (optionally) GitHub OAuth credentials
-   - Copy `frontend/.env.example` to `frontend/.env` and update `VITE_BACKEND_URL` if needed
+   - Copy `server/.env.example` to `server/.env` and fill in your database, email service, and (optionally) GitHub OAuth credentials
+   - Copy `webapp/.env.example` to `webapp/.env` and update `VITE_SERVER_URL` if needed
 4. Set up the databases:
    - Run `npm run db:deploy_generate` to initialize the development database
    - Run `npm run db:test:deploy_generate` if you plan to run backend tests

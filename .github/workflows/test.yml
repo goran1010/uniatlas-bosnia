@@ -30,11 +30,11 @@ jobs:
           --health-retries=5
 
     env:
-      VITE_BACKEND_URL: http://localhost:3000
+      VITE_SERVER_URL: http://localhost:3000
       PORT: 3000
-      FRONTEND_URL: http://localhost:5173
+      WEBAPP_URL: http://localhost:5173
       NODE_ENV: test
-      BACKEND_URL: http://localhost:3000
+      SERVER_URL: http://localhost:3000
       COOKIE_SECRET: "123456789"
       TEST_DATABASE_URL: postgresql://test_user:test_password@localhost:5432/postgres
       DATABASE_URL: postgresql://test_user:test_password@localhost:5432/postgres_db,
@@ -56,11 +56,11 @@ jobs:
       - name: Install dependencies
         run: npm run install:all
 
-      - name: Test frontend
-        run: npm run test:frontend
+      - name: Test webapp
+        run: npm run test:webapp
 
       - name: Migrate database and generate Prisma client
         run: npm run db:deploy_generate
 
-      - name: Test backend
-        run: npm run test:backend
+      - name: Test server
+        run: npm run test:server
