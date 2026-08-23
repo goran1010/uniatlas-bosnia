@@ -95,7 +95,7 @@ describe("UniversityCard", () => {
 
     await user.click(viewDetailsButton);
 
-    const noFacultiesText = await screen.findByText(/Faculties: —/i);
+    const noFacultiesText = await screen.findByText(/Faculties: -/i);
     expect(noFacultiesText).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledTimes(1);
 
@@ -104,14 +104,14 @@ describe("UniversityCard", () => {
     });
     await user.click(hideDetailsButton);
 
-    expect(screen.queryByText(/Faculties: —/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Faculties: -/i)).not.toBeInTheDocument();
 
     const showCachedDetailsButton = screen.getByRole("button", {
       name: /View details/i,
     });
     await user.click(showCachedDetailsButton);
 
-    const cachedDetails = await screen.findByText(/Faculties: —/i);
+    const cachedDetails = await screen.findByText(/Faculties: -/i);
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(cachedDetails).toBeInTheDocument();

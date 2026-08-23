@@ -29,7 +29,7 @@ function SubjectResult({
       <p className="text-sm text-(--text-muted) mt-1">
         {subject.studyProgram.name}
         <span className="text-(--text-muted)">
-          {" — "}
+          {" - "}
           {subject.studyProgram.faculty.name}
           {", "}
           {subject.studyProgram.faculty.university.name}

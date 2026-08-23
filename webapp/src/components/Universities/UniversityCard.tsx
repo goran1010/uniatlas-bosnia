@@ -317,7 +317,7 @@ function UniversityCard({ university }: { university: UniversityListItem }) {
               </>
             ) : (
               <p className="text-sm text-(--text-muted) italic">
-                {t("universitiesPage.faculties")}: —
+                {t("universitiesPage.faculties")}: -
               </p>
             )}
           </div>

@@ -198,7 +198,7 @@
     "picker": {
       "parent": "Gdje treba dodati novu stavku?",
       "target": "Koju stavku želite izmijeniti?",
-      "placeholder": "— izaberite —",
+      "placeholder": "- izaberite -",
       "currentData": "Trenutni podaci",
       "noChildren": {
         "FACULTY": "Nema dostupnih fakulteta",
@@ -223,19 +223,19 @@
       "ownership": "Vlasništvo"
     },
     "cycles": {
-      "PRVI": "PRVI — Bachelor",
-      "DRUGI": "DRUGI — Master",
-      "TRECI": "TREĆI — PhD",
-      "INTEGRISANI": "INTEGRISANI — Bachelor+Master"
+      "PRVI": "PRVI - Bachelor",
+      "DRUGI": "DRUGI - Master",
+      "TRECI": "TREĆI - PhD",
+      "INTEGRISANI": "INTEGRISANI - Bachelor+Master"
     },
     "subjectTypes": {
       "OBAVEZNI": "Obavezni",
       "IZBORNI": "Izborni"
     },
     "entities": {
-      "FBIH": "FBIH — Federacija BiH",
-      "RS": "RS — Republika Srpska",
-      "BD": "BD — Brčko Distrikt"
+      "FBIH": "FBIH - Federacija BiH",
+      "RS": "RS - Republika Srpska",
+      "BD": "BD - Brčko Distrikt"
     },
     "submitSuggestion": "Pošalji prijedlog",
     "deleteChange": "Obriši"

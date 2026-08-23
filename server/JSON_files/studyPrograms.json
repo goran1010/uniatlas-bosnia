@@ -4704,5 +4704,1904 @@
         ]
       }
     ]
+  },
+  {
+    "university": "Univerzitet u Banjoj Luci",
+    "faculties": [
+      {
+        "faculty": "Akademija umjetnosti",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Dramske umjetnosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Likovne umjetnosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Muzička umjetnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Dramske umjetnosti",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Likovne umjetnosti",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Muzička umjetnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Muzička umjetnost",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Arhitektonsko-građevinsko-geodetski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Arhitektura i urbanizam",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Energetska efikasnost u zgradarstvu - kombinovani studijski program",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Geodezija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Arhitektura",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Dizajn enterijera",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Geodezija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Pejzažna arhitektura",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          },
+          {
+            "name": "Obnovljivi izvori energije i ekološko inženjerstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Aktuarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Finansije i revizija javnog sektora",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Finansije, bankarstvo i osiguranje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "International master in business and administration",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Menadžment u turizmu i hotelijerstvu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Međunarodna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Upravljanje kulturnim nasljeđem i kulturnim turizmom",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Ekonomija i poslovno upravljanje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Ekonomija i poslovno upravljanje na engleskom jeziku",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Elektrotehnički fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Digitalno emitovanje i širokopojasne tehnologije",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Elektroenergetski i industrijski sistemi",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Elektronika i telekomunikacije",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Elektroenergetika i automatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Elektronika i telekomunikacije",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Informaciono-komunikacione tehnologije",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet bezbjednosnih nauka",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Bezbjednost i kriminalistika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Ekološka bezbjednost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Bezbjednost i kriminalistika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet fizičkog vaspitanja i sporta",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Opšti - nastavnički",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Sport",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Fizičko vaspitanje i sport",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Sportske nauke",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet političkih nauka",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Novinarstvo i komunikologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Politikologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Politikološke studije",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Novinarstvo i komunikologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Političke nauke",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Primijenjena sociologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Studij društvenih nauka",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Filološki fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Francuski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Italijanski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Metodika nastave stranih jezika i književnosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Ruski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Srpski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Romanistika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Ruski i srpski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Sinologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Srpski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Filologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Filozofski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Filozofija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Istorija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Predškolsko vaspitanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Istorija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Predškolsko vaspitanje",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Učiteljski studij",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Doktorske studije iz istorije ratova, ratnih zločina i genocida u XX vijeku",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          },
+          {
+            "name": "Metodika razredne nastave",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Mašinski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Energetska efikasnost u zgradarstvu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Energetsko i saobraćajno mašinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Industrijsko inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Konstrukciono mašinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Proizvodno mašinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Zaštita na radu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Energetsko i saobraćajno mašinstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Industrijsko inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Proizvodno mašinstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Zaštita na radu",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Medicinski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Master medicinsko laboratorijska dijagnostika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Master zdravstvenih studija usmjerenje Fizioterapija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Master zdravstvenih studija usmjerenje Mentalno zdravlje djece i odraslih",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Master zdravstvenih studija usmjerenje Radiološka tehnologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Master zdravstvenih studija usmjerenje Zdravstvena njega",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Babištvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Dentalna medicina",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Farmacija",
+            "cycle": "PRVI",
+            "durationYears": 5,
+            "ects": 300,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Fizioterapija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Medicina",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Medicina na engleskom jeziku",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "language": "engleski",
+            "sourceUrl": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+          },
+          {
+            "name": "Medicinsko laboratorijska dijagnostika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Radiološka tehnologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Sanitarno inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Zdravstvena njega",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Biomedicinske nauke",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Poljoprivredni fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Agrarna ekonomija i ruralni razvoj",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Animalna proizvodnja",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Biljne nauke",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Očuvanje i održiva upotreba genetičkih resursa",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Poljoprivredne nauke",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Master studije Pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Doktorske studije pravo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Prirodno-matematički fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Biologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Ekologija i zaštita životne sredine",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Fizika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Master studij informatike",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Prostorno planiranje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Tehničko vaspitanje i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Ekologija i zaštita životne sredine",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Fizika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Prostorno planiranje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Tehničko vaspitanje i informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Rudarski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Rudarsko i geološko inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Geološko inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Inženjerstvo zaštite životne sredine",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Rudarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Tehnološki fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Grafičko inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Hemijsko inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Prehrambeno inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Tekstilno inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Grafičko inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologije",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Prehrambene tehnologije i industrijske biotehnologije",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Tekstilno inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Tehnološko inženjerstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      },
+      {
+        "faculty": "Šumarski fakultet",
+        "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Upravljanje šumskim resursima na prirodnim osnovama",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+          },
+          {
+            "name": "Prerada drveta",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Tuzli",
+    "faculties": [
+      {
+        "faculty": "Akademija dramskih umjetnosti",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Gluma",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Produkcija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Gluma",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Produkcija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          }
+        ]
+      },
+      {
+        "faculty": "Edukacijsko-rehabilitacijski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Audologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Logopedija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Poremećaji u ponašanju",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Socijalna pedagogija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Specijalna edukacija i rehabilitacija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Surdoaudiologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Logopedija i audiologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Poremećaji u ponašanju",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Specijalna edukacija i rehabilitacija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Specijalna edukacija i rehabilitacija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Menadžment u turizmu",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Ekonomija i biznis",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet elektrotehnike",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Elektrotehnika i računarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Elektrotehnika i računarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Tehnički odgoj i informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Elektrotehnika i računarstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za tjelesni odgoj i sport",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Sportski trener",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Tjelesni odgoj i sport",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Sportski trener",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Tjelesni odgoj i sport",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Kineziologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Farmaceutski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Farmacija",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijskih-programi-integrisanog-i-i-ii-ciklusa/"
+          },
+          {
+            "name": "Kozmetologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Farmaceutske nauke/znanosti",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Filozofski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Anglistika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Angloamerički književni studiji",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Angloamerički književno-kulturalni studiji",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Bosanskohercegovačka književnost u književnohistorijskom kontekstu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Historija Bosne i Hercegovine",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Lingvistika bosanskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Lingvistika engleskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Lingvistika njemačkog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Lingvistika turskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Metodika nastave bosanskog jezika i književnosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Metodika nastave engleskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Metodika nastave njemačkog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Njemačka književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Njemački jezik, njemačka književnost i prevodilaštvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Novi vijek i savremeno doba",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Povijest bosanskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Predškolski odgoj i obrazovanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Prevođenje engleskog jezika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Socijalna politika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Stari i srednji vijek",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Tehnički odgoj i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Turska književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Žurnalistika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Bosanski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Filozofija-Sociologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Historija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Predškolski odgoj i obrazovanje",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Turski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Žurnalistika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Historija Bosne i Hercegovine u XIX i XX stoljeću",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Književnost",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Komunikologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Lingvistika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Prostor današnje Bosne i Hercegovine u vrijeme rimske uprave",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Mašinski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Energetika i termofluidni inženjering",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Održiva energija i okolina",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Proizvodno mašinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Termoenergetika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Energetika i termo-fluidni inženjering",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Proizvodno mašinstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Doktorski studij iz područja mašinstva",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Medicinski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Odsjek zdravstvenih studija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Opšta medicina",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijskih-programi-integrisanog-i-i-ii-ciklusa/"
+          },
+          {
+            "name": "Odsjek zdravstvenih studija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Biomedicina i zdravstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Master studij iz oblasti prava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Studij iz područja javne uprave",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Studij iz područja prava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Doktorski studij iz područja prava",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Prirodno-matematički fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Biologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Edukacija u biologiji",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Edukacija u fizici",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Edukacija u geografiji",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Edukacija u hemiji",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Edukacija u matematici",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Ekomonitoring i bioindikacija voda",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Primjenjena biologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Primjenjena fizika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Primjenjena hemija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Primjenjena matematika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Turizmologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Fizika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Matematika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Turizmologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Fizika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Rudarsko-geološko-građevinski fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Bušotinska eksploatacija mineralnih sirovina",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Geologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Rudarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Sigurnost i pomoć",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Bušotinska eksploatacija mineralnih sirovina",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Geologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Rudarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Sigurnost i pomoć",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Geologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Građevinarstvo - Građevinske konstrukcije",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Građevinarstvo - Hidrotehnika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Rudarstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      },
+      {
+        "faculty": "Tehnološki fakultet",
+        "sourceUrl": "https://untz.ba/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Agronomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Inženjerstvo zaštite okoline",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Prehrambena tehnologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Zaštita na radu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-ii-ciklusa-studija/"
+          },
+          {
+            "name": "Agronomija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Inženjerstvo zaštite okoline",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Prehrambena tehnologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Zaštita na radu",
+            "cycle": "PRVI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-i-ciklusa-studija/"
+          },
+          {
+            "name": "Doktorski studij iz biotehničkih nauka - područje agronomije",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Primjenjena hemija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          },
+          {
+            "name": "Studijski program trećeg ciklusa - doktorskog studija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      }
+    ]
   }
 ]

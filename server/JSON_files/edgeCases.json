@@ -1,0 +1,285 @@
+{
+  "description": "Data-collection edge cases for studyPrograms.json - decisions that deviate from a mechanical copy of the source, kept here for later review. status: resolved = decision accepted; needs-review = open question.",
+  "lastUpdated": "2026-08-23",
+  "cases": [
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Prirodno-matematički fakultet",
+      "program": "Informacione tehnologije",
+      "issue": "Registry cycle is 'Stručni studij' (professional study) which has no studyCycle enum value",
+      "action": "Skipped - not seeded",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Elektrotehnički fakultet",
+      "program": "Razvoj softvera",
+      "issue": "Registry cycle is 'Stručni studij' (professional study) which has no studyCycle enum value",
+      "action": "Skipped - not seeded",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Akademija likovnih umjetnosti",
+      "program": "Interdisciplinarni studij konzervacija i restauracija",
+      "cycle": "PRVI i DRUGI",
+      "issue": "Joint program (ALU + PMF, drugi ciklus takođe + Arhitektonski fakultet) - no single-faculty owner",
+      "action": "Assigned to first-listed faculty (Akademija likovnih umjetnosti)",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Fakultet za upravu",
+      "program": "Informatika u upravi",
+      "cycle": "PRVI",
+      "issue": "Joint program (Fakultet za upravu + Ekonomski fakultet)",
+      "action": "Assigned to first-listed faculty (Fakultet za upravu)",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Fakultet za upravu",
+      "program": "Uprava",
+      "cycle": "DRUGI",
+      "issue": "Registry lists two ECTS variants (60 and 120) under the same name and cycle",
+      "action": "Merged into one row with ects null",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Prirodno-matematički fakultet",
+      "program": "Fizika u obrazovanju",
+      "cycle": "DRUGI",
+      "issue": "Registry lists two ECTS variants (60 and 120) under the same name and cycle",
+      "action": "Merged into one row with ects null",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Ekonomski fakultet",
+      "program": "Zajednički master programi u saradnji sa Ekonomskim fakultetom Sveučilišta u Zagrebu",
+      "cycle": "DRUGI",
+      "issue": "Registry ECTS field is '60 120' (variants)",
+      "action": "ects left null",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Ekonomski fakultet",
+      "program": "Master program u saradnji sa Microsoftom",
+      "cycle": "DRUGI",
+      "issue": "Registry ECTS field is '60 120' (variants)",
+      "action": "ects left null",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Ekonomski fakultet",
+      "program": "Zajednički master program u saradnju sa Ekonomskim fakultetom Univerzitet u Ljubljani menadžmenta \"Javni sektor i ekonomija okoliša\"",
+      "cycle": "DRUGI",
+      "issue": "English-taught program but the registry's English dataset has an empty name for it",
+      "action": "Bosnian registry name kept",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Elektrotehnički fakultet",
+      "program": "svi programi PRVI/DRUGI/TRECI",
+      "issue": "Registry names are placeholders ('Nastavni plan i program prvog ciklusa studija:' x4)",
+      "action": "Replaced with real odsjek names verified on etf.unsa.ba/prvi-ciklus",
+      "status": "resolved",
+      "source": "https://etf.unsa.ba/prvi-ciklus"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Elektrotehnički fakultet",
+      "program": "Data Science and Artificial Intelligence; Sigurnost informacija",
+      "issue": "Newer than the UNSA registry - taken from the faculty's own site",
+      "action": "Added with faculty-site sourceUrl",
+      "status": "resolved",
+      "source": "https://etf.unsa.ba"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Fakultet političkih nauka",
+      "program": "Međunarodni odnosi i diplomatija",
+      "cycle": "DRUGI",
+      "issue": "Registry lists BHS and BHS+engleski variants under the same name and cycle",
+      "action": "Merged into one row, language 'Bosanski, hrvatski, srpski i engleski'",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Centar za interdisciplinarne studije",
+      "program": "Međunarodna i regionalna sigurnost / Master Program International and Regional Security",
+      "cycle": "DRUGI",
+      "issue": "Registry lists a BHS-taught and an English-taught variant of the same master program",
+      "action": "Stored as two rows: Bosnian name (BHS variant) and English name (English variant)",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Medicinski fakultet",
+      "program": "Medicina, Farmacija, Dentalna medicina",
+      "cycle": "PRVI",
+      "issue": "360/300-ECTS integrated-style studies are formally listed as first cycle in RS",
+      "action": "Kept PRVI as the source lists them (user decision 2026-08-23)",
+      "status": "resolved",
+      "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Poljoprivredni fakultet",
+      "program": "Očuvanje i održiva upotreba genetičkih resursa",
+      "cycle": "DRUGI",
+      "issue": "Joint program (Poljoprivredni + Prirodno-matematički fakultet)",
+      "action": "Assigned to first-listed faculty (Poljoprivredni fakultet)",
+      "status": "needs-review",
+      "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Arhitektonsko-građevinsko-geodetski fakultet",
+      "program": "Obnovljivi izvori energije i ekološko inženjerstvo",
+      "cycle": "TRECI",
+      "issue": "Joint program (AGGF + Elektrotehnički + Mašinski + Tehnološki fakultet)",
+      "action": "Assigned to first-listed faculty (AGGF)",
+      "status": "needs-review",
+      "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "program": "Bioinženjering i medicinska informatika",
+      "cycle": "TRECI",
+      "issue": "Joint doctoral program of two universities (UNIBL + Univerzitet u Istočnom Sarajevu) - no single-faculty owner",
+      "action": "Skipped - not seeded",
+      "status": "needs-review",
+      "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Šumarski fakultet",
+      "program": "Šumarstvo",
+      "cycle": "DRUGI",
+      "issue": "Listed as two programs: 'Šumarstvo 60 ECTS' and 'Šumarstvo 120 ECTS'",
+      "action": "Merged into one row with ects null",
+      "status": "needs-review",
+      "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "faculty": "Pravni fakultet",
+      "program": "Studij iz područja prava; Studij iz područja javne uprave; Master studij iz oblasti prava",
+      "issue": "Source lists them under descriptive titles ('Studijski program prvog ciklusa studija iz područja prava...'); latest II-cycle revision title even says 'Doktorski studij' (likely a typo on the source page)",
+      "action": "Shortened to clean descriptive names (user accepted 2026-08-23)",
+      "status": "resolved",
+      "source": "https://untz.ba/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "faculty": "Medicinski fakultet",
+      "program": "Opšta medicina",
+      "cycle": "INTEGRISANI",
+      "issue": "Source title is 'Studijski program integrisanog studija opšte medicine'",
+      "action": "Name extracted as 'Opšta medicina' (user accepted 2026-08-23)",
+      "status": "resolved",
+      "source": "https://untz.ba/studijski-programi/studijskih-programi-integrisanog-i-i-ii-ciklusa/"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "program": "Stari i srednji vijek; Novi vijek i savremeno doba; Socijalna politika; Socijalna pedagogija; Surdoaudiologija; Angloamerički književni studiji; Angloamerički književno-kulturalni studiji (i drugi)",
+      "issue": "Programs whose latest listed curriculum revision is 2011-2014 - possibly no longer enrolling",
+      "action": "Kept - they are on the official licensed-programs list (user decision 2026-08-23)",
+      "status": "resolved",
+      "source": "https://untz.ba/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "faculty": "Tehnološki fakultet",
+      "program": "Primjenjena hemija",
+      "cycle": "TRECI",
+      "issue": "Source title 'Zajednički doktorski studij Primjenjena hemija' - joint doctoral program (Tehnološki + Prirodno-matematički fakultet)",
+      "action": "Assigned to first-listed faculty (Tehnološki fakultet), 'Zajednički doktorski studij' prefix dropped",
+      "status": "needs-review",
+      "source": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "faculty": "Tehnološki fakultet",
+      "program": "Studijski program trećeg ciklusa - doktorskog studija",
+      "cycle": "TRECI",
+      "issue": "Source gives no proper program name for this doctoral study",
+      "action": "Kept the literal descriptive title",
+      "status": "needs-review",
+      "source": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+    },
+    {
+      "issue": "Em/en dashes in program names and UI strings",
+      "action": "All em (—) and en (–) dashes replaced with regular hyphens project-wide (user decision 2026-08-23); 4 UNTZ program names affected",
+      "status": "resolved"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "issue": "Licensed-programs pages publish no ECTS/duration; first-cycle ECTS taken from degree titles in the 2026/27 enrollment konkurs PDF (62 programs). Second/third-cycle titles state cumulative ECTS (e.g. master - 300 = 240+60), so they cannot be used per-program.",
+      "action": "ECTS + derived durationYears set for PRVI only",
+      "status": "resolved",
+      "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Medicinski fakultet",
+      "program": "Zdravstvena njega",
+      "cycle": "PRVI",
+      "issue": "Licensed list has 'Zdravstvena njega' but the 2026/27 konkurs enrolls 'Sestrinstvo' (240 ECTS) - likely renamed",
+      "action": "Kept licensed-list name without ECTS",
+      "status": "needs-review",
+      "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Medicinski fakultet",
+      "program": "Medicinsko laboratorijska dijagnostika",
+      "cycle": "PRVI",
+      "issue": "Konkurs spells it 'Medicinsko-laboratorijska dijagnostika' (hyphen)",
+      "action": "Kept licensed-list spelling; ECTS 240 taken from the konkurs entry",
+      "status": "resolved",
+      "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+    },
+    {
+      "university": "Univerzitet u Banjoj Luci",
+      "program": "Medicina na engleskom jeziku; Ekonomija i poslovno upravljanje na engleskom jeziku",
+      "cycle": "PRVI",
+      "issue": "English-taught programs present in the 2026/27 konkurs but missing from the licensed-programs pages; no official English program name published",
+      "action": "Added with official Serbian names, language 'engleski'",
+      "status": "resolved",
+      "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "issue": "No ECTS published in central sources (studijski-programi registry and 2026/27 konkurs list no per-program ECTS); per-program curriculum PDFs would be needed",
+      "action": "ects left null for all UNTZ programs",
+      "status": "needs-review",
+      "source": "https://untz.ba/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet u Tuzli",
+      "program": "Poslovna ekonomija; Menadžment u turizmu; Sportski trener; Kozmetologija",
+      "cycle": "PRVI",
+      "issue": "Official 'Trogodišnji studij' page identifies these as three-year studies",
+      "action": "durationYears set to 3",
+      "status": "resolved",
+      "source": "https://untz.ba/studiranje/trogodisnji-studij/"
+    }
+  ]
+}

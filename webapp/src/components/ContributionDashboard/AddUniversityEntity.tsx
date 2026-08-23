@@ -237,7 +237,7 @@ function AddUniversityEntity({
                     }}
                     required={typeOfChange === "CREATE"}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     {ENTITIES.map((en) => (
                       <option key={en} value={en}>
                         {t(`contribution.entities.${en}`)}
@@ -257,7 +257,7 @@ function AddUniversityEntity({
                     }}
                     required={typeOfChange === "CREATE"}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     <option value="JAVNA">
                       {t("universitiesPage.ownership.JAVNA")}
                     </option>
@@ -325,7 +325,7 @@ function AddUniversityEntity({
                   }}
                   required={typeOfChange === "CREATE"}
                 >
-                  <option value="">—</option>
+                  <option value="">-</option>
                   {CYCLES.map((c) => (
                     <option key={c} value={c}>
                       {t(`contribution.cycles.${c}`)}
@@ -412,7 +412,7 @@ function AddUniversityEntity({
                     setDataField("type", e.target.value);
                   }}
                 >
-                  <option value="">—</option>
+                  <option value="">-</option>
                   {SUBJECT_TYPES.map((st) => (
                     <option key={st} value={st}>
                       {t(`contribution.subjectTypes.${st}`)}

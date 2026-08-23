@@ -198,7 +198,7 @@
     "picker": {
       "parent": "Where should the new item be added?",
       "target": "Which item do you want to change?",
-      "placeholder": "— select —",
+      "placeholder": "- select -",
       "currentData": "Current data",
       "noChildren": {
         "FACULTY": "No faculties available",
@@ -223,19 +223,19 @@
       "ownership": "Ownership"
     },
     "cycles": {
-      "PRVI": "FIRST — Bachelor",
-      "DRUGI": "SECOND — Master",
-      "TRECI": "THIRD — PhD",
-      "INTEGRISANI": "INTEGRATED — Bachelor+Master"
+      "PRVI": "FIRST - Bachelor",
+      "DRUGI": "SECOND - Master",
+      "TRECI": "THIRD - PhD",
+      "INTEGRISANI": "INTEGRATED - Bachelor+Master"
     },
     "subjectTypes": {
       "OBAVEZNI": "Mandatory",
       "IZBORNI": "Elective"
     },
     "entities": {
-      "FBIH": "FBIH — Federation of B&H",
-      "RS": "RS — Republika Srpska",
-      "BD": "BD — Brčko District"
+      "FBIH": "FBIH - Federation of B&H",
+      "RS": "RS - Republika Srpska",
+      "BD": "BD - Brčko District"
     },
     "submitSuggestion": "Submit Suggestion",
     "deleteChange": "Delete"

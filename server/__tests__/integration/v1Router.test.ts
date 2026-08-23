@@ -206,7 +206,7 @@ describe("GET /api/v1/universities/:id", () => {
   });
 });
 
-describe("GET /api/v1/search — related entities", () => {
+describe("GET /api/v1/search - related entities", () => {
   test("responds with grouped faculties, study programs, and subjects including parent data", async () => {
     const university = await prisma.university.create({
       data: {
@@ -283,7 +283,7 @@ describe("GET /api/v1/search — related entities", () => {
   });
 });
 
-describe("GET /api/v1/search — diacritic-insensitive matching", () => {
+describe("GET /api/v1/search - diacritic-insensitive matching", () => {
   test("matches accented data from ASCII terms and vice versa", async () => {
     const testUniversityName = "Test Diacritics Univerzitet Ćuprija";
     const existing = await prisma.university.findMany({
