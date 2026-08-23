@@ -30,9 +30,16 @@ const facultiesFilePath = path.resolve(
   "../../JSON_files/faculties.json",
 );
 
+const studyProgramsFilePath = path.resolve(
+  __dirname,
+  "../../JSON_files/studyPrograms.json",
+);
+
 const universitiesJsonData = fs.readFileSync(universitiesFilePath, "utf-8");
 
 const facultiesJsonData = fs.readFileSync(facultiesFilePath, "utf-8");
+
+const studyProgramsJsonData = fs.readFileSync(studyProgramsFilePath, "utf-8");
 
 const optionalTextSchema = z.string().trim().min(1).nullish();
 
@@ -64,10 +71,10 @@ const facultySeedSchema = z.strictObject({
   name: z.string().trim().min(1),
   city: optionalTextSchema,
   website: optionalTextSchema,
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalDateSchema,
 });
 
-// sourceUrl and lastChecked document data provenance only — the Faculty
-// table has no such columns, so they are validated but not persisted.
 const facultyGroupSeedSchema = z.strictObject({
   university: z.string().trim().min(1),
   sourceUrl: optionalTextSchema,
@@ -76,6 +83,30 @@ const facultyGroupSeedSchema = z.strictObject({
 });
 
 const facultiesSeedSchema = z.array(facultyGroupSeedSchema);
+
+const studyProgramSeedSchema = z.strictObject({
+  name: z.string().trim().min(1),
+  cycle: z.enum(["FIRST", "SECOND", "THIRD", "INTEGRATED"]),
+  durationYears: z.number().int().positive().nullish(),
+  ects: z.number().int().positive().nullish(),
+  language: optionalTextSchema,
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalDateSchema,
+});
+
+const studyProgramFacultySeedSchema = z.strictObject({
+  faculty: z.string().trim().min(1),
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalDateSchema,
+  studyPrograms: z.array(studyProgramSeedSchema).min(1),
+});
+
+const studyProgramGroupSeedSchema = z.strictObject({
+  university: z.string().trim().min(1),
+  faculties: z.array(studyProgramFacultySeedSchema).min(1),
+});
+
+const studyProgramsSeedSchema = z.array(studyProgramGroupSeedSchema);
 
 function toUniversityData(
   university: z.infer<typeof universitySeedSchema>,
@@ -155,8 +186,11 @@ async function main() {
         );
       }
 
-      return group.faculties.map((faculty) =>
-        prisma.faculty.upsert({
+      return group.faculties.map((faculty) => {
+        const sourceUrl = faculty.sourceUrl ?? group.sourceUrl ?? null;
+        const lastChecked = faculty.lastChecked ?? group.lastChecked ?? null;
+
+        return prisma.faculty.upsert({
           where: {
             name_universityId: { name: faculty.name, universityId },
           },
@@ -165,19 +199,133 @@ async function main() {
             universityId,
             city: faculty.city ?? null,
             website: faculty.website ?? null,
+            sourceUrl,
+            lastChecked,
           },
           update: {
             city: faculty.city ?? null,
             website: faculty.website ?? null,
+            sourceUrl,
+            lastChecked,
           },
-        }),
-      );
+        });
+      });
     });
 
     const upsertedFaculties = await Promise.all(facultyUpserts);
 
     // eslint-disable-next-line no-console
     console.log(`Upserted ${upsertedFaculties.length.toString()} faculties.`);
+
+    // eslint-disable-next-line no-console
+    console.log("Seeding study programs...");
+
+    const rawStudyPrograms = JSON.parse(studyProgramsJsonData) as unknown;
+
+    const studyProgramGroups = studyProgramsSeedSchema.parse(rawStudyPrograms);
+
+    const facultyIdByUniversityAndName = new Map(
+      upsertedFaculties.map((faculty) => [
+        `${faculty.universityId.toString()}:${faculty.name}`,
+        faculty.id,
+      ]),
+    );
+
+    const unknownStudyProgramUniversities = studyProgramGroups
+      .map((group) => group.university)
+      .filter((name) => !universityIdByName.has(name));
+
+    if (unknownStudyProgramUniversities.length > 0) {
+      throw new Error(
+        `Unknown universities in studyPrograms.json: ${unknownStudyProgramUniversities.join(", ")}`,
+      );
+    }
+
+    const unknownStudyProgramFaculties = studyProgramGroups.flatMap((group) => {
+      const universityId = universityIdByName.get(group.university);
+
+      if (universityId === undefined) {
+        return [];
+      }
+
+      return group.faculties
+        .map((facultyGroup) => facultyGroup.faculty)
+        .filter(
+          (facultyName) =>
+            !facultyIdByUniversityAndName.has(
+              `${universityId.toString()}:${facultyName}`,
+            ),
+        )
+        .map((facultyName) => `${facultyName} (${group.university})`);
+    });
+
+    if (unknownStudyProgramFaculties.length > 0) {
+      throw new Error(
+        `Unknown faculties in studyPrograms.json: ${unknownStudyProgramFaculties.join(", ")}`,
+      );
+    }
+
+    const studyProgramUpserts = studyProgramGroups.flatMap((group) => {
+      const universityId = universityIdByName.get(group.university);
+
+      if (universityId === undefined) {
+        throw new Error(
+          `Unknown university in studyPrograms.json: ${group.university}`,
+        );
+      }
+
+      return group.faculties.flatMap((facultyGroup) => {
+        const facultyId = facultyIdByUniversityAndName.get(
+          `${universityId.toString()}:${facultyGroup.faculty}`,
+        );
+
+        if (facultyId === undefined) {
+          throw new Error(
+            `Unknown faculty in studyPrograms.json: ${facultyGroup.faculty} (${group.university})`,
+          );
+        }
+
+        return facultyGroup.studyPrograms.map((program) => {
+          const sourceUrl = program.sourceUrl ?? facultyGroup.sourceUrl ?? null;
+          const lastChecked =
+            program.lastChecked ?? facultyGroup.lastChecked ?? null;
+
+          return prisma.studyProgram.upsert({
+            where: {
+              name_facultyId_cycle: {
+                name: program.name,
+                facultyId,
+                cycle: program.cycle,
+              },
+            },
+            create: {
+              name: program.name,
+              facultyId,
+              cycle: program.cycle,
+              durationYears: program.durationYears ?? null,
+              ects: program.ects ?? null,
+              language: program.language ?? null,
+              sourceUrl,
+              lastChecked,
+            },
+            update: {
+              durationYears: program.durationYears ?? null,
+              ects: program.ects ?? null,
+              language: program.language ?? null,
+              sourceUrl,
+              lastChecked,
+            },
+          });
+        });
+      });
+    });
+
+    const upsertedStudyPrograms = await Promise.all(studyProgramUpserts);
+
+    // eslint-disable-next-line no-console
+    console.log(
+      `Upserted ${upsertedStudyPrograms.length.toString()} study programs.`,
+    );
   } catch (error: unknown) {
     console.error("Error seeding database:", error);
     process.exitCode = 1;

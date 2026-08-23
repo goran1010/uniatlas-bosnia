@@ -40,6 +40,7 @@ const subjectSchema = z.object({
   ects: ectsSchema.nullish().transform((value) => value ?? undefined),
   type: subjectTypeSchema.nullish().transform((value) => value ?? undefined),
   sourceUrl: optionalTextSchema,
+  lastChecked: optionalTextSchema,
 });
 
 const studyProgramSchema = z.object({
@@ -53,6 +54,7 @@ const studyProgramSchema = z.object({
   ects: ectsSchema.nullish().transform((value) => value ?? undefined),
   language: optionalTextSchema,
   sourceUrl: optionalTextSchema,
+  lastChecked: optionalTextSchema,
   subjects: z.array(subjectSchema),
 });
 
@@ -62,6 +64,8 @@ const facultySchema = z.object({
   universityId: positiveIntegerSchema,
   city: optionalTextSchema,
   website: optionalTextSchema,
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalTextSchema,
   studyPrograms: z.array(studyProgramSchema),
 });
 
