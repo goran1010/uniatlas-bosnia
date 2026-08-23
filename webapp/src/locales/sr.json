@@ -223,14 +223,14 @@
       "ownership": "Vlasništvo"
     },
     "cycles": {
-      "FIRST": "PRVI — Bachelor",
-      "SECOND": "DRUGI — Master",
-      "THIRD": "TREĆI — PhD",
-      "INTEGRATED": "INTEGRISANI — Bachelor+Master"
+      "PRVI": "PRVI — Bachelor",
+      "DRUGI": "DRUGI — Master",
+      "TRECI": "TREĆI — PhD",
+      "INTEGRISANI": "INTEGRISANI — Bachelor+Master"
     },
     "subjectTypes": {
-      "MANDATORY": "Obavezni",
-      "ELECTIVE": "Izborni"
+      "OBAVEZNI": "Obavezni",
+      "IZBORNI": "Izborni"
     },
     "entities": {
       "FBIH": "FBIH — Federacija BiH",
@@ -368,10 +368,10 @@
     "subjects": "Predmeti",
     "cycle": "Ciklus",
     "cycles": {
-      "FIRST": "Prvi (Bachelor)",
-      "SECOND": "Drugi (Master)",
-      "THIRD": "Treći (PhD)",
-      "INTEGRATED": "Integrisani (Bachelor + Master)"
+      "PRVI": "Prvi (Bachelor)",
+      "DRUGI": "Drugi (Master)",
+      "TRECI": "Treći (PhD)",
+      "INTEGRISANI": "Integrisani (Bachelor + Master)"
     },
     "ects": "ECTS",
     "durationYears": "godine",
@@ -380,8 +380,8 @@
     "semester": "Semestar",
     "subjectType": "Tip",
     "subjectTypes": {
-      "MANDATORY": "Obavezni",
-      "ELECTIVE": "Izborni"
+      "OBAVEZNI": "Obavezni",
+      "IZBORNI": "Izborni"
     },
     "website": "Web stranica",
     "foundedYear": "Osnovan",

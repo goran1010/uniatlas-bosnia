@@ -143,11 +143,11 @@ describe("GET /api/v1/universities/:id", () => {
             studyPrograms: {
               create: {
                 name: "Test Integration Study Program By ID",
-                cycle: "FIRST",
+                cycle: "PRVI",
                 subjects: {
                   create: {
                     name: "Test Integration Subject By ID",
-                    type: "MANDATORY",
+                    type: "OBAVEZNI",
                   },
                 },
               },
@@ -220,11 +220,11 @@ describe("GET /api/v1/search — related entities", () => {
             studyPrograms: {
               create: {
                 name: "Test Integration Unified Search Program",
-                cycle: "FIRST",
+                cycle: "PRVI",
                 subjects: {
                   create: {
                     name: "Test Integration Unified Search Subject",
-                    type: "MANDATORY",
+                    type: "OBAVEZNI",
                   },
                 },
               },
@@ -257,7 +257,7 @@ describe("GET /api/v1/search — related entities", () => {
     const program = studyPrograms.find(
       (sp) => sp["name"] === "Test Integration Unified Search Program",
     );
-    expect(program?.["cycle"]).toBe("FIRST");
+    expect(program?.["cycle"]).toBe("PRVI");
     const programFaculty = getResponseObject(program?.["faculty"]);
     const programUniversity = getResponseObject(programFaculty["university"]);
     expect(programUniversity["id"]).toBe(university.id);
@@ -312,11 +312,11 @@ describe("GET /api/v1/search — diacritic-insensitive matching", () => {
             studyPrograms: {
               create: {
                 name: "Test Diacritics Program",
-                cycle: "FIRST",
+                cycle: "PRVI",
                 subjects: {
                   create: {
                     name: "Test Diacritics Racunari",
-                    type: "MANDATORY",
+                    type: "OBAVEZNI",
                   },
                 },
               },

@@ -69,15 +69,15 @@ enum ownership {
 }
 
 enum studyCycle {
-  FIRST
-  SECOND
-  THIRD
-  INTEGRATED
+  PRVI
+  DRUGI
+  TRECI
+  INTEGRISANI
 }
 
 enum subjectType {
-  MANDATORY
-  ELECTIVE
+  OBAVEZNI
+  IZBORNI
 }
 
 model University {

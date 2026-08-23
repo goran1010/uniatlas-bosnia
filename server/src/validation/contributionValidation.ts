@@ -109,8 +109,8 @@ const studyProgramCreateDataSchema = z.strictObject({
     error: "Name is required",
   }),
 
-  cycle: z.enum(["FIRST", "SECOND", "THIRD", "INTEGRATED"], {
-    error: "Invalid study cycle - must be FIRST, SECOND, THIRD, or INTEGRATED",
+  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
+    error: "Invalid study cycle - must be PRVI, DRUGI, TRECI, or INTEGRISANI",
   }),
 
   durationYears: durationYearsSchema.optional(),
@@ -130,8 +130,8 @@ const subjectCreateDataSchema = z.strictObject({
   ects: ectsSchema.optional(),
 
   type: z
-    .enum(["MANDATORY", "ELECTIVE"], {
-      error: "Invalid subject type - must be MANDATORY or ELECTIVE",
+    .enum(["OBAVEZNI", "IZBORNI"], {
+      error: "Invalid subject type - must be OBAVEZNI or IZBORNI",
     })
     .optional(),
 });
@@ -233,7 +233,7 @@ const studyProgramEditDataSchema = z
       .optional(),
 
     cycle: z
-      .enum(["FIRST", "SECOND", "THIRD", "INTEGRATED"], {
+      .enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
         error: "Invalid study cycle",
       })
       .optional(),
@@ -263,8 +263,8 @@ const subjectEditDataSchema = z
     ects: ectsSchema.nullable().optional(),
 
     type: z
-      .enum(["MANDATORY", "ELECTIVE"], {
-        error: "Invalid subject type - must be MANDATORY or ELECTIVE",
+      .enum(["OBAVEZNI", "IZBORNI"], {
+        error: "Invalid subject type - must be OBAVEZNI or IZBORNI",
       })
       .nullable()
       .optional(),

@@ -133,7 +133,7 @@ describe("UniversityCard", () => {
                   id: 21,
                   name: "Computer Science",
                   facultyId: 11,
-                  cycle: "FIRST",
+                  cycle: "PRVI",
                   ects: 180,
                   subjects: [
                     {
@@ -142,7 +142,7 @@ describe("UniversityCard", () => {
                       studyProgramId: 21,
                       semester: 3,
                       ects: 6,
-                      type: "MANDATORY",
+                      type: "OBAVEZNI",
                     },
                   ],
                 },
@@ -260,7 +260,7 @@ describe("UniversityCard", () => {
                     id: 21,
                     name: "Computer Science",
                     facultyId: 11,
-                    cycle: "FIRST",
+                    cycle: "PRVI",
                     subjects: [
                       {
                         id: 31,

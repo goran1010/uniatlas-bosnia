@@ -223,14 +223,14 @@
       "ownership": "Ownership"
     },
     "cycles": {
-      "FIRST": "FIRST — Bachelor",
-      "SECOND": "SECOND — Master",
-      "THIRD": "THIRD — PhD",
-      "INTEGRATED": "INTEGRATED — Bachelor+Master"
+      "PRVI": "FIRST — Bachelor",
+      "DRUGI": "SECOND — Master",
+      "TRECI": "THIRD — PhD",
+      "INTEGRISANI": "INTEGRATED — Bachelor+Master"
     },
     "subjectTypes": {
-      "MANDATORY": "Mandatory",
-      "ELECTIVE": "Elective"
+      "OBAVEZNI": "Mandatory",
+      "IZBORNI": "Elective"
     },
     "entities": {
       "FBIH": "FBIH — Federation of B&H",
@@ -368,10 +368,10 @@
     "subjects": "Subjects",
     "cycle": "Cycle",
     "cycles": {
-      "FIRST": "First (Bachelor)",
-      "SECOND": "Second (Master)",
-      "THIRD": "Third (PhD)",
-      "INTEGRATED": "Integrated (Bachelor + Master)"
+      "PRVI": "First (Bachelor)",
+      "DRUGI": "Second (Master)",
+      "TRECI": "Third (PhD)",
+      "INTEGRISANI": "Integrated (Bachelor + Master)"
     },
     "ects": "ECTS",
     "durationYears": "years",
@@ -380,8 +380,8 @@
     "semester": "Semester",
     "subjectType": "Type",
     "subjectTypes": {
-      "MANDATORY": "Mandatory",
-      "ELECTIVE": "Elective"
+      "OBAVEZNI": "Mandatory",
+      "IZBORNI": "Elective"
     },
     "website": "Website",
     "foundedYear": "Founded",

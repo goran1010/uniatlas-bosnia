@@ -44,7 +44,7 @@ const studyProgramResult = {
   id: 7,
   name: "Computer Science",
   facultyId: 3,
-  cycle: "FIRST",
+  cycle: "PRVI",
   ects: 180,
   faculty: {
     id: 3,
@@ -65,11 +65,11 @@ const subjectResult = {
   studyProgramId: 7,
   semester: 4,
   ects: 6,
-  type: "MANDATORY",
+  type: "OBAVEZNI",
   studyProgram: {
     id: 7,
     name: "Computer Science",
-    cycle: "FIRST",
+    cycle: "PRVI",
     faculty: {
       id: 3,
       name: "Faculty of Electrical Engineering",
