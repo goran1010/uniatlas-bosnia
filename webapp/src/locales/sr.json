@@ -13,8 +13,8 @@
   },
   "meta": {
     "home": "Istražite univerzitete, fakultete, studijske programe i predmete u Bosni i Hercegovini kroz besplatan javni skup podataka, pretraživo web sučelje i REST API.",
-    "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
-    "api": "REST API dokumentacija za UniAtlas Bosnia. Pristupite podacima o univerzitetima i akademskim programima programski.",
+    "universities": "Istražite univerzitete i studijske programe u Bosni i Hercegovini.",
+    "api": "REST API dokumentacija za UniAtlas Bosnia. Pristupite podacima o univerzitetima i studijskim programima programski.",
     "login": "Prijavite se na vaš UniAtlas Bosnia nalog kako biste doprinijeli podacima i pratili vaše prijave.",
     "signup": "Napravite besplatan UniAtlas Bosnia nalog i počnite doprinositi podacima o univerzitetima."
   },
