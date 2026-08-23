@@ -72,7 +72,7 @@ describe("Loading components when visiting an address", () => {
     renderRoute("/about");
 
     const heading = await screen.findByRole("heading", {
-      name: /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      name: /Universities and Study Programs in Bosnia and Herzegovina/i,
       level: 1,
     });
     expect(heading).not.toBeNull();

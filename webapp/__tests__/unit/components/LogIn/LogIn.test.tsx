@@ -280,7 +280,7 @@ describe("LogIn Form Submit", () => {
     await submitLogInForm({ email: "new@user.com", password: "Password123" });
 
     const homePageText = await screen.findByText(
-      /Universities and Academic Programs in Bosnia and Herzegovina/i,
+      /Universities and Study Programs in Bosnia and Herzegovina/i,
     );
     expect(homePageText).toBeInTheDocument();
   });
@@ -305,7 +305,7 @@ describe("LogIn Form Submit", () => {
       await screen.findByText(/^An error occurred while logging in\.$/i),
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(/Universities and Academic Programs/i),
+      screen.queryByText(/Universities and Study Programs/i),
     ).not.toBeInTheDocument();
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
