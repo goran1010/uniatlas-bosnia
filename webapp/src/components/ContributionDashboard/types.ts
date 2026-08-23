@@ -2,7 +2,7 @@ import type { PendingChange } from "../../schemas/pendingChange";
 
 export type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
 export type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
-export type Cycle = "FIRST" | "SECOND" | "THIRD";
+export type Cycle = "FIRST" | "SECOND" | "THIRD" | "INTEGRATED";
 export type SubjectType = "MANDATORY" | "ELECTIVE";
 export type Entity = "FBIH" | "RS" | "BD";
 

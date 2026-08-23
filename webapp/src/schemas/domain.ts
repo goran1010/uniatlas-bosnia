@@ -8,7 +8,7 @@ const entityTypeSchema = z.enum([
 ]);
 const entitySchema = z.enum(["FBIH", "RS", "BD"]);
 const ownershipSchema = z.enum(["JAVNA", "PRIVATNA"]);
-const studyCycleSchema = z.enum(["FIRST", "SECOND", "THIRD"]);
+const studyCycleSchema = z.enum(["FIRST", "SECOND", "THIRD", "INTEGRATED"]);
 const subjectTypeSchema = z.enum(["MANDATORY", "ELECTIVE"]);
 const userRoleSchema = z.enum(["ADMIN", "USER"]);
 

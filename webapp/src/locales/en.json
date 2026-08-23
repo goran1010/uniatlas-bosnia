@@ -225,7 +225,8 @@
     "cycles": {
       "FIRST": "FIRST — Bachelor",
       "SECOND": "SECOND — Master",
-      "THIRD": "THIRD — PhD"
+      "THIRD": "THIRD — PhD",
+      "INTEGRATED": "INTEGRATED — Bachelor+Master"
     },
     "subjectTypes": {
       "MANDATORY": "Mandatory",
@@ -369,7 +370,8 @@
     "cycles": {
       "FIRST": "First (Bachelor)",
       "SECOND": "Second (Master)",
-      "THIRD": "Third (PhD)"
+      "THIRD": "Third (PhD)",
+      "INTEGRATED": "Integrated (Bachelor + Master)"
     },
     "ects": "ECTS",
     "durationYears": "years",

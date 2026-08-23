@@ -225,7 +225,8 @@
     "cycles": {
       "FIRST": "PRVI — Bachelor",
       "SECOND": "DRUGI — Master",
-      "THIRD": "TREĆI — PhD"
+      "THIRD": "TREĆI — PhD",
+      "INTEGRATED": "INTEGRISANI — Bachelor+Master"
     },
     "subjectTypes": {
       "MANDATORY": "Obavezni",
@@ -369,7 +370,8 @@
     "cycles": {
       "FIRST": "Prvi (Bachelor)",
       "SECOND": "Drugi (Master)",
-      "THIRD": "Treći (PhD)"
+      "THIRD": "Treći (PhD)",
+      "INTEGRATED": "Integrisani (Bachelor + Master)"
     },
     "ects": "ECTS",
     "durationYears": "godine",
