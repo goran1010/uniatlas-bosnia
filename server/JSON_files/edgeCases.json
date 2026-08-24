@@ -1,6 +1,6 @@
 {
   "description": "Data-collection edge cases for studyPrograms.json - decisions that deviate from a mechanical copy of the source, kept here for later review. status: resolved = decision accepted; needs-review = open question.",
-  "lastUpdated": "2026-08-23",
+  "lastUpdated": "2026-08-24",
   "cases": [
     {
       "university": "Univerzitet u Sarajevu",
@@ -163,8 +163,8 @@
       "program": "Bioinženjering i medicinska informatika",
       "cycle": "TRECI",
       "issue": "Joint doctoral program of two universities (UNIBL + Univerzitet u Istočnom Sarajevu) - no single-faculty owner",
-      "action": "Skipped - not seeded",
-      "status": "needs-review",
+      "action": "Skipped on the UNIBL side; the same joint program is seeded under UES Medicinski fakultet (as UES lists it)",
+      "status": "resolved",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
     },
     {
@@ -280,6 +280,287 @@
       "action": "durationYears set to 3",
       "status": "resolved",
       "source": "https://untz.ba/studiranje/trogodisnji-studij/"
+    },
+    {
+      "university": "Univerzitet u Zenici",
+      "issue": "unze.ba disabled ('resolving hacked web site') on 2026-08-23",
+      "action": "Data collected from per-faculty subdomains (mf/ff/ef/ipf/medf/ptf/prf/fipn.unze.ba)",
+      "status": "resolved"
+    },
+    {
+      "university": "Univerzitet u Zenici",
+      "faculty": "Mašinski fakultet",
+      "program": "Dizajn i tehnologije u drvopreradi; Inženjerska i poslovna informatika",
+      "cycle": "PRVI",
+      "issue": "Listed on the faculty homepage but not on its studijski-programi page",
+      "action": "Included without ECTS",
+      "status": "needs-review",
+      "source": "https://mf.unze.ba"
+    },
+    {
+      "university": "Univerzitet u Zenici",
+      "issue": "Cycles that exist but publish no program names: Ekonomski III, Medicinski II/III, Pravni II/III, FIPN II",
+      "action": "Skipped - nothing nameable to seed",
+      "status": "needs-review"
+    },
+    {
+      "university": "Univerzitet u Zenici",
+      "faculty": "Fakultet inženjerstva i prirodnih nauka",
+      "program": "Doktorski studij iz tehničkih nauka",
+      "cycle": "TRECI",
+      "issue": "Joint doctoral study (FIPN + Mašinski + Politehnički fakultet)",
+      "action": "Assigned to first-listed faculty (FIPN)",
+      "status": "needs-review",
+      "source": "https://www.fipn.unze.ba"
+    },
+    {
+      "university": "Univerzitet Džemal Bijedić",
+      "program": "Dizajn interijera; Poslovna informatika; Turizam; Zdravstvena njega (PRVI); Politehnika (TRECI)",
+      "issue": "'Univerzitetski studiji' (university-level programs) - no faculty owner in faculties.json",
+      "action": "HELD OUT of the seed pending user decision (same situation as UNSA CIS)",
+      "status": "needs-review",
+      "source": "https://www.unmo.ba/univerzitet/studijski-programi/",
+      "heldOutPrograms": [
+        {
+          "name": "Dizajn interijera",
+          "cycle": "PRVI",
+          "durationYears": 4,
+          "ects": 240,
+          "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+        },
+        {
+          "name": "Politehnika",
+          "cycle": "TRECI",
+          "durationYears": 3,
+          "ects": 180,
+          "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+        },
+        {
+          "name": "Poslovna informatika",
+          "cycle": "PRVI",
+          "durationYears": 3,
+          "ects": 180,
+          "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+        },
+        {
+          "name": "Turizam",
+          "cycle": "PRVI",
+          "durationYears": 3,
+          "ects": 180,
+          "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+        },
+        {
+          "name": "Zdravstvena njega",
+          "cycle": "PRVI",
+          "durationYears": 4,
+          "ects": 240,
+          "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+        }
+      ]
+    },
+    {
+      "university": "Univerzitet Džemal Bijedić",
+      "faculty": "Ekonomski fakultet",
+      "program": "Akademski dodiplomski studij; Stručni dodiplomski studij",
+      "cycle": "PRVI",
+      "issue": "Source publishes no proper program names; stručni is listed by the source as I ciklus (kept PRVI, unlike UNSA where 'Stručni studij' was a separate cycle label)",
+      "action": "Kept literal names",
+      "status": "needs-review",
+      "source": "https://www.unmo.ba/univerzitet/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet Džemal Bijedić",
+      "faculty": "Ekonomski fakultet",
+      "program": "Zajednički master studij sa Ekonomskim fakultetom Univerziteta u Sarajevu",
+      "cycle": "DRUGI",
+      "issue": "Source shows 60 and 120 ECTS variants",
+      "action": "ects left null",
+      "status": "resolved",
+      "source": "https://www.unmo.ba/univerzitet/studijski-programi/"
+    },
+    {
+      "university": "Sveučilište u Mostaru",
+      "issue": "Croatian-language sources; program names kept in Croatian (source language)",
+      "action": "By design per user rule",
+      "status": "resolved"
+    },
+    {
+      "university": "Sveučilište u Mostaru",
+      "faculty": "Filozofski fakultet / Fakultet prirodoslovno-matematičkih i odgojnih znanosti",
+      "issue": "Sites list studiji without preddiplomski/diplomski split (both levels exist per enrollment pages)",
+      "action": "Recorded as PRVI only; DRUGI counterparts likely exist but are unnamed per-level",
+      "status": "needs-review"
+    },
+    {
+      "university": "Sveučilište u Mostaru",
+      "issue": "Skipped: unnamed diplomski/doktorski categories (EF, FZS, FARF, PF, APTF, FSRE III); specijalistički studiji (not in cycle enum: Pravo osiguranja, 2 FF studies); EF stručni studij 180 ECTS (separate level per source); distance/campus variants (Novinarstvo/Odnosi s javnošću na daljinu, Socijalni rad SCP Orašje, FPMOZ Orašje x3); ALU 'Ars Sacra' and 2 FPMOZ poslijediplomski with unstated level",
+      "action": "Skipped + recorded",
+      "status": "needs-review"
+    },
+    {
+      "university": "Univerzitet u Istočnom Sarajevu",
+      "issue": "II/III cycle degree titles state cumulative ECTS (300/480/540)",
+      "action": "ects set only for PRVI (from titles); II/III left null",
+      "status": "resolved",
+      "source": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/"
+    },
+    {
+      "university": "Univerzitet u Istočnom Sarajevu",
+      "issue": "Cells combine program + usmjerenja ('Mašinstvo - Proizvodno mašinstvo - ...'); usmjerenja stripped. 'Poslovne ekonomije' normalized to 'Poslovna ekonomija'. Location suffixes in faculty names stripped (Pale/Foča/Zvornik/Bijeljina/Trebinje/Doboj) except the two distinct Ekonomski (Pale, Brčko)",
+      "action": "Names normalized",
+      "status": "resolved"
+    },
+    {
+      "university": "Univerzitet u Istočnom Sarajevu",
+      "faculty": "Muzička akademija",
+      "program": "Vokalno-instrumentalni nastava na ruskom jeziku",
+      "cycle": "PRVI",
+      "issue": "Russian-taught variant; no Russian program name published",
+      "action": "Kept full Serbian descriptor as name, language 'ruski'",
+      "status": "resolved"
+    },
+    {
+      "university": "Univerzitet u Istočnom Sarajevu",
+      "faculty": "Pedagoški fakultet",
+      "program": "Predškolsko vaspitanje i obrazovanje",
+      "cycle": "DRUGI",
+      "issue": "Listed as dvogodišnji and jednogodišnji variants",
+      "action": "Merged into one row, ects null",
+      "status": "resolved"
+    },
+    {
+      "university": "Univerzitet u Bihaću",
+      "faculty": "Tehnički fakultet",
+      "program": "Mašinski odsjek; Građevinski odsjek; Elektrotehnički odsjek; Tekstilni odsjek; Master studij TF 4+1",
+      "issue": "Konkurs publishes odsjek names / generic master name, not proper program names",
+      "action": "Kept literal konkurs names",
+      "status": "needs-review",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "university": "Univerzitet u Bihaću",
+      "issue": "Interdisciplinary programs 'Šumarstvo i drvna industrija' and 'Biologija i hemija' are university-level",
+      "action": "Assigned to host faculties per konkurs submission addresses (Tehnički / Pedagoški fakultet)",
+      "status": "resolved",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "university": "Univerzitet u Bihaću",
+      "faculty": "Tehnički fakultet",
+      "program": "Elektrotehnika i računarstvo",
+      "cycle": "TRECI",
+      "issue": "Konkurs table says 'Elektronika i računarstvo' but its body text says 'Elektrotehnika i računarstvo' twice",
+      "action": "Used the body-text name",
+      "status": "resolved",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "university": "Univerzitet u Bihaću",
+      "issue": "Biotehnički fakultet II cycle listed only as 'Studijski program II ciklusa' (unnamed); EF program names shortened from 'Akademski/Stručni studijski program poslovne ekonomije'",
+      "action": "Unnamed skipped; EF names shortened; stručni kept PRVI (listed in I-cycle table)",
+      "status": "needs-review",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Centar za interdisciplinarne studije",
+      "issue": "University-level organizational unit (not a faculty). Was briefly added to faculties.json + seeded on 2026-08-23, then pulled back out per user decision 2026-08-24 - to be decided later together with UNMO 'Univerzitetski studiji'",
+      "action": "HELD OUT of faculties.json and the seed; full program list preserved here",
+      "status": "needs-review",
+      "source": "http://registar.unsa.ba/",
+      "heldOutFaculty": {
+        "name": "Centar za interdisciplinarne studije",
+        "city": "Sarajevo",
+        "website": "https://cis.unsa.ba"
+      },
+      "heldOutPrograms": [
+        {
+          "name": "European Regional Master’s Programme in Democracy and Human Rights in South East Europe",
+          "cycle": "DRUGI",
+          "durationYears": 1,
+          "ects": 60,
+          "language": "engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/erma-2/"
+        },
+        {
+          "name": "Master Program International and Regional Security",
+          "cycle": "DRUGI",
+          "durationYears": 1,
+          "ects": 60,
+          "language": "engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/medunarodna-i-regionalna-sigurnost/"
+        },
+        {
+          "name": "Master Program Natural Disasters Risk Management in Western Balkan Countries",
+          "cycle": "DRUGI",
+          "durationYears": 1,
+          "ects": 60,
+          "language": "engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/zastita-od-prirodnih-katastrofa/"
+        },
+        {
+          "name": "Master studij Evropske studije",
+          "cycle": "DRUGI",
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/evropske-studije/"
+        },
+        {
+          "name": "Master studij Jedinstveno zdravlje",
+          "cycle": "DRUGI",
+          "durationYears": 1,
+          "ects": 60,
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/jedinstveno-zdravlje/"
+        },
+        {
+          "name": "Master studij Nutricionizam",
+          "cycle": "DRUGI",
+          "durationYears": 2,
+          "ects": 120,
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/nutrition/"
+        },
+        {
+          "name": "Master studij Rodne studije",
+          "cycle": "DRUGI",
+          "durationYears": 2,
+          "ects": 120,
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/rodne-studije/"
+        },
+        {
+          "name": "Master studij Upravljanje državom i nevladinim organizacijama",
+          "cycle": "DRUGI",
+          "durationYears": 2,
+          "ects": 120,
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/upravljanje-drzavom-i-nevladinim-organizacijama/"
+        },
+        {
+          "name": "Međunarodna i regionalna sigurnost",
+          "cycle": "DRUGI",
+          "durationYears": 1,
+          "ects": 60,
+          "language": "Bosanski, hrvatski, srpski",
+          "sourceUrl": "https://cis.unsa.ba/bhs/medunarodna-i-regionalna-sigurnost/"
+        },
+        {
+          "name": "Doctoral Program in Gender Studies",
+          "cycle": "TRECI",
+          "durationYears": 3,
+          "ects": 180,
+          "language": "Bosanski, hrvatski, srpski i engleski",
+          "sourceUrl": "http://cis.unsa.ba/bs/programi/doktorski/doktorski-studij-rodne-studije/"
+        },
+        {
+          "name": "Globalne studije",
+          "cycle": "TRECI",
+          "durationYears": 3,
+          "ects": 180,
+          "language": "Bosanski, hrvatski, srpski",
+          "sourceUrl": "https://cis.unsa.ba/bhs/programi/doktorski/doktorski-studij-globalne-studije/"
+        }
+      ]
     }
   ]
 }

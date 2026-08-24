@@ -239,99 +239,6 @@
         ]
       },
       {
-        "faculty": "Centar za interdisciplinarne studije",
-        "sourceUrl": "http://registar.unsa.ba/",
-        "lastChecked": "2026-08-23",
-        "studyPrograms": [
-          {
-            "name": "European Regional Master’s Programme in Democracy and Human Rights in South East Europe",
-            "cycle": "DRUGI",
-            "durationYears": 1,
-            "ects": 60,
-            "language": "engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/erma-2/"
-          },
-          {
-            "name": "Master Program International and Regional Security",
-            "cycle": "DRUGI",
-            "durationYears": 1,
-            "ects": 60,
-            "language": "engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/medunarodna-i-regionalna-sigurnost/"
-          },
-          {
-            "name": "Master Program Natural Disasters Risk Management in Western Balkan Countries",
-            "cycle": "DRUGI",
-            "durationYears": 1,
-            "ects": 60,
-            "language": "engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/zastita-od-prirodnih-katastrofa/"
-          },
-          {
-            "name": "Master studij Evropske studije",
-            "cycle": "DRUGI",
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/evropske-studije/"
-          },
-          {
-            "name": "Master studij Jedinstveno zdravlje",
-            "cycle": "DRUGI",
-            "durationYears": 1,
-            "ects": 60,
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/jedinstveno-zdravlje/"
-          },
-          {
-            "name": "Master studij Nutricionizam",
-            "cycle": "DRUGI",
-            "durationYears": 2,
-            "ects": 120,
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/nutrition/"
-          },
-          {
-            "name": "Master studij Rodne studije",
-            "cycle": "DRUGI",
-            "durationYears": 2,
-            "ects": 120,
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/rodne-studije/"
-          },
-          {
-            "name": "Master studij Upravljanje državom i nevladinim organizacijama",
-            "cycle": "DRUGI",
-            "durationYears": 2,
-            "ects": 120,
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/programi/magistarski/upravljanje-drzavom-i-nevladinim-organizacijama/"
-          },
-          {
-            "name": "Međunarodna i regionalna sigurnost",
-            "cycle": "DRUGI",
-            "durationYears": 1,
-            "ects": 60,
-            "language": "Bosanski, hrvatski, srpski",
-            "sourceUrl": "https://cis.unsa.ba/bhs/medunarodna-i-regionalna-sigurnost/"
-          },
-          {
-            "name": "Doctoral Program in Gender Studies",
-            "cycle": "TRECI",
-            "durationYears": 3,
-            "ects": 180,
-            "language": "Bosanski, hrvatski, srpski i engleski",
-            "sourceUrl": "http://cis.unsa.ba/bs/programi/doktorski/doktorski-studij-rodne-studije/"
-          },
-          {
-            "name": "Globalne studije",
-            "cycle": "TRECI",
-            "durationYears": 3,
-            "ects": 180,
-            "language": "Bosanski, hrvatski, srpski",
-            "sourceUrl": "https://cis.unsa.ba/bhs/programi/doktorski/doktorski-studij-globalne-studije/"
-          }
-        ]
-      },
-      {
         "faculty": "Ekonomski fakultet",
         "sourceUrl": "http://registar.unsa.ba/",
         "lastChecked": "2026-08-23",
@@ -6599,6 +6506,2449 @@
             "name": "Studijski program trećeg ciklusa - doktorskog studija",
             "cycle": "TRECI",
             "sourceUrl": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Zenici",
+    "faculties": [
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Lokalni ekonomski razvoj i politika",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://ef.unze.ba/drugi-ciklus/"
+          },
+          {
+            "name": "Menadžment preduzeća",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://ef.unze.ba/drugi-ciklus/"
+          },
+          {
+            "name": "Poslovne i javne finansije",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://ef.unze.ba/drugi-ciklus/"
+          },
+          {
+            "name": "Računovodstveni i revizijski menadžment",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://ef.unze.ba/drugi-ciklus/"
+          },
+          {
+            "name": "Finansije i računovodstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://ef.unze.ba/prvi-ciklus/"
+          },
+          {
+            "name": "Menadžment",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://ef.unze.ba/prvi-ciklus/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet inženjerstva i prirodnih nauka",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Elektrotehnika i informacione tehnologije",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Hemijsko inženjerstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Inženjerstvo materijala",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Inženjerstvo zaštite na radu i zaštite od požara",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Inženjerstvo zaštite okoliša",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Metalurško inženjerstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          },
+          {
+            "name": "Doktorski studij iz tehničkih nauka",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.fipn.unze.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Filozofski fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Bosanski, hrvatski, srpski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Kulturalni studij",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Turski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Bosanski, hrvatski, srpski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Kultura i turizam",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Kulturalni studij",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Tjelesni odgoj i sport",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Turski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Doktorski studij Kultura i identitet",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ff.unze.ba"
+          },
+          {
+            "name": "Doktorski studij iz lingvistike",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ff.unze.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Islamski pedagoški fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Arapski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Islamska vjeronauka",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Predškolski odgoj i obrazovanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Socijalna pedagogija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Arapski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Inkluzivna edukacija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Islamska vjeronauka",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Predškolski odgoj i obrazovanje",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Socijalna pedagogija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Islamska vjeronauka",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Predškolski odgoj i obrazovanje",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ipf.unze.ba"
+          },
+          {
+            "name": "Socijalna pedagogija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ipf.unze.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Mašinski fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Inženjerska ekologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Inženjerski dizajn proizvoda",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Menadžment proizvodnim tehnologijama",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Metrologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Održavanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Dizajn i tehnologije u drvopreradi",
+            "cycle": "PRVI",
+            "sourceUrl": "https://mf.unze.ba"
+          },
+          {
+            "name": "Inženjerska ekologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Inženjerska i poslovna informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://mf.unze.ba"
+          },
+          {
+            "name": "Inženjerski dizajn proizvoda",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Mašinstvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Menadžment proizvodnim tehnologijama",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          },
+          {
+            "name": "Održavanje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Medicinski fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Opća medicina",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://medf.unze.ba"
+          },
+          {
+            "name": "Zdravstvena njega",
+            "cycle": "PRVI",
+            "sourceUrl": "https://medf.unze.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Politehnički fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Softversko inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://ptf.unze.ba"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ptf.unze.ba"
+          },
+          {
+            "name": "Proizvodni biznis",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ptf.unze.ba"
+          },
+          {
+            "name": "Softversko inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://ptf.unze.ba/studijski-programi-si"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.unze.ba (site down 2026-08-23; per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://prf.unze.ba/i-ciklus-studija/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet Džemal Bijedić",
+    "faculties": [
+      {
+        "faculty": "Agromediteranski fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Povrtlarsko-cvjećarski",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Voćarsko-vinogradarski",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Ekologija i upravljanje okolišom u poljoprivredi",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Povrtlarsko-cvjećarski",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Voćarsko-vinogradarski",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Zajednički master studij sa Ekonomskim fakultetom Univerziteta u Sarajevu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Akademski dodiplomski studij",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Stručni dodiplomski studij",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet humanističkih nauka",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Bosanski jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Historija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Komunikologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Bosanski/Hrvatski/Srpski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Dvopredmetni studijski program Bosanski jezik i književnost i komunikologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Historija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Komunikologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Turski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet informacijskih tehnologija",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Informacijske tehnologije",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Građevinski fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Konstrukcije",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Upravljanje okolišnom infrastrukturom",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Geodezija i geoinformatika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Mašinski fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Dizajn proizvoda",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Kompjuterski inžinjering",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Obnovljivi izvori energije",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Dizajn proizvoda",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Energetika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Kompjuterski inžinjering",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Nastavnički fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Hemija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Konzervacijska biologija i ekologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Sport i zdravlje",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Stručni studij iz oblasti sporta (3+2)",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Hemija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Konzervacijska biologija i ekologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Psihologija i sociologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Sport i zdravlje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Stručni studij iz oblasti sporta",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Građansko pravo",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Krivično pravo",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          },
+          {
+            "name": "Pravo (opće)",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.unmo.ba/univerzitet/studijski-programi/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Sveučilište u Mostaru",
+    "faculties": [
+      {
+        "faculty": "Agronomski i prehrambeno-tehnološki fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Agroekonomika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Animalne znanosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Biljne znanosti",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Fitomedicina",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Nutricionizam",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Prehrambeno inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Vinogradarstvo i vinarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Agronomija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://aptf.sum.ba"
+          },
+          {
+            "name": "Prehrambena tehnologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://aptf.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Akademija likovnih umjetnosti",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Grafika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Grafički dizajn",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Kiparstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Režija i montaža",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Scenarij",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Slikarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Grafika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Kiparstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://alu.sum.ba"
+          },
+          {
+            "name": "Slikarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://alu.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://ef.sum.ba/hr/pe-240-ects"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet građevinarstva, arhitekture i geodezije",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Građevinarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fgag.sum.ba"
+          },
+          {
+            "name": "Arhitektura i urbanizam",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fgag.sum.ba"
+          },
+          {
+            "name": "Geodezija i geoinformatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fgag.sum.ba"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fgag.sum.ba"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://fgag.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet prirodoslovno-matematičkih i odgojnih znanosti",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Biologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Edukacijska rehabilitacija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Fizika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Glazba",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Kemija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Kineziologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Matematika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Predškolski odgoj",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://fpmoz.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet strojarstva, računarstva i elektrotehnike",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Elektrotehnika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          },
+          {
+            "name": "Računarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          },
+          {
+            "name": "Strojarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          },
+          {
+            "name": "Elektrotehnika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          },
+          {
+            "name": "Računarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          },
+          {
+            "name": "Strojarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fsre.sum.ba/upisi"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet zdravstvenih studija",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Fizioterapija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzs.sum.ba"
+          },
+          {
+            "name": "Primaljstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzs.sum.ba"
+          },
+          {
+            "name": "Radiološka tehnologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzs.sum.ba"
+          },
+          {
+            "name": "Sanitarno inženjerstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzs.sum.ba"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzs.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Farmaceutski fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Farmacija",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://farf.sum.ba"
+          },
+          {
+            "name": "Kozmetologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://farf.sum.ba"
+          },
+          {
+            "name": "Laboratorijska biomedicina",
+            "cycle": "PRVI",
+            "sourceUrl": "https://farf.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Filozofski fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Arheologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Hrvatski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Informacijske znanosti",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Latinski jezik i rimska književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Logopedija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Novinarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Odnosi s javnošću",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Povijest",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Povijest umjetnosti",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Sigurnosne i međunarodne studije",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Talijanski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://ff.sum.ba"
+          },
+          {
+            "name": "Interdisciplinarni doktorski studij",
+            "cycle": "TRECI",
+            "sourceUrl": "https://ff.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Medicinski fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Dentalna medicina",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://mef.sum.ba"
+          },
+          {
+            "name": "Medical Studies in English",
+            "cycle": "INTEGRISANI",
+            "language": "engleski",
+            "sourceUrl": "https://mef.sum.ba"
+          },
+          {
+            "name": "Medicina",
+            "cycle": "INTEGRISANI",
+            "sourceUrl": "https://mef.sum.ba"
+          },
+          {
+            "name": "Biomedicina i zdravstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://mef.sum.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.sum.ba (per-faculty sources)",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Kriminalistika i sigurnosni menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://pf.sum.ba"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://pf.sum.ba"
+          },
+          {
+            "name": "Kriminalistika i sigurnosni menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://pf.sum.ba"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://pf.sum.ba"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Istočnom Sarajevu",
+    "faculties": [
+      {
+        "faculty": "Akademija likovnih umjetnosti",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Likovna umjetnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Likovna umjetnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet Brčko",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Finansijski i bankarski menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Marketing i menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet Pale",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Ekonomski razvoj",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Finansije",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Kvantitativna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Makroekonomija, reforme i biznis",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Poslovno upravljanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Turizam i hotelijerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Turizam i hotelijerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Elektrotehnički fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Automatika i elektronika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Elektroenergetika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Obnovljivi izvori energije i pametne elekroenergetske mreže",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Računarska tehnika i informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Automatics and Electronics",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Automatika i elektronika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Computer Science and Informatics",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Electroenergetics",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Elektroenergetika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Računarstvo i informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet fizičkog vaspitanja i sporta",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Fizičko vaspitanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Physical education",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Sport",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Sports",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Fizičko vaspitanje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Sport",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Fizičko vaspitanje",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet poslovne ekonomije",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Digital economy",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Digitalna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Finance, banking and insurance",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Finansije, bankarstvo i osiguranje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "International economy",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Međunarodna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za proizvodnju i menadžment",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Industrijski menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Industrijsko inženjerstvo za energetiku",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Industrijski menadžment",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Industrijsko inženjerstvo za energetiku",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Inženjerstvo informacionih sistema i tehnologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Filozofski fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Istorija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Kineski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Matematika i fizika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Matematika i računarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Novinarstvo-komunikologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Opšta književnost i bibliotekarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Politička analitika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Ruski i srpski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Srpski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Istorija i arheologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Kineski i engleski jezik i književnosti",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Matematika, informatika i fizika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Novinarstvo i odnosi sa javnošću",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Opšta književnost i bibliotekarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Opšta književnost i teatrologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Politikologija i međunarodni odnosi",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Ruski jezik i književnost i međunarodni politički odnosi",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Sociologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Srpski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Filologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          },
+          {
+            "name": "Filozofija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          },
+          {
+            "name": "Istorija ratova, ratnih zločina i genocida u XX vijeku",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          },
+          {
+            "name": "Matematika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Mašinski fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Mašinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Mašinstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Medicinski fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Specijalna edukacija i rehabilitacija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Zdravstvena njega",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Dentistry",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Health care",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Medicina",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Medicine",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Specijalna edukacija i rehabilitacija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Stomatologija",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Zdravstvena njega",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Bioinžinjering i medicinska informatika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          },
+          {
+            "name": "Biomedicinska istraživanja",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Muzička akademija",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Muzičko-pedagoško teorijski",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Vokalno-instrumentalni",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Muzičko-pedagoško teorijski",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Vokalno-instrumentalni",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Vokalno-instrumentalni nastava na ruskom jeziku",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "ruski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pedagoški fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Informatika u obrazovanju",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Predškolsko vaspitanje i obrazovanje",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Predškolsko obrazovanje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Tehničko obrazovanje i informatika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Metodika razredne nastave",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Poljoprivredni fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Poljoprivreda",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Agromediteranska proizvodnja",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Upravljanje prehrambenim lancem",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravoslavni bogoslovski fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Međureligijski studiji i izgradnja mira",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Teologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Bogoslovsko-pastirski",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Pravoslavna teologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Teologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Saobraćajni fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Saobraćaj",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Saobraćaj",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Saobraćaj",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      },
+      {
+        "faculty": "Tehnološki fakultet",
+        "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Ekološki monitoring slatkih voda",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-2/"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Chemical engineering and technology",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
+          },
+          {
+            "name": "Hemijsko inženjerstvo i tehnologija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-3/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Bihaću",
+    "faculties": [
+      {
+        "faculty": "Biotehnički fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Inženjerstvo u zaštiti okoliša",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Nutricionizam",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Poljoprivreda - opći smjer",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Prehrambena tehnologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Finansije, računovodstvo i revizija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Menadžment i poduzetništvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Stručni studij poslovne ekonomije",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet zdravstvenih studija",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Sanitarno inženjerstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Fizikalna terapija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Sanitarno inženjerstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Islamski pedagoški fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Islamska vjeronauka",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Socijalna pedagogija i duhovna skrb",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Islamska vjeronauka",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Socijalna pedagogija i duhovna skrb",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Pedagoški fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Biologija i hemija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Bosanski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Likovna kultura",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Muzička kultura",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Predškolski odgoj",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Tjelesni odgoj i sport",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Studij prava",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Studij prava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Studij prava",
+            "cycle": "TRECI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          }
+        ]
+      },
+      {
+        "faculty": "Tehnički fakultet",
+        "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+        "lastChecked": "2026-08-23",
+        "studyPrograms": [
+          {
+            "name": "Master studij TF 4+1",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Elektrotehnički odsjek",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Građevinski odsjek",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Mašinski odsjek",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Tekstilni odsjek",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Šumarstvo i drvna industrija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Elektrotehnika i računarstvo",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+          },
+          {
+            "name": "Savremene proizvodne tehnologije",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
           }
         ]
       }
