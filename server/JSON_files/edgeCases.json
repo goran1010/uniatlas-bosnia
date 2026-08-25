@@ -855,6 +855,93 @@
       "action": "Only parent programs seeded",
       "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
+    },
+    {
+      "university": "Internacionalni univerzitet Travnik",
+      "issue": "Site behind a JS bot-check wall; data from the official program-overview PDF (user-provided link). Every faculty runs each program in TWO models (3+2+3: 180/120 ECTS and 4+1+3: 240/60) - the same smjer exists in both",
+      "action": "One row per smjer per cycle; ects null for I/II (model-dependent) except single-model cases; III uniformly 180 ECTS/3y; language 'Bosanski, hrvatski, srpski' per PDF",
+      "status": "resolved",
+      "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
+    },
+    {
+      "university": "Internacionalni univerzitet Travnik",
+      "faculty": "Fakultet politehničkih nauka",
+      "program": "Logistički menadžment",
+      "issue": "Same smjer name exists under two odsjeka (Logistika and Inžinjerski menadžment) - collides on the (name,faculty,cycle) unique key",
+      "action": "Merged into one row per cycle",
+      "status": "needs-review",
+      "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
+    },
+    {
+      "university": "Internacionalni univerzitet Travnik",
+      "faculty": "Pravni fakultet",
+      "program": "Državno i međunarodno javno pravo",
+      "issue": "PDF smjer row spells it 'međunaodno' (typo); degree title spells 'međunarodnog' correctly",
+      "action": "Corrected spelling used",
+      "status": "resolved",
+      "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
+    },
+    {
+      "university": "Internacionalni univerzitet Travnik",
+      "faculty": "Ekološki fakultet",
+      "program": "Biodivezitet",
+      "cycle": "TRECI",
+      "issue": "Source consistently spells 'Biodivezitet' (likely typo for Biodiverzitet)",
+      "action": "Source spelling kept",
+      "status": "needs-review",
+      "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
+    },
+    {
+      "university": "Sveučilište Hercegovina",
+      "issue": "Site lists programs by cycle only, without faculty attribution; no ECTS/durations published",
+      "action": "Law/IR programs attributed to Fakultet međunarodnih odnosa i diplomacije, all others to Fakultet društvenih znanosti dr. Milenka Brkića (subject-based inference); 'Pravo s međunarodnim odnosima' smjerovi (Pravo, Međunarodno pravo) folded into one program; site typos ('MENADŽMENT U OBRAZOVANJE', 'TURIZA') corrected",
+      "status": "needs-review",
+      "source": "https://hercegovina.edu.ba/hr/studijski-programi/"
+    },
+    {
+      "university": "Sveučilište Hercegovina",
+      "issue": "Two short study programs (30 ECTS certificates) announced",
+      "action": "Skipped - not degree programs",
+      "status": "resolved",
+      "source": "https://hercegovina.edu.ba"
+    },
+    {
+      "university": "Evropski univerzitet Kallos Tuzla",
+      "issue": "Homepage lists I-cycle offers per faculty, some smjer-style ('Opći smjer' at Ekonomski, 'Konstrukcije' at Tehnički); II cycle exists at 6 faculties and III at 7, but names are published only for Medicinski III (Biomedicina i zdravstvo)",
+      "action": "I-cycle names kept as listed; unnamed II/III skipped; no ECTS published",
+      "status": "needs-review",
+      "source": "https://eukallos.edu.ba"
+    },
+    {
+      "university": "Panevropski univerzitet Apeiron Banja Luka",
+      "issue": "Master (II) study plans at FIT, Fakultet pravnih nauka and Saobraćajni fakultet are faculty-level without program names; doctoral (III) studies exist at FPE, FIT and Fakultet filoloških nauka but publish no program names; no ECTS anywhere",
+      "action": "Named II programs seeded (8); unnamed II/III skipped",
+      "status": "needs-review",
+      "source": "https://apeiron-uni.eu"
+    },
+    {
+      "university": "Slobomir P Univerzitet",
+      "issue": "2026/27 konkurs is issued by 'Slobomir P Univerzitet BANJA LUKA' (address Braće Podgornika 8, Banja Luka) while universities.json says city 'Slobomir, Bijeljina' - university appears to have moved",
+      "action": "universities.json left unchanged; needs a decision",
+      "status": "needs-review",
+      "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
+    },
+    {
+      "university": "Slobomir P Univerzitet",
+      "faculty": "Filološki fakultet; Poreska akademija",
+      "issue": "Listed in site navigation but absent from the 2026/27 enrollment konkurs - no programs found",
+      "action": "No programs seeded for these two faculties",
+      "status": "needs-review",
+      "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
+    },
+    {
+      "university": "Slobomir P Univerzitet",
+      "faculty": "Fakultet za bezbjednost i zaštitu",
+      "program": "Bezbjednost i kriminalistika; Civilna zaštita",
+      "issue": "Konkurs lists dual ECTS variants (PRVI '180 i 240', DRUGI '120 i 60')",
+      "action": "ects left null",
+      "status": "resolved",
+      "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
     }
   ]
 }
