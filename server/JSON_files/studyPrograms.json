@@ -9446,6 +9446,8 @@
           {
             "name": "Digital Communications and Public Relations",
             "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
             "language": "engleski",
             "sourceUrl": "https://www.ibu.edu.ba/admission/digital-communications-and-public-relations"
           },
@@ -10327,6 +10329,1374 @@
             "name": "Opće pravo",
             "cycle": "TRECI",
             "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet za poslovne studije Banja Luka",
+    "faculties": [
+      {
+        "faculty": "Fakultet za poslovne i finansijske studije",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poslovne i finansijske studije",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180
+          },
+          {
+            "name": "Finansije, bankarstvo i osiguranje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240
+          },
+          {
+            "name": "Finansijski, bankarski i berzanski menadžment",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          },
+          {
+            "name": "Ekonomija i finansije",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za primijenjenu ekonomiju",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Menadžment i marketing",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180
+          },
+          {
+            "name": "Menadžment i marketing malih i srednjih preduzeća",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240
+          },
+          {
+            "name": "Menadžment i marketing malih i srednjih preduzeća",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za ekologiju",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Ekologija",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Ekologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za turizam i hotelijerstvo",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Turizam i hotelijerstvo",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Turizam",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          },
+          {
+            "name": "Hotelijerstvo",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za informacione tehnologije i dizajn",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Računarske i informacione tehnologije",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Informacione tehnologije",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          },
+          {
+            "name": "Grafički dizajn",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Dizajn",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za novinarstvo i komunikologiju",
+        "sourceUrl": "https://univerzitetps.com/studijski-programi/",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Novinarstvo i komunikologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet pravnih nauka",
+        "sourceUrl": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Pravne nauke",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240
+          },
+          {
+            "name": "Pravo Evropske unije",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180
+          },
+          {
+            "name": "Pravne nauke",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet Bijeljina",
+    "faculties": [
+      {
+        "faculty": "Farmaceutski fakultet",
+        "sourceUrl": "https://www.ubn.rs.ba/katalog-studijskih-programa",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Farmacija",
+            "cycle": "INTEGRISANI",
+            "durationYears": 5,
+            "ects": 300,
+            "language": "srpski"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za psihologiju",
+        "sourceUrl": "https://www.ubn.rs.ba/katalog-studijskih-programa",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "srpski"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet zdravstvenih studija",
+        "sourceUrl": "https://www.ubn.rs.ba/katalog-studijskih-programa",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "srpski"
+          }
+        ]
+      },
+      {
+        "faculty": "Poljoprivredni fakultet",
+        "sourceUrl": "https://www.ubn.rs.ba/katalog-studijskih-programa",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poljoprivredna proizvodnja",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "srpski"
+          },
+          {
+            "name": "Agroekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "srpski"
+          },
+          {
+            "name": "Agroekologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://pf.ubn.rs.ba/osnovne-akademske-studije/"
+          },
+          {
+            "name": "Agroekologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://pf.ubn.rs.ba/studije-ii-ciklusa/"
+          },
+          {
+            "name": "Održiva poljoprivreda i ruralni razvoj",
+            "cycle": "TRECI",
+            "sourceUrl": "https://pf.ubn.rs.ba/studije-iii-ciklusa/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Evropski univerzitet, Brčko distrikt BiH",
+    "faculties": [
+      {
+        "faculty": "Ekonomski fakultet",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Opšti smjer",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Opsti-smjer.pdf"
+          },
+          {
+            "name": "Menadžment i preduzetništvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Menadzment-i-preduzetnistvo.pdf"
+          },
+          {
+            "name": "Turizam i ekologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Turizam-i-ekologija.pdf"
+          },
+          {
+            "name": "Računovodstvo i revizija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Racunovodstvo-i-revizija.pdf"
+          },
+          {
+            "name": "Ekonomija - opšti smjer",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Ekonomija - opšti smjer",
+            "cycle": "TRECI"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Opšte pravo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Opste-pravo.pdf"
+          },
+          {
+            "name": "Bezbjednost",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Bezbjednost.pdf"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Forenzika.pdf"
+          },
+          {
+            "name": "Opšte pravo",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Opšte pravo",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "TRECI"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet političkih nauka",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Politologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Politologija.pdf"
+          },
+          {
+            "name": "Međunarodni odnosi i diplomatija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Medjunarodni-odnosi-i-diplomatija.pdf"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Socijalni-rad.pdf"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "TRECI"
+          }
+        ]
+      },
+      {
+        "faculty": "Pedagoški fakultet",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Informatika i tehnika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Informatika-i-tehnika.pdf"
+          },
+          {
+            "name": "Vaspitač predškolskih ustanova",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Vaspitac-predskolskih-ustanova.pdf"
+          },
+          {
+            "name": "Razredna nastava - opšti smjer",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Razredna-nastava.pdf"
+          },
+          {
+            "name": "Razredna nastava sa engleskim jezikom za osnovne škole",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Razredna-nastava-sa-engleskim-jezikom.pdf"
+          },
+          {
+            "name": "Razredna nastava sa defektologijom",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Razredna-nastava-sa-defektologijom.pdf"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Psihologija.pdf"
+          },
+          {
+            "name": "Historija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Istorija.pdf"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Geografija.pdf"
+          },
+          {
+            "name": "Matematika i fizika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Matematika-i-fizika.pdf"
+          },
+          {
+            "name": "Informatika i tehnika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Razredna nastava - pedagogija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Historija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Matematika i fizika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Informatika i tehnika",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Razredna nastava - pedagogija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Historija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Matematika i fizika",
+            "cycle": "TRECI"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za medicinu, farmaciju i zdravstvo",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Sestrinstvo.pdf"
+          },
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Fizioterapija-i-radna-terapija.pdf"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Sanitarni-inzenjering.pdf"
+          },
+          {
+            "name": "Farmacija",
+            "cycle": "PRVI",
+            "durationYears": 5,
+            "ects": 300,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Farmacija.pdf"
+          },
+          {
+            "name": "Medicina",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Fakultet-za-medicinu-farmaciju-i-zdravstvo-Medicina.pdf"
+          },
+          {
+            "name": "Stomatologija",
+            "cycle": "PRVI",
+            "durationYears": 6,
+            "ects": 360,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Stomatologija.pdf"
+          },
+          {
+            "name": "Radiologija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Radiologija.pdf"
+          },
+          {
+            "name": "Menadžment u sportu",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Menadzment-u-sportu.pdf"
+          },
+          {
+            "name": "Sportski trener",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Sportski-trener.pdf"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Radiologija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Menadžment u sportu",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Sportski trener",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Farmacija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Biomedicina i zdravstvo",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Stomatologija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Radiologija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Menadžment u sportu",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Sportski trener",
+            "cycle": "TRECI"
+          }
+        ]
+      },
+      {
+        "faculty": "Tehnički fakultet",
+        "sourceUrl": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Arhitektura",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Arhitektura.pdf"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Gradjevinarstvo.pdf"
+          },
+          {
+            "name": "Geodezija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Geodezija.pdf"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Poljoprivreda.pdf"
+          },
+          {
+            "name": "Inženjerska informatika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Inzenjerska-informatika.pdf"
+          },
+          {
+            "name": "IT menadžment",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-IT-menadzment.pdf"
+          },
+          {
+            "name": "Dizajn i multimedija",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Multimedija-i-dizajn.pdf"
+          },
+          {
+            "name": "Automatika i robotika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Automatika-i-robotika.pdf"
+          },
+          {
+            "name": "Elektroenergetika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Elektroenergetika.pdf"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Mehatronika.pdf"
+          },
+          {
+            "name": "Industrijsko inženjerstvo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Industrijsko-inzenjerstvo.pdf"
+          },
+          {
+            "name": "Drumski saobraćaj",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Drumski-saobracaj.pdf"
+          },
+          {
+            "name": "Bezbjednost u saobraćaju",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Bezbjednost-u-saobracaju.pdf"
+          },
+          {
+            "name": "Arhitektura",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Geodezija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Inženjerska informatika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "IT menadžment",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Dizajn i multimedija",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Automatika i robotika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Elektroenergetika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Industrijsko inženjerstvo",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Saobraćaj",
+            "cycle": "DRUGI"
+          },
+          {
+            "name": "Arhitektura",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Građevinarstvo",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Geodezija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Inženjerska informatika",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "IT menadžment",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Dizajn i multimedija",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Automatika i robotika",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Elektroenergetika",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Mehatronika",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Industrijsko inženjerstvo",
+            "cycle": "TRECI"
+          },
+          {
+            "name": "Saobraćaj",
+            "cycle": "TRECI"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+    "faculties": [
+      {
+        "faculty": "Fakultet za menadžment",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poslovni menadžment",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment"
+          },
+          {
+            "name": "Poslovni menadžment",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment"
+          },
+          {
+            "name": "Poslovni menadžment",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment"
+          },
+          {
+            "name": "Menadžment",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/ekonomija"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/ekonomija"
+          },
+          {
+            "name": "Ekonomija",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/ekonomija"
+          },
+          {
+            "name": "Poljoprivreda",
+            "cycle": "PRVI",
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/poljoprivreda"
+          },
+          {
+            "name": "Šumarstvo",
+            "cycle": "PRVI"
+          },
+          {
+            "name": "Građevinarstvo i arhitektura",
+            "cycle": "PRVI",
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/gradevinarstvo-i-arhitektura"
+          },
+          {
+            "name": "Turizam i zaštita",
+            "cycle": "PRVI",
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/turizam-i-zastita"
+          },
+          {
+            "name": "Obnovljivi izvori energije",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/obnovljivi-izvori-energije"
+          },
+          {
+            "name": "Obnovljivi izvori energije",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/obnovljivi-izvori-energije"
+          },
+          {
+            "name": "Obnovljivi izvori energije",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/obnovljivi-izvori-energije"
+          },
+          {
+            "name": "Zaštita životne sredine",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/zastita-zivotne-sredine"
+          },
+          {
+            "name": "Zaštita životne sredine",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/zastita-zivotne-sredine"
+          },
+          {
+            "name": "Zaštita životne sredine",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/zastita-zivotne-sredine"
+          },
+          {
+            "name": "Menadžment energije i energetske efikasnosti",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment-energije-i-energetske-efikasnosti"
+          },
+          {
+            "name": "Menadžment energije i energetske efikasnosti",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment-energije-i-energetske-efikasnosti"
+          },
+          {
+            "name": "Menadžment energije i energetske efikasnosti",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment-energije-i-energetske-efikasnosti"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za informatiku",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poslovna informatika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/poslovna-informatika"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/poslovna-informatika"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/poslovna-informatika"
+          },
+          {
+            "name": "Profesor informatike i računarstva",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-informatike-i-racunarstva"
+          },
+          {
+            "name": "Profesor informatike i računarstva",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-informatike-i-racunarstva"
+          },
+          {
+            "name": "Profesor informatike i računarstva",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-informatike-i-racunarstva"
+          },
+          {
+            "name": "Profesor matematike i informatike",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-matematike-i-informatike"
+          },
+          {
+            "name": "Profesor matematike i informatike",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-matematike-i-informatike"
+          },
+          {
+            "name": "Profesor matematike i informatike",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/profesor-matematike-i-informatike"
+          },
+          {
+            "name": "Informatika i tehničko obrazovanje",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/informatike-i-tehnicko-obrazovanje"
+          },
+          {
+            "name": "Informatika i tehničko obrazovanje",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/informatike-i-tehnicko-obrazovanje"
+          },
+          {
+            "name": "Informatika i tehničko obrazovanje",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/informatike-i-tehnicko-obrazovanje"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za poslovne komunikacije",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poslovne komunikacije",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/poslovne-komunikacije"
+          },
+          {
+            "name": "Poslovne komunikacije",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/poslovne-komunikacije"
+          },
+          {
+            "name": "Poslovne komunikacije",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/poslovne-komunikacije"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/engleski-jezik-i-knjizevnost"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/engleski-jezik-i-knjizevnost"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/engleski-jezik-i-knjizevnost"
+          },
+          {
+            "name": "Bosanski, hrvatski, srpski jezik i književnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/bhs-jezik"
+          },
+          {
+            "name": "Bosanski, hrvatski, srpski jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/bhs-jezik"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za poslovno-civilnu bezbjednost",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Poslovno-civilna bezbjednost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/poslovno-civilnu-bezbjednost"
+          },
+          {
+            "name": "Poslovno-civilna bezbjednost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/poslovno-civilnu-bezbjednost"
+          },
+          {
+            "name": "Poslovno-civilna bezbjednost",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/poslovno-civilnu-bezbjednost"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/foreznika"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/foreznika"
+          },
+          {
+            "name": "Forenzika",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovno-civilnu-bezbjednostt/foreznika"
+          },
+          {
+            "name": "Zdravstvena njega i zdravstvena bezbjednost",
+            "cycle": "PRVI"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za saobraćajno inženjerstvo",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Drumski saobraćaj",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-saobracajno-inzenjerstvoo/drumski-saobracaj"
+          },
+          {
+            "name": "Drumski saobraćaj",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-saobracajno-inzenjerstvoo/drumski-saobracaj"
+          },
+          {
+            "name": "Drumski saobraćaj",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-saobracajno-inzenjerstvoo/drumski-saobracaj"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Opšte pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/opste-pravo"
+          },
+          {
+            "name": "Opšte pravo",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/opste-pravo"
+          },
+          {
+            "name": "Opšte pravo",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/opste-pravo"
+          },
+          {
+            "name": "Međunarodno pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/medunarodno-pravo"
+          },
+          {
+            "name": "Međunarodno pravo",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/medunarodno-pravo"
+          },
+          {
+            "name": "Međunarodno pravo",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/medunarodno-pravo"
+          },
+          {
+            "name": "Unutrašnji poslovi-kriminalistika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/unutrasnji-poslovi-kriminalistika"
+          },
+          {
+            "name": "Unutrašnji poslovi-kriminalistika",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/unutrasnji-poslovi-kriminalistika"
+          },
+          {
+            "name": "Unutrašnji poslovi-kriminalistika",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/pravni-fakultett/unutrasnji-poslovi-kriminalistika"
+          }
+        ]
+      },
+      {
+        "faculty": "Učiteljski fakultet",
+        "sourceUrl": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs",
+        "lastChecked": "2026-08-25",
+        "studyPrograms": [
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/razredna-nastava"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/razredna-nastava"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/razredna-nastava"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/psihologija"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/psihologija"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/psihologija"
+          },
+          {
+            "name": "Pedagogija i psihologija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija-i-psihologija"
+          },
+          {
+            "name": "Pedagogija i psihologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija-i-psihologija"
+          },
+          {
+            "name": "Pedagogija i psihologija",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/pedagogija-i-psihologija"
+          },
+          {
+            "name": "Predškolsko vaspitanje i obrazovanje",
+            "cycle": "PRVI",
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/predskolsko-vaspitanje-i-obrazovanje"
           }
         ]
       }

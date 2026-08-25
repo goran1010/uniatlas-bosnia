@@ -1,6 +1,6 @@
 {
   "description": "Data-collection edge cases for studyPrograms.json - decisions that deviate from a mechanical copy of the source, kept here for later review. status: resolved = decision accepted; needs-review = open question.",
-  "lastUpdated": "2026-08-24",
+  "lastUpdated": "2026-08-25",
   "cases": [
     {
       "university": "Univerzitet u Sarajevu",
@@ -582,7 +582,7 @@
     {
       "university": "Internacionalni Burč univerzitet",
       "issue": "Site is fully client-rendered (Next.js) - program list assembled from the official navigation menu (user-provided screenshots 2026-08-24) + sitemap level slugs (-master/-msc/-phd)",
-      "action": "No ECTS/durations published in reachable sources; left null; language engleski (all programmes in English)",
+      "action": "No ECTS/durations published in reachable sources; left null; language engleski (all programmes in English). Update 2026-08-24: DCPR BSc confirmed 4y/240 ECTS from the official IBU curriculum folder (user-provided Google Drive: drive.google.com/drive/folders/1nWyuqAQY7s_O_3cA0ggB-lXtzQsHfmr6, 'FIRST CYCLE STUDY PROGRAM SPECIFICATION' PDF)",
       "status": "resolved",
       "source": "https://www.ibu.edu.ba"
     },
@@ -671,6 +671,190 @@
       "action": "Both kept as listed",
       "status": "needs-review",
       "source": "https://sveuciliste.unvi.edu.ba/"
+    },
+    {
+      "university": "Univerzitet za poslovne studije Banja Luka",
+      "issue": "Four PRVI programs are licensed in BOTH 180-ECTS (3y) and 240-ECTS (4y) variants under the same name (Ekologija, Turizam i hotelijerstvo, Računarske i informacione tehnologije, Grafički dizajn) - schema unique key (name, facultyId, cycle) cannot hold both rows",
+      "action": "Single row per program with durationYears/ects null, following the UNBI dual-model precedent",
+      "status": "needs-review",
+      "source": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf"
+    },
+    {
+      "university": "Univerzitet za poslovne studije Banja Luka",
+      "faculty": "Fakultet za novinarstvo i komunikologiju",
+      "program": "Novinarstvo i komunikologija",
+      "issue": "Faculty absent from the 2026/27 konkurs (not enrolling); program present only on the licensed-programs page",
+      "action": "Seeded from the licensed-programs list (180 ECTS -> 3y)",
+      "status": "resolved",
+      "source": "https://univerzitetps.com/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet za poslovne studije Banja Luka",
+      "issue": "Two licensed DRUGI programs ('Bankarsko i berzansko poslovanje' 60 ECTS, 'Preduzetništvo i menadžment malih i srednjih preduzeća' 60 ECTS) appear only on the university-wide licensed list with no faculty owner and are absent from the 2026/27 konkurs",
+      "action": "HELD OUT - not seeded (UNMO 'Univerzitetski studiji' precedent); thematic owners would be FPFS and FPE respectively but that would be guessing",
+      "status": "needs-review",
+      "source": "https://univerzitetps.com/studijski-programi/"
+    },
+    {
+      "university": "Univerzitet za poslovne studije Banja Luka",
+      "faculty": "Fakultet pravnih nauka",
+      "program": "Pravo Evropske unije",
+      "issue": "Licensed-programs page abbreviates the name as 'Pravo EU'; konkurs uses the full name",
+      "action": "Konkurs full name used",
+      "status": "resolved",
+      "source": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf"
+    },
+    {
+      "university": "Univerzitet za poslovne studije Banja Luka",
+      "issue": "Sub-tracks not seeded as programs: TRECI 'Ekonomija i finansije' studijske grupe (Računovodstvo i finansije; Makroekonomija i razvoj; Menadžment i poslovna ekonomija); PRVI 'Turizam i hotelijerstvo' studijske grupe (Turizam, Hotelijerstvo, Restoraterstvo i Gastronomija); DRUGI 'Hotelijerstvo' smjerovi (Hotelijerstvo, Restoraterstvo i Gastronomija)",
+      "action": "Only the parent programs seeded - smjerovi/grupe are not separate studijski programi",
+      "status": "resolved",
+      "source": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf"
+    },
+    {
+      "university": "Univerzitet Bijeljina",
+      "issue": "University catalog headings use long study-type names ('Integrisane akademske studije farmacije', 'Osnovne akademske studije psihologije') while the site's own STUDIJSKI PROGRAMI list uses plain names (Farmacija, Psihologija)",
+      "action": "Plain program names seeded; study type captured by the cycle field",
+      "status": "resolved",
+      "source": "https://www.ubn.rs.ba/katalog-studijskih-programa"
+    },
+    {
+      "university": "Univerzitet Bijeljina",
+      "faculty": "Poljoprivredni fakultet",
+      "issue": "Three programs appear only on the faculty site, not in the university catalog: Agroekologija (I ciklus), 'Agroekologija master' (II ciklus), Održiva poljoprivreda i ruralni razvoj (III ciklus); no ECTS/duration published",
+      "action": "Seeded with null ECTS/duration; 'Agroekologija master' seeded as name 'Agroekologija' cycle DRUGI ('master' read as level qualifier)",
+      "status": "needs-review",
+      "source": "https://pf.ubn.rs.ba/studije-ii-ciklusa/"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "issue": "2026/27 konkurs lists programs per faculty and cycle but publishes no ECTS/durations; NPP (nastavni plan i program) PDFs on the site state duration and total ECTS for I ciklus programs only",
+      "action": "I ciklus ECTS/durations taken from per-program NPP PDFs; II and III ciklus left null (not published)",
+      "status": "resolved",
+      "source": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za medicinu, farmaciju i zdravstvo",
+      "issue": "Medicina (6y/360 ECTS), Stomatologija (6y/360) and Farmacija (5y/300) are integrated-length programs but the konkurs lists them under I ciklus",
+      "action": "Kept PRVI per source listing (UNIBL rule 9 precedent)",
+      "status": "needs-review",
+      "source": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "faculty": "Pedagoški fakultet",
+      "program": "Historija",
+      "issue": "Konkurs names the program 'Historija' while its NPP PDF is titled 'Istorija'",
+      "action": "Konkurs name seeded",
+      "status": "resolved",
+      "source": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Istorija.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "faculty": "Tehnički fakultet",
+      "program": "Dizajn i multimedija",
+      "issue": "Konkurs names the program 'Dizajn i multimedija' while its NPP PDF is titled 'Multimedija i dizajn'",
+      "action": "Konkurs name seeded",
+      "status": "resolved",
+      "source": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Multimedija-i-dizajn.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "faculty": "Ekonomski fakultet",
+      "issue": "I ciklus program is officially named just 'Opšti smjer' (NPP: Studijski program 'Opšti smjer', zvanje Diplomirani ekonomista) while II/III ciklus are named 'Ekonomija - opšti smjer'",
+      "action": "Seeded as published per cycle",
+      "status": "needs-review",
+      "source": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Opsti-smjer.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "faculty": "Pedagoški fakultet",
+      "issue": "Name normalization: konkurs 'Razredna nastava – opšti smjer' (NPP: 'Razredna nastava-opšti smjer') and II/III 'Razredna nastava – pedagogija/Pedagogija' (inconsistent capitalization)",
+      "action": "Seeded as 'Razredna nastava - opšti smjer' and 'Razredna nastava - pedagogija' (en dashes -> hyphens, lowercase track name)",
+      "status": "resolved",
+      "source": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf"
+    },
+    {
+      "university": "Evropski univerzitet, Brčko distrikt BiH",
+      "issue": "Site carries NPP PDFs and menu entries for programs absent from the 2026/27 konkurs (e.g. Žurnalistika i komunikologija, Javna uprava, Menadžment javne uprave, Hidrotehnika, Mobilne komunikacije, Riječni saobraćaj, Putevi željeznice i aerodromi, Računarstvo i informatika, Računarske mreže i sistemi, Biomedicinsko inženjerstvo, Konstrukcije, Marketing i trgovina, Menadžment informacionih sistema, Menadžment turizma i sporta, Menadžment u saobraćaju, Razredna nastava - likovna kultura)",
+      "action": "Not seeded - konkurs 2026/27 treated as the authoritative current offering",
+      "status": "needs-review",
+      "source": "https://eubd.edu.ba/"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "issue": "Latest published konkurs is for 2025/26 (drugi upisni rok) - no 2026/27 konkurs found on the site; program pages carry per-cycle details (I: 4y/240, II: 1y/60, III: 3y/180 with program-specific degrees)",
+      "action": "Programs seeded from the union of konkurs and site program pages; cycles seeded only where the program page explicitly documents them ('Po završetku...' statements)",
+      "status": "resolved",
+      "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "issue": "Konkurs blanket statement 'MAGISTARSKE I DOKTORSKE STUDIJE PRATE OSNOVNE AKADEMSKE STUDIJE NA SVIM FAKULTETIMA I STUDIJSKIM PROGRAMIMA' implies II/III cycles for every program, but several programs lack per-cycle statements on their pages",
+      "action": "II/III NOT seeded for programs without explicit page statements (Menadžment, Poljoprivreda, Šumarstvo, Građevinarstvo i arhitektura, Turizam i zaštita, Zdravstvena njega i zdravstvena bezbjednost, Predškolsko vaspitanje i obrazovanje; BHS jezik i književnost has I and II only)",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za menadžment",
+      "issue": "Konkurs lists both MENADŽMENT and POSLOVNI MENADŽMENT; the site has a single program page titled 'Poslovni menadžment'. Konkurs-only programs Menadžment and Šumarstvo have no program pages and no ECTS/durations. Site-menu-only programs (Obnovljivi izvori energije, Menadžment energije i energetske efikasnosti) are absent from the konkurs",
+      "action": "All seeded as published; konkurs-only ones with null ECTS/duration",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za menadžment",
+      "program": "Menadžment energije i energetske efikasnosti",
+      "issue": "Program page's I-ciklus statement mistakenly names the program 'Obnovljivi izvori energije' (site copy-paste error); II/III statements use the correct name",
+      "action": "Seeded under the page title with the template values (I: 4y/240)",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment-energije-i-energetske-efikasnosti"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za informatiku",
+      "program": "Informatika i tehničko obrazovanje",
+      "issue": "Konkurs names this 'PROFESOR INFORMATIKE I TEHNIKE' while the site page is 'Informatika i tehničko obrazovanje' (page's II-cycle degree: magistar informatike i tehnike); 'Profesor informatike i računarstva' exists on the site but not in the konkurs",
+      "action": "Site page names seeded; konkurs variant not seeded as a separate program",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/informatike-i-tehnicko-obrazovanje"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za poslovne komunikacije",
+      "program": "Bosanski, hrvatski, srpski jezik i književnost",
+      "issue": "Name varies across sources: menu 'BHS jezik', page body 'Bosanski,hrvatski, srpski jezik i književnost', konkurs 'BOSANSKI, SRPSKI, HRVATSKI JEZIK I KNJIŽEVNOST'; page documents I and II cycles only",
+      "action": "Page-body name with normalized spacing seeded; no III cycle",
+      "status": "resolved",
+      "source": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-poslovne-komunikacijee/bhs-jezik"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Fakultet za poslovno-civilnu bezbjednost",
+      "program": "Zdravstvena njega i zdravstvena bezbjednost",
+      "issue": "Konkurs: 'moduli 180 i 240 ECTS' (dual duration under one name; smjerovi visoka medicinska sestra, visoki radiološki tehničar, fizioterapeut); program page is a stub with no cycle details; menu name is shorter ('Zdravstvena njega i bezbjednost')",
+      "action": "Single PRVI row with null ECTS/duration (dual-model precedent); konkurs name used",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "faculty": "Učiteljski fakultet",
+      "program": "Predškolsko vaspitanje i obrazovanje",
+      "issue": "Program page states BOTH a three-year 180 ECTS completion and a four-year 240 ECTS I ciklus completion (dual duration); konkurs calls it 'Predškolski odgoj'",
+      "action": "Single PRVI row with null ECTS/duration; site page name seeded",
+      "status": "needs-review",
+      "source": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/predskolsko-vaspitanje-i-obrazovanje"
+    },
+    {
+      "university": "Internacionalni univerzitet, Brčko distrikt BiH",
+      "issue": "Smjerovi listed in konkurs parentheses not seeded as programs: Ekonomija (računovodstvo i revizija), Poljoprivreda (opšta agronomija, zaštita bilja), Građevinarstvo i arhitektura (opšte građevinarstvo, arhitektura i urbanizam, geodezija), Turizam i zaštita (turizam, zaštita na radu, zaštita od požara)",
+      "action": "Only parent programs seeded",
+      "status": "resolved",
+      "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     }
   ]
 }
