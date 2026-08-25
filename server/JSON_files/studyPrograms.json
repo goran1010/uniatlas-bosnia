@@ -8953,5 +8953,1383 @@
         ]
       }
     ]
+  },
+  {
+    "university": "Internacionalni univerzitet u Sarajevu",
+    "faculties": [
+      {
+        "faculty": "Edukacijski fakultet",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Computer Education and Instructional Technology",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature, Teaching",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Turkish Language and Literature, Teaching",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Computer Education and Instructional Technology",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature, Teaching",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Turkish Language and Literature, Teaching",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature, Teaching",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet medicinskih nauka",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Dental Medicine",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Medicine",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet menadžmenta i javne uprave",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Economics",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "International Business and Finance",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Management",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Political Science and International Relations",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Economics",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Hospitality and Tourism Management",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "International Business and Finance",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "International Relations and Diplomacy",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Management",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Political Science and International Relations",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Economics",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Management",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Political Science and International Relations",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet prirodnih i tehničkih nauka",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Architecture",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Computer Sciences and Engineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Industrial Engineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Mechanical Engineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Software Engineering",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Architecture",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Artificial Intelligence and Data Engineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Computer Sciences and Engineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Mechanical Engineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Software Engineering",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Computer Sciences and Engineering",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Industrial Engineering",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Mechanical Engineering",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet umjetnosti i društvenih nauka",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Cultural Studies",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Psychology",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Visual Arts and Visual Communications Design",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Media and Communication",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Psychology",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Visual Arts and Visual Communications Design",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Cultural Studies",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "English Language and Literature",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Psychology",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://ius.edu.ba",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Law",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          },
+          {
+            "name": "Law",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "engleski",
+            "sourceUrl": "https://ius.edu.ba"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Internacionalni Burč univerzitet",
+    "faculties": [
+      {
+        "faculty": "Fakultet za edukaciju i humanističke nauke",
+        "sourceUrl": "https://www.ibu.edu.ba (menu + sitemap; site is client-rendered)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Graphic Design and Multimedia",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-graphic-design-and-multimedia-master"
+          },
+          {
+            "name": "Digital Communications and Public Relations",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/admission/digital-communications-and-public-relations"
+          },
+          {
+            "name": "English Language and Literature",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-english-language-and-literature-bsc"
+          },
+          {
+            "name": "Film and Video Production",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-film-and-video-production"
+          },
+          {
+            "name": "Graphic Design and Multimedia",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-graphic-design-and-multimedia"
+          },
+          {
+            "name": "Educational Communication",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/admission/international-doctoral-program-educational-communication"
+          },
+          {
+            "name": "English Language and Literature",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-english-language-and-literature-phd"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za ekonomiju i društvene nauke",
+        "sourceUrl": "https://www.ibu.edu.ba (menu + sitemap; site is client-rendered)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "International Relations and European Studies",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-international-relations-and-european-studies-master"
+          },
+          {
+            "name": "Management",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-management-master"
+          },
+          {
+            "name": "Economics and Finance",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/admission/banking-and-finance"
+          },
+          {
+            "name": "International Relations and European Studies",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-international-relations-and-european-studies"
+          },
+          {
+            "name": "Management",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-management"
+          },
+          {
+            "name": "International Relations and European Studies",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-international-relations-and-european-studies-phd"
+          },
+          {
+            "name": "Management",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-management-phd"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za inžinjering, prirodne i medicinske nauke",
+        "sourceUrl": "https://www.ibu.edu.ba (menu + sitemap; site is client-rendered)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Architecture",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-architecture-master"
+          },
+          {
+            "name": "Civil Engineering",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-civil-engineering-msc"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-electrical-and-electronics-engineering-master"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-genetics-and-bioengineering-master"
+          },
+          {
+            "name": "Information Technology",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-information-technologies-master"
+          },
+          {
+            "name": "Dentistry",
+            "cycle": "INTEGRISANI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-dentistry"
+          },
+          {
+            "name": "Architecture",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-architecture"
+          },
+          {
+            "name": "Civil Engineering",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-civil-engineering"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-electrical-and-electronics-engineering"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-genetics-and-bioengineering"
+          },
+          {
+            "name": "Information Technology",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-information-technologies"
+          },
+          {
+            "name": "Architecture",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-architecture-phd"
+          },
+          {
+            "name": "Civil Engineering",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-civil-engineering-phd"
+          },
+          {
+            "name": "Electrical and Electronics Engineering",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-electrical-and-electronics-engineering-phd"
+          },
+          {
+            "name": "Genetics and Bioengineering",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-genetics-and-bioengineering-phd"
+          },
+          {
+            "name": "Information Technology",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://www.ibu.edu.ba/department-of-information-technologies-phd"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet Sarajevo School of Science and Technology",
+    "faculties": [
+      {
+        "faculty": "Computer Science",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Computer Science",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/computer-science/2"
+          }
+        ]
+      },
+      {
+        "faculty": "Dentistry",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Dentistry",
+            "cycle": "INTEGRISANI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/dentistry/8"
+          }
+        ]
+      },
+      {
+        "faculty": "Economics and Business",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "MBA",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/economics-and-business/5"
+          },
+          {
+            "name": "Economics and Business",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/economics-and-business/5"
+          }
+        ]
+      },
+      {
+        "faculty": "Foreign Languages",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "English and Applied Studies",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/foreign-languages/11"
+          },
+          {
+            "name": "German Language and Literature",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/foreign-languages/11"
+          }
+        ]
+      },
+      {
+        "faculty": "Game Design and Development",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Game Design and Development",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/game-design-and-development/1"
+          }
+        ]
+      },
+      {
+        "faculty": "Health Studies",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Health Sciences",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/health-studies/7"
+          },
+          {
+            "name": "Health Sciences",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/health-studies/7"
+          }
+        ]
+      },
+      {
+        "faculty": "Pharmaco-Economics",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Health Economics and Pharmacoeconomics",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/pharmaco-economics/10"
+          }
+        ]
+      },
+      {
+        "faculty": "Pharmacy",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Pharmacy",
+            "cycle": "INTEGRISANI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/pharmacy/9"
+          }
+        ]
+      },
+      {
+        "faculty": "Political Science and International Relations",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Political Science and International Relations",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/political-science-and-international-relations/4"
+          },
+          {
+            "name": "Political Science and International Relations",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/political-science-and-international-relations/4"
+          }
+        ]
+      },
+      {
+        "faculty": "Sarajevo Film Academy",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Film Directing",
+            "cycle": "DRUGI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/sarajevo-film-academy/12"
+          },
+          {
+            "name": "Film Directing",
+            "cycle": "PRVI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/sarajevo-film-academy/12"
+          }
+        ]
+      },
+      {
+        "faculty": "Sarajevo Medical School",
+        "sourceUrl": "https://ssst.edu.ba/en",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Medicine",
+            "cycle": "INTEGRISANI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/sarajevo-medical-school/6"
+          },
+          {
+            "name": "Biomedicine",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/pharmaco-economics/10"
+          },
+          {
+            "name": "Clinical Medicine",
+            "cycle": "TRECI",
+            "language": "engleski",
+            "sourceUrl": "https://ssst.edu.ba/en/department/pharmaco-economics/10"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Univerzitet u Travniku",
+    "faculties": [
+      {
+        "faculty": "Edukacijski fakultet",
+        "sourceUrl": "https://www.unt.ba (per-faculty sites)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "B/H/S jezik i književnost",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Edukacijski menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Komunikologija/novinarstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Matematika i informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Opća kineziologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Pedagogija i psihologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Personalni trener",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Predškolski odgoj",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Razredna nastava",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Specijalne namjene",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Sportski menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          },
+          {
+            "name": "Sportski trener",
+            "cycle": "PRVI",
+            "sourceUrl": "https://www.eft.ba/web/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za menadžment i poslovnu ekonomiju",
+        "sourceUrl": "https://www.unt.ba (per-faculty sites)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Finansijski menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fmpe.edu.ba/master-studij/"
+          },
+          {
+            "name": "Opći menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fmpe.edu.ba/master-studij/"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fmpe.edu.ba/master-studij/"
+          },
+          {
+            "name": "Poslovna psihologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fmpe.edu.ba/master-studij/"
+          },
+          {
+            "name": "Zdravstveni menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fmpe.edu.ba/master-studij/"
+          },
+          {
+            "name": "Bezbjednosni menadžment",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Menadžment u bankarstvu i osiguranju",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Menadžment u turizmu i ugostiteljstvu",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Opći menadžment",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          },
+          {
+            "name": "Poslovna psihologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fmpe.edu.ba/dodiplomski-studij/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet za tehničke studije",
+        "sourceUrl": "https://www.unt.ba (per-faculty sites)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Arhitektura",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          },
+          {
+            "name": "Grafički dizajn i multimedija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          },
+          {
+            "name": "Građevina",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          },
+          {
+            "name": "Inženjerska informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          },
+          {
+            "name": "Sigurnost i zaštita na radu i zaštita od požara",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          },
+          {
+            "name": "Tekstilno inženjerstvo i modni dizajn",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fts.edu.ba/"
+          }
+        ]
+      },
+      {
+        "faculty": "Farmaceutsko-zdravstveni fakultet",
+        "sourceUrl": "https://www.unt.ba (per-faculty sites)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Fizioterapija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Medicinsko-laboratorijska dijagnostika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Radiologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Farmacija",
+            "cycle": "INTEGRISANI",
+            "durationYears": 5,
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Stomatologija",
+            "cycle": "INTEGRISANI",
+            "durationYears": 5,
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Fizioterapija",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Medicinsko-laboratorijska dijagnostika",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Radiologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://fzf.edu.ba"
+          },
+          {
+            "name": "Biomedicina i zdravstvo",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "sourceUrl": "https://fzf.edu.ba"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://www.unt.ba (per-faculty sites)",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Javna uprava",
+            "cycle": "DRUGI",
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          },
+          {
+            "name": "Opće pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          },
+          {
+            "name": "Poslovno pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          },
+          {
+            "name": "Opće pravo",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          },
+          {
+            "name": "Poslovno pravo",
+            "cycle": "PRVI",
+            "durationYears": 3,
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          },
+          {
+            "name": "Pravo",
+            "cycle": "TRECI",
+            "sourceUrl": "http://pfk.edu.ba/v2/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "university": "Sveučilište/Univerzitet Vitez",
+    "faculties": [
+      {
+        "faculty": "Fakultet informacijskih tehnologija",
+        "sourceUrl": "https://sveuciliste.unvi.edu.ba/",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Cybersecurity - Kibernetička sigurnost",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Informacijske tehnologije",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Informacijske tehnologije",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Softverski inženjering",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Informacijske tehnologije",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet poslovne ekonomije",
+        "sourceUrl": "https://sveuciliste.unvi.edu.ba/",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Digitalna ekonomija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Financije, računovodstvo i revizija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Marketing menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Menadžment u zdravstvu",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poduzetnički menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poduzetništvo i menadžment",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Digitalna ekonomija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Financije, računovodstvo i revizija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Marketing menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poduzetnički menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poduzetništvo i menadžment",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poslovna informatika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Financije, računovodstvo i revizija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Poduzetnički menadžment",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          }
+        ]
+      },
+      {
+        "faculty": "Fakultet zdravstvenih studija",
+        "sourceUrl": "https://sveuciliste.unvi.edu.ba/",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Kozmetologija",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Kozmetologija",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Fizioterapija i radna terapija",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sanitarni inženjering",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sestrinstvo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          }
+        ]
+      },
+      {
+        "faculty": "Pravni fakultet",
+        "sourceUrl": "https://sveuciliste.unvi.edu.ba/",
+        "lastChecked": "2026-08-24",
+        "studyPrograms": [
+          {
+            "name": "Opće pravo",
+            "cycle": "DRUGI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Opće pravo",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Sigurnost i kriminalistika",
+            "cycle": "PRVI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          },
+          {
+            "name": "Opće pravo",
+            "cycle": "TRECI",
+            "sourceUrl": "https://sveuciliste.unvi.edu.ba/"
+          }
+        ]
+      }
+    ]
   }
 ]

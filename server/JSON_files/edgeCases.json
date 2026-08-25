@@ -561,6 +561,116 @@
           "sourceUrl": "https://cis.unsa.ba/bhs/programi/doktorski/doktorski-studij-globalne-studije/"
         }
       ]
+    },
+    {
+      "university": "Internacionalni univerzitet u Sarajevu",
+      "issue": "English-taught university; site states university-wide bachelor 240 ECTS/4y, master 60 ECTS/1y, PhD 180 ECTS/3y - applied to all programs",
+      "action": "ects/durationYears set from the university-wide statement",
+      "status": "resolved",
+      "source": "https://ius.edu.ba"
+    },
+    {
+      "university": "Internacionalni univerzitet u Sarajevu",
+      "faculty": "Fakultet medicinskih nauka",
+      "program": "Medicine; Dental Medicine",
+      "cycle": "PRVI",
+      "issue": "Site lists them under 'Bachelor', but medicine/dental studies cannot be 240-ECTS bachelors; likely integrated",
+      "action": "Recorded as PRVI per source listing WITHOUT the university-wide 240/4y defaults",
+      "status": "needs-review",
+      "source": "https://ius.edu.ba"
+    },
+    {
+      "university": "Internacionalni Burč univerzitet",
+      "issue": "Site is fully client-rendered (Next.js) - program list assembled from the official navigation menu (user-provided screenshots 2026-08-24) + sitemap level slugs (-master/-msc/-phd)",
+      "action": "No ECTS/durations published in reachable sources; left null; language engleski (all programmes in English)",
+      "status": "resolved",
+      "source": "https://www.ibu.edu.ba"
+    },
+    {
+      "university": "Internacionalni Burč univerzitet",
+      "faculty": "Fakultet za ekonomiju i društvene nauke",
+      "program": "Economics and Finance",
+      "cycle": "PRVI",
+      "issue": "Current menu says 'Economics and Finance' while the sitemap/admission slug is 'banking-and-finance' (likely renamed)",
+      "action": "Menu name used",
+      "status": "needs-review",
+      "source": "https://www.ibu.edu.ba"
+    },
+    {
+      "university": "Internacionalni Burč univerzitet",
+      "program": "Game and Interaction Design; management-mit",
+      "issue": "Present in sitemap but absent from the current faculties menu (possibly discontinued / unclear)",
+      "action": "Skipped",
+      "status": "needs-review",
+      "source": "https://www.ibu.edu.ba/sitemap-0.xml"
+    },
+    {
+      "university": "Internacionalni Burč univerzitet",
+      "faculty": "Fakultet za inžinjering, prirodne i medicinske nauke",
+      "program": "Dentistry",
+      "issue": "No cycle stated in reachable sources; dental study in BiH is an integrated I+II programme",
+      "action": "Recorded INTEGRISANI",
+      "status": "needs-review",
+      "source": "https://www.ibu.edu.ba/department-of-dentistry"
+    },
+    {
+      "university": "Univerzitet Sarajevo School of Science and Technology",
+      "issue": "English-taught; departments double as faculties. Program names taken from department-page prose (no formal register): 'Health Sciences' (bachelor+master), 'Film Directing' (BFA/MFA), 'MBA', 'Health Economics and Pharmacoeconomics'",
+      "action": "Names as stated in prose; unnamed MSc/PhD tracks at Economics and Business skipped",
+      "status": "needs-review",
+      "source": "https://ssst.edu.ba/en"
+    },
+    {
+      "university": "Univerzitet Sarajevo School of Science and Technology",
+      "program": "Medicine (MD); Pharmacy (MPharm); Dentistry",
+      "issue": "Degree titles imply integrated studies (MD, Master of Pharmacy); cycles not explicitly labeled",
+      "action": "Recorded INTEGRISANI",
+      "status": "needs-review",
+      "source": "https://ssst.edu.ba/en"
+    },
+    {
+      "university": "Univerzitet Sarajevo School of Science and Technology",
+      "faculty": "Sarajevo Medical School",
+      "program": "Clinical Medicine; Biomedicine",
+      "cycle": "TRECI",
+      "issue": "PhD programs mentioned on the Pharmaco-Economics department page as launched at Sarajevo Medical School",
+      "action": "Attributed to Sarajevo Medical School",
+      "status": "needs-review",
+      "source": "https://ssst.edu.ba/en/department/pharmaco-economics/10"
+    },
+    {
+      "university": "Univerzitet u Travniku",
+      "faculty": "Edukacijski fakultet; Fakultet za tehničke studije",
+      "issue": "Sites list programs without cycle split (I/II/III all exist)",
+      "action": "Recorded as PRVI only; higher-cycle counterparts unnamed",
+      "status": "needs-review"
+    },
+    {
+      "university": "Univerzitet u Travniku",
+      "faculty": "Fakultet za menadžment i poslovnu ekonomiju",
+      "issue": "Doctoral study exists but publishes no program names; PRVI programs with '3+2, 4+1' dual models (Poslovna ekonomija, Poslovna psihologija) left without duration",
+      "action": "III cycle skipped; dual-model durations null",
+      "status": "needs-review",
+      "source": "https://fmpe.edu.ba"
+    },
+    {
+      "university": "Univerzitet u Travniku",
+      "faculty": "Pravni fakultet",
+      "program": "Pravo",
+      "cycle": "TRECI",
+      "issue": "Doctoral study organized in 7 tracks (Građansko, Historija države i prava, Javno, Krivično, Međunarodno, Poslovno, Evropsko pravo)",
+      "action": "Recorded as one program 'Pravo'; tracks noted here",
+      "status": "resolved",
+      "source": "http://pfk.edu.ba/v2/"
+    },
+    {
+      "university": "Sveučilište/Univerzitet Vitez",
+      "faculty": "Fakultet poslovne ekonomije",
+      "program": "Poduzetnički menadžment / Poduzetništvo i menadžment",
+      "issue": "Both listed as separate programs with near-identical names",
+      "action": "Both kept as listed",
+      "status": "needs-review",
+      "source": "https://sveuciliste.unvi.edu.ba/"
     }
   ]
 }
