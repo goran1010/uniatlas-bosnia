@@ -23,7 +23,7 @@ function StudyProgramResult({
         {program.faculty.name}
 
         <span className="text-(--text-muted)">
-          {" — "}
+          {" - "}
           {program.faculty.university.name}
           {program.faculty.university.acronym &&
             ` (${program.faculty.university.acronym})`}

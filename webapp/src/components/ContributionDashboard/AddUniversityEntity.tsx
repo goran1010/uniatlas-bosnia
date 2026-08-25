@@ -50,9 +50,9 @@ const ENTITY_TYPES: EntityType[] = [
 
 const TYPE_OF_CHANGES: TypeOfChange[] = ["CREATE", "UPDATE", "DELETE"];
 
-const CYCLES: Cycle[] = ["FIRST", "SECOND", "THIRD"];
+const CYCLES: Cycle[] = ["PRVI", "DRUGI", "TRECI", "INTEGRISANI"];
 
-const SUBJECT_TYPES: SubjectType[] = ["MANDATORY", "ELECTIVE"];
+const SUBJECT_TYPES: SubjectType[] = ["OBAVEZNI", "IZBORNI"];
 
 const ENTITIES: Entity[] = ["FBIH", "RS", "BD"];
 
@@ -237,7 +237,7 @@ function AddUniversityEntity({
                     }}
                     required={typeOfChange === "CREATE"}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     {ENTITIES.map((en) => (
                       <option key={en} value={en}>
                         {t(`contribution.entities.${en}`)}
@@ -257,7 +257,7 @@ function AddUniversityEntity({
                     }}
                     required={typeOfChange === "CREATE"}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     <option value="JAVNA">
                       {t("universitiesPage.ownership.JAVNA")}
                     </option>
@@ -325,7 +325,7 @@ function AddUniversityEntity({
                   }}
                   required={typeOfChange === "CREATE"}
                 >
-                  <option value="">—</option>
+                  <option value="">-</option>
                   {CYCLES.map((c) => (
                     <option key={c} value={c}>
                       {t(`contribution.cycles.${c}`)}
@@ -412,7 +412,7 @@ function AddUniversityEntity({
                     setDataField("type", e.target.value);
                   }}
                 >
-                  <option value="">—</option>
+                  <option value="">-</option>
                   {SUBJECT_TYPES.map((st) => (
                     <option key={st} value={st}>
                       {t(`contribution.subjectTypes.${st}`)}

@@ -1,7 +1,6 @@
 {
   "version": "0.2",
   "language": "en",
-
   "files": [
     "webapp/src/**/*.{ts,tsx,md}",
     "webapp/__tests__/**/*.{ts,tsx,md}",
@@ -11,14 +10,12 @@
     "CONTRIBUTING.md",
     "LICENSE.md"
   ],
-
   "ignorePaths": [
     "**/node_modules/**",
     "**/dist/**",
     "**/coverage/**",
     "**/src/generated/**"
   ],
-
   "userWords": [
     "JAVNA",
     "FBIH",
@@ -69,9 +66,13 @@
     "upsert",
     "upserted",
     "upserts",
-    "quixo"
+    "quixo",
+    "PRVI",
+    "DRUGI",
+    "TRECI",
+    "INTEGRISANI",
+    "IZBORNI"
   ],
-
   "ignoreWords": [],
   "import": ["@cspell/cspell-bundled-dicts"]
 }

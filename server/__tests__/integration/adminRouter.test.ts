@@ -759,7 +759,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
     const studyProgram = await prisma.studyProgram.create({
       data: {
         name: "Test Delete Study Program",
-        cycle: "FIRST",
+        cycle: "PRVI",
         facultyId: faculty.id,
       },
     });
@@ -835,7 +835,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
         parentId: faculty.id,
         data: {
           name: "Test Create Study Program",
-          cycle: "FIRST",
+          cycle: "PRVI",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,
@@ -896,7 +896,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
     const studyProgram = await prisma.studyProgram.create({
       data: {
         name: "Test Update Study Program",
-        cycle: "FIRST",
+        cycle: "PRVI",
         facultyId: faculty.id,
       },
     });
@@ -909,7 +909,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for STUDY_PROG
         parentId: faculty.id,
         data: {
           name: "Test Approve Study Program Updated",
-          cycle: "SECOND",
+          cycle: "DRUGI",
           durationYears: 4,
           ects: 240,
         },
@@ -975,7 +975,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
     const studyProgram = await prisma.studyProgram.create({
       data: {
         name: "Test Delete Study Program",
-        cycle: "FIRST",
+        cycle: "PRVI",
         facultyId: faculty.id,
       },
     });
@@ -1055,7 +1055,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
     const studyProgram = await prisma.studyProgram.create({
       data: {
         name: "Test Create Study Program",
-        cycle: "FIRST",
+        cycle: "PRVI",
         facultyId: faculty.id,
       },
     });
@@ -1129,7 +1129,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
     const studyProgram = await prisma.studyProgram.create({
       data: {
         name: "Test Update Study Program",
-        cycle: "FIRST",
+        cycle: "PRVI",
         facultyId: faculty.id,
       },
     });
@@ -1151,7 +1151,7 @@ describe("Admin Router - POST /users/admin/approve-pending-change for SUBJECT", 
           name: "Test Approve Subject Updated",
           semester: 3,
           ects: 6,
-          type: "MANDATORY",
+          type: "OBAVEZNI",
         },
         createdAt: new Date("2024-01-01T00:00:00.000Z"),
         reviewedAt: null,

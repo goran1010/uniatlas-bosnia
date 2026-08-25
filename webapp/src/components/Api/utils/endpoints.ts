@@ -92,7 +92,7 @@ const apiEndpoints: Endpoint[] = [
       }
     ],
     "studyPrograms": [
-      { "id": 1, "name": "Software Engineering", "cycle": "FIRST",
+      { "id": 1, "name": "Software Engineering", "cycle": "PRVI",
         "faculty": { "id": 1, "name": "Faculty of Electrical Engineering",
           "university": { "id": 1, "name": "University of Sarajevo" }
         }

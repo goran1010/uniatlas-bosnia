@@ -13,8 +13,8 @@
   },
   "meta": {
     "home": "Istražite univerzitete, fakultete, studijske programe i predmete u Bosni i Hercegovini kroz besplatan javni skup podataka, pretraživo web sučelje i REST API.",
-    "universities": "Istražite univerzitete i akademske programe u Bosni i Hercegovini.",
-    "api": "REST API dokumentacija za UniAtlas Bosnia. Pristupite podacima o univerzitetima i akademskim programima programski.",
+    "universities": "Istražite univerzitete i studijske programe u Bosni i Hercegovini.",
+    "api": "REST API dokumentacija za UniAtlas Bosnia. Pristupite podacima o univerzitetima i studijskim programima programski.",
     "login": "Prijavite se na vaš UniAtlas Bosnia nalog kako biste doprinijeli podacima i pratili vaše prijave.",
     "signup": "Napravite besplatan UniAtlas Bosnia nalog i počnite doprinositi podacima o univerzitetima."
   },
@@ -198,7 +198,7 @@
     "picker": {
       "parent": "Gdje treba dodati novu stavku?",
       "target": "Koju stavku želite izmijeniti?",
-      "placeholder": "— izaberite —",
+      "placeholder": "- izaberite -",
       "currentData": "Trenutni podaci",
       "noChildren": {
         "FACULTY": "Nema dostupnih fakulteta",
@@ -223,18 +223,19 @@
       "ownership": "Vlasništvo"
     },
     "cycles": {
-      "FIRST": "PRVI — Bachelor",
-      "SECOND": "DRUGI — Master",
-      "THIRD": "TREĆI — PhD"
+      "PRVI": "PRVI - Bachelor",
+      "DRUGI": "DRUGI - Master",
+      "TRECI": "TREĆI - PhD",
+      "INTEGRISANI": "INTEGRISANI - Bachelor+Master"
     },
     "subjectTypes": {
-      "MANDATORY": "Obavezni",
-      "ELECTIVE": "Izborni"
+      "OBAVEZNI": "Obavezni",
+      "IZBORNI": "Izborni"
     },
     "entities": {
-      "FBIH": "FBIH — Federacija BiH",
-      "RS": "RS — Republika Srpska",
-      "BD": "BD — Brčko Distrikt"
+      "FBIH": "FBIH - Federacija BiH",
+      "RS": "RS - Republika Srpska",
+      "BD": "BD - Brčko Distrikt"
     },
     "submitSuggestion": "Pošalji prijedlog",
     "deleteChange": "Obriši"
@@ -367,9 +368,10 @@
     "subjects": "Predmeti",
     "cycle": "Ciklus",
     "cycles": {
-      "FIRST": "Prvi (Bachelor)",
-      "SECOND": "Drugi (Master)",
-      "THIRD": "Treći (PhD)"
+      "PRVI": "Prvi (Bachelor)",
+      "DRUGI": "Drugi (Master)",
+      "TRECI": "Treći (PhD)",
+      "INTEGRISANI": "Integrisani (Bachelor + Master)"
     },
     "ects": "ECTS",
     "durationYears": "godine",
@@ -378,8 +380,8 @@
     "semester": "Semestar",
     "subjectType": "Tip",
     "subjectTypes": {
-      "MANDATORY": "Obavezni",
-      "ELECTIVE": "Izborni"
+      "OBAVEZNI": "Obavezni",
+      "IZBORNI": "Izborni"
     },
     "website": "Web stranica",
     "foundedYear": "Osnovan",

@@ -2,8 +2,8 @@ import type { PendingChange } from "../../schemas/pendingChange";
 
 export type EntityType = "UNIVERSITY" | "FACULTY" | "STUDY_PROGRAM" | "SUBJECT";
 export type TypeOfChange = "CREATE" | "UPDATE" | "DELETE";
-export type Cycle = "FIRST" | "SECOND" | "THIRD";
-export type SubjectType = "MANDATORY" | "ELECTIVE";
+export type Cycle = "PRVI" | "DRUGI" | "TRECI" | "INTEGRISANI";
+export type SubjectType = "OBAVEZNI" | "IZBORNI";
 export type Entity = "FBIH" | "RS" | "BD";
 
 export interface ContributionFormDraft {

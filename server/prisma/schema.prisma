@@ -69,14 +69,15 @@ enum ownership {
 }
 
 enum studyCycle {
-  FIRST
-  SECOND
-  THIRD
+  PRVI
+  DRUGI
+  TRECI
+  INTEGRISANI
 }
 
 enum subjectType {
-  MANDATORY
-  ELECTIVE
+  OBAVEZNI
+  IZBORNI
 }
 
 model University {
@@ -106,6 +107,8 @@ model Faculty {
   university    University     @relation(fields: [universityId], references: [id])
   city          String?
   website       String?
+  sourceUrl     String?
+  lastChecked   DateTime?
   studyPrograms StudyProgram[]
 
   @@unique([name, universityId])
@@ -122,6 +125,7 @@ model StudyProgram {
   ects          Int?
   language      String?
   sourceUrl     String?
+  lastChecked   DateTime?
   subjects      Subject[]
 
   @@unique([name, facultyId, cycle])
@@ -137,6 +141,7 @@ model Subject {
   ects           Int?
   type           subjectType?
   sourceUrl      String?
+  lastChecked    DateTime?
 
   @@unique([name, studyProgramId])
   @@map("subjects")

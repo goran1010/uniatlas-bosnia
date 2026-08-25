@@ -238,7 +238,7 @@ function EntityPicker({
             placeholder={t("contribution.picker.placeholder")}
             options={studyPrograms.map((sp) => ({
               id: sp.id,
-              label: `${sp.name} — ${t(`universitiesPage.cycles.${sp.cycle}`)}`,
+              label: `${sp.name} - ${t(`universitiesPage.cycles.${sp.cycle}`)}`,
             }))}
             onChange={handleProgramChange}
           />

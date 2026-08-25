@@ -44,7 +44,7 @@ const universityDetail = {
           id: 7,
           name: "Computer Science",
           facultyId: 3,
-          cycle: "FIRST",
+          cycle: "PRVI",
           ects: 180,
           subjects: [
             {
@@ -53,7 +53,7 @@ const universityDetail = {
               studyProgramId: 7,
               semester: 3,
               ects: 6,
-              type: "MANDATORY",
+              type: "OBAVEZNI",
             },
           ],
         },
@@ -400,7 +400,7 @@ describe("AddUniversityEntity", () => {
     await user.type(screen.getByLabelText(/ECTS credits/i), "6");
     await user.selectOptions(
       screen.getByLabelText(/Subject type/i),
-      "MANDATORY",
+      "OBAVEZNI",
     );
 
     await user.click(
@@ -416,7 +416,7 @@ describe("AddUniversityEntity", () => {
       name: "Algorithms",
       semester: 3,
       ects: 6,
-      type: "MANDATORY",
+      type: "OBAVEZNI",
     });
     expect(submittedArgs.setPendingChanges).toBe(setPendingChanges);
   });
@@ -439,7 +439,7 @@ describe("AddUniversityEntity", () => {
     await pickFaculty(user);
 
     await user.type(screen.getByLabelText(/Name/i), "Computer Science");
-    await user.selectOptions(screen.getByLabelText(/Cycle/i), "FIRST");
+    await user.selectOptions(screen.getByLabelText(/Cycle/i), "PRVI");
     await user.type(screen.getByLabelText(/Duration/i), "3");
     await user.type(screen.getByLabelText(/ECTS credits/i), "180");
 
@@ -454,7 +454,7 @@ describe("AddUniversityEntity", () => {
     expect(submittedArgs.typeOfChange).toBe("CREATE");
     expect(submittedArgs.data).toMatchObject({
       name: "Computer Science",
-      cycle: "FIRST",
+      cycle: "PRVI",
       durationYears: 3,
       ects: 180,
     });
