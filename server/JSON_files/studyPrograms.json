@@ -334,6 +334,15 @@
             "ects": 180,
             "language": "engleski",
             "sourceUrl": "http://www.efsa.unsa.ba/ef/docs/Doktorski%20studij/Doktorski-Course-Catalogue_2012.pdf"
+          },
+          {
+            "name": "Poslovanje i informacione tehnologije",
+            "cycle": "STRUCNI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Bosanski, hrvatski, srpski",
+            "sourceUrl": "https://www.efsa.unsa.ba/ef/bs/poslovanje-i-informacione-tehnologije",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -353,7 +362,9 @@
           {
             "name": "Data Science and Artificial Intelligence",
             "cycle": "PRVI",
-            "sourceUrl": "https://etf.unsa.ba"
+            "sourceUrl": "http://registar.unsa.ba/",
+            "ects": 180,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Elektroenergetika",
@@ -4515,6 +4526,15 @@
             "ects": 180,
             "language": "Bosanski, hrvatski, srpski",
             "sourceUrl": "http://math.pmf.unsa.ba/doktorski-studij/prirodne-i-matematicke-nauke-u-obrazovanju.html"
+          },
+          {
+            "name": "Informacione tehnologije",
+            "cycle": "STRUCNI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Bosanski, hrvatski, srpski",
+            "sourceUrl": "https://pmf.unsa.ba/strucni-studij-it/",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -5279,14 +5299,14 @@
           },
           {
             "name": "Dentalna medicina",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
           },
           {
             "name": "Farmacija",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 5,
             "ects": 300,
             "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
@@ -5300,14 +5320,14 @@
           },
           {
             "name": "Medicina",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
           },
           {
             "name": "Medicina na engleskom jeziku",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "language": "engleski",
@@ -8379,7 +8399,7 @@
           },
           {
             "name": "Dentistry",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "language": "engleski",
@@ -8395,14 +8415,14 @@
           },
           {
             "name": "Medicina",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
           },
           {
             "name": "Medicine",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "language": "engleski",
@@ -8417,7 +8437,7 @@
           },
           {
             "name": "Stomatologija",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/studijski-programi-1/"
@@ -9027,13 +9047,13 @@
         "studyPrograms": [
           {
             "name": "Dental Medicine",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "language": "engleski",
             "sourceUrl": "https://ius.edu.ba"
           },
           {
             "name": "Medicine",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "language": "engleski",
             "sourceUrl": "https://ius.edu.ba"
           }
@@ -10863,21 +10883,21 @@
           },
           {
             "name": "Farmacija",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 5,
             "ects": 300,
             "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Farmacija.pdf"
           },
           {
             "name": "Medicina",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://eubd.edu.ba/NPP/Fakultet-za-medicinu-farmaciju-i-zdravstvo-Medicina.pdf"
           },
           {
             "name": "Stomatologija",
-            "cycle": "PRVI",
+            "cycle": "INTEGRISANI",
             "durationYears": 6,
             "ects": 360,
             "sourceUrl": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Stomatologija.pdf"
@@ -11767,7 +11787,7 @@
             "sourceUrl": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
           },
           {
-            "name": "Biodivezitet",
+            "name": "Biodiverzitet",
             "cycle": "TRECI",
             "durationYears": 3,
             "ects": 180,
