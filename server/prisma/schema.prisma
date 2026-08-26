@@ -73,6 +73,7 @@ enum studyCycle {
   DRUGI
   TRECI
   INTEGRISANI
+  STRUCNI
 }
 
 enum subjectType {

@@ -109,8 +109,8 @@ const studyProgramCreateDataSchema = z.strictObject({
     error: "Name is required",
   }),
 
-  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
-    error: "Invalid study cycle - must be PRVI, DRUGI, TRECI, or INTEGRISANI",
+  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"], {
+    error: "Invalid study cycle - must be PRVI, DRUGI, TRECI, INTEGRISANI, or STRUCNI",
   }),
 
   durationYears: durationYearsSchema.optional(),
@@ -233,7 +233,7 @@ const studyProgramEditDataSchema = z
       .optional(),
 
     cycle: z
-      .enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
+      .enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"], {
         error: "Invalid study cycle",
       })
       .optional(),

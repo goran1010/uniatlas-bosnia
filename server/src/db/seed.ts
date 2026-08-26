@@ -86,7 +86,7 @@ const facultiesSeedSchema = z.array(facultyGroupSeedSchema);
 
 const studyProgramSeedSchema = z.strictObject({
   name: z.string().trim().min(1),
-  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"]),
+  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"]),
   durationYears: z.number().int().positive().nullish(),
   ects: z.number().int().positive().nullish(),
   language: optionalTextSchema,

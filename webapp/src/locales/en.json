@@ -226,7 +226,8 @@
       "PRVI": "FIRST - Bachelor",
       "DRUGI": "SECOND - Master",
       "TRECI": "THIRD - PhD",
-      "INTEGRISANI": "INTEGRATED - Bachelor+Master"
+      "INTEGRISANI": "INTEGRATED - Bachelor+Master",
+      "STRUCNI": "PROFESSIONAL - Professional Bachelor"
     },
     "subjectTypes": {
       "OBAVEZNI": "Mandatory",
@@ -371,7 +372,8 @@
       "PRVI": "First (Bachelor)",
       "DRUGI": "Second (Master)",
       "TRECI": "Third (PhD)",
-      "INTEGRISANI": "Integrated (Bachelor + Master)"
+      "INTEGRISANI": "Integrated (Bachelor + Master)",
+      "STRUCNI": "Professional (Professional Bachelor)"
     },
     "ects": "ECTS",
     "durationYears": "years",

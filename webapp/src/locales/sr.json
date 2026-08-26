@@ -226,7 +226,8 @@
       "PRVI": "PRVI - Bachelor",
       "DRUGI": "DRUGI - Master",
       "TRECI": "TREĆI - PhD",
-      "INTEGRISANI": "INTEGRISANI - Bachelor+Master"
+      "INTEGRISANI": "INTEGRISANI - Bachelor+Master",
+      "STRUCNI": "STRUČNI - Professional Bachelor"
     },
     "subjectTypes": {
       "OBAVEZNI": "Obavezni",
@@ -371,7 +372,8 @@
       "PRVI": "Prvi (Bachelor)",
       "DRUGI": "Drugi (Master)",
       "TRECI": "Treći (PhD)",
-      "INTEGRISANI": "Integrisani (Bachelor + Master)"
+      "INTEGRISANI": "Integrisani (Bachelor + Master)",
+      "STRUCNI": "Stručni (Professional Bachelor)"
     },
     "ects": "ECTS",
     "durationYears": "godine",
