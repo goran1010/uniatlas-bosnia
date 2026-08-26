@@ -45,8 +45,8 @@ const ENTITY_TYPES: EntityType[] = [
   "UNIVERSITY",
   "FACULTY",
   "STUDY_PROGRAM",
-  "SUBJECT",
   "TRACK",
+  "SUBJECT",
 ];
 
 const TYPE_OF_CHANGES: TypeOfChange[] = ["CREATE", "UPDATE", "DELETE"];
