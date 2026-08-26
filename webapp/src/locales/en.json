@@ -188,7 +188,8 @@
       "UNIVERSITY": "University",
       "FACULTY": "Faculty",
       "STUDY_PROGRAM": "Study Program",
-      "SUBJECT": "Subject"
+      "SUBJECT": "Subject",
+      "TRACK": "Track (smjer)"
     },
     "changeTypes": {
       "CREATE": "Create",
@@ -203,7 +204,8 @@
       "noChildren": {
         "FACULTY": "No faculties available",
         "STUDY_PROGRAM": "No study programs available",
-        "SUBJECT": "No subjects available"
+        "SUBJECT": "No subjects available",
+        "TRACK": "No tracks available"
       }
     },
     "dataFields": {
@@ -366,6 +368,7 @@
     },
     "faculties": "Faculties",
     "studyPrograms": "Study Programs",
+    "tracks": "Tracks (smjerovi)",
     "subjects": "Subjects",
     "cycle": "Cycle",
     "cycles": {

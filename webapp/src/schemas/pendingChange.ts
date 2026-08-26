@@ -13,6 +13,8 @@ import {
   studyProgramEditDataSchema,
   subjectCreateDataSchema,
   subjectEditDataSchema,
+  trackCreateDataSchema,
+  trackEditDataSchema,
   universityCreateDataSchema,
   universityEditDataSchema,
 } from "./contribution";
@@ -59,6 +61,13 @@ const pendingChangeSchema = z.union([
     data: subjectCreateDataSchema,
   }),
   pendingChangeBaseSchema.extend({
+    entityType: z.literal("TRACK"),
+    typeOfChange: z.literal("CREATE"),
+    targetId: z.null(),
+    parentId: positiveIntegerSchema,
+    data: trackCreateDataSchema,
+  }),
+  pendingChangeBaseSchema.extend({
     entityType: z.literal("UNIVERSITY"),
     typeOfChange: z.literal("UPDATE"),
     targetId: positiveIntegerSchema,
@@ -85,6 +94,13 @@ const pendingChangeSchema = z.union([
     targetId: positiveIntegerSchema,
     parentId: z.null(),
     data: subjectEditDataSchema,
+  }),
+  pendingChangeBaseSchema.extend({
+    entityType: z.literal("TRACK"),
+    typeOfChange: z.literal("UPDATE"),
+    targetId: positiveIntegerSchema,
+    parentId: z.null(),
+    data: trackEditDataSchema,
   }),
   pendingChangeBaseSchema.extend({
     entityType: entityTypeSchema,

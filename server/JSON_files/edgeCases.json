@@ -26,8 +26,8 @@
       "program": "Interdisciplinarni studij konzervacija i restauracija",
       "cycle": "PRVI i DRUGI",
       "issue": "Joint program (ALU + PMF, drugi ciklus takođe + Arhitektonski fakultet) - no single-faculty owner",
-      "action": "Assigned to first-listed faculty (Akademija likovnih umjetnosti) (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (Akademija likovnih umjetnosti) (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/"
     },
     {
@@ -36,8 +36,8 @@
       "program": "Informatika u upravi",
       "cycle": "PRVI",
       "issue": "Joint program (Fakultet za upravu + Ekonomski fakultet)",
-      "action": "Assigned to first-listed faculty (Fakultet za upravu) (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (Fakultet za upravu) (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/"
     },
     {
@@ -144,8 +144,8 @@
       "program": "Očuvanje i održiva upotreba genetičkih resursa",
       "cycle": "DRUGI",
       "issue": "Joint program (Poljoprivredni + Prirodno-matematički fakultet)",
-      "action": "Assigned to first-listed faculty (Poljoprivredni fakultet) (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (Poljoprivredni fakultet) (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
     },
     {
@@ -154,8 +154,8 @@
       "program": "Obnovljivi izvori energije i ekološko inženjerstvo",
       "cycle": "TRECI",
       "issue": "Joint program (AGGF + Elektrotehnički + Mašinski + Tehnološki fakultet)",
-      "action": "Assigned to first-listed faculty (AGGF) (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (AGGF) (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
     },
     {
@@ -210,8 +210,8 @@
       "program": "Primjenjena hemija",
       "cycle": "TRECI",
       "issue": "Source title 'Zajednički doktorski studij Primjenjena hemija' - joint doctoral program (Tehnološki + Prirodno-matematički fakultet)",
-      "action": "Assigned to first-listed faculty (Tehnološki fakultet), 'Zajednički doktorski studij' prefix dropped (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (Tehnološki fakultet), 'Zajednički doktorski studij' prefix dropped (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
     },
     {
@@ -309,8 +309,8 @@
       "program": "Doktorski studij iz tehničkih nauka",
       "cycle": "TRECI",
       "issue": "Joint doctoral study (FIPN + Mašinski + Politehnički fakultet)",
-      "action": "Assigned to first-listed faculty (FIPN) (decision deferred to end of issue #359 work - user 2026-08-26)",
-      "status": "needs-review",
+      "action": "Assigned to first-listed faculty (FIPN) (user decision 2026-08-26: single lead faculty kept in the DB; co-owning faculties stay documented here for possible future modeling)",
+      "status": "resolved",
       "source": "https://www.fipn.unze.ba"
     },
     {
@@ -659,7 +659,7 @@
       "program": "Pravo",
       "cycle": "TRECI",
       "issue": "Doctoral study organized in 7 tracks (Građansko, Historija države i prava, Javno, Krivično, Međunarodno, Poslovno, Evropsko pravo)",
-      "action": "Recorded as one program 'Pravo'; tracks noted here",
+      "action": "Recorded as one program 'Pravo'; tracks noted here. Update 2026-08-26: the 7 tracks seeded as Track rows under 'Pravo' (Track model added)",
       "status": "resolved",
       "source": "http://pfk.edu.ba/v2/"
     },
@@ -707,7 +707,7 @@
     {
       "university": "Univerzitet za poslovne studije Banja Luka",
       "issue": "Sub-tracks not seeded as programs: TRECI 'Ekonomija i finansije' studijske grupe (Računovodstvo i finansije; Makroekonomija i razvoj; Menadžment i poslovna ekonomija); PRVI 'Turizam i hotelijerstvo' studijske grupe (Turizam, Hotelijerstvo, Restoraterstvo i Gastronomija); DRUGI 'Hotelijerstvo' smjerovi (Hotelijerstvo, Restoraterstvo i Gastronomija)",
-      "action": "Only the parent programs seeded - smjerovi/grupe are not separate studijski programi",
+      "action": "Only the parent programs seeded - smjerovi/grupe are not separate studijski programi. Update 2026-08-26: the studijske grupe/smjerovi seeded as Track rows under their parent programs (Track model added)",
       "status": "resolved",
       "source": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf"
     },
@@ -836,7 +836,7 @@
       "faculty": "Fakultet za poslovno-civilnu bezbjednost",
       "program": "Zdravstvena njega i zdravstvena bezbjednost",
       "issue": "Konkurs: 'moduli 180 i 240 ECTS' (dual duration under one name; smjerovi visoka medicinska sestra, visoki radiološki tehničar, fizioterapeut); program page is a stub with no cycle details; menu name is shorter ('Zdravstvena njega i bezbjednost')",
-      "action": "Single PRVI row with null ECTS/duration (dual-model precedent); konkurs name used (merge-with-null convention confirmed by user 2026-08-26)",
+      "action": "Single PRVI row with null ECTS/duration (dual-model precedent); konkurs name used (merge-with-null convention confirmed by user 2026-08-26). Update 2026-08-26: the 3 smjerovi seeded as Track rows (Track model added)",
       "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     },
@@ -852,7 +852,7 @@
     {
       "university": "Internacionalni univerzitet, Brčko distrikt BiH",
       "issue": "Smjerovi listed in konkurs parentheses not seeded as programs: Ekonomija (računovodstvo i revizija), Poljoprivreda (opšta agronomija, zaštita bilja), Građevinarstvo i arhitektura (opšte građevinarstvo, arhitektura i urbanizam, geodezija), Turizam i zaštita (turizam, zaštita na radu, zaštita od požara)",
-      "action": "Only parent programs seeded",
+      "action": "Only parent programs seeded. Update 2026-08-26: the parenthesized smjerovi seeded as Track rows under the PRVI parent programs (Track model added)",
       "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     },
@@ -894,7 +894,7 @@
     {
       "university": "Sveučilište Hercegovina",
       "issue": "Site lists programs by cycle only, without faculty attribution; no ECTS/durations published",
-      "action": "Law/IR programs attributed to Fakultet međunarodnih odnosa i diplomacije, all others to Fakultet društvenih znanosti dr. Milenka Brkića (subject-based inference); 'Pravo s međunarodnim odnosima' smjerovi (Pravo, Međunarodno pravo) folded into one program; site typos ('MENADŽMENT U OBRAZOVANJE', 'TURIZA') corrected (user accepted 2026-08-26)",
+      "action": "Law/IR programs attributed to Fakultet međunarodnih odnosa i diplomacije, all others to Fakultet društvenih znanosti dr. Milenka Brkića (subject-based inference); 'Pravo s međunarodnim odnosima' smjerovi (Pravo, Međunarodno pravo) folded into one program; site typos ('MENADŽMENT U OBRAZOVANJE', 'TURIZA') corrected (user accepted 2026-08-26). Update 2026-08-26: 'Pravo' and 'Međunarodno pravo' seeded as Track rows on the PRVI program (DRUGI track split unconfirmed; Track model added)",
       "status": "resolved",
       "source": "https://hercegovina.edu.ba/hr/studijski-programi/"
     },

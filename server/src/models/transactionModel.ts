@@ -7,6 +7,8 @@ import {
   studyProgramEditDataSchema,
   subjectCreateDataSchema,
   subjectEditDataSchema,
+  trackCreateDataSchema,
+  trackEditDataSchema,
   universityCreateDataSchema,
   universityEditDataSchema,
 } from "../validation/contributionValidation.js";
@@ -20,6 +22,8 @@ import type {
   StudyProgramEditData,
   SubjectCreateData,
   SubjectEditData,
+  TrackCreateData,
+  TrackEditData,
   UniversityCreateData,
   UniversityEditData,
 } from "../validation/contributionValidation.js";
@@ -125,6 +129,30 @@ function toSubjectUpdateInput(
     ...(data.semester !== undefined && { semester: data.semester }),
     ...(data.ects !== undefined && { ects: data.ects }),
     ...(data.type !== undefined && { type: data.type }),
+  };
+}
+
+function toTrackCreateInput(
+  data: TrackCreateData,
+  studyProgramId: number,
+): Prisma.TrackUncheckedCreateInput {
+  return {
+    name: data.name,
+    studyProgramId,
+    ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.durationYears !== undefined && {
+      durationYears: data.durationYears,
+    }),
+  };
+}
+
+function toTrackUpdateInput(data: TrackEditData): Prisma.TrackUpdateInput {
+  return {
+    ...(data.name !== undefined && { name: data.name }),
+    ...(data.ects !== undefined && { ects: data.ects }),
+    ...(data.durationYears !== undefined && {
+      durationYears: data.durationYears,
+    }),
   };
 }
 
@@ -283,6 +311,48 @@ async function approvePendingChange({ id }: { id: string }): Promise<boolean> {
       await tx.studyProgram.update({
         where: { id: targetId },
         data: toStudyProgramUpdateInput(data),
+      });
+
+      return deletePendingChange();
+    }
+
+    if (entityType === "TRACK") {
+      if (typeOfChange === "DELETE") {
+        if (targetId === null) return false;
+
+        await tx.track.delete({ where: { id: targetId } });
+        return deletePendingChange();
+      }
+
+      if (typeOfChange === "CREATE") {
+        if (parentId === null) return false;
+
+        const data = parsePendingChangeData(
+          trackCreateDataSchema,
+          pendingChange.data,
+          id,
+        );
+        if (!data) return false;
+
+        await tx.track.create({
+          data: toTrackCreateInput(data, parentId),
+        });
+
+        return deletePendingChange();
+      }
+
+      if (targetId === null) return false;
+
+      const data = parsePendingChangeData(
+        trackEditDataSchema,
+        pendingChange.data,
+        id,
+      );
+      if (!data) return false;
+
+      await tx.track.update({
+        where: { id: targetId },
+        data: toTrackUpdateInput(data),
       });
 
       return deletePendingChange();

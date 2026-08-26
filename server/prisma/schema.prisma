@@ -128,9 +128,24 @@ model StudyProgram {
   sourceUrl     String?
   lastChecked   DateTime?
   subjects      Subject[]
+  tracks        Track[]
 
   @@unique([name, facultyId, cycle])
   @@map("study_programs")
+}
+
+model Track {
+  id             Int          @id @default(autoincrement())
+  name           String
+  studyProgramId Int
+  studyProgram   StudyProgram @relation(fields: [studyProgramId], references: [id])
+  ects           Int?
+  durationYears  Int?
+  sourceUrl      String?
+  lastChecked    DateTime?
+
+  @@unique([name, studyProgramId])
+  @@map("tracks")
 }
 
 model Subject {
@@ -153,6 +168,7 @@ enum entityType {
   FACULTY
   STUDY_PROGRAM
   SUBJECT
+  TRACK
 }
 
 model PendingChange {

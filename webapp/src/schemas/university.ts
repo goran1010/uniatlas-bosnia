@@ -43,6 +43,18 @@ const subjectSchema = z.object({
   lastChecked: optionalTextSchema,
 });
 
+const trackSchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  studyProgramId: positiveIntegerSchema,
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
+  durationYears: durationYearsSchema
+    .nullish()
+    .transform((value) => value ?? undefined),
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalTextSchema,
+});
+
 const studyProgramSchema = z.object({
   id: positiveIntegerSchema,
   name: z.string().min(1),
@@ -56,6 +68,7 @@ const studyProgramSchema = z.object({
   sourceUrl: optionalTextSchema,
   lastChecked: optionalTextSchema,
   subjects: z.array(subjectSchema),
+  tracks: z.array(trackSchema).optional().default([]),
 });
 
 const facultySchema = z.object({
@@ -152,6 +165,8 @@ export type UniversityDetailStudyProgram =
   UniversityDetailFaculty["studyPrograms"][number];
 export type UniversityDetailSubject =
   UniversityDetailStudyProgram["subjects"][number];
+export type UniversityDetailTrack =
+  UniversityDetailStudyProgram["tracks"][number];
 export type StudyProgramSearchResult = z.infer<
   typeof studyProgramSearchResultSchema
 >;

@@ -12,6 +12,7 @@ import type {
   UniversityDetailFaculty,
   UniversityDetailStudyProgram,
   UniversityDetailSubject,
+  UniversityDetailTrack,
   UniversityListItem,
 } from "../../schemas/university";
 
@@ -45,6 +46,32 @@ function SubjectRow({
             }`}
           >
             {t(`universitiesPage.subjectTypes.${subject.type}`)}
+          </span>
+        )}
+      </span>
+    </li>
+  );
+}
+
+function TrackRow({
+  track,
+  t,
+}: {
+  track: UniversityDetailTrack;
+  t: TFunction;
+}) {
+  return (
+    <li className="flex flex-wrap gap-2 text-sm py-1 border-b border-(--border-color) last:border-0">
+      <span className="font-medium flex-1">{track.name}</span>
+      <span className="flex gap-2 flex-wrap text-xs text-(--text-muted)">
+        {track.durationYears != null && (
+          <span>
+            {track.durationYears} {t("universitiesPage.durationYears")}
+          </span>
+        )}
+        {track.ects != null && (
+          <span>
+            {track.ects} {t("universitiesPage.ects")}
           </span>
         )}
       </span>
@@ -107,6 +134,18 @@ function StudyProgramRow({
               </span>
             )}
           </div>
+          {program.tracks.length > 0 && (
+            <>
+              <p className="text-xs font-semibold uppercase tracking-wide text-(--text-muted) pt-1">
+                {t("universitiesPage.tracks")}
+              </p>
+              <ul>
+                {program.tracks.map((tr) => (
+                  <TrackRow key={tr.id} track={tr} t={t} />
+                ))}
+              </ul>
+            </>
+          )}
           {program.subjects.length > 0 ? (
             <ul>
               {program.subjects.map((s) => (

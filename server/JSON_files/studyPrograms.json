@@ -10130,7 +10130,37 @@
           {
             "name": "Pravo",
             "cycle": "TRECI",
-            "sourceUrl": "http://pfk.edu.ba/v2/"
+            "sourceUrl": "http://pfk.edu.ba/v2/",
+            "tracks": [
+              {
+                "name": "Građansko pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Historija države i prava",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Javno pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Krivično pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Međunarodno pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Poslovno pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Evropsko pravo",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           }
         ]
       }
@@ -10384,7 +10414,21 @@
             "name": "Ekonomija i finansije",
             "cycle": "TRECI",
             "durationYears": 3,
-            "ects": 180
+            "ects": 180,
+            "tracks": [
+              {
+                "name": "Računovodstvo i finansije",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Makroekonomija i razvoj",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Menadžment i poslovna ekonomija",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           }
         ]
       },
@@ -10437,7 +10481,21 @@
         "studyPrograms": [
           {
             "name": "Turizam i hotelijerstvo",
-            "cycle": "PRVI"
+            "cycle": "PRVI",
+            "tracks": [
+              {
+                "name": "Turizam",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Hotelijerstvo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Restoraterstvo i Gastronomija",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           },
           {
             "name": "Turizam",
@@ -10449,7 +10507,17 @@
             "name": "Hotelijerstvo",
             "cycle": "DRUGI",
             "durationYears": 1,
-            "ects": 60
+            "ects": 60,
+            "tracks": [
+              {
+                "name": "Hotelijerstvo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Restoraterstvo i Gastronomija",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           }
         ]
       },
@@ -11219,7 +11287,13 @@
             "cycle": "PRVI",
             "durationYears": 4,
             "ects": 240,
-            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/ekonomija"
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/ekonomija",
+            "tracks": [
+              {
+                "name": "Računovodstvo i revizija",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           },
           {
             "name": "Ekonomija",
@@ -11238,7 +11312,17 @@
           {
             "name": "Poljoprivreda",
             "cycle": "PRVI",
-            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/poljoprivreda"
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/poljoprivreda",
+            "tracks": [
+              {
+                "name": "Opšta agronomija",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Zaštita bilja",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           },
           {
             "name": "Šumarstvo",
@@ -11247,12 +11331,40 @@
           {
             "name": "Građevinarstvo i arhitektura",
             "cycle": "PRVI",
-            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/gradevinarstvo-i-arhitektura"
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/gradevinarstvo-i-arhitektura",
+            "tracks": [
+              {
+                "name": "Opšte građevinarstvo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Arhitektura i urbanizam",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Geodezija",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           },
           {
             "name": "Turizam i zaštita",
             "cycle": "PRVI",
-            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/turizam-i-zastita"
+            "sourceUrl": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/turizam-i-zastita",
+            "tracks": [
+              {
+                "name": "Turizam",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Zaštita na radu",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Zaštita od požara",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           },
           {
             "name": "Obnovljivi izvori energije",
@@ -11522,7 +11634,21 @@
           },
           {
             "name": "Zdravstvena njega i zdravstvena bezbjednost",
-            "cycle": "PRVI"
+            "cycle": "PRVI",
+            "tracks": [
+              {
+                "name": "Visoka medicinska sestra",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Visoki radiološki tehničar",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Fizioterapeut",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           }
         ]
       },
@@ -12968,7 +13094,17 @@
           {
             "name": "Pravo s međunarodnim odnosima",
             "cycle": "PRVI",
-            "sourceUrl": "https://hercegovina.edu.ba/hr/studijski-programi/"
+            "sourceUrl": "https://hercegovina.edu.ba/hr/studijski-programi/",
+            "tracks": [
+              {
+                "name": "Pravo",
+                "lastChecked": "2026-08-26"
+              },
+              {
+                "name": "Međunarodno pravo",
+                "lastChecked": "2026-08-26"
+              }
+            ]
           }
         ]
       }

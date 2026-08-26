@@ -16,6 +16,8 @@ async function entityExists(entityType: entityType, id: number) {
       return (await prisma.studyProgram.findUnique({ where: { id } })) !== null;
     case "SUBJECT":
       return (await prisma.subject.findUnique({ where: { id } })) !== null;
+    case "TRACK":
+      return (await prisma.track.findUnique({ where: { id } })) !== null;
   }
 }
 
@@ -26,6 +28,8 @@ async function parentEntityExists(entityType: entityType, parentId: number) {
     case "STUDY_PROGRAM":
       return entityExists("FACULTY", parentId);
     case "SUBJECT":
+      return entityExists("STUDY_PROGRAM", parentId);
+    case "TRACK":
       return entityExists("STUDY_PROGRAM", parentId);
     case "UNIVERSITY":
       return true;

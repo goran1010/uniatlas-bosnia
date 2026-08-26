@@ -188,7 +188,8 @@
       "UNIVERSITY": "Univerzitet",
       "FACULTY": "Fakultet",
       "STUDY_PROGRAM": "Studijski program",
-      "SUBJECT": "Predmet"
+      "SUBJECT": "Predmet",
+      "TRACK": "Smjer"
     },
     "changeTypes": {
       "CREATE": "Kreiranje",
@@ -203,7 +204,8 @@
       "noChildren": {
         "FACULTY": "Nema dostupnih fakulteta",
         "STUDY_PROGRAM": "Nema dostupnih studijskih programa",
-        "SUBJECT": "Nema dostupnih predmeta"
+        "SUBJECT": "Nema dostupnih predmeta",
+        "TRACK": "Nema dostupnih smjerova"
       }
     },
     "dataFields": {
@@ -366,6 +368,7 @@
     },
     "faculties": "Fakulteti",
     "studyPrograms": "Studijski programi",
+    "tracks": "Smjerovi",
     "subjects": "Predmeti",
     "cycle": "Ciklus",
     "cycles": {

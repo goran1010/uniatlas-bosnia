@@ -60,6 +60,13 @@ function buildRows(entity: PickedEntity, t: TFunction): DetailRow[] {
           : undefined,
       );
       break;
+    case "TRACK":
+      push(t("contribution.dataFields.ects"), entity.data.ects);
+      push(
+        t("contribution.dataFields.durationYears"),
+        entity.data.durationYears,
+      );
+      break;
   }
 
   return rows;

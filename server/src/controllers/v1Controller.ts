@@ -115,6 +115,7 @@ async function getUniversityById(req: Request, res: Response) {
           studyPrograms: {
             include: {
               subjects: true,
+              tracks: true,
             },
           },
         },
