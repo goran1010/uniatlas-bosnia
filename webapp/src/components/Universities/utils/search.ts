@@ -8,6 +8,7 @@ const EMPTY_RESULTS: UnifiedSearchResults = {
   universities: [],
   faculties: [],
   studyPrograms: [],
+  tracks: [],
   subjects: [],
 };
 
