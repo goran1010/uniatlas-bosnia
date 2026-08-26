@@ -1,14 +1,14 @@
 {
   "description": "Data-collection edge cases for studyPrograms.json - decisions that deviate from a mechanical copy of the source, kept here for later review. status: resolved = decision accepted; needs-review = open question.",
-  "lastUpdated": "2026-08-25",
+  "lastUpdated": "2026-08-26",
   "cases": [
     {
       "university": "Univerzitet u Sarajevu",
       "faculty": "Prirodno-matematički fakultet",
       "program": "Informacione tehnologije",
       "issue": "Registry cycle is 'Stručni studij' (professional study) which has no studyCycle enum value",
-      "action": "Skipped - not seeded",
-      "status": "needs-review",
+      "action": "Seeded as STRUCNI (enum value added 2026-08-26): 120 ECTS, 2 years, per pmf.unsa.ba/strucni-studij-it/. Registry re-check 2026-08-26: the separate 'Stručni studij' registry cycle is gone, but the faculty page confirms the program is enrolling 2026/27",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/"
     },
     {
@@ -16,8 +16,8 @@
       "faculty": "Elektrotehnički fakultet",
       "program": "Razvoj softvera",
       "issue": "Registry cycle is 'Stručni studij' (professional study) which has no studyCycle enum value",
-      "action": "Skipped - not seeded",
-      "status": "needs-review",
+      "action": "Not seeded - discontinued/unverifiable: registry no longer lists it (2026-08-26) and its site rs.etf.unsa.ba is a dead server. STRUCNI enum now exists should it return",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/"
     },
     {
@@ -26,7 +26,7 @@
       "program": "Interdisciplinarni studij konzervacija i restauracija",
       "cycle": "PRVI i DRUGI",
       "issue": "Joint program (ALU + PMF, drugi ciklus takođe + Arhitektonski fakultet) - no single-faculty owner",
-      "action": "Assigned to first-listed faculty (Akademija likovnih umjetnosti)",
+      "action": "Assigned to first-listed faculty (Akademija likovnih umjetnosti) (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "http://registar.unsa.ba/"
     },
@@ -36,7 +36,7 @@
       "program": "Informatika u upravi",
       "cycle": "PRVI",
       "issue": "Joint program (Fakultet za upravu + Ekonomski fakultet)",
-      "action": "Assigned to first-listed faculty (Fakultet za upravu)",
+      "action": "Assigned to first-listed faculty (Fakultet za upravu) (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "http://registar.unsa.ba/"
     },
@@ -86,8 +86,8 @@
       "program": "Zajednički master program u saradnju sa Ekonomskim fakultetom Univerzitet u Ljubljani menadžmenta \"Javni sektor i ekonomija okoliša\"",
       "cycle": "DRUGI",
       "issue": "English-taught program but the registry's English dataset has an empty name for it",
-      "action": "Bosnian registry name kept",
-      "status": "needs-review",
+      "action": "Bosnian registry name kept (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/"
     },
     {
@@ -104,7 +104,7 @@
       "faculty": "Elektrotehnički fakultet",
       "program": "Data Science and Artificial Intelligence; Sigurnost informacija",
       "issue": "Newer than the UNSA registry - taken from the faculty's own site",
-      "action": "Added with faculty-site sourceUrl",
+      "action": "Added with faculty-site sourceUrl. Update 2026-08-26: registry now lists DSAI with 180 ECTS - ects set, sourceUrl switched to the registry",
       "status": "resolved",
       "source": "https://etf.unsa.ba"
     },
@@ -134,7 +134,7 @@
       "program": "Medicina, Farmacija, Dentalna medicina",
       "cycle": "PRVI",
       "issue": "360/300-ECTS integrated-style studies are formally listed as first cycle in RS",
-      "action": "Kept PRVI as the source lists them (user decision 2026-08-23)",
+      "action": "Kept PRVI as the source lists them (user decision 2026-08-23). Superseded 2026-08-26: re-tagged INTEGRISANI per new rule (integrated-length medicine-like programs are INTEGRISANI)",
       "status": "resolved",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-prvom-ciklusu-studija"
     },
@@ -144,7 +144,7 @@
       "program": "Očuvanje i održiva upotreba genetičkih resursa",
       "cycle": "DRUGI",
       "issue": "Joint program (Poljoprivredni + Prirodno-matematički fakultet)",
-      "action": "Assigned to first-listed faculty (Poljoprivredni fakultet)",
+      "action": "Assigned to first-listed faculty (Poljoprivredni fakultet) (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
     },
@@ -154,7 +154,7 @@
       "program": "Obnovljivi izvori energije i ekološko inženjerstvo",
       "cycle": "TRECI",
       "issue": "Joint program (AGGF + Elektrotehnički + Mašinski + Tehnološki fakultet)",
-      "action": "Assigned to first-listed faculty (AGGF)",
+      "action": "Assigned to first-listed faculty (AGGF) (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
     },
@@ -173,8 +173,8 @@
       "program": "Šumarstvo",
       "cycle": "DRUGI",
       "issue": "Listed as two programs: 'Šumarstvo 60 ECTS' and 'Šumarstvo 120 ECTS'",
-      "action": "Merged into one row with ects null",
-      "status": "needs-review",
+      "action": "Merged into one row with ects null (merge-with-null convention confirmed by user 2026-08-26)",
+      "status": "resolved",
       "source": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
     },
     {
@@ -210,7 +210,7 @@
       "program": "Primjenjena hemija",
       "cycle": "TRECI",
       "issue": "Source title 'Zajednički doktorski studij Primjenjena hemija' - joint doctoral program (Tehnološki + Prirodno-matematički fakultet)",
-      "action": "Assigned to first-listed faculty (Tehnološki fakultet), 'Zajednički doktorski studij' prefix dropped",
+      "action": "Assigned to first-listed faculty (Tehnološki fakultet), 'Zajednički doktorski studij' prefix dropped (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
     },
@@ -220,8 +220,8 @@
       "program": "Studijski program trećeg ciklusa - doktorskog studija",
       "cycle": "TRECI",
       "issue": "Source gives no proper program name for this doctoral study",
-      "action": "Kept the literal descriptive title",
-      "status": "needs-review",
+      "action": "Kept the literal descriptive title (source re-checked 2026-08-26: no proper name published; user accepted literal name)",
+      "status": "resolved",
       "source": "https://untz.ba/studijski-programi/studijski-programi-iii-ciklusa/"
     },
     {
@@ -242,8 +242,8 @@
       "program": "Zdravstvena njega",
       "cycle": "PRVI",
       "issue": "Licensed list has 'Zdravstvena njega' but the 2026/27 konkurs enrolls 'Sestrinstvo' (240 ECTS) - likely renamed",
-      "action": "Kept licensed-list name without ECTS",
-      "status": "needs-review",
+      "action": "Kept licensed-list name without ECTS (user decision 2026-08-26: keep licensed-list name)",
+      "status": "resolved",
       "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
     },
     {
@@ -261,15 +261,15 @@
       "program": "Medicina na engleskom jeziku; Ekonomija i poslovno upravljanje na engleskom jeziku",
       "cycle": "PRVI",
       "issue": "English-taught programs present in the 2026/27 konkurs but missing from the licensed-programs pages; no official English program name published",
-      "action": "Added with official Serbian names, language 'engleski'",
+      "action": "Added with official Serbian names, language 'engleski'. Update 2026-08-26: 'Medicina na engleskom jeziku' re-tagged INTEGRISANI per new rule",
       "status": "resolved",
       "source": "https://unibl.org/uploads/files/Konkurs_upis%20studenata_26.27_.pdf"
     },
     {
       "university": "Univerzitet u Tuzli",
       "issue": "No ECTS published in central sources (studijski-programi registry and 2026/27 konkurs list no per-program ECTS); per-program curriculum PDFs would be needed",
-      "action": "ects left null for all UNTZ programs",
-      "status": "needs-review",
+      "action": "ects left null for all UNTZ programs (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://untz.ba/studijski-programi/"
     },
     {
@@ -293,15 +293,15 @@
       "program": "Dizajn i tehnologije u drvopreradi; Inženjerska i poslovna informatika",
       "cycle": "PRVI",
       "issue": "Listed on the faculty homepage but not on its studijski-programi page",
-      "action": "Included without ECTS",
-      "status": "needs-review",
+      "action": "Included without ECTS (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://mf.unze.ba"
     },
     {
       "university": "Univerzitet u Zenici",
       "issue": "Cycles that exist but publish no program names: Ekonomski III, Medicinski II/III, Pravni II/III, FIPN II",
-      "action": "Skipped - nothing nameable to seed",
-      "status": "needs-review"
+      "action": "Skipped - nothing nameable to seed (user accepted 2026-08-26)",
+      "status": "resolved"
     },
     {
       "university": "Univerzitet u Zenici",
@@ -309,7 +309,7 @@
       "program": "Doktorski studij iz tehničkih nauka",
       "cycle": "TRECI",
       "issue": "Joint doctoral study (FIPN + Mašinski + Politehnički fakultet)",
-      "action": "Assigned to first-listed faculty (FIPN)",
+      "action": "Assigned to first-listed faculty (FIPN) (decision deferred to end of issue #359 work - user 2026-08-26)",
       "status": "needs-review",
       "source": "https://www.fipn.unze.ba"
     },
@@ -317,8 +317,8 @@
       "university": "Univerzitet Džemal Bijedić",
       "program": "Dizajn interijera; Poslovna informatika; Turizam; Zdravstvena njega (PRVI); Politehnika (TRECI)",
       "issue": "'Univerzitetski studiji' (university-level programs) - no faculty owner in faculties.json",
-      "action": "HELD OUT of the seed pending user decision (same situation as UNSA CIS)",
-      "status": "needs-review",
+      "action": "Held out of the seed (user decision 2026-08-26); program data preserved here",
+      "status": "resolved",
       "source": "https://www.unmo.ba/univerzitet/studijski-programi/",
       "heldOutPrograms": [
         {
@@ -364,8 +364,8 @@
       "program": "Akademski dodiplomski studij; Stručni dodiplomski studij",
       "cycle": "PRVI",
       "issue": "Source publishes no proper program names; stručni is listed by the source as I ciklus (kept PRVI, unlike UNSA where 'Stručni studij' was a separate cycle label)",
-      "action": "Kept literal names",
-      "status": "needs-review",
+      "action": "Kept literal names (user accepted 2026-08-26; stručni stays PRVI per source-label rule)",
+      "status": "resolved",
       "source": "https://www.unmo.ba/univerzitet/studijski-programi/"
     },
     {
@@ -388,19 +388,19 @@
       "university": "Sveučilište u Mostaru",
       "faculty": "Filozofski fakultet / Fakultet prirodoslovno-matematičkih i odgojnih znanosti",
       "issue": "Sites list studiji without preddiplomski/diplomski split (both levels exist per enrollment pages)",
-      "action": "Recorded as PRVI only; DRUGI counterparts likely exist but are unnamed per-level",
-      "status": "needs-review"
+      "action": "Recorded as PRVI only; DRUGI counterparts likely exist but are unnamed per-level (user accepted 2026-08-26)",
+      "status": "resolved"
     },
     {
       "university": "Sveučilište u Mostaru",
       "issue": "Skipped: unnamed diplomski/doktorski categories (EF, FZS, FARF, PF, APTF, FSRE III); specijalistički studiji (not in cycle enum: Pravo osiguranja, 2 FF studies); EF stručni studij 180 ECTS (separate level per source); distance/campus variants (Novinarstvo/Odnosi s javnošću na daljinu, Socijalni rad SCP Orašje, FPMOZ Orašje x3); ALU 'Ars Sacra' and 2 FPMOZ poslijediplomski with unstated level",
-      "action": "Skipped + recorded",
-      "status": "needs-review"
+      "action": "Skipped + recorded (user accepted 2026-08-26; SUM EF stručni re-checked - level exists but publishes no program name, stays skipped despite new STRUCNI enum)",
+      "status": "resolved"
     },
     {
       "university": "Univerzitet u Istočnom Sarajevu",
       "issue": "II/III cycle degree titles state cumulative ECTS (300/480/540)",
-      "action": "ects set only for PRVI (from titles); II/III left null",
+      "action": "ects set only for PRVI (from titles); II/III left null. Update 2026-08-26: the 360-ECTS medicine-like PRVI programs (Medicina, Medicine, Dentistry, Stomatologija) re-tagged INTEGRISANI per new rule",
       "status": "resolved",
       "source": "https://www.ues.rs.ba/nastava/vrste-i-nivoi-studija/"
     },
@@ -433,8 +433,8 @@
       "faculty": "Tehnički fakultet",
       "program": "Mašinski odsjek; Građevinski odsjek; Elektrotehnički odsjek; Tekstilni odsjek; Master studij TF 4+1",
       "issue": "Konkurs publishes odsjek names / generic master name, not proper program names",
-      "action": "Kept literal konkurs names",
-      "status": "needs-review",
+      "action": "Kept literal konkurs names (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
     },
     {
@@ -457,16 +457,16 @@
     {
       "university": "Univerzitet u Bihaću",
       "issue": "Biotehnički fakultet II cycle listed only as 'Studijski program II ciklusa' (unnamed); EF program names shortened from 'Akademski/Stručni studijski program poslovne ekonomije'",
-      "action": "Unnamed skipped; EF names shortened; stručni kept PRVI (listed in I-cycle table)",
-      "status": "needs-review",
+      "action": "Unnamed skipped; EF names shortened; stručni kept PRVI (listed in I-cycle table) (user accepted 2026-08-26; stručni stays PRVI per source-label rule)",
+      "status": "resolved",
       "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
     },
     {
       "university": "Univerzitet u Sarajevu",
       "faculty": "Centar za interdisciplinarne studije",
       "issue": "University-level organizational unit (not a faculty). Was briefly added to faculties.json + seeded on 2026-08-23, then pulled back out per user decision 2026-08-24 - to be decided later together with UNMO 'Univerzitetski studiji'",
-      "action": "HELD OUT of faculties.json and the seed; full program list preserved here",
-      "status": "needs-review",
+      "action": "Held out of faculties.json and the seed (user decision 2026-08-26); full program list preserved here",
+      "status": "resolved",
       "source": "http://registar.unsa.ba/",
       "heldOutFaculty": {
         "name": "Centar za interdisciplinarne studije",
@@ -573,10 +573,10 @@
       "university": "Internacionalni univerzitet u Sarajevu",
       "faculty": "Fakultet medicinskih nauka",
       "program": "Medicine; Dental Medicine",
-      "cycle": "PRVI",
+      "cycle": "INTEGRISANI",
       "issue": "Site lists them under 'Bachelor', but medicine/dental studies cannot be 240-ECTS bachelors; likely integrated",
-      "action": "Recorded as PRVI per source listing WITHOUT the university-wide 240/4y defaults",
-      "status": "needs-review",
+      "action": "Re-tagged INTEGRISANI (user decision 2026-08-26: integrated-length medicine-like programs are INTEGRISANI); ects/duration left null (university-wide 240/4y defaults still not applied)",
+      "status": "resolved",
       "source": "https://ius.edu.ba"
     },
     {
@@ -592,16 +592,16 @@
       "program": "Economics and Finance",
       "cycle": "PRVI",
       "issue": "Current menu says 'Economics and Finance' while the sitemap/admission slug is 'banking-and-finance' (likely renamed)",
-      "action": "Menu name used",
-      "status": "needs-review",
+      "action": "Menu name used (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://www.ibu.edu.ba"
     },
     {
       "university": "Internacionalni Burč univerzitet",
       "program": "Game and Interaction Design; management-mit",
       "issue": "Present in sitemap but absent from the current faculties menu (possibly discontinued / unclear)",
-      "action": "Skipped",
-      "status": "needs-review",
+      "action": "Skipped (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://www.ibu.edu.ba/sitemap-0.xml"
     },
     {
@@ -609,23 +609,23 @@
       "faculty": "Fakultet za inžinjering, prirodne i medicinske nauke",
       "program": "Dentistry",
       "issue": "No cycle stated in reachable sources; dental study in BiH is an integrated I+II programme",
-      "action": "Recorded INTEGRISANI",
-      "status": "needs-review",
+      "action": "Recorded INTEGRISANI (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://www.ibu.edu.ba/department-of-dentistry"
     },
     {
       "university": "Univerzitet Sarajevo School of Science and Technology",
       "issue": "English-taught; departments double as faculties. Program names taken from department-page prose (no formal register): 'Health Sciences' (bachelor+master), 'Film Directing' (BFA/MFA), 'MBA', 'Health Economics and Pharmacoeconomics'",
-      "action": "Names as stated in prose; unnamed MSc/PhD tracks at Economics and Business skipped",
-      "status": "needs-review",
+      "action": "Names as stated in prose; unnamed MSc/PhD tracks at Economics and Business skipped (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://ssst.edu.ba/en"
     },
     {
       "university": "Univerzitet Sarajevo School of Science and Technology",
       "program": "Medicine (MD); Pharmacy (MPharm); Dentistry",
       "issue": "Degree titles imply integrated studies (MD, Master of Pharmacy); cycles not explicitly labeled",
-      "action": "Recorded INTEGRISANI",
-      "status": "needs-review",
+      "action": "Recorded INTEGRISANI (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://ssst.edu.ba/en"
     },
     {
@@ -634,23 +634,23 @@
       "program": "Clinical Medicine; Biomedicine",
       "cycle": "TRECI",
       "issue": "PhD programs mentioned on the Pharmaco-Economics department page as launched at Sarajevo Medical School",
-      "action": "Attributed to Sarajevo Medical School",
-      "status": "needs-review",
+      "action": "Attributed to Sarajevo Medical School (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://ssst.edu.ba/en/department/pharmaco-economics/10"
     },
     {
       "university": "Univerzitet u Travniku",
       "faculty": "Edukacijski fakultet; Fakultet za tehničke studije",
       "issue": "Sites list programs without cycle split (I/II/III all exist)",
-      "action": "Recorded as PRVI only; higher-cycle counterparts unnamed",
-      "status": "needs-review"
+      "action": "Recorded as PRVI only; higher-cycle counterparts unnamed (user accepted 2026-08-26)",
+      "status": "resolved"
     },
     {
       "university": "Univerzitet u Travniku",
       "faculty": "Fakultet za menadžment i poslovnu ekonomiju",
       "issue": "Doctoral study exists but publishes no program names; PRVI programs with '3+2, 4+1' dual models (Poslovna ekonomija, Poslovna psihologija) left without duration",
-      "action": "III cycle skipped; dual-model durations null",
-      "status": "needs-review",
+      "action": "III cycle skipped; dual-model durations null (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://fmpe.edu.ba"
     },
     {
@@ -668,15 +668,15 @@
       "faculty": "Fakultet poslovne ekonomije",
       "program": "Poduzetnički menadžment / Poduzetništvo i menadžment",
       "issue": "Both listed as separate programs with near-identical names",
-      "action": "Both kept as listed",
-      "status": "needs-review",
+      "action": "Both kept as listed (user accepted 2026-08-26; revisit if an odsjek/smjer level is added to the schema)",
+      "status": "resolved",
       "source": "https://sveuciliste.unvi.edu.ba/"
     },
     {
       "university": "Univerzitet za poslovne studije Banja Luka",
       "issue": "Four PRVI programs are licensed in BOTH 180-ECTS (3y) and 240-ECTS (4y) variants under the same name (Ekologija, Turizam i hotelijerstvo, Računarske i informacione tehnologije, Grafički dizajn) - schema unique key (name, facultyId, cycle) cannot hold both rows",
-      "action": "Single row per program with durationYears/ects null, following the UNBI dual-model precedent",
-      "status": "needs-review",
+      "action": "Single row per program with durationYears/ects null, following the UNBI dual-model precedent (merge-with-null convention confirmed by user 2026-08-26)",
+      "status": "resolved",
       "source": "https://univerzitetps.com/wp-content/uploads/2026/06/Novo_KONKURS-I-II-i-III-ciklus-za-objavu-JUN-2026.-1.pdf"
     },
     {
@@ -691,8 +691,8 @@
     {
       "university": "Univerzitet za poslovne studije Banja Luka",
       "issue": "Two licensed DRUGI programs ('Bankarsko i berzansko poslovanje' 60 ECTS, 'Preduzetništvo i menadžment malih i srednjih preduzeća' 60 ECTS) appear only on the university-wide licensed list with no faculty owner and are absent from the 2026/27 konkurs",
-      "action": "HELD OUT - not seeded (UNMO 'Univerzitetski studiji' precedent); thematic owners would be FPFS and FPE respectively but that would be guessing",
-      "status": "needs-review",
+      "action": "Held out - not seeded (user decision 2026-08-26; UNMO 'Univerzitetski studiji' precedent); thematic owners would be FPFS and FPE respectively but that would be guessing",
+      "status": "resolved",
       "source": "https://univerzitetps.com/studijski-programi/"
     },
     {
@@ -722,8 +722,8 @@
       "university": "Univerzitet Bijeljina",
       "faculty": "Poljoprivredni fakultet",
       "issue": "Three programs appear only on the faculty site, not in the university catalog: Agroekologija (I ciklus), 'Agroekologija master' (II ciklus), Održiva poljoprivreda i ruralni razvoj (III ciklus); no ECTS/duration published",
-      "action": "Seeded with null ECTS/duration; 'Agroekologija master' seeded as name 'Agroekologija' cycle DRUGI ('master' read as level qualifier)",
-      "status": "needs-review",
+      "action": "Seeded with null ECTS/duration; 'Agroekologija master' seeded as name 'Agroekologija' cycle DRUGI ('master' read as level qualifier) (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://pf.ubn.rs.ba/studije-ii-ciklusa/"
     },
     {
@@ -737,8 +737,8 @@
       "university": "Evropski univerzitet, Brčko distrikt BiH",
       "faculty": "Fakultet za medicinu, farmaciju i zdravstvo",
       "issue": "Medicina (6y/360 ECTS), Stomatologija (6y/360) and Farmacija (5y/300) are integrated-length programs but the konkurs lists them under I ciklus",
-      "action": "Kept PRVI per source listing (UNIBL rule 9 precedent)",
-      "status": "needs-review",
+      "action": "Re-tagged INTEGRISANI (user decision 2026-08-26: integrated-length medicine-like programs are INTEGRISANI regardless of I-ciklus konkurs listing; supersedes UNIBL rule 9 precedent)",
+      "status": "resolved",
       "source": "https://eubd.edu.ba/Konkursi/Konkurs%20za%20upis%20studenata%20u%202026%202027%20godinu%20Brcko.pdf"
     },
     {
@@ -763,8 +763,8 @@
       "university": "Evropski univerzitet, Brčko distrikt BiH",
       "faculty": "Ekonomski fakultet",
       "issue": "I ciklus program is officially named just 'Opšti smjer' (NPP: Studijski program 'Opšti smjer', zvanje Diplomirani ekonomista) while II/III ciklus are named 'Ekonomija - opšti smjer'",
-      "action": "Seeded as published per cycle",
-      "status": "needs-review",
+      "action": "Seeded as published per cycle (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://eubd.edu.ba/NPP/Osnovne-akademske-studije-Opsti-smjer.pdf"
     },
     {
@@ -778,8 +778,8 @@
     {
       "university": "Evropski univerzitet, Brčko distrikt BiH",
       "issue": "Site carries NPP PDFs and menu entries for programs absent from the 2026/27 konkurs (e.g. Žurnalistika i komunikologija, Javna uprava, Menadžment javne uprave, Hidrotehnika, Mobilne komunikacije, Riječni saobraćaj, Putevi željeznice i aerodromi, Računarstvo i informatika, Računarske mreže i sistemi, Biomedicinsko inženjerstvo, Konstrukcije, Marketing i trgovina, Menadžment informacionih sistema, Menadžment turizma i sporta, Menadžment u saobraćaju, Razredna nastava - likovna kultura)",
-      "action": "Not seeded - konkurs 2026/27 treated as the authoritative current offering",
-      "status": "needs-review",
+      "action": "Not seeded - konkurs 2026/27 treated as the authoritative current offering (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://eubd.edu.ba/"
     },
     {
@@ -792,16 +792,16 @@
     {
       "university": "Internacionalni univerzitet, Brčko distrikt BiH",
       "issue": "Konkurs blanket statement 'MAGISTARSKE I DOKTORSKE STUDIJE PRATE OSNOVNE AKADEMSKE STUDIJE NA SVIM FAKULTETIMA I STUDIJSKIM PROGRAMIMA' implies II/III cycles for every program, but several programs lack per-cycle statements on their pages",
-      "action": "II/III NOT seeded for programs without explicit page statements (Menadžment, Poljoprivreda, Šumarstvo, Građevinarstvo i arhitektura, Turizam i zaštita, Zdravstvena njega i zdravstvena bezbjednost, Predškolsko vaspitanje i obrazovanje; BHS jezik i književnost has I and II only)",
-      "status": "needs-review",
+      "action": "II/III NOT seeded for programs without explicit page statements (Menadžment, Poljoprivreda, Šumarstvo, Građevinarstvo i arhitektura, Turizam i zaštita, Zdravstvena njega i zdravstvena bezbjednost, Predškolsko vaspitanje i obrazovanje; BHS jezik i književnost has I and II only) (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     },
     {
       "university": "Internacionalni univerzitet, Brčko distrikt BiH",
       "faculty": "Fakultet za menadžment",
       "issue": "Konkurs lists both MENADŽMENT and POSLOVNI MENADŽMENT; the site has a single program page titled 'Poslovni menadžment'. Konkurs-only programs Menadžment and Šumarstvo have no program pages and no ECTS/durations. Site-menu-only programs (Obnovljivi izvori energije, Menadžment energije i energetske efikasnosti) are absent from the konkurs",
-      "action": "All seeded as published; konkurs-only ones with null ECTS/duration",
-      "status": "needs-review",
+      "action": "All seeded as published; konkurs-only ones with null ECTS/duration (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     },
     {
@@ -809,8 +809,8 @@
       "faculty": "Fakultet za menadžment",
       "program": "Menadžment energije i energetske efikasnosti",
       "issue": "Program page's I-ciklus statement mistakenly names the program 'Obnovljivi izvori energije' (site copy-paste error); II/III statements use the correct name",
-      "action": "Seeded under the page title with the template values (I: 4y/240)",
-      "status": "needs-review",
+      "action": "Seeded under the page title with the template values (I: 4y/240) (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-menadzmentt/menadzment-energije-i-energetske-efikasnosti"
     },
     {
@@ -818,8 +818,8 @@
       "faculty": "Fakultet za informatiku",
       "program": "Informatika i tehničko obrazovanje",
       "issue": "Konkurs names this 'PROFESOR INFORMATIKE I TEHNIKE' while the site page is 'Informatika i tehničko obrazovanje' (page's II-cycle degree: magistar informatike i tehnike); 'Profesor informatike i računarstva' exists on the site but not in the konkurs",
-      "action": "Site page names seeded; konkurs variant not seeded as a separate program",
-      "status": "needs-review",
+      "action": "Site page names seeded; konkurs variant not seeded as a separate program (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/fakulteti/fakultet-za-informatikuu/informatike-i-tehnicko-obrazovanje"
     },
     {
@@ -836,8 +836,8 @@
       "faculty": "Fakultet za poslovno-civilnu bezbjednost",
       "program": "Zdravstvena njega i zdravstvena bezbjednost",
       "issue": "Konkurs: 'moduli 180 i 240 ECTS' (dual duration under one name; smjerovi visoka medicinska sestra, visoki radiološki tehničar, fizioterapeut); program page is a stub with no cycle details; menu name is shorter ('Zdravstvena njega i bezbjednost')",
-      "action": "Single PRVI row with null ECTS/duration (dual-model precedent); konkurs name used",
-      "status": "needs-review",
+      "action": "Single PRVI row with null ECTS/duration (dual-model precedent); konkurs name used (merge-with-null convention confirmed by user 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/obavjestenja/421-drugi-upisni-rok-na-iubd-javni-konkurs"
     },
     {
@@ -845,8 +845,8 @@
       "faculty": "Učiteljski fakultet",
       "program": "Predškolsko vaspitanje i obrazovanje",
       "issue": "Program page states BOTH a three-year 180 ECTS completion and a four-year 240 ECTS I ciklus completion (dual duration); konkurs calls it 'Predškolski odgoj'",
-      "action": "Single PRVI row with null ECTS/duration; site page name seeded",
-      "status": "needs-review",
+      "action": "Single PRVI row with null ECTS/duration; site page name seeded (merge-with-null convention confirmed by user 2026-08-26)",
+      "status": "resolved",
       "source": "http://iubd.edu.ba/index.php/fakulteti/uciteljski-fakultett/predskolsko-vaspitanje-i-obrazovanje"
     },
     {
@@ -868,8 +868,8 @@
       "faculty": "Fakultet politehničkih nauka",
       "program": "Logistički menadžment",
       "issue": "Same smjer name exists under two odsjeka (Logistika and Inžinjerski menadžment) - collides on the (name,faculty,cycle) unique key",
-      "action": "Merged into one row per cycle",
-      "status": "needs-review",
+      "action": "Merged into one row per cycle (user accepted 2026-08-26; revisit if an odsjek/smjer level is added to the schema)",
+      "status": "resolved",
       "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
     },
     {
@@ -887,15 +887,15 @@
       "program": "Biodivezitet",
       "cycle": "TRECI",
       "issue": "Source consistently spells 'Biodivezitet' (likely typo for Biodiverzitet)",
-      "action": "Source spelling kept",
-      "status": "needs-review",
+      "action": "Corrected to 'Biodiverzitet' (user decision 2026-08-26, consistent with typo corrections in other cases)",
+      "status": "resolved",
       "source": "https://iu-travnik.com/wp-content/uploads/2025/12/Pregled-studijskih-programa-po-fakultetima-i-modelima-za-web-stranicu-2025-26.pdf"
     },
     {
       "university": "Sveučilište Hercegovina",
       "issue": "Site lists programs by cycle only, without faculty attribution; no ECTS/durations published",
-      "action": "Law/IR programs attributed to Fakultet međunarodnih odnosa i diplomacije, all others to Fakultet društvenih znanosti dr. Milenka Brkića (subject-based inference); 'Pravo s međunarodnim odnosima' smjerovi (Pravo, Međunarodno pravo) folded into one program; site typos ('MENADŽMENT U OBRAZOVANJE', 'TURIZA') corrected",
-      "status": "needs-review",
+      "action": "Law/IR programs attributed to Fakultet međunarodnih odnosa i diplomacije, all others to Fakultet društvenih znanosti dr. Milenka Brkića (subject-based inference); 'Pravo s međunarodnim odnosima' smjerovi (Pravo, Međunarodno pravo) folded into one program; site typos ('MENADŽMENT U OBRAZOVANJE', 'TURIZA') corrected (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://hercegovina.edu.ba/hr/studijski-programi/"
     },
     {
@@ -908,30 +908,30 @@
     {
       "university": "Evropski univerzitet Kallos Tuzla",
       "issue": "Homepage lists I-cycle offers per faculty, some smjer-style ('Opći smjer' at Ekonomski, 'Konstrukcije' at Tehnički); II cycle exists at 6 faculties and III at 7, but names are published only for Medicinski III (Biomedicina i zdravstvo)",
-      "action": "I-cycle names kept as listed; unnamed II/III skipped; no ECTS published",
-      "status": "needs-review",
+      "action": "I-cycle names kept as listed; unnamed II/III skipped; no ECTS published (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://eukallos.edu.ba"
     },
     {
       "university": "Panevropski univerzitet Apeiron Banja Luka",
       "issue": "Master (II) study plans at FIT, Fakultet pravnih nauka and Saobraćajni fakultet are faculty-level without program names; doctoral (III) studies exist at FPE, FIT and Fakultet filoloških nauka but publish no program names; no ECTS anywhere",
-      "action": "Named II programs seeded (8); unnamed II/III skipped",
-      "status": "needs-review",
+      "action": "Named II programs seeded (8); unnamed II/III skipped (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://apeiron-uni.eu"
     },
     {
       "university": "Slobomir P Univerzitet",
       "issue": "2026/27 konkurs is issued by 'Slobomir P Univerzitet BANJA LUKA' (address Braće Podgornika 8, Banja Luka) while universities.json says city 'Slobomir, Bijeljina' - university appears to have moved",
-      "action": "universities.json left unchanged; needs a decision",
-      "status": "needs-review",
+      "action": "universities.json city updated to 'Banja Luka' (user decision 2026-08-26); verified: spu.ba brands itself 'Slobomir P Univerzitet Banja Luka' and the 2026/27 konkurs address is Braće Podgornika 8, Banja Luka",
+      "status": "resolved",
       "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
     },
     {
       "university": "Slobomir P Univerzitet",
       "faculty": "Filološki fakultet; Poreska akademija",
       "issue": "Listed in site navigation but absent from the 2026/27 enrollment konkurs - no programs found",
-      "action": "No programs seeded for these two faculties",
-      "status": "needs-review",
+      "action": "No programs seeded for these two faculties (user accepted 2026-08-26)",
+      "status": "resolved",
       "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
     },
     {
@@ -942,6 +942,16 @@
       "action": "ects left null",
       "status": "resolved",
       "source": "https://spu.ba/wp-content/uploads/2026/05/СПУ-КОНКУРС-УПИС-СТУДЕНАТА-1.pdf"
+    },
+    {
+      "university": "Univerzitet u Sarajevu",
+      "faculty": "Ekonomski fakultet",
+      "program": "Poslovanje i informacione tehnologije",
+      "cycle": "STRUCNI",
+      "issue": "Registry (2026-08-26) lists 'Stručni studij – Poslovanje i informacione tehnologije' under Ciklus I although the name marks it as stručni studij (120 ECTS); the registry's earlier separate 'Stručni studij' cycle category is gone",
+      "action": "Seeded as STRUCNI with name 'Poslovanje i informacione tehnologije' (prefix dropped), 120 ECTS, 2 years (user decision 2026-08-26)",
+      "status": "resolved",
+      "source": "http://registar.unsa.ba/"
     }
   ]
 }
