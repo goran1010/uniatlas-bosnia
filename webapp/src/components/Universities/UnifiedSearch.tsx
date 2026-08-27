@@ -13,6 +13,7 @@ import { Spinner } from "../../utils/Spinner";
 import { UniversityCard } from "./UniversityCard";
 import { FacultyResult } from "./FacultyResult";
 import { StudyProgramResult } from "./StudyProgramResult";
+import { TrackResult } from "./TrackResult";
 import { SubjectResult } from "./SubjectResult";
 import { searchAll } from "./utils/search";
 import { searchTermSchema } from "../../schemas/domain";
@@ -89,6 +90,7 @@ function UnifiedSearch() {
     results.universities.length === 0 &&
     results.faculties.length === 0 &&
     results.studyPrograms.length === 0 &&
+    results.tracks.length === 0 &&
     results.subjects.length === 0;
 
   return (
@@ -154,6 +156,17 @@ function UnifiedSearch() {
               <ul className="flex flex-col gap-2 w-full">
                 {results.studyPrograms.map((p) => (
                   <StudyProgramResult key={p.id} program={p} t={t} />
+                ))}
+              </ul>
+            </ResultSection>
+            <ResultSection
+              heading={t("universitiesPage.tracksSection")}
+              emptyMessage={t("universitiesPage.noTrackResults")}
+              isEmpty={results.tracks.length === 0}
+            >
+              <ul className="flex flex-col gap-2 w-full">
+                {results.tracks.map((tr) => (
+                  <TrackResult key={tr.id} track={tr} t={t} />
                 ))}
               </ul>
             </ResultSection>

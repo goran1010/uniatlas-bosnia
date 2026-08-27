@@ -81,6 +81,18 @@ const subjectEditDataSchema = nonEmptyObject({
   type: subjectTypeSchema.nullable().optional(),
 });
 
+const trackCreateDataSchema = z.strictObject({
+  name: requiredNameSchema,
+  ects: ectsSchema.optional(),
+  durationYears: durationYearsSchema.optional(),
+});
+
+const trackEditDataSchema = nonEmptyObject({
+  name: optionalNameSchema,
+  ects: ectsSchema.nullable().optional(),
+  durationYears: durationYearsSchema.nullable().optional(),
+});
+
 const positiveIdSchema = z
   .string()
   .trim()
@@ -113,6 +125,12 @@ const contributionSubmissionSchema = z.union([
     data: subjectCreateDataSchema,
   }),
   z.object({
+    entityType: z.literal("TRACK"),
+    typeOfChange: z.literal("CREATE"),
+    parentId: positiveIdSchema,
+    data: trackCreateDataSchema,
+  }),
+  z.object({
     entityType: z.literal("UNIVERSITY"),
     typeOfChange: z.literal("UPDATE"),
     targetId: positiveIdSchema,
@@ -137,6 +155,12 @@ const contributionSubmissionSchema = z.union([
     data: subjectEditDataSchema,
   }),
   z.object({
+    entityType: z.literal("TRACK"),
+    typeOfChange: z.literal("UPDATE"),
+    targetId: positiveIdSchema,
+    data: trackEditDataSchema,
+  }),
+  z.object({
     entityType: entityTypeSchema,
     typeOfChange: z.literal("DELETE"),
     targetId: positiveIdSchema,
@@ -151,6 +175,8 @@ export {
   studyProgramEditDataSchema,
   subjectCreateDataSchema,
   subjectEditDataSchema,
+  trackCreateDataSchema,
+  trackEditDataSchema,
   universityCreateDataSchema,
   universityEditDataSchema,
 };

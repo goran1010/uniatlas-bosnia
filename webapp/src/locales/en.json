@@ -188,6 +188,7 @@
       "UNIVERSITY": "University",
       "FACULTY": "Faculty",
       "STUDY_PROGRAM": "Study Program",
+      "TRACK": "Track (smjer)",
       "SUBJECT": "Subject"
     },
     "changeTypes": {
@@ -203,6 +204,7 @@
       "noChildren": {
         "FACULTY": "No faculties available",
         "STUDY_PROGRAM": "No study programs available",
+        "TRACK": "No tracks available",
         "SUBJECT": "No subjects available"
       }
     },
@@ -226,7 +228,8 @@
       "PRVI": "FIRST - Bachelor",
       "DRUGI": "SECOND - Master",
       "TRECI": "THIRD - PhD",
-      "INTEGRISANI": "INTEGRATED - Bachelor+Master"
+      "INTEGRISANI": "INTEGRATED - Bachelor+Master",
+      "STRUCNI": "PROFESSIONAL - Professional Bachelor"
     },
     "subjectTypes": {
       "OBAVEZNI": "Mandatory",
@@ -350,10 +353,12 @@
     "universitiesSection": "Universities",
     "facultiesSection": "Faculties",
     "studyProgramsSection": "Study programs",
+    "tracksSection": "Tracks (smjerovi)",
     "subjectsSection": "Subjects",
     "noResults": "No universities found.",
     "noFacultyResults": "No faculties found.",
     "noStudyProgramResults": "No study programs found.",
+    "noTrackResults": "No tracks found.",
     "noSubjectResults": "No subjects found.",
     "noResultsAtAll": "No results found.",
     "city": "City",
@@ -365,13 +370,15 @@
     },
     "faculties": "Faculties",
     "studyPrograms": "Study Programs",
+    "tracks": "Tracks (smjerovi)",
     "subjects": "Subjects",
     "cycle": "Cycle",
     "cycles": {
       "PRVI": "First (Bachelor)",
       "DRUGI": "Second (Master)",
       "TRECI": "Third (PhD)",
-      "INTEGRISANI": "Integrated (Bachelor + Master)"
+      "INTEGRISANI": "Integrated (Bachelor + Master)",
+      "STRUCNI": "Professional (Professional Bachelor)"
     },
     "ects": "ECTS",
     "durationYears": "years",

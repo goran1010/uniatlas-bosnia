@@ -45,12 +45,13 @@ const ENTITY_TYPES: EntityType[] = [
   "UNIVERSITY",
   "FACULTY",
   "STUDY_PROGRAM",
+  "TRACK",
   "SUBJECT",
 ];
 
 const TYPE_OF_CHANGES: TypeOfChange[] = ["CREATE", "UPDATE", "DELETE"];
 
-const CYCLES: Cycle[] = ["PRVI", "DRUGI", "TRECI", "INTEGRISANI"];
+const CYCLES: Cycle[] = ["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"];
 
 const SUBJECT_TYPES: SubjectType[] = ["OBAVEZNI", "IZBORNI"];
 
@@ -175,6 +176,7 @@ function AddUniversityEntity({
         <EntityPicker
           key={`${entityType}-${typeOfChange}-${String(pickerResetKey)}`}
           depth={getPickerDepth(entityType, typeOfChange)}
+          leafType={entityType === "TRACK" ? "TRACK" : "SUBJECT"}
           legend={
             needsParent
               ? t("contribution.picker.parent")
@@ -367,6 +369,38 @@ function AddUniversityEntity({
                 value={data.language ?? ""}
                 onChange={(e) => {
                   setDataField("language", e.target.value || undefined);
+                }}
+              />
+            </>
+          )}
+
+          {entityType === "TRACK" && (
+            <>
+              <DataField
+                label={t("contribution.dataFields.ects")}
+                id="dataTrackEcts"
+                type="number"
+                min={1}
+                value={data.ects ?? ""}
+                onChange={(e) => {
+                  setDataField(
+                    "ects",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
+                }}
+              />
+              <DataField
+                label={t("contribution.dataFields.durationYears")}
+                id="dataTrackDuration"
+                type="number"
+                min={1}
+                max={10}
+                value={data.durationYears ?? ""}
+                onChange={(e) => {
+                  setDataField(
+                    "durationYears",
+                    e.target.value === "" ? undefined : Number(e.target.value),
+                  );
                 }}
               />
             </>

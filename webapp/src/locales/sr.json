@@ -188,6 +188,7 @@
       "UNIVERSITY": "Univerzitet",
       "FACULTY": "Fakultet",
       "STUDY_PROGRAM": "Studijski program",
+      "TRACK": "Smjer",
       "SUBJECT": "Predmet"
     },
     "changeTypes": {
@@ -203,6 +204,7 @@
       "noChildren": {
         "FACULTY": "Nema dostupnih fakulteta",
         "STUDY_PROGRAM": "Nema dostupnih studijskih programa",
+        "TRACK": "Nema dostupnih smjerova",
         "SUBJECT": "Nema dostupnih predmeta"
       }
     },
@@ -226,7 +228,8 @@
       "PRVI": "PRVI - Bachelor",
       "DRUGI": "DRUGI - Master",
       "TRECI": "TREĆI - PhD",
-      "INTEGRISANI": "INTEGRISANI - Bachelor+Master"
+      "INTEGRISANI": "INTEGRISANI - Bachelor+Master",
+      "STRUCNI": "STRUČNI - Professional Bachelor"
     },
     "subjectTypes": {
       "OBAVEZNI": "Obavezni",
@@ -350,10 +353,12 @@
     "universitiesSection": "Univerziteti",
     "facultiesSection": "Fakulteti",
     "studyProgramsSection": "Studijski programi",
+    "tracksSection": "Smjerovi",
     "subjectsSection": "Predmeti",
     "noResults": "Nisu pronađeni univerziteti.",
     "noFacultyResults": "Nisu pronađeni fakulteti.",
     "noStudyProgramResults": "Nisu pronađeni studijski programi.",
+    "noTrackResults": "Nema pronađenih smjerova.",
     "noSubjectResults": "Nisu pronađeni predmeti.",
     "noResultsAtAll": "Nema rezultata pretrage.",
     "city": "Grad",
@@ -365,13 +370,15 @@
     },
     "faculties": "Fakulteti",
     "studyPrograms": "Studijski programi",
+    "tracks": "Smjerovi",
     "subjects": "Predmeti",
     "cycle": "Ciklus",
     "cycles": {
       "PRVI": "Prvi (Bachelor)",
       "DRUGI": "Drugi (Master)",
       "TRECI": "Treći (PhD)",
-      "INTEGRISANI": "Integrisani (Bachelor + Master)"
+      "INTEGRISANI": "Integrisani (Bachelor + Master)",
+      "STRUCNI": "Stručni (Professional Bachelor)"
     },
     "ects": "ECTS",
     "durationYears": "godine",

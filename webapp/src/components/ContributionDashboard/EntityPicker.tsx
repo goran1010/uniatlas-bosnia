@@ -17,13 +17,17 @@ import type {
   UniversityDetailFaculty,
   UniversityDetailStudyProgram,
   UniversityDetailSubject,
+  UniversityDetailTrack,
   UniversityListItem,
 } from "../../schemas/university";
 export type PickedEntity =
   | { type: "UNIVERSITY"; data: UniversityListItem }
   | { type: "FACULTY"; data: UniversityDetailFaculty }
   | { type: "STUDY_PROGRAM"; data: UniversityDetailStudyProgram }
-  | { type: "SUBJECT"; data: UniversityDetailSubject };
+  | { type: "SUBJECT"; data: UniversityDetailSubject }
+  | { type: "TRACK"; data: UniversityDetailTrack };
+
+export type PickerLeafType = "SUBJECT" | "TRACK";
 
 interface LevelSelectProps {
   id: string;
@@ -75,6 +79,7 @@ interface EntityPickerProps {
   depth: number;
   legend: string;
   showSelectedDetails: boolean;
+  leafType?: PickerLeafType;
   onSelect: (id: string) => void;
 }
 
@@ -82,6 +87,7 @@ function EntityPicker({
   depth,
   legend,
   showSelectedDetails,
+  leafType = "SUBJECT",
   onSelect,
 }: EntityPickerProps) {
   const { t, addNotification } = use(RootContext);
@@ -194,8 +200,13 @@ function EntityPicker({
   const faculties = detail?.faculties ?? [];
   const studyPrograms =
     faculties.find((f) => String(f.id) === selFaculty)?.studyPrograms ?? [];
-  const subjects =
-    studyPrograms.find((sp) => String(sp.id) === selProgram)?.subjects ?? [];
+  const selectedProgram = studyPrograms.find(
+    (sp) => String(sp.id) === selProgram,
+  );
+  const leafOptions =
+    leafType === "TRACK"
+      ? (selectedProgram?.tracks ?? [])
+      : (selectedProgram?.subjects ?? []);
 
   let pickedEntity: PickedEntity | undefined;
   if (depth === 1 && selUniversity) {
@@ -208,8 +219,17 @@ function EntityPicker({
     const program = studyPrograms.find((sp) => String(sp.id) === selProgram);
     if (program) pickedEntity = { type: "STUDY_PROGRAM", data: program };
   } else if (depth === 4 && selSubject) {
-    const subject = subjects.find((s) => String(s.id) === selSubject);
-    if (subject) pickedEntity = { type: "SUBJECT", data: subject };
+    if (leafType === "TRACK") {
+      const track = (selectedProgram?.tracks ?? []).find(
+        (tr) => String(tr.id) === selSubject,
+      );
+      if (track) pickedEntity = { type: "TRACK", data: track };
+    } else {
+      const subject = (selectedProgram?.subjects ?? []).find(
+        (s) => String(s.id) === selSubject,
+      );
+      if (subject) pickedEntity = { type: "SUBJECT", data: subject };
+    }
   }
 
   let deeperLevels: ReactNode = null;
@@ -245,13 +265,13 @@ function EntityPicker({
         )}
         {depth >= 4 && (
           <LevelSelect
-            id="pickerSubject"
-            label={t("contribution.entityTypes.SUBJECT")}
+            id="pickerLeaf"
+            label={t(`contribution.entityTypes.${leafType}`)}
             value={selSubject}
             disabled={!selProgram}
-            emptyMessage={t("contribution.picker.noChildren.SUBJECT")}
+            emptyMessage={t(`contribution.picker.noChildren.${leafType}`)}
             placeholder={t("contribution.picker.placeholder")}
-            options={subjects.map((s) => ({ id: s.id, label: s.name }))}
+            options={leafOptions.map((o) => ({ id: o.id, label: o.name }))}
             onChange={handleSubjectChange}
           />
         )}

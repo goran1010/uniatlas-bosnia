@@ -3,7 +3,7 @@ import { z } from "zod";
 import { RequestValidationError } from "../errors/RequestValidationError.js";
 
 const entityTypeSchema = z.enum(
-  ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT"],
+  ["UNIVERSITY", "FACULTY", "STUDY_PROGRAM", "SUBJECT", "TRACK"],
   {
     error: "Invalid entity type",
   },
@@ -109,8 +109,9 @@ const studyProgramCreateDataSchema = z.strictObject({
     error: "Name is required",
   }),
 
-  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
-    error: "Invalid study cycle - must be PRVI, DRUGI, TRECI, or INTEGRISANI",
+  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"], {
+    error:
+      "Invalid study cycle - must be PRVI, DRUGI, TRECI, INTEGRISANI, or STRUCNI",
   }),
 
   durationYears: durationYearsSchema.optional(),
@@ -136,6 +137,16 @@ const subjectCreateDataSchema = z.strictObject({
     .optional(),
 });
 
+const trackCreateDataSchema = z.strictObject({
+  name: z.string().trim().min(1, {
+    error: "Name is required",
+  }),
+
+  ects: ectsSchema.optional(),
+
+  durationYears: durationYearsSchema.optional(),
+});
+
 const createEntitySchema = z.discriminatedUnion("entityType", [
   z.strictObject({
     entityType: z.literal("UNIVERSITY"),
@@ -158,6 +169,12 @@ const createEntitySchema = z.discriminatedUnion("entityType", [
     entityType: z.literal("SUBJECT"),
     parentId: parentIdSchema,
     data: subjectCreateDataSchema,
+  }),
+
+  z.strictObject({
+    entityType: z.literal("TRACK"),
+    parentId: parentIdSchema,
+    data: trackCreateDataSchema,
   }),
 ]);
 
@@ -233,7 +250,7 @@ const studyProgramEditDataSchema = z
       .optional(),
 
     cycle: z
-      .enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"], {
+      .enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"], {
         error: "Invalid study cycle",
       })
       .optional(),
@@ -273,6 +290,24 @@ const subjectEditDataSchema = z
     error: "At least one field must be provided",
   });
 
+const trackEditDataSchema = z
+  .strictObject({
+    name: z
+      .string()
+      .trim()
+      .min(1, {
+        error: "Name cannot be empty if provided",
+      })
+      .optional(),
+
+    ects: ectsSchema.nullable().optional(),
+
+    durationYears: durationYearsSchema.nullable().optional(),
+  })
+  .refine((data) => Object.keys(data).length > 0, {
+    error: "At least one field must be provided",
+  });
+
 const editEntitySchema = z.discriminatedUnion("entityType", [
   z.strictObject({
     entityType: z.literal("UNIVERSITY"),
@@ -296,6 +331,12 @@ const editEntitySchema = z.discriminatedUnion("entityType", [
     entityType: z.literal("SUBJECT"),
     targetId: targetIdSchema,
     data: subjectEditDataSchema,
+  }),
+
+  z.strictObject({
+    entityType: z.literal("TRACK"),
+    targetId: targetIdSchema,
+    data: trackEditDataSchema,
   }),
 ]);
 
@@ -368,10 +409,12 @@ export {
   facultyCreateDataSchema,
   studyProgramCreateDataSchema,
   subjectCreateDataSchema,
+  trackCreateDataSchema,
   universityEditDataSchema,
   facultyEditDataSchema,
   studyProgramEditDataSchema,
   subjectEditDataSchema,
+  trackEditDataSchema,
 };
 
 export type UniversityCreateData = z.infer<typeof universityCreateDataSchema>;
@@ -380,7 +423,9 @@ export type StudyProgramCreateData = z.infer<
   typeof studyProgramCreateDataSchema
 >;
 export type SubjectCreateData = z.infer<typeof subjectCreateDataSchema>;
+export type TrackCreateData = z.infer<typeof trackCreateDataSchema>;
 export type UniversityEditData = z.infer<typeof universityEditDataSchema>;
 export type FacultyEditData = z.infer<typeof facultyEditDataSchema>;
 export type StudyProgramEditData = z.infer<typeof studyProgramEditDataSchema>;
 export type SubjectEditData = z.infer<typeof subjectEditDataSchema>;
+export type TrackEditData = z.infer<typeof trackEditDataSchema>;

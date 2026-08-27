@@ -5,6 +5,7 @@ const ENTITY_LEVELS: Record<EntityType, number> = {
   FACULTY: 2,
   STUDY_PROGRAM: 3,
   SUBJECT: 4,
+  TRACK: 4,
 };
 
 function getPickerDepth(

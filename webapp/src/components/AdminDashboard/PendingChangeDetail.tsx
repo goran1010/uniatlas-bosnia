@@ -88,6 +88,10 @@ function buildEntityRows(
         );
       }
       break;
+    case "TRACK":
+      push(t("contribution.dataFields.ects"), entity.ects);
+      push(t("contribution.dataFields.durationYears"), entity.durationYears);
+      break;
   }
 
   return rows;

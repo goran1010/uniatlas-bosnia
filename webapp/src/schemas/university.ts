@@ -43,6 +43,18 @@ const subjectSchema = z.object({
   lastChecked: optionalTextSchema,
 });
 
+const trackSchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  studyProgramId: positiveIntegerSchema,
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
+  durationYears: durationYearsSchema
+    .nullish()
+    .transform((value) => value ?? undefined),
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalTextSchema,
+});
+
 const studyProgramSchema = z.object({
   id: positiveIntegerSchema,
   name: z.string().min(1),
@@ -56,6 +68,7 @@ const studyProgramSchema = z.object({
   sourceUrl: optionalTextSchema,
   lastChecked: optionalTextSchema,
   subjects: z.array(subjectSchema),
+  tracks: z.array(trackSchema).optional().default([]),
 });
 
 const facultySchema = z.object({
@@ -135,12 +148,34 @@ const subjectSearchResultSchema = z.object({
   }),
 });
 
+const trackSearchResultSchema = z.object({
+  id: positiveIntegerSchema,
+  name: z.string().min(1),
+  studyProgramId: positiveIntegerSchema,
+  ects: ectsSchema.nullish().transform((value) => value ?? undefined),
+  durationYears: durationYearsSchema
+    .nullish()
+    .transform((value) => value ?? undefined),
+  studyProgram: z.object({
+    id: positiveIntegerSchema,
+    name: z.string().min(1),
+    cycle: studyCycleSchema,
+    faculty: z.object({
+      id: positiveIntegerSchema,
+      name: z.string().min(1),
+      universityId: positiveIntegerSchema,
+      university: searchResultUniversitySchema,
+    }),
+  }),
+});
+
 const unifiedSearchResponseSchema = z.object({
   message: z.string(),
   data: z.object({
     universities: z.array(universityListItemSchema),
     faculties: z.array(facultySearchResultSchema),
     studyPrograms: z.array(studyProgramSearchResultSchema),
+    tracks: z.array(trackSearchResultSchema).optional().default([]),
     subjects: z.array(subjectSearchResultSchema),
   }),
 });
@@ -152,11 +187,14 @@ export type UniversityDetailStudyProgram =
   UniversityDetailFaculty["studyPrograms"][number];
 export type UniversityDetailSubject =
   UniversityDetailStudyProgram["subjects"][number];
+export type UniversityDetailTrack =
+  UniversityDetailStudyProgram["tracks"][number];
 export type StudyProgramSearchResult = z.infer<
   typeof studyProgramSearchResultSchema
 >;
 export type FacultySearchResult = z.infer<typeof facultySearchResultSchema>;
 export type SubjectSearchResult = z.infer<typeof subjectSearchResultSchema>;
+export type TrackSearchResult = z.infer<typeof trackSearchResultSchema>;
 export type UnifiedSearchResults = z.infer<
   typeof unifiedSearchResponseSchema
 >["data"];

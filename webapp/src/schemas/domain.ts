@@ -5,10 +5,17 @@ const entityTypeSchema = z.enum([
   "FACULTY",
   "STUDY_PROGRAM",
   "SUBJECT",
+  "TRACK",
 ]);
 const entitySchema = z.enum(["FBIH", "RS", "BD"]);
 const ownershipSchema = z.enum(["JAVNA", "PRIVATNA"]);
-const studyCycleSchema = z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"]);
+const studyCycleSchema = z.enum([
+  "PRVI",
+  "DRUGI",
+  "TRECI",
+  "INTEGRISANI",
+  "STRUCNI",
+]);
 const subjectTypeSchema = z.enum(["OBAVEZNI", "IZBORNI"]);
 const userRoleSchema = z.enum(["ADMIN", "USER"]);
 

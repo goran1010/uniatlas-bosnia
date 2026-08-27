@@ -84,14 +84,23 @@ const facultyGroupSeedSchema = z.strictObject({
 
 const facultiesSeedSchema = z.array(facultyGroupSeedSchema);
 
+const trackSeedSchema = z.strictObject({
+  name: z.string().trim().min(1),
+  ects: z.number().int().positive().nullish(),
+  durationYears: z.number().int().positive().nullish(),
+  sourceUrl: optionalTextSchema,
+  lastChecked: optionalDateSchema,
+});
+
 const studyProgramSeedSchema = z.strictObject({
   name: z.string().trim().min(1),
-  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI"]),
+  cycle: z.enum(["PRVI", "DRUGI", "TRECI", "INTEGRISANI", "STRUCNI"]),
   durationYears: z.number().int().positive().nullish(),
   ects: z.number().int().positive().nullish(),
   language: optionalTextSchema,
   sourceUrl: optionalTextSchema,
   lastChecked: optionalDateSchema,
+  tracks: z.array(trackSeedSchema).min(1).optional(),
 });
 
 const studyProgramFacultySeedSchema = z.strictObject({
@@ -326,6 +335,76 @@ async function main() {
     console.log(
       `Upserted ${upsertedStudyPrograms.length.toString()} study programs.`,
     );
+
+    // eslint-disable-next-line no-console
+    console.log("Seeding tracks...");
+
+    const tracksByProgramKey = new Map(
+      studyProgramGroups.flatMap((group) => {
+        const universityId = universityIdByName.get(group.university);
+
+        if (universityId === undefined) {
+          return [];
+        }
+
+        return group.faculties.flatMap((facultyGroup) => {
+          const facultyId = facultyIdByUniversityAndName.get(
+            `${universityId.toString()}:${facultyGroup.faculty}`,
+          );
+
+          if (facultyId === undefined) {
+            return [];
+          }
+
+          return facultyGroup.studyPrograms
+            .filter((program) => program.tracks !== undefined)
+            .map(
+              (program) =>
+                [
+                  `${facultyId.toString()}:${program.name}:${program.cycle}`,
+                  program.tracks ?? [],
+                ] as const,
+            );
+        });
+      }),
+    );
+
+    const trackUpserts = upsertedStudyPrograms.flatMap((studyProgram) => {
+      const tracks =
+        tracksByProgramKey.get(
+          `${studyProgram.facultyId.toString()}:${studyProgram.name}:${studyProgram.cycle}`,
+        ) ?? [];
+
+      return tracks.map((track) =>
+        prisma.track.upsert({
+          where: {
+            name_studyProgramId: {
+              name: track.name,
+              studyProgramId: studyProgram.id,
+            },
+          },
+          create: {
+            name: track.name,
+            studyProgramId: studyProgram.id,
+            ects: track.ects ?? null,
+            durationYears: track.durationYears ?? null,
+            sourceUrl: track.sourceUrl ?? null,
+            lastChecked: track.lastChecked ?? null,
+          },
+          update: {
+            ects: track.ects ?? null,
+            durationYears: track.durationYears ?? null,
+            sourceUrl: track.sourceUrl ?? null,
+            lastChecked: track.lastChecked ?? null,
+          },
+        }),
+      );
+    });
+
+    const upsertedTracks = await Promise.all(trackUpserts);
+
+    // eslint-disable-next-line no-console
+    console.log(`Upserted ${upsertedTracks.length.toString()} tracks.`);
   } catch (error: unknown) {
     console.error("Error seeding database:", error);
     process.exitCode = 1;
