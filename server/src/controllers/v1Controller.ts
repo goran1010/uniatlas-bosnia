@@ -36,68 +36,68 @@ async function search(req: Request, res: Response) {
 
   const [universities, faculties, studyPrograms, subjects, tracks] =
     await Promise.all([
-    prisma.university.findMany({
-      where: {
-        OR: [
-          ...fieldContains("name"),
-          ...fieldContains("city"),
-          ...fieldContains("acronym"),
-        ],
-      },
-    }),
-    prisma.faculty.findMany({
-      where: {
-        OR: [...fieldContains("name"), ...fieldContains("city")],
-      },
-      include: {
-        university: true,
-      },
-    }),
-    prisma.studyProgram.findMany({
-      where: {
-        OR: fieldContains("name"),
-      },
-      include: {
-        faculty: {
-          include: {
-            university: true,
+      prisma.university.findMany({
+        where: {
+          OR: [
+            ...fieldContains("name"),
+            ...fieldContains("city"),
+            ...fieldContains("acronym"),
+          ],
+        },
+      }),
+      prisma.faculty.findMany({
+        where: {
+          OR: [...fieldContains("name"), ...fieldContains("city")],
+        },
+        include: {
+          university: true,
+        },
+      }),
+      prisma.studyProgram.findMany({
+        where: {
+          OR: fieldContains("name"),
+        },
+        include: {
+          faculty: {
+            include: {
+              university: true,
+            },
           },
         },
-      },
-    }),
-    prisma.subject.findMany({
-      where: {
-        OR: fieldContains("name"),
-      },
-      include: {
-        studyProgram: {
-          include: {
-            faculty: {
-              include: {
-                university: true,
+      }),
+      prisma.subject.findMany({
+        where: {
+          OR: fieldContains("name"),
+        },
+        include: {
+          studyProgram: {
+            include: {
+              faculty: {
+                include: {
+                  university: true,
+                },
               },
             },
           },
         },
-      },
-    }),
-    prisma.track.findMany({
-      where: {
-        OR: fieldContains("name"),
-      },
-      include: {
-        studyProgram: {
-          include: {
-            faculty: {
-              include: {
-                university: true,
+      }),
+      prisma.track.findMany({
+        where: {
+          OR: fieldContains("name"),
+        },
+        include: {
+          studyProgram: {
+            include: {
+              faculty: {
+                include: {
+                  university: true,
+                },
               },
             },
           },
         },
-      },
-    }),
-  ]);
+      }),
+    ]);
 
   const totalResults =
     universities.length +
