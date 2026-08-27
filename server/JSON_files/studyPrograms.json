@@ -425,7 +425,10 @@
           {
             "name": "Sigurnost informacija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://si.etf.unsa.ba/"
+            "sourceUrl": "https://si.etf.unsa.ba/",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Telekomunikacije",
@@ -4310,7 +4313,10 @@
             "name": "Fizika u obrazovanju",
             "cycle": "DRUGI",
             "language": "Bosanski, hrvatski, srpski",
-            "sourceUrl": "http://www.pmf.unsa.ba/fizika/images/npp/II%20ciklus%20-Fizika%20u%20obrazovanju_41_F_.pdf"
+            "sourceUrl": "http://registar.unsa.ba/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Geografija - Nastavnički",
@@ -4643,17 +4649,26 @@
           {
             "name": "Dramske umjetnosti",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Likovne umjetnosti",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Muzička umjetnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Dramske umjetnosti",
@@ -4679,7 +4694,10 @@
           {
             "name": "Muzička umjetnost",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -4691,22 +4709,34 @@
           {
             "name": "Arhitektura i urbanizam",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Energetska efikasnost u zgradarstvu - kombinovani studijski program",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Geodezija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Građevinarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Arhitektura",
@@ -4744,12 +4774,18 @@
           {
             "name": "Građevinarstvo",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Obnovljivi izvori energije i ekološko inženjerstvo",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -4761,42 +4797,66 @@
           {
             "name": "Aktuarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Finansije i revizija javnog sektora",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Finansije, bankarstvo i osiguranje",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "International master in business and administration",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Menadžment u turizmu i hotelijerstvu",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Međunarodna ekonomija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Poslovna ekonomija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Upravljanje kulturnim nasljeđem i kulturnim turizmom",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Ekonomija i poslovno upravljanje",
@@ -4823,7 +4883,10 @@
           {
             "name": "Ekonomija",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -4835,22 +4898,34 @@
           {
             "name": "Digitalno emitovanje i širokopojasne tehnologije",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Elektroenergetski i industrijski sistemi",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Elektronika i telekomunikacije",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Računarstvo i informatika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Elektroenergetika i automatika",
@@ -4876,7 +4951,10 @@
           {
             "name": "Informaciono-komunikacione tehnologije",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -4888,12 +4966,18 @@
           {
             "name": "Bezbjednost i kriminalistika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Ekološka bezbjednost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Bezbjednost i kriminalistika",
@@ -4912,12 +4996,18 @@
           {
             "name": "Opšti - nastavnički",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Sport",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Fizičko vaspitanje i sport",
@@ -4943,27 +5033,42 @@
           {
             "name": "Novinarstvo i komunikologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Politikologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Politikološke studije",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Socijalni rad",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Sociologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Novinarstvo i komunikologija",
@@ -4996,7 +5101,10 @@
           {
             "name": "Studij društvenih nauka",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5008,37 +5116,58 @@
           {
             "name": "Engleski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Francuski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Italijanski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Metodika nastave stranih jezika i književnosti",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Njemački jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Ruski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Srpski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Engleski jezik i književnost",
@@ -5085,7 +5214,10 @@
           {
             "name": "Filologija",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5097,32 +5229,50 @@
           {
             "name": "Filozofija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Istorija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Pedagogija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Predškolsko vaspitanje",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Psihologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Razredna nastava",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Filozofija",
@@ -5169,17 +5319,26 @@
           {
             "name": "Doktorske studije iz istorije ratova, ratnih zločina i genocida u XX vijeku",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Metodika razredne nastave",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Pedagogija",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5191,37 +5350,58 @@
           {
             "name": "Energetska efikasnost u zgradarstvu",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Energetsko i saobraćajno mašinstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Industrijsko inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Konstrukciono mašinstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Mehatronika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Proizvodno mašinstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Zaštita na radu",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Energetsko i saobraćajno mašinstvo",
@@ -5268,27 +5448,42 @@
           {
             "name": "Master medicinsko laboratorijska dijagnostika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Master zdravstvenih studija usmjerenje Fizioterapija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Master zdravstvenih studija usmjerenje Mentalno zdravlje djece i odraslih",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Master zdravstvenih studija usmjerenje Radiološka tehnologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Master zdravstvenih studija usmjerenje Zdravstvena njega",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Babištvo",
@@ -5362,7 +5557,10 @@
           {
             "name": "Biomedicinske nauke",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5374,22 +5572,34 @@
           {
             "name": "Agrarna ekonomija i ruralni razvoj",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Animalna proizvodnja",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Biljne nauke",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Očuvanje i održiva upotreba genetičkih resursa",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Poljoprivreda",
@@ -5401,7 +5611,10 @@
           {
             "name": "Poljoprivredne nauke",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5413,7 +5626,10 @@
           {
             "name": "Master studije Pravo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Pravo",
@@ -5425,7 +5641,10 @@
           {
             "name": "Doktorske studije pravo",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5437,47 +5656,74 @@
           {
             "name": "Biologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Ekologija i zaštita životne sredine",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Fizika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Geografija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Hemija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Master studij informatike",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Matematika i informatika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Prostorno planiranje",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Tehničko vaspitanje i informatika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Biologija",
@@ -5538,12 +5784,18 @@
           {
             "name": "Hemija",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Matematika i informatika",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5555,7 +5807,10 @@
           {
             "name": "Rudarsko i geološko inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Geološko inženjerstvo",
@@ -5588,22 +5843,34 @@
           {
             "name": "Grafičko inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Hemijsko inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Prehrambeno inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Tekstilno inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/licencirani-studijski-programi-na-drugom-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Grafičko inženjerstvo",
@@ -5636,7 +5903,10 @@
           {
             "name": "Tehnološko inženjerstvo",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -5670,7 +5940,10 @@
           {
             "name": "Šumarstvo",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.unibl.org/sr-lat/studije/vrste-i-nivoi-studija/studijski-programi-na-trecem-ciklusu-studija"
+            "sourceUrl": "https://unibl.org/uploads/files/upis/2026/Vodic-za-upis-studenata-2026-27-LAT.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       }
@@ -7374,37 +7647,58 @@
           {
             "name": "Agroekonomika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Animalne znanosti",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Biljne znanosti",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Fitomedicina",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Nutricionizam",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Prehrambeno inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Vinogradarstvo i vinarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://aptf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Agronomija",
@@ -7430,47 +7724,74 @@
           {
             "name": "Grafika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Grafički dizajn",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kiparstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Režija i montaža",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Scenarij",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Slikarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Grafika",
             "cycle": "PRVI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kiparstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Slikarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://alu.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7485,6 +7806,15 @@
             "durationYears": 4,
             "ects": 240,
             "sourceUrl": "https://ef.sum.ba/hr/pe-240-ects"
+          },
+          {
+            "name": "Poslovna ekonomija",
+            "cycle": "STRUCNI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7496,22 +7826,34 @@
           {
             "name": "Građevinarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://fgag.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Arhitektura i urbanizam",
             "cycle": "PRVI",
-            "sourceUrl": "https://fgag.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Geodezija i geoinformatika",
             "cycle": "PRVI",
-            "sourceUrl": "https://fgag.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Građevinarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fgag.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Građevinarstvo",
@@ -7528,57 +7870,90 @@
           {
             "name": "Biologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Edukacijska rehabilitacija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Fizika",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Geografija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
-            "name": "Glazba",
+            "name": "Glazbena pedagogija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Informatika",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kemija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kineziologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Matematika",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Pedagogija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Predškolski odgoj",
             "cycle": "PRVI",
-            "sourceUrl": "https://fpmoz.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Razredna nastava",
@@ -7589,6 +7964,150 @@
             "name": "Pedagogija",
             "cycle": "TRECI",
             "sourceUrl": "https://fpmoz.sum.ba"
+          },
+          {
+            "name": "Predškolski odgoj",
+            "cycle": "STRUCNI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Kineziologija",
+            "cycle": "STRUCNI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Glazbena umjetnost",
+            "cycle": "PRVI",
+            "durationYears": 4,
+            "ects": 240,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Biologija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Edukacijska rehabilitacija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Geografija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Informatika",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Kemija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Matematika",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Pedagogija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Glazbena pedagogija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Glazbena umjetnost",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Kineziologija",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Predškolski odgoj",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Razredna nastava – jednogodišnji studij",
+            "cycle": "DRUGI",
+            "durationYears": 1,
+            "ects": 60,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Razredna nastava – dvogodišnji studij",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7600,32 +8119,50 @@
           {
             "name": "Elektrotehnika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Računarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Strojarstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Elektrotehnika",
             "cycle": "PRVI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Računarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Strojarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fsre.sum.ba/upisi"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7637,27 +8174,96 @@
           {
             "name": "Fizioterapija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fzs.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Primaljstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fzs.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Radiološka tehnologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://fzs.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Sanitarno inženjerstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fzs.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Sestrinstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://fzs.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Klinička fizioterapija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Klinička zdravstvena njega",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Primaljstvo",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Radiološka tehnologija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Sanitarno inženjerstvo",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Zdravstvene znanosti",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7669,17 +8275,35 @@
           {
             "name": "Farmacija",
             "cycle": "INTEGRISANI",
-            "sourceUrl": "https://farf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 300,
+            "durationYears": 5,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kozmetologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://farf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Laboratorijska biomedicina",
             "cycle": "PRVI",
-            "sourceUrl": "https://farf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Farmaceutske znanosti",
+            "cycle": "TRECI",
+            "durationYears": 3,
+            "ects": 180,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7691,92 +8315,227 @@
           {
             "name": "Arheologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Engleski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Filozofija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Hrvatski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Informacijske znanosti",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Latinski jezik i rimska književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Logopedija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Njemački jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Novinarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Odnosi s javnošću",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Politologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Povijest",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Povijest umjetnosti",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Psihologija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Sigurnosne i međunarodne studije",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Socijalni rad",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Talijanski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Interdisciplinarni doktorski studij",
             "cycle": "TRECI",
-            "sourceUrl": "https://ff.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Engleski jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Informacijske znanosti",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Logopedija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Novinarstvo",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Njemački jezik i književnost",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Odnosi s javnošću",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Politologija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Psihologija",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
+          },
+          {
+            "name": "Socijalni rad",
+            "cycle": "DRUGI",
+            "durationYears": 2,
+            "ects": 120,
+            "language": "Hrvatski",
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "lastChecked": "2026-08-26"
           }
         ]
       },
@@ -7788,18 +8547,27 @@
           {
             "name": "Dentalna medicina",
             "cycle": "INTEGRISANI",
-            "sourceUrl": "https://mef.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Medical Studies in English",
             "cycle": "INTEGRISANI",
             "language": "engleski",
-            "sourceUrl": "https://mef.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Medicina",
             "cycle": "INTEGRISANI",
-            "sourceUrl": "https://mef.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Biomedicina i zdravstvo",
@@ -7816,22 +8584,34 @@
           {
             "name": "Kriminalistika i sigurnosni menadžment",
             "cycle": "DRUGI",
-            "sourceUrl": "https://pf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Pravo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://pf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Kriminalistika i sigurnosni menadžment",
             "cycle": "PRVI",
-            "sourceUrl": "https://pf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-26"
           },
           {
             "name": "Pravo",
             "cycle": "PRVI",
-            "sourceUrl": "https://pf.sum.ba"
+            "sourceUrl": "https://web-admin.sum.ba/api/storage/Vodic-za-buduce-studente_2026-2027_web-verzija_1779953058_34.pdf",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-26"
           }
         ]
       }
