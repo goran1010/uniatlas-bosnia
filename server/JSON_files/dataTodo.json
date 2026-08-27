@@ -133,9 +133,9 @@
     },
     {
       "category": "missing-ects",
-      "university": "UNZE / UNBI / Džemal Bijedić / IUS / Bijeljina",
-      "title": "claimed by parallel session (2026-08-27)",
-      "details": "A parallel session was mining these five; check studyPrograms.json state - whatever is still null here needs the same treatment (UNZE konkurs/subdomains, UNBI konkurs, unmo.ba, ius.edu.ba, ubn.rs.ba).",
+      "university": "Univerzitet u Zenici",
+      "title": "UNZE handled by parallel session (2026-08-27)",
+      "details": "A parallel session mined UNZE (FIPN/MF/FF/IPF/MEDF/PTF from NPP PDFs) - check studyPrograms.json state; whatever remains null there follows its dataTodo notes.",
       "lead": "",
       "source": ""
     },
@@ -536,6 +536,102 @@
       "details": "FPMOZ/FF dvopredmetni variants (Biologija, Fizika, Geografija, Informatika, Kemija, Matematika, Pedagogija, Informacijske znanosti, Povijest umjetnosti) exist as separate programs (3y/180, DRUGI 2y/120) - intentionally not separate rows.",
       "lead": "",
       "source": ""
+    },
+    {
+      "category": "missing-ects",
+      "university": "Univerzitet u Bihaću",
+      "title": "27 PRVI programs without ECTS/duration",
+      "details": "Konkurs 2026/27 I-ciklus table is quotas-only; faculty pages are sparse. The II-cycle fills (60/1y) derive from the konkurs entry rule (II ciklus requires 240 ECTS, Statut cl. 142/143) and the explicit 4+1 naming.",
+      "lead": "The same statute rule implies academic PRVI programs are 240/4y (UNBI is a 4+1 university) - verify per faculty/NPP before applying; 'Stručni studij poslovne ekonomije' is likely 180/3y (stručni).",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "category": "missing-ects",
+      "university": "Univerzitet Bijeljina",
+      "title": "3 programs in initial accreditation - no data published",
+      "details": "Agroekologija (PRVI i DRUGI) and 'Održiva poljoprivreda i ruralni razvoj' (TRECI) pages state 'Studije su u fazi početne akreditacije' - brand-new programs without NPP/ECTS.",
+      "lead": "Re-check pf.ubn.rs.ba after accreditation completes.",
+      "source": "https://pf.ubn.rs.ba/"
+    },
+    {
+      "category": "missing-ects",
+      "university": "Univerzitet Džemal Bijedić",
+      "title": "joint EF master without ECTS",
+      "details": "'Zajednički master studij sa Ekonomskim fakultetom Univerziteta u Sarajevu' - collaborative master, no ECTS published on unmo.ba program listing.",
+      "lead": "EF UNMO page / partner faculty page.",
+      "source": "https://www.unmo.ba/univerzitet/studijski-programi/"
+    },
+    {
+      "category": "unnamed-programs",
+      "university": "Univerzitet u Bihaću",
+      "title": "Biotehnički II ciklus enrolling but unnamed",
+      "details": "Konkurs 2026/27 enrolls 10 students on 'Studijski program II ciklusa' at Biotehnički fakultet - still without a proper program name.",
+      "lead": "Watch faculty announcements; seed once named.",
+      "source": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+    },
+    {
+      "category": "dual-variant",
+      "university": "Univerzitet u Zenici",
+      "title": "MF Metrologija (DRUGI) runs in two models — ects kept null",
+      "details": "Mašinski fakultet offers Metrologija II ciklus in BOTH 4+1 (60 ECTS, 1y) and 3+2+3 (120 ECTS, 2y); the 2026/27 II-cycle konkurs lists 'Metrologija' and 'Metrologija (3+2+3)' as separate rows. Merged row stays null per the group-D decision; candidates for Track variants if dual-model rows ever get modeled.",
+      "lead": "Elaborats: mf.unze.ba/wp-content/uploads/2024/03/Elaborat-II-ciklusa-Metrologija-4-1-3-kompletno.pdf and .../Elaborat-II-ciklusa-Metrologija-323-kompletno.pdf",
+      "source": "https://unze.ba/konkurs-za-upis-studenata-u-prvu-godinu-ii-drugog-ciklusa-studija-na-univerzitetu-u-zenici-u-akademskoj-2026-2027-godini-magistarski-studij/"
+    },
+    {
+      "category": "missing-programs",
+      "university": "Univerzitet u Zenici",
+      "title": "FIPN II-cycle masters absent from studyPrograms.json",
+      "details": "FIPN runs three II-cycle programs (Metalurgija; Materijali/Inženjerstvo materijala with metalni+nemetalni smjerovi; Hemijsko inženjerstvo), each 60 ECTS / 1y ('zajedno s prvim ciklusom 300 ECTS'), enrolling in the 2026/27 konkurs (14 seats). JSON has no DRUGI rows for this faculty.",
+      "lead": "https://www.fipn.unze.ba/ii-ciklus-studija/ has full description incl. ECTS.",
+      "source": "https://www.fipn.unze.ba/ii-ciklus-studija/"
+    },
+    {
+      "category": "missing-programs",
+      "university": "Univerzitet u Zenici",
+      "title": "Pravni fakultet II-cycle master absent from studyPrograms.json",
+      "details": "2026/27 II-cycle konkurs lists Pravni fakultet 'Opći smjer' master (uže oblasti: Građansko, Krivično, Historija države i prava, Državno i međunarodno javno pravo) with 32 seats; JSON has only PRVI Pravo.",
+      "lead": "prf.unze.ba for NPP/ECTS; likely 60/1y under 4+1.",
+      "source": "https://unze.ba/konkurs-za-upis-studenata-u-prvu-godinu-ii-drugog-ciklusa-studija-na-univerzitetu-u-zenici-u-akademskoj-2026-2027-godini-magistarski-studij/"
+    },
+    {
+      "category": "missing-programs",
+      "university": "Univerzitet u Zenici",
+      "title": "Doctoral programs at Pravni and Ekonomski fakultet absent from studyPrograms.json",
+      "details": "unze.ba published 2025/26 III-cycle konkursi for Pravni fakultet (doktorski studij) and Ekonomski fakultet (Poslovna ekonomija). Neither faculty has a TRECI row in JSON.",
+      "lead": "Konkursi on unze.ba state duration/ECTS (UNZE doctoral standard: 3y/180): konkurs-natjecaj-za-upis...na-pravnom-fakultetu...2025-2026... and ...poslovna-ekonomija-na-ekonomskom-fakultetu...2025-2026...",
+      "source": "https://unze.ba/svi-konkursi/"
+    },
+    {
+      "category": "missing-programs",
+      "university": "Univerzitet u Zenici",
+      "title": "MEDF 'Zdravstvena njega i menadžment' (DRUGI) absent from studyPrograms.json",
+      "details": "2026/27 II-cycle konkurs lists Medicinski fakultet master 'Zdravstvena njega i menadžment' with 20 seats; JSON has no DRUGI row for MEDF. medf.unze.ba has a master-studij page.",
+      "lead": "https://medf.unze.ba/master-studij/",
+      "source": "https://unze.ba/konkurs-za-upis-studenata-u-prvu-godinu-ii-drugog-ciklusa-studija-na-univerzitetu-u-zenici-u-akademskoj-2026-2027-godini-magistarski-studij/"
+    },
+    {
+      "category": "missing-programs",
+      "university": "Univerzitet u Zenici",
+      "title": "MF 'Obnovljivi izvori energije i okolinski aspekti' (DRUGI) listed with zero seats",
+      "details": "Appears in the 2026/27 II-cycle konkurs plan for Mašinski fakultet with / / / / seats (no enrollment); not in JSON. Watch whether it activates.",
+      "lead": "mf.unze.ba studijski-programi nav for a future NPP.",
+      "source": "https://unze.ba/konkurs-za-upis-studenata-u-prvu-godinu-ii-drugog-ciklusa-studija-na-univerzitetu-u-zenici-u-akademskoj-2026-2027-godini-magistarski-studij/"
+    },
+    {
+      "category": "name-watch",
+      "university": "Univerzitet u Zenici",
+      "title": "MF 'Mašinstvo' vs konkurs/site name 'Mašinstvo i robotika'",
+      "details": "JSON row Mašinski fakultet [PRVI] 'Mašinstvo' (180/3) corresponds to the program the faculty and the 2026/27 konkurs call 'Mašinstvo i robotika (trogodišnji studij)' (odsjek under the 3+2+3 stručni model).",
+      "lead": "https://mf.unze.ba/i-ciklus-studija-323/",
+      "source": "https://unze.ba/konkurs-za-upis-studenata-u-prvu-godinu-i-prvog-ciklusa-studija-na-univerzitetu-u-zenici-u-akademskoj-2026-2027-godini-drugi-upisni-rok/"
+    },
+    {
+      "category": "name-watch",
+      "university": "Univerzitet u Zenici",
+      "title": "MF calls its 3+2+3 first-cycle programs 'dodiplomski stručni studij'",
+      "details": "MF page describes 'Mašinstvo i robotika' and 'Dizajn i tehnologije u drvopreradi' as dodiplomski STRUČNI studij (3y/180) under Bologna 3+2+3, yet the university konkurs files them under regular I ciklus. Kept as PRVI per the locked group-A decision (source label wins was applied to UNSA registry labels; UNZE registry/konkurs files these as I ciklus). Revisit only if STRUCNI scope is ever widened.",
+      "lead": "https://mf.unze.ba/i-ciklus-studija-323/",
+      "source": "https://mf.unze.ba/i-ciklus-studija-323/"
     }
   ]
 }

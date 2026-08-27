@@ -6864,37 +6864,58 @@
           {
             "name": "Elektrotehnika i informacione tehnologije",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/novi-studijski-program-na-fakultetu-inzenjerstva-i-prirodnih-nauka/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Hemijsko inženjerstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/hemijsko-inzenjerstvo-2/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerstvo materijala",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/inzenjerstvo-materijala-2/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerstvo zaštite na radu i zaštite od požara",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/zastita-na-radu-i-zastita-od-pozara-2/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerstvo zaštite okoliša",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/inzenjerstvo-zastite-okolisa-2/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Metalurško inženjerstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/metalursko-inzenjerstvo-2/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Doktorski studij iz tehničkih nauka",
             "cycle": "TRECI",
-            "sourceUrl": "https://www.fipn.unze.ba"
+            "sourceUrl": "https://www.fipn.unze.ba/iii-ciklus-studija/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -6906,92 +6927,146 @@
           {
             "name": "Bosanski, hrvatski, srpski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-bosanski-hrvatski-srpski-jezik-i-knjizevnost-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Engleski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-engleski-jezik-i-knjizevnost-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Kulturalni studij",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/kulturalni-studij-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Matematika i informatika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-matematika-i-informatika-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Njemački jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/njemacki-jezik-i-knjizevnost-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Razredna nastava",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-razredna-nastava-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Turski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/studijski-program-turski-jezik-i-knjizevnost-2-ciklus/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Bosanski, hrvatski, srpski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-bosanski-hrvatski-srpski-jezik-i-knjizevnost-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Engleski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-engleski-jezik-i-knjizevnost-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Kultura i turizam",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/kultura-i-turizam/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Kulturalni studij",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/kulturalni-studij-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Matematika i informatika",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-matematika-i-informatika-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Njemački jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/njemacki-jezik-i-knjizevnost-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Razredna nastava",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/studijski-program-razredna-nastava-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Tjelesni odgoj i sport",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/tjelesni-odgoj-i-sport-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Turski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/ba/turski-jezik-i-knjizevnost-1-ciklus/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Doktorski studij Kultura i identitet",
             "cycle": "TRECI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://unze.ba/konkurs-natjecaj-za-upis-studenata-u-prvu-godinu-studija-treceg-ciklusa-studijski-program-doktorski-studij-kultura-i-identitet-na-filozofskom-fakultetu-univerziteta-u-zenici-u-akademskoj-2025-2026-g/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Doktorski studij iz lingvistike",
             "cycle": "TRECI",
-            "sourceUrl": "https://ff.unze.ba"
+            "sourceUrl": "https://ff.unze.ba/wp-content/uploads/2024/07/NPP-DSL-final-za-objavu-24-25.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -7003,62 +7078,98 @@
           {
             "name": "Arapski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "http://www.ipf.unze.ba/wp-content/uploads/2023/10/NPP-OAJIK-II-ciklus-2021-22.-god.-04.10.2023.-1.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Islamska vjeronauka",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/master-studij-islamske-vjeronauke/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Predškolski odgoj i obrazovanje",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/master-studij-predskolskog-odgoja-i-obrazovanja/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Socijalna pedagogija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/master-studij-socijalne-pedagogije/",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Arapski jezik i književnost",
             "cycle": "PRVI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/odsjek-za-arapski-jezik/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inkluzivna edukacija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/odsjek-za-inkluzivnu-edukaciju/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Islamska vjeronauka",
             "cycle": "PRVI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://zdk.ba/sjednicevlade/sjednice2023/25sjednica/25-04_30-06-2023.pdf",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Predškolski odgoj i obrazovanje",
             "cycle": "PRVI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/master-studij-predskolskog-odgoja-i-obrazovanja/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Socijalna pedagogija",
             "cycle": "PRVI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "https://www.ipf.unze.ba/odsjek-za-socijalnu-pedagogiju/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Islamska vjeronauka",
             "cycle": "TRECI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "http://www.ipf.unze.ba/wp-content/uploads/2023/10/NPP-za-III-ciklus-na-Odsjeku-za-islamsku-vjeronauku-ak.-2020-21.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Predškolski odgoj i obrazovanje",
             "cycle": "TRECI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "http://www.ipf.unze.ba/wp-content/uploads/2023/10/PROGRAM-DOKTORSKI-SP-2021-22-FINAL.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Socijalna pedagogija",
             "cycle": "TRECI",
-            "sourceUrl": "https://ipf.unze.ba"
+            "sourceUrl": "http://www.ipf.unze.ba/wp-content/uploads/2023/10/PROGRAM-DOKTORSKI-SP-2021-22-FINAL.pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -7070,22 +7181,34 @@
           {
             "name": "Inženjerska ekologija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+            "sourceUrl": "https://mf.unze.ba/wp-content/uploads/2024/02/Nastavni-plan-i-program-II-ciklus_1.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerski dizajn proizvoda",
             "cycle": "DRUGI",
-            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+            "sourceUrl": "https://mf.unze.ba/wp-content/uploads/2024/02/Nastavni-plan-i-program-II-ciklus_1.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Mehatronika",
             "cycle": "DRUGI",
-            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+            "sourceUrl": "https://mf.unze.ba/wp-content/uploads/2025/10/FINALNO-NPP-II-ciklus-Mehatronika.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Menadžment proizvodnim tehnologijama",
             "cycle": "DRUGI",
-            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+            "sourceUrl": "https://mf.unze.ba/wp-content/uploads/2024/02/Nastavni-plan-i-program-II-ciklus_1.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Metrologija",
@@ -7095,12 +7218,18 @@
           {
             "name": "Održavanje",
             "cycle": "DRUGI",
-            "sourceUrl": "https://mf.unze.ba/studijski-programi/"
+            "sourceUrl": "https://mf.unze.ba/wp-content/uploads/2024/02/Nastavni-plan-i-program-II-ciklus_1.pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Dizajn i tehnologije u drvopreradi",
             "cycle": "PRVI",
-            "sourceUrl": "https://mf.unze.ba"
+            "sourceUrl": "https://mf.unze.ba/i-ciklus-studija-323/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerska ekologija",
@@ -7112,7 +7241,10 @@
           {
             "name": "Inženjerska i poslovna informatika",
             "cycle": "PRVI",
-            "sourceUrl": "https://mf.unze.ba"
+            "sourceUrl": "https://mf.unze.ba/i-ciklus-studija-413/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Inženjerski dizajn proizvoda",
@@ -7152,12 +7284,18 @@
           {
             "name": "Opća medicina",
             "cycle": "INTEGRISANI",
-            "sourceUrl": "https://medf.unze.ba"
+            "sourceUrl": "https://medf.unze.ba/nastavni-plan-i-program-odsjeka-opca-medicina/",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Zdravstvena njega",
             "cycle": "PRVI",
-            "sourceUrl": "https://medf.unze.ba"
+            "sourceUrl": "https://medf.unze.ba/nastavni-plan-i-program-odsjeka-zdravstvena-njega/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -7169,17 +7307,26 @@
           {
             "name": "Softversko inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://ptf.unze.ba"
+            "sourceUrl": "https://zdk.ba/sjednicevlade/sjednice2023/25sjednica/25-04_30-06-2023.pdf",
+            "ects": 120,
+            "durationYears": 2,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Građevinarstvo",
             "cycle": "PRVI",
-            "sourceUrl": "https://ptf.unze.ba"
+            "sourceUrl": "http://ptf.unze.ba/studijski-programi-gr/",
+            "ects": 240,
+            "durationYears": 4,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Proizvodni biznis",
             "cycle": "PRVI",
-            "sourceUrl": "https://ptf.unze.ba"
+            "sourceUrl": "http://ptf.unze.ba/studijski-programi-pb/",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Softversko inženjerstvo",
@@ -9539,12 +9686,18 @@
           {
             "name": "Finansije, računovodstvo i revizija",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Menadžment i poduzetništvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Poslovna ekonomija",
@@ -9566,12 +9719,18 @@
           {
             "name": "Sanitarno inženjerstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Sestrinstvo",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Fizikalna terapija",
@@ -9598,12 +9757,18 @@
           {
             "name": "Islamska vjeronauka",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Socijalna pedagogija i duhovna skrb",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Islamska vjeronauka",
@@ -9625,7 +9790,10 @@
           {
             "name": "Engleski jezik i književnost",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Biologija i hemija",
@@ -9687,7 +9855,10 @@
           {
             "name": "Studij prava",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Studij prava",
@@ -9697,7 +9868,10 @@
           {
             "name": "Studij prava",
             "cycle": "TRECI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 180,
+            "durationYears": 3,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
@@ -9709,7 +9883,10 @@
           {
             "name": "Master studij TF 4+1",
             "cycle": "DRUGI",
-            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf"
+            "sourceUrl": "https://unbi.ba/files/media/pdf/6a3393d48d9220.28685323_Konkurs%20za%20upis%20studenata%20na%20I,%20II%20i%20III%20ciklus%202026_27..pdf",
+            "ects": 60,
+            "durationYears": 1,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Elektrotehnički odsjek",
@@ -9829,13 +10006,19 @@
             "name": "Dental Medicine",
             "cycle": "INTEGRISANI",
             "language": "engleski",
-            "sourceUrl": "https://ius.edu.ba"
+            "sourceUrl": "https://fms.ius.edu.ba/en",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-27"
           },
           {
             "name": "Medicine",
             "cycle": "INTEGRISANI",
             "language": "engleski",
-            "sourceUrl": "https://ius.edu.ba"
+            "sourceUrl": "https://fms.ius.edu.ba/en",
+            "ects": 360,
+            "durationYears": 6,
+            "lastChecked": "2026-08-27"
           }
         ]
       },
